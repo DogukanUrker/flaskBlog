@@ -1,0 +1,13 @@
+.item {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.author {
+  color: #f3dbb4;
+  text-align: end;
+}
+
+.articleTitle {
+  margin-bottom: 0.5rem;
+}
