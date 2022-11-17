@@ -4,10 +4,13 @@
 }
 
 .author {
-  color: #f3dbb4;
+  margin-top: 0;
   text-align: end;
 }
-
+.date {
+  text-align: start;
+  margin-bottom: 0;
+}
 .articleTitle {
   margin-bottom: 0.5rem;
 }

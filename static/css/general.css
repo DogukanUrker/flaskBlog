@@ -23,3 +23,8 @@ p {
   font-size: 1rem;
   font-weight: 600;
 }
+
+h5 {
+  display: inline-block;
+  color: #f3dbb4;
+}
