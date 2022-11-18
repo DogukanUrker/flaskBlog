@@ -1,17 +1,31 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect
 import json
+import os
 app = Flask(__name__)
-f = open("articles.json")
-data = json.load(f)
+
+
 @app.route("/")
 def index():
-    return render_template("index.html",title=data["title"],date=data["date"],content=data["content"])
+    return render_template("index.html",title=os.listdir("posts/"))
 
-@app.route("/{{articleID}}")
-def article():
-    f = open("articles/article.json")
+
+
+
+
+@app.route("/<postID>")
+def post(postID):
+    try:
+        f = open("posts/{}".format(postID))
+    except:
+        return redirect("/404")
     data = json.load(f)
-    return render_template("article.html",title=data["title"],date=data["date"],content=data["content"])
+    return render_template("post.html",title=data["title"],date=data["date"],content=data["content"])
+
+
+@app.route("/404")
+def page_not_found():
+    return "404"
+
 
 
 if __name__ == "__main__":

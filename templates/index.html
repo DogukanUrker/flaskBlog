@@ -6,11 +6,11 @@
 />
 {% endblock head %} {%block body%}
 <div class="item">
-  <h3 class="articleTitle">{{title}}</h3>
-  <p class="article">
-    {{content}}
-  </p>
-  <h5 class="date">{{date}}</h5>
-  <h5 class="author">Doğukan Ürker</h4>
+  <h3 >
+    {% for post in title %}
+    <a class="postTitle" href="{{post}}">{{post}}</h1>
+    {% endfor %}
+  </h3>
+  <p class="post">{{content}}</p>
 </div>
 {% endblock body %}
