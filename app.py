@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template
 import json
 import os
 
@@ -16,19 +16,14 @@ def index():
 
 @app.route("/<postID>")
 def post(postID):
-    try:
-        post = open("posts/{}".format(postID))
-    except:
-        return redirect("/404")
+    if postID in posts:
+        post = open("posts/%s.json" % (postID))
+    else:
+        return render_template("404.html", post=postID)
     data = json.load(post)
     return render_template(
         "post.html", title=data["title"], date=data["date"], content=data["content"]
     )
-
-
-@app.errorhandler(404)
-def page_not_found():
-    return "404", 404
 
 
 if __name__ == "__main__":
