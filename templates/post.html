@@ -2,15 +2,17 @@
 <title>{{title}}</title>
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/index.css') }}"
+  href="{{ url_for('static', filename='css/post.css') }}"
 />
 {% endblock head %} {%block body%}
 <div class="item">
   <h3 class="postTitle">{{title}}</h3>
-  <p class="post">
-    {{content}}
-  </p>
-  <h5 class="date">{{date}}</h5>
-  <h5 class="author">Doğukan Ürker</h4>
+  <div class="post">
+    <p class="content">
+      {{content}}
+    </p>
+    <h5 class="date">{{date}}</h5>
+    <h5 class="author">Doğukan Ürker</h4>
+  </div>
 </div>
 {% endblock body %}

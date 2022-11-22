@@ -1,5 +1,6 @@
 .head {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 3rem;
   text-align: center;
   align-items: center;
   user-select: none;
@@ -7,6 +8,15 @@
 .head h1 {
   margin-bottom: 0.5rem;
 }
+.postTitle {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  text-align: center;
+  display: block;
+  font-weight: 100;
+  margin-bottom: 0.5rem;
+}
+
 * {
   font-family: "Roboto Mono", monospace;
 }

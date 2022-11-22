@@ -1,6 +1,7 @@
-.item {
+.container {
   margin-left: 20%;
   margin-right: 20%;
+  margin-top: 4rem;
 }
 
 .author {
@@ -10,7 +11,4 @@
 .date {
   text-align: start;
   margin-bottom: 0;
-}
-.postTitle {
-  margin-bottom: 0.5rem;
 }
