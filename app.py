@@ -22,7 +22,11 @@ def post(postID):
         return render_template("404.html", post=postID)
     data = json.load(post)
     return render_template(
-        "post.html", title=data["title"], date=data["date"], content=data["content"]
+        "post.html",
+        title=data["title"],
+        date=data["date"],
+        author=data["author"],
+        content=data["content"],
     )
 
 

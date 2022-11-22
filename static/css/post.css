@@ -1,5 +1,7 @@
 .post {
-  margin-top: 3rem;
+  margin-left: 30%;
+  max-width: 50rem;
+  margin-top: 5rem;
   display: block;
   text-align: center;
 }
