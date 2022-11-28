@@ -1,0 +1,24 @@
+input {
+  display: flex;
+  border: 1px solid var(--light);
+  margin: 0.5rem;
+  border-radius: 1rem;
+  height: 2rem;
+  width: 16rem;
+  background-color: transparent;
+  text-align: center;
+}
+.container {
+  text-align: center;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+button {
+  margin-top: 0.5rem;
+  height: 2rem;
+  width: 6rem;
+  border: 0px;
+  border-radius: 1rem;
+}

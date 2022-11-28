@@ -4,4 +4,10 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/login.css') }}"
 />
-{% endblock head %} {%block body%} {% endblock body %}
+{% endblock head %} {%block body%}
+<div class="container">
+  <input type="email" name="" id="email" placeholder="email" />
+  <input type="password" name="" id="password" placeholder="password" />
+  <button type="submit">Login</button>
+</div>
+{% endblock body %}

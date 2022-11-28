@@ -1,3 +1,7 @@
+:root {
+  --light: #f7f7f7;
+  --dark: #393e46;
+}
 .head {
   margin-top: 2.5rem;
   margin-bottom: 3rem;
@@ -22,7 +26,7 @@
 }
 
 a {
-  color: #6d9886;
+  color: #141b18;
   text-decoration: none;
 }
 
