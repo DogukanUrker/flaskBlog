@@ -1,5 +1,21 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from wtforms import Form, PasswordField, StringField, validators
+
+
+class registerForm(Form):
+    userName = StringField(
+        "Username",
+        [validators.Length(min=4, max=25)],
+        render_kw={"placeholder": "username"},
+    )
+    email = StringField(
+        "Email", [validators.Length(min=6, max=50)], render_kw={"placeholder": "email"}
+    )
+    password = PasswordField(
+        "Passowrd", [validators.Length(min=8)], render_kw={"placeholder": "password"}
+    )
+
 
 theme = "dark"
 db = SQLAlchemy()
@@ -30,9 +46,19 @@ def login():
     return render_template("login.html", theme=theme)
 
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
-    return render_template("signup.html", theme=theme)
+    form = registerForm(request.form)
+    if request.method == "POST":
+        user = User(
+            userName=request.form["userName"],
+            email=request.form["email"],
+            password=request.form["password"],
+        )
+        db.session.add(user)
+        db.session.commit()
+        return redirect("/")
+    return render_template("signup.html", theme=theme, form=form)
 
 
 @app.route("/createpost")
