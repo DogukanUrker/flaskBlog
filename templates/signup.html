@@ -4,4 +4,9 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/signup.css') }}"
 />
-{% endblock head %} {%block body%} {% endblock body %}
+{% endblock head %} {%block body%}
+<input type="text" name="userName" id="userName" placeholder="username" />
+<input type="email" name="email" id="email" placeholder="email" />
+<input type="password" name="password" id="password" placeholder="password" />
+<input type="submit" value="Sign Up" />
+{% endblock body %}
