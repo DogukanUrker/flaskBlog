@@ -5,8 +5,8 @@
   href="{{ url_for('static', filename='css/signup.css') }}"
 />
 {% endblock head %} {%block body%}
-<form method="post">
-  {{form.userName}} {{form.email}} {{form.password}}
+<form method="post" class="form">
+  {{form.userName(class_="input")}} {{form.email}} {{form.password}}
   <button type="submit">Signup</button>
 </form>
 {% endblock body %}
