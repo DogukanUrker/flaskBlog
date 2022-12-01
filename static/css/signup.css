@@ -19,5 +19,11 @@ button {
   width: 6rem;
   border: 0px;
   border-radius: 1rem;
+  transition: 0.3s;
   background-color: #f3dbb4;
+}
+
+button:hover {
+  color: #f3dbb4;
+  background-color: var(--dark);
 }
