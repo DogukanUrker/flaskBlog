@@ -8,17 +8,6 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/general.css') }}"
     />
-    {%if theme=="dark"%}
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/dark.css') }}"
-    />
-    {%else%}
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/light.css') }}"
-    />
-    {% endif %}
   </head>
   {% block head %} {% endblock head %}
   <style>

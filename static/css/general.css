@@ -1,7 +1,3 @@
-:root {
-  --light: #f7f7f7;
-  --dark: #393e46;
-}
 .head {
   margin-top: 2.5rem;
   margin-bottom: 3rem;
@@ -9,9 +5,11 @@
   align-items: center;
   user-select: none;
 }
+
 .head h1 {
   margin-bottom: 0.5rem;
 }
+
 .postTitle {
   font-size: 1.5rem;
   margin-top: 1rem;
@@ -23,6 +21,11 @@
 
 * {
   font-family: "Roboto Mono", monospace;
+}
+
+body {
+  background-color: #393e46;
+  color: #eeeeee;
 }
 
 a {
