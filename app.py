@@ -17,7 +17,6 @@ class registerForm(Form):
     )
 
 
-theme = "dark"
 db = SQLAlchemy()
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
@@ -38,12 +37,16 @@ with app.app_context():
 
 @app.route("/")
 def index():
-    return render_template("index.html", theme=theme)
+    return render_template(
+        "index.html",
+    )
 
 
 @app.route("/login")
 def login():
-    return render_template("login.html", theme=theme)
+    return render_template(
+        "login.html",
+    )
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -58,12 +61,14 @@ def signup():
         db.session.add(user)
         db.session.commit()
         return redirect("/")
-    return render_template("signup.html", theme=theme, form=form)
+    return render_template("signup.html", form=form)
 
 
 @app.route("/createpost")
 def createPost():
-    return render_template("createPost.html", theme=theme)
+    return render_template(
+        "createPost.html",
+    )
 
 
 @app.route("/<postID>")
