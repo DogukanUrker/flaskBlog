@@ -53,6 +53,32 @@ def index():
     )
 
 
+"""
+# Kullanıcının girdiği bilgileri alın
+username = request.form['username']
+password = request.form['password']
+
+# Veritabanı bağlantısını açın
+db = sqlite3.connect('veritabanim.db')
+
+# Kullanıcının bilgilerini kontrol etmek için bir sorgu oluşturun
+query = "SELECT * FROM kullanicilar WHERE username=? AND password=?"
+
+# Sorguyu çalıştırın ve sonuçları bir değişkende tutun
+cursor = db.execute(query, (username, password))
+results = cursor.fetchall()
+
+# Eğer sonuçlar boş değilse, kullanıcının girişini onaylayın
+if results:
+    # Kullanıcının girişi onaylandı
+else:
+    # Kullanıcının girişi reddedildi
+
+# Veritabanı bağlantısını kapatın
+db.close()
+"""
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = loginForm(request.form)
