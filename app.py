@@ -17,6 +17,17 @@ class registerForm(Form):
     )
 
 
+class loginForm(Form):
+    userName = StringField(
+        "Username",
+        [validators.Length(min=4, max=25)],
+        render_kw={"placeholder": "username"},
+    )
+    password = PasswordField(
+        "Passowrd", [validators.Length(min=8)], render_kw={"placeholder": "password"}
+    )
+
+
 db = SQLAlchemy()
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
@@ -42,11 +53,15 @@ def index():
     )
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template(
-        "login.html",
-    )
+    form = loginForm(request.form)
+    if request.method == "POST":
+        user = User(
+            userName=request.form["userName"],
+            password=request.form["password"],
+        )
+    return render_template("login.html", form=form)
 
 
 @app.route("/signup", methods=["GET", "POST"])

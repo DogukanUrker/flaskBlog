@@ -6,8 +6,9 @@
 />
 {% endblock head %} {%block body%}
 <div class="container">
-  <input type="email" name="" id="email" placeholder="email" />
-  <input type="password" name="" id="password" placeholder="password" />
-  <button type="submit">Login</button>
+  <form method="post" class="form">
+    {{form.userName(class_="input")}}{{form.password}}
+    <button type="submit">Signup</button>
+  </form>
 </div>
 {% endblock body %}
