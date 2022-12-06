@@ -19,5 +19,7 @@ button {
   height: 2rem;
   width: 6rem;
   border: 0px;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
+  transition: 0.3s;
+  background-color: #00adb5;
 }
