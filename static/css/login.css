@@ -23,3 +23,7 @@ button {
   transition: 0.3s;
   background-color: #00adb5;
 }
+button:hover {
+  color: #00adb5;
+  background-color: #393e46;
+}
