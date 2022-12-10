@@ -54,27 +54,27 @@ def index():
 
 
 """
-# Kullanıcının girdiği bilgileri alın
+# Kullanicinin girdiği bilgileri alin
 username = request.form['username']
 password = request.form['password']
 
-# Veritabanı bağlantısını açın
+# Veritabani bağlantisini açin
 db = sqlite3.connect('veritabanim.db')
 
-# Kullanıcının bilgilerini kontrol etmek için bir sorgu oluşturun
+# Kullanicinin bilgilerini kontrol etmek için bir sorgu oluşturun
 query = "SELECT * FROM kullanicilar WHERE username=? AND password=?"
 
-# Sorguyu çalıştırın ve sonuçları bir değişkende tutun
+# Sorguyu çaliştirin ve sonuçlari bir değişkende tutun
 cursor = db.execute(query, (username, password))
 results = cursor.fetchall()
 
-# Eğer sonuçlar boş değilse, kullanıcının girişini onaylayın
+# Eğer sonuçlar boş değilse, kullanicinin girişini onaylayin
 if results:
-    # Kullanıcının girişi onaylandı
+    # Kullanicinin girişi onaylandi
 else:
-    # Kullanıcının girişi reddedildi
+    # Kullanicinin girişi reddedildi
 
-# Veritabanı bağlantısını kapatın
+# Veritabani bağlantisini kapatin
 db.close()
 """
 
