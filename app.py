@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, PasswordField, StringField, validators
 
-
+#hi
 class registerForm(Form):
     userName = StringField(
         "Username",
