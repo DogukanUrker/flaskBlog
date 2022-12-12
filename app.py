@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, PasswordField, StringField, validators
 
-#hi
+
 class registerForm(Form):
     userName = StringField(
         "Username",
@@ -53,41 +53,20 @@ def index():
     )
 
 
-"""
-# Kullanicinin girdigi bilgileri alin
-username = request.form['username']
-password = request.form['password']
-
-# Veritabani baglantisini açin
-db = sqlite3.connect('veritabanim.db')
-
-# Kullanicinin bilgilerini kontrol etmek için bir sorgu oluşturun
-query = "SELECT * FROM kullanicilar WHERE username=? AND password=?"
-
-# Sorguyu çaliştirin ve sonuçlari bir degişkende tutun
-cursor = db.execute(query, (username, password))
-results = cursor.fetchall()
-
-# Eger sonuçlar boş degilse, kullanicinin girişini onaylayin
-if results:
-    # Kullanicinin girişi onaylandi
-else:
-    # Kullanicinin girişi reddedildi
-
-# Veritabani baglantisini kapatin
-db.close()
-"""
-
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = loginForm(request.form)
     if request.method == "POST":
-        user = User(
-            userName=request.form["userName"],
-            password=request.form["password"],
-        )
-    return render_template("login.html", form=form)
+        userName = request.form["userName"]
+        password = request.form["password"]
+        try:
+            user = db.session.execute(
+                db.select(User).filter_by(userName=userName)
+            ).one()
+        except:
+            return "no user"
+
+        return render_template("login.html", form=form, user=user)
 
 
 @app.route("/signup", methods=["GET", "POST"])
