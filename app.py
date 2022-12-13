@@ -2,6 +2,10 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, PasswordField, StringField, validators
 
+# Debugging
+# print("\x1b[6;30;42m" + " SUCCESS " + "\x1b[0m")
+# print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
+
 
 class registerForm(Form):
     userName = StringField(
