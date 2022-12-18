@@ -83,6 +83,7 @@ def signup():
             password=request.form["password"],
         )
         db.session.add(user)
+
         db.session.commit()
         return redirect("/")
     return render_template("signup.html", form=form)
@@ -97,7 +98,7 @@ def createPost():
 
 @app.route("/<postID>")
 def post(postID):
-    return "post will be display here"
+    return postID
 
 
 if __name__ == "__main__":
