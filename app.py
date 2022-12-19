@@ -14,7 +14,6 @@ def dbConnection(dbFile):
     conn = None
     try:
         conn = sqlite3.connect(dbFile)
-        print(sqlite3.version)
     except Error as e:
         print(e)
     finally:
@@ -66,6 +65,7 @@ def login():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     form = registerForm(request.form)
+    print(type(form.userName))
     if request.method == "POST":
         return redirect("/")
     return render_template("signup.html", form=form)
