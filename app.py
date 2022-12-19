@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect
+import sqlite3
+from sqlite3 import Error
 from wtforms import Form, PasswordField, StringField, validators
 
 # Debugging
@@ -6,6 +8,18 @@ from wtforms import Form, PasswordField, StringField, validators
 # print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
 
 app = Flask(__name__)
+
+
+def dbConnection(dbFile):
+    conn = None
+    try:
+        conn = sqlite3.connect(dbFile)
+        print(sqlite3.version)
+    except Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
 
 
 class registerForm(Form):
@@ -70,4 +84,5 @@ def post(postID):
 
 
 if __name__ == "__main__":
+    dbConnection("db/users.db")
     app.run(debug=True)
