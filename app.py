@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form, PasswordField, StringField, validators
 
 # Debugging
 # print("\x1b[6;30;42m" + " SUCCESS " + "\x1b[0m")
 # print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
+
+app = Flask(__name__)
 
 
 class registerForm(Form):
@@ -32,24 +33,6 @@ class loginForm(Form):
     )
 
 
-db = SQLAlchemy()
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
-db.init_app(app)
-
-
-class User(db.Model):
-    userID = db.Column(db.Integer, primary_key=True)
-    userName = db.Column(db.String, unique=True, nullable=False)
-    email = db.Column(db.String)
-    posts = db.Column(db.String)
-    password = db.Column(db.String, nullable=False)
-
-
-with app.app_context():
-    db.create_all()
-
-
 @app.route("/")
 def index():
     return render_template(
@@ -63,28 +46,13 @@ def login():
     if request.method == "POST":
         userName = request.form["userName"]
         password = request.form["password"]
-        try:
-            user = db.session.execute(
-                db.select(User).filter_by(userName=userName)
-            ).one()
-        except:
-            return "no user"
-
-        return render_template("login.html", form=form, user=user)
+    return render_template("login.html", form=form, user=user)
 
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     form = registerForm(request.form)
     if request.method == "POST":
-        user = User(
-            userName=request.form["userName"],
-            email=request.form["email"],
-            password=request.form["password"],
-        )
-        db.session.add(user)
-
-        db.session.commit()
         return redirect("/")
     return render_template("signup.html", form=form)
 
