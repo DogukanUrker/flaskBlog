@@ -62,7 +62,7 @@ def signup():
         email = request.form["email"]
         password = request.form["password"]
         cur.execute(
-            f'INSERT INTO  user(userName,email,password) VALUES("{userName}","{email}","{password}")'
+            f'INSERT INTO  user(userName,email,password,role) VALUES("{userName}","{email}","{password}","user")'
         )
         conn.commit()
 
