@@ -9,16 +9,8 @@ from wtforms import Form, PasswordField, StringField, validators
 
 app = Flask(__name__)
 
-
-def dbConnection(dbFile):
-    conn = None
-    try:
-        conn = sqlite3.connect(dbFile)
-    except Error as e:
-        print(e)
-    finally:
-        if conn:
-            conn.close()
+conn = sqlite3.connect("db/users.db")
+cur = conn.cursor()
 
 
 class registerForm(Form):
@@ -69,6 +61,10 @@ def signup():
         userName = request.form["userName"]
         email = request.form["email"]
         password = request.form["password"]
+        cur.execute(
+            f'INSERT INTO  user(userName,email,password) VALUES("{userName}","{email}","{password}")'
+        )
+        conn.commit()
 
         return redirect("/")
     return render_template("signup.html", form=form)
@@ -87,5 +83,4 @@ def post(postID):
 
 
 if __name__ == "__main__":
-    dbConnection("db/users.db")
     app.run(debug=True)
