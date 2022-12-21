@@ -50,7 +50,11 @@ def login():
         password = request.form["password"]
         conn = sqlite3.connect("db/users.db")
         cur = conn.cursor()
-        cur.execute(f'select userName from user where userName = "{userName}" ')
+        cur.execute(f"SELECT * FROM users Where userName = '{userName}'")
+        if not cur.fetchall():
+            print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
+        else:
+            print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
     return render_template("login.html", form=form)
 
 
@@ -64,10 +68,9 @@ def signup():
         conn = sqlite3.connect("db/users.db")
         cur = conn.cursor()
         cur.execute(
-            f'INSERT INTO  user(userName,email,password,role) VALUES("{userName}","{email}","{password}","user")'
+            f'INSERT INTO  users(userName,email,password,role) VALUES("{userName}","{email}","{password}","user")'
         )
         conn.commit()
-
         return redirect("/")
     return render_template("signup.html", form=form)
 
