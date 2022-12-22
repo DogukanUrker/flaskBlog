@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 import sqlite3
 from sqlite3 import Error
 from wtforms import Form, PasswordField, StringField, validators
@@ -8,6 +8,7 @@ from wtforms import Form, PasswordField, StringField, validators
 # print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 class registerForm(Form):
@@ -52,13 +53,16 @@ def login():
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM users Where userName = '{userName}'")
         if not cur.fetchall():
+            flash("user not found", "error")
             print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
         else:
             print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
             cur.execute(f"select '{userName}' from users Where password = '{password}'")
             if not cur.fetchall():
+                flash("wrong password", "error")
                 print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
             else:
+                flash("logined successfully", "success")
                 print("\x1b[6;30;42m" + " LOGIN SUCCESSFUL " + "\x1b[0m")
     return render_template("login.html", form=form)
 

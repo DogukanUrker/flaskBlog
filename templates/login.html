@@ -6,6 +6,14 @@
 />
 {% endblock head %} {%block body%}
 <div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %}
+  <div class="flash">
+    {% for category, message in messages %}
+    <p class="{{ category }}">{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %} {% endwith %}
   <form method="post" class="form">
     {{form.userName(class_="input")}}{{form.password}}
     <button type="submit">Login</button>

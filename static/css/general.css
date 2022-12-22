@@ -42,3 +42,16 @@ h5 {
   display: inline-block;
   color: #f3dbb4;
 }
+.flash {
+  text-align: center;
+  color: white;
+  display: inline-block;
+  width: 10rem;
+}
+.error {
+  background-color: red;
+}
+
+.success {
+  background-color: green;
+}
