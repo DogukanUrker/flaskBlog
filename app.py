@@ -55,6 +55,11 @@ def login():
             print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
         else:
             print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
+            cur.execute(f"select '{userName}' from users Where password = '{password}'")
+            if not cur.fetchall():
+                print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
+            else:
+                print("\x1b[6;30;42m" + " LOGIN SUCCESSFUL " + "\x1b[0m")
     return render_template("login.html", form=form)
 
 
