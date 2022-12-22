@@ -2,13 +2,15 @@ from flask import Flask, render_template, request, redirect, flash
 import sqlite3
 from sqlite3 import Error
 from wtforms import Form, PasswordField, StringField, validators
+import secrets
+
 
 # Debugging
 # print("\x1b[6;30;42m" + " SUCCESS " + "\x1b[0m")
 # print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
 
 app = Flask(__name__)
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = secrets.token_urlsafe(32)
 
 
 class registerForm(Form):
