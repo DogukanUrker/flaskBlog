@@ -42,11 +42,12 @@ h5 {
   display: inline-block;
   color: #f3dbb4;
 }
-.flash {
+#flash {
   text-align: center;
   color: white;
   display: inline-block;
   width: 10rem;
+  border-radius: 0.5rem;
 }
 .error {
   background-color: red;
