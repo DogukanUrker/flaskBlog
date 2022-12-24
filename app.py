@@ -3,6 +3,7 @@ import sqlite3
 from sqlite3 import Error
 from wtforms import Form, PasswordField, StringField, validators
 import secrets
+from cryptography.fernet import Fernet
 
 
 # Debugging
@@ -11,6 +12,9 @@ import secrets
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
+
+key = Fernet.generate_key()
+f = Fernet(key)
 
 
 class registerForm(Form):
@@ -50,7 +54,7 @@ def login():
     form = loginForm(request.form)
     if request.method == "POST":
         userName = request.form["userName"]
-        password = request.form["password"]
+        password = f.encrypt(request.form["password"].encode("utf-8"))
         conn = sqlite3.connect("db/users.db")
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM users Where userName = '{userName}'")
@@ -59,7 +63,7 @@ def login():
             print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
         else:
             print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
-            cur.execute(f"select '{userName}' from users Where password = '{password}'")
+            cur.execute(f"select '{userName}' from users Where password = {password} ")
             if not cur.fetchall():
                 flash("wrong password", "error")
                 print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
@@ -75,7 +79,7 @@ def signup():
     if request.method == "POST":
         userName = request.form["userName"]
         email = request.form["email"]
-        password = request.form["password"]
+        password = f.encrypt(request.form["password"].encode("utf-8"))
         conn = sqlite3.connect("db/users.db")
         cur = conn.cursor()
         cur.execute(
