@@ -50,9 +50,9 @@ h5 {
   border-radius: 0.5rem;
 }
 .error {
-  background-color: red;
+  background-color: #dc3545;
 }
 
 .success {
-  background-color: green;
+  background-color: #198754;
 }
