@@ -51,26 +51,7 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    form = loginForm(request.form)
-    if request.method == "POST":
-        userName = request.form["userName"]
-        password = f.encrypt(request.form["password"].encode("utf-8"))
-        conn = sqlite3.connect("db/users.db")
-        cur = conn.cursor()
-        cur.execute(f"SELECT * FROM users Where userName = '{userName}'")
-        if not cur.fetchall():
-            flash("user not found", "error")
-            print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
-        else:
-            print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
-            cur.execute(f"select '{userName}' from users Where password = {password} ")
-            if not cur.fetchall():
-                flash("wrong password", "error")
-                print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
-            else:
-                flash("logined successfully", "success")
-                print("\x1b[6;30;42m" + " LOGIN SUCCESSFUL " + "\x1b[0m")
-    return render_template("login.html", form=form)
+    return "work in progress"
 
 
 @app.route("/signup", methods=["GET", "POST"])
