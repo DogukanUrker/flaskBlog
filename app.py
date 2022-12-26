@@ -51,7 +51,7 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    return "work in progress"
+    return "..."
 
 
 @app.route("/signup", methods=["GET", "POST"])
