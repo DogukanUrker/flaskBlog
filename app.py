@@ -80,7 +80,7 @@ def createPost():
 
 @app.route("/<postID>")
 def post(postID):
-    return postID
+    return f"<h1>{postID}</h1>"
 
 
 if __name__ == "__main__":
