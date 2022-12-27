@@ -12,7 +12,6 @@ from cryptography.fernet import Fernet
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
-
 key = Fernet.generate_key()
 f = Fernet(key)
 
@@ -51,7 +50,29 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    return "..."
+    form = registerForm(request.form)
+    if request.method == "POST":
+        userName = request.form["userName"]
+        password = request.form["password"]
+        conn = sqlite3.connect("db/users.db")
+        cur = conn.cursor()
+        cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
+        user = cur.fetchone()
+        if not user:
+            print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
+            flash("user not found", "error")
+        else:
+            userNameDB = user[1]
+            passwordDB = f.decrypt(user[3])
+            if userName == userNameDB and password == passwordDB:
+                flash("user found", "success")
+            elif userName == userNameDB and password != passwordDB:
+                print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
+                flash("wrong  password", "error")
+            elif userName != userNameDB and password == passwordDB:
+                print("\x1b[6;30;41m" + " WRONG USERNAME " + "\x1b[0m")
+                flash("wrong  username", "error")
+    return render_template("login.html", form=form)
 
 
 @app.route("/signup", methods=["GET", "POST"])
