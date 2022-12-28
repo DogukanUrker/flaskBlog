@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash
 import sqlite3
-from sqlite3 import Error
 from wtforms import Form, PasswordField, StringField, validators
 import secrets
 from passlib.hash import sha256_crypt
