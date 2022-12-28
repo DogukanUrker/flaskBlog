@@ -61,6 +61,7 @@ def login():
             flash("user not found", "error")
         else:
             if sha256_crypt.verify(password, user[3]):
+                print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
                 flash("user found", "success")
             else:
                 print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
