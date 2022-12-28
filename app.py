@@ -3,7 +3,7 @@ import sqlite3
 from sqlite3 import Error
 from wtforms import Form, PasswordField, StringField, validators
 import secrets
-from cryptography.fernet import Fernet
+from passlib.hash import sha256_crypt
 
 
 # Debugging
@@ -12,8 +12,6 @@ from cryptography.fernet import Fernet
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
-key = Fernet.generate_key()
-f = Fernet(key)
 
 
 class registerForm(Form):
@@ -62,16 +60,11 @@ def login():
             print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
             flash("user not found", "error")
         else:
-            userNameDB = user[1]
-            passwordDB = f.decrypt(user[3])
-            if userName == userNameDB and password == passwordDB:
+            if sha256_crypt.verify(password, user[3]):
                 flash("user found", "success")
-            elif userName == userNameDB and password != passwordDB:
+            else:
                 print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
                 flash("wrong  password", "error")
-            elif userName != userNameDB and password == passwordDB:
-                print("\x1b[6;30;41m" + " WRONG USERNAME " + "\x1b[0m")
-                flash("wrong  username", "error")
     return render_template("login.html", form=form)
 
 
@@ -81,7 +74,7 @@ def signup():
     if request.method == "POST":
         userName = request.form["userName"]
         email = request.form["email"]
-        password = f.encrypt(request.form["password"].encode("utf-8"))
+        password = sha256_crypt.hash(request.form["password"])
         conn = sqlite3.connect("db/users.db")
         cur = conn.cursor()
         cur.execute(
