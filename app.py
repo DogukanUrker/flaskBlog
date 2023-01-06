@@ -1,13 +1,9 @@
-from flask import Flask, render_template, request, redirect, flash, session
-import sqlite3
-from wtforms import Form, PasswordField, StringField, validators
 import secrets
+import sqlite3
 from passlib.hash import sha256_crypt
+from wtforms import Form, PasswordField, StringField, validators
+from flask import Flask, render_template, redirect, flash, request, session
 
-
-# Debugging
-# print("\x1b[6;30;42m" + " SUCCESS " + "\x1b[0m")
-# print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
@@ -102,3 +98,8 @@ def post(postID):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# Debugging
+# print("\x1b[6;30;42m" + " SUCCESS " + "\x1b[0m")
+# print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
