@@ -8,24 +8,12 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/general.css') }}"
     />
+    {% block head %} {% endblock head %}
   </head>
-  {% block head %} {% endblock head %}
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
   </style>
   <body>
-    <div class="head">
-      <h1><a href="https://dogukanurker.com/socials">Dogukan Urker</a></h1>
-      <a href="https://twitter.com/dogukanurker/"
-        ><i class="fa-brands fa-twitter"></i
-      ></a>
-      <a href="https://github.com/dogukanurker/"
-        ><i class="fa-brands fa-github"></i
-      ></a>
-      <a href="https://instagram.com/dogukanurker/"
-        ><i class="fa-brands fa-instagram"></i>
-      </a>
-    </div>
     {% block body %} {% endblock body %}
     <script
       src="https://kit.fontawesome.com/af7a48118d.js"
