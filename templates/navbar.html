@@ -3,15 +3,15 @@
   href="{{ url_for('static', filename='css/navbar.css') }}"
 />
 <div class="navbar">
-  <a href="/" class="btnHome"><h1>Home</h1></a>
+  <a href="/"><h1 class="btn btnHome">Home</h1></a>
   <div class="btns">
     {% if session["userName"] %}
     <a href="/{{session['userName']}}"
-      ><button class="btnAccount">{{session["userName"]}}</button></a
+      ><button class="btn btnAccount">{{session["userName"]}}</button></a
     >
     {% else %}
-    <a href="/login"><button class="btnLogin">Login</button></a>
-    <a href="/signup"><button class="btnSignUp">Sign Up</button></a>
+    <a href="/login"><button class="btn btnLogin">Login</button></a>
+    <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>
     {% endif %}
   </div>
 </div>

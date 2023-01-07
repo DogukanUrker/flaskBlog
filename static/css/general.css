@@ -17,15 +17,25 @@ input {
   display: block;
   color: #141410;
 }
+
+input:focus {
+  outline: none;
+}
+a {
+  text-decoration: none;
+}
+
 .btnSubmit {
   margin-top: 0.5rem;
   height: 2rem;
   width: 6rem;
   border: 0px;
-  border-radius: 0.3rem;
+  border-radius: 2rem;
   transition: 0.3s;
   background-color: #00adb5;
+  cursor: pointer;
 }
+
 .btnSubmit:hover {
   color: #00adb5;
   background-color: #393e46;

@@ -8,7 +8,6 @@
 .btnHome {
   margin-left: 12rem;
   order: 1;
-  transition: 0.25s;
   text-decoration: none;
 }
 
@@ -21,24 +20,37 @@
   order: 5;
 }
 
-.btnLogin,
-.btnSignUp,
-.btnAccount {
+.btn {
   height: 2rem;
   width: 5rem;
   border-radius: 2rem;
   border: 0px;
+  transition: 0.3s;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #fffafa;
 }
 
 .btnLogin {
-  background-color: #d00000;
+  background-color: #f77f00;
 }
 
 .btnSignUp {
-  background-color: #694873;
+  background-color: #7a28cb;
 }
 
 .btnAccount {
   width: fit-content;
-  background-color: #694873;
+  background-color: #f77f00;
+}
+
+.btnSignUp:hover {
+  color: #7a28cb;
+}
+.btnLogin:hover,
+.btnAccount:hover {
+  color: #f77f00;
 }
