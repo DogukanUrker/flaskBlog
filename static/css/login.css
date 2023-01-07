@@ -1,36 +1,7 @@
-input {
-  display: flex;
-  border: 1px solid var(--light);
-  margin: 0.5rem;
-  border-radius: 1rem;
-  height: 2rem;
-  width: 16rem;
-  text-align: center;
-}
 .container {
   text-align: center;
   transform: translate(-50%, -50%);
   position: absolute;
   top: 50%;
   left: 50%;
-}
-.form {
-  padding-top: 0.7rem;
-  background-color: #222831;
-  height: 10rem;
-  width: 17.5rem;
-  border-radius: 1rem;
-}
-button {
-  margin-top: 0.5rem;
-  height: 2rem;
-  width: 6rem;
-  border: 0px;
-  border-radius: 0.3rem;
-  transition: 0.3s;
-  background-color: #00adb5;
-}
-button:hover {
-  color: #00adb5;
-  background-color: #393e46;
 }
