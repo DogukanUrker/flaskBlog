@@ -4,30 +4,41 @@
   width: 100%;
   justify-content: space-between;
 }
+
 .btnHome {
   margin-left: 12rem;
   order: 1;
-  color: #eff7cf;
   transition: 0.25s;
+  text-decoration: none;
 }
+
 .btnHome:hover {
   color: grey;
 }
+
 .btns {
   margin-right: 12rem;
   order: 5;
 }
+
 .btnLogin,
-.btnSignUp {
+.btnSignUp,
+.btnAccount {
   height: 2rem;
   width: 5rem;
   border-radius: 2rem;
   border: 0px;
-  color: #fff;
 }
+
 .btnLogin {
-  background-color: #bad9b5;
+  background-color: #d00000;
 }
+
 .btnSignUp {
+  background-color: #694873;
+}
+
+.btnAccount {
+  width: fit-content;
   background-color: #694873;
 }
