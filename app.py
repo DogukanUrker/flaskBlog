@@ -36,10 +36,7 @@ class loginForm(Form):
 
 @app.route("/")
 def index():
-    if "userName" in session:
-        return render_template("index.html", logined=True, userName=session["userName"])
-    else:
-        return render_template("index.html", logined=False, userName="Guest")
+    return render_template("index.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -48,7 +45,6 @@ def login():
     if request.method == "POST":
         userName = request.form["userName"]
         password = request.form["password"]
-        session["userName"] = userName
         conn = sqlite3.connect("db/users.db")
         cur = conn.cursor()
         cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
@@ -58,6 +54,7 @@ def login():
             flash("user not found", "error")
         else:
             if sha256_crypt.verify(password, user[3]):
+                session["userName"] = userName
                 print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
                 flash("user found", "success")
                 return redirect("/")
@@ -86,9 +83,13 @@ def signup():
 
 @app.route("/createpost")
 def createPost():
-    return render_template(
-        "createPost.html",
-    )
+    if "userName" in session:
+        return render_template(
+            "createPost.html",
+        )
+    else:
+        flash("you need login for create a post", "error")
+        return redirect("/login")
 
 
 @app.route("/<postID>")
