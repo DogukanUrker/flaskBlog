@@ -5,16 +5,6 @@
   justify-content: space-between;
 }
 
-.btnHome {
-  margin-left: 12rem;
-  order: 1;
-  text-decoration: none;
-}
-
-.btnHome:hover {
-  color: grey;
-}
-
 .btns {
   margin-right: 12rem;
   order: 5;
@@ -28,29 +18,41 @@
   transition: 0.3s;
   font-weight: 500;
   cursor: pointer;
+  font-size: 1rem;
+  background-color: transparent;
 }
 
-.btn:hover {
-  background-color: #fffafa;
+.btnHome {
+  text-align: center;
+  margin-left: 12rem;
+  order: 1;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.btnHome:hover {
+  color: grey;
 }
 
 .btnLogin {
-  background-color: #f77f00;
+  color: #0087bd;
 }
 
 .btnSignUp {
-  background-color: #7a28cb;
+  background-color: #0087bd;
 }
 
 .btnAccount {
   width: fit-content;
-  background-color: #f77f00;
+  color: #0087bd;
 }
 
 .btnSignUp:hover {
-  color: #7a28cb;
+  color: #0087bd;
+  background-color: #fffafa;
 }
+
 .btnLogin:hover,
 .btnAccount:hover {
-  color: #f77f00;
+  color: #fffafa;
 }
