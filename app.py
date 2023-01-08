@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
 
 
-class registerForm(Form):
+class signUpForm(Form):
     userName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
@@ -47,7 +47,7 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    form = registerForm(request.form)
+    form = signUpForm(request.form)
     if request.method == "POST":
         userName = request.form["userName"]
         password = request.form["password"]
@@ -72,7 +72,7 @@ def login():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    form = registerForm(request.form)
+    form = signUpForm(request.form)
     if request.method == "POST":
         userName = request.form["userName"]
         email = request.form["email"]
