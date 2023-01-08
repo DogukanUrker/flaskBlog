@@ -35,20 +35,20 @@
 }
 
 .btnLogin {
-  color: #0087bd;
+  color: #00ab66;
 }
 
 .btnSignUp {
-  background-color: #0087bd;
+  background-color: #00ab66;
 }
 
 .btnAccount {
   width: fit-content;
-  color: #0087bd;
+  color: #00ab66;
 }
 
 .btnSignUp:hover {
-  color: #0087bd;
+  color: #00ab66;
   background-color: #fffafa;
 }
 
