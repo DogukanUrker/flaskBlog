@@ -12,25 +12,31 @@ app.secret_key = secrets.token_urlsafe(32)
 class registerForm(Form):
     userName = StringField(
         "Username",
-        [validators.Length(min=4, max=25)],
+        [validators.Length(min=4, max=25), validators.InputRequired()],
         render_kw={"placeholder": "username"},
     )
     email = StringField(
-        "Email", [validators.Length(min=6, max=50)], render_kw={"placeholder": "email"}
+        "Email",
+        [validators.Length(min=6, max=50), validators.InputRequired()],
+        render_kw={"placeholder": "email"},
     )
     password = PasswordField(
-        "Passowrd", [validators.Length(min=8)], render_kw={"placeholder": "password"}
+        "Passowrd",
+        [validators.Length(min=8), validators.InputRequired()],
+        render_kw={"placeholder": "password"},
     )
 
 
 class loginForm(Form):
     userName = StringField(
         "Username",
-        [validators.Length(min=4, max=25)],
+        [validators.Length(min=4, max=25), validators.InputRequired()],
         render_kw={"placeholder": "username"},
     )
     password = PasswordField(
-        "Passowrd", [validators.Length(min=8)], render_kw={"placeholder": "password"}
+        "Passowrd",
+        [validators.Length(min=8), validators.InputRequired()],
+        render_kw={"placeholder": "password"},
     )
 
 
