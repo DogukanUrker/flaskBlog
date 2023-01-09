@@ -11,7 +11,7 @@
   <p class="{{ category }}" id="flash">{{ message }}</p>
   {% endfor %} {% endif %} {% endwith %}
   <form method="post" class="form">
-    {{form.userName(class_="input")}}{{form.password}}
+    {{form.userName(class_="input",autocomplete="off")}}{{form.password(autocomplete="off")}}
     <button type="submit" class="btnSubmit">Login</button>
   </form>
 </div>
