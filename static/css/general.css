@@ -3,13 +3,16 @@
   --light: #fffafa;
   --mainColor: #5946b2;
 }
+
 * {
   font-family: "Roboto Mono", monospace;
   color: #fffafa;
 }
+
 html {
   font-size: 150% !important;
 }
+
 body {
   background-color: var(--dark);
 }
@@ -29,12 +32,13 @@ input {
   border-radius: 0.1rem;
 }
 
+a {
+  text-decoration: none;
+}
+
 input:focus {
   outline: none;
   border-color: var(--mainColor);
-}
-a {
-  text-decoration: none;
 }
 
 .btnSubmit {
