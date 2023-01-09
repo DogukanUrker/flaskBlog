@@ -1,3 +1,8 @@
+:root {
+  --dark: #141410;
+  --light: #fffafa;
+  --mainColor: #5946b2;
+}
 * {
   font-family: "Roboto Mono", monospace;
   color: #fffafa;
@@ -6,7 +11,7 @@ html {
   font-size: 150% !important;
 }
 body {
-  background-color: #141410;
+  background-color: var(--dark);
 }
 
 input {
@@ -16,17 +21,17 @@ input {
   width: 14rem;
   text-align: center;
   display: block;
-  color: #fffafa;
+  color: var(--light);
   background-color: transparent;
   font-size: 1rem;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--light);
   transition: 0.4s;
   border-radius: 0.1rem;
 }
 
 input:focus {
   outline: none;
-  border-color: #0087bd;
+  border-color: var(--mainColor);
 }
 a {
   text-decoration: none;
@@ -39,14 +44,14 @@ a {
   border: 0px;
   border-radius: 2rem;
   transition: 0.3s;
-  background-color: #0087bd;
+  background-color: var(--mainColor);
   cursor: pointer;
   font-size: 1rem;
 }
 
 .btnSubmit:hover {
-  color: #0087bd;
-  background-color: #393e46;
+  color: var(--mainColor);
+  background-color: var(--dark);
 }
 
 .form {
