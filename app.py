@@ -40,7 +40,7 @@ class loginForm(Form):
     )
 
 
-class createPost(Form):
+class createPostForm(Form):
     postTitle = StringField(
         "Post Title",
         [validators.Length(min=4, max=75), validators.InputRequired()],
@@ -103,10 +103,10 @@ def signup():
     return render_template("signup.html", form=form)
 
 
-@app.route("/createpost")
+@app.route("/createpost", methods=["GET", "POST"])
 def createPost():
     if "userName" in session:
-        form = createPost(request.form)
+        form = createPostForm(request.form)
         if request.method == "POST":
             postTitle = request.form["postTitle"]
             postTags = request.form["postTags"]
