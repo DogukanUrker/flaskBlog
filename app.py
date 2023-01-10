@@ -40,6 +40,21 @@ class loginForm(Form):
     )
 
 
+class createPost(Form):
+    postTitle = StringField(
+        "Post Title",
+        [validators.Length(min=4, max=75), validators.InputRequired()],
+        render_kw={"placeholder": "Post Title"},
+    )
+    postTags = StringField(
+        "Post Tags", [validators.InputRequired()], render_kw={"placeholder": "tags"}
+    )
+    postContent = StringField(
+        "Post Content",
+        [validators.Length(min=50), validators.InputRequired()],
+    )
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -89,7 +104,21 @@ def signup():
 
 @app.route("/createpost")
 def createPost():
+
     if "userName" in session:
+        form = createPost(request.form)
+        if request.method == "POST":
+            postTitle = request.form["postTitle"]
+            postTags = request.form["postTags"]
+            postContent = request.form["postContent"]
+            conn = sqlite3.connect("db/posts.db")
+            cur = conn.cursor()
+            cur.execute(
+                f"""INSERT INTO posts(postTitle,postTags,postContent,postAuthor,postDate,postTime) VALUES("{postTitle}","{postTags}","{postContent}",
+                "{session["userName"]}",
+                "{datetime.now().strftime("%d.%m.%y")}",
+                "{datetime.now().strftime("%H:%M")}")"""
+            )
         return render_template(
             "createPost.html",
         )
