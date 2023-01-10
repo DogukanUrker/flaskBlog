@@ -104,7 +104,6 @@ def signup():
 
 @app.route("/createpost")
 def createPost():
-
     if "userName" in session:
         form = createPost(request.form)
         if request.method == "POST":
@@ -119,9 +118,9 @@ def createPost():
                 "{datetime.now().strftime("%d.%m.%y")}",
                 "{datetime.now().strftime("%H:%M")}")"""
             )
-        return render_template(
-            "createPost.html",
-        )
+            conn.commit()
+            return redirect("/")
+        return render_template("createPost.html", form=form)
     else:
         flash("you need login for create a post", "error")
         return redirect("/login")
