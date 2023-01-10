@@ -9,7 +9,11 @@
     <a href="/{{session['userName']}}"
       ><button class="btn btnAccount">{{session["userName"]}}</button></a
     >
-    {% else %}
+    {% elif '{{ url_for(request.endpoint) }}'|string == '/login' %}
+    <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>
+    {% elif "{{ url_for(request.endpoint) }}"== "/signup" %}
+    <a href="/login"><button class="btn btnLogin">Login</button></a>
+    {%else%}
     <a href="/login"><button class="btn btnLogin">Login</button></a>
     <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>
     {% endif %}
