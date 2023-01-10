@@ -95,7 +95,8 @@ def signup():
         conn = sqlite3.connect("db/users.db")
         cur = conn.cursor()
         cur.execute(
-            f'INSERT INTO  users(userName,email,password,role) VALUES("{userName}","{email}","{password}","user")'
+            f"""INSERT INTO  users(userName,email,password,role) 
+            VALUES("{userName}","{email}","{password}","user")"""
         )
         conn.commit()
         return redirect("/")
@@ -113,10 +114,13 @@ def createPost():
             conn = sqlite3.connect("db/posts.db")
             cur = conn.cursor()
             cur.execute(
-                f"""INSERT INTO posts(postTitle,postTags,postContent,postAuthor,postDate,postTime) VALUES("{postTitle}","{postTags}","{postContent}",
+                f"""
+                INSERT INTO posts(postTitle,postTags,postContent,postAuthor,postDate,postTime) 
+                VALUES("{postTitle}","{postTags}","{postContent}",
                 "{session["userName"]}",
                 "{datetime.now().strftime("%d.%m.%y")}",
-                "{datetime.now().strftime("%H:%M")}")"""
+                "{datetime.now().strftime("%H:%M")}")
+                """
             )
             conn.commit()
             return redirect("/")
