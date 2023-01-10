@@ -4,4 +4,13 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/createPost.css') }}"
 />
-{% endblock head %} {%block body%} {% endblock body %}
+{% endblock head %} {%block body%}
+<div class="container">
+  <form method="post" class="form">
+    {{form.postTitle(class_="input" , autocomplete="off")}}
+    {{form.postTags(class_="input" , autocomplete="off")}}
+    {{form.postContent(class_="input" , autocomplete="off")}}
+    <button type="submit" class="btnSubmit">Share post</button>
+  </form>
+</div>
+{% endblock body %}
