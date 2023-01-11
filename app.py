@@ -72,45 +72,51 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    form = signUpForm(request.form)
-    if request.method == "POST":
-        userName = request.form["userName"]
-        password = request.form["password"]
-        conn = sqlite3.connect("db/users.db")
-        cur = conn.cursor()
-        cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
-        user = cur.fetchone()
-        if not user:
-            print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
-            flash("user not found", "error")
-        else:
-            if sha256_crypt.verify(password, user[3]):
-                session["userName"] = userName
-                print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
-                flash("user found", "success")
-                return redirect("/")
+    if "userName" in session:
+        return redirect("/")
+    else:
+        form = signUpForm(request.form)
+        if request.method == "POST":
+            userName = request.form["userName"]
+            password = request.form["password"]
+            conn = sqlite3.connect("db/users.db")
+            cur = conn.cursor()
+            cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
+            user = cur.fetchone()
+            if not user:
+                print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
+                flash("user not found", "error")
             else:
-                print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
-                flash("wrong  password", "error")
-    return render_template("login.html", form=form)
+                if sha256_crypt.verify(password, user[3]):
+                    session["userName"] = userName
+                    print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
+                    flash("user found", "success")
+                    return redirect("/")
+                else:
+                    print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
+                    flash("wrong  password", "error")
+        return render_template("login.html", form=form)
 
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    form = signUpForm(request.form)
-    if request.method == "POST":
-        userName = request.form["userName"]
-        email = request.form["email"]
-        password = sha256_crypt.hash(request.form["password"])
-        conn = sqlite3.connect("db/users.db")
-        cur = conn.cursor()
-        cur.execute(
-            f"""INSERT INTO  users(userName,email,password,role) 
-            VALUES("{userName}","{email}","{password}","user")"""
-        )
-        conn.commit()
+    if "userName" in session:
         return redirect("/")
-    return render_template("signup.html", form=form)
+    else:
+        form = signUpForm(request.form)
+        if request.method == "POST":
+            userName = request.form["userName"]
+            email = request.form["email"]
+            password = sha256_crypt.hash(request.form["password"])
+            conn = sqlite3.connect("db/users.db")
+            cur = conn.cursor()
+            cur.execute(
+                f"""INSERT INTO  users(userName,email,password,role) 
+                VALUES("{userName}","{email}","{password}","user")"""
+            )
+            conn.commit()
+            return redirect("/")
+        return render_template("signup.html", form=form)
 
 
 @app.route("/createpost", methods=["GET", "POST"])
