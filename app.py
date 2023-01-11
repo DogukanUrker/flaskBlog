@@ -7,6 +7,7 @@ from flask import Flask, render_template, redirect, flash, request, session
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
+app.config["SESSION_PERMANENT"] = True
 
 
 class signUpForm(Form):
@@ -21,9 +22,18 @@ class signUpForm(Form):
         render_kw={"placeholder": "email"},
     )
     password = PasswordField(
-        "Passowrd",
-        [validators.Length(min=8), validators.InputRequired()],
+        "Password",
+        [
+            validators.Length(min=8),
+            validators.InputRequired(),
+            validators.EqualTo(
+                fieldname="passwordConfirm", message="Passwords must match"
+            ),
+        ],
         render_kw={"placeholder": "password"},
+    )
+    passwordConfirm = PasswordField(
+        "passwordConfirm",
     )
 
 
@@ -34,7 +44,7 @@ class loginForm(Form):
         render_kw={"placeholder": "username"},
     )
     password = PasswordField(
-        "Passowrd",
+        "Password",
         [validators.Length(min=8), validators.InputRequired()],
         render_kw={"placeholder": "password"},
     )
