@@ -2,7 +2,7 @@ import secrets
 import sqlite3
 from datetime import datetime
 from passlib.hash import sha256_crypt
-from wtforms import Form, PasswordField, StringField, validators
+from wtforms import Form, PasswordField, StringField, TextAreaField, validators
 from flask import Flask, render_template, redirect, flash, request, session
 
 app = Flask(__name__)
@@ -54,12 +54,12 @@ class createPostForm(Form):
     postTitle = StringField(
         "Post Title",
         [validators.Length(min=4, max=75), validators.InputRequired()],
-        render_kw={"placeholder": "Post Title"},
+        render_kw={"placeholder": "post title"},
     )
     postTags = StringField(
         "Post Tags", [validators.InputRequired()], render_kw={"placeholder": "tags"}
     )
-    postContent = StringField(
+    postContent = TextAreaField(
         "Post Content",
         [validators.Length(min=50), validators.InputRequired()],
     )

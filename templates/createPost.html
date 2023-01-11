@@ -7,9 +7,9 @@
 {% endblock head %} {%block body%}
 <div class="container">
   <form method="post" class="form">
-    {{form.postTitle(class_="input" , autocomplete="off")}}
-    {{form.postTags(class_="input" , autocomplete="off")}}
-    {{form.postContent(class_="input" , autocomplete="off")}}
+    {{form.postTitle(class_="inputTitle" , autocomplete="off")}}
+    {{form.postTags(class_="inputTags" , autocomplete="off")}}
+    {{form.postContent(class_="inputContent" , autocomplete="off")}}
     <button type="submit" class="btnSubmit">Share post</button>
   </form>
 </div>

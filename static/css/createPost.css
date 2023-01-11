@@ -1,0 +1,59 @@
+.btnSubmit {
+    margin-top: 0.5rem;
+    height: 2rem;
+    width: 8rem;
+    border: 0px;
+    border-radius: 2rem;
+    transition: 0.3s;
+    background-color: var(--mainColor);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btnSubmit:hover {
+    color: var(--mainColor);
+    background-color: var(--dark);
+}
+
+.form {
+    text-align: center;
+    margin-top: 1rem;
+    margin-left: 20%;
+}
+
+input {
+    display: block;
+    margin: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--mainColor);
+}
+
+.inputTitle, .inputTags {
+    border: 0px;
+    height: 2rem;
+    width: 14rem;
+    text-align: center;
+    display: block;
+    color: var(--light);
+    background-color: transparent;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--light);
+    transition: 0.4s;
+    border-radius: 0.1rem;
+
+}
+
+.inputContent {
+    width: 40rem;
+    height: 30rem;
+    display: block;
+    color: var(--dark);
+    border: 0px;
+}
+
+.inputContent:focus {
+    outline: none;
+}
