@@ -7,7 +7,10 @@
   <div class="btns">
     {% if session["userName"] %}
     <a href="/{{session['userName']}}"
-      ><button class="btn btnAccount">{{session["userName"]}}</button></a
+      ><button class="btn btnAccount">
+        <div class="userName">{{session["userName"]}}</div>
+        <a href="/logout" class="dropdown">logout</a>
+      </button></a
     >
     {% elif '{{ url_for(request.endpoint) }}'|string == '/login' %}
     <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>

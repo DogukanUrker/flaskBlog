@@ -44,7 +44,8 @@
 
 .btnAccount {
   width: fit-content;
-  color: var(--mainColor);
+  display: inline-block;
+  position: relative;
 }
 
 .btnSignUp:hover {
@@ -52,7 +53,28 @@
   background-color: var(--light);
 }
 
-.btnLogin:hover,
-.btnAccount:hover {
+.btnLogin:hover {
+  color: var(--light);
+}
+
+.dropdown {
+  padding-top: 0.5rem;
+  height: 2rem;
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+}
+
+.btnAccount:hover .dropdown {
+  display: block;
+}
+
+.userName {
+  color: var(--mainColor);
+  transition: 0.3s;
+}
+
+.userName:hover {
   color: var(--light);
 }
