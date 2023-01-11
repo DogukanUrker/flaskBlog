@@ -2,13 +2,14 @@
 <title>Signup</title>
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/signup.css') }}"
+  href="{{ url_for('static', filename='css/submit.css') }}"
 />
 {% endblock head %} {%block body%}
 <div class="container">
   <form method="post" class="form">
     {{form.userName(class_="input" , autocomplete="off")}}
     {{form.email(autocomplete="off")}} {{form.password}}
+    {{form.passwordConfirm}}
     <button type="submit" class="btnSubmit">Signup</button>
   </form>
 </div>
