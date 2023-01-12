@@ -118,8 +118,12 @@ def signup():
                 conn = sqlite3.connect("db/users.db")
                 cur = conn.cursor()
                 cur.execute(
-                    f"""INSERT INTO  users(userName,email,password,role) 
-                    VALUES("{userName}","{email}","{password}","user")"""
+                    f"""
+                    INSERT INTO  users(userName,email,password,role,creationDate,creationTime) 
+                    VALUES("{userName}","{email}","{password}","user",
+                    "{datetime.now().strftime("%d.%m.%y")}",
+                    "{datetime.now().strftime("%H:%M")}")
+                    """
                 )
                 conn.commit()
                 print("\x1b[6;30;42m" + " NEW USER ADDED TO DATABASE " + "\x1b[0m")
