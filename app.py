@@ -26,14 +26,16 @@ class signUpForm(Form):
         [
             validators.Length(min=8),
             validators.InputRequired(),
-            validators.EqualTo(
-                fieldname="passwordConfirm", message="Passwords must match"
-            ),
         ],
         render_kw={"placeholder": "password"},
     )
     passwordConfirm = PasswordField(
         "passwordConfirm",
+        [
+            validators.Length(min=8),
+            validators.InputRequired(),
+        ],
+        render_kw={"placeholder": "confirm your password"},
     )
 
 
@@ -109,16 +111,22 @@ def signup():
         if request.method == "POST":
             userName = request.form["userName"]
             email = request.form["email"]
-            password = sha256_crypt.hash(request.form["password"])
-            conn = sqlite3.connect("db/users.db")
-            cur = conn.cursor()
-            cur.execute(
-                f"""INSERT INTO  users(userName,email,password,role) 
-                VALUES("{userName}","{email}","{password}","user")"""
-            )
-            conn.commit()
-            print("\x1b[6;30;42m" + " NEW USER ADDED TO DATABASE " + "\x1b[0m")
-            return redirect("/")
+            password = request.form["password"]
+            passwordConfirm = request.form["passwordConfirm"]
+            if passwordConfirm == password:
+                password = sha256_crypt.hash(password)
+                conn = sqlite3.connect("db/users.db")
+                cur = conn.cursor()
+                cur.execute(
+                    f"""INSERT INTO  users(userName,email,password,role) 
+                    VALUES("{userName}","{email}","{password}","user")"""
+                )
+                conn.commit()
+                print("\x1b[6;30;42m" + " NEW USER ADDED TO DATABASE " + "\x1b[0m")
+                return redirect("/")
+            elif passwordConfirm != password:
+                print("\x1b[6;30;41m" + " PASSWORDS MUST MATCH " + "\x1b[0m")
+                flash("password must match", "error")
         return render_template("signup.html", form=form, hideSignUp=True)
 
 
