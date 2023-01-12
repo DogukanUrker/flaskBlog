@@ -73,6 +73,7 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "userName" in session:
+        print("\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m")
         return redirect("/")
     else:
         form = signUpForm(request.form)
@@ -101,6 +102,7 @@ def login():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if "userName" in session:
+        print("\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m")
         return redirect("/")
     else:
         form = signUpForm(request.form)
@@ -115,6 +117,7 @@ def signup():
                 VALUES("{userName}","{email}","{password}","user")"""
             )
             conn.commit()
+            print("\x1b[6;30;42m" + " NEW USER ADDED TO DATABASE " + "\x1b[0m")
             return redirect("/")
         return render_template("signup.html", form=form)
 
@@ -139,9 +142,11 @@ def createPost():
                 """
             )
             conn.commit()
+            print("\x1b[6;30;42m" + " POSTED " + "\x1b[0m")
             return redirect("/")
         return render_template("createPost.html", form=form)
     else:
+        print("\x1b[6;30;41m" + " USER NOT LOGGED IN " + "\x1b[0m")
         flash("you need login for create a post", "error")
         return redirect("/login")
 
@@ -164,7 +169,3 @@ if __name__ == "__main__":
 # Debugging
 # print("\x1b[6;30;42m" + " SUCCESS " + "\x1b[0m")
 # print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
-
-
-# current time = datetime.now().strftime("%H:%M")
-# current date = datetime.now().strftime("%d.%m.%y")
