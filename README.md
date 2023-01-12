@@ -1,7 +1,7 @@
 # flaskBlog
 
-a blog page built with flask
-[contact](https://dogukanurker.com/socials)
+Simple blog app built with Flask
+[contact](https://dogukanurker.com)
 
 Requirements:
 
