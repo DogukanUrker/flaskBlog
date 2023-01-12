@@ -55,7 +55,7 @@ def login():
         print("\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m")
         return redirect("/")
     else:
-        form = signUpForm(request.form)
+        form = loginForm(request.form)
         if request.method == "POST":
             userName = request.form["userName"]
             password = request.form["password"]
