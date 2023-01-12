@@ -12,9 +12,9 @@
         <a href="/logout" class="dropdown">logout</a>
       </button></a
     >
-    {% elif '{{ url_for(request.endpoint) }}'|string == '/login' %}
+    {% elif hideLogin %}
     <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>
-    {% elif "{{ url_for(request.endpoint) }}"== "/signup" %}
+    {% elif hideSignUp %}
     <a href="/login"><button class="btn btnLogin">Login</button></a>
     {%else%}
     <a href="/login"><button class="btn btnLogin">Login</button></a>

@@ -96,7 +96,7 @@ def login():
                 else:
                     print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
                     flash("wrong  password", "error")
-        return render_template("login.html", form=form)
+        return render_template("login.html", form=form, hideLogin=True)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -119,7 +119,7 @@ def signup():
             conn.commit()
             print("\x1b[6;30;42m" + " NEW USER ADDED TO DATABASE " + "\x1b[0m")
             return redirect("/")
-        return render_template("signup.html", form=form)
+        return render_template("signup.html", form=form, hideSignUp=True)
 
 
 @app.route("/createpost", methods=["GET", "POST"])
