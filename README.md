@@ -6,6 +6,6 @@ a blog page built with flask
 Requirements:
 
 - Flask
-- WTforms
+- WTForms
 - Passlib
 - Python 3.6 or higher
