@@ -113,9 +113,22 @@ def createPost():
         return redirect("/login")
 
 
-@app.route("/<postID>")
+@app.route("/<postID>", methods=["GET", "POST"])
 def post(postID):
-    return f"<h1>{postID}</h1>"
+    conn = sqlite3.connect("db/posts.db")
+    cur = conn.cursor()
+    cur.execute(f'SELECT * from posts WHERE postID = "{postID}"')
+    post = cur.fetchone()
+    print(post)
+    return render_template(
+        "post.html",
+        postID=post[0],
+        postName=post[1],
+        postTags=post[2],
+        postContent=post[3],
+        postAuthor=post[4],
+        postDate=post[5],
+    )
 
 
 if __name__ == "__main__":
