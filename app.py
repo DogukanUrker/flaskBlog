@@ -130,7 +130,7 @@ def post(postID):
             postDate=post[5],
         )
     except:
-        return render_template("404.html")
+        return render_template("404.html", notFound=postID)
 
 
 if __name__ == "__main__":
