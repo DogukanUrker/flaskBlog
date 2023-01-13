@@ -1,9 +1,6 @@
 {% extends 'layout.html'%} {%block head%}
 <title>(⊙_⊙) {{post}}？</title>
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/404.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}" />
 {% endblock head %} {%block body%}
-<h1 class="errorMessage">I don't know what is "{{post}}" sorry :(</h1>
+<h1 class="errorMessage">I don't know what are you talking about sorry :(</h1>
 {% endblock body %}
