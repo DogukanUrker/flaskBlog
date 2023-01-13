@@ -5,14 +5,12 @@
   href="{{ url_for('static', filename='css/post.css') }}"
 />
 {% endblock head %} {%block body%}
-<div class="item">
-  <h3 class="postTitle">{{postTitle}}</h3>
-  <div class="post">
-    <p class="content">
-      {{postContent}}
-    </p>
+<div class="post">
+  <h1 class="title">{{postTitle}}</h1>
+  <p class="content">{{postContent}}</p>
+  <div class="bottomBar">
+    <h5 class="author">{{postAuthor}}</h5>
     <h5 class="date">{{postDate}}</h5>
-    <h5 class="author">{{postAuthor}}</h4>
   </div>
 </div>
 {% endblock body %}
