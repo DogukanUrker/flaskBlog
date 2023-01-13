@@ -115,7 +115,12 @@ def createPost():
 
 @app.route("/<postID>", methods=["GET", "POST"])
 def post(postID):
-    try:
+    conn = sqlite3.connect("db/posts.db")
+    cur = conn.cursor()
+    cur.execute(f"SELECT postID from posts")
+    posts = str(cur.fetchone())
+    if postID in posts:
+        print(f"\x1b[6;30;42m" + " POST FOUNDED " + "\x1b[0m")
         conn = sqlite3.connect("db/posts.db")
         cur = conn.cursor()
         cur.execute(f'SELECT * from posts WHERE postID = "{postID}"')
@@ -129,7 +134,8 @@ def post(postID):
             postAuthor=post[4],
             postDate=post[5],
         )
-    except:
+    else:
+        print("\x1b[6;30;41m" + " 404 " + "\x1b[0m")
         return render_template("404.html", notFound=postID)
 
 
