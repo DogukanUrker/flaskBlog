@@ -115,20 +115,22 @@ def createPost():
 
 @app.route("/<postID>", methods=["GET", "POST"])
 def post(postID):
-    conn = sqlite3.connect("db/posts.db")
-    cur = conn.cursor()
-    cur.execute(f'SELECT * from posts WHERE postID = "{postID}"')
-    post = cur.fetchone()
-    print(post)
-    return render_template(
-        "post.html",
-        postID=post[0],
-        postName=post[1],
-        postTags=post[2],
-        postContent=post[3],
-        postAuthor=post[4],
-        postDate=post[5],
-    )
+    try:
+        conn = sqlite3.connect("db/posts.db")
+        cur = conn.cursor()
+        cur.execute(f'SELECT * from posts WHERE postID = "{postID}"')
+        post = cur.fetchone()
+        return render_template(
+            "post.html",
+            postID=post[0],
+            postTitle=post[1],
+            postTags=post[2],
+            postContent=post[3],
+            postAuthor=post[4],
+            postDate=post[5],
+        )
+    except:
+        return render_template("404.html")
 
 
 if __name__ == "__main__":
