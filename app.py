@@ -105,6 +105,12 @@ def createPost():
             )
             conn.commit()
             print("\x1b[6;30;42m" + " POSTED " + "\x1b[0m")
+            conn = sqlite3.connect("db/users.db")
+            cur = conn.cursor()
+            cur.execute(
+                f'UPDATE users set points = points+10 where userName = "{session["userName"]}"'
+            )
+            conn.commit()
             return redirect("/")
         return render_template("createPost.html", form=form)
     else:
