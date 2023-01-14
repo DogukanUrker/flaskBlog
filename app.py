@@ -34,8 +34,8 @@ def signup():
                 cur = conn.cursor()
                 cur.execute(
                     f"""
-                    INSERT INTO  users(userName,email,password,role,creationDate,creationTime) 
-                    VALUES("{userName}","{email}","{password}","user",
+                    INSERT INTO  users(userName,email,password,role,points,creationDate,creationTime) 
+                    VALUES("{userName}","{email}","{password}","user",0,
                     "{datetime.now().strftime("%d.%m.%y")}",
                     "{datetime.now().strftime("%H:%M")}")
                     """
@@ -96,9 +96,9 @@ def createPost():
             cur = conn.cursor()
             cur.execute(
                 f"""
-                INSERT INTO posts(postTitle,postTags,postContent,postAuthor,postDate,postTime) 
+                INSERT INTO posts(title,tags,content,author,views,date,time) 
                 VALUES("{postTitle}","{postTags}","{postContent}",
-                "{session["userName"]}",
+                "{session["userName"]}",0,
                 "{datetime.now().strftime("%d.%m.%y")}",
                 "{datetime.now().strftime("%H:%M")}")
                 """
@@ -117,22 +117,23 @@ def createPost():
 def post(postID):
     conn = sqlite3.connect("db/posts.db")
     cur = conn.cursor()
-    cur.execute(f"SELECT postID from posts")
+    cur.execute(f"SELECT id from posts")
     posts = str(cur.fetchone())
     if postID in posts:
         print(f"\x1b[6;30;42m" + " POST FOUNDED " + "\x1b[0m")
         conn = sqlite3.connect("db/posts.db")
         cur = conn.cursor()
-        cur.execute(f'SELECT * from posts WHERE postID = "{postID}"')
+        cur.execute(f'SELECT * from posts WHERE id = "{postID}"')
         post = cur.fetchone()
         return render_template(
             "post.html",
-            postID=post[0],
-            postTitle=post[1],
-            postTags=post[2],
-            postContent=post[3],
-            postAuthor=post[4],
-            postDate=post[5],
+            id=post[0],
+            title=post[1],
+            tags=post[2],
+            content=post[3],
+            views=post[4],
+            author=post[5],
+            date=post[6],
         )
     else:
         print("\x1b[6;30;41m" + " 404 " + "\x1b[0m")
