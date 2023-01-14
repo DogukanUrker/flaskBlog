@@ -18,12 +18,15 @@
 .form {
     text-align: center;
     margin-top: 1rem;
-    margin-left: 20%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input {
     display: block;
     margin: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input:focus {
