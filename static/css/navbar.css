@@ -78,3 +78,12 @@
 .userName:hover {
   color: var(--light);
 }
+
+.btnPost {
+  color: var(--secondaryColor);
+  margin-right: 1rem;
+}
+
+.btnPost:hover {
+  color: var(--light);
+}

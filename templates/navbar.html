@@ -6,6 +6,9 @@
   <a href="/"><h1 class="btn btnHome">Home</h1></a>
   <div class="btns">
     {% if session["userName"] %}
+    <a href="/createpsot">
+      <button class="btn btnPost">New Post</button>
+    </a>
     <a href="/{{session['userName']}}"
       ><button class="btn btnAccount">
         <div class="userName">{{session["userName"]}}</div>
