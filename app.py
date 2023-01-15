@@ -12,10 +12,23 @@ app.config["SESSION_PERMANENT"] = True
 
 
 def message(positive, message):
+    now = (
+        "\n"
+        + "\033[94m"
+        + "["
+        + f'{datetime.now().strftime("%d.%m.%y")}'
+        + "\033[0m"
+        + " "
+        + "\033[95m"
+        + f"{datetime.now().strftime('%H:%M:%S')}"
+        + "]"
+        + "\033[0m"
+        + "  "
+    )
     if positive == True:
-        print("\n" + "\x1b[6;30;42m" + message + "\x1b[0m" + "\n")
+        print(now + "\033[92m" + message + "\033[0m" + "\n")
     elif positive == False:
-        print("\n" + "\x1b[6;30;41m" + message + "\x1b[0m" + "\n")
+        print(now + "\033[91m" + message + "\033[0m" + "\n")
 
 
 def addPoints(points, userSession):
@@ -25,7 +38,7 @@ def addPoints(points, userSession):
         f'UPDATE users set points = points+{points} where userName = "{userSession}"'
     )
     conn.commit()
-    message(True, f' {points} POINTS ADDED TO "{userSession}" ')
+    message(True, f'{points} POINTS ADDED TO "{userSession}"')
 
 
 @app.route("/")
@@ -36,7 +49,7 @@ def index():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if "userName" in session:
-        message(False, f' "{session["userName"]}" ALREADY LOGGED IN ')
+        message(False, f'"{session["userName"]}" ALREADY LOGGED IN')
         return redirect("/")
     else:
         form = signUpForm(request.form)
@@ -58,7 +71,7 @@ def signup():
                     """
                 )
                 conn.commit()
-                message(True, f' "{userName}" ADDED TO DATABASE ')
+                message(True, f'"{userName}" ADDED TO DATABASE')
                 return redirect("/")
             elif passwordConfirm != password:
                 message(False, " PASSWORDS MUST MATCH ")
@@ -69,7 +82,7 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "userName" in session:
-        message(False, f' "{session["userName"]}" ALREADY LOGGED IN ')
+        message(False, f'"{session["userName"]}" ALREADY LOGGED IN')
         return redirect("/")
     else:
         form = loginForm(request.form)
@@ -81,17 +94,17 @@ def login():
             cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
             user = cur.fetchone()
             if not user:
-                message(False, f' "{userName}" NOT FOUND ')
+                message(False, f'"{userName}" NOT FOUND')
                 flash("user not found", "error")
             else:
                 if sha256_crypt.verify(password, user[3]):
                     session["userName"] = userName
                     # addPoints(1, session["userName"])
-                    message(True, f' "{userName}" LOGGED IN ')
+                    message(True, f'"{userName}" LOGGED IN')
                     flash("user found", "success")
                     return redirect("/")
                 else:
-                    message(False, " WRONG PASSWORD ")
+                    message(False, "WRONG PASSWORD")
                     flash("wrong  password", "error")
         return render_template("login.html", form=form, hideLogin=True)
 
@@ -99,11 +112,11 @@ def login():
 @app.route("/logout")
 def logout():
     if "userName" in session:
-        message(True, f' {session["userName"]} LOGGED OUT ')
+        message(True, f'"{session["userName"]}" LOGGED OUT')
         session.clear()
         return redirect("/")
     else:
-        message(False, f" USER NOT LOGGED IN ")
+        message(False, f"USER NOT LOGGED IN")
         return redirect("/")
 
 
@@ -127,12 +140,12 @@ def createPost():
                 """
             )
             conn.commit()
-            message(True, f" '{postTitle}' POSTED ")
+            message(True, f"'{postTitle}' POSTED")
             addPoints(10, session["userName"])
             return redirect("/")
         return render_template("createPost.html", form=form)
     else:
-        message(False, " USER NOT LOGGED IN ")
+        message(False, "USER NOT LOGGED IN")
         flash("you need login for create a post", "error")
         return redirect("/login")
 
@@ -144,7 +157,7 @@ def post(postID):
     cur.execute(f"SELECT id from posts")
     posts = str(cur.fetchone())
     if postID in posts:
-        message(True, f" {postID} FOUND ")
+        message(True, f'"{postID}" FOUND')
         conn = sqlite3.connect("db/posts.db")
         cur = conn.cursor()
         cur.execute(f'SELECT * from posts WHERE id = "{postID}"')
@@ -160,7 +173,7 @@ def post(postID):
             date=post[6],
         )
     else:
-        message(False, " 404 ")
+        message(False, "404")
         return render_template("404.html", notFound=postID)
 
 
