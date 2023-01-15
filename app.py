@@ -18,7 +18,13 @@ def addPoints(points, userSession):
         f'UPDATE users set points = points+{points} where userName = "{userSession}"'
     )
     conn.commit()
-    print(+"\x1b[6;30;42m" + f" {points} POINTS ADDED TO {userSession} " + "\x1b[0m")
+    print(
+        "\n"
+        + "\x1b[6;30;42m"
+        + f" {points} POINTS ADDED TO {userSession} "
+        + "\x1b[0m"
+        + "\n"
+    )
 
 
 @app.route("/")
@@ -29,7 +35,7 @@ def index():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if "userName" in session:
-        print("\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m")
+        print("\n" + "\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m" + "\n")
         return redirect("/")
     else:
         form = signUpForm(request.form)
@@ -51,10 +57,18 @@ def signup():
                     """
                 )
                 conn.commit()
-                print("\x1b[6;30;42m" + " NEW USER ADDED TO DATABASE " + "\x1b[0m")
+                print(
+                    "\n"
+                    + "\x1b[6;30;42m"
+                    + " NEW USER ADDED TO DATABASE "
+                    + "\x1b[0m"
+                    + "\n"
+                )
                 return redirect("/")
             elif passwordConfirm != password:
-                print("\x1b[6;30;41m" + " PASSWORDS MUST MATCH " + "\x1b[0m")
+                print(
+                    "\n" + "\x1b[6;30;41m" + " PASSWORDS MUST MATCH " + "\x1b[0m" + "\n"
+                )
                 flash("password must match", "error")
         return render_template("signup.html", form=form, hideSignUp=True)
 
@@ -62,7 +76,7 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "userName" in session:
-        print("\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m")
+        print("\n" + "\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m" + "\n")
         return redirect("/")
     else:
         form = loginForm(request.form)
@@ -74,17 +88,19 @@ def login():
             cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
             user = cur.fetchone()
             if not user:
-                print("\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m")
+                print("\n" + "\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m" + "\n")
                 flash("user not found", "error")
             else:
                 if sha256_crypt.verify(password, user[3]):
                     session["userName"] = userName
                     addPoints(1, session["userName"])
-                    print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
+                    print("\n" + "\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m" + "\n")
                     flash("user found", "success")
                     return redirect("/")
                 else:
-                    print("\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m")
+                    print(
+                        "\n" + "\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m" + "\n"
+                    )
                     flash("wrong  password", "error")
         return render_template("login.html", form=form, hideLogin=True)
 
@@ -115,12 +131,12 @@ def createPost():
                 """
             )
             conn.commit()
-            print("\x1b[6;30;42m" + " POSTED " + "\x1b[0m")
+            print("\n" + "\x1b[6;30;42m" + " POSTED " + "\x1b[0m" + "\n")
             addPoints(10, session["userName"])
             return redirect("/")
         return render_template("createPost.html", form=form)
     else:
-        print("\x1b[6;30;41m" + " USER NOT LOGGED IN " + "\x1b[0m")
+        print("\n" + "\x1b[6;30;41m" + " USER NOT LOGGED IN " + "\x1b[0m" + "\n")
         flash("you need login for create a post", "error")
         return redirect("/login")
 
@@ -132,7 +148,7 @@ def post(postID):
     cur.execute(f"SELECT id from posts")
     posts = str(cur.fetchone())
     if postID in posts:
-        print(f"\x1b[6;30;42m" + " POST FOUNDED " + "\x1b[0m")
+        print("\n" + "\x1b[6;30;42m" + " POST FOUNDED " + "\x1b[0m" + "\n")
         conn = sqlite3.connect("db/posts.db")
         cur = conn.cursor()
         cur.execute(f'SELECT * from posts WHERE id = "{postID}"')
@@ -148,7 +164,7 @@ def post(postID):
             date=post[6],
         )
     else:
-        print("\x1b[6;30;41m" + " 404 " + "\x1b[0m")
+        print("\n" + "\x1b[6;30;41m" + " 404 " + "\x1b[0m" + "\n")
         return render_template("404.html", notFound=postID)
 
 
