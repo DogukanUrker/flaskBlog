@@ -11,6 +11,16 @@ app.secret_key = secrets.token_urlsafe(32)
 app.config["SESSION_PERMANENT"] = True
 
 
+def addPoints(points, userSession):
+    conn = sqlite3.connect("db/users.db")
+    cur = conn.cursor()
+    cur.execute(
+        f'UPDATE users set points = points+{points} where userName = "{userSession}"'
+    )
+    conn.commit()
+    print(+"\x1b[6;30;42m" + f" {points} POINTS ADDED TO {userSession} " + "\x1b[0m")
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -69,6 +79,7 @@ def login():
             else:
                 if sha256_crypt.verify(password, user[3]):
                     session["userName"] = userName
+                    addPoints(1, session["userName"])
                     print("\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m")
                     flash("user found", "success")
                     return redirect("/")
@@ -105,12 +116,7 @@ def createPost():
             )
             conn.commit()
             print("\x1b[6;30;42m" + " POSTED " + "\x1b[0m")
-            conn = sqlite3.connect("db/users.db")
-            cur = conn.cursor()
-            cur.execute(
-                f'UPDATE users set points = points+10 where userName = "{session["userName"]}"'
-            )
-            conn.commit()
+            addPoints(10, session["userName"])
             return redirect("/")
         return render_template("createPost.html", form=form)
     else:
