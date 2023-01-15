@@ -21,7 +21,7 @@ def addPoints(points, userSession):
     print(
         "\n"
         + "\x1b[6;30;42m"
-        + f" {points} POINTS ADDED TO {userSession} "
+        + f' {points} POINTS ADDED TO "{userSession}" '
         + "\x1b[0m"
         + "\n"
     )
@@ -35,7 +35,13 @@ def index():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if "userName" in session:
-        print("\n" + "\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m" + "\n")
+        print(
+            "\n"
+            + "\x1b[6;30;41m"
+            + f' "{session["userName"]}" ALREADY LOGGED IN '
+            + "\x1b[0m"
+            + "\n"
+        )
         return redirect("/")
     else:
         form = signUpForm(request.form)
@@ -60,7 +66,7 @@ def signup():
                 print(
                     "\n"
                     + "\x1b[6;30;42m"
-                    + " NEW USER ADDED TO DATABASE "
+                    + f' "{userName}" ADDED TO DATABASE '
                     + "\x1b[0m"
                     + "\n"
                 )
@@ -76,7 +82,13 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "userName" in session:
-        print("\n" + "\x1b[6;30;41m" + " USER ALREADY LOGGED IN " + "\x1b[0m" + "\n")
+        print(
+            "\n"
+            + "\x1b[6;30;42m"
+            + f' "{session["userName"]}" ALREADY LOGGED IN '
+            + "\x1b[0m"
+            + "\n"
+        )
         return redirect("/")
     else:
         form = loginForm(request.form)
@@ -88,13 +100,25 @@ def login():
             cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
             user = cur.fetchone()
             if not user:
-                print("\n" + "\x1b[6;30;41m" + " USER NOT FOUND " + "\x1b[0m" + "\n")
+                print(
+                    "\n"
+                    + "\x1b[6;30;41m"
+                    + f' "{userName}" NOT FOUND '
+                    + "\x1b[0m"
+                    + "\n"
+                )
                 flash("user not found", "error")
             else:
                 if sha256_crypt.verify(password, user[3]):
                     session["userName"] = userName
-                    addPoints(1, session["userName"])
-                    print("\n" + "\x1b[6;30;42m" + " USER FOUND " + "\x1b[0m" + "\n")
+                    # addPoints(1, session["userName"])
+                    print(
+                        "\n"
+                        + "\x1b[6;30;42m"
+                        + f' "{userName}" LOGGED IN '
+                        + "\x1b[0m"
+                        + "\n"
+                    )
                     flash("user found", "success")
                     return redirect("/")
                 else:
@@ -107,6 +131,13 @@ def login():
 
 @app.route("/logout")
 def logout():
+    print(
+        "\n"
+        + "\x1b[6;30;42m"
+        + f' {session["userName"]} LOGGED OUT '
+        + "\x1b[0m"
+        + "\n"
+    )
     session.clear()
     return redirect("/")
 
@@ -131,7 +162,7 @@ def createPost():
                 """
             )
             conn.commit()
-            print("\n" + "\x1b[6;30;42m" + " POSTED " + "\x1b[0m" + "\n")
+            print("\n" + "\x1b[6;30;42m" + f" '{postTitle}' POSTED " + "\x1b[0m" + "\n")
             addPoints(10, session["userName"])
             return redirect("/")
         return render_template("createPost.html", form=form)
@@ -148,7 +179,7 @@ def post(postID):
     cur.execute(f"SELECT id from posts")
     posts = str(cur.fetchone())
     if postID in posts:
-        print("\n" + "\x1b[6;30;42m" + " POST FOUNDED " + "\x1b[0m" + "\n")
+        print("\n" + "\x1b[6;30;42m" + f" {postID} FOUND " + "\x1b[0m" + "\n")
         conn = sqlite3.connect("db/posts.db")
         cur = conn.cursor()
         cur.execute(f'SELECT * from posts WHERE id = "{postID}"')
@@ -173,5 +204,5 @@ if __name__ == "__main__":
 
 
 # Debugging
-# print("\x1b[6;30;42m" + " SUCCESS " + "\x1b[0m")
-# print("\x1b[6;30;41m" + " ERROR " + "\x1b[0m")
+# print("\n" + "\x1b[6;30;42m" + ' SUCCESS ' + "\x1b[0m" + "\n")
+# print("\n" + "\x1b[6;30;41m" + ' ERROR ' + "\x1b[0m" + "\n")
