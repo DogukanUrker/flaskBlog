@@ -13,21 +13,9 @@ app.config["SESSION_PERMANENT"] = True
 
 def message(color, message):
     print(
-        "\n"
-        + "\033[94m"
-        + "["
-        + f'{datetime.now().strftime("%d.%m.%y")}'
-        + "\033[0m"
-        + " "
-        + "\033[95m"
-        + f"{datetime.now().strftime('%H:%M:%S')}"
-        + "]"
-        + "\033[0m"
-        + "  "
-        + f"\033[9{color}m"
-        + message
-        + "\033[0m"
-        + "\n"
+        f'\n\033[94m[{datetime.now().strftime("%d.%m.%y")}\033[0m'
+        f'\033[95m {datetime.now().strftime("%H:%M:%S")}]\033[0m'
+        f"\033[9{color}m {message}\033[0m\n"
     )
 
 
