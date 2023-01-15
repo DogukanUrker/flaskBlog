@@ -155,7 +155,7 @@ def post(postID):
     conn = sqlite3.connect("db/posts.db")
     cur = conn.cursor()
     cur.execute(f"SELECT id from posts")
-    posts = str(cur.fetchone())
+    posts = str(cur.fetchall())
     if postID in posts:
         message(True, f'"{postID}" FOUND')
         conn = sqlite3.connect("db/posts.db")
