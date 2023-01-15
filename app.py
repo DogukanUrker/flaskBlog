@@ -98,9 +98,13 @@ def login():
 
 @app.route("/logout")
 def logout():
-    message(True, f' {session["userName"]} LOGGED OUT ')
-    session.clear()
-    return redirect("/")
+    if "userName" in session:
+        message(True, f' {session["userName"]} LOGGED OUT ')
+        session.clear()
+        return redirect("/")
+    else:
+        message(False, f" USER NOT LOGGED IN ")
+        return redirect("/")
 
 
 @app.route("/createpost", methods=["GET", "POST"])
