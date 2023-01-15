@@ -11,6 +11,13 @@ app.secret_key = secrets.token_urlsafe(32)
 app.config["SESSION_PERMANENT"] = True
 
 
+def message(positive, message):
+    if positive == True:
+        print("\n" + "\x1b[6;30;42m" + message + "\x1b[0m" + "\n")
+    elif positive == False:
+        print("\n" + "\x1b[6;30;41m" + message + "\x1b[0m" + "\n")
+
+
 def addPoints(points, userSession):
     conn = sqlite3.connect("db/users.db")
     cur = conn.cursor()
@@ -18,13 +25,7 @@ def addPoints(points, userSession):
         f'UPDATE users set points = points+{points} where userName = "{userSession}"'
     )
     conn.commit()
-    print(
-        "\n"
-        + "\x1b[6;30;42m"
-        + f' {points} POINTS ADDED TO "{userSession}" '
-        + "\x1b[0m"
-        + "\n"
-    )
+    message(True, f' {points} POINTS ADDED TO "{userSession}" ')
 
 
 @app.route("/")
@@ -35,13 +36,7 @@ def index():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if "userName" in session:
-        print(
-            "\n"
-            + "\x1b[6;30;41m"
-            + f' "{session["userName"]}" ALREADY LOGGED IN '
-            + "\x1b[0m"
-            + "\n"
-        )
+        message(False, f' "{session["userName"]}" ALREADY LOGGED IN ')
         return redirect("/")
     else:
         form = signUpForm(request.form)
@@ -63,18 +58,10 @@ def signup():
                     """
                 )
                 conn.commit()
-                print(
-                    "\n"
-                    + "\x1b[6;30;42m"
-                    + f' "{userName}" ADDED TO DATABASE '
-                    + "\x1b[0m"
-                    + "\n"
-                )
+                message(True, f' "{userName}" ADDED TO DATABASE ')
                 return redirect("/")
             elif passwordConfirm != password:
-                print(
-                    "\n" + "\x1b[6;30;41m" + " PASSWORDS MUST MATCH " + "\x1b[0m" + "\n"
-                )
+                message(False, " PASSWORDS MUST MATCH ")
                 flash("password must match", "error")
         return render_template("signup.html", form=form, hideSignUp=True)
 
@@ -82,13 +69,7 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "userName" in session:
-        print(
-            "\n"
-            + "\x1b[6;30;42m"
-            + f' "{session["userName"]}" ALREADY LOGGED IN '
-            + "\x1b[0m"
-            + "\n"
-        )
+        message(False, f' "{session["userName"]}" ALREADY LOGGED IN ')
         return redirect("/")
     else:
         form = loginForm(request.form)
@@ -100,44 +81,24 @@ def login():
             cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
             user = cur.fetchone()
             if not user:
-                print(
-                    "\n"
-                    + "\x1b[6;30;41m"
-                    + f' "{userName}" NOT FOUND '
-                    + "\x1b[0m"
-                    + "\n"
-                )
+                message(False, f' "{userName}" NOT FOUND ')
                 flash("user not found", "error")
             else:
                 if sha256_crypt.verify(password, user[3]):
                     session["userName"] = userName
                     # addPoints(1, session["userName"])
-                    print(
-                        "\n"
-                        + "\x1b[6;30;42m"
-                        + f' "{userName}" LOGGED IN '
-                        + "\x1b[0m"
-                        + "\n"
-                    )
+                    message(True, f' "{userName}" LOGGED IN ')
                     flash("user found", "success")
                     return redirect("/")
                 else:
-                    print(
-                        "\n" + "\x1b[6;30;41m" + " WRONG PASSWORD " + "\x1b[0m" + "\n"
-                    )
+                    message(False, " WRONG PASSWORD ")
                     flash("wrong  password", "error")
         return render_template("login.html", form=form, hideLogin=True)
 
 
 @app.route("/logout")
 def logout():
-    print(
-        "\n"
-        + "\x1b[6;30;42m"
-        + f' {session["userName"]} LOGGED OUT '
-        + "\x1b[0m"
-        + "\n"
-    )
+    message(True, f' {session["userName"]} LOGGED OUT ')
     session.clear()
     return redirect("/")
 
@@ -162,12 +123,12 @@ def createPost():
                 """
             )
             conn.commit()
-            print("\n" + "\x1b[6;30;42m" + f" '{postTitle}' POSTED " + "\x1b[0m" + "\n")
+            message(True, f" '{postTitle}' POSTED ")
             addPoints(10, session["userName"])
             return redirect("/")
         return render_template("createPost.html", form=form)
     else:
-        print("\n" + "\x1b[6;30;41m" + " USER NOT LOGGED IN " + "\x1b[0m" + "\n")
+        message(False, " USER NOT LOGGED IN ")
         flash("you need login for create a post", "error")
         return redirect("/login")
 
@@ -179,7 +140,7 @@ def post(postID):
     cur.execute(f"SELECT id from posts")
     posts = str(cur.fetchone())
     if postID in posts:
-        print("\n" + "\x1b[6;30;42m" + f" {postID} FOUND " + "\x1b[0m" + "\n")
+        message(True, f" {postID} FOUND ")
         conn = sqlite3.connect("db/posts.db")
         cur = conn.cursor()
         cur.execute(f'SELECT * from posts WHERE id = "{postID}"')
@@ -195,14 +156,9 @@ def post(postID):
             date=post[6],
         )
     else:
-        print("\n" + "\x1b[6;30;41m" + " 404 " + "\x1b[0m" + "\n")
+        message(False, " 404 ")
         return render_template("404.html", notFound=postID)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-# Debugging
-# print("\n" + "\x1b[6;30;42m" + ' SUCCESS ' + "\x1b[0m" + "\n")
-# print("\n" + "\x1b[6;30;41m" + ' ERROR ' + "\x1b[0m" + "\n")
