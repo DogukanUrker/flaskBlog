@@ -80,10 +80,10 @@
 }
 
 .btnPost {
-  color: var(--secondaryColor);
-  margin-right: 1rem;
+  color: var(--light);
+  margin-right: 2rem;
 }
 
 .btnPost:hover {
-  color: var(--light);
+  color: var(--mainColor);
 }
