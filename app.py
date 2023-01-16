@@ -46,24 +46,40 @@ def signup():
             email = request.form["email"]
             password = request.form["password"]
             passwordConfirm = request.form["passwordConfirm"]
-            if passwordConfirm == password:
-                password = sha256_crypt.hash(password)
-                conn = sqlite3.connect("db/users.db")
-                cur = conn.cursor()
-                cur.execute(
-                    f"""
-                    INSERT INTO  users(userName,email,password,role,points,creationDate,creationTime) 
-                    VALUES("{userName}","{email}","{password}","user",0,
-                    "{datetime.now().strftime("%d.%m.%y")}",
-                    "{datetime.now().strftime("%H:%M")}")
-                    """
-                )
-                conn.commit()
-                message("2", f'"{userName}" ADDED TO DATABASE')
-                return redirect("/")
-            elif passwordConfirm != password:
-                message("1", " PASSWORDS MUST MATCH ")
-                flash("password must match", "error")
+            conn = sqlite3.connect("db/users.db")
+            cur = conn.cursor()
+            cur.execute("select userName from users")
+            users = str(cur.fetchall())
+            cur.execute("select email from users")
+            mails = str(cur.fetchall())
+            if not userName in users and not email in mails:
+                if passwordConfirm == password:
+                    password = sha256_crypt.hash(password)
+                    conn = sqlite3.connect("db/users.db")
+                    cur = conn.cursor()
+                    cur.execute(
+                        f"""
+                        INSERT INTO  users(userName,email,password,role,points,creationDate,creationTime) 
+                        VALUES("{userName}","{email}","{password}","user",0,
+                        "{datetime.now().strftime("%d.%m.%y")}",
+                        "{datetime.now().strftime("%H:%M")}")
+                        """
+                    )
+                    conn.commit()
+                    message("2", f'"{userName}" ADDED TO DATABASE')
+                    return redirect("/")
+                elif passwordConfirm != password:
+                    message("1", " PASSWORDS MUST MATCH ")
+                    flash("password must match", "error")
+            elif userName in users and email in mails:
+                message("1", f'"{userName}" & "{email}" IS UNAVAILABLE ')
+                flash("This username and email is unavailable.", "error")
+            elif not userName in users and email in mails:
+                message("1", f'THIS EMAIL "{email}" IS UNAVAILABLE ')
+                flash("This email is unavailable.", "error")
+            elif userName in users and not email in mails:
+                message("1", f'THIS USERNAME "{userName}" IS UNAVAILABLE ')
+                flash("This username is unavailable.", "error")
         return render_template("signup.html", form=form, hideSignUp=True)
 
 
