@@ -14,9 +14,12 @@
   </div>
 
   <form method="post" class="form">
-    {% if session["userName"] %} {{form.comment}}
+    {% if session["userName"] %} {{form.comment(class_="comment")}}
     <button type="submit" class="btnSubmit">comment</button> {% else %}
-    <small>you need <a href="/login">login</a> for comment</small> {% endif %}
+    <small
+      >you need <a href="/login" class="linkLogin">login</a> for comment</small
+    >
+    {% endif %}
   </form>
 </div>
 {% endblock body %}

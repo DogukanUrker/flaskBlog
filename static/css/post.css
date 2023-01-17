@@ -21,3 +21,34 @@
   align-items: stretch;
   justify-content: space-between;
 }
+
+.linkLogin {
+  color: var(--mainColor);
+  transition: 0.25s;
+}
+
+.linkLogin:hover {
+  color: var(--light);
+}
+
+
+.comment {
+  display: block;
+  width: 30rem;
+  height: 8rem;
+  background-color: transparent;
+  border: 1px solid var(--mainColor);
+  border-radius: 1rem;
+  resize: none;
+  padding: 1rem;
+  margin-left: 8rem;
+  margin-bottom: 1rem;
+}
+
+.comment:focus {
+  outline: none;
+}
+
+small {
+  font-size: 0.75rem;
+}
