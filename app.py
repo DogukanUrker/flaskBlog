@@ -167,7 +167,7 @@ def post(postID):
         cur = conn.cursor()
         cur.execute(f'SELECT * from posts WHERE id = "{postID}"')
         post = cur.fetchone()
-        cur.execute(f'UPDATE posts set views = views+1 where id = "{postID}"')
+        # cur.execute(f'UPDATE posts set views = views+1 where id = "{postID}"')
         conn.commit()
         if request.method == "POST":
             comment = request.form["comment"]
