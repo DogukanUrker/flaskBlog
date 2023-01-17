@@ -174,7 +174,7 @@ def post(postID):
             conn = sqlite3.connect("db/comments.db")
             cur = conn.cursor()
             cur.execute(
-                f'INSERT INTO comments(comment,user,date,time) VALUES("{comment}","{session["userName"]}","{datetime.now().strftime("%d.%m.%y")}","{datetime.now().strftime("%H:%M")}")'
+                f'INSERT INTO comments(post,comment,user,date,time) VALUES({postID},"{comment}","{session["userName"]}","{datetime.now().strftime("%d.%m.%y")}","{datetime.now().strftime("%H:%M")}")'
             )
             conn.commit()
         return render_template(
