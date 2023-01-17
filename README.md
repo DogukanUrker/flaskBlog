@@ -1,4 +1,4 @@
-# flaskBlog
+# flaskBlog 📝
 
 Simple blog app built with Flask
 [contact](https://dogukanurker.com)
