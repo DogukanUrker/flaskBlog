@@ -12,5 +12,11 @@
     <h5 class="author">{{author}}</h5>
     <h5 class="date">{{date}}</h5>
   </div>
+
+  <form method="post" class="form">
+    {% if session["userName"] %} {{form.comment}}
+    <button type="submit" class="btnSubmit">comment</button> {% else %}
+    <small>you need <a href="/login">login</a> for comment</small> {% endif %}
+  </form>
 </div>
 {% endblock body %}

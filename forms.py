@@ -1,6 +1,14 @@
 from wtforms import Form, PasswordField, StringField, TextAreaField, validators
 
 
+class commentForm(Form):
+    comment = StringField(
+        "Comment",
+        [validators.Length(min=20, max=500)],
+        render_kw={"placeholder": "your comment min 20 max 500 keys"},
+    )
+
+
 class loginForm(Form):
     userName = StringField(
         "Username",

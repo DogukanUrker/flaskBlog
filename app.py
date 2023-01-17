@@ -1,8 +1,8 @@
 import secrets
 import sqlite3
+from forms import *
 from datetime import datetime
 from passlib.hash import sha256_crypt
-from forms import createPostForm, signUpForm, loginForm
 from flask import Flask, render_template, redirect, flash, request, session
 
 
@@ -156,6 +156,7 @@ def createPost():
 
 @app.route("/<postID>", methods=["GET", "POST"])
 def post(postID):
+    form = commentForm(request.form)
     conn = sqlite3.connect("db/posts.db")
     cur = conn.cursor()
     cur.execute(f"SELECT id from posts")
@@ -168,6 +169,14 @@ def post(postID):
         post = cur.fetchone()
         cur.execute(f'UPDATE posts set views = views+1 where id = "{postID}"')
         conn.commit()
+        if request.method == "POST":
+            comment = request.form["comment"]
+            conn = sqlite3.connect("db/comments.db")
+            cur = conn.cursor()
+            cur.execute(
+                f'INSERT INTO comments(comment,user,date,time) VALUES("{comment}","{session["userName"]}","{datetime.now().strftime("%d.%m.%y")}","{datetime.now().strftime("%H:%M")}")'
+            )
+            conn.commit()
         return render_template(
             "post.html",
             id=post[0],
@@ -177,7 +186,9 @@ def post(postID):
             views=post[4],
             author=post[5],
             date=post[6],
+            form=form,
         )
+
     else:
         message("1", "404")
         return render_template("404.html", notFound=postID)
