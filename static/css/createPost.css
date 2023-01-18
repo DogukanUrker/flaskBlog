@@ -53,8 +53,13 @@ input:focus {
     width: 40rem;
     height: 30rem;
     display: block;
-    color: var(--dark);
+    color: var(--light);
     border: 0px;
+    background-color: transparent;
+    border: 1px solid var(--mainColor);
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding: 1rem;
 }
 
 .inputContent:focus {
