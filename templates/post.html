@@ -13,7 +13,7 @@
     <h5 class="date">{{date}}</h5>
   </div>
 
-  <form method="post" class="form">
+  <form method="post" class="commentForm">
     {% if session["userName"] %} {{form.comment(class_="comment")}}
     <button type="submit" class="btnSubmit">comment</button> {% else %}
     <small
