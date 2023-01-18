@@ -5,6 +5,20 @@
   --secondaryColor: #e685c9;
 }
 
+body::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: #666;
+}
+
+body::-webkit-scrollbar-track,
+body::-webkit-scrollbar-button {
+  background: transparent;
+}
+
 * {
   font-family: "Roboto Mono", monospace;
   color: #fffafa;
