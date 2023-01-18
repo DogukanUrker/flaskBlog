@@ -5,17 +5,17 @@
   --secondaryColor: #e685c9;
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 0.4rem;
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   border-radius: 1rem;
   background: #666;
 }
 
-body::-webkit-scrollbar-track,
-body::-webkit-scrollbar-button {
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-button {
   background: transparent;
 }
 
