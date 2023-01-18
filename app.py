@@ -23,7 +23,7 @@ def addPoints(points, userSession):
     conn = sqlite3.connect("db/users.db")
     cur = conn.cursor()
     cur.execute(
-        f'UPDATE users set points = points+{points} where userName = "{userSession}"'
+        f'update users set points = points+{points} where userName = "{userSession}"'
     )
     conn.commit()
     message("2", f'{points} POINTS ADDED TO "{userSession}"')
@@ -59,8 +59,8 @@ def signup():
                     cur = conn.cursor()
                     cur.execute(
                         f"""
-                        INSERT INTO  users(userName,email,password,role,points,creationDate,creationTime) 
-                        VALUES("{userName}","{email}","{password}","user",0,
+                        insert into users(userName,email,password,role,points,creationDate,creationTime) 
+                        values("{userName}","{email}","{password}","user",0,
                         "{datetime.now().strftime("%d.%m.%y")}",
                         "{datetime.now().strftime("%H:%M")}")
                         """
@@ -95,7 +95,7 @@ def login():
             password = request.form["password"]
             conn = sqlite3.connect("db/users.db")
             cur = conn.cursor()
-            cur.execute(f'SELECT * from users WHERE userName = "{userName}"')
+            cur.execute(f'select * from users where userName = "{userName}"')
             user = cur.fetchone()
             if not user:
                 message("1", f'"{userName}" NOT FOUND')
@@ -136,8 +136,8 @@ def createPost():
             cur = conn.cursor()
             cur.execute(
                 f"""
-                INSERT INTO posts(title,tags,content,author,views,date,time) 
-                VALUES("{postTitle}","{postTags}","{postContent}",
+                instert into posts(title,tags,content,author,views,date,time) 
+                values("{postTitle}","{postTags}","{postContent}",
                 "{session["userName"]}",0,
                 "{datetime.now().strftime("%d.%m.%y")}",
                 "{datetime.now().strftime("%H:%M")}")
@@ -159,13 +159,13 @@ def post(postID):
     form = commentForm(request.form)
     conn = sqlite3.connect("db/posts.db")
     cur = conn.cursor()
-    cur.execute(f"SELECT id from posts")
+    cur.execute(f"select id from posts")
     posts = str(cur.fetchall())
     if postID in posts:
         message("2", f'"{postID}" FOUND')
         conn = sqlite3.connect("db/posts.db")
         cur = conn.cursor()
-        cur.execute(f'SELECT * from posts WHERE id = "{postID}"')
+        cur.execute(f'select * from posts where id = "{postID}"')
         post = cur.fetchone()
         # cur.execute(f'UPDATE posts set views = views+1 where id = "{postID}"')
         conn.commit()
@@ -174,7 +174,12 @@ def post(postID):
             conn = sqlite3.connect("db/comments.db")
             cur = conn.cursor()
             cur.execute(
-                f'INSERT INTO comments(post,comment,user,date,time) VALUES({postID},"{comment}","{session["userName"]}","{datetime.now().strftime("%d.%m.%y")}","{datetime.now().strftime("%H:%M")}")'
+                f"""
+                insert into comments(post,comment,user,date,time)
+                values({postID},"{comment}","{session["userName"]}",
+                {datetime.now().strftime("%d.%m.%y")}",
+                "{datetime.now().strftime("%H:%M")}")
+                """
             )
             conn.commit()
         return render_template(
