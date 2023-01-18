@@ -33,13 +33,12 @@
 
 .comment {
   display: block;
-  width: 30rem;
+  width: 25rem;
   height: 8rem;
   background-color: transparent;
   border: none;
   resize: none;
   padding: 1rem;
-  margin-bottom: 1rem;
   font-size: 0.8rem;
 }
 
@@ -70,8 +69,7 @@ small {
 }
 
 .commentForm {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1rem auto 0 auto;
   display: flex;
   justify-content: space-between;
   width: fit-content;
