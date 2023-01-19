@@ -12,10 +12,14 @@
     <h5 class="author">{{author}}</h5>
     <h5 class="date">{{date}}</h5>
   </div>
-
   <form method="post" class="commentForm">
     {% if session["userName"] %} {{form.comment(class_="comment")}}
     <button type="submit" class="btnSubmit">comment</button> {% else %}
+    <style>
+      .commentForm {
+        border: none;
+      }
+    </style>
     <small
       >you need <a href="/login" class="linkLogin">login</a> for comment</small
     >
