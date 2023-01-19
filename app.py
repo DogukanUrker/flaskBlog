@@ -20,12 +20,12 @@ def message(color, message):
 
 
 def addPoints(points, userSession):
-    conn = sqlite3.connect("db/users.db")
-    cur = conn.cursor()
-    cur.execute(
+    connection = sqlite3.connect("db/users.db")
+    cursor = connection.cursor()
+    cursor.execute(
         f'update users set points = points+{points} where userName = "{userSession}"'
     )
-    conn.commit()
+    connection.commit()
     message("2", f'{points} POINTS ADDED TO "{userSession}"')
 
 
@@ -46,18 +46,18 @@ def signup():
             email = request.form["email"]
             password = request.form["password"]
             passwordConfirm = request.form["passwordConfirm"]
-            conn = sqlite3.connect("db/users.db")
-            cur = conn.cursor()
-            cur.execute("select userName from users")
-            users = str(cur.fetchall())
-            cur.execute("select email from users")
-            mails = str(cur.fetchall())
+            connection = sqlite3.connect("db/users.db")
+            cursor = connection.cursor()
+            cursor.execute("select userName from users")
+            users = str(cursor.fetchall())
+            cursor.execute("select email from users")
+            mails = str(cursor.fetchall())
             if not userName in users and not email in mails:
                 if passwordConfirm == password:
                     password = sha256_crypt.hash(password)
-                    conn = sqlite3.connect("db/users.db")
-                    cur = conn.cursor()
-                    cur.execute(
+                    connection = sqlite3.connect("db/users.db")
+                    cursor = connection.cursor()
+                    cursor.execute(
                         f"""
                         insert into users(userName,email,password,role,points,creationDate,creationTime) 
                         values("{userName}","{email}","{password}","user",0,
@@ -65,7 +65,7 @@ def signup():
                         "{datetime.now().strftime("%H:%M")}")
                         """
                     )
-                    conn.commit()
+                    connection.commit()
                     message("2", f'"{userName}" ADDED TO DATABASE')
                     return redirect("/")
                 elif passwordConfirm != password:
@@ -93,10 +93,10 @@ def login():
         if request.method == "POST":
             userName = request.form["userName"]
             password = request.form["password"]
-            conn = sqlite3.connect("db/users.db")
-            cur = conn.cursor()
-            cur.execute(f'select * from users where userName = "{userName}"')
-            user = cur.fetchone()
+            connection = sqlite3.connect("db/users.db")
+            cursor = connection.cursor()
+            cursor.execute(f'select * from users where userName = "{userName}"')
+            user = cursor.fetchone()
             if not user:
                 message("1", f'"{userName}" NOT FOUND')
                 flash("user not found", "error")
@@ -132,9 +132,9 @@ def createPost():
             postTitle = request.form["postTitle"]
             postTags = request.form["postTags"]
             postContent = request.form["postContent"]
-            conn = sqlite3.connect("db/posts.db")
-            cur = conn.cursor()
-            cur.execute(
+            connection = sqlite3.connect("db/posts.db")
+            cursor = connection.cursor()
+            cursor.execute(
                 f"""
                 instert into posts(title,tags,content,author,views,date,time) 
                 values("{postTitle}","{postTags}","{postContent}",
@@ -143,7 +143,7 @@ def createPost():
                 "{datetime.now().strftime("%H:%M")}")
                 """
             )
-            conn.commit()
+            connection.commit()
             message("2", f"'{postTitle}' POSTED")
             addPoints(10, session["userName"])
             return redirect("/")
@@ -157,31 +157,35 @@ def createPost():
 @app.route("/<postID>", methods=["GET", "POST"])
 def post(postID):
     form = commentForm(request.form)
-    conn = sqlite3.connect("db/posts.db")
-    cur = conn.cursor()
-    cur.execute(f"select id from posts")
-    posts = str(cur.fetchall())
+    connection = sqlite3.connect("db/posts.db")
+    cursor = connection.cursor()
+    cursor.execute(f"select id from posts")
+    posts = str(cursor.fetchall())
     if postID in posts:
         message("2", f'"{postID}" FOUND')
-        conn = sqlite3.connect("db/posts.db")
-        cur = conn.cursor()
-        cur.execute(f'select * from posts where id = "{postID}"')
-        post = cur.fetchone()
-        # cur.execute(f'UPDATE posts set views = views+1 where id = "{postID}"')
-        conn.commit()
+        connection = sqlite3.connect("db/posts.db")
+        cursor = connection.cursor()
+        cursor.execute(f'select * from posts where id = "{postID}"')
+        post = cursor.fetchone()
+        # cursor.execute(f'UPDATE posts set views = views+1 where id = "{postID}"')
+        connection.commit()
         if request.method == "POST":
             comment = request.form["comment"]
-            conn = sqlite3.connect("db/comments.db")
-            cur = conn.cursor()
-            cur.execute(
+            connection = sqlite3.connect("db/comments.db")
+            cursor = connection.cursor()
+            cursor.execute(
                 f"""
                 insert into comments(post,comment,user,date,time)
                 values({postID},"{comment}","{session["userName"]}",
-                {datetime.now().strftime("%d.%m.%y")}",
+                "{datetime.now().strftime("%d.%m.%y")}",
                 "{datetime.now().strftime("%H:%M")}")
                 """
             )
-            conn.commit()
+            connection.commit()
+        connection = sqlite3.connect("db/comments.db")
+        cursor = connection.cursor()
+        cursor.execute(f'select * from comments where post = "{postID}"')
+        comments = cursor.fetchall()
         return render_template(
             "post.html",
             id=post[0],
@@ -192,8 +196,8 @@ def post(postID):
             author=post[5],
             date=post[6],
             form=form,
+            comments=comments,
         )
-
     else:
         message("1", "404")
         return render_template("404.html", notFound=postID)
