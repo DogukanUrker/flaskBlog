@@ -15,7 +15,7 @@
   {% for comment in comments %}
   <div class="comments">
     <section>
-      <p class="commentUserName">{{comment[3]}}</p>
+      <a href="/{{comment[3]}}" class="commentUserName">{{comment[3]}}</a>
       <p class="commentDate">{{comment[4]}}</p>
     </section>
     <p class="commentContent">{{comment[2]}}</p>
