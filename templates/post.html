@@ -12,12 +12,13 @@
     <h5 class="author">{{author}}</h5>
     <h5 class="date">{{date}}</h5>
   </div>
+  {% for comment in comments %}
   <div class="comments">
-    {% for comment in comments %}
+    <section>
+      <p class="commentUserName">{{comment[3]}}</p>
+      <p class="commentDate">{{comment[4]}}</p>
+    </section>
     <p class="commentContent">{{comment[2]}}</p>
-    <p class="commentUserName">{{comment[3]}}</p>
-    <p class="commentDate">{{comment[4]}}</p>
-    <p class="ccommentTime">{{comment[5]}}</p>
     {% endfor %}
   </div>
   <form method="post" class="commentForm">

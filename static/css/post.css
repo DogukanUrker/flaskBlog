@@ -69,10 +69,30 @@ small {
 }
 
 .commentForm {
-  margin: 1rem auto 0 auto;
+  margin: 2rem auto 0 auto;
   display: flex;
   justify-content: space-between;
   width: fit-content;
   border: 1px solid var(--mainColor);
   border-radius: 1rem;
+}
+
+.comments {
+  margin: 3rem auto 0 auto;
+  width: 30rem;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.commentContent {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section {
+  font-size: 0.7rem;
+  margin-right: 2rem;
 }
