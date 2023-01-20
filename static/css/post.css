@@ -96,3 +96,7 @@ section {
   font-size: 0.7rem;
   margin-right: 2rem;
 }
+
+section p {
+  margin: 0;
+}
