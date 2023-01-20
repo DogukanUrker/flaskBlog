@@ -7,7 +7,7 @@
 {% endblock head %} {%block body%}
 <div class="post">
   <h1 class="title">{{title}}</h1>
-  <p class="content">{{content}}</p>
+  <p class="content">{{content|safe}}</p>
   <div class="bottomBar">
     <h5 class="author">{{author}}</h5>
     <h5 class="date">{{date}}</h5>
