@@ -8,6 +8,23 @@
   padding: 1rem;
 }
 
+.content {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin: 1rem 0rem 1rem 0rem;
+}
+
 .title {
   font-size: 1.5rem;
+}
+
+.readMore {
+  color: var(--mainColor);
+  transition: 0.25s;
+}
+
+.readMore:hover {
+  color: var(--light);
 }

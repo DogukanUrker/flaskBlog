@@ -7,6 +7,7 @@
 {% endblock head %} {%block body%} {% for post in posts %}
 <div class="post">
   <a class="title" href="/{{post[0]}}">{{post[1]}}</a>
-  <p class="content" tag="content">{{post[3]}}</p>
+  <div class="content" tag="content">{{post[3]|safe}}</div>
+  <a href="/{{post[0]}}" class="readMore">read more</a>
 </div>
 {% endfor %} {% endblock body %}
