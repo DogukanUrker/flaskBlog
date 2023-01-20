@@ -31,7 +31,11 @@ def addPoints(points, userSession):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    connection = sqlite3.connect("db/posts.db")
+    cursor = connection.cursor()
+    cursor.execute("select * from posts")
+    posts = cursor.fetchall()
+    return render_template("index.html", posts=posts)
 
 
 @app.route("/signup", methods=["GET", "POST"])

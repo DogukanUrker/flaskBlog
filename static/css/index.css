@@ -1,15 +1,13 @@
-.container {
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 4rem;
+.post {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  border: 1px solid var(--light);
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
-.author {
-  margin-top: 0;
-  text-align: end;
-}
-
-.date {
-  text-align: start;
-  margin-bottom: 0;
+.title {
+  font-size: 1.5rem;
 }

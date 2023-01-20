@@ -4,6 +4,9 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/index.css') }}"
 />
-{% endblock head %} {%block body%}
-<div class="container"></div>
-{% endblock body %}
+{% endblock head %} {%block body%} {% for post in posts %}
+<div class="post">
+  <a class="title" href="/{{post[0]}}">{{post[1]}}</a>
+  <p class="content" tag="content">{{post[3]}}</p>
+</div>
+{% endfor %} {% endblock body %}
