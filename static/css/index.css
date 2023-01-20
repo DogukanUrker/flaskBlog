@@ -11,7 +11,7 @@
 .content {
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   margin: 1rem 0rem 1rem 0rem;
 }
