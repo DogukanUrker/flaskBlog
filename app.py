@@ -1,9 +1,18 @@
+import os
 import secrets
 import sqlite3
 from forms import *
 from datetime import datetime
 from passlib.hash import sha256_crypt
-from flask import Flask, render_template, redirect, flash, request, session
+from flask import (
+    Flask,
+    request,
+    session,
+    flash,
+    redirect,
+    render_template,
+    send_from_directory,
+)
 
 
 app = Flask(__name__)
@@ -140,7 +149,7 @@ def createPost():
             cursor = connection.cursor()
             cursor.execute(
                 f"""
-                instert into posts(title,tags,content,author,views,date,time) 
+                insert into posts(title,tags,content,author,views,date,time) 
                 values("{postTitle}","{postTags}","{postContent}",
                 "{session["userName"]}",0,
                 "{datetime.now().strftime("%d.%m.%y")}",
@@ -171,7 +180,7 @@ def post(postID):
         cursor = connection.cursor()
         cursor.execute(f'select * from posts where id = "{postID}"')
         post = cursor.fetchone()
-        # cursor.execute(f'UPDATE posts set views = views+1 where id = "{postID}"')
+        # cursor.execute(f'update posts set views = views+1 where id = "{postID}"')
         connection.commit()
         if request.method == "POST":
             comment = request.form["comment"]
@@ -205,6 +214,15 @@ def post(postID):
     else:
         message("1", "404")
         return render_template("404.html", notFound=postID)
+
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(
+        os.path.join(app.root_path, "static/images"),
+        "favicon.ico",
+        mimetype="favicon.ico",
+    )
 
 
 if __name__ == "__main__":
