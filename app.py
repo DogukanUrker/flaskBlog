@@ -157,7 +157,7 @@ def createPost():
                 """
             )
             connection.commit()
-            message("2", f"'{postTitle}' POSTED")
+            message("2", f'"{postTitle}" POSTED')
             addPoints(10, session["userName"])
             return redirect("/")
         return render_template("createPost.html", form=form)
