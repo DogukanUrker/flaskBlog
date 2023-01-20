@@ -20,8 +20,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-    <script>
-      CKEDITOR.replace("postContent");
-    </script>
+    <script src="{{ url_for('static', filename='js/textEditor.js') }}"></script>
   </body>
 </html>
