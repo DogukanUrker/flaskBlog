@@ -15,11 +15,11 @@
   </style>
   <body>
     {% include 'navbar.html'%} {% block body %} {% endblock body %}
-    <script
-      src="https://kit.fontawesome.com/af7a48118d.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-    <script src="{{ url_for('static', filename='js/textEditor.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/editor.css') }}"
+    />
   </body>
 </html>
