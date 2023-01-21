@@ -31,15 +31,17 @@
 }
 
 .btnHome:hover {
-  color: grey;
-}
-
-.btnLogin {
   color: var(--mainColor);
 }
 
+.btnLogin {
+
+  color: var(--dark);
+}
+
 .btnSignUp {
-  background-color: var(--mainColor);
+  color: var(--light);
+  background-color: var(--dark);
 }
 
 .btnAccount {
@@ -49,12 +51,12 @@
 }
 
 .btnSignUp:hover {
-  color: var(--mainColor);
-  background-color: var(--light);
+  color: var(--dark);
+  background-color: transparent;
 }
 
 .btnLogin:hover {
-  color: var(--light);
+  color: var(--mainColor);
 }
 
 .dropdown {
@@ -80,7 +82,7 @@
 }
 
 .btnPost {
-  color: var(--light);
+  color: var(--dark);
   margin-right: 2rem;
 }
 

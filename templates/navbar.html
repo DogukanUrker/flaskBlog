@@ -17,6 +17,15 @@
     >
     {% elif hideLogin %}
     <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>
+    <style>
+      .btnSignUp {
+        color: var(--dark);
+        background-color: transparent;
+      }
+      .btnSignUp:hover {
+        color: var(--mainColor);
+      }
+    </style>
     {% elif hideSignUp %}
     <a href="/login"><button class="btn btnLogin">Login</button></a>
     {%else%}

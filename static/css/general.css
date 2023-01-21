@@ -1,7 +1,8 @@
 :root {
-  --dark: #141410;
-  --light: #fffafa;
-  --mainColor: #5946b2;
+  --dark: #000;
+  --light: #fff;
+  --gray: #D3D3D3;
+  --mainColor: #1B998B;
   --secondaryColor: #e685c9;
 }
 
@@ -21,7 +22,7 @@
 
 * {
   font-family: "Roboto Mono", monospace;
-  color: #fffafa;
+  color: var(--dark);
 }
 
 html {
@@ -29,7 +30,7 @@ html {
 }
 
 body {
-  background-color: var(--dark);
+  background-color: var(--light);
 }
 
 

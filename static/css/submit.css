@@ -5,10 +5,10 @@ input {
     width: 14rem;
     text-align: center;
     display: block;
-    color: var(--light);
+    color: var(--dark);
     background-color: transparent;
     font-size: 1rem;
-    border-bottom: 1px solid var(--light);
+    border-bottom: 1px solid var(--dark);
     transition: 0.4s;
     border-radius: 0.1rem;
 }
@@ -25,14 +25,15 @@ input:focus {
     border: 0px;
     border-radius: 2rem;
     transition: 0.3s;
-    background-color: var(--mainColor);
+    color: var(--light);
+    background-color: var(--dark);
     cursor: pointer;
     font-size: 1rem;
 }
 
 .btnSubmit:hover {
-    color: var(--mainColor);
-    background-color: var(--dark);
+    color: var(--dark);
+    background-color: var(--light);
 }
 
 .container {
@@ -41,4 +42,5 @@ input:focus {
     position: absolute;
     top: 50%;
     left: 50%;
+    padding: 1rem;
 }

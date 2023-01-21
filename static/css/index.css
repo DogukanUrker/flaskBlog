@@ -3,7 +3,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 2rem;
-  border: 1px solid var(--light);
+  border: 1px solid var(--dark);
   border-radius: 1rem;
   padding: 1rem;
 }
@@ -26,5 +26,5 @@
 }
 
 .readMore:hover {
-  color: var(--light);
+  color: var(--dark);
 }

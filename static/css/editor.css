@@ -9,7 +9,7 @@
     --ck-custom-background: hsl(270, 1%, 29%);
     --ck-custom-foreground: hsl(255, 3%, 18%);
     --ck-custom-border: hsl(300, 1%, 22%);
-    --ck-custom-white: hsl(0, 0%, 100%);
+    --ck-custom-white: var(--light);
 
     /* -- Overrides generic colors. ------------------------------------------------------------- */
 
@@ -103,7 +103,6 @@
 
     --ck-color-link-default: hsl(190, 100%, 75%);
 }
-
 
 #editor {
     margin: 2rem;
