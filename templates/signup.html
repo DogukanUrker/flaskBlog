@@ -12,9 +12,9 @@
   {% endfor %} {% endif %} {% endwith %}
   <form method="post" class="form">
     {{form.userName(class_="input" , autocomplete="off")}}
-    {{form.email(autocomplete="off")}} {{form.password}}
-    {{form.passwordConfirm}}
-    <button type="submit" class="btnSubmit">Signup</button>
+    {{form.email(class_="input",autocomplete="off")}}
+    {{form.password(class_="input")}} {{form.passwordConfirm(class_="input")}}
+    <button type="submit" class="btn btnPrimary">Signup</button>
   </form>
 </div>
 

@@ -3,34 +3,22 @@
   href="{{ url_for('static', filename='css/navbar.css') }}"
 />
 <div class="navbar">
-  <a href="/"><h1 class="btn btnHome">flaskBlog</h1></a>
+  <a href="/"><h1 class="btn btnLink btnHome">flaskBlog</h1></a>
   <div class="btns">
     {% if session["userName"] %}
     <a href="/createpost">
-      <button class="btn btnPost">New Post</button>
+      <button class="btn btnLink">New Post</button>
     </a>
-    <a href="/{{session['userName']}}"
-      ><button class="btn btnAccount">
-        <div class="userName">{{session["userName"]}}</div>
-        <a href="/logout" class="dropdown">logout</a>
-      </button></a
-    >
+    <a href="/{{session['userName']}}">
+      <button class="btn btnPrimary">{{session["userName"]}}</button>
+      <a href="/logout" ><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
     {% elif hideLogin %}
-    <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>
-    <style>
-      .btnSignUp {
-        color: var(--dark);
-        background-color: transparent;
-      }
-      .btnSignUp:hover {
-        color: var(--mainColor);
-      }
-    </style>
+    <a href="/signup"><button class="btn btnLink">Sign Up</button></a>
     {% elif hideSignUp %}
-    <a href="/login"><button class="btn btnLogin">Login</button></a>
+    <a href="/login"><button class="btn btnLink">Login</button></a>
     {%else%}
-    <a href="/login"><button class="btn btnLogin">Login</button></a>
-    <a href="/signup"><button class="btn btnSignUp">Sign Up</button></a>
+    <a href="/login"><button class="btn btnLink">Login</button></a>
+    <a href="/signup"><button class="btn btnPrimary">Sign Up</button></a>
     {% endif %}
   </div>
 </div>

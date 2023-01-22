@@ -1,18 +1,13 @@
 {% extends 'layout.html'%} {%block head%}
 <title>Create Post</title>
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/createPost.css') }}"
-/>
 {% endblock head %} {%block body%}
 <div class="container">
-  <form method="post" class="form">
-    {{form.postTitle(class_="inputTitle" , autocomplete="off")}}
-    {{form.postTags(class_="inputTags" , autocomplete="off")}}
+  <form method="post" class="form formPost centeredHorizontally">
+    {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
+    {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}
     <small>(separete with comma)</small>
-    {{form.postContent(class_="inputContent" ,id_="editor",
-    autocomplete="off")}}
-    <button type="submit" class="btnSubmit">Share post</button>
+    {{form.postContent(class_="editor", autocomplete="off")}}
+    <button type="submit" class="btn btnPrimary">Share post</button>
   </form>
 </div>
 {% endblock body %}

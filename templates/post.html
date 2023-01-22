@@ -5,7 +5,7 @@
   href="{{ url_for('static', filename='css/post.css') }}"
 />
 {% endblock head %} {%block body%}
-<div class="post">
+<div class="post centeredHorizontally">
   <h1 class="title">{{title}}</h1>
   <p class="content">{{content|safe}}</p>
   <div class="bottomBar">
@@ -18,7 +18,7 @@
       <a href="/{{comment[3]}}" class="commentUserName">{{comment[3]}}</a>
       <p class="commentDate">{{comment[4]}}</p>
     </section>
-    <p class="commentContent">{{comment[2]}}</p>
+    <p class="centeredHorizontally">{{comment[2]}}</p>
     {% endfor %}
   </div>
   <form method="post" class="commentForm">
