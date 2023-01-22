@@ -1,23 +1,9 @@
 :root {
   --dark: #000;
+  --jet: #373737;
   --light: #fff;
   --gray: #D3D3D3;
-  --mainColor: #1B998B;
-  --secondaryColor: #e685c9;
-}
-
-*::-webkit-scrollbar {
-  width: 0.4rem;
-}
-
-*::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background: #666;
-}
-
-*::-webkit-scrollbar-track,
-*::-webkit-scrollbar-button {
-  background: transparent;
+  --primaryColor: #1B998B;
 }
 
 * {
@@ -33,19 +19,88 @@ body {
   background-color: var(--light);
 }
 
-
 a {
   text-decoration: none;
 }
 
+*::-webkit-scrollbar {
+  width: 0.4rem;
+}
 
+*::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: var(--dark);
+}
+
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-button {
+  background: transparent;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+}
 
 .form {
-  padding-top: 0.7rem;
   height: fit-content;
   width: fit-content;
-  border-radius: 1rem;
-  padding: 0.5rem;
+}
+
+.input {
+  margin-bottom: 1rem;
+  border: 0px;
+  height: 2rem;
+  width: 14rem;
+  text-align: center;
+  display: block;
+  color: var(--dark);
+  background-color: transparent;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--dark);
+  transition: 0.4s;
+  border-radius: 0.1rem;
+}
+
+.centeredHorizontally {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primaryColor);
+}
+
+.btn {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 2rem;
+  border: 0px;
+  transition: 0.25s;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0rem 0.25rem;
+}
+
+.btnPrimary {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: var(--light);
+  background-color: var(--dark);
+}
+
+.btnLink {
+  background-color: transparent;
+}
+
+.btnPrimary:hover {
+  background-color: var(--jet);
+}
+
+.btnLink:hover {
+  color: var(--jet);
 }
 
 #flash {
@@ -62,4 +117,9 @@ a {
 
 .success {
   background-color: #009f6b;
+}
+
+.errorMessage, .formPost {
+  text-align: center;
+  margin-top: 6rem;
 }

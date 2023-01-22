@@ -1,7 +1,5 @@
 .post {
-  max-width: 40rem;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 35rem;
   margin-top: 2rem;
   border: 1px solid var(--dark);
   border-radius: 1rem;
@@ -11,20 +9,12 @@
 .content {
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
-  margin: 1rem 0rem 1rem 0rem;
+  margin: 1rem 0rem;
 }
 
 .title {
+  color: var(--primaryColor);
   font-size: 1.5rem;
-}
-
-.readMore {
-  color: var(--mainColor);
-  transition: 0.25s;
-}
-
-.readMore:hover {
-  color: var(--dark);
 }

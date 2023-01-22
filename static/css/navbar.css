@@ -3,6 +3,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  padding-top: 1rem;
 }
 
 .btns {
@@ -10,82 +11,17 @@
   order: 5;
 }
 
-.btn {
-  height: 2rem;
-  width: 5rem;
-  border-radius: 2rem;
-  border: 0px;
-  transition: 0.3s;
-  font-weight: 500;
-  cursor: pointer;
-  font-size: 0.9rem;
-  background-color: transparent;
-}
-
 .btnHome {
-  text-align: center;
   margin-left: 12rem;
   order: 1;
-  text-decoration: none;
   font-size: 2rem;
 }
 
-.btnHome:hover {
-  color: var(--mainColor);
+.fa-solid {
+  transition: 0.25s;
+  margin-left: 0.25rem;
 }
 
-.btnLogin {
-
-  color: var(--dark);
-}
-
-.btnSignUp {
-  color: var(--light);
-  background-color: var(--dark);
-}
-
-.btnAccount {
-  width: fit-content;
-  display: inline-block;
-  position: relative;
-}
-
-.btnSignUp:hover {
-  color: var(--dark);
-  background-color: transparent;
-}
-
-.btnLogin:hover {
-  color: var(--mainColor);
-}
-
-.dropdown {
-  padding-top: 0.5rem;
-  height: 2rem;
-  display: none;
-  position: absolute;
-  width: 100%;
-  overflow: auto;
-}
-
-.btnAccount:hover .dropdown {
-  display: block;
-}
-
-.userName {
-  color: var(--mainColor);
-  transition: 0.3s;
-}
-
-.userName:hover {
-  color: var(--light);
-}
-
-.btnPost {
-  color: var(--dark);
-  margin-right: 2rem;
-}
-
-.btnPost:hover {
-  color: var(--mainColor);
+.fa-solid:hover {
+  color: var(--jet);
 }

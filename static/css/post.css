@@ -3,17 +3,11 @@
   flex-direction: column;
   text-align: center;
   max-width: 50rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .title {
   font-size: 2rem;
-}
-
-.content {
-  font-size: 1rem;
 }
 
 .bottomBar {
@@ -23,12 +17,12 @@
 }
 
 .linkLogin {
-  color: var(--mainColor);
+  color: var(--primaryColor);
   transition: 0.25s;
 }
 
 .linkLogin:hover {
-  color: var(--light);
+  color: var(--dark);
 }
 
 .comment {
@@ -51,7 +45,7 @@ small {
 }
 
 .btnSubmit {
-  background-color: var(--mainColor);
+  background-color: var(--primaryColor);
   color: var(--light);
   border: 0px;
   border-radius: 1rem;
@@ -65,7 +59,7 @@ small {
 
 .btnSubmit:hover {
   background-color: transparent;
-  color: var(--mainColor);
+  color: var(--primaryColor);
 }
 
 .commentForm {
@@ -73,7 +67,7 @@ small {
   display: flex;
   justify-content: space-between;
   width: fit-content;
-  border: 1px solid var(--mainColor);
+  border: 1px solid var(--primaryColor);
   border-radius: 1rem;
 }
 
@@ -85,11 +79,6 @@ small {
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.commentContent {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 section {
