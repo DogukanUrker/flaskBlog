@@ -21,11 +21,16 @@ app.config["SESSION_PERMANENT"] = True
 
 
 def message(color, message):
+    currentDate = datetime.now().strftime("%d.%m.%y")
+    currentTime = datetime.now().strftime("%H:%M:%S")
     print(
-        f'\n\033[94m[{datetime.now().strftime("%d.%m.%y")}\033[0m'
-        f'\033[95m {datetime.now().strftime("%H:%M:%S")}]\033[0m'
+        f"\n\033[94m[{currentDate}\033[0m"
+        f"\033[95m {currentTime}]\033[0m"
         f"\033[9{color}m {message}\033[0m\n"
     )
+    logFile = open("log.log", "a")
+    # logFile.write(f"[{currentDate}" f"|{currentTime}]" f" {message}\n")
+    logFile.close()
 
 
 def addPoints(points, userSession):
