@@ -1,5 +1,10 @@
 {% extends 'layout.html'%} {%block head%}
-<title>(⊙_⊙) {{notFound}} ？</title>
+<title>{{ request.path }} ?</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}" />
 {% endblock head %} {%block body%}
-<h1 class="errorMessage">I don't know what is "{{notFound}}" sorry :(</h1>
+<div class="errorMessage">
+  <h1>I don't know what is</h1>
+  <h1 id="path">{{ request.path }}</h1>
+  <h1>sorry :(</h1>
+</div>
 {% endblock body %}
