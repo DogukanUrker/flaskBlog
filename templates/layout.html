@@ -13,7 +13,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/dark.css') }}"
     />
-    {% else %}
+    {% elif theme == "light" %}
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/light.css') }}"
