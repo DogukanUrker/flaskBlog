@@ -8,6 +8,6 @@ Requirements:
 - Flask
 - Passlib
 - WTForms
-- Python 3.6 or higher
+- Python 3.10 or newer
 
 Commands in comment lines will be executed on final build.
