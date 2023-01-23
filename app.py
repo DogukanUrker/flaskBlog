@@ -1,9 +1,9 @@
 import os
 import secrets
 import sqlite3
-from forms import *
 from datetime import datetime
 from passlib.hash import sha256_crypt
+from forms import commentForm, loginForm, createPostForm, signUpForm
 from flask import (
     Flask,
     request,
