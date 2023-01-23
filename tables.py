@@ -6,7 +6,7 @@ def usersTable():
     connection = sqlite3.connect("db/users.db")
     cursor = connection.cursor()
     try:
-        cursor.execute("""SELECT userName FROM users; """).fetchall()
+        cursor.execute("""SELECT * FROM users; """).fetchall()
         message("2", '"Users" TABLE FOUND')
         connection.close()
     except:
@@ -34,7 +34,7 @@ def postsTable():
     connection = sqlite3.connect("db/posts.db")
     cursor = connection.cursor()
     try:
-        cursor.execute("""SELECT id FROM posts; """).fetchall()
+        cursor.execute("""SELECT * FROM posts; """).fetchall()
         message("2", '"Posts" TABLE FOUND')
         connection.close()
 
@@ -63,7 +63,7 @@ def commentsTable():
     connection = sqlite3.connect("db/comments.db")
     cursor = connection.cursor()
     try:
-        cursor.execute("""SELECT id FROM comments; """).fetchall()
+        cursor.execute("""SELECT * FROM comments; """).fetchall()
         message("2", '"Comments" TABLE FOUND')
         connection.close()
     except:
