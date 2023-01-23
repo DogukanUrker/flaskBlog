@@ -1,15 +1,26 @@
 import sqlite3
+from os import mkdir
 from app import message
 from os.path import exists
 
 
+match exists("db"):
+    case True:
+        message("2", '"/db" FOUND')
+    case False:
+        message("1", '"/db" NOT FOUND')
+        mkdir("db")
+        message("2", '"/db" CREATED')
+
+
 def usersTable():
-    if not exists("db/users.db"):
-        message("1", '"users.db" NOT FOUND')
-        open("db/users.db", "x")
-        message("2", '"users.db" CREATED')
-    else:
-        message("2", '"users.db" FOUND')
+    match exists("db/users.db"):
+        case True:
+            message("2", '"users.db" FOUND')
+        case False:
+            message("1", '"users.db" NOT FOUND')
+            open("db/users.db", "x")
+            message("2", '"users.db" CREATED')
     connection = sqlite3.connect("db/users.db")
     cursor = connection.cursor()
     try:
@@ -30,7 +41,6 @@ def usersTable():
 	    "creationTime"	TEXT,
 	    PRIMARY KEY("userID" AUTOINCREMENT)
         );"""
-
         cursor.execute(usersTable)
         connection.commit()
         connection.close()
@@ -38,12 +48,13 @@ def usersTable():
 
 
 def postsTable():
-    if not exists("db/posts.db"):
-        message("1", '"posts.db" NOT FOUND')
-        open("db/posts.db", "x")
-        message("2", '"posts.db" CREATED')
-    else:
-        message("2", '"posts.db" FOUND')
+    match exists("db/posts.db"):
+        case True:
+            message("2", '"posts.db" FOUND')
+        case False:
+            message("1", '"posts.db" NOT FOUND')
+            open("db/posts.db", "x")
+            message("2", '"posts.db" CREATED')
     connection = sqlite3.connect("db/posts.db")
     cursor = connection.cursor()
     try:
@@ -64,7 +75,6 @@ def postsTable():
 	    "views"	TEXT,
 	    PRIMARY KEY("id" AUTOINCREMENT)
         );"""
-
         cursor.execute(postsTable)
         connection.commit()
         connection.close()
@@ -72,12 +82,13 @@ def postsTable():
 
 
 def commentsTable():
-    if not exists("db/comments.db"):
-        message("1", '"comments.db" NOT FOUND')
-        open("db/comments.db", "x")
-        message("2", '"comments.db" CREATED')
-    else:
-        message("2", '"comments.db" FOUND')
+    match exists("db/comments.db"):
+        case True:
+            message("2", '"comments.db" FOUND')
+        case False:
+            message("1", '"comments.db" NOT FOUND')
+            open("db/comments.db", "x")
+            message("2", '"comments.db" CREATED')
     connection = sqlite3.connect("db/comments.db")
     cursor = connection.cursor()
     try:
@@ -96,7 +107,6 @@ def commentsTable():
 	    "time"	TEXT,
 	    PRIMARY KEY("id" AUTOINCREMENT)
         );"""
-
         cursor.execute(commentsTable)
         connection.commit()
         connection.close()
