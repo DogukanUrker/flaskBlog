@@ -14,7 +14,7 @@ from flask import (
     send_from_directory,
 )
 
-# import database
+# import dbChecker
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
