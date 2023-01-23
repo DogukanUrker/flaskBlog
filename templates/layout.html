@@ -8,7 +8,17 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/general.css') }}"
     />
-    {% block head %} {% endblock head %}
+    {% if theme == "dark" %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dark.css') }}"
+    />
+    {% else %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/light.css') }}"
+    />
+    {% endif %} {% block head %} {% endblock head %}
   </head>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
