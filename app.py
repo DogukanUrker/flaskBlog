@@ -14,7 +14,7 @@ from flask import (
     send_from_directory,
 )
 
-# import tables
+# import database
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
