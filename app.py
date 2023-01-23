@@ -20,16 +20,26 @@ app.secret_key = secrets.token_urlsafe(32)
 app.config["SESSION_PERMANENT"] = True
 
 
+def currentDate():
+    return datetime.now().strftime("%d.%m.%y")
+
+
+def currentTime(seconds=False):
+    match seconds:
+        case False:
+            return datetime.now().strftime("%H:%M")
+        case True:
+            return datetime.now().strftime("%H:%M:%S")
+
+
 def message(color, message):
-    currentDate = datetime.now().strftime("%d.%m.%y")
-    currentTime = datetime.now().strftime("%H:%M:%S")
     print(
-        f"\n\033[94m[{currentDate}\033[0m"
-        f"\033[95m {currentTime}]\033[0m"
+        f"\n\033[94m[{currentDate()}\033[0m"
+        f"\033[95m {currentTime(True)}]\033[0m"
         f"\033[9{color}m {message}\033[0m\n"
     )
     logFile = open("log.log", "a")
-    # logFile.write(f"[{currentDate}" f"|{currentTime}]" f" {message}\n")
+    # logFile.write(f"[{currentDate()}" f"|{currentTime(True)}]" f" {message}\n")
     logFile.close()
 
 
@@ -79,8 +89,8 @@ def signup():
                         f"""
                         insert into users(userName,email,password,role,points,creationDate,creationTime) 
                         values("{userName}","{email}","{password}","user",0,
-                        "{datetime.now().strftime("%d.%m.%y")}",
-                        "{datetime.now().strftime("%H:%M")}")
+                        "{currentDate()}",
+                        "{currentTime()}")
                         """
                     )
                     connection.commit()
@@ -157,8 +167,8 @@ def createPost():
                 insert into posts(title,tags,content,author,views,date,time) 
                 values("{postTitle}","{postTags}","{postContent}",
                 "{session["userName"]}",0,
-                "{datetime.now().strftime("%d.%m.%y")}",
-                "{datetime.now().strftime("%H:%M")}")
+                "{currentDate()}",
+                "{currentTime()}")
                 """
             )
             connection.commit()
@@ -195,8 +205,8 @@ def post(postID):
                 f"""
                 insert into comments(post,comment,user,date,time)
                 values({postID},"{comment}","{session["userName"]}",
-                "{datetime.now().strftime("%d.%m.%y")}",
-                "{datetime.now().strftime("%H:%M")}")
+                "{currentDate()}",
+                "{currentTime()}")
                 """
             )
             connection.commit()
