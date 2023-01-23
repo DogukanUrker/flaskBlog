@@ -10,6 +10,7 @@ from flask import (
     session,
     flash,
     redirect,
+    url_for,
     render_template,
     send_from_directory,
 )
@@ -52,6 +53,12 @@ def addPoints(points, userSession):
     )
     connection.commit()
     message("2", f'{points} POINTS ADDED TO "{userSession}"')
+
+
+@app.errorhandler(404)
+def notFound(e):
+    message("1", "404")
+    return render_template("404.html"), 404
 
 
 @app.route("/")
@@ -229,7 +236,7 @@ def post(postID):
         )
     else:
         message("1", "404")
-        return render_template("404.html", notFound=postID)
+        return render_template("404.html")
 
 
 @app.route("/favicon.ico")
