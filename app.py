@@ -1,5 +1,4 @@
 import os
-import tables
 import secrets
 import sqlite3
 from datetime import datetime
@@ -15,6 +14,7 @@ from flask import (
     send_from_directory,
 )
 
+# import tables
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
