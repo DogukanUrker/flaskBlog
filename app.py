@@ -1,4 +1,5 @@
 import os
+import tables
 import secrets
 import sqlite3
 from datetime import datetime
