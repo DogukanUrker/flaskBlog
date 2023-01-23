@@ -247,7 +247,6 @@ def favicon():
         os.path.join(app.root_path, "static/images"),
         "favicon.ico",
         mimetype="favicon.ico",
-        theme=theme,
     )
 
 
