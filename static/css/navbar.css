@@ -26,7 +26,7 @@
   color: var(--jet);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1200px) {
   .btnHome {
     margin: 0 2rem 0 0;
   }
