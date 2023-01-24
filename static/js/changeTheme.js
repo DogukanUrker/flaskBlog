@@ -1,13 +1,13 @@
 var root = document.querySelector(":root");
-var rootStyles = getComputedStyle(root);
 var changeTheme = document.querySelector(".changeTheme");
 
 theme = "dark";
 
-if (localStorage.getItem(theme) === "light") {
-  toLight()
-} else if (localStorage.getItem(theme) === "dark") {
+if (localStorage.getItem(theme) === "dark") {
   toDark()
+}
+else if (localStorage.getItem(theme) === "light") {
+  toLight()
 }
 
 function toLight() {
