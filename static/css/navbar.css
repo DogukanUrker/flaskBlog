@@ -25,3 +25,13 @@
 .fa-solid:hover {
   color: var(--jet);
 }
+
+@media screen and (max-width: 600px) {
+  .btnHome {
+    margin: 0 2rem 0 0;
+  }
+
+  .btns {
+    margin: 0 0 0 2rem;
+  }
+}
