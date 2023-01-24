@@ -2,8 +2,13 @@ section {
     position: relative;
 }
 
-.toDark, .toLight {
+.changeTheme {
     position: absolute;
     top: 0px;
     right: 0px;
+    margin: 0;
+}
+
+.changeTheme:hover {
+    font-size: 1.5rem;
 }
