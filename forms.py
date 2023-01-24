@@ -37,6 +37,33 @@ class createPostForm(Form):
     )
 
 
+class changePasswordForm(Form):
+    oldPassword = PasswordField(
+        "oldPassword",
+        [
+            validators.Length(min=8),
+            validators.InputRequired(),
+        ],
+        render_kw={"placeholder": "old password"},
+    )
+    password = PasswordField(
+        "password",
+        [
+            validators.Length(min=8),
+            validators.InputRequired(),
+        ],
+        render_kw={"placeholder": "new password"},
+    )
+    passwordConfirm = PasswordField(
+        "passwordConfirm",
+        [
+            validators.Length(min=8),
+            validators.InputRequired(),
+        ],
+        render_kw={"placeholder": "confirm your password"},
+    )
+
+
 class signUpForm(Form):
     userName = StringField(
         "Username",
