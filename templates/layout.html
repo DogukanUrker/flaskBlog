@@ -8,23 +8,14 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/general.css') }}"
     />
-    {% if theme == "dark" %}
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/dark.css') }}"
-    />
-    {% elif theme == "light" %}
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/light.css') }}"
-    />
-    {% endif %} {% block head %} {% endblock head %}
+    {% block head %} {% endblock head %}
   </head>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
   </style>
   <body>
-    {% include 'navbar.html'%} {% block body %} {% endblock body %}
+    {% include 'changeTheme.html'%} {% include 'navbar.html'%} {% block body %}
+    {% endblock body %}
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
     <link

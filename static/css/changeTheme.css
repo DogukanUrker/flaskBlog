@@ -1,0 +1,9 @@
+section {
+    position: relative;
+}
+
+.toDark, .toLight {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
