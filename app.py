@@ -230,7 +230,7 @@ def changePassword():
         return render_template("changePassword.html", form=form)
     else:
         message("1", "USER NOT LOGGED IN")
-        flash("you need login for create change your password", "error")
+        flash("you need login for change your password", "error")
         return redirect("/login")
 
 
