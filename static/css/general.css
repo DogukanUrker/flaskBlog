@@ -1,4 +1,6 @@
 :root {
+  --dark: #000;
+  --light: #fff;
   --jet: #494949;
   --primaryColor: #ff206e;
 }
