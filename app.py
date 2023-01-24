@@ -14,7 +14,6 @@ from flask import (
     send_from_directory,
 )
 
-theme = "dark"
 
 # import dbChecker
 
@@ -59,7 +58,7 @@ def addPoints(points, userSession):
 @app.errorhandler(404)
 def notFound(e):
     message("1", "404")
-    return render_template("404.html", theme=theme), 404
+    return render_template("404.html"), 404
 
 
 @app.route("/")
@@ -68,7 +67,7 @@ def index():
     cursor = connection.cursor()
     cursor.execute("select * from posts")
     posts = cursor.fetchall()
-    return render_template("index.html", posts=posts, theme=theme)
+    return render_template("index.html", posts=posts)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -117,7 +116,7 @@ def signup():
             elif userName in users and not email in mails:
                 message("1", f'THIS USERNAME "{userName}" IS UNAVAILABLE ')
                 flash("This username is unavailable.", "error")
-        return render_template("signup.html", form=form, hideSignUp=True, theme=theme)
+        return render_template("signup.html", form=form, hideSignUp=True)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -147,7 +146,7 @@ def login():
                 else:
                     message("1", "WRONG PASSWORD")
                     flash("wrong  password", "error")
-        return render_template("login.html", form=form, hideLogin=True, theme=theme)
+        return render_template("login.html", form=form, hideLogin=True)
 
 
 @app.route("/logout")
@@ -184,7 +183,7 @@ def createPost():
             message("2", f'"{postTitle}" POSTED')
             addPoints(10, session["userName"])
             return redirect("/")
-        return render_template("createPost.html", form=form, theme=theme)
+        return render_template("createPost.html", form=form)
     else:
         message("1", "USER NOT LOGGED IN")
         flash("you need login for create a post", "error")
@@ -234,7 +233,6 @@ def post(postID):
             date=post[6],
             form=form,
             comments=comments,
-            theme=theme,
         )
     else:
         message("1", "404")
