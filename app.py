@@ -62,6 +62,19 @@ def getProfilePicture(userName):
     return cursor.fetchone()[0]
 
 
+@app.context_processor
+def utility_processor():
+    def getProfilePicture(userName):
+        connection = sqlite3.connect("db/users.db")
+        cursor = connection.cursor()
+        cursor.execute(
+            f'select profilePicture from users where userName = "{userName}"'
+        )
+        return cursor.fetchone()[0]
+
+    return dict(getProfilePicture=getProfilePicture)
+
+
 @app.errorhandler(404)
 def notFound(e):
     message("1", "404")
