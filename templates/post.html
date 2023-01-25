@@ -9,7 +9,14 @@
   <h1 class="title">{{title}}</h1>
   <p class="content">{{content|safe}}</p>
   <div class="bottomBar">
-    <h5 class="author">{{author}}</h5>
+    <a href="/{{author}}">
+      <h5 class="author">
+        <img
+          class="profilePicture"
+          src="{{ getProfilePicture(author) }}"
+        />{{author}}
+      </h5></a
+    >
     <h5 class="date">{{date}}</h5>
   </div>
   {% for comment in comments %}
