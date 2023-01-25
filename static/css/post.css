@@ -73,7 +73,7 @@ small {
 
 .comments {
   margin: 3rem auto 0 auto;
-  width: 30rem;
+  width: 32rem;
   font-size: 0.75rem;
   display: flex;
   justify-content: space-between;
@@ -88,4 +88,8 @@ section {
 
 section p {
   margin: 0;
+}
+
+.profilePicture {
+  margin-right: 0.6rem;
 }

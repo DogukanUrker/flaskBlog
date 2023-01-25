@@ -14,6 +14,7 @@
   </div>
   {% for comment in comments %}
   <div class="comments">
+    <img class="profilePicture" src="{{ getProfilePicture(comment[3]) }}" />
     <section>
       <a href="/{{comment[3]}}" class="commentUserName">{{comment[3]}}</a>
       <p class="commentDate">{{comment[4]}}</p>
@@ -23,7 +24,8 @@
   </div>
   <form method="post" class="commentForm">
     {% if session["userName"] %} {{form.comment(class_="comment")}}
-    <button type="submit" class="btnSubmit">comment</button> {% else %}
+    <button type="submit" class="btnSubmit">comment</button>
+    {% else %}
     <style>
       .commentForm {
         border: none;
