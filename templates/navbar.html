@@ -10,7 +10,10 @@
       <button class="btn btnLink">New Post</button>
     </a>
     <a href="/{{session['userName']}}">
-      <button class="btn btnPrimary">{{session["userName"]}}</button>
+      <div class="btn btnPrimary user">
+        <img class="profilePicture" src="{{ getProfilePicture(session['userName']) }}">
+        <button class="btn profileText">{{session["userName"]}}</button>
+      </div>
       <a href="/logout" ><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
     {% elif hideLogin %}
     <a href="/signup"><button class="btn btnLink">Sign Up</button></a>
