@@ -289,6 +289,7 @@ def post(postID):
                 """
             )
             connection.commit()
+            return redirect(f"/{postID}")
         connection = sqlite3.connect("db/comments.db")
         cursor = connection.cursor()
         cursor.execute(f'select * from comments where post = "{postID}"')
