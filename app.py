@@ -296,13 +296,12 @@ def post(postID):
         comments = cursor.fetchall()
         return render_template(
             "post.html",
-            id=post[0],
             title=post[1],
             tags=post[2],
             content=post[3],
-            views=post[4],
-            author=post[5],
-            date=post[6],
+            author=post[4],
+            views=post[5],
+            date=post[5],
             form=form,
             comments=comments,
         )
