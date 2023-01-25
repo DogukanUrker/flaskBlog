@@ -3,6 +3,7 @@ section {
 }
 
 .changeTheme {
+    font-size: 1rem;
     position: absolute;
     top: 0px;
     right: 0px;
