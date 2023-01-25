@@ -319,5 +319,6 @@ def favicon():
     )
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+match __name__:
+    case "__main__":
+        app.run(debug=True)
