@@ -22,7 +22,7 @@
 }
 
 .linkLogin:hover {
-  color: var(--dark);
+  color: var(--themePrimary);
 }
 
 .comment {
@@ -46,7 +46,7 @@ small {
 
 .btnSubmit {
   background-color: var(--primaryColor);
-  color: var(--light);
+  color: var(--themeSecondary);
   border: 0px;
   border-radius: 1rem;
   height: 2rem;

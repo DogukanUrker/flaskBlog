@@ -1,13 +1,13 @@
 :root {
-  --dark: #000;
-  --light: #fff;
-  --jet: #303030;
+  --themePrimary: #000;
+  --themeSecondary: #fff;
+  --themeHelper: #303030;
   --primaryColor: #ff206e;
 }
 
 * {
   font-family: "Roboto Mono", monospace;
-  color: var(--dark);
+  color: var(--themePrimary);
 }
 
 html {
@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  background-color: var(--light);
+  background-color: var(--themeSecondary);
 }
 
 a {
@@ -28,7 +28,7 @@ a {
 
 *::-webkit-scrollbar-thumb {
   border-radius: 1rem;
-  background: var(--dark);
+  background: var(--themePrimary);
 }
 
 *::-webkit-scrollbar-track,
@@ -53,10 +53,10 @@ button {
   width: 14rem;
   text-align: center;
   display: block;
-  color: var(--dark);
+  color: var(--themePrimary);
   background-color: transparent;
   font-size: 1rem;
-  border-bottom: 1px solid var(--dark);
+  border-bottom: 1px solid var(--themePrimary);
   transition: 0.4s;
   border-radius: 0.1rem;
 }
@@ -86,8 +86,8 @@ button {
 
 .btnPrimary {
   padding: 0.5rem 1rem 0.5rem 1rem;
-  color: var(--light);
-  background-color: var(--dark);
+  color: var(--themeSecondary);
+  background-color: var(--themePrimary);
 }
 
 .btnLink {
@@ -95,11 +95,11 @@ button {
 }
 
 .btnPrimary:hover {
-  background-color: var(--jet);
+  background-color: var(--themeHelper);
 }
 
 .btnLink:hover {
-  color: var(--jet);
+  color: var(--themeHelper);
 }
 
 #flash {

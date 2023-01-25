@@ -1,7 +1,7 @@
 .post {
   max-width: 35rem;
   margin-top: 2rem;
-  border: 1px solid var(--dark);
+  border: 1px solid var(--themePrimary);
   border-radius: 1rem;
   padding: 1rem;
 }

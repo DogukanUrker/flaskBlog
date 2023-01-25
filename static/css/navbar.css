@@ -24,7 +24,7 @@
 }
 
 .fa-solid:hover {
-  color: var(--jet);
+  color: var(--themeHelper);
 }
 
 .profilePicture {
@@ -44,7 +44,7 @@
 .profileText {
   margin: 0;
   padding-left: 0;
-  color: var(--light);
+  color: var(--themeSecondary);
 }
 
 @media screen and (max-width: 1200px) {

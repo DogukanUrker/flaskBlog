@@ -12,18 +12,18 @@ else if (localStorage.getItem(theme) === "light") {
 
 function toLight() {
   localStorage.setItem(theme, "light");
-  root.style.setProperty("--dark", "#000");
-  root.style.setProperty("--light", "#fff");
-  root.style.setProperty("--jet", "#303030");
+  root.style.setProperty("--themePrimary", "#000");
+  root.style.setProperty("--themeSecondary", "#fff");
+  root.style.setProperty("--themeHelper", "#303030");
   changeTheme.innerHTML = "🌚";
   changeTheme.setAttribute("onclick", "javascript: toDark();")
 }
 
 function toDark() {
   localStorage.setItem(theme, "dark");
-  root.style.setProperty("--dark", "#fff");
-  root.style.setProperty("--light", "#000");
-  root.style.setProperty("--jet", "#C6C6C6")
+  root.style.setProperty("--themePrimary", "#fff");
+  root.style.setProperty("--themeSecondary", "#000");
+  root.style.setProperty("--themeHelper", "#C6C6C6")
   changeTheme.innerHTML = "🌞";
   changeTheme.setAttribute("onclick", "javascript: toLight();")
 }
