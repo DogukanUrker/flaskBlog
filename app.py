@@ -55,6 +55,13 @@ def addPoints(points, userSession):
     message("2", f'{points} POINTS ADDED TO "{userSession}"')
 
 
+def getProfilePicture(userName):
+    connection = sqlite3.connect("db/users.db")
+    cursor = connection.cursor()
+    cursor.execute(f'select profilePicture from users where userName = "{userName}"')
+    return cursor.fetchone()[0]
+
+
 @app.errorhandler(404)
 def notFound(e):
     message("1", "404")
@@ -67,7 +74,11 @@ def index():
     cursor = connection.cursor()
     cursor.execute("select * from posts")
     posts = cursor.fetchall()
-    return render_template("index.html", posts=posts)
+    return render_template(
+        "index.html",
+        posts=posts,
+        picture=f"https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}",
+    )
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -95,8 +106,8 @@ def signup():
                     cursor = connection.cursor()
                     cursor.execute(
                         f"""
-                        insert into users(userName,email,password,role,points,creationDate,creationTime) 
-                        values("{userName}","{email}","{password}","user",0,
+                        insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime) 
+                        values("{userName}","{email}","{password}","https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}","user",0,
                         "{currentDate()}",
                         "{currentTime()}")
                         """
@@ -201,11 +212,9 @@ def changePassword():
             connection = sqlite3.connect("db/users.db")
             cursor = connection.cursor()
             cursor.execute(
-                f'select * from users where userName = "{session["userName"]}"'
+                f'select password from users where userName = "{session["userName"]}"'
             )
-            user = cursor.fetchone()
-            connection.commit()
-            if sha256_crypt.verify(oldPassword, user[3]):
+            if sha256_crypt.verify(oldPassword, cursor.fetchone()[0]):
                 if oldPassword == password:
                     flash("new password cant be same with old password", "error")
                     message("1", "NEW PASSWORD CANT BE SAME WITH OLD PASSWORD")
@@ -227,7 +236,12 @@ def changePassword():
             else:
                 flash("old password wrong", "error")
                 message("1", "OLD PASSWORD WRONG")
-        return render_template("changePassword.html", form=form)
+
+        return render_template(
+            "changePassword.html",
+            form=form,
+            profilePicture=getProfilePicture(session["userName"]),
+        )
     else:
         message("1", "USER NOT LOGGED IN")
         flash("you need login for change your password", "error")
