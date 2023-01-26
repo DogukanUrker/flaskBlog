@@ -3,14 +3,14 @@
 Simple blog app built with Flask.
 [contact](https://dogukanurker.com)
 
-### Requirements:
+### Requirements
 
 - Flask
 - Passlib
 - WTForms
 - Python 3.10 or newer
 
-### Features:
+### Features
 
 | Feature                      | Status |
 | :--------------------------- | :----: |
@@ -19,11 +19,14 @@ Simple blog app built with Flask.
 | User Log Out                 |   ✅   |
 | User Points                  |   ✅   |
 | Post Creation                |   ✅   |
+| Post Views                   |   ✅   |
 | Comment                      |   ✅   |
 | Password Reset               |   ✅   |
 | User Profile Pictures        |   ✅   |
 | Dark/Light Themes            |   ✅   |
 | Debugging/Logging            |   ✅   |
+| CKEditor 5                   |   ⏳   |
+| Post Likes                   |   🟧   |
 | Edit Post                    |   🟧   |
 | User Page                    |   🟧   |
 | Dashboard Page               |   🟧   |
