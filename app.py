@@ -316,6 +316,17 @@ def post(postID):
             return render_template("404.html")
 
 
+@app.route("/editpost/<int:postID>")
+def editPost(postID):
+    match "userName" in session:
+        case True:
+            return render_template("/editPost.html")
+        case False:
+            message("1", "USER NOT LOGGED IN")
+            flash("you need login for edit a post", "error")
+            return redirect("/login")
+
+
 @app.route("/favicon.ico")
 def favicon():
     return send_from_directory(
