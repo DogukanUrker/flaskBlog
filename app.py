@@ -342,8 +342,8 @@ def editPost(postID):
 def favicon():
     return send_from_directory(
         os.path.join(app.root_path, "static/images"),
-        "favicon.ico",
-        mimetype="favicon.ico",
+        "favicon.png",
+        mimetype="favicon.png",
     )
 
 
