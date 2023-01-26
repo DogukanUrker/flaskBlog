@@ -96,169 +96,174 @@ def index():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    if "userName" in session:
-        message("1", f'"{session["userName"]}" ALREADY LOGGED IN')
-        return redirect("/")
-    else:
-        form = signUpForm(request.form)
-        if request.method == "POST":
-            userName = request.form["userName"]
-            email = request.form["email"]
-            password = request.form["password"]
-            passwordConfirm = request.form["passwordConfirm"]
-            connection = sqlite3.connect("db/users.db")
-            cursor = connection.cursor()
-            cursor.execute("select userName from users")
-            users = str(cursor.fetchall())
-            cursor.execute("select email from users")
-            mails = str(cursor.fetchall())
-            if not userName in users and not email in mails:
-                if passwordConfirm == password:
-                    password = sha256_crypt.hash(password)
-                    connection = sqlite3.connect("db/users.db")
-                    cursor = connection.cursor()
-                    cursor.execute(
-                        f"""
-                        insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime) 
-                        values("{userName}","{email}","{password}","https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}","user",0,
-                        "{currentDate()}",
-                        "{currentTime()}")
-                        """
-                    )
-                    connection.commit()
-                    message("2", f'"{userName}" ADDED TO DATABASE')
-                    return redirect("/")
-                elif passwordConfirm != password:
-                    message("1", " PASSWORDS MUST MATCH ")
-                    flash("password must match", "error")
-            elif userName in users and email in mails:
-                message("1", f'"{userName}" & "{email}" IS UNAVAILABLE ')
-                flash("This username and email is unavailable.", "error")
-            elif not userName in users and email in mails:
-                message("1", f'THIS EMAIL "{email}" IS UNAVAILABLE ')
-                flash("This email is unavailable.", "error")
-            elif userName in users and not email in mails:
-                message("1", f'THIS USERNAME "{userName}" IS UNAVAILABLE ')
-                flash("This username is unavailable.", "error")
-        return render_template("signup.html", form=form, hideSignUp=True)
+    match "userName" in session:
+        case True:
+            message("1", f'"{session["userName"]}" ALREADY LOGGED IN')
+            return redirect("/")
+        case False:
+            form = signUpForm(request.form)
+            if request.method == "POST":
+                userName = request.form["userName"]
+                email = request.form["email"]
+                password = request.form["password"]
+                passwordConfirm = request.form["passwordConfirm"]
+                connection = sqlite3.connect("db/users.db")
+                cursor = connection.cursor()
+                cursor.execute("select userName from users")
+                users = str(cursor.fetchall())
+                cursor.execute("select email from users")
+                mails = str(cursor.fetchall())
+                if not userName in users and not email in mails:
+                    if passwordConfirm == password:
+                        password = sha256_crypt.hash(password)
+                        connection = sqlite3.connect("db/users.db")
+                        cursor = connection.cursor()
+                        cursor.execute(
+                            f"""
+                            insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime) 
+                            values("{userName}","{email}","{password}","https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}","user",0,
+                            "{currentDate()}",
+                            "{currentTime()}")
+                            """
+                        )
+                        connection.commit()
+                        message("2", f'"{userName}" ADDED TO DATABASE')
+                        return redirect("/")
+                    elif passwordConfirm != password:
+                        message("1", " PASSWORDS MUST MATCH ")
+                        flash("password must match", "error")
+                elif userName in users and email in mails:
+                    message("1", f'"{userName}" & "{email}" IS UNAVAILABLE ')
+                    flash("This username and email is unavailable.", "error")
+                elif not userName in users and email in mails:
+                    message("1", f'THIS EMAIL "{email}" IS UNAVAILABLE ')
+                    flash("This email is unavailable.", "error")
+                elif userName in users and not email in mails:
+                    message("1", f'THIS USERNAME "{userName}" IS UNAVAILABLE ')
+                    flash("This username is unavailable.", "error")
+            return render_template("signup.html", form=form, hideSignUp=True)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if "userName" in session:
-        message("1", f'"{session["userName"]}" ALREADY LOGGED IN')
-        return redirect("/")
-    else:
-        form = loginForm(request.form)
-        if request.method == "POST":
-            userName = request.form["userName"]
-            password = request.form["password"]
-            connection = sqlite3.connect("db/users.db")
-            cursor = connection.cursor()
-            cursor.execute(f'select * from users where userName = "{userName}"')
-            user = cursor.fetchone()
-            if not user:
-                message("1", f'"{userName}" NOT FOUND')
-                flash("user not found", "error")
-            else:
-                if sha256_crypt.verify(password, user[3]):
-                    session["userName"] = userName
-                    # addPoints(1, session["userName"])
-                    message("2", f'"{userName}" LOGGED IN')
-                    flash("user found", "success")
-                    return redirect("/")
+    match "userName" in session:
+        case True:
+            message("1", f'"{session["userName"]}" ALREADY LOGGED IN')
+            return redirect("/")
+        case False:
+            form = loginForm(request.form)
+            if request.method == "POST":
+                userName = request.form["userName"]
+                password = request.form["password"]
+                connection = sqlite3.connect("db/users.db")
+                cursor = connection.cursor()
+                cursor.execute(f'select * from users where userName = "{userName}"')
+                user = cursor.fetchone()
+                if not user:
+                    message("1", f'"{userName}" NOT FOUND')
+                    flash("user not found", "error")
                 else:
-                    message("1", "WRONG PASSWORD")
-                    flash("wrong  password", "error")
-        return render_template("login.html", form=form, hideLogin=True)
+                    if sha256_crypt.verify(password, user[3]):
+                        session["userName"] = userName
+                        # addPoints(1, session["userName"])
+                        message("2", f'"{userName}" LOGGED IN')
+                        flash("user found", "success")
+                        return redirect("/")
+                    else:
+                        message("1", "WRONG PASSWORD")
+                        flash("wrong  password", "error")
+            return render_template("login.html", form=form, hideLogin=True)
 
 
 @app.route("/logout")
 def logout():
-    if "userName" in session:
-        message("2", f'"{session["userName"]}" LOGGED OUT')
-        session.clear()
-        return redirect("/")
-    else:
-        message("1", f"USER NOT LOGGED IN")
-        return redirect("/")
+    match "userName" in session:
+        case True:
+            message("2", f'"{session["userName"]}" LOGGED OUT')
+            session.clear()
+            return redirect("/")
+        case False:
+            message("1", f"USER NOT LOGGED IN")
+            return redirect("/")
 
 
 @app.route("/createpost", methods=["GET", "POST"])
 def createPost():
-    if "userName" in session:
-        form = createPostForm(request.form)
-        if request.method == "POST":
-            postTitle = request.form["postTitle"]
-            postTags = request.form["postTags"]
-            postContent = request.form["postContent"]
-            connection = sqlite3.connect("db/posts.db")
-            cursor = connection.cursor()
-            cursor.execute(
-                f"""
-                insert into posts(title,tags,content,author,views,date,time) 
-                values("{postTitle}","{postTags}","{postContent}",
-                "{session["userName"]}",0,
-                "{currentDate()}",
-                "{currentTime()}")
-                """
-            )
-            connection.commit()
-            message("2", f'"{postTitle}" POSTED')
-            addPoints(10, session["userName"])
-            return redirect("/")
-        return render_template("createPost.html", form=form)
-    else:
-        message("1", "USER NOT LOGGED IN")
-        flash("you need login for create a post", "error")
-        return redirect("/login")
+    match "userName" in session:
+        case True:
+            form = createPostForm(request.form)
+            if request.method == "POST":
+                postTitle = request.form["postTitle"]
+                postTags = request.form["postTags"]
+                postContent = request.form["postContent"]
+                connection = sqlite3.connect("db/posts.db")
+                cursor = connection.cursor()
+                cursor.execute(
+                    f"""
+                    insert into posts(title,tags,content,author,views,date,time) 
+                    values("{postTitle}","{postTags}","{postContent}",
+                    "{session["userName"]}",0,
+                    "{currentDate()}",
+                    "{currentTime()}")
+                    """
+                )
+                connection.commit()
+                message("2", f'"{postTitle}" POSTED')
+                addPoints(10, session["userName"])
+                return redirect("/")
+            return render_template("createPost.html", form=form)
+        case False:
+            message("1", "USER NOT LOGGED IN")
+            flash("you need login for create a post", "error")
+            return redirect("/login")
 
 
 @app.route("/changepassword", methods=["GET", "POST"])
 def changePassword():
-    if "userName" in session:
-        form = changePasswordForm(request.form)
-        if request.method == "POST":
-            oldPassword = request.form["oldPassword"]
-            password = request.form["password"]
-            passwordConfirm = request.form["passwordConfirm"]
-            connection = sqlite3.connect("db/users.db")
-            cursor = connection.cursor()
-            cursor.execute(
-                f'select password from users where userName = "{session["userName"]}"'
-            )
-            if sha256_crypt.verify(oldPassword, cursor.fetchone()[0]):
-                if oldPassword == password:
-                    flash("new password cant be same with old password", "error")
-                    message("1", "NEW PASSWORD CANT BE SAME WITH OLD PASSWORD")
-                elif password != passwordConfirm:
-                    message("1", "PASSWORDS MUST MATCH")
-                    flash("passwords must match", "error")
-                elif oldPassword != password and password == passwordConfirm:
-                    newPassword = sha256_crypt.hash(password)
-                    connection = sqlite3.connect("db/users.db")
-                    cursor = connection.cursor()
-                    cursor.execute(
-                        f'update users set password = "{newPassword}" where userName = "{session["userName"]}"'
-                    )
-                    connection.commit()
-                    message("2", f'"{session["userName"]}" CHANGED HIS PASSWORD')
-                    session.clear()
-                    flash("you need login with new password", "error")
-                    return redirect("/login")
-            else:
-                flash("old password wrong", "error")
-                message("1", "OLD PASSWORD WRONG")
+    match "userName" in session:
+        case True:
+            form = changePasswordForm(request.form)
+            if request.method == "POST":
+                oldPassword = request.form["oldPassword"]
+                password = request.form["password"]
+                passwordConfirm = request.form["passwordConfirm"]
+                connection = sqlite3.connect("db/users.db")
+                cursor = connection.cursor()
+                cursor.execute(
+                    f'select password from users where userName = "{session["userName"]}"'
+                )
+                if sha256_crypt.verify(oldPassword, cursor.fetchone()[0]):
+                    if oldPassword == password:
+                        flash("new password cant be same with old password", "error")
+                        message("1", "NEW PASSWORD CANT BE SAME WITH OLD PASSWORD")
+                    elif password != passwordConfirm:
+                        message("1", "PASSWORDS MUST MATCH")
+                        flash("passwords must match", "error")
+                    elif oldPassword != password and password == passwordConfirm:
+                        newPassword = sha256_crypt.hash(password)
+                        connection = sqlite3.connect("db/users.db")
+                        cursor = connection.cursor()
+                        cursor.execute(
+                            f'update users set password = "{newPassword}" where userName = "{session["userName"]}"'
+                        )
+                        connection.commit()
+                        message("2", f'"{session["userName"]}" CHANGED HIS PASSWORD')
+                        session.clear()
+                        flash("you need login with new password", "error")
+                        return redirect("/login")
+                else:
+                    flash("old password wrong", "error")
+                    message("1", "OLD PASSWORD WRONG")
 
-        return render_template(
-            "changePassword.html",
-            form=form,
-            profilePicture=getProfilePicture(session["userName"]),
-        )
-    else:
-        message("1", "USER NOT LOGGED IN")
-        flash("you need login for change your password", "error")
-        return redirect("/login")
+            return render_template(
+                "changePassword.html",
+                form=form,
+                profilePicture=getProfilePicture(session["userName"]),
+            )
+        case False:
+            message("1", "USER NOT LOGGED IN")
+            flash("you need login for change your password", "error")
+            return redirect("/login")
 
 
 @app.route("/<postID>", methods=["GET", "POST"])
@@ -268,46 +273,47 @@ def post(postID):
     cursor = connection.cursor()
     cursor.execute(f"select id from posts")
     posts = str(cursor.fetchall())
-    if postID in posts:
-        message("2", f'"{postID}" FOUND')
-        connection = sqlite3.connect("db/posts.db")
-        cursor = connection.cursor()
-        cursor.execute(f'select * from posts where id = "{postID}"')
-        post = cursor.fetchone()
-        # cursor.execute(f'update posts set views = views+1 where id = "{postID}"')
-        connection.commit()
-        if request.method == "POST":
-            comment = request.form["comment"]
+    match postID in posts:
+        case True:
+            message("2", f'"{postID}" FOUND')
+            connection = sqlite3.connect("db/posts.db")
+            cursor = connection.cursor()
+            cursor.execute(f'select * from posts where id = "{postID}"')
+            post = cursor.fetchone()
+            # cursor.execute(f'update posts set views = views+1 where id = "{postID}"')
+            connection.commit()
+            if request.method == "POST":
+                comment = request.form["comment"]
+                connection = sqlite3.connect("db/comments.db")
+                cursor = connection.cursor()
+                cursor.execute(
+                    f"""
+                    insert into comments(post,comment,user,date,time)
+                    values({postID},"{comment}","{session["userName"]}",
+                    "{currentDate()}",
+                    "{currentTime()}")
+                    """
+                )
+                connection.commit()
+                return redirect(f"/{postID}")
             connection = sqlite3.connect("db/comments.db")
             cursor = connection.cursor()
-            cursor.execute(
-                f"""
-                insert into comments(post,comment,user,date,time)
-                values({postID},"{comment}","{session["userName"]}",
-                "{currentDate()}",
-                "{currentTime()}")
-                """
+            cursor.execute(f'select * from comments where post = "{postID}"')
+            comments = cursor.fetchall()
+            return render_template(
+                "post.html",
+                title=post[1],
+                tags=post[2],
+                content=post[3],
+                author=post[4],
+                views=post[5],
+                date=post[5],
+                form=form,
+                comments=comments,
             )
-            connection.commit()
-            return redirect(f"/{postID}")
-        connection = sqlite3.connect("db/comments.db")
-        cursor = connection.cursor()
-        cursor.execute(f'select * from comments where post = "{postID}"')
-        comments = cursor.fetchall()
-        return render_template(
-            "post.html",
-            title=post[1],
-            tags=post[2],
-            content=post[3],
-            author=post[4],
-            views=post[5],
-            date=post[5],
-            form=form,
-            comments=comments,
-        )
-    else:
-        message("1", "404")
-        return render_template("404.html")
+        case False:
+            message("1", "404")
+            return render_template("404.html")
 
 
 @app.route("/favicon.ico")
