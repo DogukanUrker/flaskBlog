@@ -320,6 +320,17 @@ def post(postID):
 def editPost(postID):
     match "userName" in session:
         case True:
+            connection = sqlite3.connect("db/posts.db")
+            cursor = connection.cursor()
+            cursor.execute(f"select * from posts where id = {postID}")
+            post = cursor.fetchall()
+            print(post)
+            match post:
+                case []:
+                    message("1", f'"{postID}"  NOT FOUND')
+                    return render_template("404.html")
+                case _:
+                    message("2", f'"{postID}" FOUNDED')
             return render_template("/editPost.html")
         case False:
             message("1", "USER NOT LOGGED IN")
