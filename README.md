@@ -24,7 +24,8 @@ Simple blog app built with Flask.
 | Password Reset               |   ✅   |
 | User Profile Pictures        |   ✅   |
 | Dark/Light Themes            |   ✅   |
-| Debugging/Logging            |   ✅   |
+| Debug Messages               |   ✅   |
+| Logging                      |   ✅   |
 | CKEditor 5                   |   ⏳   |
 | Post Likes                   |   🟧   |
 | Edit Post                    |   🟧   |
