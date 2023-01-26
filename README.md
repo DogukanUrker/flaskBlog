@@ -25,6 +25,7 @@ Simple blog app built with Flask.
 | User Profile Pictures        |   ✅   |
 | Dark/Light Themes            |   ✅   |
 | Debug Messages               |   ✅   |
+| Database Checker             |   ✅   |
 | Logging                      |   ✅   |
 | CKEditor 5                   |   ⏳   |
 | Post Likes                   |   🟧   |
