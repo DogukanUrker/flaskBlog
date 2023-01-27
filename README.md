@@ -28,10 +28,9 @@ Simple blog app built with Flask.
 | Database Checker             |   ✅   |
 | Logging                      |   ✅   |
 | CKEditor 5                   |   ⏳   |
-| Post Likes                   |   🟧   |
 | Edit Post                    |   ✅   |
-| User Page                    |   🟧   |
-| Dashboard Page               |   🟧   |
+| User Page                    |   ⏳   |
+| Dashboard Page               |   ✅   |
 | User Custom Profile Pictures |   🟧   |
 
 _Commands in comment lines will be executed on final build._
