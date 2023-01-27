@@ -365,7 +365,7 @@ def editPost(postID):
                                 f'update posts set lastEditTime = "{currentTime()}" where id = {post[0]}'
                             )
                             connection.commit()
-                            message("2", f'"{postTitle} EDITED"')
+                            message("2", f'"{postTitle}" EDITED')
                             return redirect("/")
 
                         return render_template(
