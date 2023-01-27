@@ -200,9 +200,11 @@ def createPost():
                 cursor = connection.cursor()
                 cursor.execute(
                     f"""
-                    insert into posts(title,tags,content,author,views,date,time) 
+                    insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) 
                     values("{postTitle}","{postTags}","{postContent}",
                     "{session["userName"]}",0,
+                    "{currentDate()}",
+                    "{currentTime()}",
                     "{currentDate()}",
                     "{currentTime()}")
                     """
@@ -266,14 +268,14 @@ def changePassword():
             return redirect("/login")
 
 
-@app.route("/<postID>", methods=["GET", "POST"])
+@app.route("/post/<int:postID>", methods=["GET", "POST"])
 def post(postID):
     form = commentForm(request.form)
     connection = sqlite3.connect("db/posts.db")
     cursor = connection.cursor()
     cursor.execute(f"select id from posts")
     posts = str(cursor.fetchall())
-    match postID in posts:
+    match str(postID) in posts:
         case True:
             message("2", f'"{postID}" FOUND')
             connection = sqlite3.connect("db/posts.db")
@@ -355,6 +357,12 @@ def editPost(postID):
                             )
                             cursor.execute(
                                 f'update posts set content = "{postContent}" where id = {post[0]}'
+                            )
+                            cursor.execute(
+                                f'update posts set lastEditDate = "{currentDate()}" where id = {post[0]}'
+                            )
+                            cursor.execute(
+                                f'update posts set lastEditTime = "{currentTime()}" where id = {post[0]}'
                             )
                             connection.commit()
                             message("2", f'"{postTitle} EDITED"')

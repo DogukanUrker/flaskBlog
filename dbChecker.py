@@ -64,16 +64,18 @@ def postsTable():
     except:
         message("1", '"Posts" TABLE NOT FOUND')
         postsTable = """
-        CREATE TABLE IF NOT EXISTS posts(
-	    "id"	INTEGER NOT NULL UNIQUE,
-	    "title"	TEXT NOT NULL,
-	    "tags"	TEXT,
-	    "content"	TEXT NOT NULL,
-	    "author"	TEXT NOT NULL,
-	    "date"	BLOB NOT NULL,
-	    "time"	BLOB NOT NULL,
-	    "views"	TEXT,
-	    PRIMARY KEY("id" AUTOINCREMENT)
+        CREATE TABLE "posts" (
+    	"id"	INTEGER NOT NULL UNIQUE,
+    	"title"	TEXT NOT NULL,
+    	"tags"	TEXT,
+    	"content"	TEXT NOT NULL,
+    	"author"	TEXT NOT NULL,
+    	"date"	TEXT NOT NULL,
+    	"time"	TEXT NOT NULL,
+    	"views"	TEXT,
+    	"lastEditDate"	TEXT,
+        "lastEditTime"	TEXT,
+    	PRIMARY KEY("id" AUTOINCREMENT)
         );"""
         cursor.execute(postsTable)
         connection.commit()
