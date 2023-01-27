@@ -1,17 +1,13 @@
 {% extends 'layout.html'%} {%block head%}
-<title>Change password</title>
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/editPost.css') }}"
-/>
+<title>Create Post</title>
 {% endblock head %} {%block body%}
 <div class="container">
   <form method="post" class="form formPost centeredHorizontally">
-    {{form.postTitle(class_="input centeredHorizontally", autocomplete="off")}}
+    {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
     {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}
     <small>(separete with comma)</small>
     {{form.postContent(class_="editor", autocomplete="off")}}
-    <button type="submit" class="btn btnPrimary">Edit</button>
+    <button type="submit" class="btn btnPrimary">save</button>
   </form>
 </div>
 {% endblock body %}
