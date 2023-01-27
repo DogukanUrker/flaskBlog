@@ -29,7 +29,7 @@ Simple blog app built with Flask.
 | Logging                      |   ✅   |
 | CKEditor 5                   |   ⏳   |
 | Post Likes                   |   🟧   |
-| Edit Post                    |   🟧   |
+| Edit Post                    |   ⏳   |
 | User Page                    |   🟧   |
 | Dashboard Page               |   🟧   |
 | User Custom Profile Pictures |   🟧   |
