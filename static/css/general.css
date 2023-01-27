@@ -3,6 +3,7 @@
   --themeSecondary: #fff;
   --themeHelper: #303030;
   --primaryColor: #ff206e;
+  --primaryHelper: #FF4F8C;
 }
 
 * {
@@ -101,6 +102,16 @@ button {
 .btnLink:hover {
   color: var(--themeHelper);
 }
+
+.textPrimary {
+  color: var(--primaryColor);
+  transition: 0.25s;
+}
+
+.textPrimary:hover {
+  color: var(--primaryHelper);
+}
+
 
 #flash {
   text-align: center;
