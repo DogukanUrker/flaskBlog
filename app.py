@@ -385,7 +385,7 @@ def editPost(postID):
                             )
                             return redirect("/")
                 case False:
-                    message("1", f'"{postID}"  NOT FOUND')
+                    message("1", f'"{postID}" NOT FOUND')
                     return render_template("404.html")
         case False:
             message("1", "USER NOT LOGGED IN")
