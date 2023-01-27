@@ -6,8 +6,8 @@
 />
 {% endblock head %} {%block body%} {% for post in posts %}
 <div class="post centeredHorizontally">
-  <a class="title" href="/{{post[0]}}">{{post[1]}}</a>
+  <a class="title" href="post/{{post[0]}}">{{post[1]}}</a>
   <div class="content" tag="content">{{post[3]|safe}}</div>
-  <a href="/{{post[0]}}" class="btn btnLink">read more</a>
+  <a href="post/{{post[0]}}" class="btn btnLink">read more</a>
 </div>
 {% endfor %} {% endblock body %}
