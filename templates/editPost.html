@@ -5,5 +5,13 @@
   href="{{ url_for('static', filename='css/editPost.css') }}"
 />
 {% endblock head %} {%block body%}
-<div class="container"></div>
+<div class="container">
+  <form method="post" class="form formPost centeredHorizontally">
+    {{form.postTitle(class_="input centeredHorizontally", autocomplete="off")}}
+    {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}
+    <small>(separete with comma)</small>
+    {{form.postContent(class_="editor", autocomplete="off")}}
+    <button type="submit" class="btn btnPrimary">Edit</button>
+  </form>
+</div>
 {% endblock body %}

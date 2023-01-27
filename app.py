@@ -316,22 +316,63 @@ def post(postID):
             return render_template("404.html")
 
 
-@app.route("/editpost/<int:postID>")
+# add last edited date and time to db
+@app.route("/editpost/<int:postID>", methods=["GET", "POST"])
 def editPost(postID):
     match "userName" in session:
         case True:
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
             cursor.execute(f"select * from posts where id = {postID}")
-            post = cursor.fetchall()
-            print(post)
+            post = cursor.fetchone()
             match post:
                 case []:
                     message("1", f'"{postID}"  NOT FOUND')
                     return render_template("404.html")
                 case _:
                     message("2", f'"{postID}" FOUNDED')
-            return render_template("/editPost.html")
+                    connection = sqlite3.connect("db/users.db")
+                    cursor = connection.cursor()
+                    cursor.execute(
+                        f'select userName from users where userName="{session["userName"]}"'
+                    )
+                    if cursor.fetchone()[0] == post[4]:
+                        form = createPostForm(request.form)
+                        form.postTitle.data = post[1]
+                        form.postTags.data = post[2]
+                        form.postContent.data = post[3]
+                        if request.method == "POST":
+                            postTitle = request.form["postTitle"]
+                            postTags = request.form["postTags"]
+                            postContent = request.form["postContent"]
+                            connection = sqlite3.connect("db/posts.db")
+                            cursor = connection.cursor()
+                            cursor.execute(
+                                f'update posts set title = "{postTitle}" where id = {post[0]}'
+                            )
+                            cursor.execute(
+                                f'update posts set tags = "{postTags}" where id = {post[0]}'
+                            )
+                            cursor.execute(
+                                f'update posts set content = "{postContent}" where id = {post[0]}'
+                            )
+                            connection.commit()
+                            message("2", f'"{postTitle} EDITED"')
+                            return redirect("/")
+
+                        return render_template(
+                            "/editPost.html",
+                            title=post[1],
+                            tags=post[2],
+                            content=post[3],
+                            form=form,
+                        )
+                    else:
+                        flash("this post not yours", "error")
+                        message(
+                            "1", f'THIS POST DOES NOT BELONG TO "{session["userName"]}"'
+                        )
+                        return redirect("/")
         case False:
             message("1", "USER NOT LOGGED IN")
             flash("you need login for edit a post", "error")
