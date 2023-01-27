@@ -19,6 +19,7 @@ Simple blog app built with Flask.
 | User Log Out                 |   ✅   |
 | User Points                  |   ✅   |
 | Post Creation                |   ✅   |
+| Post Delete                  |   🟧   |
 | Post Views                   |   ✅   |
 | Comment                      |   ✅   |
 | Password Reset               |   ✅   |
@@ -28,7 +29,7 @@ Simple blog app built with Flask.
 | Database Checker             |   ✅   |
 | Logging                      |   ✅   |
 | CKEditor 5                   |   ⏳   |
-| Edit Post                    |   ✅   |
+| Post Edit                    |   ✅   |
 | User Page                    |   ⏳   |
 | Dashboard Page               |   ✅   |
 | User Custom Profile Pictures |   🟧   |
