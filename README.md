@@ -14,24 +14,26 @@ Simple blog app built with Flask.
 
 | Feature                      | Status |
 | :--------------------------- | :----: |
+| User Page                    |   ⏳   |
 | User Login                   |   ✅   |
-| User Sign Up                 |   ✅   |
-| User Log Out                 |   ✅   |
 | User Points                  |   ✅   |
-| Post Creation                |   ✅   |
-| Post Delete                  |   🟧   |
-| Post Views                   |   ✅   |
-| Comment                      |   ✅   |
-| Password Reset               |   ✅   |
+| User Log Out                 |   ✅   |
+| User Sign Up                 |   ✅   |
 | User Profile Pictures        |   ✅   |
-| Dark/Light Themes            |   ✅   |
-| Debug Messages               |   ✅   |
-| Database Checker             |   ✅   |
-| Logging                      |   ✅   |
+| User Custom Profile Pictures |   🟧   |
+| Dashboard Page               |   ✅   |
+| Password Reset               |   ✅   |
 | CKEditor 5                   |   ⏳   |
 | Post Edit                    |   ✅   |
-| User Page                    |   ⏳   |
-| Dashboard Page               |   ✅   |
-| User Custom Profile Pictures |   🟧   |
+| Post Views                   |   ✅   |
+| Post Delete                  |   🟧   |
+| Post Creation                |   ✅   |
+| Comment                      |   ✅   |
+| Comment Edit                 |   🟧   |
+| Comment Delete               |   🟧   |
+| Logging                      |   ✅   |
+| Debug Messages               |   ✅   |
+| Database Checker             |   ✅   |
+| Dark/Light Themes            |   ✅   |
 
 _Commands in comment lines will be executed on final build._
