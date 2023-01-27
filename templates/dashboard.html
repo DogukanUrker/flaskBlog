@@ -1,0 +1,32 @@
+{% extends 'layout.html'%} {%block head%}
+<title>{{session["userName"]}}'s Dashboard</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/dashboard.css') }}"
+/>
+{% endblock head %} {%block body%} {% for post in posts %}
+<div class="post centeredHorizontally">
+  <a class="title textPrimary" href="/post/{{post[0]}} ">{{post[1]}}</a>
+  <div class="content" tag="content">{{post[3]|safe}}</div>
+  <section>
+    <a href="/post/{{post[0]}}" class="btn btnLink textPrimary">go to post</a>
+    <a href="/editpost/{{post[0]}}" class="btn btnLink textPrimary">edit</a>
+  </section>
+  <div class="info">
+    <p>Tags: {{post[2]}}</p>
+    <p>Views: {{post[7]}}</p>
+  </div>
+  <div class="info">
+    <p>Creation Time: {{post[6]}}</p>
+    <p>Last Edit Time: {{post[9]}}</p>
+  </div>
+  <div class="info">
+    <p>Creation Date: {{post[5]}}</p>
+    <p>Last Edit Date: {{post[8]}}</p>
+  </div>
+</div>
+{% endfor %} {% endblock body %}
