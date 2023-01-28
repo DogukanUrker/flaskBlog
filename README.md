@@ -39,6 +39,6 @@ Simple blog app built with Flask.
 
 ## Known Issues
 
-- Redirect users to wrong pages on /post/[postID]
+- Redirect users to wrong pages
 
 _Commands in comment lines will be executed on final build._
