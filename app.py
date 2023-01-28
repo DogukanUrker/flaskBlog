@@ -72,25 +72,7 @@ def utility_processor():
         )
         return cursor.fetchone()[0]
 
-    def deletePost(postID):
-        connection = sqlite3.connect("db/posts.db")
-        cursor = connection.cursor()
-        cursor.execute(f"delete from posts where id = {postID}")
-        connection.commit()
-        message("2", f'"{postID}" DELETED')
-
-    def deleteComment(commentID):
-        connection = sqlite3.connect("db/comments.db")
-        cursor = connection.cursor()
-        cursor.execute(f"delete from comments where id = {commentID}")
-        connection.commit()
-        message("2", f'"{commentID}" DELETED')
-
-    return dict(
-        getProfilePicture=getProfilePicture,
-        deletePost=deletePost,
-        deleteComment=deleteComment,
-    )
+    return dict(getProfilePicture=getProfilePicture)
 
 
 @app.errorhandler(404)
@@ -235,6 +217,31 @@ def createPost():
             message("1", "USER NOT LOGGED IN")
             flash("you need loin for create a post", "error")
             return redirect("/login")
+
+
+@app.route("/deletepost/<int:postID>")
+def deletePost(postID):
+    match "userName" in session:
+        case True:
+            connection = sqlite3.connect("db/posts.db")
+            cursor = connection.cursor()
+            cursor.execute(f"select author from posts where id = {postID}")
+            author = cursor.fetchone()
+            match author[0] == session["userName"]:
+                case True:
+                    cursor.execute(f"delete from posts where id = {postID}")
+                    connection.commit()
+                    message("2", f'"{postID}" DELETED')
+                    return redirect("/")
+                case False:
+                    message(
+                        "1",
+                        f'"{postID}" NOT DELETED "{postID}" DOES NOT BELONG TO {session["userName"]}',
+                    )
+                    return redirect("/")
+        case False:
+            message("1", f'USER NEEDS TO LOGIN FOR DELETE "{postID}"')
+            return redirect("/")
 
 
 @app.route("/changepassword", methods=["GET", "POST"])
