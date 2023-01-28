@@ -419,6 +419,41 @@ def dashboard(userName):
             return redirect("/login")
 
 
+@app.route("/user/<int:userID>")
+def user(userID):
+    connection = sqlite3.connect("db/users.db")
+    cursor = connection.cursor()
+    cursor.execute(f"select userID from users")
+    users = cursor.fetchall()
+    match str(userID) in str(users):
+        case True:
+            message("2", f'USER "{userID}" FOUND')
+            cursor.execute(f"select * from users where userID = {userID}")
+            user = cursor.fetchone()
+            print(user)
+            connection = sqlite3.connect("db/posts.db")
+            cursor = connection.cursor()
+            cursor.execute(f'select views from posts where author = "{user[1]}"')
+            viewsData = cursor.fetchall()
+            views = 0
+            for view in viewsData:
+                views += int(view[0])
+            cursor.execute(f'select * from posts where author = "{user[1]}"')
+            posts = cursor.fetchall()
+            print(posts)
+            message("2", f'USER "{userID}"s PAGE LOADED')
+            return render_template(
+                "user.html",
+                user=user,
+                views=views,
+                posts=posts,
+            )
+
+        case _:
+            message("1", f'USER "{userID}" NOT FOUND')
+            return render_template("404.html")
+
+
 @app.route("/favicon.ico")
 def favicon():
     return send_from_directory(

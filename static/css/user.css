@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+.userProfilePicture {
+    height: 6rem;
+    width: 6rem;
+    border: 1px solid var(--primaryColor);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.userName {
+    margin: 6rem 0 0 1rem;
+}
+
+.head {
+    display: flex;
+    width: 20rem;
+    margin: 2rem 0 2rem 0;
+}
+
+.head img, h2 {
+    display: inline-block;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.stats {
+    display: flex;
+    width: 22rem;
+    justify-content: space-between;
+}
+
+.stats p {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.content {
+    -webkit-line-clamp: 4;
+}
+
+h1 {
+    width: 36rem;
+    margin: 1rem 0 0 0;
+}
