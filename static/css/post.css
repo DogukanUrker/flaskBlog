@@ -1,9 +1,12 @@
 .post {
   display: flex;
   flex-direction: column;
-  text-align: center;
   max-width: 50rem;
   margin-top: 1.5rem;
+}
+
+.post h1 {
+  text-align: center;
 }
 
 .title {
