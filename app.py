@@ -219,29 +219,57 @@ def createPost():
             return redirect("/login")
 
 
-@app.route("/deletepost/<int:postID>")
-def deletePost(postID):
+@app.route("/deletepost/<int:postID>/redirect=<direct>")
+def deletePost(postID, direct):
     match "userName" in session:
         case True:
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
             cursor.execute(f"select author from posts where id = {postID}")
             author = cursor.fetchone()
+            direct = direct.replace("&", "/")
             match author[0] == session["userName"]:
                 case True:
                     cursor.execute(f"delete from posts where id = {postID}")
                     connection.commit()
                     message("2", f'"{postID}" DELETED')
-                    return redirect("/")
+                    return redirect(f"/{direct}")
                 case False:
                     message(
                         "1",
                         f'"{postID}" NOT DELETED "{postID}" DOES NOT BELONG TO {session["userName"]}',
                     )
-                    return redirect("/")
+                    return redirect(f"/{direct}")
+            return redirect(f"/{direct}")
         case False:
             message("1", f'USER NEEDS TO LOGIN FOR DELETE "{postID}"')
-            return redirect("/")
+            return redirect(f"/{direct}")
+
+
+@app.route("/deletecomment/<int:commentID>/redirect=<direct>")
+def deleteComment(commentID, direct):
+    match "userName" in session:
+        case True:
+            connection = sqlite3.connect("db/comments.db")
+            cursor = connection.cursor()
+            cursor.execute(f"select user from comments where id = {commentID}")
+            user = cursor.fetchone()
+            direct = direct.replace("&", "/")
+            match user[0] == session["userName"]:
+                case True:
+                    cursor.execute(f"delete from comments where id = {commentID}")
+                    connection.commit()
+                    message("2", f"COMMENT:{commentID} DELETED")
+                    return redirect(f"/{direct}")
+                case False:
+                    message(
+                        "1",
+                        f'"{commentID}" NOT DELETED "{commentID}" DOES NOT BELONG TO {session["userName"]}',
+                    )
+                    return redirect(f"/{direct}")
+        case False:
+            message("1", f"USER NEEDS TO LOGIN FOR DELETE COMMENT:{commentID}")
+            return redirect(f"/{direct}")
 
 
 @app.route("/changepassword", methods=["GET", "POST"])
