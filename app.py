@@ -222,19 +222,26 @@ def createPost():
 @app.route("/deletepost/<int:postID>")
 def deletePost(postID):
     match "userName" in session:
-        case _:
+        case True:
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
             cursor.execute(f"select author from posts where id = {postID}")
             author = cursor.fetchone()
             match author[0] == session["userName"]:
                 case True:
-                    pass
+                    cursor.execute(f"delete from posts where id = {postID}")
+                    connection.commit()
+                    message("2", f'"{postID}" DELETED')
+                    return redirect("/")
                 case False:
-                    pass
+                    message(
+                        "1",
+                        f'"{postID}" NOT DELETED "{postID}" DOES NOT BELONG TO {session["userName"]}',
+                    )
+                    return redirect("/")
+        case False:
+            message("1", f'USER NEEDS TO LOGIN FOR DELETE "{postID}"')
             return redirect("/")
-        # case False:
-        # return redirect("/")
 
 
 @app.route("/changepassword", methods=["GET", "POST"])

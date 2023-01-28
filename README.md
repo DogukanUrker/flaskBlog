@@ -27,7 +27,7 @@ Simple blog app built with Flask.
 | CKEditor 5                   |   ⏳   |
 | Post Edit                    |   ✅   |
 | Post Views                   |   ✅   |
-| Post Delete                  |   ⏳   |
+| Post Delete                  |   ✅   |
 | Post Creation                |   ✅   |
 | Comment                      |   ✅   |
 | Comment Edit                 |   🟧   |
@@ -38,6 +38,7 @@ Simple blog app built with Flask.
 | Dark/Light Themes            |   ✅   |
 
 ## Known Issues
+
 - Redirect users to wrong pages on /post/[postID]
 
 _Commands in comment lines will be executed on final build._
