@@ -27,7 +27,7 @@ Simple blog app built with Flask.
 | CKEditor 5                   |   ⏳   |
 | Post Edit                    |   ✅   |
 | Post Views                   |   ✅   |
-| Post Delete                  |   🟧   |
+| Post Delete                  |   ⏳   |
 | Post Creation                |   ✅   |
 | Comment                      |   ✅   |
 | Comment Edit                 |   🟧   |

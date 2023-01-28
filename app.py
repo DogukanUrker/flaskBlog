@@ -215,8 +215,26 @@ def createPost():
             return render_template("createPost.html", form=form)
         case False:
             message("1", "USER NOT LOGGED IN")
-            flash("you need login for create a post", "error")
+            flash("you need loin for create a post", "error")
             return redirect("/login")
+
+
+@app.route("/deletepost/<int:postID>")
+def deletePost(postID):
+    match "userName" in session:
+        case _:
+            connection = sqlite3.connect("db/posts.db")
+            cursor = connection.cursor()
+            cursor.execute(f"select author from posts where id = {postID}")
+            author = cursor.fetchone()
+            match author[0] == session["userName"]:
+                case True:
+                    pass
+                case False:
+                    pass
+            return redirect("/")
+        # case False:
+        # return redirect("/")
 
 
 @app.route("/changepassword", methods=["GET", "POST"])
