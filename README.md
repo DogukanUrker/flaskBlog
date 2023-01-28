@@ -14,7 +14,7 @@ Simple blog app built with Flask.
 
 | Feature                      | Status |
 | :--------------------------- | :----: |
-| User Page                    |   ⏳   |
+| User Page                    |   ✅   |
 | User Login                   |   ✅   |
 | User Points                  |   ✅   |
 | User Sign Up                 |   ✅   |
