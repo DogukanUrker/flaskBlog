@@ -29,9 +29,11 @@ Simple blog app built with Flask.
 | Post Views                   |   ✅   |
 | Post Delete                  |   ✅   |
 | Post Creation                |   ✅   |
+| Post Reactions               |   🟧   |
 | Comment                      |   ✅   |
 | Comment Edit                 |   🟧   |
 | Comment Delete               |   🟧   |
+| Comment Reactions            |   🟧   |
 | Logging                      |   ✅   |
 | Debug Messages               |   ✅   |
 | Database Checker             |   ✅   |
@@ -39,6 +41,7 @@ Simple blog app built with Flask.
 
 ## Known Issues
 
-- Redirect users to wrong pages
+- Redirect users to wrong pages.
+- Submit button doesn't work on /createpost.
 
-_Commands in comment lines will be executed on final build._
+**_Commands in comment lines will be executed on final build._**
