@@ -6,10 +6,12 @@
 />
 {% endblock head %} {%block body%}
 <div class="container">
-  {% with messages = get_flashed_messages(with_categories=true) %} {% if
-  messages %} {% for category, message in messages %}
-  <p class="{{ category }}" id="flash">{{ message }}</p>
-  {% endfor %} {% endif %} {% endwith %}
+  <div id="hide">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <p class="{{ category }} " id="flash">{{ message }}</p>
+    {% endfor %} {% endif %} {% endwith %}
+  </div>
   <form method="post" class="form">
     {{form.userName(class_="input",autocomplete="off")}}{{form.password(autocomplete="off",class_="input")}}
     <button type="submit" class="btn btnPrimary">Login</button>
