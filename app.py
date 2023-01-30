@@ -45,14 +45,14 @@ def message(color, message):
     logFile.close()
 
 
-def addPoints(points, userSession):
+def addPoints(points, user):
     connection = sqlite3.connect("db/users.db")
     cursor = connection.cursor()
     cursor.execute(
-        f'update users set points = points+{points} where userName = "{userSession}"'
+        f'update users set points = points+{points} where userName = "{user}"'
     )
     connection.commit()
-    message("2", f'{points} POINTS ADDED TO "{userSession}"')
+    message("2", f'{points} POINTS ADDED TO "{user}"')
 
 
 def getProfilePicture(userName):
@@ -97,7 +97,7 @@ def index():
 def signup():
     match "userName" in session:
         case True:
-            message("1", f'"{session["userName"]}" ALREADY LOGGED IN')
+            message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
             return redirect("/")
         case False:
             form = signUpForm(request.form)
@@ -126,7 +126,7 @@ def signup():
                             """
                         )
                         connection.commit()
-                        message("2", f'"{userName}" ADDED TO DATABASE')
+                        message("2", f'USER: "{userName}" ADDED TO DATABASE')
                         return redirect("/")
                     elif passwordConfirm != password:
                         message("1", " PASSWORDS MUST MATCH ")
@@ -147,7 +147,7 @@ def signup():
 def login():
     match "userName" in session:
         case True:
-            message("1", f'"{session["userName"]}" ALREADY LOGGED IN')
+            message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
             return redirect("/")
         case False:
             form = loginForm(request.form)
@@ -159,13 +159,13 @@ def login():
                 cursor.execute(f'select * from users where userName = "{userName}"')
                 user = cursor.fetchone()
                 if not user:
-                    message("1", f'"{userName}" NOT FOUND')
+                    message("1", f'USER: "{userName}" NOT FOUND')
                     flash("user not found", "error")
                 else:
                     if sha256_crypt.verify(password, user[3]):
                         session["userName"] = userName
                         # addPoints(1, session["userName"])
-                        message("2", f'"{userName}" LOGGED IN')
+                        message("2", f'USER: "{userName}" LOGGED IN')
                         flash("user found", "success")
                         return redirect("/")
                     else:
@@ -178,7 +178,7 @@ def login():
 def logout():
     match "userName" in session:
         case True:
-            message("2", f'"{session["userName"]}" LOGGED OUT')
+            message("2", f'USER: "{session["userName"]}" LOGGED OUT')
             session.clear()
             return redirect("/")
         case False:
@@ -209,7 +209,7 @@ def createPost():
                     """
                 )
                 connection.commit()
-                message("2", f'"{postTitle}" POSTED')
+                message("2", f'POST: "{postTitle}" POSTED')
                 addPoints(10, session["userName"])
                 return redirect("/")
             return render_template("createPost.html", form=form)
@@ -232,17 +232,17 @@ def deletePost(postID, direct):
                 case True:
                     cursor.execute(f"delete from posts where id = {postID}")
                     connection.commit()
-                    message("2", f'"{postID}" DELETED')
+                    message("2", f'POST: "{postID}" DELETED')
                     return redirect(f"/{direct}")
                 case False:
                     message(
                         "1",
-                        f'"{postID}" NOT DELETED "{postID}" DOES NOT BELONG TO {session["userName"]}',
+                        f'POST: "{postID}" NOT DELETED "{postID}" DOES NOT BELONG TO USER: {session["userName"]}',
                     )
                     return redirect(f"/{direct}")
             return redirect(f"/{direct}")
         case False:
-            message("1", f'USER NEEDS TO LOGIN FOR DELETE "{postID}"')
+            message("1", f'USER NEEDS TO LOGIN FOR DELETE POST: "{postID}"')
             return redirect(f"/{direct}")
 
 
@@ -259,16 +259,16 @@ def deleteComment(commentID, direct):
                 case True:
                     cursor.execute(f"delete from comments where id = {commentID}")
                     connection.commit()
-                    message("2", f"COMMENT:{commentID} DELETED")
+                    message("2", f"COMMENT: {commentID} DELETED")
                     return redirect(f"/{direct}")
                 case False:
                     message(
                         "1",
-                        f'"{commentID}" NOT DELETED "{commentID}" DOES NOT BELONG TO {session["userName"]}',
+                        f'COMMENT: "{commentID}" NOT DELETED "{commentID}" DOES NOT BELONG TO {session["userName"]}',
                     )
                     return redirect(f"/{direct}")
         case False:
-            message("1", f"USER NEEDS TO LOGIN FOR DELETE COMMENT:{commentID}")
+            message("1", f"USER NEEDS TO LOGIN FOR DELETE COMMENT: {commentID}")
             return redirect(f"/{direct}")
 
 
@@ -301,7 +301,9 @@ def changePassword():
                             f'update users set password = "{newPassword}" where userName = "{session["userName"]}"'
                         )
                         connection.commit()
-                        message("2", f'"{session["userName"]}" CHANGED HIS PASSWORD')
+                        message(
+                            "2", f'USER: "{session["userName"]}" CHANGED HIS PASSWORD'
+                        )
                         session.clear()
                         flash("you need login with new password", "error")
                         return redirect("/login")
@@ -329,7 +331,7 @@ def post(postID):
     posts = str(cursor.fetchall())
     match str(postID) in posts:
         case True:
-            message("2", f'"{postID}" FOUND')
+            message("2", f'POST: "{postID}" FOUND')
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
             cursor.execute(f'select * from posts where id = "{postID}"')
@@ -384,7 +386,7 @@ def editPost(postID):
                     cursor = connection.cursor()
                     cursor.execute(f"select * from posts where id = {postID}")
                     post = cursor.fetchone()
-                    message("2", f'"{postID}" FOUNDED')
+                    message("2", f'POST: "{postID}" FOUND')
                     connection = sqlite3.connect("db/users.db")
                     cursor = connection.cursor()
                     cursor.execute(
@@ -418,7 +420,7 @@ def editPost(postID):
                                     f'update posts set lastEditTime = "{currentTime()}" where id = {post[0]}'
                                 )
                                 connection.commit()
-                                message("2", f'"{postTitle}" EDITED')
+                                message("2", f'POST: "{postTitle}" EDITED')
                                 return redirect("/")
 
                             return render_template(
@@ -432,11 +434,11 @@ def editPost(postID):
                             flash("this post not yours", "error")
                             message(
                                 "1",
-                                f'THIS POST DOES NOT BELONG TO "{session["userName"]}"',
+                                f'THIS POST DOES NOT BELONG TO USER: "{session["userName"]}"',
                             )
                             return redirect("/")
                 case False:
-                    message("1", f'"{postID}" NOT FOUND')
+                    message("1", f'POST: "{postID}" NOT FOUND')
                     return render_template("404.html")
         case False:
             message("1", "USER NOT LOGGED IN")
@@ -463,11 +465,11 @@ def dashboard(userName):
                 case False:
                     message(
                         "1",
-                        f'THIS IS DASHBOARD NOT BELONGS TO "{session["userName"]}"',
+                        f'THIS IS DASHBOARD NOT BELONGS TO USER: "{session["userName"]}"',
                     )
                     return redirect(f'/dashboard/{session["userName"].lower()}')
         case False:
-            message("1", "USER NOT LOGGED IN (DASHBOARD)")
+            message("1", "DASHBOARD CANNOT BE ACCESSED WITHOUT USER LOGIN")
             flash("you need login for reach to dashboard", "error")
             return redirect("/login")
 
@@ -480,7 +482,7 @@ def user(userID):
     users = cursor.fetchall()
     match str(userID) in str(users):
         case True:
-            message("2", f'USER "{userID}" FOUND')
+            message("2", f'USER: "{userID}" FOUND')
             cursor.execute(f"select * from users where userID = {userID}")
             user = cursor.fetchone()
             print(user)
@@ -494,7 +496,7 @@ def user(userID):
             cursor.execute(f'select * from posts where author = "{user[1]}"')
             posts = cursor.fetchall()
             print(posts)
-            message("2", f'USER "{userID}"s PAGE LOADED')
+            message("2", f'USER: "{userID}"s PAGE LOADED')
             return render_template(
                 "user.html",
                 user=user,
@@ -503,7 +505,7 @@ def user(userID):
             )
 
         case _:
-            message("1", f'USER "{userID}" NOT FOUND')
+            message("1", f'USER: "{userID}" NOT FOUND')
             return render_template("404.html")
 
 
