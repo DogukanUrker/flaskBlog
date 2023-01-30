@@ -489,18 +489,17 @@ def dashboard(userName):
             return redirect("/login")
 
 
-@app.route("/user/<int:userID>")
-def user(userID):
+@app.route("/user/<userName>")
+def user(userName):
     connection = sqlite3.connect("db/users.db")
     cursor = connection.cursor()
-    cursor.execute(f"select userID from users")
+    cursor.execute(f"select userName from users")
     users = cursor.fetchall()
-    match str(userID) in str(users):
+    match str(userName).lower() in str(users).lower():
         case True:
-            message("2", f'USER: "{userID}" FOUND')
-            cursor.execute(f"select * from users where userID = {userID}")
+            message("2", f'USER: "{userName}" FOUND')
+            cursor.execute(f'select * from users where lower(userName) = "{userName}"')
             user = cursor.fetchone()
-            print(user)
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
             cursor.execute(f'select views from posts where author = "{user[1]}"')
@@ -510,8 +509,7 @@ def user(userID):
                 views += int(view[0])
             cursor.execute(f'select * from posts where author = "{user[1]}"')
             posts = cursor.fetchall()
-            print(posts)
-            message("2", f'USER: "{userID}"s PAGE LOADED')
+            message("2", f'USER: "{userName}"s PAGE LOADED')
             return render_template(
                 "user.html",
                 user=user,
@@ -520,7 +518,7 @@ def user(userID):
             )
 
         case _:
-            message("1", f'USER: "{userID}" NOT FOUND')
+            message("1", f'USER: "{userName}" NOT FOUND')
             return render_template("404.html")
 
 
