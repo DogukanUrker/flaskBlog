@@ -166,7 +166,6 @@ def login():
                         session["userName"] = userName
                         # addPoints(1, session["userName"])
                         message("2", f'USER: "{userName}" LOGGED IN')
-                        flash("user found", "success")
                         return redirect("/")
                     else:
                         message("1", "WRONG PASSWORD")
@@ -195,23 +194,31 @@ def createPost():
                 postTitle = request.form["postTitle"]
                 postTags = request.form["postTags"]
                 postContent = request.form["postContent"]
-                connection = sqlite3.connect("db/posts.db")
-                cursor = connection.cursor()
-                cursor.execute(
-                    f"""
-                    insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) 
-                    values("{postTitle}","{postTags}","{postContent}",
-                    "{session["userName"]}",0,
-                    "{currentDate()}",
-                    "{currentTime()}",
-                    "{currentDate()}",
-                    "{currentTime()}")
-                    """
-                )
-                connection.commit()
-                message("2", f'POST: "{postTitle}" POSTED')
-                addPoints(10, session["userName"])
-                return redirect("/")
+                match postContent == "":
+                    case True:
+                        flash("post content not be empty", "error")
+                        message(
+                            "1",
+                            f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
+                        )
+                    case False:
+                        connection = sqlite3.connect("db/posts.db")
+                        cursor = connection.cursor()
+                        cursor.execute(
+                            f"""
+                            insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) 
+                            values("{postTitle}","{postTags}","{postContent}",
+                            "{session["userName"]}",0,
+                            "{currentDate()}",
+                            "{currentTime()}",
+                            "{currentDate()}",
+                            "{currentTime()}")
+                            """
+                        )
+                        connection.commit()
+                        message("2", f'POST: "{postTitle}" POSTED')
+                        addPoints(10, session["userName"])
+                        return redirect("/")
             return render_template("createPost.html", form=form)
         case False:
             message("1", "USER NOT LOGGED IN")
@@ -402,26 +409,34 @@ def editPost(postID):
                                 postTitle = request.form["postTitle"]
                                 postTags = request.form["postTags"]
                                 postContent = request.form["postContent"]
-                                connection = sqlite3.connect("db/posts.db")
-                                cursor = connection.cursor()
-                                cursor.execute(
-                                    f'update posts set title = "{postTitle}" where id = {post[0]}'
-                                )
-                                cursor.execute(
-                                    f'update posts set tags = "{postTags}" where id = {post[0]}'
-                                )
-                                cursor.execute(
-                                    f'update posts set content = "{postContent}" where id = {post[0]}'
-                                )
-                                cursor.execute(
-                                    f'update posts set lastEditDate = "{currentDate()}" where id = {post[0]}'
-                                )
-                                cursor.execute(
-                                    f'update posts set lastEditTime = "{currentTime()}" where id = {post[0]}'
-                                )
-                                connection.commit()
-                                message("2", f'POST: "{postTitle}" EDITED')
-                                return redirect("/")
+                                match postContent == "":
+                                    case True:
+                                        flash("post content not be empty", "error")
+                                        message(
+                                            "1",
+                                            f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
+                                        )
+                                    case False:
+                                        connection = sqlite3.connect("db/posts.db")
+                                        cursor = connection.cursor()
+                                        cursor.execute(
+                                            f'update posts set title = "{postTitle}" where id = {post[0]}'
+                                        )
+                                        cursor.execute(
+                                            f'update posts set tags = "{postTags}" where id = {post[0]}'
+                                        )
+                                        cursor.execute(
+                                            f'update posts set content = "{postContent}" where id = {post[0]}'
+                                        )
+                                        cursor.execute(
+                                            f'update posts set lastEditDate = "{currentDate()}" where id = {post[0]}'
+                                        )
+                                        cursor.execute(
+                                            f'update posts set lastEditTime = "{currentTime()}" where id = {post[0]}'
+                                        )
+                                        connection.commit()
+                                        message("2", f'POST: "{postTitle}" EDITED')
+                                        return redirect("/")
 
                             return render_template(
                                 "/editPost.html",
