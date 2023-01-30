@@ -23,7 +23,7 @@
   <div class="comments">
     <img class="profilePicture" src="{{ getProfilePicture(comment[3]) }}" />
     <section>
-      <a href="/user/{{author|lower}}" class="commentUserName"
+      <a href="/user/{{comment[3]|lower}}" class="commentUserName"
         >{{comment[3]}}</a
       >
       <p class="commentDate">{{comment[4]}}</p>
