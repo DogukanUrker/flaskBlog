@@ -33,7 +33,7 @@ class createPostForm(Form):
     )
     postContent = TextAreaField(
         "Post Content",
-        [validators.Length(min=50), validators.InputRequired()],
+        [validators.Length(min=50)],
     )
 
 
