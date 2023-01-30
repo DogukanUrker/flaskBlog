@@ -24,7 +24,7 @@ Simple blog app built with Flask.
 | Admin Panel                  |   🟧   |
 | Dashboard Page               |   ✅   |
 | Password Reset               |   ✅   |
-| CKEditor 5                   |   ⏳   |
+| CKEditor 5                   |   ✅   |
 | Post Edit                    |   ✅   |
 | Post Views                   |   ✅   |
 | Post Delete                  |   ✅   |
@@ -42,6 +42,5 @@ Simple blog app built with Flask.
 ## Known Issues
 
 - Redirect users to wrong pages.
-- Submit button doesn't work on /createpost.
 
 **_Commands in comment lines will be executed on final build._**
