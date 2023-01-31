@@ -1,16 +1,14 @@
-import sqlite3
-from os import mkdir
-from app import message
-from os.path import exists
+from helpers import mkdir, exists, message, sqlite3
 
 
-match exists("db"):
-    case True:
-        message("2", '"/db" FOUND')
-    case False:
-        message("1", '"/db" NOT FOUND')
-        mkdir("db")
-        message("2", '"/db" CREATED')
+def dbDirectory():
+    match exists("db"):
+        case True:
+            message("2", '"/db" FOUND')
+        case False:
+            message("1", '"/db" NOT FOUND')
+            mkdir("db")
+            message("2", '"/db" CREATED')
 
 
 def usersTable():
@@ -113,8 +111,3 @@ def commentsTable():
         connection.commit()
         connection.close()
         message("2", '"Comments" TABLE CREATED')
-
-
-usersTable()
-postsTable()
-commentsTable()
