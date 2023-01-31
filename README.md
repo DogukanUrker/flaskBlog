@@ -31,7 +31,6 @@ Simple blog app built with Flask.
 | Post Creation                |   ✅   |
 | Post Reactions               |   🟧   |
 | Comment                      |   ✅   |
-| Comment Edit                 |   🟧   |
 | Comment Delete               |   ✅   |
 | Comment Reactions            |   🟧   |
 | Logging                      |   ✅   |
