@@ -22,13 +22,15 @@
   {% for comment in comments %}
   <div class="comments">
     <img class="profilePicture" src="{{ getProfilePicture(comment[3]) }}" />
-    <section>
+    <section class="commentUserNameContainer">
       <a href="/user/{{comment[3]|lower}}" class="commentUserName"
         >{{comment[3]}} :</a
       >
     </section>
     <p class="centeredHorizontally">{{comment[2]}}</p>
-    {% endfor %}
+    {% if session["userName"] == comment[3] %}
+    <a href="/deletecomment/{{comment[0]}}/redirect=post&{{id}}">🗑️</a>
+    {% endif %} {% endfor %}
   </div>
   <form method="post" class="commentForm">
     {% if session["userName"] %} {{form.comment(class_="comment")}}

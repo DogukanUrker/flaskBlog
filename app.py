@@ -266,7 +266,7 @@ def deleteComment(commentID, direct):
                 case True:
                     cursor.execute(f"delete from comments where id = {commentID}")
                     connection.commit()
-                    message("2", f"COMMENT: {commentID} DELETED")
+                    message("2", f'COMMENT: "{commentID}" DELETED')
                     return redirect(f"/{direct}")
                 case False:
                     message(
@@ -365,6 +365,7 @@ def post(postID):
             comments = cursor.fetchall()
             return render_template(
                 "post.html",
+                id=post[0],
                 title=post[1],
                 tags=post[2],
                 content=post[3],

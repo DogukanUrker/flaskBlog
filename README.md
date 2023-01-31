@@ -32,7 +32,7 @@ Simple blog app built with Flask.
 | Post Reactions               |   🟧   |
 | Comment                      |   ✅   |
 | Comment Edit                 |   🟧   |
-| Comment Delete               |   🟧   |
+| Comment Delete               |   ✅   |
 | Comment Reactions            |   🟧   |
 | Logging                      |   ✅   |
 | Debug Messages               |   ✅   |
