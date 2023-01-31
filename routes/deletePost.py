@@ -21,6 +21,7 @@ def deletePost(postID, direct):
             match author[0] == session["userName"]:
                 case True:
                     cursor.execute(f"delete from posts where id = {postID}")
+                    cursor.execute(f"update sqlite_sequence set seq = seq-1")
                     connection.commit()
                     message("2", f'POST: "{postID}" DELETED')
                     return redirect(f"/{direct}")
