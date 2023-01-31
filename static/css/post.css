@@ -84,12 +84,12 @@ small {
   align-items: center;
 }
 
-section {
+.commentUserNameContainer {
   font-size: 0.7rem;
   margin-right: 2rem;
 }
 
-section p {
+.commentUserNameContainer p {
   margin: 0;
 }
 
