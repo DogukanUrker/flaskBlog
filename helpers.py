@@ -55,5 +55,7 @@ def addPoints(points, user):
 def getProfilePicture(userName):
     connection = sqlite3.connect("db/users.db")
     cursor = connection.cursor()
-    cursor.execute(f'select profilePicture from users where userName = "{userName}"')
+    cursor.execute(
+        f'select profilePicture from users where lower(userName) = "{userName.lower()}"'
+    )
     return cursor.fetchone()[0]

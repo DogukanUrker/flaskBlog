@@ -38,20 +38,28 @@ def signup():
                 mails = str(cursor.fetchall())
                 if not userName in users and not email in mails:
                     if passwordConfirm == password:
-                        password = sha256_crypt.hash(password)
-                        connection = sqlite3.connect("db/users.db")
-                        cursor = connection.cursor()
-                        cursor.execute(
-                            f"""
-                            insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime) 
-                            values("{userName}","{email}","{password}","https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}","user",0,
-                            "{currentDate()}",
-                            "{currentTime()}")
-                            """
-                        )
-                        connection.commit()
-                        message("2", f'USER: "{userName}" ADDED TO DATABASE')
-                        return redirect("/")
+                        match userName.isascii():
+                            case True:
+                                password = sha256_crypt.hash(password)
+                                connection = sqlite3.connect("db/users.db")
+                                cursor = connection.cursor()
+                                cursor.execute(
+                                    f"""
+                                    insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime) 
+                                    values("{userName}","{email}","{password}","https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}","user",0,
+                                    "{currentDate()}",
+                                    "{currentTime()}")
+                                    """
+                                )
+                                connection.commit()
+                                message("2", f'USER: "{userName}" ADDED TO DATABASE')
+                                return redirect("/")
+                            case False:
+                                message(
+                                    "1",
+                                    f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
+                                )
+                                flash("username does not fit ascii charecters", "error")
                     elif passwordConfirm != password:
                         message("1", " PASSWORDS MUST MATCH ")
                         flash("password must match", "error")
