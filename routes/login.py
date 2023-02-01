@@ -27,16 +27,18 @@ def login():
                 password = request.form["password"]
                 connection = sqlite3.connect("db/users.db")
                 cursor = connection.cursor()
-                cursor.execute(f'select * from users where userName = "{userName}"')
+                cursor.execute(
+                    f'select * from users where lower(userName) = "{userName.lower()}"'
+                )
                 user = cursor.fetchone()
                 if not user:
                     message("1", f'USER: "{userName}" NOT FOUND')
                     flash("user not found", "error")
                 else:
                     if sha256_crypt.verify(password, user[3]):
-                        session["userName"] = userName
+                        session["userName"] = user[1]
                         # addPoints(1, session["userName"])
-                        message("2", f'USER: "{userName}" LOGGED IN')
+                        message("2", f'USER: "{user[1]}" LOGGED IN')
                         return redirect("/")
                     else:
                         message("1", "WRONG PASSWORD")
