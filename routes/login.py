@@ -14,12 +14,13 @@ from helpers import (
 loginBlueprint = Blueprint("login", __name__)
 
 
-@loginBlueprint.route("/login", methods=["GET", "POST"])
-def login():
+@loginBlueprint.route("/login/redirect=<direct>", methods=["GET", "POST"])
+def login(direct):
+    direct = direct.replace("&", "/")
     match "userName" in session:
         case True:
             message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
-            return redirect("/")
+            return redirect(f"/{direct}")
         case False:
             form = loginForm(request.form)
             if request.method == "POST":
@@ -39,7 +40,7 @@ def login():
                         session["userName"] = user[1]
                         # addPoints(1, session["userName"])
                         message("2", f'USER: "{user[1]}" LOGGED IN')
-                        return redirect("/")
+                        return redirect(f"/{direct}")
                     else:
                         message("1", "WRONG PASSWORD")
                         flash("wrong  password", "error")

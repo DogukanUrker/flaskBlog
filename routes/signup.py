@@ -17,12 +17,13 @@ from helpers import (
 signUpBlueprint = Blueprint("signup", __name__)
 
 
-@signUpBlueprint.route("/signup", methods=["GET", "POST"])
-def signup():
+@signUpBlueprint.route("/signup/redirect=<direct>", methods=["GET", "POST"])
+def signup(direct):
+    direct = direct.replace("&", "/")
     match "userName" in session:
         case True:
             message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
-            return redirect("/")
+            return redirect(f"/{direct}")
         case False:
             form = signUpForm(request.form)
             if request.method == "POST":
@@ -53,7 +54,7 @@ def signup():
                                 )
                                 connection.commit()
                                 message("2", f'USER: "{userName}" ADDED TO DATABASE')
-                                return redirect("/")
+                                return redirect(f"/{direct}")
                             case False:
                                 message(
                                     "1",
