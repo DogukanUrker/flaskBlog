@@ -22,7 +22,7 @@ Simple blog app built with Flask.
 | User Sign Up                 |   ✅   |
 | User Profile Pictures        |   ✅   |
 | User Custom Profile Pictures |   🟧   |
-| Admin Panel                  |   ⌛   |
+| Admin Panel                  |   ✅   |
 | Dashboard Page               |   ✅   |
 | Password Reset               |   ✅   |
 | CKEditor 5                   |   ✅   |
