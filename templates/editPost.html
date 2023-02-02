@@ -2,12 +2,6 @@
 <title>Edit Post</title>
 {% endblock head %} {%block body%}
 <div class="container">
-  <div id="hide">
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %}
-    <p class="{{ category }} " id="flash">{{ message }}</p>
-    {% endfor %} {% endif %} {% endwith %}
-  </div>
   <form method="post" class="form formPost centeredHorizontally">
     {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
     {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}
