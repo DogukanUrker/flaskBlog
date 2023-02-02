@@ -23,7 +23,7 @@ def signup(direct):
     match "userName" in session:
         case True:
             message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
-            return redirect(f"/{direct}")
+            return redirect(direct)
         case False:
             form = signUpForm(request.form)
             if request.method == "POST":
@@ -54,7 +54,7 @@ def signup(direct):
                                 )
                                 connection.commit()
                                 message("2", f'USER: "{userName}" ADDED TO DATABASE')
-                                return redirect(f"/{direct}")
+                                return redirect(direct)
                             case False:
                                 message(
                                     "1",

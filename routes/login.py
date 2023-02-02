@@ -20,7 +20,7 @@ def login(direct):
     match "userName" in session:
         case True:
             message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
-            return redirect(f"/{direct}")
+            return redirect(direct)
         case False:
             form = loginForm(request.form)
             if request.method == "POST":
@@ -40,7 +40,7 @@ def login(direct):
                         session["userName"] = user[1]
                         # addPoints(1, session["userName"])
                         message("2", f'USER: "{user[1]}" LOGGED IN')
-                        return redirect(f"/{direct}")
+                        return redirect(direct)
                     else:
                         message("1", "WRONG PASSWORD")
                         flash("wrong  password", "error")

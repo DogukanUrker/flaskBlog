@@ -20,12 +20,16 @@
     </a>
     <a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
     {% elif hideLogin %}
-    <a href="/signup"><button class="btn btnLink">Sign Up</button></a>
+    <a href="/signup/redirect=&"
+      ><button class="btn btnLink">Sign Up</button></a
+    >
     {% elif hideSignUp %}
-    <a href="/login"><button class="btn btnLink">Login</button></a>
+    <a href="/login/redirect=&"><button class="btn btnLink">Login</button></a>
     {%else%}
-    <a href="/login"><button class="btn btnLink">Login</button></a>
-    <a href="/signup"><button class="btn btnPrimary">Sign Up</button></a>
+    <a href="/login/redirect=&"><button class="btn btnLink">Login</button></a>
+    <a href="/signup/redirect=&"
+      ><button class="btn btnPrimary">Sign Up</button></a
+    >
     {% endif %}
   </div>
 </div>
