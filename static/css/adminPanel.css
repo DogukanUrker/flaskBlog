@@ -1,0 +1,37 @@
+.userContainer {
+    display: block;
+    border: 1px solid var(--primaryColor);
+    border-radius: 0.5rem;
+    width: 25rem;
+    padding: 1rem;
+    margin: 1rem auto 1rem auto;
+}
+
+.userContainer .picture {
+    width: 2rem;
+    height: 2rem;
+}
+
+.stats {
+    display: flex;
+    width: 22rem;
+    justify-content: space-between;
+}
+
+.stats p, .stats a {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.usersContainer {
+    text-align: center;
+    display: block;
+}
+
+a {
+    margin-left: 0rem !important;
+}
+
+section p {
+    width: 50rem !important;
+}

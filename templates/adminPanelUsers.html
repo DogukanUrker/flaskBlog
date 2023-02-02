@@ -1,0 +1,37 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Admin Panel</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/adminPanel.css') }}"
+/>
+{% endblock head %} {%block body%}
+<div class="usersContainer">
+  <h1>USERS</h1>
+  {% for user in users %}
+  <div class="userContainer">
+    <section class="stats">
+      <p>ID: {{user[0]}}</p>
+      <p>Role: {{user[5]}}</p>
+    </section>
+    <section class="stats">
+      <p>
+        User Name:
+        <a href="/user/{{user[1].lower()}}" class="textPrimary">{{user[1]}}</a>
+      </p>
+      <img src="{{user[4]}}" alt="{{user[1]}}" class="picture" />
+    </section>
+    <section class="stats">
+      <p>email: {{user[2]}}</p>
+      <p>Points: {{user[6]}}</p>
+    </section>
+    <section class="stats">
+      <p>Join Date: {{user[7]}}</p>
+      <p>Join Time: {{user[8]}}</p>
+    </section>
+    <a href="deleteuser/{{user[1].lower()}}/redirect=&admin" class="textPrimary"
+      >delete user</a
+    >
+  </div>
+  {% endfor %}
+</div>
+{% endblock body %}
