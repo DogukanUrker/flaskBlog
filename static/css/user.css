@@ -37,7 +37,7 @@ h2 {
     justify-content: space-between;
 }
 
-.stats p {
+.stats p, .stats a {
     text-align: left;
     margin-left: 1rem;
 }

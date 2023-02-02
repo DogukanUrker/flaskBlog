@@ -9,7 +9,7 @@
     <a href="/createpost">
       <button class="btn btnLink">New Post</button>
     </a>
-    <a href="/dashboard/{{session['userName']}}">
+    <a href="/user/{{session['userName'].lower()}}">
       <div class="btn btnPrimary user">
         <img
           class="profilePicture"

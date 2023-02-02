@@ -13,9 +13,6 @@
   <section class="head">
     <img src="{{user[4]}}" alt="{{user[1]}}" class="userProfilePicture" />
     <h2 class="userName">{{user[1]}}</h2>
-    {% if session["userName"] == user[1] %}
-    <a href="/deleteuser/{{user[1]}}/redirect=&">xx</a>
-    {% endif %}
   </section>
   <section class="stats">
     <p class="userRole">Role: {{user[5]}}</p>
@@ -24,6 +21,16 @@
   <section class="stats">
     <p class="userCreationDate">Join Date: {{user[7]}}</p>
     <p class="userPoint">Points: {{user[6]}}</p>
+  </section>
+  <section class="stats">
+    {% if session["userName"] == user[1] %}
+    <a href="/deleteuser/{{user[1]}}/redirect=&" class="btn btnLink textPrimary"
+      >delete account</a
+    >
+    <a href="/dashboard/{{user[1]}}" class="btn btnLink textPrimary"
+      >dashboard</a
+    >
+    {% endif %}
   </section>
   {% if "userName" in session and session['userName'] == "{{user[1]}}"%}
   <a href="/dashboard/{{session['userName']}}">dashboard</a>
