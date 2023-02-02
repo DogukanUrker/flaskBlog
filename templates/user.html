@@ -13,6 +13,9 @@
   <section class="head">
     <img src="{{user[4]}}" alt="{{user[1]}}" class="userProfilePicture" />
     <h2 class="userName">{{user[1]}}</h2>
+    {% if session["userName"] == user[1] %}
+    <a href="/deleteuser/{{user[1]}}/redirect=&">xx</a>
+    {% endif %}
   </section>
   <section class="stats">
     <p class="userRole">Role: {{user[5]}}</p>
