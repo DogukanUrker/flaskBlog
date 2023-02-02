@@ -20,7 +20,6 @@ def deleteUser(userName, direct):
                 f'select * from users where lower(userName) = "{userName.lower()}"'
             )
             user = cursor.fetchone()
-            print(user)
             cursor.execute(
                 f'select role from users where userName = "{session["userName"]}"'
             )
