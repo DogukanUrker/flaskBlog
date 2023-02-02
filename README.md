@@ -17,7 +17,7 @@ Simple blog app built with Flask.
 | User Page                    |   ✅   |
 | User Login                   |   ✅   |
 | User Points                  |   ✅   |
-| User Delete                  |   🟧   |
+| User Delete                  |   ✅   |
 | User Log Out                 |   ✅   |
 | User Sign Up                 |   ✅   |
 | User Profile Pictures        |   ✅   |
