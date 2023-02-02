@@ -15,7 +15,7 @@ dashboardBlueprint = Blueprint("dashboard", __name__)
 def dashboard(userName):
     match "userName" in session:
         case True:
-            match session["userName"].lower() == userName:
+            match session["userName"].lower() == userName.lower():
                 case True:
                     connection = sqlite3.connect("db/posts.db")
                     cursor = connection.cursor()

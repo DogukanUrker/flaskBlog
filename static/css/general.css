@@ -116,3 +116,14 @@ button {
   text-align: center;
   margin-top: 6rem;
 }
+
+.textCenter {
+  text-align: center;
+}
+
+.goBackToAdmin {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+}

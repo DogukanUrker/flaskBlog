@@ -35,3 +35,12 @@ a {
 section p {
     width: 50rem !important;
 }
+
+.toPanelsContainer {
+    text-align: center;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 1rem;
+}

@@ -1,0 +1,44 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Admin Panel --> Comments</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/dashboard.css') }}"
+/>
+{% endblock head %} {%block body%}
+<h1 class="textCenter">Comments</h1>
+{% for comment in comments %}
+<div class="post centeredHorizontally">
+  <h3>
+    Post ID:
+    <a class="title textPrimary" href="/post/{{comment[0]}} ">{{comment[1]}}</a>
+  </h3>
+  <div class="content" tag="content">{{comment[2]|safe}}</div>
+  <section>
+    <a
+      href="/deletecomments/{{comment[0]}}/redirect=dashboard&{{session['userName'].lower()}}"
+      class="btn btnLink textPrimary"
+      >delete</a
+    >
+  </section>
+  <div class="info">
+    <p>Creation Time: {{comment[5]}}</p>
+    <p>Creation Date: {{comment[4]}}</p>
+  </div>
+  {% if request.path == "/admin/comments" %}
+  <p>
+    Author:
+    <a href="/user/{{comment[3].lower()}}" class="textPrimary"
+      >{{comment[3]}}</a
+    >
+  </p>
+  {% endif %}
+</div>
+{% endfor %} {% if request.path == "/admin/comments" %}
+<a href="/admin" class="btn btnLink textPrimary goBackToAdmin"
+  >↩️go back to admin panel</a
+>
+{% endif %} {% endblock body %}

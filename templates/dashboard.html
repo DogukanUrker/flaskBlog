@@ -1,5 +1,9 @@
-{% extends 'layout.html'%} {%block head%}
+{% extends 'layout.html'%} {%block head%} {% if request.path == "/admin/posts"
+%}
+<title>Admin Panel --> Posts</title>
+{% else %}
 <title>{{session["userName"]}}'s Dashboard</title>
+{% endif %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/index.css') }}"
@@ -8,7 +12,9 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/dashboard.css') }}"
 />
-{% endblock head %} {%block body%} {% for post in posts %}
+{% endblock head %} {%block body%}
+<h1 class="textCenter">Posts</h1>
+{% for post in posts %}
 <div class="post centeredHorizontally">
   <a class="title textPrimary" href="/post/{{post[0]}} ">{{post[1]}}</a>
   <div class="content" tag="content">{{post[3]|safe}}</div>
@@ -32,5 +38,13 @@
     <p>Creation Date: {{post[5]}}</p>
     <p>Last Edit Date: {{post[8]}}</p>
   </div>
+  {% if request.path == "/admin/posts" %}
+  <p>
+    Author:
+    <a href="/user/{{post[4].lower()}}" class="textPrimary">{{post[4]}}</a>
+  </p>
+  {% endif %}
 </div>
-{% endfor %} {% endblock body %}
+{% endfor %} {% if request.path == "/admin/posts" %}
+<a href="/admin" class="btn btnLink textPrimary">↩️go back to admin panel</a>
+{% endif %} {% endblock body %}

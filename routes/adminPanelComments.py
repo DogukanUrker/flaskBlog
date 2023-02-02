@@ -1,11 +1,11 @@
 from helpers import sqlite3, render_template, Blueprint, session, redirect
 
-adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)
+adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
 
 
-@adminPanelUsersBlueprint.route("/admin/users")
-@adminPanelUsersBlueprint.route("/adminpanel/users")
-def adminPanelUsers():
+@adminPanelCommentsBlueprint.route("/admin/comments")
+@adminPanelCommentsBlueprint.route("/adminpanel/comments")
+def adminPanelComments():
     match "userName" in session:
         case True:
             connection = sqlite3.connect("db/users.db")
@@ -16,14 +16,11 @@ def adminPanelUsers():
             role = cursor.fetchone()[0]
             match role == "admin":
                 case True:
-                    connection = sqlite3.connect("db/users.db")
+                    connection = sqlite3.connect("db/comments.db")
                     cursor = connection.cursor()
-                    cursor.execute("select * from users")
-                    users = cursor.fetchall()
-                    return render_template(
-                        "adminPanelUsers.html",
-                        users=users,
-                    )
+                    cursor.execute("select * from comments")
+                    comments = cursor.fetchall()
+                    return render_template("adminPanelComments.html", comments=comments)
                 case False:
                     return redirect("/")
         case False:

@@ -23,6 +23,8 @@ from routes.createPost import createPostBlueprint
 from routes.deleteComment import deleteCommentBlueprint
 from routes.changePassword import changePasswordBlueprint
 from routes.adminPanelUsers import adminPanelUsersBlueprint
+from routes.adminPanelPosts import adminPanelPostsBlueprint
+from routes.adminPanelComments import adminPanelCommentsBlueprint
 
 from dbChecker import usersTable, postsTable, dbDirectory, commentsTable
 
@@ -72,6 +74,8 @@ app.register_blueprint(createPostBlueprint)
 app.register_blueprint(deleteCommentBlueprint)
 app.register_blueprint(changePasswordBlueprint)
 app.register_blueprint(adminPanelUsersBlueprint)
+app.register_blueprint(adminPanelPostsBlueprint)
+app.register_blueprint(adminPanelCommentsBlueprint)
 
 
 match __name__:
