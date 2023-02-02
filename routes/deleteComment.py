@@ -11,13 +11,13 @@ deleteCommentBlueprint = Blueprint("deleteComment", __name__)
 
 @deleteCommentBlueprint.route("/deletecomment/<int:commentID>/redirect=<direct>")
 def deleteComment(commentID, direct):
+    direct = direct.replace("&", "/")
     match "userName" in session:
         case True:
             connection = sqlite3.connect("db/comments.db")
             cursor = connection.cursor()
             cursor.execute(f"select user from comments where id = {commentID}")
             user = cursor.fetchone()
-            direct = direct.replace("&", "/")
             match user[0] == session["userName"]:
                 case True:
                     cursor.execute(f"delete from comments where id = {commentID}")
