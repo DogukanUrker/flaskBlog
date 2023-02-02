@@ -38,7 +38,8 @@ def deleteUser(userName, direct):
                             cursor.execute(f"update sqlite_sequence set seq = seq-1")
                             connection.commit()
                             message("2", f'USER: "{userName}" DELETED')
-                            return redirect(f"/{direct}")
+                            session.clear()
+                            return redirect(f"{direct}")
                         case False:
                             message(
                                 "1",
