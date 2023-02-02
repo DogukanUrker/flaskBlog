@@ -31,6 +31,7 @@ def signup(direct):
                 email = request.form["email"]
                 password = request.form["password"]
                 passwordConfirm = request.form["passwordConfirm"]
+                userName = userName.replace(" ", "")
                 connection = sqlite3.connect("db/users.db")
                 cursor = connection.cursor()
                 cursor.execute("select userName from users")

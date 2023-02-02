@@ -26,6 +26,7 @@ def login(direct):
             if request.method == "POST":
                 userName = request.form["userName"]
                 password = request.form["password"]
+                userName = userName.replace(" ", "")
                 connection = sqlite3.connect("db/users.db")
                 cursor = connection.cursor()
                 cursor.execute(
@@ -40,6 +41,7 @@ def login(direct):
                         session["userName"] = user[1]
                         # addPoints(1, session["userName"])
                         message("2", f'USER: "{user[1]}" LOGGED IN')
+                        flash(f"Welcome {userName}", "success")
                         return redirect(direct)
                     else:
                         message("1", "WRONG PASSWORD")
