@@ -16,6 +16,7 @@ from routes.signup import signUpBlueprint
 from routes.logout import logoutBlueprint
 from routes.editPost import editPostBlueprint
 from routes.dashboard import dashboardBlueprint
+from routes.deleteUser import deleteUserBlueprint
 from routes.deletePost import deletePostBlueprint
 from routes.createPost import createPostBlueprint
 from routes.deleteComment import deleteCommentBlueprint
@@ -62,6 +63,7 @@ app.register_blueprint(signUpBlueprint)
 app.register_blueprint(logoutBlueprint)
 app.register_blueprint(editPostBlueprint)
 app.register_blueprint(dashboardBlueprint)
+app.register_blueprint(deleteUserBlueprint)
 app.register_blueprint(deletePostBlueprint)
 app.register_blueprint(createPostBlueprint)
 app.register_blueprint(deleteCommentBlueprint)
