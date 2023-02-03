@@ -28,11 +28,22 @@
       <p>Join Date: {{user[7]}}</p>
       <p>Join Time: {{user[8]}}</p>
     </section>
-    <a
-      href="deleteuser/{{user[1].lower()}}/redirect=&admin&users"
-      class="textPrimary"
-      >delete user</a
-    >
+    <section class="stats">
+      <a
+        href="deleteuser/{{user[1].lower()}}/redirect=&admin&users"
+        class="textPrimary"
+        >delete user</a
+      >
+      {% if user[5] == "admin" %}
+      <a href="/setuserrole/{{user[1].lower()}}/user" class="textPrimary"
+        >set user role to user</a
+      >
+      {% else %}
+      <a href="/setuserrole/{{user[1].lower()}}/admin" class="textPrimary"
+        >set user role to admin</a
+      >
+      {% endif %}
+    </section>
   </div>
   {% endfor %}
 </div>
