@@ -5,6 +5,7 @@ from helpers import (
     flash,
     message,
     redirect,
+    addPoints,
     render_template,
     Blueprint,
     loginForm,
@@ -41,7 +42,7 @@ def login(direct):
                         session["userName"] = user[1]
                         # addPoints(1, session["userName"])
                         message("2", f'USER: "{user[1]}" LOGGED IN')
-                        flash(f"Welcome {userName}", "success")
+                        flash(f"Welcome {user[1]}", "success")
                         return redirect(direct)
                     else:
                         message("1", "WRONG PASSWORD")

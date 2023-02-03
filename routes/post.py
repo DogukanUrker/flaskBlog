@@ -2,8 +2,10 @@ from helpers import (
     session,
     sqlite3,
     request,
+    flash,
     message,
     redirect,
+    addPoints,
     currentDate,
     currentTime,
     render_template,
@@ -43,6 +45,8 @@ def post(postID):
                     """
                 )
                 connection.commit()
+                # addPoints(5, session["userName"])
+                flash("You earned 5 points by commenting ", "success")
                 return redirect(f"/post/{postID}")
             connection = sqlite3.connect("db/comments.db")
             cursor = connection.cursor()
