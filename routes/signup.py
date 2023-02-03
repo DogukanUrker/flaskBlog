@@ -47,7 +47,9 @@ def signup():
                                 cursor.execute(
                                     f"""
                                     insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime) 
-                                    values("{userName}","{email}","{password}","https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}","user",0,
+                                    values("{userName}","{email}","{password}",
+                                    "https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}",
+                                    "user",0,
                                     "{currentDate()}",
                                     "{currentTime()}")
                                     """
