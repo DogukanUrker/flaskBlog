@@ -23,9 +23,26 @@ def dashboard(userName):
                         f'select * from posts where author = "{session["userName"]}"'
                     )
                     posts = cursor.fetchall()
+                    connection = sqlite3.connect("db/comments.db")
+                    cursor = connection.cursor()
+                    cursor.execute(
+                        f'select * from comments where lower(user) = "{userName.lower()}"'
+                    )
+                    comments = cursor.fetchall()
+                    if posts:
+                        showPosts = True
+                    elif not posts:
+                        showPosts = False
+                    if comments:
+                        showComments = True
+                    elif not comments:
+                        showComments = False
                     return render_template(
                         "/dashboard.html",
                         posts=posts,
+                        comments=comments,
+                        showPosts=showPosts,
+                        showComments=showComments,
                     )
                 case False:
                     message(
@@ -36,4 +53,4 @@ def dashboard(userName):
         case False:
             message("1", "DASHBOARD CANNOT BE ACCESSED WITHOUT USER LOGIN")
             flash("you need login for reach to dashboard", "error")
-            return redirect("/login")
+            return redirect("/login/redirect=&dashboard&user")

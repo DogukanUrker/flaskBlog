@@ -28,12 +28,29 @@ def user(userName):
                 views += int(view[0])
             cursor.execute(f'select * from posts where author = "{user[1]}"')
             posts = cursor.fetchall()
+            connection = sqlite3.connect("db/comments.db")
+            cursor = connection.cursor()
+            cursor.execute(
+                f'select * from comments where lower(user) = "{userName.lower()}"'
+            )
+            comments = cursor.fetchall()
+            if posts:
+                showPosts = True
+            elif not posts:
+                showPosts = False
+            if comments:
+                showComments = True
+            elif not comments:
+                showComments = False
             message("2", f'USER: "{userName}"s PAGE LOADED')
             return render_template(
                 "user.html",
                 user=user,
                 views=views,
                 posts=posts,
+                comments=comments,
+                showPosts=showPosts,
+                showComments=showComments,
             )
 
         case _:

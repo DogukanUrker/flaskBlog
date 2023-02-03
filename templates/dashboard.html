@@ -12,7 +12,7 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/dashboard.css') }}"
 />
-{% endblock head %} {%block body%}
+{% endblock head %} {%block body%} {% if showPosts %}
 <h1 class="textCenter">Posts</h1>
 {% for post in posts %}
 <div class="post centeredHorizontally">
@@ -45,6 +45,25 @@
   </p>
   {% endif %}
 </div>
-{% endfor %} {% if request.path == "/admin/posts" %}
+{% endfor %} {% elif not showPosts %} {% if request.path == "/admin/posts" %}
+<h1>This user haven't posted yet.</h1>
+{% else %}
+<p class="userDashboardNoPost">
+  You don't have any posts. Do you want
+  <a href="/createpost" class="textPrimary">create a post</a> ?
+</p>
+{% endif %} {% endif %} {% if showComments and not request.path ==
+"/admin/posts"%}
+<h1 class="textCenter">Comments</h1>
+{% for comment in comments %}
+<div class="post centeredHorizontally">
+  <div class="content" tag="content">{{comment[2]|safe}}</div>
+  <section class="comment">
+    <p class="commentCreationDate">Creation Date: {{comment[4]}}</p>
+    <p class="commentCreationTime">Creation Time: {{comment[5]}}</p>
+  </section>
+  <a href="/post/{{comment[1]}}" class="btn btnLink textPrimary">go to post</a>
+</div>
+{% endfor %} {% endif %} {% if request.path == "/admin/posts" %}
 <a href="/admin" class="btn btnLink textPrimary">↩️go back to admin panel</a>
 {% endif %} {% endblock body %}

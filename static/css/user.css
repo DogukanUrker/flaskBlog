@@ -1,3 +1,16 @@
+h1 {
+    width: 36rem;
+    margin: 1rem 0 0 0;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.head img, h2 {
+    display: inline-block;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -23,13 +36,6 @@
     margin: 2rem 0 2rem 0;
 }
 
-.head img, h2 {
-    display: inline-block;
-}
-
-h2 {
-    font-size: 2rem;
-}
 
 .stats {
     display: flex;
@@ -46,7 +52,11 @@ h2 {
     -webkit-line-clamp: 4;
 }
 
-h1 {
-    width: 36rem;
-    margin: 1rem 0 0 0;
+.comment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentCreationDate {
+    margin-right: 1rem;
 }

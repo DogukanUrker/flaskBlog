@@ -20,7 +20,9 @@ def adminPanelPosts():
                     cursor = connection.cursor()
                     cursor.execute("select * from posts")
                     posts = cursor.fetchall()
-                    return render_template("dashboard.html", posts=posts)
+                    return render_template(
+                        "dashboard.html", posts=posts, showPosts=True
+                    )
                 case False:
                     return redirect("/")
         case False:
