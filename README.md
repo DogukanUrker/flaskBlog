@@ -20,6 +20,7 @@ Simple blog app built with Flask.
 | User Delete           |   ✅   |
 | User Log Out          |   ✅   |
 | User Sign Up          |   ✅   |
+| User Settings Page    |   🟧   |
 | User Profile Pictures |   ✅   |
 | Admin Panel           |   ✅   |
 | Dashboard Page        |   ✅   |
