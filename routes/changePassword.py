@@ -48,7 +48,7 @@ def changePassword():
                             "2", f'USER: "{session["userName"]}" CHANGED HIS PASSWORD'
                         )
                         session.clear()
-                        flash("you need login with new password", "error")
+                        flash("you need login with new password", "success")
                         return redirect("/login")
                 else:
                     flash("old password wrong", "error")
