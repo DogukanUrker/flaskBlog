@@ -6,7 +6,14 @@ from os.path import exists
 from datetime import datetime
 from passlib.hash import sha256_crypt
 from flask import render_template, Blueprint
-from forms import signUpForm, loginForm, changePasswordForm, commentForm, createPostForm
+from forms import (
+    loginForm,
+    signUpForm,
+    commentForm,
+    createPostForm,
+    changePasswordForm,
+    changeUserNameForm,
+)
 from flask import (
     request,
     session,

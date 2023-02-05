@@ -20,10 +20,10 @@ Simple blog app built with Flask.
 | User Delete                  |   ✅   |
 | User Log Out                 |   ✅   |
 | User Sign Up                 |   ✅   |
+| User Name Change             |   ✅   |
 | User Settings Page           |   ✅   |
 | User Profile Pictures        |   ✅   |
 | User Custom Profile Pictures |   🟧   |
-| Change User Name             |   🟧   |
 | Admin Panel                  |   ✅   |
 | Dashboard Page               |   ✅   |
 | Password Reset               |   ✅   |

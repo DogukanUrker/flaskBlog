@@ -64,6 +64,14 @@ class changePasswordForm(Form):
     )
 
 
+class changeUserNameForm(Form):
+    newUserName = StringField(
+        "Username",
+        [validators.Length(min=4, max=25), validators.InputRequired()],
+        render_kw={"placeholder": "new username"},
+    )
+
+
 class signUpForm(Form):
     userName = StringField(
         "Username",
