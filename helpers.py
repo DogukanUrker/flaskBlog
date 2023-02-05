@@ -14,8 +14,8 @@ from flask import (
     redirect,
     render_template,
     send_from_directory,
-    Blueprint,
     Flask,
+    Blueprint,
 )
 
 
