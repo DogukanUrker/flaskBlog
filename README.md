@@ -12,32 +12,34 @@ Simple blog app built with Flask.
 
 ## Features
 
-| Feature               | Status |
-| :-------------------- | :----: |
-| User Page             |   ✅   |
-| User Login            |   ✅   |
-| User Points           |   ✅   |
-| User Delete           |   ✅   |
-| User Log Out          |   ✅   |
-| User Sign Up          |   ✅   |
-| User Settings Page    |   🟧   |
-| User Profile Pictures |   ✅   |
-| Admin Panel           |   ✅   |
-| Dashboard Page        |   ✅   |
-| Password Reset        |   ✅   |
-| CKEditor 5            |   ✅   |
-| Search Bar            |   🟧   |
-| Post Edit             |   ✅   |
-| Post Views            |   ✅   |
-| Post Delete           |   ✅   |
-| Post Creation         |   ✅   |
-| Post Reactions        |   🟧   |
-| Comment               |   ✅   |
-| Comment Delete        |   ✅   |
-| Comment Reactions     |   🟧   |
-| Logging               |   ✅   |
-| Debug Messages        |   ✅   |
-| Database Checker      |   ✅   |
-| Dark/Light Themes     |   ✅   |
+| Feature                      | Status |
+| :--------------------------- | :----: |
+| User Page                    |   ✅   |
+| User Login                   |   ✅   |
+| User Points                  |   ✅   |
+| User Delete                  |   ✅   |
+| User Log Out                 |   ✅   |
+| User Sign Up                 |   ✅   |
+| User Settings Page           |   ✅   |
+| User Profile Pictures        |   ✅   |
+| User Custom Profile Pictures |   🟧   |
+| Change User Name             |   🟧   |
+| Admin Panel                  |   ✅   |
+| Dashboard Page               |   ✅   |
+| Password Reset               |   ✅   |
+| CKEditor 5                   |   ✅   |
+| Search Bar                   |   🟧   |
+| Post Edit                    |   ✅   |
+| Post Views                   |   ✅   |
+| Post Delete                  |   ✅   |
+| Post Creation                |   ✅   |
+| Post Reactions               |   🟧   |
+| Comment                      |   ✅   |
+| Comment Delete               |   ✅   |
+| Comment Reactions            |   🟧   |
+| Logging                      |   ✅   |
+| Debug Messages               |   ✅   |
+| Database Checker             |   ✅   |
+| Dark/Light Themes            |   ✅   |
 
 **_Commands in comment lines will be executed on final build._**
