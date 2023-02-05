@@ -24,8 +24,8 @@
   </section>
   <section class="stats">
     {% if session["userName"] == user[1] %}
-    <a href="/deleteuser/{{user[1]}}/redirect=&" class="btn btnLink textPrimary"
-      >delete account</a
+    <a href="/accountsettings" class="btn btnLink textPrimary"
+      >account settings</a
     >
     <a href="/dashboard/{{user[1]}}" class="btn btnLink textPrimary"
       >dashboard</a
