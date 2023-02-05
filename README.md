@@ -41,5 +41,6 @@ Simple blog app built with Flask.
 | Debug Messages               |   ✅   |
 | Database Checker             |   ✅   |
 | Dark/Light Themes            |   ✅   |
+| Responsive Design            |   🟧   |
 
 **_Commands in comment lines will be executed on final build._**
