@@ -1,7 +1,7 @@
 var root = document.querySelector(":root");
 var changeTheme = document.querySelector(".changeTheme");
 
-theme = "dark";
+var theme;
 
 if (localStorage.getItem(theme) === "dark") {
   toDark()
