@@ -21,6 +21,7 @@ body {
 
 a {
   text-decoration: none;
+  user-select: none;
 }
 
 *::-webkit-scrollbar {
