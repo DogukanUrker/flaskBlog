@@ -15,7 +15,7 @@ function toLight() {
   root.style.setProperty("--themePrimary", "#000");
   root.style.setProperty("--themeSecondary", "#fff");
   root.style.setProperty("--themeHelper", "#303030");
-  changeTheme.innerHTML = "🌚";
+  changeTheme.innerHTML = "🌞";
   changeTheme.setAttribute("onclick", "javascript: toDark();")
 }
 
@@ -24,6 +24,6 @@ function toDark() {
   root.style.setProperty("--themePrimary", "#fff");
   root.style.setProperty("--themeSecondary", "#000");
   root.style.setProperty("--themeHelper", "#C6C6C6")
-  changeTheme.innerHTML = "🌞";
+  changeTheme.innerHTML = "🌚";
   changeTheme.setAttribute("onclick", "javascript: toLight();")
 }
