@@ -29,11 +29,11 @@ from routes.adminPanelUsers import adminPanelUsersBlueprint
 from routes.adminPanelPosts import adminPanelPostsBlueprint
 from routes.accountSettings import accountSettingsBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
-from dbChecker import usersTable, postsTable, dbDirectory, commentsTable
+from dbChecker import dbFolder, usersTable, postsTable, commentsTable
 
+dbFolder()
 usersTable()
 postsTable()
-dbDirectory()
 commentsTable()
 
 app = Flask(__name__)
