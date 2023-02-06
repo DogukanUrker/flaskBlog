@@ -1,12 +1,10 @@
 import socket
 
 from helpers import (
-    os,
     secrets,
     message,
     render_template,
     getProfilePicture,
-    send_from_directory,
     Flask,
 )
 
