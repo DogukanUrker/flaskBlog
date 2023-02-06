@@ -55,15 +55,6 @@ def notFound(e):
     return render_template("404.html"), 404
 
 
-@app.route("/favicon.ico")
-def favicon():
-    return send_from_directory(
-        os.path.join(app.root_path, "static/images"),
-        "favicon.png",
-        mimetype="favicon.png",
-    )
-
-
 app.register_blueprint(postBlueprint)
 app.register_blueprint(userBlueprint)
 app.register_blueprint(indexBlueprint)
