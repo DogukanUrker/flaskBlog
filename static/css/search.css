@@ -3,3 +3,13 @@ h3, h2 {
     margin-right: auto;
     width: fit-content;
 }
+
+.post img {
+    width: 5rem;
+    height: 5rem;
+}
+
+.userBox {
+    width: fit-content;
+    padding-bottom: 0.3rem;
+}

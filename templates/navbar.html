@@ -4,6 +4,14 @@
 />
 <div class="navbar">
   <a href="/"><h1 class="btn btnLink btnHome">flaskBlog</h1></a>
+  <div>
+    <input
+      type="text"
+      id="searchInput"
+      class="input"
+      placeholder="search"
+    /><button onclick="search()" class="btn">🔍</button>
+  </div>
   <div class="btns">
     {% if session["userName"] %}
     <a href="/createpost">
@@ -29,3 +37,4 @@
     {% endif %}
   </div>
 </div>
+<script src="/static/js/navbar.js"></script>

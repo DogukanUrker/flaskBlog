@@ -47,6 +47,11 @@
   color: var(--themeSecondary);
 }
 
+#searchInput {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
 @media screen and (max-width: 1200px) {
   .btnHome {
     margin: 0 2rem 0 0;
