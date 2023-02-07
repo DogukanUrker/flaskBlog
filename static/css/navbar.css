@@ -4,6 +4,7 @@
   width: 100%;
   justify-content: space-between;
   padding-top: 1rem;
+  user-select: none;
 }
 
 .btns {
@@ -52,7 +53,7 @@
   margin-right: 0.5rem;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 600px) {
   .btnHome {
     margin: 0 2rem 0 0;
   }
