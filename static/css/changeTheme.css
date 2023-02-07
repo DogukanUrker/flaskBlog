@@ -1,5 +1,6 @@
 .changeThemeContainer {
     position: relative;
+    user-select: none;
 }
 
 .changeTheme {
