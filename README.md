@@ -33,10 +33,8 @@ Simple blog app built with Flask.
 | Post Views                   |   ✅   |
 | Post Delete                  |   ✅   |
 | Post Creation                |   ✅   |
-| Post Reactions               |   🟧   |
 | Comment                      |   ✅   |
 | Comment Delete               |   ✅   |
-| Comment Reactions            |   🟧   |
 | Logging                      |   ✅   |
 | Debug Messages               |   ✅   |
 | Database Checker             |   ✅   |
