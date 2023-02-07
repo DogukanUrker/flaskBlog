@@ -7,19 +7,35 @@
 {% endblock head %} {%block body%}
 <div class="post centeredHorizontally">
   <h1 class="title">{{title}}</h1>
-  <p class="content">{{content|safe}}</p>
+  <p class="content">
+    {{content|safe}} <br />
+    Tags: {{tags.replace(",",", ")}}
+  </p>
   <div class="bottomBar">
-    <a href="/user/{{author|lower}}">
-      <h5 class="author">
-        <img
-          class="profilePicture"
-          src="{{ getProfilePicture(author) }}"
-        />{{author}}
-      </h5></a
-    >
-    <h5 class="date">{{date}}</h5>
+    <div>
+      <h5>👁️ {{views}}</h5>
+      <a href="/user/{{author|lower}}">
+        <h5 class="author">
+          <img
+            class="profilePicture"
+            src="{{ getProfilePicture(author) }}"
+          />{{author}}
+        </h5></a
+      >
+    </div>
+    <div class="dateTime">
+      <h5>{{time}}</h5>
+      <h5 class="date">{{date}}</h5>
+    </div>
   </div>
-  {% for comment in comments %}
+  {% if author == session["userName"] %}
+  <div class="bottomBar">
+    <a href="/deletepost/{{id}}/redirect=&" class="btn btnLink textPrimary"
+      >delete</a
+    >
+    <a href="/editpost/{{id}}" class="btn btnLink textPrimary">edit</a>
+  </div>
+  {% endif %} {% for comment in comments %}
   <div class="comments">
     <img class="profilePicture" src="{{ getProfilePicture(comment[3]) }}" />
     <section class="commentUserNameContainer">
