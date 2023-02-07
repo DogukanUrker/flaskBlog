@@ -1,8 +1,5 @@
 from helpers import (
     sqlite3,
-    flash,
-    message,
-    redirect,
     render_template,
     Blueprint,
 )
@@ -14,6 +11,14 @@ searchBlueprint = Blueprint("search", __name__)
 def changeUserName(query):
     queryNoWhiteSpace = query.replace("+", "")
     query = query.replace("+", " ")
+    connection = sqlite3.connect("db/users.db")
+    cursor = connection.cursor()
+    queryUsers = cursor.execute(
+        f"select * from users where userName like '%{query}%'"
+    ).fetchall()
+    queryUsers = cursor.execute(
+        f"select * from users where userName like '%{queryNoWhiteSpace}%'"
+    ).fetchall()
     connection = sqlite3.connect("db/posts.db")
     cursor = connection.cursor()
     queryTags = cursor.execute(
@@ -34,14 +39,6 @@ def changeUserName(query):
     queryAuthors = cursor.execute(
         f"select * from posts where author like '%{queryNoWhiteSpace}%'"
     ).fetchall()
-    connection = sqlite3.connect("db/users.db")
-    cursor = connection.cursor()
-    queryUsers = cursor.execute(
-        f"select * from users where userName like '%{query}%'"
-    ).fetchall()
-    queryUsers = cursor.execute(
-        f"select * from users where userName like '%{queryNoWhiteSpace}%'"
-    ).fetchall()
     posts = []
     users = []
     empty = False
@@ -59,6 +56,15 @@ def changeUserName(query):
             users.append(queryUsers)
     if not posts and not users:
         empty = True
+    resultsID = []
+    for post in posts:
+        for post in post:
+            if post[0] not in resultsID:
+                resultsID.append(post[0])
+    posts = []
+    for postID in resultsID:
+        cursor.execute(f"select * from posts where id = {postID}")
+        posts.append(cursor.fetchall())
     return render_template(
         "search.html",
         posts=posts,
