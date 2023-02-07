@@ -30,7 +30,7 @@ def post(postID):
             cursor = connection.cursor()
             cursor.execute(f'select * from posts where id = "{postID}"')
             post = cursor.fetchone()
-            # cursor.execute(f'update posts set views = views+1 where id = "{postID}"')
+            cursor.execute(f'update posts set views = views+1 where id = "{postID}"')
             connection.commit()
             if request.method == "POST":
                 comment = request.form["comment"]
@@ -45,7 +45,7 @@ def post(postID):
                     """
                 )
                 connection.commit()
-                # addPoints(5, session["userName"])
+                addPoints(5, session["userName"])
                 flash("You earned 5 points by commenting ", "success")
                 return redirect(f"/post/{postID}")
             connection = sqlite3.connect("db/comments.db")
@@ -59,8 +59,9 @@ def post(postID):
                 tags=post[2],
                 content=post[3],
                 author=post[4],
-                views=post[5],
+                views=post[7],
                 date=post[5],
+                time=post[6],
                 form=form,
                 comments=comments,
             )

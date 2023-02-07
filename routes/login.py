@@ -40,7 +40,7 @@ def login(direct):
                 else:
                     if sha256_crypt.verify(password, user[3]):
                         session["userName"] = user[1]
-                        # addPoints(1, session["userName"])
+                        addPoints(1, session["userName"])
                         message("2", f'USER: "{user[1]}" LOGGED IN')
                         flash(f"Welcome {user[1]}", "success")
                         return redirect(direct)
