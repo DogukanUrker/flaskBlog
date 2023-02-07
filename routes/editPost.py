@@ -72,7 +72,8 @@ def editPost(postID):
                                         )
                                         connection.commit()
                                         message("2", f'POST: "{postTitle}" EDITED')
-                                        return redirect("/")
+                                        flash("Post edited", "success")
+                                        return redirect(f"/post/{post[0]}")
 
                             return render_template(
                                 "/editPost.html",
