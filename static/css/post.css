@@ -96,3 +96,18 @@ small {
 .profilePicture {
   margin-right: 0.6rem;
 }
+
+.dateTime h5 {
+  text-align: right;
+}
+
+
+@media screen and (max-width: 600px) {
+  .comments, .comments small {
+    max-width: 100% !important;
+  }
+
+  .navbar * {
+    width: 100%;
+  }
+}
