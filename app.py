@@ -75,6 +75,7 @@ app.register_blueprint(adminPanelPostsBlueprint)
 app.register_blueprint(accountSettingsBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
 
-match __name__:
-    case "__main__":
-        app.run()
+# removed for deploy at vercel
+# match __name__:
+#    case "__main__":
+#        app.run()
