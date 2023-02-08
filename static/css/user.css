@@ -60,3 +60,49 @@ h2 {
 .commentCreationDate {
     margin-right: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+    .userName {
+        display: block;
+        font-size: 1.5rem;
+        margin-top: 0;
+    }
+
+    .userProfilePicture {
+        display: block;
+    }
+
+    .stats {
+        width: 100%;
+        margin: 0;
+    }
+
+    .stats * {
+        margin: 0 0 0.5rem 0 !important;
+
+    }
+
+    .container {
+        display: block;
+        width: 100%;
+    }
+
+    .userContainer {
+        padding: 1rem;
+    }
+
+    .userProfilePicture {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .head {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .postsText, .commentsText {
+        width: fit-content;
+    }
+}

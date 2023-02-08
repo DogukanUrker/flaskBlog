@@ -36,7 +36,6 @@
 
 .user {
   text-align: center;
-  padding-bottom: 0.5rem;
   display: inline-block;
   height: fit-content;
 
@@ -53,12 +52,64 @@
   margin-right: 0.5rem;
 }
 
-@media screen and (max-width: 600px) {
+.hamburger {
+  position: relative;
+  display: none;
+  width: fit-content;
+}
+
+.hamburgerContent {
+  display: none;
+  position: absolute;
+  background-color: var(--themeSecondary);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.hamburgerContent a {
+  color: var(--themePrimary);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.show {
+  display: block;
+}
+
+.hamburgerBtn {
+  font-size: 1rem;
+  text-align: right;
+  width: fit-content !important;
+  margin-left: 5rem;
+}
+
+@media screen and (max-width: 968px) {
   .btnHome {
-    margin: 0 2rem 0 0;
+    margin: 0 1rem 0 0;
   }
 
-  .btns {
-    margin: 0 0 0 2rem;
+  .btns, .searchBar {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+
+  .searchBarPage {
+    display: block;
+  }
+
+}
+
+@media (min-width:968px) and (max-width:1280px) {
+  .btnHome, .btns {
+    margin-right: 2rem;
+  }
+
+  .btnHome {
+    margin-left: 1rem;
   }
 }

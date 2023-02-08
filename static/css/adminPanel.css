@@ -1,5 +1,6 @@
 .userContainer {
     display: block;
+    text-align: center;
     border: 1px solid var(--primaryColor);
     border-radius: 0.5rem;
     width: fit-content;
@@ -23,11 +24,6 @@
     margin-left: 1rem;
 }
 
-.usersContainer {
-    text-align: center;
-    display: block;
-}
-
 a {
     margin-left: 0rem !important;
 }
@@ -43,4 +39,16 @@ section p {
     top: 50%;
     left: 50%;
     padding: 1rem;
+}
+
+
+@media screen and (max-width: 600px) {
+    .userContainer {
+        width: 90%;
+
+    }
+
+    .stats {
+        width: 100%;
+    }
 }
