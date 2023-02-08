@@ -8,7 +8,7 @@ searchBlueprint = Blueprint("search", __name__)
 
 
 @searchBlueprint.route("/search/<query>", methods=["GET", "POST"])
-def changeUserName(query):
+def search(query):
     queryNoWhiteSpace = query.replace("+", "")
     query = query.replace("+", " ")
     connection = sqlite3.connect("db/users.db")
