@@ -1,7 +1,9 @@
 # flaskBlog 📜
 
 Simple blog app built with Flask.
-[contact](https://dogukanurker.com)
+<br/>
+[Contact](mailto:dogukanurker@icloud.com)
+[Dogukan Urker](https://dogukanurker.com)
 
 ## Requirements
 
