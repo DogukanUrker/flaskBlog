@@ -38,3 +38,4 @@ Simple blog app built with Flask.
 | Debug Messages        |   ✅   |
 | Database Checker      |   ✅   |
 | Dark/Light Themes     |   ✅   |
+| Responsive Design     |   ✅   |
