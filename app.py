@@ -1,3 +1,5 @@
+import socket
+
 from helpers import (
     secrets,
     message,
@@ -75,7 +77,6 @@ app.register_blueprint(adminPanelPostsBlueprint)
 app.register_blueprint(accountSettingsBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
 
-# removed for deploy at vercel
-# match __name__:
-#    case "__main__":
-#        app.run()
+match __name__:
+    case "__main__":
+        app.run(debug=True, host=socket.gethostbyname(socket.gethostname()))
