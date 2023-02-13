@@ -39,7 +39,7 @@ Simple blog app built with Flask.
 | Dark/Light Themes     |   ✅   |
 | Responsive Design     |   ✅   |
 
-## How to install
+## Installation
 
 download source code from github 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
