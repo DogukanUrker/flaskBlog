@@ -5,6 +5,10 @@ Simple blog app built with Flask.
 [Contact](mailto:dogukanurker@icloud.com)<br/>
 [Dogukan Urker](https://dogukanurker.com)
 
+|                 Desktop                  |                 Mobile                  |
+| :--------------------------------------: | :-------------------------------------: |
+| ![appDesktop](/images/desktop/light.png) | ![appMobile](/images/mobile/light.jpeg) |
+
 ## Features
 
 | Feature               | Status |
