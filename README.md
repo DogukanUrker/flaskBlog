@@ -5,13 +5,6 @@ Simple blog app built with Flask.
 [Contact](mailto:dogukanurker@icloud.com)<br/>
 [Dogukan Urker](https://dogukanurker.com)
 
-## Requirements
-
-- Flask
-- Passlib
-- WTForms
-- Python 3.10 or newer
-
 ## Features
 
 | Feature               | Status |
@@ -41,3 +34,28 @@ Simple blog app built with Flask.
 | Database Checker      |   ✅   |
 | Dark/Light Themes     |   ✅   |
 | Responsive Design     |   ✅   |
+
+## How to install
+
+download source code from github 💾
+`git clone https://github.com/DogukanUrker/flaskBlog.git`
+
+go to directory 📁
+`cd flaskBlog`
+
+install requirements.txt 🔽
+`pip install -r requirements.txt`
+
+its ready to run 🎉
+`python app.py`
+or
+`python desktop.py`
+for run flaskBlog as a desktop app 💯
+
+## Requirements
+
+- Flask
+- Passlib
+- WTForms
+- Flaskwebgui <sub><sup>(if you run desktop.py)</sup></sub>
+- Python 3.10 or newer
