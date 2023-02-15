@@ -50,7 +50,7 @@ go to directory 📁
 install requirements.txt 🔽
 `pip install -r requirements.txt`
 
-its ready to run 🎉
+it's ready to run 🎉
 `python app.py`
 or
 `python desktop.py`
