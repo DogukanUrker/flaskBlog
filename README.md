@@ -41,7 +41,7 @@ Simple blog app built with Flask.
 
 ## Installation
 
-download source code from github 💾
+download source code from Github 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
 
 go to directory 📁
