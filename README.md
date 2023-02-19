@@ -39,6 +39,16 @@ Simple blog app built with Flask.
 | Dark/Light Themes     |   ✅   |
 | Responsive Design     |   ✅   |
 
+
+## Requirements
+
+- Flask
+- Passlib
+- WTForms
+- Flaskwebgui <sub><sup>(if you run desktop.py)</sup></sub>
+- Python 3.10 or newer
+
+
 ## Installation
 
 download source code from Github 💾
@@ -56,10 +66,3 @@ or
 `python desktop.py`
 for run flaskBlog as a desktop app 💯
 
-## Requirements
-
-- Flask
-- Passlib
-- WTForms
-- Flaskwebgui <sub><sup>(if you run desktop.py)</sup></sub>
-- Python 3.10 or newer
