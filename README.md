@@ -8,6 +8,7 @@ Simple blog app built with Flask.
 |                 Desktop                  |                 Mobile                  |
 | :--------------------------------------: | :-------------------------------------: |
 | ![appDesktop](/images/desktop/light.png) | ![appMobile](/images/mobile/light.jpeg) |
+| ![appDesktop](/images/desktop/dark.png)  | ![appMobile](/images/mobile/dark.jpeg)  |
 
 ## Features
 
