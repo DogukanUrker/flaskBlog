@@ -1,0 +1,31 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to SSH Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          mkdir -p noisedive  # make server folder if it does not already exist
+          cd noisedive
+          rm -rf *  # Remove existing files in the directory
+          tar -xzf -  # Extract files from the tar archive sent via stdin
+      env:
+        TAR_OPTIONS: --directory=public  # Change this if your site is in a different directory
+
+    - name: Copy files to server
+      run: tar -czf - . | ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cat > noisedive/site.tar.gz && tar -xzf noisedive/site.tar.gz -C noisedive && rm noisedive/site.tar.gz"
