@@ -20,6 +20,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          echo ${{ secrets.SSH_HOST }}
           mkdir -p noisedive  # make server folder if it does not already exist
           cd noisedive
           rm -rf *  # Remove existing files in the directory
