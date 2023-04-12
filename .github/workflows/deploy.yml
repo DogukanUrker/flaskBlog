@@ -28,7 +28,7 @@ jobs:
           rm -rf *
 
           # Create a tar.gz archive of the website files from the repository
-          tar -czf site.tar.gz -C $GITHUB_WORKSPACE .
+          tar -czf site.tar.gz -C $GITHUB_WORKSPACE ./
 
           # Extract the website files to the current directory
           tar -xzf site.tar.gz
