@@ -30,11 +30,11 @@ jobs:
           # Create a tar.gz archive of the website files from the repository
           tar -czf site.tar.gz -C $GITHUB_WORKSPACE ./
 
-          # Extract the website files to the current directory
-          tar -xzf site.tar.gz
+          # # Extract the website files to the current directory
+          # tar -xzf site.tar.gz
 
-          # Remove the archive file
-          rm site.tar.gz
+          # # Remove the archive file
+          # rm site.tar.gz
       env:
         GITHUB_WORKSPACE: ${{ github.workspace }}  # Set the environment variable for github.workspace
 
