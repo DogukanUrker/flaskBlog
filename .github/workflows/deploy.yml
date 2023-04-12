@@ -19,11 +19,22 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        script: |
+        script:
+          # Navigate to the directory where the website files will be deployed
           mkdir -p noisedive  # make server folder if it does not already exist
           cd noisedive
-          rm -rf *  # Remove existing files in the directory
-          tar -xzf -  # Extract files from the tar archive sent via stdin
+
+          # Remove any existing files in the directory
+          rm -rf *
+
+          # Create a tar.gz archive of the website files from the repository
+          tar -czf site.tar.gz -C ${{ github.workspace }} .
+
+          # Extract the website files to the current directory
+          tar -xzf site.tar.gz
+
+          # Remove the archive file
+          rm site.tar.gz
       env:
         TAR_OPTIONS: --directory=public  # Change this if your site is in a different directory
 
