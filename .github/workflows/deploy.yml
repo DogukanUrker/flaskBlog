@@ -19,7 +19,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        script:
+        script: |
           # Navigate to the directory where the website files will be deployed
           mkdir -p noisedive  # make server folder if it does not already exist
           cd noisedive
@@ -27,25 +27,16 @@ jobs:
           # Remove any existing files in the directory
           rm -rf *
 
+          # Create a tar.gz archive of the website files from the repository
+          tar -czf site.tar.gz -C $GITHUB_WORKSPACE .
 
-          tar -xzf -  # Extract files from the tar archive sent via stdin
+          # Extract the website files to the current directory
+          tar -xzf site.tar.gz
 
-          # # Create a tar.gz archive of the website files from the repository
-          # tar -czf site.tar.gz -C $GITHUB_WORKSPACE .
-
-          # # Extract the website files to the current directory
-          # tar -xzf site.tar.gz
-
-          # # Remove the archive file
-          # rm site.tar.gz
-
-          # mkdir -p noisedive  # make server folder if it does not already exist
-          # cd noisedive
-          # rm -rf *  # Remove existing files in the directory
-          # tar -xzf -  # Extract files from the tar archive sent via stdin
-
+          # Remove the archive file
+          rm site.tar.gz
       env:
-        TAR_OPTIONS: --directory=public  # Change this if your site is in a different directory
+        GITHUB_WORKSPACE: ${{ github.workspace }}  # Set the environment variable for github.workspace
 
-    - name: Copy files to server
-      run: tar -czf - . | ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cat > noisedive/site.tar.gz && tar -xzf noisedive/site.tar.gz -C noisedive && rm noisedive/site.tar.gz"
+    - name: Notify Deployment Success
+      run: echo "Deployment to remote server completed successfully!"
