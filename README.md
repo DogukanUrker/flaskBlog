@@ -40,7 +40,6 @@ Simple blog app built with Flask.
 | Dark/Light Themes     |   ✅   |
 | Responsive Design     |   ✅   |
 
-
 ## Requirements
 
 - Flask
@@ -48,7 +47,6 @@ Simple blog app built with Flask.
 - WTForms
 - Flaskwebgui <sub><sup>(if you run desktop.py)</sup></sub>
 - Python 3.10 or newer
-
 
 ## Installation
 
@@ -67,3 +65,12 @@ or
 `python desktop.py`
 for run flaskBlog as a desktop app 💯
 
+#### Contributors
+
+<a href="https://github.com/dogukanurker/flaskblog/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=dogukanurker/flaskblog" />
+</a>
+
+#### Support
+
+<a href="https://www.buymeacoffee.com/dogukanurker" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
