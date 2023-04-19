@@ -10,7 +10,7 @@ Simple blog app built with Flask.
 | ![appDesktop](/images/desktop/light.png) | ![appMobile](/images/mobile/light.jpeg) |
 | ![appDesktop](/images/desktop/dark.png)  | ![appMobile](/images/mobile/dark.jpeg)  |
 
-## Features
+## Features 💫
 
 | Feature               | Status |
 | :-------------------- | :----: |
@@ -40,7 +40,7 @@ Simple blog app built with Flask.
 | Dark/Light Themes     |   ✅   |
 | Responsive Design     |   ✅   |
 
-## Requirements
+## Requirements 📦
 
 - Flask
 - Passlib
@@ -48,7 +48,7 @@ Simple blog app built with Flask.
 - Flaskwebgui <sub><sup>(if you run desktop.py)</sup></sub>
 - Python 3.10 or newer
 
-## Installation
+## Installation ⬇️
 
 download source code from Github 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
@@ -65,12 +65,12 @@ or
 `python desktop.py`
 for run flaskBlog as a desktop app 💯
 
-#### Contributors
+### Contributors 💕
 
 <a href="https://github.com/dogukanurker/flaskblog/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=dogukanurker/flaskblog" />
 </a>
 
-#### Support
+### Support 💰
 
 <a href="https://www.buymeacoffee.com/dogukanurker" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
