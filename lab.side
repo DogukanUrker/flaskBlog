@@ -1,0 +1,63 @@
+{
+  "id": "72fd4d89-1e67-40d4-9ceb-92e8df9821db",
+  "version": "2.0",
+  "name": "lab",
+  "url": "",
+  "tests": [{
+    "id": "9d508c91-1c2a-40c1-997d-7dd375ffddd3",
+    "name": "register user",
+    "commands": [{
+      "id": "aa29fa7c-d929-4eb5-b4f0-d0dce26365a3",
+      "comment": "",
+      "command": "open",
+      "target": "http://192.168.31.156:5000/signup",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "852aebc5-c88c-468e-93ec-5eea8fedb46a",
+      "comment": "",
+      "command": "type",
+      "target": "(//input[@class='input'])[2]",
+      "targets": [],
+      "value": "user3004"
+    }, {
+      "id": "008c520d-be8e-49d8-bdf2-50367fbeb4b8",
+      "comment": "",
+      "command": "type",
+      "target": "//input[@type='password']",
+      "targets": [],
+      "value": "test3004"
+    }, {
+      "id": "1b1bcfab-f024-4790-b16b-e31445bf7191",
+      "comment": "",
+      "command": "type",
+      "target": "(//input[@class='input'])[3]",
+      "targets": [],
+      "value": "test3004@gmail.com"
+    }, {
+      "id": "b7827808-bf81-4c14-b2d6-ae70094927b5",
+      "comment": "",
+      "command": "type",
+      "target": "//input[@placeholder='confirm your password']",
+      "targets": [],
+      "value": "test3004"
+    }, {
+      "id": "208fcbef-eba5-4782-88b7-6d31c37981ad",
+      "comment": "",
+      "command": "click",
+      "target": "//button[text()='Signup']",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "d88680b8-ab72-44b4-9636-b9717bb602b6",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["9d508c91-1c2a-40c1-997d-7dd375ffddd3"]
+  }],
+  "urls": [],
+  "plugins": []
+}
