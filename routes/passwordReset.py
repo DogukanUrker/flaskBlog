@@ -98,7 +98,8 @@ def passwordReset(codeSent):
                         message.set_content(
                             f"Hi {userName}👋,\nForgot your password😶‍🌫️? No problem👌.\nHere is your password reset code🔢:\n{passwordResetCode}"
                         )
-                        message.add_alternative(f"""\
+                        message.add_alternative(
+                            f"""\
                         <html>
                             <body>
                                 <h2>Hi {userName}👋,</h2>
@@ -106,7 +107,9 @@ def passwordReset(codeSent):
                                 <h1>{passwordResetCode}</h1>
                                 </body>
                         </html>
-                        """, subtype='html')
+                        """,
+                            subtype="html",
+                        )
                         message["Subject"] = "Forgot Password?"
                         message["From"] = "flaskblogdogukanurker@gmail.com"
                         message["To"] = email
@@ -119,6 +122,6 @@ def passwordReset(codeSent):
                         flash("code sent", "success")
                         return redirect("/passwordreset/codesent=true")
                     case True:
-                        message("1", f'USER: "{userName}" NOT FOUND')
+                        messageDebugging("1", f'USER: "{userName}" NOT FOUND')
                         flash("user not found", "error")
             return render_template("passwordReset.html", form=form, mailSent=False)
