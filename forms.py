@@ -37,6 +37,40 @@ class createPostForm(Form):
     )
 
 
+class passwordResetForm(Form):
+    userName = StringField(
+        "Username",
+        [validators.Length(min=4, max=25), validators.InputRequired()],
+        render_kw={"placeholder": "username"},
+    )
+    email = StringField(
+        "Email",
+        [validators.Length(min=6, max=50), validators.InputRequired()],
+        render_kw={"placeholder": "email"},
+    )
+    code = StringField(
+        "code",
+        [validators.Length(min=4, max=4), validators.InputRequired()],
+        render_kw={"placeholder": "code"},
+    )
+    password = PasswordField(
+        "Password",
+        [
+            validators.Length(min=8),
+            validators.InputRequired(),
+        ],
+        render_kw={"placeholder": "password"},
+    )
+    passwordConfirm = PasswordField(
+        "passwordConfirm",
+        [
+            validators.Length(min=8),
+            validators.InputRequired(),
+        ],
+        render_kw={"placeholder": "confirm your password"},
+    )
+
+
 class changePasswordForm(Form):
     oldPassword = PasswordField(
         "oldPassword",

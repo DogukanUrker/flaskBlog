@@ -9,7 +9,9 @@
   <form method="post" class="form">
     {{form.userName(class_="input",autocomplete="off")}}{{form.password(autocomplete="off",class_="input")}}
     <button type="submit" class="btn btnPrimary">Login</button>
-    <a href="/passwordreset" id="passwordReset">Forgot password?</a>
+    <a href="/passwordreset/codesent=false" id="passwordReset"
+      >Forgot password?</a
+    >
   </form>
 </div>
 {% endblock body %}

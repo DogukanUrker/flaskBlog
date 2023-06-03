@@ -25,8 +25,8 @@ Simple blog app built with Flask.
 | User Profile Pictures |   ✅   |
 | Admin Panel           |   ✅   |
 | Dashboard Page        |   ✅   |
+| Password Reset        |   ✅   |
 | Password Change       |   ✅   |
-| Password Reset        |   🚧   |
 | CKEditor 5            |   ✅   |
 | Search Bar            |   ✅   |
 | Post Edit             |   ✅   |

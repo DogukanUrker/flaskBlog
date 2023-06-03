@@ -23,6 +23,7 @@ from routes.deleteUser import deleteUserBlueprint
 from routes.deletePost import deletePostBlueprint
 from routes.createPost import createPostBlueprint
 from routes.setUserRole import setUserRoleBlueprint
+from routes.passwordReset import passwordResetBlueprint
 from routes.deleteComment import deleteCommentBlueprint
 from routes.changeUserName import changeUserNameBlueprint
 from routes.changePassword import changePasswordBlueprint
@@ -69,6 +70,7 @@ app.register_blueprint(deleteUserBlueprint)
 app.register_blueprint(deletePostBlueprint)
 app.register_blueprint(createPostBlueprint)
 app.register_blueprint(setUserRoleBlueprint)
+app.register_blueprint(passwordResetBlueprint)
 app.register_blueprint(deleteCommentBlueprint)
 app.register_blueprint(changeUserNameBlueprint)
 app.register_blueprint(changePasswordBlueprint)
