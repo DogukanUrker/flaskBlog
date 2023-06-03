@@ -6,3 +6,9 @@
     left: 50%;
     padding: 1rem;
 }
+
+#passwordReset {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+}
