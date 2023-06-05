@@ -110,7 +110,7 @@ def passwordReset(codeSent):
                         """,
                             subtype="html",
                         )
-                        message["Subject"] = "Forgot Password?"
+                        message["Subject"] = "Forgot Password?😕"
                         message["From"] = "flaskblogdogukanurker@gmail.com"
                         message["To"] = email
                         server.send_message(message)
