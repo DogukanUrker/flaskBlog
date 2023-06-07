@@ -10,6 +10,8 @@ Simple blog app built with Flask.
 | ![appDesktop](/images/desktop/light.png) | ![appMobile](/images/mobile/light.jpeg) |
 | ![appDesktop](/images/desktop/dark.png)  | ![appMobile](/images/mobile/dark.jpeg)  |
 
+[click for more images📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
+
 ## Features 💫
 
 | Feature               | Status |
