@@ -36,15 +36,19 @@ def createPost():
                         connection = sqlite3.connect("db/posts.db")
                         cursor = connection.cursor()
                         cursor.execute(
-                            f"""
-                            insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) 
-                            values("{postTitle}","{postTags}","{postContent}",
-                            "{session["userName"]}",0,
-                            "{currentDate()}",
-                            "{currentTime()}",
-                            "{currentDate()}",
-                            "{currentTime()}")
-                            """
+                            "insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) \
+                            values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                            (
+                                postTitle,
+                                postTags,
+                                postContent,
+                                session["userName"],
+                                0,
+                                currentDate(),
+                                currentTime(),
+                                currentDate(),
+                                currentTime(),
+                            ),
                         )
                         connection.commit()
                         message("2", f'POST: "{postTitle}" POSTED')

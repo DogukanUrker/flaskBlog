@@ -37,12 +37,15 @@ def post(postID):
                 connection = sqlite3.connect("db/comments.db")
                 cursor = connection.cursor()
                 cursor.execute(
-                    f"""
-                    insert into comments(post,comment,user,date,time)
-                    values({postID},"{comment}","{session["userName"]}",
-                    "{currentDate()}",
-                    "{currentTime()}")
-                    """
+                    "insert into comments(post,comment,user,date,time) \
+                    values(?, ?, ?, ?, ?)",
+                    (
+                        postID,
+                        comment,
+                        session["userName"],
+                        currentDate(),
+                        currentTime(),
+                    ),
                 )
                 connection.commit()
                 addPoints(5, session["userName"])
