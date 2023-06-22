@@ -70,9 +70,8 @@ for run flaskBlog as a desktop app 💯
 
 ### Contributors 💕
 
-<a href="https://github.com/dogukanurker/flaskblog/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=dogukanurker/flaskblog" />
-</a>
+<a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="ngryman" width="80" height="80"></a>
+<a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="ngryman" width="80" height="80"></a>
 
 ### Support 💰
 
