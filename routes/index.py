@@ -11,7 +11,7 @@ indexBlueprint = Blueprint("index", __name__)
 def index():
     connection = sqlite3.connect("db/posts.db")
     cursor = connection.cursor()
-    cursor.execute("select * from posts")
+    cursor.execute("select * from posts order by date desc, time desc")
     posts = cursor.fetchall()
     return render_template(
         "index.html",
