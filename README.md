@@ -72,6 +72,7 @@ for run flaskBlog as a desktop app 💯
 
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="ngryman" width="80" height="80"></a>
 <a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="ngryman" width="80" height="80"></a>
+<a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="ngryman" width="80" height="80"></a>
 
 ### Support 💰
 
