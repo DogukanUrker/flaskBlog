@@ -30,9 +30,13 @@
   </div>
   {% if author == session["userName"] %}
   <div class="bottomBar">
-    <a href="/deletepost/{{id}}/redirect=&" class="btn btnLink textPrimary"
-      >delete</a
-    >
+    <form>
+      <a href="/deletepost/{{id}}/redirect=&" class="btn btnLink textPrimary"
+        >delete</a
+      >
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    </form>
+
     <a href="/editpost/{{id}}" class="btn btnLink textPrimary">edit</a>
   </div>
   {% endif %} {% for comment in comments %}
@@ -63,6 +67,7 @@
       comment</small
     >
     {% endif %}
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   </form>
 </div>
 {% endblock body %}

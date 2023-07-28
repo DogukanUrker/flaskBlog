@@ -9,7 +9,7 @@ from helpers import (
 deleteCommentBlueprint = Blueprint("deleteComment", __name__)
 
 
-@deleteCommentBlueprint.route("/deletecomment/<int:commentID>/redirect=<direct>")
+@deleteCommentBlueprint.post("/deletecomment/<int:commentID>/redirect=<direct>")
 def deleteComment(commentID, direct):
     direct = direct.replace("&", "/")
     match "userName" in session:

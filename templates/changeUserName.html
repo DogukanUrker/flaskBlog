@@ -9,6 +9,7 @@
   <form method="post" class="form">
     {{form.newUserName(class_="input")}}
     <button type="submit" class="btn btnPrimary">change my username</button>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   </form>
 </div>
 {% endblock body %}
