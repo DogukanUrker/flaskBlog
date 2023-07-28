@@ -33,6 +33,7 @@ def usersTable():
 	    "userName"	TEXT UNIQUE,
 	    "email"	TEXT UNIQUE,
 	    "password"	TEXT,
+            "profilePicture" TEXT,
 	    "role"	TEXT,
 	    "points"	INTEGER,
 	    "creationDate"	TEXT,
