@@ -6,12 +6,14 @@ from helpers import (
     redirect,
     render_template,
     Blueprint,
+    request,
 )
+from delete import deletePost
 
 dashboardBlueprint = Blueprint("dashboard", __name__)
 
 
-@dashboardBlueprint.route("/dashboard/<userName>")
+@dashboardBlueprint.route("/dashboard/<userName>", methods=["GET", "POST"])
 def dashboard(userName):
     match "userName" in session:
         case True:
@@ -28,6 +30,11 @@ def dashboard(userName):
                     cursor.execute(
                         f'select * from comments where lower(user) = "{userName.lower()}"'
                     )
+                    if request.method == "POST":
+                        if "postDeleteButton" in request.form:
+                            postID = request.form["postID"]
+                            deletePost(postID)
+                            return redirect(f"/dashboard/{userName}")
                     comments = cursor.fetchall()
                     if posts:
                         showPosts = True

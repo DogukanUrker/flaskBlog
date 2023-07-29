@@ -12,6 +12,7 @@ from helpers import (
     Blueprint,
     commentForm,
 )
+from delete import deleteComment, deletePost
 
 postBlueprint = Blueprint("post", __name__)
 
@@ -33,24 +34,31 @@ def post(postID):
             cursor.execute(f'update posts set views = views+1 where id = "{postID}"')
             connection.commit()
             if request.method == "POST":
-                comment = request.form["comment"]
-                connection = sqlite3.connect("db/comments.db")
-                cursor = connection.cursor()
-                cursor.execute(
-                    "insert into comments(post,comment,user,date,time) \
-                    values(?, ?, ?, ?, ?)",
-                    (
-                        postID,
-                        comment,
-                        session["userName"],
-                        currentDate(),
-                        currentTime(),
-                    ),
-                )
-                connection.commit()
-                addPoints(5, session["userName"])
-                flash("You earned 5 points by commenting ", "success")
-                return redirect(f"/post/{postID}")
+                if "postDeleteButton" in request.form:
+                    deletePost(postID)
+                    return redirect(f"/")
+                elif "commentDeleteButton" in request.form:
+                    deleteComment(request.form["commentID"])
+                    return redirect(f"/post/{postID}")
+                else:
+                    comment = request.form["comment"]
+                    connection = sqlite3.connect("db/comments.db")
+                    cursor = connection.cursor()
+                    cursor.execute(
+                        "insert into comments(post,comment,user,date,time) \
+                        values(?, ?, ?, ?, ?)",
+                        (
+                            postID,
+                            comment,
+                            session["userName"],
+                            currentDate(),
+                            currentTime(),
+                        ),
+                    )
+                    connection.commit()
+                    addPoints(5, session["userName"])
+                    flash("You earned 5 points by commenting ", "success")
+                    return redirect(f"/post/{postID}")
             connection = sqlite3.connect("db/comments.db")
             cursor = connection.cursor()
             cursor.execute(f'select * from comments where post = "{postID}"')

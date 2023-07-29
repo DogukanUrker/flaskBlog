@@ -20,11 +20,16 @@
   <div class="content" tag="content">{{post[3]|safe}}</div>
   <section>
     <a href="/editpost/{{post[0]}}" class="btn btnLink textPrimary">edit</a>
-    <a
-      href="/deletepost/{{post[0]}}/redirect=dashboard&{{session['userName'].lower()}}"
-      class="btn btnLink textPrimary"
-      >delete</a
-    >
+    <form method="post">
+      <input type="hidden" name="postID" value="{{post[0]}}" />
+      <button
+        type="submit"
+        name="postDeleteButton"
+        class="btn btnLink textPrimary"
+      >
+        delete
+      </button>
+    </form>
   </section>
   <div class="info">
     <p>Tags: {{post[2]}}</p>

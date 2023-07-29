@@ -18,11 +18,16 @@
   </h3>
   <div class="content" tag="content">{{comment[2]}}</div>
   <section>
-    <a
-      href="/deletecomments/{{comment[0]}}/redirect=dashboard&{{session['userName'].lower()}}"
-      class="btn btnLink textPrimary"
-      >delete</a
-    >
+    <form method="post">
+      <input type="hidden" name="commentID" value="{{comment[0]}}" />
+      <button
+        type="submit"
+        name="commentDeleteButton"
+        class="btn btnLink textPrimary"
+      >
+        delete
+      </button>
+    </form>
   </section>
   <div class="info">
     <p>Creation Time: {{comment[5]}}</p>

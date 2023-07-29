@@ -30,11 +30,14 @@
   </div>
   {% if author == session["userName"] %}
   <div class="bottomBar">
-    <form>
-      <a href="/deletepost/{{id}}/redirect=&" class="btn btnLink textPrimary"
-        >delete</a
+    <form method="post">
+      <button
+        type="submit"
+        class="btn btnLink textPrimary"
+        name="postDeleteButton"
       >
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        delete
+      </button>
     </form>
 
     <a href="/editpost/{{id}}" class="btn btnLink textPrimary">edit</a>
@@ -49,7 +52,10 @@
     </section>
     <p class="centeredHorizontally">{{comment[2]}}</p>
     {% if session["userName"] == comment[3] %}
-    <a href="/deletecomment/{{comment[0]}}/redirect=post&{{id}}">🗑️</a>
+    <form method="post">
+      <input type="hidden" name="commentID" value="{{comment[0]}}" />
+      <button type="submit" name="commentDeleteButton">🗑️</button>
+    </form>
     {% endif %} {% endfor %}
   </div>
   <form method="post" class="commentForm">
@@ -67,7 +73,6 @@
       comment</small
     >
     {% endif %}
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   </form>
 </div>
 {% endblock body %}

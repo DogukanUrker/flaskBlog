@@ -17,11 +17,11 @@
     >
   </h2>
   <h2>
-    <a
-      href="/deleteuser/{{session['userName']}}/redirect=&"
-      class="toPanel textPrimary"
-      >delete your account</a
-    >
+    <form method="post">
+      <button type="submit" name="userDeleteButton" class="toPanel textPrimary">
+        delete your account
+      </button>
+    </form>
   </h2>
 </div>
 {% endblock body %}

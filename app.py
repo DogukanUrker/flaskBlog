@@ -19,19 +19,15 @@ from routes.searchBar import searchBarBlueprint
 from routes.editPost import editPostBlueprint
 from routes.dashboard import dashboardBlueprint
 from routes.adminPanel import adminPanelBlueprint
-from routes.deleteUser import deleteUserBlueprint
-from routes.deletePost import deletePostBlueprint
 from routes.createPost import createPostBlueprint
 from routes.setUserRole import setUserRoleBlueprint
 from routes.passwordReset import passwordResetBlueprint
-from routes.deleteComment import deleteCommentBlueprint
 from routes.changeUserName import changeUserNameBlueprint
 from routes.changePassword import changePasswordBlueprint
 from routes.adminPanelUsers import adminPanelUsersBlueprint
 from routes.adminPanelPosts import adminPanelPostsBlueprint
 from routes.accountSettings import accountSettingsBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
-from flask_wtf.csrf import CSRFProtect
 from dbChecker import dbFolder, usersTable, postsTable, commentsTable
 
 dbFolder()
@@ -42,7 +38,6 @@ commentsTable()
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
 app.config["SESSION_PERMANENT"] = True
-csrf = CSRFProtect(app)
 
 
 @app.context_processor
@@ -68,12 +63,9 @@ app.register_blueprint(editPostBlueprint)
 app.register_blueprint(dashboardBlueprint)
 app.register_blueprint(searchBarBlueprint)
 app.register_blueprint(adminPanelBlueprint)
-app.register_blueprint(deleteUserBlueprint)
-app.register_blueprint(deletePostBlueprint)
 app.register_blueprint(createPostBlueprint)
 app.register_blueprint(setUserRoleBlueprint)
 app.register_blueprint(passwordResetBlueprint)
-app.register_blueprint(deleteCommentBlueprint)
 app.register_blueprint(changeUserNameBlueprint)
 app.register_blueprint(changePasswordBlueprint)
 app.register_blueprint(adminPanelUsersBlueprint)
