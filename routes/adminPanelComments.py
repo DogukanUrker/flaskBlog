@@ -1,10 +1,18 @@
-from helpers import sqlite3, render_template, Blueprint, session, redirect
+from helpers import (
+    sqlite3,
+    render_template,
+    Blueprint,
+    session,
+    redirect,
+    request,
+)
+from delete import deleteComment
 
 adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
 
 
-@adminPanelCommentsBlueprint.route("/admin/comments")
-@adminPanelCommentsBlueprint.route("/adminpanel/comments")
+@adminPanelCommentsBlueprint.route("/admin/comments", methods=["GET", "POST"])
+@adminPanelCommentsBlueprint.route("/adminpanel/comments", methods=["GET", "POST"])
 def adminPanelComments():
     match "userName" in session:
         case True:
@@ -14,6 +22,10 @@ def adminPanelComments():
                 f'select role from users where userName = "{session["userName"]}"'
             )
             role = cursor.fetchone()[0]
+            if request.method == "POST":
+                if "commentDeleteButton" in request.form:
+                    deleteComment(request.form["commentID"])
+                    return redirect(f"/admin/comments")
             match role == "admin":
                 case True:
                     connection = sqlite3.connect("db/comments.db")

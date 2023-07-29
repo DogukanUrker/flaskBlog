@@ -30,9 +30,16 @@
   </div>
   {% if author == session["userName"] %}
   <div class="bottomBar">
-    <a href="/deletepost/{{id}}/redirect=&" class="btn btnLink textPrimary"
-      >delete</a
-    >
+    <form method="post">
+      <button
+        type="submit"
+        class="btn btnLink textPrimary"
+        name="postDeleteButton"
+      >
+        delete
+      </button>
+    </form>
+
     <a href="/editpost/{{id}}" class="btn btnLink textPrimary">edit</a>
   </div>
   {% endif %} {% for comment in comments %}
@@ -45,7 +52,10 @@
     </section>
     <p class="centeredHorizontally">{{comment[2]}}</p>
     {% if session["userName"] == comment[3] %}
-    <a href="/deletecomment/{{comment[0]}}/redirect=post&{{id}}">🗑️</a>
+    <form method="post">
+      <input type="hidden" name="commentID" value="{{comment[0]}}" />
+      <button type="submit" name="commentDeleteButton">🗑️</button>
+    </form>
     {% endif %} {% endfor %}
   </div>
   <form method="post" class="commentForm">

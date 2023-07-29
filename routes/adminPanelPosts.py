@@ -1,10 +1,18 @@
-from helpers import sqlite3, render_template, Blueprint, session, redirect
+from helpers import (
+    sqlite3,
+    render_template,
+    Blueprint,
+    session,
+    redirect,
+    request,
+)
+from delete import deletePost
 
 adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
 
 
-@adminPanelPostsBlueprint.route("/admin/posts")
-@adminPanelPostsBlueprint.route("/adminpanel/posts")
+@adminPanelPostsBlueprint.route("/admin/posts", methods=["GET", "POST"])
+@adminPanelPostsBlueprint.route("/adminpanel/posts", methods=["GET", "POST"])
 def adminPanelPosts():
     match "userName" in session:
         case True:
@@ -14,6 +22,9 @@ def adminPanelPosts():
                 f'select role from users where userName = "{session["userName"]}"'
             )
             role = cursor.fetchone()[0]
+            if request.method == "POST":
+                if "postDeleteButton" in request.form:
+                    deletePost(request.form["postID"])
             match role == "admin":
                 case True:
                     connection = sqlite3.connect("db/posts.db")

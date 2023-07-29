@@ -29,11 +29,12 @@
       <p>Join Time: {{user[8]}}</p>
     </section>
     <section class="stats">
-      <a
-        href="deleteuser/{{user[1].lower()}}/redirect=&admin&users"
-        class="textPrimary"
-        >delete user</a
-      >
+      <form method="post">
+        <input type="hidden" name="userName" value="{{user[1]}}" />
+        <button type="submit" name="userDeleteButton" class="textPrimary">
+          delete user
+        </button>
+      </form>
       {% if user[5] == "admin" %}
       <a href="/setuserrole/{{user[1].lower()}}/user" class="textPrimary"
         >set user role to user</a
