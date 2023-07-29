@@ -8,7 +8,6 @@
     <small>(separete with comma)</small>
     {{form.postContent(class_="editor", autocomplete="off")}}
     <button type="submit" class="btn btnPrimary">save</button>
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   </form>
 </div>
 {% endblock body %}
