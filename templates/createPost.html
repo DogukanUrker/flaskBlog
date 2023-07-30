@@ -3,6 +3,8 @@
 {% endblock head %} {%block body%}
 <div class="container">
   <form method="post" class="form formPost centeredHorizontally">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
     {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}
     <small>(separete with comma)</small>

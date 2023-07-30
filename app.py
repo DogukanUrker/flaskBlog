@@ -29,6 +29,7 @@ from routes.adminPanelPosts import adminPanelPostsBlueprint
 from routes.accountSettings import accountSettingsBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
 from dbChecker import dbFolder, usersTable, postsTable, commentsTable
+from flask_wtf.csrf import CSRFProtect
 
 dbFolder()
 usersTable()
@@ -38,6 +39,7 @@ commentsTable()
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
 app.config["SESSION_PERMANENT"] = True
+csrf = CSRFProtect(app)
 
 
 @app.context_processor

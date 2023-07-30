@@ -19,6 +19,7 @@
   <div class="content" tag="content">{{comment[2]}}</div>
   <section>
     <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <input type="hidden" name="commentID" value="{{comment[0]}}" />
       <button
         type="submit"
