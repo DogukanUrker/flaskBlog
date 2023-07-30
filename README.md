@@ -50,6 +50,7 @@ Simple blog app built with Flask.
 - Flask
 - Passlib
 - WTForms
+- Flask-WTF
 - Flaskwebgui <sub><sup>(if you run desktop.py)</sup></sub>
 - Python 3.10 or newer
 

@@ -1,4 +1,5 @@
 Flask==2.2.2
 passlib==1.7.4
 WTForms==3.0.1
+Flask-WTF==1.1.1
 flaskwebgui==1.0.3
