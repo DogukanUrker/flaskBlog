@@ -30,6 +30,7 @@
     </section>
     <section class="stats">
       <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="userName" value="{{user[1]}}" />
         <button
           type="submit"

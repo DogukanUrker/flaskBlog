@@ -21,6 +21,7 @@
   <section>
     <a href="/editpost/{{post[0]}}" class="btn btnLink textPrimary">edit</a>
     <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <input type="hidden" name="postID" value="{{post[0]}}" />
       <button
         type="submit"
