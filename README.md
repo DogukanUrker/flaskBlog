@@ -29,7 +29,7 @@ Simple blog app built with Flask.
 | Dashboard Page         |   ✅    |
 | Password Reset         |   ✅    |
 | Password Change        |   ✅    |
-| CKEditor 5             |   ✅    |
+| Summer Note Editor     |   ✅    |
 | Search Bar             |   ✅    |
 | Post Edit              |   ✅    |
 | Post Views             |   ✅    |
