@@ -1,3 +1,5 @@
-ClassicEditor.create(document.querySelector(".editor")).catch((error) => {
-  console.error(error);
+$(document).ready(function() {
+  $(".editor").summernote({
+    height: 520,
+  });
 });
