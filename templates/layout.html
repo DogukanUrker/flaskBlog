@@ -17,7 +17,16 @@
   <body>
     {% include 'changeTheme.html'%} {% include 'navbar.html'%} {% include
     'flash.html'%} {% block body %} {% endblock body %}
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
     <link
       rel="stylesheet"
