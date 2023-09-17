@@ -71,9 +71,6 @@ or
 `python desktop.py`
 for run flaskBlog as a desktop app 💯
 
-### Knowing Issues
-- [CKEditor not working properly](https://github.com/DogukanUrker/flaskBlog/issues/10#issue-1825223821)
-
 ### Contributors 💕
 
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="ngryman" width="80" height="80"></a>
