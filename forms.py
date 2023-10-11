@@ -71,6 +71,14 @@ class passwordResetForm(Form):
     )
 
 
+class verifyUserForm(Form):
+    code = StringField(
+        "code",
+        [validators.Length(min=4, max=4), validators.InputRequired()],
+        render_kw={"placeholder": "code"},
+    )
+
+
 class changePasswordForm(Form):
     oldPassword = PasswordField(
         "oldPassword",
