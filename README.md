@@ -43,7 +43,7 @@ Simple blog app built with Flask.
 | Dark/Light Themes      |   ✅    |
 | Responsive Design      |   ✅    |
 | Custom Profile Picture |   ⏳    |
-| Email Verification     |   ⏳    |
+| User Verification      |   ⏳    |
 
 ## Requirements 📦
 
