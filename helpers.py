@@ -15,6 +15,7 @@ from forms import (
     signUpForm,
     commentForm,
     createPostForm,
+    verifyUserForm,
     passwordResetForm,
     changePasswordForm,
     changeUserNameForm,
