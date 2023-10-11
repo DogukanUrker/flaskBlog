@@ -15,9 +15,10 @@ from routes.login import loginBlueprint
 from routes.signup import signUpBlueprint
 from routes.logout import logoutBlueprint
 from routes.search import searchBlueprint
-from routes.searchBar import searchBarBlueprint
 from routes.editPost import editPostBlueprint
+from routes.searchBar import searchBarBlueprint
 from routes.dashboard import dashboardBlueprint
+from routes.verifyUser import verifyUserBlueprint
 from routes.adminPanel import adminPanelBlueprint
 from routes.createPost import createPostBlueprint
 from routes.setUserRole import setUserRoleBlueprint
@@ -66,6 +67,7 @@ app.register_blueprint(dashboardBlueprint)
 app.register_blueprint(searchBarBlueprint)
 app.register_blueprint(adminPanelBlueprint)
 app.register_blueprint(createPostBlueprint)
+app.register_blueprint(verifyUserBlueprint)
 app.register_blueprint(setUserRoleBlueprint)
 app.register_blueprint(passwordResetBlueprint)
 app.register_blueprint(changeUserNameBlueprint)
