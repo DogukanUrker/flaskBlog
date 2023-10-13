@@ -6,6 +6,7 @@ from helpers import (
     flash,
     message,
     redirect,
+    addPoints,
     currentDate,
     currentTime,
     render_template,
@@ -51,12 +52,16 @@ def signup():
                                     "https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}",
                                     "user",0,
                                     "{currentDate()}",
-                                    "{currentTime()}",{False})
+                                    "{currentTime()}","False")
                                     """
                                 )
                                 connection.commit()
                                 message("2", f'USER: "{userName}" ADDED TO DATABASE')
-                                return redirect("/")
+                                session["userName"] = userName
+                                addPoints(1, session["userName"])
+                                message("2", f'USER: "{userName}" LOGGED IN')
+                                flash(f"Welcome {userName}", "success")
+                                return redirect("/verifyUser/codesent=false")
                             case False:
                                 message(
                                     "1",
