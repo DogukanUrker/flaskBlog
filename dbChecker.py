@@ -38,7 +38,7 @@ def usersTable():
 	    "points"	INTEGER,
 	    "creationDate"	TEXT,
 	    "creationTime"	TEXT,
-        "isVerified"	TEXT DEFAULT 'False',
+        "isVerified"	TEXT,
 	    PRIMARY KEY("userID" AUTOINCREMENT)
         );"""
         cursor.execute(usersTable)
