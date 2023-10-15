@@ -1,6 +1,5 @@
 from helpers import (
     session,
-    secrets,
     sqlite3,
     request,
     flash,
@@ -49,7 +48,7 @@ def signup():
                                     f"""
                                     insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) 
                                     values("{userName}","{email}","{password}",
-                                    "https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}",
+                                    "https://api.dicebear.com/7.x/identicon/svg?seed={userName}",
                                     "user",0,
                                     "{currentDate()}",
                                     "{currentTime()}","False")
