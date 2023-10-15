@@ -19,6 +19,7 @@ from forms import (
     passwordResetForm,
     changePasswordForm,
     changeUserNameForm,
+    changeProfilePictureForm,
 )
 from flask import (
     Flask,
