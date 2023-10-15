@@ -42,7 +42,7 @@ Simple blog app built with Flask.
 | Database Checker       |   ✅    |
 | Dark/Light Themes      |   ✅    |
 | Responsive Design      |   ✅    |
-| Custom Profile Picture |   ⏳    |
+| Custom Profile Picture |   ✅    |
 | User Verification      |   ✅    |
 
 ## Requirements 📦
