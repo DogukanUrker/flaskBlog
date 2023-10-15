@@ -29,6 +29,7 @@ from routes.adminPanelUsers import adminPanelUsersBlueprint
 from routes.adminPanelPosts import adminPanelPostsBlueprint
 from routes.accountSettings import accountSettingsBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
+from routes.changeProfilePicture import changeProfilePictureBlueprint
 from dbChecker import dbFolder, usersTable, postsTable, commentsTable
 from flask_wtf.csrf import CSRFProtect
 
@@ -76,6 +77,7 @@ app.register_blueprint(adminPanelUsersBlueprint)
 app.register_blueprint(adminPanelPostsBlueprint)
 app.register_blueprint(accountSettingsBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
+app.register_blueprint(changeProfilePictureBlueprint)
 
 match __name__:
     case "__main__":
