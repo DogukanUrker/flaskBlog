@@ -77,15 +77,15 @@ for run flaskBlog as a desktop app 💯
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="ngryman" width="80" height="80"></a>
 <a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="ngryman" width="80" height="80"></a>
 <a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="ngryman" width="80" height="80"></a>
-<!---
+
 ### Stars ⭐
 
-[![Stargazers repo roster for @DogukanUrker/flaskBlog](https://reporoster.com/stars/dark/DogukanUrker/flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
+[![Stargazers repo roster for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
 
 ### Forks 🍴
 
-[![Forkers repo roster for @DogukanUrker/flaskBlog](https://reporoster.com/forks/dark/DogukanUrker/flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
--->
+[![Forkers repo roster for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
+
 ### Support 💰
 
 <a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
