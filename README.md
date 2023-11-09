@@ -32,8 +32,7 @@ Simple blog app built with Flask.
 | Password Reset         |   ✅    |
 | Password Change        |   ✅    |
 | Summer Note Editor     |   ✅    |
-| Search Bar             |
-   ✅    |
+| Search Bar             |   ✅    |
 | Post Edit              |   ✅    |
 | Post Views             |   ✅    |
 | Post Delete            |   ✅    |
@@ -48,7 +47,8 @@ Simple blog app built with Flask.
 | Custom Profile Picture |   ✅    |
 | User Verification      |   ✅    |
 
-## Requirements 📦
+##
+ Requirements 📦
 
 - Flask
 - Passlib
