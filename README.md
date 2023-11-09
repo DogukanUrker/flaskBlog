@@ -6,6 +6,7 @@ Simple blog app built with Flask.
 [Dogukan Urker](https://dogukanurker.com)
 
 ### [Demo Video 📺](https://youtu.be/BTBXe6yPbLE)
+
 | [Desktop](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Mobile](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
 | :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
 |                    ![appDesktop](/images/desktop/light.png)                     |                    ![appMobile](/images/mobile/light.jpeg)                    |
@@ -31,7 +32,8 @@ Simple blog app built with Flask.
 | Password Reset         |   ✅    |
 | Password Change        |   ✅    |
 | Summer Note Editor     |   ✅    |
-| Search Bar             |   ✅    |
+| Search Bar             |
+   ✅    |
 | Post Edit              |   ✅    |
 | Post Views             |   ✅    |
 | Post Delete            |   ✅    |
