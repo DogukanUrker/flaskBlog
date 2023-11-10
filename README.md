@@ -82,11 +82,11 @@ for run flaskBlog as a desktop app 💯
 
 ### Stars ⭐
 
-[![Stargazers repo roster for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
+[![Stargazers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
 
 ### Forks 🍴
 
-[![Forkers repo roster for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
+[![Forkers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
 
 ### Support 💰
 
