@@ -1,0 +1,17 @@
+.note-btn-group * {
+  color: black;
+}
+
+.note-editable {
+  color: black !important;
+  background-color: white;
+  text-align: left !important;
+}
+
+.note-editable * {
+  color: black !important;
+}
+
+.note-modal-content * {
+  color: black !important;
+}
