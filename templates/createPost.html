@@ -1,15 +1,14 @@
 {% extends 'layout.html'%} {%block head%}
 <title>Create Post</title>
 {% endblock head %} {%block body%}
-<div class="container">
-  <form method="post" class="form formPost centeredHorizontally">
+<div>
+  <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
-    {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}
+    {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <small>(separete with comma)</small>
     {{form.postContent(class_="editor", autocomplete="off")}}
-    <button type="submit" class="btn btnPrimary">Post</button>
+    <button type="submit">Post</button>
   </form>
 </div>
 {% endblock body %}

@@ -1,57 +1,42 @@
 {% extends 'layout.html'%} {%block head%}
 <title>{{title}}</title>
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/post.css') }}"
-/>
 {% endblock head %} {%block body%}
-<div class="post centeredHorizontally">
-  <h1 class="title">{{title}}</h1>
-  <p class="content">
+<div>
+  <h1>{{title}}</h1>
+  <p>
     {{content|safe}} <br />
     Tags: {{tags.replace(",",", ")}}
   </p>
-  <div class="bottomBar">
+  <div>
     <div>
       <h5>👁️ {{views}}</h5>
       <a href="/user/{{author|lower}}">
-        <h5 class="author">
-          <img
-            class="profilePicture"
-            src="{{ getProfilePicture(author) }}"
-          />{{author}}
-        </h5></a
+        <h5><img src="{{ getProfilePicture(author) }}" />{{author}}</h5></a
       >
     </div>
-    <div class="dateTime">
+    <div>
       <h5>{{time}}</h5>
-      <h5 class="date">{{date}}</h5>
+      <h5>{{date}}</h5>
     </div>
   </div>
   {% if author == session["userName"] %}
-  <div class="bottomBar">
+  <div>
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <button
-        type="submit"
-        class="btn btnLink textPrimary"
-        name="postDeleteButton"
-      >
+      <button type="submit" name="postDeleteButton">
         delete
       </button>
     </form>
 
-    <a href="/editpost/{{id}}" class="btn btnLink textPrimary">edit</a>
+    <a href="/editpost/{{id}}">edit</a>
   </div>
   {% endif %} {% for comment in comments %}
-  <div class="comments">
-    <img class="profilePicture" src="{{ getProfilePicture(comment[3]) }}" />
-    <section class="commentUserNameContainer">
-      <a href="/user/{{comment[3]|lower}}" class="commentUserName"
-        >{{comment[3]}} :</a
-      >
+  <div>
+    <img src="{{ getProfilePicture(comment[3]) }}" />
+    <section>
+      <a href="/user/{{comment[3]|lower}}">{{comment[3]}} :</a>
     </section>
-    <p class="centeredHorizontally">{{comment[2]}}</p>
+    <p>{{comment[2]}}</p>
     {% if session["userName"] == comment[3] %}
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -60,10 +45,10 @@
     </form>
     {% endif %} {% endfor %}
   </div>
-  <form method="post" class="commentForm">
+  <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {% if session["userName"] %} {{form.comment(class_="comment")}}
-    <button type="submit" class="btnSubmit">comment</button>
+    {% if session["userName"] %} {{form.comment()}}
+    <button type="submit">comment</button>
     {% else %}
     <style>
       .commentForm {
@@ -71,8 +56,7 @@
       }
     </style>
     <small
-      >you need
-      <a href="/login/redirect=&post&{{id}}" class="linkLogin">login</a> for
+      >you need <a href="/login/redirect=&post&{{id}}">login</a> for
       comment</small
     >
     {% endif %}
