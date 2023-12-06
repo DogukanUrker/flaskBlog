@@ -74,6 +74,12 @@ or
 `python desktop.py`
 for run flaskBlog as a desktop app 💯
 
+### Default Admin Account
+
+Username: admin
+
+Password: admin
+
 ### Contributors 💕
 
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="ngryman" width="80" height="80"></a>
