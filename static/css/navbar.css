@@ -2,7 +2,7 @@
   align-items: center;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-top: 1rem;
   user-select: none;
 }
@@ -38,7 +38,6 @@
   text-align: center;
   display: inline-block;
   height: fit-content;
-
 }
 
 .profileText {
@@ -85,12 +84,13 @@
   margin-left: 5rem;
 }
 
-@media screen and (max-width: 968px) {
+@media screen and (max-width: 1068px) {
   .btnHome {
     margin: 0 1rem 0 0;
   }
 
-  .btns, .searchBar {
+  .btns,
+  .searchBar {
     display: none;
   }
 
@@ -101,11 +101,11 @@
   .searchBarPage {
     display: block;
   }
-
 }
 
-@media (min-width:968px) and (max-width:1280px) {
-  .btnHome, .btns {
+@media (min-width: 1068px) and (max-width: 1600px) {
+  .btnHome,
+  .btns {
     margin-right: 2rem;
   }
 
