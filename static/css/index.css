@@ -1,0 +1,24 @@
+.post {
+  max-width: 35rem;
+  max-height: fit-content;
+  margin-top: 2rem;
+  border: 1px solid var(--themePrimary);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.content {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  margin: 1rem 0rem;
+}
+
+.content p {
+  display: inline;
+}
+
+.title {
+  font-size: 1.5rem;
+}

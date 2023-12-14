@@ -1,0 +1,140 @@
+:root {
+  --themePrimary: #000;
+  --themeSecondary: #fff;
+  --themeHelper: #303030;
+  --primaryColor: #ff206e;
+  --primaryHelper: #FF4F8C;
+}
+
+* {
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--themePrimary);
+}
+
+html {
+  font-size: 125% !important;
+}
+
+body {
+  background-color: var(--themeSecondary);
+}
+
+a {
+  text-decoration: none;
+  user-select: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: var(--themePrimary);
+}
+
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-button {
+  background: transparent;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+}
+
+.form {
+  height: fit-content;
+  width: fit-content;
+}
+
+.input {
+  margin-bottom: 1rem;
+  border: 0px;
+  height: 2rem;
+  width: 14rem;
+  text-align: center;
+  display: block;
+  color: var(--themePrimary);
+  background-color: transparent;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--themePrimary);
+  transition: 0.4s;
+  border-radius: 0.1rem;
+}
+
+.centeredHorizontally {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primaryColor);
+}
+
+.btn {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 2rem;
+  border: 0px;
+  transition: 0.25s;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0rem 0.25rem;
+}
+
+.btnPrimary {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: var(--themeSecondary);
+  background-color: var(--themePrimary);
+}
+
+.btnLink {
+  background-color: transparent;
+}
+
+.btnPrimary:hover {
+  background-color: var(--themeHelper);
+}
+
+.btnLink:hover {
+  color: var(--themeHelper);
+}
+
+.textPrimary {
+  color: var(--primaryColor);
+  transition: 0.25s;
+}
+
+.textPrimary:hover {
+  color: var(--primaryHelper);
+}
+
+.errorMessage, .formPost {
+  text-align: center;
+  margin-top: 6rem;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.goBackToAdmin {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    max-width: 100% !important;
+  }
+
+  .navbar * {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,23 @@
+button {
+  margin: 0 !important;
+}
+
+section,
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  -webkit-line-clamp: 2;
+}
+
+.info p {
+  margin: 1rem 0 0 0;
+  font-size: 0.8rem;
+}
+
+.userDashboardNoPost {
+  width: fit-content;
+  margin: 2rem auto 2rem auto;
+}

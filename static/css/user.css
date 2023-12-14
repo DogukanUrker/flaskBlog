@@ -1,0 +1,108 @@
+h1 {
+    width: 36rem;
+    margin: 1rem 0 0 0;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.head img, h2 {
+    display: inline-block;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+.userProfilePicture {
+    height: 6rem;
+    width: 6rem;
+    border: 1px solid var(--primaryColor);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.userName {
+    margin: 6rem 0 0 1rem;
+}
+
+.head {
+    display: flex;
+    width: 20rem;
+    margin: 2rem 0 2rem 0;
+}
+
+
+.stats {
+    display: flex;
+    width: 22rem;
+    justify-content: space-between;
+}
+
+.stats p, .stats a {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.content {
+    -webkit-line-clamp: 4;
+}
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentCreationDate {
+    margin-right: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+    .userName {
+        display: block;
+        font-size: 1.5rem;
+        margin-top: 0;
+    }
+
+    .userProfilePicture {
+        display: block;
+    }
+
+    .stats {
+        width: 100%;
+        margin: 0;
+    }
+
+    .stats * {
+        margin: 0 0 0.5rem 0 !important;
+
+    }
+
+    .container {
+        display: block;
+        width: 100%;
+    }
+
+    .userContainer {
+        padding: 1rem;
+    }
+
+    .userProfilePicture {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .head {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .postsText, .commentsText {
+        width: fit-content;
+    }
+}
