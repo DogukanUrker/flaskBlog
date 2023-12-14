@@ -51,7 +51,7 @@ def message(color, message):
         f"\033[95m {currentTime(True)}]\033[0m"
         f"\033[9{color}m {message}\033[0m\n"
     )
-    logFile = open("log.log", "a")
+    logFile = open("log.log", "a", encoding="utf-8")
     logFile.write(f"[{currentDate()}" f"|{currentTime(True)}]" f" {message}\n")
     logFile.close()
 
