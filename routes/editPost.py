@@ -56,13 +56,16 @@ def editPost(postID):
                                         connection = sqlite3.connect("db/posts.db")
                                         cursor = connection.cursor()
                                         cursor.execute(
-                                            f'update posts set title = "{postTitle}" where id = {post[0]}'
+                                            """update posts set title = ? where id = ? """,
+                                            (postTitle, post[0]),
                                         )
                                         cursor.execute(
-                                            f'update posts set tags = "{postTags}" where id = {post[0]}'
+                                            """update posts set tags = ? where id = ? """,
+                                            (postTags, post[0]),
                                         )
                                         cursor.execute(
-                                            f'update posts set content = "{postContent}" where id = {post[0]}'
+                                            """update posts set content = ? where id = ? """,
+                                            (postContent, post[0]),
                                         )
                                         cursor.execute(
                                             f'update posts set lastEditDate = "{currentDate()}" where id = {post[0]}'
