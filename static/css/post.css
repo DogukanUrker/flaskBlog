@@ -111,6 +111,10 @@ small {
     max-width: 100% !important;
   }
 
+  .commentForm textarea {
+    width: 100%;
+  }
+
   .navbar * {
     width: 100%;
   }
