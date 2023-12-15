@@ -16,7 +16,7 @@ from helpers import (
 
 signUpBlueprint = Blueprint("signup", __name__)
 
-REGISTRATION = False
+REGISTRATION = True
 
 
 @signUpBlueprint.route("/signup", methods=["GET", "POST"])
