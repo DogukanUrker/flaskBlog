@@ -5,12 +5,13 @@
   href="{{ url_for('static', filename='css/submit.css') }}"
 />
 {% endblock head %} {%block body%}
-<div>
-  <form method="post">
+<div class="container">
+  <form method="post" class="form">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {% if mailSent %} {{form.code(autocomplete="off")}}
-    <button type="submit">Verify Account</button> {% else %}
-    <button type="submit">
+    {% if mailSent %} {{form.code(autocomplete="off",class_="input")}}
+    <button type="submit" class="btn btnPrimary">Verify Account</button> {% else
+    %}
+    <button type="submit" class="btn btnPrimary">
       Click for send verification code
     </button>
     {% endif %}
