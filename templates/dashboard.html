@@ -71,5 +71,7 @@
   <a href="/post/{{comment[1]}}" class="btn btnLink textPrimary">go to post</a>
 </div>
 {% endfor %} {% endif %} {% if request.path == "/admin/posts" %}
-<a href="/admin" class="btn btnLink textPrimary">↩️go back to admin panel</a>
+<a href="/admin" class="btn btnLink textPrimary goBackToAdmin"
+  >↩️go back to admin panel</a
+>
 {% endif %} {% endblock body %}

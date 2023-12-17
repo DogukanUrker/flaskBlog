@@ -3,11 +3,12 @@
   --themeSecondary: #fff;
   --themeHelper: #303030;
   --primaryColor: #ff206e;
-  --primaryHelper: #FF4F8C;
+  --primaryHelper: #ff4f8c;
 }
 
 * {
-  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--themePrimary);
 }
 
@@ -113,7 +114,8 @@ button {
   color: var(--primaryHelper);
 }
 
-.errorMessage, .formPost {
+.errorMessage,
+.formPost {
   text-align: center;
   margin-top: 6rem;
 }
@@ -123,10 +125,9 @@ button {
 }
 
 .goBackToAdmin {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   left: 0px;
-
 }
 
 @media screen and (max-width: 600px) {
