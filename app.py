@@ -31,7 +31,7 @@ from routes.accountSettings import accountSettingsBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
 from routes.changeProfilePicture import changeProfilePictureBlueprint
 from dbChecker import dbFolder, usersTable, postsTable, commentsTable
-from flask_wtf.csrf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect, CSRFError
 
 dbFolder()
 usersTable()
@@ -54,6 +54,11 @@ def utility_processor():
 def notFound(e):
     message("1", "404")
     return render_template("404.html"), 404
+
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return render_template("csrfError.html", reason=e.description), 400
 
 
 app.register_blueprint(postBlueprint)
