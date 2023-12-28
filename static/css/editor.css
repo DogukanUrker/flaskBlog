@@ -15,3 +15,14 @@
 .note-modal-content * {
   color: black !important;
 }
+
+.note-editor {
+  width: 45rem;
+  margin: auto;
+}
+
+@media screen and (max-width: 900px) {
+  .note-editor {
+    width: 90%;
+  }
+}
