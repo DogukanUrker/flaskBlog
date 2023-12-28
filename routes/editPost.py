@@ -98,4 +98,4 @@ def editPost(postID):
         case False:
             message("1", "USER NOT LOGGED IN")
             flash("you need login for edit a post", "error")
-            return redirect("/login")
+            return redirect(f"/login/redirect=&editpost&{postID}")
