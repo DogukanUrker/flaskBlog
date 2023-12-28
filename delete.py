@@ -8,6 +8,14 @@ def deletePost(postID):
     cursor.execute(f"delete from posts where id = {postID}")
     cursor.execute(f"update sqlite_sequence set seq = seq-1")
     connection.commit()
+    connection.close()
+    connection = sqlite3.connect("db/comments.db")
+    cursor = connection.cursor()
+    cursor.execute(f"select count(*) from comments where post = {postID}")
+    commentCount = list(cursor)[0][0]
+    cursor.execute(f"delete from comments where post = {postID}")
+    cursor.execute(f"update sqlite_sequence set seq = seq - {commentCount}")
+    connection.commit()
     message("2", f'POST: "{postID}" DELETED')
 
 
