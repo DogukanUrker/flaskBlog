@@ -1,10 +1,11 @@
 # Contributor Covenant Code of Conduct
 
-**English** | [Türkçe](./CODE_OF_CONDUCT_TR.md)
+**English** | [Türkçe](/docs/CODE_OF_CONDUCT_TR.md)
 
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our
+
 community a harassment-free experience for everyone, regardless of age, body
 size, visible or invisible disability, ethnicity, sex characteristics, gender
 identity and expression, level of experience, education, socio-economic status,
