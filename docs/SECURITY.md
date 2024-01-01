@@ -1,6 +1,6 @@
 # Security Policy
 
-**English** | [Türkçe](./SECURITY_TR.md)
+**English** | [Türkçe](/docs/SECURITY_TR.md)
 
 Use latest version on [dogukanurker/flaskblog](https://github.com/DogukanUrker/flaskBlog)
 
