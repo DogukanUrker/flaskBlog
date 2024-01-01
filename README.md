@@ -1,5 +1,7 @@
 # [flaskBlog📜](https://dogukanurker.com/flaskblog)
 
+**English** | [Türkçe](docs/readme_tr.md)
+
 Simple blog app built with Flask.
 <br/>
 [Contact](mailto:dogukanurker@icloud.com)<br/>
@@ -18,37 +20,38 @@ Simple blog app built with Flask.
 
 | Feature                | Status |
 | :--------------------- | :----: |
-| User Page              |   ✅    |
-| User Login             |   ✅    |
-| User Points            |   ✅    |
-| User Delete            |   ✅    |
-| User Log Out           |   ✅    |
-| User Sign Up           |   ✅    |
-| User Name Change       |   ✅    |
-| User Settings Page     |   ✅    |
-| User Profile Pictures  |   ✅    |
-| Admin Panel            |   ✅    |
-| Dashboard Page         |   ✅    |
-| Password Reset         |   ✅    |
-| Password Change        |   ✅    |
-| Summer Note Editor     |   ✅    |
-| Search Bar             |   ✅    |
-| Post Edit              |   ✅    |
-| Post Views             |   ✅    |
-| Post Delete            |   ✅    |
-| Post Creation          |   ✅    |
-| Comment                |   ✅    |
-| Comment Delete         |   ✅    |
-| Logging                |   ✅    |
-| Debug Messages         |   ✅    |
-| Database Checker       |   ✅    |
-| Dark/Light Themes      |   ✅    |
-| Responsive Design      |   ✅    |
-| Custom Profile Picture |   ✅    |
-| User Verification      |   ✅    |
+| User Page              |   ✅   |
+| User Login             |   ✅   |
+| User Points            |   ✅   |
+| User Delete            |   ✅   |
+| User Log Out           |   ✅   |
+| User Sign Up           |   ✅   |
+| User Name Change       |   ✅   |
+| User Settings Page     |   ✅   |
+| User Profile Pictures  |   ✅   |
+| Admin Panel            |   ✅   |
+| Dashboard Page         |   ✅   |
+| Password Reset         |   ✅   |
+| Password Change        |   ✅   |
+| Summer Note Editor     |   ✅   |
+| Search Bar             |   ✅   |
+| Post Edit              |   ✅   |
+| Post Views             |   ✅   |
+| Post Delete            |   ✅   |
+| Post Creation          |   ✅   |
+| Comment                |   ✅   |
+| Comment Delete         |   ✅   |
+| Logging                |   ✅   |
+| Debug Messages         |   ✅   |
+| Database Checker       |   ✅   |
+| Dark/Light Themes      |   ✅   |
+| Responsive Design      |   ✅   |
+| Custom Profile Picture |   ✅   |
+| User Verification      |   ✅   |
 
 ##
- Requirements 📦
+
+Requirements 📦
 
 - Flask
 - Passlib
