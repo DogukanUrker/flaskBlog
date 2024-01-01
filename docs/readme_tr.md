@@ -2,7 +2,7 @@
 
 [English](../README.md) | **Türkçe**
 
-Flask ile oluşturulmuş basit blog uygulaması.
+Flask ile oluşturulmuş basit bir blog uygulaması.
 <br/>
 [İletişim](mailto:dogukanurker@icloud.com)<br/>
 [Doğukan Ürker](https://dogukanurker.com)
