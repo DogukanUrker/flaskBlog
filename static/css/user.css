@@ -62,6 +62,10 @@ h2 {
   margin-right: 1rem;
 }
 
+.post {
+  min-width: 35rem;
+}
+
 @media screen and (max-width: 600px) {
   .userName {
     display: block;
@@ -105,5 +109,9 @@ h2 {
   .postsText,
   .commentsText {
     width: fit-content;
+  }
+
+  .post {
+    min-width: 90%;
   }
 }
