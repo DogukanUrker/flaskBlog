@@ -11,23 +11,79 @@
       class="input"
       autocomplete="off"
       placeholder="search"
-    /><button onclick="search()" class="btn">🔍</button>
+    /><button onclick="search()" class="btn">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-search"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+        <path d="M21 21l-6 -6" />
+      </svg>
+    </button>
   </div>
   <div class="btns">
     {% if session["userName"] %}
-    <a href="/createpost">
-      <button class="btn btnLink">New Post</button>
-    </a>
     <a href="/user/{{session['userName'].lower()}}">
-      <div class="btn btnPrimary user">
+      <div class="btn user">
         <img
           class="profilePicture"
           src="{{ getProfilePicture(session['userName']) }}"
         />
-        <button class="btn profileText">{{session["userName"]}}</button>
       </div>
     </a>
-    <a href="/logout" title="logout">❌</a>
+    <a href="/createpost">
+      <button class="btn btnLink">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-text-plus"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M19 10h-14" />
+          <path d="M5 6h14" />
+          <path d="M14 14h-9" />
+          <path d="M5 18h6" />
+          <path d="M18 15v6" />
+          <path d="M15 18h6" />
+        </svg>
+      </button>
+    </a>
+    <a href="/logout" title="logout"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-logout"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+        />
+        <path d="M9 12h12l-3 -3" />
+        <path d="M18 15l3 -3" /></svg
+    ></a>
     {% elif hideLogin %}
     <a href="/signup"><button class="btn btnLink">Sign Up</button></a>
     {% elif hideSignUp %}
@@ -36,31 +92,6 @@
     <a href="/login/redirect=&"><button class="btn btnLink">Login</button></a>
     <a href="/signup"><button class="btn btnPrimary">Sign Up</button></a>
     {% endif %}
-  </div>
-  <div class="hamburger">
-    <button onclick="hamburger()" class="hamburgerBtn">🍔</button>
-    <div id="hamburgerDropdown" class="hamburgerContent">
-      {% if session["userName"] %}
-      <a href="/user/{{session['userName'].lower()}}">
-        <div class="user">
-          <img
-            class="profilePicture"
-            src="{{ getProfilePicture(session['userName']) }}"
-          />
-          {{session["userName"]}}
-        </div>
-      </a>
-      <a href="/logout" title="logout">Logout</a>
-      {% elif hideLogin %}
-      <a href="/signup">Sign Up</a>
-      {% elif hideSignUp %}
-      <a href="/login/redirect=&">Login</a>
-      {%else%}
-      <a href="/login/redirect=&">Login</a>
-      <a href="/signup">Sign Up</a>
-      {% endif %}
-      <a href="/searchbar">Search</a>
-    </div>
   </div>
   <script src="/static/js/navbar.js"></script>
 </div>
