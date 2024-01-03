@@ -1,0 +1,79 @@
+{% extends 'layout.html'%} {%block head%}
+<title>{{title}}</title>
+{% endblock head %} {%block body%}
+<div class="w-11/12 lg:w-5/6 xl:w-6/12 mx-auto mt-16">
+  <h1 class="text-3xl mb-6 text-rose-500 w-full text-center select-none">
+    {{title}}
+  </h1>
+  <p>
+    {{content|safe}} <br />
+    Tags: {{tags.replace(",",", ")}}
+  </p>
+  <div class="flex place-content-between my-4">
+    <div class="text-left">
+      <h5 class="m-2">👁️ {{views}}</h5>
+      <a href="/user/{{author|lower}}">
+        <h5 class="m-2 flex items-baseline">
+          <img
+            class="w-6 mr-2"
+            src="{{ getProfilePicture(author) }}"
+            alt="{{author}}"
+          />{{author}}
+        </h5></a
+      >
+    </div>
+    <div class="text-right">
+      <h5 class="m-2">{{time}}</h5>
+      <h5 class="m-2">{{date}}</h5>
+    </div>
+  </div>
+  {% if author == session["userName"] %}
+  <div class="flex justify-between px-2">
+    <form method="post" >
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <button type="submit" name="postDeleteButton" class="text-rose-500 hover:text-rose-500/75 duration-150">
+        delete
+      </button>
+    </form>
+    <a href="/editpost/{{id}}" class="text-rose-500 hover:text-rose-500/75 duration-150">edit</a>
+  </div>
+  {% endif %}
+  <div class="flex flex-col">
+    {% for comment in comments %}
+    <div class="flex justify-between w-5/6 gap-8 mx-auto my-4 items-center">
+      <div >
+        <a href="/user/{{comment[3]}}" class="flex gap-3 items-center"><img
+          class="w-8"
+          src="{{ getProfilePicture(comment[3]) }}"
+          alt=""
+        />{{comment[3]}}:</a>
+      </div>
+      <p class="">{{comment[2]}}</p>{% if session["userName"] == comment[3] %}
+      <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="commentID" value="{{comment[0]}}" />
+        <button type="submit" name="commentDeleteButton">🗑️</button>
+      </form>
+    </div>
+    {% endif %} 
+    </div>
+    {% endfor %}
+  </div>
+  <div class="mx-auto w-5/6 text-center my-4"><form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {% if session["userName"] %} <div class="border w-3/6 lg:w-2/6 mx-auto rounded border-rose-500/25 flex justify-between content-center">{{form.comment(class_="bg-transparent focus:outline-none rounded-md p-2 text-center h-16 w-3/4 resize-none mx-auto mb-0")}}
+      <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2">comment</button></div>
+    {% else %}
+    <p>
+      you need
+      <a
+        href="/login/redirect=&post&{{id}}"
+        class="hover:text-rose-500 duration-150"
+        >login</a
+      >
+      for comment
+    </p>
+    {% endif %}
+  </form></div>
+</div>
+{% endblock body %}

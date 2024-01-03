@@ -1,0 +1,11 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Change Username</title>
+{% endblock head %} {%block body%}
+<div>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.newUserName(class_="")}}
+    <button type="submit">change my username</button>
+  </form>
+</div>
+{% endblock body %}

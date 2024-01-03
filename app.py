@@ -30,15 +30,19 @@ from routes.adminPanelPosts import adminPanelPostsBlueprint
 from routes.accountSettings import accountSettingsBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
 from routes.changeProfilePicture import changeProfilePictureBlueprint
-from dbChecker import dbFolder, usersTable, postsTable, commentsTable
+
+
 from flask_wtf.csrf import CSRFProtect, CSRFError
+from UISelector import templateFolder, staticFolder
+from dbChecker import dbFolder, usersTable, postsTable, commentsTable
 
 dbFolder()
 usersTable()
 postsTable()
 commentsTable()
 
-app = Flask(__name__)
+
+app = Flask(__name__, template_folder=templateFolder, static_folder=staticFolder)
 app.secret_key = secrets.token_urlsafe(32)
 app.config["SESSION_PERMANENT"] = True
 csrf = CSRFProtect(app)

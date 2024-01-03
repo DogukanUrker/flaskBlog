@@ -1,0 +1,22 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Change Profile Picture</title>
+{% endblock head %} {%block body%}
+<div>
+  <div>
+    <p>https://api.dicebear.com/7.x/identicon/svg?seed={SEED}</p>
+    <small>default seed is your username</small><br />
+    <a href="https://www.dicebear.com/styles/identicon/"
+      ><small>click for more information about profile picture seeds</small></a
+    >
+  </div>
+  <div>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      {{form.newProfilePictureSeed(class_="")}}
+      <button type="submit">
+        Set Profile Picture Seed
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,15 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Create Post</title>
+{% endblock head %} {%block body%}
+<div>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.postTitle(class_="" , autocomplete="off")}} {{form.postTags(class_=""
+    , autocomplete="off")}}
+    <small>(separete with comma)</small>
+    {{form.postContent(class_="", autocomplete="off")}}
+    <button type="submit">Post</button>
+  </form>
+</div>
+{% endblock body %}

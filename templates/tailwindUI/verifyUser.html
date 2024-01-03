@@ -1,0 +1,15 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Verify Account</title>
+{% endblock head %} {%block body%}
+<div>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {% if mailSent %} {{form.code(autocomplete="off",class_="")}}
+    <button type="submit">Verify Account</button> {% else %}
+    <button type="submit">
+      Click for send verification code
+    </button>
+    {% endif %}
+  </form>
+</div>
+{% endblock body %}

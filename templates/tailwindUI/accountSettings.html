@@ -1,0 +1,23 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Account Settings</title>
+{% endblock head %} {%block body%}
+<div>
+  <h2>
+    <a href="/changeusername">change username</a>
+  </h2>
+  <h2>
+    <a href="/changepassword">change password</a>
+  </h2>
+  <h2>
+    <a href="/changeprofilepicture">change profile picture</a>
+  </h2>
+  <h2>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <button type="submit" name="userDeleteButton">
+        delete account
+      </button>
+    </form>
+  </h2>
+</div>
+{% endblock body %}

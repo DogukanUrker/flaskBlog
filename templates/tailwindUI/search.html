@@ -1,0 +1,22 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Search results for {{query}}</title>
+{% endblock head %} {%block body%}
+<h3>
+  search results for
+  <h2>"{{query}}"</h2>
+</h3>
+{% if users %} {% for user in users %} {% for user in user %}
+<div>
+  <img src="{{user[4]}}" />
+  <a href="/user/{{user[1]|lower}}">{{user[1]}}</a>
+</div>
+{% endfor %} {% endfor %} {% endif %} {% if posts %} {% for post in posts %} {%
+for post in post %}
+<div>
+  <a href="/post/{{post[0]}}">{{post[1]}}</a>
+  <div tag="content">{{post[3]|safe}}</div>
+  <a href="/post/{{post[0]}}">read more</a>
+</div>
+{% endfor %} {% endfor %} {% endif %} {% if empty%}
+<h3>not found</h3>
+{% endif %} {% endblock body %}

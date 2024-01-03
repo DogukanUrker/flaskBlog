@@ -1,0 +1,15 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Search</title>
+{% endblock head %} {%block body%}
+<div>
+  <div>
+    <input
+      type="text"
+      id="searchBarInput"
+      autocomplete="off"
+      placeholder="search"
+    /><button onclick="searchBar()">🔍</button>
+  </div>
+</div>
+<script src="/static/js/searchBar.js"></script>
+{% endblock body %}
