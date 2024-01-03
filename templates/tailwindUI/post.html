@@ -1,8 +1,8 @@
 {% extends 'layout.html'%} {%block head%}
 <title>{{title}}</title>
 {% endblock head %} {%block body%}
-<div class="w-11/12 lg:w-5/6 xl:w-6/12 mx-auto mt-16">
-  <h1 class="text-3xl mb-6 text-rose-500 w-full text-center select-none">
+<div class="w-11/12 lg:w-5/6 xl:w-6/12 mx-auto mt-16 break-words">
+  <h1 class="text-3xl mb-6 text-rose-500 w-full text-center select-none ">
     {{title}}
   </h1>
   <p>
@@ -11,7 +11,7 @@
   </p>
   <div class="flex place-content-between my-4">
     <div class="text-left">
-      <h5 class="m-2">👁️ {{views}}</h5>
+      <h5 class="m-2"><div class="flex"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye mr-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg> {{views}}</div></h5>
       <a href="/user/{{author|lower}}">
         <h5 class="m-2 flex items-baseline">
           <img
@@ -32,10 +32,10 @@
     <form method="post" >
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <button type="submit" name="postDeleteButton" class="text-rose-500 hover:text-rose-500/75 duration-150">
-        delete
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7h16" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /><path d="M10 12l4 4m0 -4l-4 4" /></svg>
       </button>
     </form>
-    <a href="/editpost/{{id}}" class="text-rose-500 hover:text-rose-500/75 duration-150">edit</a>
+    <a href="/editpost/{{id}}" class="text-rose-500 hover:text-rose-500/75 duration-150"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></a>
   </div>
   {% endif %}
   <div class="flex flex-col">
@@ -52,7 +52,7 @@
       <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="commentID" value="{{comment[0]}}" />
-        <button type="submit" name="commentDeleteButton">🗑️</button>
+        <button type="submit" name="commentDeleteButton" class="hover:text-rose-500 duration-150"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7h16" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /><path d="M10 12l4 4m0 -4l-4 4" /></svg></button>
       </form>
     </div>
     {% endif %} 
@@ -62,7 +62,7 @@
   <div class="mx-auto w-5/6 text-center my-4"><form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if session["userName"] %} <div class="border w-3/6 lg:w-2/6 mx-auto rounded border-rose-500/25 flex justify-between content-center">{{form.comment(class_="bg-transparent focus:outline-none rounded-md p-2 text-center h-16 w-3/4 resize-none mx-auto mb-0")}}
-      <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2">comment</button></div>
+      <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg></button></div>
     {% else %}
     <p>
       you need

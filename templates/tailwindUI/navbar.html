@@ -11,7 +11,27 @@
       autocomplete="off"
       placeholder="search"
       class="w-80 h-10 m-2 rounded-md p-2 text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-150"
-    /><button onclick="search()">🔍</button>
+    /><button
+      onclick="search()"
+      class="text-xl hover:text-rose-500 duration-150"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-search"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+        <path d="M21 21l-6 -6" />
+      </svg>
+    </button>
   </div>
   <div class="flex items-center justify-center gap-4 font-medium select-none">
     {% if session["userName"] %}
@@ -24,9 +44,52 @@
       </div>
     </a>
     <a href="/createpost">
-      <button>✍🏼</button>
+      <button class="text-xl hover:text-rose-500 duration-150">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-file-plus"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+          <path
+            d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"
+          />
+          <path d="M12 11l0 6" />
+          <path d="M9 14l6 0" />
+        </svg>
+      </button>
     </a>
-    <a href="/logout" title="logout">❌</a>
+    <a
+      href="/logout"
+      title="logout"
+      class="text-xl hover:text-rose-500 duration-150"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-logout"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+        />
+        <path d="M9 12h12l-3 -3" />
+        <path d="M18 15l3 -3" /></svg
+    ></a>
     {% elif hideLogin %}
     <a href="/signup"
       ><button class="text-xl hover:text-rose-500 duration-150">
