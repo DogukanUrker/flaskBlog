@@ -5,10 +5,30 @@
   href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>"
 />
 {% endblock head %} {%block body%}
-<div>
+<div class="w-fit mx-auto mt-32 text-2xl text-center">
   <h1>I don't know what is</h1>
-  <h1>{{ request.path }}</h1>
-  <h1>sorry :(</h1>
-  <a href="/"><h3>home</h3></a>
+  <h1 class="bg-rose-500 w-fit mx-auto p-1 m-1 rounded">{{ request.path }}</h1>
+  <h1>
+    sorry
+  </h1>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon icon-tabler icon-tabler-mood-sad mx-auto m-1"
+    width="64"
+    height="64"
+    viewBox="0 0 24 24"
+    stroke-width="2"
+    stroke="currentColor"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+    <path d="M9 10l.01 0" />
+    <path d="M15 10l.01 0" />
+    <path d="M9.5 15.25a3.5 3.5 0 0 1 5 0" />
+  </svg>
+  <a href="/"><h3 class="hover:text-rose-500 duration-150">home</h3></a>
 </div>
 {% endblock body %}
