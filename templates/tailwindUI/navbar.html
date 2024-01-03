@@ -1,7 +1,9 @@
 <div
   class="flex items-center justify-center gap-32 mt-8 lg:mt-4 text-2xl font-medium select-none max-w-max mx-auto"
 >
-  <a href="/" class="pl-1"><h1>flaskBlog</h1></a>
+  <a href="/" class="pl-1 hover:text-rose-500 duration-150"
+    ><h1>flaskBlog</h1></a
+  >
   <div class="hidden lg:block">
     <input
       type="text"
@@ -26,12 +28,28 @@
     </a>
     <a href="/logout" title="logout">❌</a>
     {% elif hideLogin %}
-    <a href="/signup"><button>Sign Up</button></a>
+    <a href="/signup"
+      ><button class="text-xl hover:text-rose-500 duration-150">
+        Sign Up
+      </button></a
+    >
     {% elif hideSignUp %}
-    <a href="/login/redirect=&"><button>Login</button></a>
+    <a href="/login/redirect=&"
+      ><button class="text-xl hover:text-rose-500 duration-150">
+        Login
+      </button></a
+    >
     {%else%}
-    <a href="/login/redirect=&"><button>Login</button></a>
-    <a href="/signup"><button>Sign Up</button></a>
+    <a href="/login/redirect=&"
+      ><button class="text-xl hover:text-rose-500 duration-150">
+        Login
+      </button></a
+    >
+    <a href="/signup"
+      ><button class="text-xl hover:text-rose-500 duration-150">
+        Sign Up
+      </button></a
+    >
     {% endif %}
   </div>
   <script src="/static/js/navbar.js"></script>
