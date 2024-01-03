@@ -1,3 +1,7 @@
+html {
+  font-size: 125%;
+}
+
 *::-webkit-scrollbar {
   width: 0.4rem;
 }

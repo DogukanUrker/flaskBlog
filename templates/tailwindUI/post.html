@@ -46,9 +46,9 @@
           class="w-8"
           src="{{ getProfilePicture(comment[3]) }}"
           alt=""
-        />{{comment[3]}}:</a>
+        /> <div class="hidden md:block">{{comment[3]}}:</div> </a>
       </div>
-      <p class="">{{comment[2]}}</p>{% if session["userName"] == comment[3] %}
+      <p class="break-words max-w-52 md:max-w-72">{{comment[2]}}</p>{% if session["userName"] == comment[3] %}
       <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="commentID" value="{{comment[0]}}" />
@@ -59,9 +59,9 @@
     </div>
     {% endfor %}
   </div>
-  <div class="mx-auto w-5/6 text-center my-4"><form method="post">
+  <div class="mx-auto w-fit text-center my-8"><form method="post" class="w-full">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {% if session["userName"] %} <div class="border w-3/6 lg:w-2/6 mx-auto rounded border-rose-500/25 flex justify-between content-center">{{form.comment(class_="bg-transparent focus:outline-none rounded-md p-2 text-center h-16 w-3/4 resize-none mx-auto mb-0")}}
+    {% if session["userName"] %} <div class="border w-full mx-auto rounded border-rose-500/25 flex justify-between content-center">{{form.comment(class_="bg-transparent focus:outline-none rounded-md p-2 text-center h-20 w-72 resize-none mx-auto mb-0")}}
       <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg></button></div>
     {% else %}
     <p>
