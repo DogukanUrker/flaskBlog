@@ -13,7 +13,11 @@
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <input type="hidden" name="commentID" value="{{comment[0]}}" />
-      <button type="submit" name="commentDeleteButton">
+      <button
+        type="submit"
+        name="commentDeleteButton"
+        class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
+      >
         delete
       </button>
     </form>

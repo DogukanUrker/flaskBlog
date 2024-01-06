@@ -1,15 +1,25 @@
 {% extends 'layout.html'%} {%block head%}
 <title>Create Post</title>
 {% endblock head %} {%block body%}
-<div>
+<div class="w-fit mx-auto mt-8">
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.postTitle(class_="" , autocomplete="off")}} {{form.postTags(class_=""
-    , autocomplete="off")}}
-    <small>(separete with comma)</small>
-    {{form.postContent(class_="", autocomplete="off")}}
-    <button type="submit">Post</button>
+    {{form.postTitle(class_="w-80 h-12 mx-auto mb-4 p-2 rounded-md text-center
+    outline-rose-500 bg-transparent focus:outline-none focus:ring-2
+    focus:ring-rose-500 duration-150 border-2 border-gray-500/25
+    focus:border-rose-500 block shadow-md" , autocomplete="off")}}
+    {{form.postTags(class_="w-80 h-12 mx-auto mb-4 p-2 rounded-md text-center
+    outline-rose-500 bg-transparent focus:outline-none focus:ring-2
+    focus:ring-rose-500 duration-150 border-2 border-gray-500/25
+    focus:border-rose-500 block shadow-md" , autocomplete="off")}}
+    <small class="text-sm">(separete with comma)</small>
+    {{form.postContent(class_="editor", autocomplete="off")}}
+    <button
+      type="submit"
+      class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
+    >
+      Post
+    </button>
   </form>
 </div>
 {% endblock body %}

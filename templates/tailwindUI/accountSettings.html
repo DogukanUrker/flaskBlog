@@ -14,7 +14,11 @@
   <h2>
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <button type="submit" name="userDeleteButton">
+      <button
+        type="submit"
+        name="userDeleteButton"
+        class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
+      >
         delete account
       </button>
     </form>

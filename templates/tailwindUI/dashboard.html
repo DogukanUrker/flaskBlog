@@ -14,7 +14,11 @@
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <input type="hidden" name="postID" value="{{post[0]}}" />
-      <button type="submit" name="postDeleteButton">
+      <button
+        type="submit"
+        name="postDeleteButton"
+        class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
+      >
         delete
       </button>
     </form>
