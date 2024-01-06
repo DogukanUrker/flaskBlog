@@ -56,7 +56,6 @@ def utility_processor():
 
 @app.errorhandler(404)
 def notFound(e):
-    message("1", "404")
     return render_template("404.html"), 404
 
 

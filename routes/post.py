@@ -77,5 +77,4 @@ def post(postID):
                 comments=comments,
             )
         case False:
-            message("1", "404")
             return render_template("404.html")
