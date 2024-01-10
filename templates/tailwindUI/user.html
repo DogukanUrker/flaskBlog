@@ -36,27 +36,43 @@
     {% endif %}
   </div>
   {% if showPosts %}
-  <h1>Posts</h1>
+  <h1 class="my-4 text-center text-2xl text-rose-500 select-none">Posts</h1>
   {% for post in posts %}
-  <div>
-    <a href="/post/{{post[0]}}" class="hover:text-rose-500 duration-150"
+  <div
+    class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-96 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md
+  border-gray-500/25"
+  >
+    <a
+      href="/post/{{post[0]}}"
+      class="text-rose-500 h-64 pb-8 text-2xl hover:text-rose-500/75 duration-150 select-none"
       >{{post[1]}}</a
     >
-    <div tag="content">{{post[3]|safe}}</div>
-    <a href="/post/{{post[0]}}" class="hover:text-rose-500 duration-150"
-      >go to post</a
+    <div tag="content" class="h-60 overflow-y-hidden mt-6 mb-3 break-words">
+      {{post[3]|safe}}
+    </div>
+    <p class="select-none">...</p>
+    <a
+      href="post/{{post[0]}}"
+      class="text-rose-500 hover:text-rose-500/75 duration-150 select-none"
+    >
+      go to post</a
     >
   </div>
   {% endfor %} {% endif %} {% if showComments %}
-  <h1>Comments</h1>
+  <h1 class="mb-4 text-center text-2xl text-rose-500 select-none">Comments</h1>
   {% for comment in comments %}
-  <div>
-    <div tag="content">{{comment[2]}}</div>
-    <section class="flex w-full justify-between">
+  <div
+    class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md
+  border-gray-500/25"
+  >
+    <div tag="content my-2">{{comment[2]}}</div>
+    <section class="flex w-full justify-between my-2">
       <p>Creation Date: {{comment[4]}}</p>
       <p>Creation Time: {{comment[5]}}</p>
     </section>
-    <a href="/post/{{comment[1]}}" class="hover:text-rose-500 duration-150"
+    <a
+      href="/post/{{comment[1]}}"
+      class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2"
       >go to post</a
     >
   </div>
