@@ -1,5 +1,7 @@
 from wtforms import validators, Form, StringField, PasswordField, TextAreaField
 
+inputStyle = "w-80 h-12 mb-4 mx-auto p-2 rounded-md text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-0 block shadow-md"
+
 
 class commentForm(Form):
     comment = TextAreaField(
@@ -13,12 +15,12 @@ class loginForm(Form):
     userName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"placeholder": "username"},
+        render_kw={"class": inputStyle, "placeholder": "username"},
     )
     password = PasswordField(
         "Password",
         [validators.Length(min=5), validators.InputRequired()],
-        render_kw={"placeholder": "password"},
+        render_kw={"class": inputStyle, "placeholder": "password"},
     )
 
 
@@ -26,10 +28,12 @@ class createPostForm(Form):
     postTitle = StringField(
         "Post Title",
         [validators.Length(min=4, max=75), validators.InputRequired()],
-        render_kw={"placeholder": "post title"},
+        render_kw={"class": inputStyle, "placeholder": "post title"},
     )
     postTags = StringField(
-        "Post Tags", [validators.InputRequired()], render_kw={"placeholder": "tags"}
+        "Post Tags",
+        [validators.InputRequired()],
+        render_kw={"class": inputStyle, "placeholder": "tags"},
     )
     postContent = TextAreaField(
         "Post Content",
@@ -41,17 +45,17 @@ class passwordResetForm(Form):
     userName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"placeholder": "username"},
+        render_kw={"class": inputStyle, "placeholder": "username"},
     )
     email = StringField(
         "Email",
         [validators.Length(min=6, max=50), validators.InputRequired()],
-        render_kw={"placeholder": "email"},
+        render_kw={"class": inputStyle, "placeholder": "email"},
     )
     code = StringField(
         "code",
         [validators.Length(min=4, max=4), validators.InputRequired()],
-        render_kw={"placeholder": "code"},
+        render_kw={"class": inputStyle, "placeholder": "code"},
     )
     password = PasswordField(
         "Password",
@@ -59,7 +63,7 @@ class passwordResetForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"placeholder": "password"},
+        render_kw={"class": inputStyle, "placeholder": "password"},
     )
     passwordConfirm = PasswordField(
         "passwordConfirm",
@@ -67,7 +71,7 @@ class passwordResetForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"placeholder": "confirm your password"},
+        render_kw={"class": inputStyle, "placeholder": "confirm your password"},
     )
 
 
@@ -75,7 +79,7 @@ class verifyUserForm(Form):
     code = StringField(
         "code",
         [validators.Length(min=4, max=4), validators.InputRequired()],
-        render_kw={"placeholder": "code"},
+        render_kw={"class": inputStyle, "placeholder": "code"},
     )
 
 
@@ -86,7 +90,7 @@ class changePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"placeholder": "old password"},
+        render_kw={"class": inputStyle, "placeholder": "old password"},
     )
     password = PasswordField(
         "password",
@@ -94,7 +98,7 @@ class changePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"placeholder": "new password"},
+        render_kw={"class": inputStyle, "placeholder": "new password"},
     )
     passwordConfirm = PasswordField(
         "passwordConfirm",
@@ -102,7 +106,7 @@ class changePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"placeholder": "confirm your password"},
+        render_kw={"class": inputStyle, "placeholder": "confirm your password"},
     )
 
 
@@ -110,7 +114,7 @@ class changeUserNameForm(Form):
     newUserName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"placeholder": "new username"},
+        render_kw={"class": inputStyle, "placeholder": "new username"},
     )
 
 
@@ -118,7 +122,10 @@ class changeProfilePictureForm(Form):
     newProfilePictureSeed = StringField(
         "ProfilePictureSeed",
         [validators.InputRequired()],
-        render_kw={"placeholder": "Enter seed for profile picture"},
+        render_kw={
+            "class": inputStyle,
+            "placeholder": "Enter seed for profile picture",
+        },
     )
 
 
@@ -126,12 +133,12 @@ class signUpForm(Form):
     userName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"placeholder": "username"},
+        render_kw={"class": inputStyle, "placeholder": "username"},
     )
     email = StringField(
         "Email",
         [validators.Length(min=6, max=50), validators.InputRequired()],
-        render_kw={"placeholder": "email"},
+        render_kw={"class": inputStyle, "placeholder": "email"},
     )
     password = PasswordField(
         "Password",
@@ -139,7 +146,7 @@ class signUpForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"placeholder": "password"},
+        render_kw={"class": inputStyle, "placeholder": "password"},
     )
     passwordConfirm = PasswordField(
         "passwordConfirm",
@@ -147,5 +154,5 @@ class signUpForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"placeholder": "confirm your password"},
+        render_kw={"class": inputStyle, "placeholder": "confirm your password"},
     )
