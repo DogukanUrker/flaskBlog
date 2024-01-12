@@ -4,14 +4,7 @@
 <div class="w-fit mx-auto mt-8">
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.postTitle(class_="w-80 h-12 mx-auto mb-4 p-2 rounded-md text-center
-    outline-rose-500 bg-transparent focus:outline-none focus:ring-2
-    focus:ring-rose-500 duration-150 border-2 border-gray-500/25
-    focus:border-rose-500 block shadow-md" , autocomplete="off")}}
-    {{form.postTags(class_="w-80 h-12 mx-auto p-2 rounded-md text-center
-    outline-rose-500 bg-transparent focus:outline-none focus:ring-2
-    focus:ring-rose-500 duration-150 border-2 border-gray-500/25
-    focus:border-rose-500 block shadow-md" , autocomplete="off")}}
+    {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
     {{form.postContent(id_="editor", autocomplete="off")}}
     <button
