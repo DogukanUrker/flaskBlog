@@ -119,7 +119,8 @@ app.register_blueprint(accountSettingsBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
 app.register_blueprint(changeProfilePictureBlueprint)
 
+message("2", "APP STARTED SUCCESSFULLY")
+
 match __name__:
     case "__main__":
-        message("2", "APP STARTED SUCCESSFULLY")
         app.run(debug=DEBUG_MODE, host=APP_HOST)
