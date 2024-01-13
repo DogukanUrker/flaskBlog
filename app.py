@@ -41,6 +41,7 @@ from constants import (
     APP_HOST,
     DEBUG_MODE,
     TAILWIND_UI,
+    LOG_IN,
     REGISTRATION,
     LOG_FILE_ROOT,
     APP_SECRET_KEY,
@@ -59,7 +60,9 @@ message("3", f"APP HOST: {APP_HOST}")
 message("3", f"APP SECRET KEY: {APP_SECRET_KEY}")
 message("3", f"APP SESSION PERMANENT: {SESSION_PERMANENT}")
 message("3", f"LOG FILE ROOT: {LOG_FILE_ROOT}")
+message("3", f"LOG IN: {LOG_IN}")
 message("3", f"REGISTRATION: {REGISTRATION}")
+
 
 match TAILWIND_UI:
     case True:
