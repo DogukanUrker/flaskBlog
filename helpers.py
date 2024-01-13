@@ -39,22 +39,30 @@ def currentDate():
     return datetime.now().strftime("%d.%m.%y")
 
 
-def currentTime(seconds=False):
+def currentTime(seconds=False, microSeconds=False):
     match seconds:
         case False:
             return datetime.now().strftime("%H:%M")
         case True:
-            return datetime.now().strftime("%H:%M:%S")
+            match microSeconds:
+                case True:
+                    return datetime.now().strftime("%H:%M:%S.%f")
+                case False:
+                    return datetime.now().strftime("%H:%M:%S")
 
 
 def message(color, message):
     print(
         f"\n\033[94m[{currentDate()}\033[0m"
-        f"\033[95m {currentTime(True)}]\033[0m"
+        f"\033[95m {currentTime(seconds=True)}]\033[0m"
         f"\033[9{color}m {message}\033[0m\n"
     )
     logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
-    logFile.write(f"[{currentDate()}" f"|{currentTime(True)}]" f" {message}\n")
+    logFile.write(
+        f"[{currentDate()}"
+        f"|{currentTime(seconds=True,microSeconds=True)}]"
+        f" {message}\n"
+    )
     logFile.close()
 
 
