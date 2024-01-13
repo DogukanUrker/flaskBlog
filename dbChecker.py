@@ -1,25 +1,26 @@
 from helpers import mkdir, exists, message, sqlite3
+from constants import DB_FOLDER_ROOT, DB_USERS_ROOT, DB_POSTS_ROOT, DB_COMMENTS_ROOT
 
 
 def dbFolder():
-    match exists("db"):
+    match exists(DB_FOLDER_ROOT):
         case True:
-            message("6", 'Folder: "/db" FOUND')
+            message("6", f'Folder: "/{DB_FOLDER_ROOT}" FOUND')
         case False:
-            message("1", 'Folder: "/db" NOT FOUND')
-            mkdir("db")
-            message("2", 'Folder: "/db" CREATED')
+            message("1", f'Folder: "/{DB_FOLDER_ROOT}" NOT FOUND')
+            mkdir(DB_FOLDER_ROOT)
+            message("2", f'Folder: "/{DB_FOLDER_ROOT}" CREATED')
 
 
 def usersTable():
-    match exists("db/users.db"):
+    match exists(DB_USERS_ROOT):
         case True:
-            message("6", 'DATABASE: "users.db" FOUND')
+            message("6", f'DATABASE: "{DB_USERS_ROOT}" FOUND')
         case False:
-            message("1", 'DATABASE: "users.db" NOT FOUND')
-            open("db/users.db", "x")
-            message("2", 'DATABASE: "users.db" CREATED')
-    connection = sqlite3.connect("db/users.db")
+            message("1", f'DATABASE: "{DB_USERS_ROOT}" NOT FOUND')
+            open(DB_USERS_ROOT, "x")
+            message("2", f'DATABASE: "{DB_USERS_ROOT}" CREATED')
+    connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     try:
         cursor.execute("""SELECT * FROM users; """).fetchall()
@@ -48,14 +49,14 @@ def usersTable():
 
 
 def postsTable():
-    match exists("db/posts.db"):
+    match exists(DB_POSTS_ROOT):
         case True:
-            message("6", 'DATABASE: "posts.db" FOUND')
+            message("6", f'DATABASE: "{DB_POSTS_ROOT}" FOUND')
         case False:
-            message("1", 'DATABASE: "posts.db" NOT FOUND')
-            open("db/posts.db", "x")
-            message("2", 'DATABASE: "posts.db" CREATED')
-    connection = sqlite3.connect("db/posts.db")
+            message("1", f'DATABASE: "{DB_POSTS_ROOT}" NOT FOUND')
+            open(DB_POSTS_ROOT, "x")
+            message("2", f'DATABASE: "{DB_POSTS_ROOT}" CREATED')
+    connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
     try:
         cursor.execute("""SELECT * FROM posts; """).fetchall()
@@ -84,14 +85,14 @@ def postsTable():
 
 
 def commentsTable():
-    match exists("db/comments.db"):
+    match exists(DB_COMMENTS_ROOT):
         case True:
-            message("6", 'DATABASE: "comments.db" FOUND')
+            message("6", f'DATABASE: "{DB_COMMENTS_ROOT}" FOUND')
         case False:
-            message("1", 'DATABASE: "comments.db" NOT FOUND')
-            open("db/comments.db", "x")
-            message("2", 'DATABASE: "comments.db" CREATED')
-    connection = sqlite3.connect("db/comments.db")
+            message("1", f'DATABASE: "{DB_COMMENTS_ROOT}" NOT FOUND')
+            open(DB_COMMENTS_ROOT, "x")
+            message("2", f'DATABASE: "{DB_COMMENTS_ROOT}" CREATED')
+    connection = sqlite3.connect(DB_COMMENTS_ROOT)
     cursor = connection.cursor()
     try:
         cursor.execute("""SELECT * FROM comments; """).fetchall()
