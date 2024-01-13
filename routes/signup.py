@@ -13,10 +13,9 @@ from helpers import (
     signUpForm,
     sha256_crypt,
 )
+from constants import REGISTRATION
 
 signUpBlueprint = Blueprint("signup", __name__)
-
-REGISTRATION = True
 
 
 @signUpBlueprint.route("/signup", methods=["GET", "POST"])

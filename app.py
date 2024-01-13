@@ -1,12 +1,14 @@
-import socket
+from helpers import message
+
+message("3", "APP IS STARTING...")
+
 
 from helpers import (
-    secrets,
-    message,
     render_template,
     getProfilePicture,
     Flask,
 )
+
 
 from routes.post import postBlueprint
 from routes.user import userBlueprint
@@ -33,19 +35,48 @@ from routes.changeProfilePicture import changeProfilePictureBlueprint
 
 
 from flask_wtf.csrf import CSRFProtect, CSRFError
-from UISelector import templateFolder, staticFolder
 from dbChecker import dbFolder, usersTable, postsTable, commentsTable
+
+from constants import (
+    APP_HOST,
+    DEBUG_MODE,
+    TAILWIND_UI,
+    LOG_IN,
+    REGISTRATION,
+    LOG_FILE_ROOT,
+    APP_SECRET_KEY,
+    SESSION_PERMANENT,
+)
+from UISelector import TEMPLATE_FOLDER, STATIC_FOLDER
+
+app = Flask(__name__, template_folder=TEMPLATE_FOLDER, static_folder=STATIC_FOLDER)
+app.secret_key = APP_SECRET_KEY
+app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
+csrf = CSRFProtect(app)
+
+
+message("1", f"APP DEBUG MODE: {DEBUG_MODE}")
+message("3", f"APP HOST: {APP_HOST}")
+message("3", f"APP SECRET KEY: {APP_SECRET_KEY}")
+message("3", f"APP SESSION PERMANENT: {SESSION_PERMANENT}")
+message("3", f"LOG FILE ROOT: {LOG_FILE_ROOT}")
+message("3", f"LOG IN: {LOG_IN}")
+message("3", f"REGISTRATION: {REGISTRATION}")
+
+
+match TAILWIND_UI:
+    case True:
+        message("4", f"UI MODE: TAILWIND-CSS")
+    case False:
+        message("4", f"UI MODE: STANDARD-CSS")
+
+message("4", f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
+message("4", f"STATIC FOLDER: {STATIC_FOLDER}")
 
 dbFolder()
 usersTable()
 postsTable()
 commentsTable()
-
-
-app = Flask(__name__, template_folder=templateFolder, static_folder=staticFolder)
-app.secret_key = secrets.token_urlsafe(32)
-app.config["SESSION_PERMANENT"] = True
-csrf = CSRFProtect(app)
 
 
 @app.context_processor
@@ -61,6 +92,7 @@ def notFound(e):
 
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
+    message("1", "CSRF ERROR")
     return render_template("csrfError.html", reason=e.description), 400
 
 
@@ -87,6 +119,8 @@ app.register_blueprint(accountSettingsBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
 app.register_blueprint(changeProfilePictureBlueprint)
 
+message("2", "APP STARTED SUCCESSFULLY")
+
 match __name__:
     case "__main__":
-        app.run(debug=True, host=socket.gethostbyname(socket.gethostname()))
+        app.run(debug=DEBUG_MODE, host=APP_HOST)

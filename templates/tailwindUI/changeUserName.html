@@ -1,13 +1,13 @@
 {% extends 'layout.html'%} {%block head%}
 <title>Change Username</title>
 {% endblock head %} {%block body%}
-<div>
+<div class="text-center mt-32">
   <form method="post" class="mx-auto w-fit mt-8">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.newUserName()}}
     <button
       type="submit"
-      class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
+      class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
     >
       change my username
     </button>
