@@ -1,10 +1,10 @@
-tailwindUI = False
+from constants import TAILWIND_UI
 
 
-match tailwindUI:
+match TAILWIND_UI:
     case True:
-        templateFolder = "templates/tailwindUI"
-        staticFolder = "static/tailwindUI"
+        TEMPLATE_FOLDER = "templates/tailwindUI"
+        STATIC_FOLDER = "static/tailwindUI"
     case False:
-        templateFolder = "templates/standardUI"
-        staticFolder = "static/standardUI"
+        TEMPLATE_FOLDER = "templates/standardUI"
+        STATIC_FOLDER = "static/standardUI"

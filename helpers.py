@@ -1,5 +1,6 @@
 import os
 import ssl
+import socket
 import smtplib
 import secrets
 import sqlite3
@@ -7,6 +8,7 @@ from os import mkdir
 from random import randint
 from os.path import exists
 from datetime import datetime
+from constants import LOG_FILE_ROOT
 from email.message import EmailMessage
 from passlib.hash import sha256_crypt
 from flask import render_template, Blueprint
@@ -51,7 +53,7 @@ def message(color, message):
         f"\033[95m {currentTime(True)}]\033[0m"
         f"\033[9{color}m {message}\033[0m\n"
     )
-    logFile = open("log.log", "a", encoding="utf-8")
+    logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
     logFile.write(f"[{currentDate()}" f"|{currentTime(True)}]" f" {message}\n")
     logFile.close()
 
