@@ -1,9 +1,9 @@
 from helpers import secrets, socket
 
-APP_HOST = socket.gethostbyname(socket.gethostname())
-DEBUG_MODE = True
-TAILWIND_UI = False
-REGISTRATION = True
-LOG_FILE_ROOT = "log.log"
-APP_SECRET_KEY = secrets.token_urlsafe(32)
-SESSION_PERMANENT = True
+APP_HOST = socket.gethostbyname(socket.gethostname())  # FLASK APP'S HOST/PORT
+DEBUG_MODE = True  # TURN ON/OFF FLASK DEBUG MODE
+TAILWIND_UI = False  # SELECT TAILWIND-UI/STANDARD-UI
+REGISTRATION = True  # TURN ON/OFF USER SIGN UP
+LOG_FILE_ROOT = "log.log"  # ROOT OF THE LOG FILE FROM WHERE MESSAGES ARE PRINTED FROM THE MESSAGE MODULE.
+APP_SECRET_KEY = secrets.token_urlsafe(32)  # FLASK APP'S SECRET KEY
+SESSION_PERMANENT = True  # FLASK APP'S SESSIONS
