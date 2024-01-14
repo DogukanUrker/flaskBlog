@@ -1,10 +1,12 @@
 from helpers import (
+    request,
     sqlite3,
-    render_template,
-    Blueprint,
     session,
     redirect,
-    request,
+    Blueprint,
+    DB_USERS_ROOT,
+    render_template,
+    DB_COMMENTS_ROOT,
 )
 from delete import deleteComment
 
@@ -16,7 +18,7 @@ adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
 def adminPanelComments():
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
                 f'select role from users where userName = "{session["userName"]}"'
@@ -28,7 +30,7 @@ def adminPanelComments():
                     return redirect(f"/admin/comments")
             match role == "admin":
                 case True:
-                    connection = sqlite3.connect("db/comments.db")
+                    connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute("select * from comments")
                     comments = cursor.fetchall()

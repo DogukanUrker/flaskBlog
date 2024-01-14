@@ -1,10 +1,11 @@
 from helpers import (
     sqlite3,
-    render_template,
-    Blueprint,
     session,
-    redirect,
     request,
+    redirect,
+    Blueprint,
+    DB_USERS_ROOT,
+    render_template,
 )
 from delete import deleteUser
 
@@ -16,7 +17,7 @@ adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)
 def adminPanelUsers():
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
                 f'select role from users where userName = "{session["userName"]}"'
@@ -27,7 +28,7 @@ def adminPanelUsers():
                     deleteUser(request.form["userName"])
             match role == "admin":
                 case True:
-                    connection = sqlite3.connect("db/users.db")
+                    connection = sqlite3.connect(DB_USERS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute("select * from users")
                     users = cursor.fetchall()

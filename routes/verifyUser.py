@@ -9,8 +9,9 @@ from helpers import (
     redirect,
     Blueprint,
     EmailMessage,
-    render_template,
+    DB_USERS_ROOT,
     verifyUserForm,
+    render_template,
     message as messageDebugging,
 )
 
@@ -22,7 +23,7 @@ def verifyUser(codeSent):
     match "userName" in session:
         case True:
             userName = session["userName"]
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
                 f'select isVerified from users where lower(username) = "{userName.lower()}"'
@@ -60,7 +61,7 @@ def verifyUser(codeSent):
                             )
                         case "false":
                             if request.method == "POST":
-                                connection = sqlite3.connect("db/users.db")
+                                connection = sqlite3.connect(DB_USERS_ROOT)
                                 cursor = connection.cursor()
                                 cursor.execute(
                                     f'select * from users where lower(userName) = "{userName.lower()}"'

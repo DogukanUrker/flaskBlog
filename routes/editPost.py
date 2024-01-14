@@ -1,15 +1,17 @@
 from helpers import (
+    flash,
     session,
     sqlite3,
     request,
-    flash,
     message,
     redirect,
+    Blueprint,
     currentDate,
     currentTime,
-    render_template,
-    Blueprint,
+    DB_POSTS_ROOT,
+    DB_USERS_ROOT,
     createPostForm,
+    render_template,
 )
 
 editPostBlueprint = Blueprint("editPost", __name__)
@@ -19,18 +21,18 @@ editPostBlueprint = Blueprint("editPost", __name__)
 def editPost(postID):
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/posts.db")
+            connection = sqlite3.connect(DB_POSTS_ROOT)
             cursor = connection.cursor()
             cursor.execute(f"select id from posts")
             posts = str(cursor.fetchall())
             match str(postID) in posts:
                 case True:
-                    connection = sqlite3.connect("db/posts.db")
+                    connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(f"select * from posts where id = {postID}")
                     post = cursor.fetchone()
                     message("2", f'POST: "{postID}" FOUND')
-                    connection = sqlite3.connect("db/users.db")
+                    connection = sqlite3.connect(DB_USERS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
                         f'select userName from users where userName="{session["userName"]}"'
@@ -53,7 +55,7 @@ def editPost(postID):
                                             f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                                         )
                                     case False:
-                                        connection = sqlite3.connect("db/posts.db")
+                                        connection = sqlite3.connect(DB_POSTS_ROOT)
                                         cursor = connection.cursor()
                                         cursor.execute(
                                             """update posts set title = ? where id = ? """,

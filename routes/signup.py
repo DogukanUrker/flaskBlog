@@ -1,17 +1,18 @@
 from helpers import (
+    flash,
     session,
     sqlite3,
     request,
-    flash,
     message,
     redirect,
     addPoints,
-    currentDate,
-    currentTime,
-    render_template,
     Blueprint,
     signUpForm,
+    currentDate,
+    currentTime,
     sha256_crypt,
+    DB_USERS_ROOT,
+    render_template,
 )
 from constants import REGISTRATION
 
@@ -34,7 +35,7 @@ def signup():
                         password = request.form["password"]
                         passwordConfirm = request.form["passwordConfirm"]
                         userName = userName.replace(" ", "")
-                        connection = sqlite3.connect("db/users.db")
+                        connection = sqlite3.connect(DB_USERS_ROOT)
                         cursor = connection.cursor()
                         cursor.execute("select userName from users")
                         users = str(cursor.fetchall())
@@ -45,7 +46,7 @@ def signup():
                                 match userName.isascii():
                                     case True:
                                         password = sha256_crypt.hash(password)
-                                        connection = sqlite3.connect("db/users.db")
+                                        connection = sqlite3.connect(DB_USERS_ROOT)
                                         cursor = connection.cursor()
                                         cursor.execute(
                                             f"""

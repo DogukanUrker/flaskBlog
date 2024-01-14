@@ -1,6 +1,6 @@
 from helpers import (
-    render_template,
     Blueprint,
+    render_template,
 )
 
 searchBarBlueprint = Blueprint("searchBar", __name__)

@@ -8,7 +8,7 @@ from os import mkdir
 from random import randint
 from os.path import exists
 from datetime import datetime
-from constants import LOG_FILE_ROOT
+from constants import LOG_FILE_ROOT, DB_USERS_ROOT, DB_POSTS_ROOT, DB_COMMENTS_ROOT
 from email.message import EmailMessage
 from passlib.hash import sha256_crypt
 from flask import render_template, Blueprint
@@ -67,7 +67,7 @@ def message(color, message):
 
 
 def addPoints(points, user):
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
         f'update users set points = points+{points} where userName = "{user}"'
@@ -77,7 +77,7 @@ def addPoints(points, user):
 
 
 def getProfilePicture(userName):
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
         f'select profilePicture from users where lower(userName) = "{userName.lower()}"'

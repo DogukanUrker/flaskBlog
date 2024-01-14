@@ -1,7 +1,8 @@
 from helpers import (
     sqlite3,
-    render_template,
     Blueprint,
+    DB_POSTS_ROOT,
+    render_template,
 )
 
 indexBlueprint = Blueprint("index", __name__)
@@ -9,7 +10,7 @@ indexBlueprint = Blueprint("index", __name__)
 
 @indexBlueprint.route("/")
 def index():
-    connection = sqlite3.connect("db/posts.db")
+    connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
     cursor.execute("select * from posts")
     posts = cursor.fetchall()

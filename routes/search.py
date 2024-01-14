@@ -1,7 +1,9 @@
 from helpers import (
     sqlite3,
-    render_template,
     Blueprint,
+    DB_POSTS_ROOT,
+    DB_USERS_ROOT,
+    render_template,
 )
 
 searchBlueprint = Blueprint("search", __name__)
@@ -11,7 +13,7 @@ searchBlueprint = Blueprint("search", __name__)
 def search(query):
     queryNoWhiteSpace = query.replace("+", "")
     query = query.replace("+", " ")
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     queryUsers = cursor.execute(
         f"select * from users where userName like '%{query}%'"
@@ -19,7 +21,7 @@ def search(query):
     queryUsers = cursor.execute(
         f"select * from users where userName like '%{queryNoWhiteSpace}%'"
     ).fetchall()
-    connection = sqlite3.connect("db/posts.db")
+    connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
     queryTags = cursor.execute(
         f"select * from posts where tags like '%{query}%'"
