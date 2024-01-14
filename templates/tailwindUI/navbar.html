@@ -13,7 +13,7 @@
       class="w-80 h-10 m-2 rounded-md p-2 text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-150"
     /><button
       onclick="search()"
-      class="text-xl hover:text-rose-500 duration-150"
+      class="hover:text-rose-500 duration-150"
     >
     <i class="ti ti-search text-2xl"></i>
     </button>
@@ -33,36 +33,36 @@
         />
       </div>
     </a>
-    <a href="/createpost" class="w-7 h-7 text-center">
-      <button class="text-xl hover:text-rose-500 duration-150">
+    <a href="/createpost" class="text-center">
+      <button class="hover:text-rose-500 duration-150">
         <i class="ti ti-pencil-plus text-2xl"></i>
       </button>
     </a>
     <a
       href="/logout"
       title="logout"
-      class="text-xl hover:text-rose-500 duration-150"
+      class="hover:text-rose-500 duration-150"
       ><i class="ti ti-logout text-2xl"></i>
       </a>
     {% elif hideLogin %}
     <a href="/signup"
-      ><button class="text-xl hover:text-rose-500 duration-150">
+      ><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-user-plus text-2xl"></i>
         </a>
     {% elif hideSignUp %}
     <a href="/login/redirect=&" class="w-7 h-7"
-      ><button class="text-xl hover:text-rose-500 duration-150">
+      ><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-login text-2xl"></i>
         </button
     ></a>
     {%else%}
     <a href="/login/redirect=&" class="w-7 h-7"
-      ><button class="text-xl hover:text-rose-500 duration-150">
+      ><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-login text-2xl"></i>
         </button
     ></a>
     <a href="/signup" class="w-7 h-7"
-      ><button class="text-xl hover:text-rose-500 duration-150">
+      ><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-user-plus text-2xl"></i>
         </button
     ></a>
