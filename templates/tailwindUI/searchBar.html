@@ -1,28 +1,16 @@
 {% extends 'layout.html'%} {%block head%}
 <title>Search</title>
 {% endblock head %} {%block body%}
-<div>
+<div class="w-fit mx-auto mt-32">
   <div>
     <input
       type="text"
       id="searchBarInput"
       autocomplete="off"
       placeholder="search"
+      class="w-72 h-10 text-xl m-2 rounded-md p-2 text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-150"
     /><button onclick="searchBar()" class="hover:text-rose-500 duration-150">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-        />
-      </svg>
+      <i class="ti ti-search ml-2 text-2xl"></i>
     </button>
   </div>
 </div>
