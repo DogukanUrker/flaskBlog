@@ -9,6 +9,7 @@ from helpers import (
     Blueprint,
     EmailMessage,
     sha256_crypt,
+    DB_USERS_ROOT,
     render_template,
     passwordResetForm,
     message as messageDebugging,
@@ -26,7 +27,7 @@ def passwordReset(codeSent):
     form = passwordResetForm(request.form)
     match codeSent:
         case "true":
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             if request.method == "POST":
                 code = request.form["code"]
@@ -71,7 +72,7 @@ def passwordReset(codeSent):
                 userName = request.form["userName"]
                 email = request.form["email"]
                 userName = userName.replace(" ", "")
-                connection = sqlite3.connect("db/users.db")
+                connection = sqlite3.connect(DB_USERS_ROOT)
                 cursor = connection.cursor()
                 cursor.execute(
                     f'select * from users where lower(userName) = "{userName.lower()}"'

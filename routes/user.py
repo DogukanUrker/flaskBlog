@@ -1,8 +1,11 @@
 from helpers import (
     sqlite3,
     message,
-    render_template,
     Blueprint,
+    DB_POSTS_ROOT,
+    DB_USERS_ROOT,
+    render_template,
+    DB_COMMENTS_ROOT,
 )
 
 userBlueprint = Blueprint("user", __name__)
@@ -10,7 +13,7 @@ userBlueprint = Blueprint("user", __name__)
 
 @userBlueprint.route("/user/<userName>")
 def user(userName):
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(f"select userName from users")
     users = cursor.fetchall()
@@ -19,7 +22,7 @@ def user(userName):
             message("2", f'USER: "{userName}" FOUND')
             cursor.execute(f'select * from users where lower(userName) = "{userName}"')
             user = cursor.fetchone()
-            connection = sqlite3.connect("db/posts.db")
+            connection = sqlite3.connect(DB_POSTS_ROOT)
             cursor = connection.cursor()
             cursor.execute(f'select views from posts where author = "{user[1]}"')
             viewsData = cursor.fetchall()
@@ -28,7 +31,7 @@ def user(userName):
                 views += int(view[0])
             cursor.execute(f'select * from posts where author = "{user[1]}"')
             posts = cursor.fetchall()
-            connection = sqlite3.connect("db/comments.db")
+            connection = sqlite3.connect(DB_COMMENTS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
                 f'select * from comments where lower(user) = "{userName.lower()}"'

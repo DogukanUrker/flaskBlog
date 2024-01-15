@@ -1,12 +1,13 @@
 from helpers import (
+    flash,
     session,
     sqlite3,
     request,
-    flash,
     message,
     redirect,
-    render_template,
     Blueprint,
+    DB_USERS_ROOT,
+    render_template,
     changeProfilePictureForm,
 )
 
@@ -21,7 +22,7 @@ def changeProfilePicture():
             if request.method == "POST":
                 newProfilePictureSeed = request.form["newProfilePictureSeed"]
                 newProfilePicture = f"https://api.dicebear.com/7.x/identicon/svg?seed={newProfilePictureSeed}&radius=10"
-                connection = sqlite3.connect("db/users.db")
+                connection = sqlite3.connect(DB_USERS_ROOT)
                 cursor = connection.cursor()
                 cursor.execute(
                     f'update users set profilePicture = "{newProfilePicture}" where userName = "{session["userName"]}" '

@@ -1,10 +1,11 @@
 from helpers import (
-    session,
-    redirect,
-    render_template,
-    Blueprint,
     request,
     sqlite3,
+    session,
+    redirect,
+    Blueprint,
+    DB_USERS_ROOT,
+    render_template,
 )
 from delete import deleteUser
 
@@ -15,7 +16,7 @@ accountSettingsBlueprint = Blueprint("accountSettings", __name__)
 def accountSettings():
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
                 f'select userName from users where userName = "{session["userName"]}"'

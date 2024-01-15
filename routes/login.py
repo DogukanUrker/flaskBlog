@@ -1,15 +1,16 @@
 from helpers import (
+    flash,
     session,
     request,
     sqlite3,
-    flash,
     message,
     redirect,
     addPoints,
-    render_template,
     Blueprint,
     loginForm,
     sha256_crypt,
+    DB_USERS_ROOT,
+    render_template,
 )
 from constants import LOG_IN
 
@@ -31,7 +32,7 @@ def login(direct):
                         userName = request.form["userName"]
                         password = request.form["password"]
                         userName = userName.replace(" ", "")
-                        connection = sqlite3.connect("db/users.db")
+                        connection = sqlite3.connect(DB_USERS_ROOT)
                         cursor = connection.cursor()
                         cursor.execute(
                             f'select * from users where lower(userName) = "{userName.lower()}"'

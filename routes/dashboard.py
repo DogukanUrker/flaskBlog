@@ -1,12 +1,14 @@
 from helpers import (
+    flash,
+    request,
     session,
     sqlite3,
-    flash,
     message,
     redirect,
-    render_template,
     Blueprint,
-    request,
+    DB_POSTS_ROOT,
+    DB_COMMENTS_ROOT,
+    render_template,
 )
 from delete import deletePost
 
@@ -19,13 +21,13 @@ def dashboard(userName):
         case True:
             match session["userName"].lower() == userName.lower():
                 case True:
-                    connection = sqlite3.connect("db/posts.db")
+                    connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
                         f'select * from posts where author = "{session["userName"]}"'
                     )
                     posts = cursor.fetchall()
-                    connection = sqlite3.connect("db/comments.db")
+                    connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
                         f'select * from comments where lower(user) = "{userName.lower()}"'

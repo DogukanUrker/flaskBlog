@@ -1,13 +1,14 @@
 from helpers import (
+    flash,
     session,
     sqlite3,
     request,
-    flash,
     message,
     redirect,
-    render_template,
     Blueprint,
     sha256_crypt,
+    DB_USERS_ROOT,
+    render_template,
     changePasswordForm,
 )
 
@@ -23,7 +24,7 @@ def changePassword():
                 oldPassword = request.form["oldPassword"]
                 password = request.form["password"]
                 passwordConfirm = request.form["passwordConfirm"]
-                connection = sqlite3.connect("db/users.db")
+                connection = sqlite3.connect(DB_USERS_ROOT)
                 cursor = connection.cursor()
                 cursor.execute(
                     f'select password from users where userName = "{session["userName"]}"'
@@ -35,7 +36,7 @@ def changePassword():
                         flash("passwords must match", "error")
                     elif oldPassword != password and password == passwordConfirm:
                         newPassword = sha256_crypt.hash(password)
-                        connection = sqlite3.connect("db/users.db")
+                        connection = sqlite3.connect(DB_USERS_ROOT)
                         cursor = connection.cursor()
                         cursor.execute(
                             f'update users set password = "{newPassword}" where userName = "{session["userName"]}"'

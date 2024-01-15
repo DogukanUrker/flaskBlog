@@ -1,16 +1,17 @@
 from helpers import (
+    flash,
     session,
     sqlite3,
     request,
-    flash,
     message,
     redirect,
     addPoints,
+    Blueprint,
     currentDate,
     currentTime,
-    render_template,
-    Blueprint,
+    DB_POSTS_ROOT,
     createPostForm,
+    render_template,
 )
 
 createPostBlueprint = Blueprint("createPost", __name__)
@@ -33,7 +34,7 @@ def createPost():
                             f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                         )
                     case False:
-                        connection = sqlite3.connect("db/posts.db")
+                        connection = sqlite3.connect(DB_POSTS_ROOT)
                         cursor = connection.cursor()
                         cursor.execute(
                             "insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) \
