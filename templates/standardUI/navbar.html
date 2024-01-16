@@ -27,7 +27,7 @@
         <button class="btn profileText">{{session["userName"]}}</button>
       </div>
     </a>
-    <a href="/logout" title="logout">❌</a>
+    <a href="/logout" title="logout"><i class="ti ti-logout"></i></a>
     {% elif hideLogin %}
     <a href="/signup"><button class="btn btnLink">Sign Up</button></a>
     {% elif hideSignUp %}
@@ -62,5 +62,5 @@
       <a href="/searchbar">Search</a>
     </div>
   </div>
-  <script src="/static/js/navbar.js"></script>
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 </div>
