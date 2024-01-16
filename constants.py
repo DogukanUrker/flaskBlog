@@ -1,8 +1,9 @@
 from helpers import secrets, socket
 
-APP_NAME = "flaskBlog"  # NAME OF THE FLASK APP.
+APP_NAME = "OperCat"  # NAME OF THE FLASK APP.
 APP_ROOT_PATH = "."  # THE PATH TO THE ROOT OF THE APP FILES.
-APP_HOST = socket.gethostbyname(socket.gethostname())  # FLASK APP'S HOST/PORT.
+APP_HOST = "localhost"
+APP_PORT = 8080  # FLASK APP'S HOST/PORT.
 DEBUG_MODE = True  # TURN ON/OFF FLASK DEBUG MODE.
 TAILWIND_UI = False  # SELECT TAILWIND-UI/STANDARD-UI.
 LOG_IN = True  # TURN ON/OFF USER LOG IN UP.
