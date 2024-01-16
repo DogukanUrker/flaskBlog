@@ -11,26 +11,23 @@
       class="input"
       autocomplete="off"
       placeholder="search"
-    /><button onclick="search()" class="btn">
-      <i class="ti ti-search"></i>
-    </button>
+    /><button onclick="search()" class="btn">🔍</button>
   </div>
   <div class="btns">
     {% if session["userName"] %}
+    <a href="/createpost">
+      <button class="btn btnLink">New Post</button>
+    </a>
     <a href="/user/{{session['userName'].lower()}}">
-      <div class="btn user">
+      <div class="btn btnPrimary user">
         <img
           class="profilePicture"
           src="{{ getProfilePicture(session['userName']) }}"
         />
+        <button class="btn profileText">{{session["userName"]}}</button>
       </div>
     </a>
-    <a href="/createpost">
-      <button class="btn btnLink">
-        <i class="ti ti-pencil-plus"></i>
-      </button>
-    </a>
-    <a href="/logout" title="logout"><i class="ti ti-logout"></i> </a>
+    <a href="/logout" title="logout">❌</a>
     {% elif hideLogin %}
     <a href="/signup"><button class="btn btnLink">Sign Up</button></a>
     {% elif hideSignUp %}
@@ -40,5 +37,30 @@
     <a href="/signup"><button class="btn btnPrimary">Sign Up</button></a>
     {% endif %}
   </div>
-  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  <div class="hamburger">
+    <button onclick="hamburger()" class="hamburgerBtn">🍔</button>
+    <div id="hamburgerDropdown" class="hamburgerContent">
+      {% if session["userName"] %}
+      <a href="/user/{{session['userName'].lower()}}">
+        <div class="user">
+          <img
+            class="profilePicture"
+            src="{{ getProfilePicture(session['userName']) }}"
+          />
+          {{session["userName"]}}
+        </div>
+      </a>
+      <a href="/logout" title="logout">Logout</a>
+      {% elif hideLogin %}
+      <a href="/signup">Sign Up</a>
+      {% elif hideSignUp %}
+      <a href="/login/redirect=&">Login</a>
+      {%else%}
+      <a href="/login/redirect=&">Login</a>
+      <a href="/signup">Sign Up</a>
+      {% endif %}
+      <a href="/searchbar">Search</a>
+    </div>
+  </div>
+  <script src="/static/js/navbar.js"></script>
 </div>
