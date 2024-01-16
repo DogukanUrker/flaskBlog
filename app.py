@@ -38,27 +38,37 @@ from flask_wtf.csrf import CSRFProtect, CSRFError
 from dbChecker import dbFolder, usersTable, postsTable, commentsTable
 
 from constants import (
+    LOG_IN,
     APP_HOST,
+    APP_NAME,
     DEBUG_MODE,
     TAILWIND_UI,
-    LOG_IN,
     REGISTRATION,
     LOG_FILE_ROOT,
+    APP_ROOT_PATH,
     APP_SECRET_KEY,
     SESSION_PERMANENT,
 )
+
 from UISelector import TEMPLATE_FOLDER, STATIC_FOLDER
 
-app = Flask(__name__, template_folder=TEMPLATE_FOLDER, static_folder=STATIC_FOLDER)
+app = Flask(
+    import_name=APP_NAME,
+    root_path=APP_ROOT_PATH,
+    static_folder=STATIC_FOLDER,
+    template_folder=TEMPLATE_FOLDER,
+)
+
 app.secret_key = APP_SECRET_KEY
 app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
 csrf = CSRFProtect(app)
 
-
 message("1", f"APP DEBUG MODE: {DEBUG_MODE}")
+message("3", f"APP NAME: {APP_NAME}")
 message("3", f"APP HOST: {APP_HOST}")
 message("3", f"APP SECRET KEY: {APP_SECRET_KEY}")
 message("3", f"APP SESSION PERMANENT: {SESSION_PERMANENT}")
+message("3", f"APP ROOT PATH: {APP_ROOT_PATH}")
 message("3", f"LOG FILE ROOT: {LOG_FILE_ROOT}")
 message("3", f"LOG IN: {LOG_IN}")
 message("3", f"REGISTRATION: {REGISTRATION}")
@@ -119,8 +129,14 @@ app.register_blueprint(accountSettingsBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
 app.register_blueprint(changeProfilePictureBlueprint)
 
-message("2", "APP STARTED SUCCESSFULLY")
 
 match __name__:
     case "__main__":
-        app.run(debug=DEBUG_MODE, host=APP_HOST)
+        try:
+            message("2", "APP STARTED SUCCESSFULLY")
+            app.run(debug=DEBUG_MODE, host=APP_HOST)
+        except:
+            message("1", "ERROR: APP IS DOWN")
+            app.run(debug=DEBUG_MODE, host=APP_HOST)
+        finally:
+            message("3", "APP SHUT DOWN")

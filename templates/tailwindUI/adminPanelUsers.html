@@ -1,66 +1,84 @@
 {% extends 'layout.html'%} {%block head%}
 <title>Admin Panel</title>
 {% endblock head %} {%block body%}
-<div>
-  <h1>Users</h1>
+<div class="text-center">
+  <h1 class="my-4 text-4xl font-medium select-none">Users</h1>
   {% for user in users %}
-  <div>
-    <section>
-      <p>ID: {{user[0]}}</p>
-      <p>Role: {{user[5]}}</p>
-    </section>
-    <section>
-      <p>
-        User Name:
-        <a href="/user/{{user[1].lower()}}">{{user[1]}}</a>
+  <div
+    class="w-12/12 md:w-8/12 lg:w-2/4 xl:w-4/12 h-fit mx-px md:mx-auto py-2 px-2 my-4 border-2 rounded-md shadow-md
+    border-gray-500/25"
+  >
+    <section class="mb-4 text-center">
+      <img
+        src="{{user[4]}}"
+        alt="{{user[1]}}"
+        class="w-20 m-2 mx-auto select-none"
+      />
+      <p class="self-end">
+        <a
+          href="/user/{{user[1].lower()}}"
+          class="hover:text-rose-500 duration-150"
+          >{{user[1]}}</a
+        >
       </p>
-      <img src="{{user[4]}}" alt="{{user[1]}}" />
     </section>
-    <section>
-      <p>email: {{user[2]}}</p>
-      <p>Points: {{user[6]}}</p>
+    <section class="flex w-full justify-between my-4">
+      <p class="flex items-center">
+        <i class="ti ti-id mr-1 text-xl"></i>ID: {{user[0]}}
+      </p>
+      <p class="flex items-center">
+        <i class="ti ti-user mr-1 text-xl"></i>Role: {{user[5]}}
+      </p>
     </section>
-    <section>
-      <p>Join Date: {{user[7]}}</p>
-      <p>Join Time: {{user[8]}}</p>
+    <section class="flex w-full justify-between my-4">
+      <p class="flex items-centers text-left">
+        <i class="ti ti-mail mr-1 text-xl"></i>email: {{user[2]}}
+      </p>
+      <p class="flex items-center">
+        <i class="ti ti-sparkles mr-1 text-xl"></i>Points: {{user[6]}}
+      </p>
     </section>
-    <section>
+    <section class="flex w-full justify-between my-4">
+      <p class="flex items-center">
+        <i class="ti ti-calendar mr-1 text-xl"></i>Join Date: {{user[7]}}
+      </p>
+      <p class="flex items-center">
+        <i class="ti ti-clock mr-1 text-xl"></i>Join Time: {{user[8]}}
+      </p>
+    </section>
+    <section class="flex w-full justify-between mt-4">
       <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="userName" value="{{user[1]}}" />
         <button
           type="submit"
           name="userDeleteButton"
-          class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
+          class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
         >
+          <i class="ti ti-trash mr-1 text-xl"></i>
           delete user
         </button>
       </form>
       {% if user[5] == "admin" %}
-      <a href="/setuserrole/{{user[1].lower()}}/user">set user role to user</a>
+      <a
+        href="/setuserrole/{{user[1].lower()}}/user"
+        class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
+        ><i class="ti ti-user-down mr-1 text-xl"></i> set user role to user</a
+      >
       {% else %}
-      <a href="/setuserrole/{{user[1].lower()}}/admin"
-        >set user role to admin</a
+      <a
+        href="/setuserrole/{{user[1].lower()}}/admin"
+        class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
+        ><i class="ti ti-user-up mr-1 text-xl"></i>set user role to admin</a
       >
       {% endif %}
     </section>
   </div>
   {% endfor %}
 </div>
-<a href="/admin"
-  ><svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-6 h-6 hover:text-rose-500 duration-150"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-    />
-  </svg>
+<a href="/admin" class="fixed bottom-0 left-1"
+  ><i
+    class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"
+  ></i>
 </a>
 {% endblock body %}
