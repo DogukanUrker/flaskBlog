@@ -32,7 +32,7 @@ a {
 
 *::-webkit-scrollbar-thumb {
   border-radius: 1rem;
-  background: var(--themePrimary);
+  background: rgb(244 63 94);
 }
 
 *::-webkit-scrollbar-track,
