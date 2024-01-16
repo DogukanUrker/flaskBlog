@@ -48,6 +48,7 @@ from constants import (
     APP_ROOT_PATH,
     APP_SECRET_KEY,
     SESSION_PERMANENT,
+    APP_PORT,
 )
 
 from UISelector import TEMPLATE_FOLDER, STATIC_FOLDER
@@ -134,7 +135,7 @@ match __name__:
     case "__main__":
         try:
             message("2", "APP STARTED SUCCESSFULLY")
-            app.run(debug=DEBUG_MODE, host=APP_HOST)
+            app.run(debug=DEBUG_MODE, host=APP_HOST, port = APP_PORT)
         except:
             message("1", "ERROR: APP IS DOWN")
             app.run(debug=DEBUG_MODE, host=APP_HOST)
