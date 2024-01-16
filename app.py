@@ -67,6 +67,7 @@ csrf = CSRFProtect(app)
 message("1", f"APP DEBUG MODE: {DEBUG_MODE}")
 message("3", f"APP NAME: {APP_NAME}")
 message("3", f"APP HOST: {APP_HOST}")
+message("3", f"APP PORT: {APP_PORT}")
 message("3", f"APP SECRET KEY: {APP_SECRET_KEY}")
 message("3", f"APP SESSION PERMANENT: {SESSION_PERMANENT}")
 message("3", f"APP ROOT PATH: {APP_ROOT_PATH}")
@@ -135,9 +136,10 @@ match __name__:
     case "__main__":
         try:
             message("2", "APP STARTED SUCCESSFULLY")
-            app.run(debug=DEBUG_MODE, host=APP_HOST, port = APP_PORT)
+            message("2", f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
+            app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
         except:
             message("1", "ERROR: APP IS DOWN")
-            app.run(debug=DEBUG_MODE, host=APP_HOST)
+            app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
         finally:
             message("3", "APP SHUT DOWN")
