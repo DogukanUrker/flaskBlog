@@ -13,6 +13,6 @@
 
 @media screen and (min-width: 968px) {
   .changeTheme:hover {
-    scale: 1.5;
+    scale: 1.25;
   }
 }
