@@ -59,7 +59,8 @@ def currentTime(seconds=False, microSeconds=False):
 def message(color, message):
     print(
         f"\n\033[94m[{currentDate()}\033[0m"
-        f"\033[95m {currentTime(seconds=True)}]\033[0m"
+        f"\033[95m {currentTime(seconds=True)}\033[0m"
+        f"\033[94m {currentTimeZone()}] \033[0m"
         f"\033[9{color}m {message}\033[0m\n"
     )
     logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
