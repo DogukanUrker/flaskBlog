@@ -85,9 +85,10 @@ Password: admin
 
 ### Contributors 💕
 
-<a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="ngryman" width="80" height="80"></a>
-<a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="ngryman" width="80" height="80"></a>
-<a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="ngryman" width="80" height="80"></a>
+<a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="dogukanurker" width="80" height="80"></a>
+<a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="adindrabkin" width="80" height="80"></a>
+<a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="codehwang" width="80" height="80"></a>
+<a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/67013355" title="dkashkarev" width="80" height="80"></a>
 
 ### Stars ⭐
 
