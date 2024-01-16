@@ -13,6 +13,32 @@
   overflow-wrap: break-word !important;
 }
 
+*::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: var(--primaryColor);
+}
+
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-button {
+  background: transparent;
+}
+
+*::selection {
+  background: var(--primaryColor);
+}
+
+*::-moz-selection {
+  background: var(--primaryColor);
+}
+
+*::-webkit-selection {
+  background: var(--primaryColor);
+}
+
 html {
   font-size: 125% !important;
 }
@@ -24,20 +50,6 @@ body {
 a {
   text-decoration: none;
   user-select: none;
-}
-
-*::-webkit-scrollbar {
-  width: 0.4rem;
-}
-
-*::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background: rgb(244 63 94);
-}
-
-*::-webkit-scrollbar-track,
-*::-webkit-scrollbar-button {
-  background: transparent;
 }
 
 button {
