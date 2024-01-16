@@ -5,6 +5,7 @@ import smtplib
 import secrets
 import sqlite3
 from os import mkdir
+from time import tzname
 from random import randint
 from os.path import exists
 from datetime import datetime
@@ -35,6 +36,10 @@ from flask import (
 )
 
 
+def currentTimeZone():
+    return tzname[0]
+
+
 def currentDate():
     return datetime.now().strftime("%d.%m.%y")
 
@@ -60,8 +65,10 @@ def message(color, message):
     logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
     logFile.write(
         f"[{currentDate()}"
-        f"|{currentTime(seconds=True,microSeconds=True)}]"
-        f" {message}\n"
+        f"|{currentTime(seconds=True,microSeconds=True)}"
+        f"|{currentTimeZone()}]"
+        "\t"
+        f"{message}\n"
     )
     logFile.close()
 
