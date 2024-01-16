@@ -56,7 +56,9 @@ button {
   background-color: transparent;
   border: 0;
 }
-
+.ti {
+  font-size: 1.5rem;
+}
 .form {
   height: fit-content;
   width: fit-content;
