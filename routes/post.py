@@ -64,6 +64,10 @@ def post(postID):
                         ),
                     )
                     connection.commit()
+                    message(
+                        "2",
+                        f'USER: "{session["userName"]}" COMMENTED TO POST: "{postID}"',
+                    )
                     addPoints(5, session["userName"])
                     flash("You earned 5 points by commenting ", "success")
                     return redirect(f"/post/{postID}")
