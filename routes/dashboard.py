@@ -22,6 +22,15 @@ def dashboard(userName):
         case True:
             match session["userName"].lower() == userName.lower():
                 case True:
+                    if request.method == "POST":
+                        if "postDeleteButton" in request.form:
+                            deletePost(request.form["postID"])
+                            return (
+                                redirect(
+                                    url_for("dashboard.dashboard", userName=userName)
+                                ),
+                                301,
+                            )
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
@@ -35,16 +44,6 @@ def dashboard(userName):
                         """select * from comments where lower(user) = ? """,
                         [(userName.lower())],
                     )
-                    if request.method == "POST":
-                        if "postDeleteButton" in request.form:
-                            postID = request.form["postID"]
-                            deletePost(postID)
-                            return (
-                                redirect(
-                                    url_for("dashboard.dashboard", userName=userName)
-                                ),
-                                301,
-                            )
                     comments = cursor.fetchall()
                     if posts:
                         showPosts = True
