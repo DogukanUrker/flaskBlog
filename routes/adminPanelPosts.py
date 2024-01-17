@@ -1,5 +1,4 @@
 from helpers import (
-    flash,
     sqlite3,
     session,
     request,
@@ -29,7 +28,6 @@ def adminPanelPosts():
             if request.method == "POST":
                 if "postDeleteButton" in request.form:
                     deletePost(request.form["postID"])
-                    flash("post deleted", "error")
             match role == "admin":
                 case True:
                     connection = sqlite3.connect(DB_POSTS_ROOT)

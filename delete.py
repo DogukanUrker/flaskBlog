@@ -1,4 +1,5 @@
 from helpers import (
+    flash,
     sqlite3,
     message,
     session,
@@ -39,6 +40,7 @@ def deletePost(postID):
         [(commentCount)],
     )
     connection.commit()
+    flash("post deleted", "error")
     message("2", f'POST: "{postID}" DELETED')
 
 
@@ -60,6 +62,7 @@ def deleteUser(userName):
     )
     cursor.execute("update sqlite_sequence set seq = seq-1")
     connection.commit()
+    flash(f"user: {userName} deleted", "error")
     message("2", f'USER: "{userName}" DELETED')
     match perpetrator[0] == "admin":
         case True:
@@ -82,4 +85,5 @@ def deleteComment(commentID):
     )
     cursor.execute("update sqlite_sequence set seq = seq-1")
     connection.commit()
+    flash("comment deleted", "error")
     message("2", f'COMMENT: "{commentID}" DELETED')
