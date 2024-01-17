@@ -36,7 +36,8 @@ def passwordReset(codeSent):
                 match code == passwordResetCode:
                     case True:
                         cursor.execute(
-                            f'select password from users where lower(userName) = "{userName.lower()}"'
+                            """select password from users where lower(userName) = ? """,
+                            [(userName.lower())],
                         )
                         oldPassword = cursor.fetchone()[0]
                         match password == passwordConfirm:
@@ -50,7 +51,8 @@ def passwordReset(codeSent):
                                     case False:
                                         password = sha256_crypt.hash(password)
                                         cursor.execute(
-                                            f'update users set password = "{password}" where lower(userName) = "{userName.lower()}"'
+                                            """update users set password = ? where lower(userName) = ? """,
+                                            [(password), (userName.lower())],
                                         )
                                         connection.commit()
                                         messageDebugging(
@@ -75,11 +77,13 @@ def passwordReset(codeSent):
                 connection = sqlite3.connect(DB_USERS_ROOT)
                 cursor = connection.cursor()
                 cursor.execute(
-                    f'select * from users where lower(userName) = "{userName.lower()}"'
+                    """select * from users where lower(userName) = ? """,
+                    [(userName.lower())],
                 )
                 userNameDB = cursor.fetchone()
                 cursor.execute(
-                    f'select * from users where lower(email) = "{email.lower()}"'
+                    """select * from users where lower(email) = ? """,
+                    [(email.lower())],
                 )
                 emailDB = cursor.fetchone()
                 match not userNameDB or not emailDB:

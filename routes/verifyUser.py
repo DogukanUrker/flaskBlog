@@ -26,7 +26,8 @@ def verifyUser(codeSent):
             connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
-                f'select isVerified from users where lower(username) = "{userName.lower()}"'
+                """select isVerified from users where lower(username) = ? """,
+                [(userName.lower())],
             )
             isVerfied = cursor.fetchone()[0]
             match isVerfied:
@@ -42,7 +43,8 @@ def verifyUser(codeSent):
                                 match code == verificationCode:
                                     case True:
                                         cursor.execute(
-                                            f'update users set isVerified = "True" where lower(userName) = "{userName.lower()}"'
+                                            """update users set isVerified = "True" where lower(userName) = ? """,
+                                            [(userName.lower())],
                                         )
                                         connection.commit()
                                         messageDebugging(
@@ -64,11 +66,13 @@ def verifyUser(codeSent):
                                 connection = sqlite3.connect(DB_USERS_ROOT)
                                 cursor = connection.cursor()
                                 cursor.execute(
-                                    f'select * from users where lower(userName) = "{userName.lower()}"'
+                                    """select * from users where lower(userName) = ? """,
+                                    [(userName.lower())],
                                 )
                                 userNameDB = cursor.fetchone()
                                 cursor.execute(
-                                    f'select email from users where lower(username) = "{userName.lower()}"'
+                                    """select email from users where lower(username) = ? """,
+                                    [(userName.lower())],
                                 )
                                 email = cursor.fetchone()
                                 match not userNameDB:

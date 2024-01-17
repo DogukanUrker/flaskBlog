@@ -24,16 +24,22 @@ def post(postID):
     form = commentForm(request.form)
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
-    cursor.execute(f"select id from posts")
+    cursor.execute("select id from posts")
     posts = str(cursor.fetchall())
     match str(postID) in posts:
         case True:
             message("2", f'POST: "{postID}" FOUND')
             connection = sqlite3.connect(DB_POSTS_ROOT)
             cursor = connection.cursor()
-            cursor.execute(f'select * from posts where id = "{postID}"')
+            cursor.execute(
+                """select * from posts where id = ? """,
+                [(postID)],
+            )
             post = cursor.fetchone()
-            cursor.execute(f'update posts set views = views+1 where id = "{postID}"')
+            cursor.execute(
+                """update posts set views = views+1 where id = ? """,
+                [(postID)],
+            )
             connection.commit()
             if request.method == "POST":
                 if "postDeleteButton" in request.form:
@@ -63,7 +69,10 @@ def post(postID):
                     return redirect(f"/post/{postID}")
             connection = sqlite3.connect(DB_COMMENTS_ROOT)
             cursor = connection.cursor()
-            cursor.execute(f'select * from comments where post = "{postID}"')
+            cursor.execute(
+                """select * from comments where post = ? """,
+                [(postID)],
+            )
             comments = cursor.fetchall()
             return render_template(
                 "post.html",

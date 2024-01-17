@@ -23,19 +23,23 @@ def editPost(postID):
         case True:
             connection = sqlite3.connect(DB_POSTS_ROOT)
             cursor = connection.cursor()
-            cursor.execute(f"select id from posts")
+            cursor.execute("select id from posts")
             posts = str(cursor.fetchall())
             match str(postID) in posts:
                 case True:
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
-                    cursor.execute(f"select * from posts where id = {postID}")
+                    cursor.execute(
+                        """select * from posts where id = ? """,
+                        [(postID)],
+                    )
                     post = cursor.fetchone()
                     message("2", f'POST: "{postID}" FOUND')
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
-                        f'select userName from users where userName="{session["userName"]}"'
+                        """select userName from users where userName = ? """,
+                        [(session["userName"])],
                     )
                     match post[4] == session["userName"]:
                         case True:
@@ -70,10 +74,12 @@ def editPost(postID):
                                             (postContent, post[0]),
                                         )
                                         cursor.execute(
-                                            f'update posts set lastEditDate = "{currentDate()}" where id = {post[0]}'
+                                            """update posts set lastEditDate = ? where id = ? """,
+                                            [(currentDate()), (post[0])],
                                         )
                                         cursor.execute(
-                                            f'update posts set lastEditTime = "{currentTime()}" where id = {post[0]}'
+                                            """update posts set lastEditTime = ? where id = ? """,
+                                            [(currentTime()), (post[0])],
                                         )
                                         connection.commit()
                                         message("2", f'POST: "{postTitle}" EDITED')

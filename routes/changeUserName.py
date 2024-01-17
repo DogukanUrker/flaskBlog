@@ -27,7 +27,8 @@ def changeUserName():
                 connection = sqlite3.connect(DB_USERS_ROOT)
                 cursor = connection.cursor()
                 cursor.execute(
-                    f'select userName from users where userName = "{newUserName}"'
+                    """select userName from users where userName = ? """,
+                    [(newUserName)],
                 )
                 userNameCheck = cursor.fetchone()
                 match newUserName.isascii():
@@ -39,19 +40,22 @@ def changeUserName():
                                 match userNameCheck == None:
                                     case True:
                                         cursor.execute(
-                                            f'update users set userName = "{newUserName}" where userName = "{session["userName"]}" '
+                                            """update users set userName = ? where userName = ? """,
+                                            [(newUserName), (session["userName"])],
                                         )
                                         connection.commit()
                                         connection = sqlite3.connect(DB_POSTS_ROOT)
                                         cursor = connection.cursor()
                                         cursor.execute(
-                                            f'update posts set Author = "{newUserName}" where author = "{session["userName"]}" '
+                                            """update posts set Author = ? where author = ? """,
+                                            [(newUserName), (session["userName"])],
                                         )
                                         connection.commit()
                                         connection = sqlite3.connect(DB_COMMENTS_ROOT)
                                         cursor = connection.cursor()
                                         cursor.execute(
-                                            f'update comments set user = "{newUserName}" where user = "{session["userName"]}" '
+                                            """update comments set user = ? where user = ? """,
+                                            [(newUserName), (session["userName"])],
                                         )
                                         connection.commit()
                                         message(

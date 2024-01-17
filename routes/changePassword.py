@@ -27,7 +27,8 @@ def changePassword():
                 connection = sqlite3.connect(DB_USERS_ROOT)
                 cursor = connection.cursor()
                 cursor.execute(
-                    f'select password from users where userName = "{session["userName"]}"'
+                    """select password from users where userName = ? """,
+                    [(session["userName"])],
                 )
                 if sha256_crypt.verify(oldPassword, cursor.fetchone()[0]):
                     if oldPassword == password:
@@ -39,7 +40,8 @@ def changePassword():
                         connection = sqlite3.connect(DB_USERS_ROOT)
                         cursor = connection.cursor()
                         cursor.execute(
-                            f'update users set password = "{newPassword}" where userName = "{session["userName"]}"'
+                            """update users set password = ? where userName = ? """,
+                            [(newPassword), (session["userName"])],
                         )
                         connection.commit()
                         message(

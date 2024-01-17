@@ -10,13 +10,15 @@ def setUserRole(userName, newRole):
             connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
-                f'select role from users where userName = "{session["userName"]}"'
+                """select role from users where userName = ? """,
+                [(session["userName"])],
             )
             role = cursor.fetchone()[0]
             match role == "admin":
                 case True:
                     cursor.execute(
-                        f'update users set role = "{newRole}" where lower(userName) = "{userName.lower()}" '
+                        """update users set role = ? where lower(userName) = ? """,
+                        [(newRole), (userName.lower())],
                     )
                     connection.commit()
                     message(

@@ -50,13 +50,20 @@ def signup():
                                         cursor = connection.cursor()
                                         cursor.execute(
                                             f"""
-                                            insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) 
-                                            values("{userName}","{email}","{password}",
-                                            "https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                            "user",0,
-                                            "{currentDate()}",
-                                            "{currentTime()}","False")
-                                            """
+                                            insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) \
+                                            values(?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                            """,
+                                            (
+                                                userName,
+                                                email,
+                                                password,
+                                                f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
+                                                "user",
+                                                0,
+                                                currentDate(),
+                                                currentTime(),
+                                                "False",
+                                            ),
                                         )
                                         connection.commit()
                                         message(

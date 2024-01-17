@@ -25,7 +25,8 @@ def changeProfilePicture():
                 connection = sqlite3.connect(DB_USERS_ROOT)
                 cursor = connection.cursor()
                 cursor.execute(
-                    f'update users set profilePicture = "{newProfilePicture}" where userName = "{session["userName"]}" '
+                    """update users set profilePicture = ? where userName = ? """,
+                    [(newProfilePicture), (session["userName"])],
                 )
                 connection.commit()
                 message(

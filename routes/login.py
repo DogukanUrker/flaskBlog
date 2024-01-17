@@ -35,7 +35,8 @@ def login(direct):
                         connection = sqlite3.connect(DB_USERS_ROOT)
                         cursor = connection.cursor()
                         cursor.execute(
-                            f'select * from users where lower(userName) = "{userName.lower()}"'
+                            """select * from users where lower(userName) = ? """,
+                            [(userName.lower())],
                         )
                         user = cursor.fetchone()
                         if not user:

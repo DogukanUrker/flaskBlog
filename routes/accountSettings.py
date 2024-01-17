@@ -19,7 +19,8 @@ def accountSettings():
             connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
-                f'select userName from users where userName = "{session["userName"]}"'
+                """select userName from users where userName = ? """,
+                [(session["userName"])],
             )
             user = cursor.fetchall()
             if request.method == "POST":

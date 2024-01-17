@@ -78,7 +78,8 @@ def addPoints(points, user):
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
-        f'update users set points = points+{points} where userName = "{user}"'
+        """update users set points = points+? where userName = ? """,
+        [(points), (user)],
     )
     connection.commit()
     message("2", f'{points} POINTS ADDED TO "{user}"')
@@ -88,6 +89,7 @@ def getProfilePicture(userName):
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
-        f'select profilePicture from users where lower(userName) = "{userName.lower()}"'
+        """select profilePicture from users where lower(userName) = ? """,
+        [(userName.lower())],
     )
     return cursor.fetchone()[0]

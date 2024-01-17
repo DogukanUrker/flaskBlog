@@ -24,13 +24,15 @@ def dashboard(userName):
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
-                        f'select * from posts where author = "{session["userName"]}"'
+                        """select * from posts where author = ? """,
+                        [(session["userName"])],
                     )
                     posts = cursor.fetchall()
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
-                        f'select * from comments where lower(user) = "{userName.lower()}"'
+                        """select * from comments where lower(user) = ? """,
+                        [(userName.lower())],
                     )
                     if request.method == "POST":
                         if "postDeleteButton" in request.form:
