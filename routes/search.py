@@ -11,6 +11,7 @@ searchBlueprint = Blueprint("search", __name__)
 
 @searchBlueprint.route("/search/<query>", methods=["GET", "POST"])
 def search(query):
+    query = query.replace("%20", " ")
     queryNoWhiteSpace = query.replace("+", "")
     query = query.replace("+", " ")
     connection = sqlite3.connect(DB_USERS_ROOT)
