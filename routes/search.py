@@ -81,13 +81,15 @@ def search(query):
     match queryUsers == []:
         case False:
             users.append(queryUsers)
-    if not posts and not users:
-        empty = True
+    match not posts and not users:
+        case True:
+            empty = True
     resultsID = []
     for post in posts:
         for post in post:
-            if post[0] not in resultsID:
-                resultsID.append(post[0])
+            match post[0] not in resultsID:
+                case True:
+                    resultsID.append(post[0])
     posts = []
     for postID in resultsID:
         cursor.execute(

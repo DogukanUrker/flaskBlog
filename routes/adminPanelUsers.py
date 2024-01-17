@@ -24,9 +24,11 @@ def adminPanelUsers():
                 [(session["userName"])],
             )
             role = cursor.fetchone()[0]
-            if request.method == "POST":
-                if "userDeleteButton" in request.form:
-                    deleteUser(request.form["userName"])
+            match request.method == "POST":
+                case True:
+                    match "userDeleteButton" in request.form:
+                        case True:
+                            deleteUser(request.form["userName"])
             match role == "admin":
                 case True:
                     connection = sqlite3.connect(DB_USERS_ROOT)

@@ -25,9 +25,11 @@ def adminPanelComments():
                 [(session["userName"])],
             )
             role = cursor.fetchone()[0]
-            if request.method == "POST":
-                if "commentDeleteButton" in request.form:
-                    deleteComment(request.form["commentID"])
+            match request.method == "POST":
+                case True:
+                    match "commentDeleteButton" in request.form:
+                        case True:
+                            deleteComment(request.form["commentID"])
                     return redirect(f"/admin/comments")
             match role == "admin":
                 case True:

@@ -47,14 +47,16 @@ def user(userName):
                 [(userName.lower())],
             )
             comments = cursor.fetchall()
-            if posts:
-                showPosts = True
-            elif not posts:
-                showPosts = False
-            if comments:
-                showComments = True
-            elif not comments:
-                showComments = False
+            match posts:
+                case []:
+                    showPosts = False
+                case _:
+                    showPosts = True
+            match comments:
+                case []:
+                    showComments = False
+                case _:
+                    showComments = True
             message("2", f'USER: "{userName}"s PAGE LOADED')
             return render_template(
                 "user.html",
@@ -65,7 +67,6 @@ def user(userName):
                 showPosts=showPosts,
                 showComments=showComments,
             )
-
         case _:
             message("1", f'USER: "{userName}" NOT FOUND')
             return render_template("404.html")

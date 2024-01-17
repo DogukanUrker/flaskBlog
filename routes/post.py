@@ -42,14 +42,16 @@ def post(postID):
                 [(postID)],
             )
             connection.commit()
-            if request.method == "POST":
-                if "postDeleteButton" in request.form:
-                    deletePost(postID)
-                    return redirect(f"/")
-                elif "commentDeleteButton" in request.form:
-                    deleteComment(request.form["commentID"])
-                    return redirect(url_for("post.post", postID=postID)), 301
-                else:
+            match request.method == "POST":
+                case True:
+                    match "postDeleteButton" in request.form:
+                        case True:
+                            deletePost(postID)
+                            return redirect(f"/")
+                    match "commentDeleteButton" in request.form:
+                        case True:
+                            deleteComment(request.form["commentID"])
+                            return redirect(url_for("post.post", postID=postID)), 301
                     comment = request.form["comment"]
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     cursor = connection.cursor()

@@ -22,15 +22,19 @@ def dashboard(userName):
         case True:
             match session["userName"].lower() == userName.lower():
                 case True:
-                    if request.method == "POST":
-                        if "postDeleteButton" in request.form:
-                            deletePost(request.form["postID"])
-                            return (
-                                redirect(
-                                    url_for("dashboard.dashboard", userName=userName)
-                                ),
-                                301,
-                            )
+                    match request.method == "POST":
+                        case True:
+                            match "postDeleteButton" in request.form:
+                                case True:
+                                    deletePost(request.form["postID"])
+                                    return (
+                                        redirect(
+                                            url_for(
+                                                "dashboard.dashboard", userName=userName
+                                            )
+                                        ),
+                                        301,
+                                    )
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
@@ -45,14 +49,16 @@ def dashboard(userName):
                         [(userName.lower())],
                     )
                     comments = cursor.fetchall()
-                    if posts:
-                        showPosts = True
-                    elif not posts:
-                        showPosts = False
-                    if comments:
-                        showComments = True
-                    elif not comments:
-                        showComments = False
+                    match posts:
+                        case []:
+                            showPosts = False
+                        case _:
+                            showPosts = True
+                    match comments:
+                        case []:
+                            showComments = False
+                        case _:
+                            showComments = True
                     return render_template(
                         "/dashboard.html",
                         posts=posts,

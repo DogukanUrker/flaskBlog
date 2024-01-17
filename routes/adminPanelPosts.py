@@ -25,9 +25,11 @@ def adminPanelPosts():
                 [(session["userName"])],
             )
             role = cursor.fetchone()[0]
-            if request.method == "POST":
-                if "postDeleteButton" in request.form:
-                    deletePost(request.form["postID"])
+            match request.method == "POST":
+                case True:
+                    match "postDeleteButton" in request.form:
+                        case True:
+                            deletePost(request.form["postID"])
             match role == "admin":
                 case True:
                     connection = sqlite3.connect(DB_POSTS_ROOT)
