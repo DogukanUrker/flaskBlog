@@ -1,7 +1,7 @@
 {% extends 'layout.html'%} {%block head%}
 <title>Verify Account</title>
 {% endblock head %} {%block body%}
-<div>
+<div class="w-fit mx-auto mt-32 select-none">
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if mailSent %} {{form.code(autocomplete="off")}}
