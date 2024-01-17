@@ -45,6 +45,7 @@ def post(postID):
             if request.method == "POST":
                 if "postDeleteButton" in request.form:
                     deletePost(postID)
+                    flash("post deleted", "error")
                     return redirect(f"/")
                 elif "commentDeleteButton" in request.form:
                     deleteComment(request.form["commentID"])

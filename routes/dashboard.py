@@ -25,6 +25,7 @@ def dashboard(userName):
                     if request.method == "POST":
                         if "postDeleteButton" in request.form:
                             deletePost(request.form["postID"])
+                            flash("post deleted", "error")
                             return (
                                 redirect(
                                     url_for("dashboard.dashboard", userName=userName)
