@@ -134,12 +134,7 @@ app.register_blueprint(changeProfilePictureBlueprint)
 
 match __name__:
     case "__main__":
-        try:
-            message("2", "APP STARTED SUCCESSFULLY")
-            message("2", f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
-            app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
-        except:
-            message("1", "ERROR: APP IS DOWN")
-            app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
-        finally:
-            message("3", "APP SHUT DOWN")
+        message("2", "APP STARTED SUCCESSFULLY")
+        message("2", f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
+        app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
+        message("1", "APP SHUT DOWN")
