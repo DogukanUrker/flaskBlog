@@ -4,6 +4,7 @@ from helpers import (
     sqlite3,
     request,
     message,
+    url_for,
     redirect,
     addPoints,
     Blueprint,
@@ -47,7 +48,7 @@ def post(postID):
                     return redirect(f"/")
                 elif "commentDeleteButton" in request.form:
                     deleteComment(request.form["commentID"])
-                    return redirect(f"/post/{postID}")
+                    return redirect(url_for("post.post", postID=postID)), 301
                 else:
                     comment = request.form["comment"]
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
@@ -70,7 +71,7 @@ def post(postID):
                     )
                     addPoints(5, session["userName"])
                     flash("You earned 5 points by commenting ", "success")
-                    return redirect(f"/post/{postID}")
+                    return redirect(url_for("post.post", postID=postID)), 301
             connection = sqlite3.connect(DB_COMMENTS_ROOT)
             cursor = connection.cursor()
             cursor.execute(

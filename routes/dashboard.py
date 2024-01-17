@@ -1,5 +1,6 @@
 from helpers import (
     flash,
+    url_for,
     request,
     session,
     sqlite3,
@@ -38,7 +39,12 @@ def dashboard(userName):
                         if "postDeleteButton" in request.form:
                             postID = request.form["postID"]
                             deletePost(postID)
-                            return redirect(f"/dashboard/{userName}")
+                            return (
+                                redirect(
+                                    url_for("dashboard.dashboard", userName=userName)
+                                ),
+                                301,
+                            )
                     comments = cursor.fetchall()
                     if posts:
                         showPosts = True

@@ -1,5 +1,6 @@
 from helpers import (
     flash,
+    url_for,
     session,
     request,
     sqlite3,
@@ -25,7 +26,10 @@ def login(direct):
             match "userName" in session:
                 case True:
                     message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
-                    return redirect(direct)
+                    return (
+                        redirect(direct),
+                        301,
+                    )
                 case False:
                     form = loginForm(request.form)
                     if request.method == "POST":
@@ -48,10 +52,16 @@ def login(direct):
                                 addPoints(1, session["userName"])
                                 message("2", f'USER: "{user[1]}" LOGGED IN')
                                 flash(f"Welcome {user[1]}", "success")
-                                return redirect(direct)
+                                return (
+                                    redirect(direct),
+                                    301,
+                                )
                             else:
                                 message("1", "WRONG PASSWORD")
                                 flash("wrong  password", "error")
                     return render_template("login.html", form=form, hideLogin=True)
         case False:
-            return redirect(direct)
+            return (
+                redirect(direct),
+                301,
+            )
