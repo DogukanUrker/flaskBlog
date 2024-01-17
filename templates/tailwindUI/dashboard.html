@@ -4,63 +4,65 @@
 {% else %}
 <title>{{session["userName"]}}'s Dashboard</title>
 {% endif %} {% endblock head %} {%block body%} {% if showPosts %}
-<h1>Posts</h1>
+<h1 class="text-center text-3xl font-medium mt-8">Posts</h1>
 {% for post in posts %}
-<div>
-  <a href="/post/{{post[0]}} ">{{post[1]}}</a>
-  <div tag="content">{{post[3]|safe}}</div>
-  <section>
-    <a href="/editpost/{{post[0]}}">edit</a>
+<div
+  class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md
+border-gray-500/25"
+>
+  <a
+    href="/post/{{post[0]}}"
+    class="text-rose-500 h-64 pb-8 text-2xl hover:text-rose-500/75 duration-150 select-none"
+    >{{post[1]}}</a
+  >
+  <div tag="content" class="h-60 overflow-y-hidden mt-6 mb-3 break-words">
+    {{post[3]|safe}}
+  </div>
+  <section class="flex items-center justify-between my-2">
+    <a
+      href="/editpost/{{post[0]}}"
+      class="hover:text-rose-500 duration-150 font-medium"
+      ><i class="ti ti-edit mr-1 text-2xl"></i
+    ></a>
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <input type="hidden" name="postID" value="{{post[0]}}" />
       <button
         type="submit"
         name="postDeleteButton"
-        class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
+        class="hover:text-rose-500 duration-150 font-medium"
       >
-        delete
+        <i class="ti ti-trash-x mr-1 text-2xl"></i>
       </button>
     </form>
   </section>
-  <div>
-    <div class="flex items-center">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
-        />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M6 6h.008v.008H6V6Z"
-        />
-      </svg>
-
-      {{post[2]}}
-    </div>
-    <p>Views: {{post[7]}}</p>
+  <div class="flex items-center justify-between my-2">
+    <p class="flex"><i class="ti ti-tags mr-1 text-xl"></i>Tags: {{post[2]}}</p>
+    <p class="flex"><i class="ti ti-eye mr-1 text-xl"></i>Views: {{post[7]}}</p>
   </div>
-  <div>
-    <p>Creation Time: {{post[6]}}</p>
-    <p>Last Edit Time: {{post[9]}}</p>
+  <div class="flex items-center justify-between my-2">
+    <p class="flex">
+      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time: {{post[6]}}
+    </p>
+    <p class="flex">
+      <i class="ti ti-clock-edit mr-1 text-xl"></i>Last Edit Time: {{post[9]}}
+    </p>
   </div>
-  <div>
-    <p>Creation Date: {{post[5]}}</p>
-    <p>Last Edit Date: {{post[8]}}</p>
+  <div class="flex items-center justify-between my-2">
+    <p class="flex">
+      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date: {{post[5]}}
+    </p>
+    <p class="flex">
+      <i class="ti ti-calendar-dot mr-1 text-xl"></i>Last Edit Date: {{post[8]}}
+    </p>
   </div>
   {% if request.path == "/admin/posts" %}
-  <p>
-    Author:
-    <a href="/user/{{post[4].lower()}}">{{post[4]}}</a>
+  <p class="flex">
+    <i class="ti ti-user mr-1 text-xl"></i>
+    Author:&nbsp;
+    <a href="/user/{{post[4].lower()}}" class="hover:text-rose-500 duration-150"
+      >{{post[4]}}</a
+    >
   </p>
   {% endif %}
 </div>
@@ -75,31 +77,35 @@
 </p>
 {% endif %} {% endif %} {% if showComments and not request.path ==
 "/admin/posts"%}
-<h1>Comments</h1>
+<h1 class="text-center text-3xl font-medium mt-8">Comments</h1>
 {% for comment in comments %}
-<div>
+<div
+  class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md
+border-gray-500/25"
+>
   <div tag="content">{{comment[2]}}</div>
-  <section>
-    <p>Creation Date: {{comment[4]}}</p>
-    <p>Creation Time: {{comment[5]}}</p>
+  <section class="flex items-center justify-between my-2">
+    <p class="flex">
+      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date: {{comment[4]}}
+    </p>
+    <p class="flex">
+      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time: {{comment[5]}}
+    </p>
   </section>
-  <a href="/post/{{comment[1]}}">go to post</a>
+  <a
+    href="/post/{{comment[1]}}"
+    class="hover:text-rose-500 duration-150 font-medium"
+    >go to post</a
+  >
 </div>
 {% endfor %} {% endif %} {% if request.path == "/admin/posts" %}
-<a href="/admin"
-  ><svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-6 h-6 hover:text-rose-500 duration-150"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-    />
-  </svg>
+<a href="/admin" class="fixed bottom-0 left-1"
+  ><i
+    class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"
+  ></i>
 </a>
-{% endif %} {% endblock body %}
+{% else %}<a href='/user/{{session["userName"]}}' class="fixed bottom-0 left-1"
+  ><i
+    class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"
+  ></i> </a
+>{% endif %} {% endblock body %}
