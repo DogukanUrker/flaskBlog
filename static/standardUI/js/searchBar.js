@@ -1,8 +1,9 @@
 function searchBar() {
-  var input = document.querySelector("#searchBarInput").value;
-  console.log(input);
-  if (input === "" || input.replace(/\s/g, "") === "") {
+  const input = document.querySelector("#searchBarInput").value;
+  if (input === "" || input.trim() === "") {
   } else {
-    window.location.href = `/search/${input.replace(/\s/g, "+")}`;
+    window.location.href = `/search/${encodeURIComponent(
+      escape(input.trim())
+    )}`;
   }
 }

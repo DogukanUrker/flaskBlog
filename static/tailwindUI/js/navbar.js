@@ -1,10 +1,13 @@
 function search() {
-  var input = document.getElementById("searchInput").value;
-  if (input === "" || input.replace(/\s/g, "") === "") {
+  const input = document.querySelector("#searchInput").value;
+  if (input === "" || input.trim() === "") {
   } else {
-    window.location.href = `/search/${input.replace(/\s/g, "+")}`;
+    window.location.href = `/search/${encodeURIComponent(
+      escape(input.trim())
+    )}`;
   }
 }
+
 function hamburger() {
   document.getElementById("hamburgerDropdown").classList.toggle("show");
 }
