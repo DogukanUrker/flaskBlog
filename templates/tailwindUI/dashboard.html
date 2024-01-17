@@ -67,9 +67,11 @@
 {% endfor %} {% elif not showPosts %} {% if request.path == "/admin/posts" %}
 <h1>This user haven't posted yet.</h1>
 {% else %}
-<p>
+<p class="text-center mt-32 select-none">
   No post yet,
-  <a href="/createpost">create one</a>?
+  <a href="/createpost" class="hover:text-rose-500 duration-150 font-medium"
+    >create one</a
+  >?
 </p>
 {% endif %} {% endif %} {% if showComments and not request.path ==
 "/admin/posts"%}
