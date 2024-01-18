@@ -8,15 +8,11 @@
 <div class="container">
   {% if recaptcha %}
   <script src="https://www.google.com/recaptcha/api.js"></script>
-  <script>
-    function onSubmit(token) {
-      document.getElementById("signUpForm").submit();
-    }
-  </script>
+  <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
   <form
     method="post"
     class="form"
-    id="signUpForm"
+    id="recaptchaForm"
     action="{{ url_for('signup.signup') }}"
   >
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

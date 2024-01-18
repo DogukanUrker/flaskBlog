@@ -3,12 +3,12 @@
 <div class="w-fit mx-auto mt-36 text-center text-xl">
   {% if recaptcha %}
   <script src="https://www.google.com/recaptcha/api.js"></script>
-  <script>
-    function onSubmit(token) {
-      document.getElementById("signUpForm").submit();
-    }
-  </script>
-  <form method="post" id="signUpForm" action="{{ url_for('signup.signup') }}">
+  <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+  <form
+    method="post"
+    id="recaptchaForm"
+    action="{{ url_for('signup.signup') }}"
+  >
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.userName(autocomplete="off")}} {{form.email(autocomplete="off")}}
     {{form.password()}} {{form.passwordConfirm()}}
