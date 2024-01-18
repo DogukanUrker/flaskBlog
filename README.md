@@ -1,8 +1,8 @@
-# [flaskBlog📜](https://dogukanurker.com/flaskblog)
+# [flaskBlog](https://dogukanurker.com/flaskblog)  [<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" style='border-radius: 0.5rem; widht:60px; height: 60px;' />](https://dogukanurker.com/flaskblog)
 
 **English** | [Türkçe](docs/readme_tr.md)
 
-<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" style='border-radius: 0.5rem;' />
+<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/GitHubBanner.png" style='border-radius: 0.5rem; widht:768px; height: 384px;' />
 
 Simple blog app built with Flask.
 <br/>
@@ -19,6 +19,7 @@ Simple blog app built with Flask.
 [click for more images📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
 
 ## Features 💫
+
 
 | Feature                | Status |
 | :--------------------- | :----: |
