@@ -12,10 +12,12 @@ from datetime import datetime
 from requests import post as requestsPost
 from constants import (
     LOG_IN,
+    BREAKER_TEXT,
     REGISTRATION,
     LOG_FILE_ROOT,
     DB_USERS_ROOT,
     DB_POSTS_ROOT,
+    BREAKER_TEXT,
     DB_COMMENTS_ROOT,
 )
 from constants import (
@@ -81,22 +83,33 @@ def currentTime(seconds=False, microSeconds=False):
                     return datetime.now().strftime("%H:%M:%S")
 
 
-def message(color, message):
-    print(
-        f"\n\033[94m[{currentDate()}\033[0m"
-        f"\033[95m {currentTime(seconds=True)}\033[0m"
-        f"\033[94m {currentTimeZone()}] \033[0m"
-        f"\033[9{color}m {message}\033[0m\n"
-    )
-    logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
-    logFile.write(
-        f"[{currentDate()}"
-        f"|{currentTime(seconds=True,microSeconds=True)}"
-        f"|{currentTimeZone()}]"
-        "\t"
-        f"{message}\n"
-    )
-    logFile.close()
+def message(
+    color="0",
+    message="NO MESSAGE CONTENT",
+    breaker=False,
+):
+    match breaker:
+        case True:
+            print(f"\033[9{color}m {BREAKER_TEXT}\033[0m")
+            logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
+            logFile.write(BREAKER_TEXT + "\n")
+            logFile.close()
+        case False:
+            print(
+                f"\n\033[94m[{currentDate()}\033[0m"
+                f"\033[95m {currentTime(seconds=True)}\033[0m"
+                f"\033[94m {currentTimeZone()}] \033[0m"
+                f"\033[9{color}m {message}\033[0m\n"
+            )
+            logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
+            logFile.write(
+                f"[{currentDate()}"
+                f"|{currentTime(seconds=True,microSeconds=True)}"
+                f"|{currentTimeZone()}]"
+                "\t"
+                f"{message}\n"
+            )
+            logFile.close()
 
 
 def addPoints(points, user):

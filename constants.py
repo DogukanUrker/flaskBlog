@@ -15,7 +15,7 @@ REGISTRATION = True  # TURN ON/OFF USER SIGN UP.
 LOG_FILE_ROOT = "log.log"  # ROOT OF THE LOG FILE FROM WHERE MESSAGES ARE PRINTED FROM THE MESSAGE MODULE.
 APP_SECRET_KEY = secrets.token_urlsafe(32)  # FLASK APP'S SECRET KEY.
 SESSION_PERMANENT = True  # FLASK APP'S SESSIONS.
-
+BREAKER_TEXT = "===================================================================================================="
 
 ### DATABASE SETTINGS ###
 DB_FOLDER_ROOT = "db"  # ROOT OF THE DATABASE FOLDER WHERE .db FILES ARE LOCATED.

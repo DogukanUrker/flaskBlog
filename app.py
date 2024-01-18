@@ -1,5 +1,6 @@
 from helpers import message
 
+message(breaker=True)
 message("3", "APP IS STARTING...")
 
 
@@ -79,6 +80,7 @@ app.secret_key = APP_SECRET_KEY
 app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
 csrf = CSRFProtect(app)
 
+message(breaker=True)
 message("1", f"APP DEBUG MODE: {DEBUG_MODE}")
 message("3", f"APP NAME: {APP_NAME}")
 message("3", f"APP HOST: {APP_HOST}")
@@ -89,6 +91,7 @@ message("3", f"APP ROOT PATH: {APP_ROOT_PATH}")
 message("3", f"LOG FILE ROOT: {LOG_FILE_ROOT}")
 message("3", f"LOG IN: {LOG_IN}")
 message("3", f"REGISTRATION: {REGISTRATION}")
+message(breaker=True)
 
 
 match RECAPTCHA:
@@ -123,7 +126,7 @@ match RECAPTCHA:
                 )
     case False:
         message("1", f"RECAPTCHA IS OFF")
-
+message(breaker=True)
 match TAILWIND_UI:
     case True:
         message("4", f"UI MODE: TAILWIND-CSS")
@@ -133,10 +136,12 @@ match TAILWIND_UI:
 message("4", f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
 message("4", f"STATIC FOLDER: {STATIC_FOLDER}")
 
+message(breaker=True)
 dbFolder()
 usersTable()
 postsTable()
 commentsTable()
+message(breaker=True)
 
 
 @app.context_processor
@@ -190,5 +195,7 @@ match __name__:
     case "__main__":
         message("2", "APP STARTED SUCCESSFULLY")
         message("2", f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
+        message(breaker=True)
         app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
+        message(breaker=True)
         message("1", "APP SHUT DOWN")
