@@ -91,7 +91,7 @@ def login(direct):
                                                                 301,
                                                             )
                                                         case False:
-                                                            message("1",f"LOGIN | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            message("1",f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
                                                             abort(401)
                                                 case False:
                                                     session["userName"] = user[1]
