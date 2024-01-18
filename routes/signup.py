@@ -67,7 +67,7 @@ def signup():
                                                                 "score"
                                                             ] > 0.5:
                                                                 case True:
-                                                                    message("2",f"VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                                    message("2",f"SIGN UP | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
                                                                     cursor = connection.cursor()
                                                                     cursor.execute(
                                                                         f"""
@@ -109,7 +109,7 @@ def signup():
                                                                         "/verifyUser/codesent=false"
                                                                     )
                                                                 case False:
-                                                                    message("1",f"VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                                    message("1",f"SIGN UP | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
                                                                     abort(401)
                                                         case False:
                                                             cursor = connection.cursor()
