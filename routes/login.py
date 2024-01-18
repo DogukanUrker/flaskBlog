@@ -2,7 +2,6 @@ from helpers import (
     abort,
     flash,
     LOG_IN,
-    url_for,
     session,
     request,
     sqlite3,
