@@ -42,7 +42,6 @@ from constants import (
     APP_HOST,
     APP_NAME,
     APP_PORT,
-    RECAPTCHA,
     DEBUG_MODE,
     TAILWIND_UI,
     REGISTRATION,
@@ -50,10 +49,23 @@ from constants import (
     APP_ROOT_PATH,
     APP_SECRET_KEY,
     SESSION_PERMANENT,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_SECRET_KEY,
 )
-
+from helpers import (
+    RECAPTCHA,
+    RECAPTCHA_LOGIN,
+    RECAPTCHA_COMMENT,
+    RECAPTCHA_SIGN_UP,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_POST_EDIT,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_VERIFY_USER,
+    RECAPTCHA_POST_CREATE,
+    RECAPTCHA_PASSWORD_RESET,
+    RECAPTCHA_PASSWORD_CHANGE,
+    RECAPTCHA_USERNAME_CHANGE,
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,
+)
 from UISelector import TEMPLATE_FOLDER, STATIC_FOLDER
 
 app = Flask(
@@ -92,9 +104,22 @@ match RECAPTCHA:
                     f"PLEASE CHECK YOUR RECAPTCHA KEYS OR SET RECAPTCHA TO FALSE FROM TRUE IN 'constants.py'",
                 )
             case False:
-                message("2", f"RECAPTCHA IS ON")
+                message("2", "RECAPTCHA IS ON")
                 message("3", f"RECAPTCHA RECAPTCHA_SITE_KEY KEY: {RECAPTCHA_SITE_KEY}")
                 message("3", f"RECAPTCHA SECRET KEY: {RECAPTCHA_SECRET_KEY}")
+                message("6", f"RECAPTCHA LOGIN: {RECAPTCHA_LOGIN}")
+                message("6", f"RECAPTCHA SIGN UP: {RECAPTCHA_SIGN_UP }")
+                message("6", f"RECAPTCHA POST CREATE: {RECAPTCHA_POST_CREATE}")
+                message("6", f"RECAPTCHA POST EDIT: {RECAPTCHA_POST_EDIT }")
+                message("6", f"RECAPTCHA COMMENT: {RECAPTCHA_COMMENT}")
+                message("6", f"RECAPTCHA PASSWORD RESET: {RECAPTCHA_PASSWORD_RESET}")
+                message("6", f"RECAPTCHA PASSWORD CHANGE: {RECAPTCHA_PASSWORD_CHANGE}")
+                message("6", f"RECAPTCHA USERNAME CHANGE: {RECAPTCHA_USERNAME_CHANGE}")
+                message("6", f"RECAPTCHA VERIFY USER: {RECAPTCHA_VERIFY_USER}")
+                message(
+                    "6",
+                    f"RECAPTCHA PROFILE PICTURE CHANGE: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
+                )
     case False:
         message("1", f"RECAPTCHA IS OFF")
 

@@ -12,15 +12,27 @@ from datetime import datetime
 from requests import post as requestsPost
 from constants import (
     LOG_IN,
-    RECAPTCHA,
     REGISTRATION,
     LOG_FILE_ROOT,
     DB_USERS_ROOT,
     DB_POSTS_ROOT,
     DB_COMMENTS_ROOT,
+)
+from constants import (
+    RECAPTCHA,
+    RECAPTCHA_LOGIN,
+    RECAPTCHA_COMMENT,
+    RECAPTCHA_SIGN_UP,
     RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_POST_EDIT,
     RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_VERIFY_USER,
+    RECAPTCHA_POST_CREATE,
+    RECAPTCHA_PASSWORD_RESET,
+    RECAPTCHA_PASSWORD_CHANGE,
+    RECAPTCHA_USERNAME_CHANGE,
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,
 )
 from email.message import EmailMessage
 from passlib.hash import sha256_crypt
