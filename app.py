@@ -131,7 +131,7 @@ def unauthorized(e):
 
 
 @app.errorhandler(CSRFError)
-def handle_csrf_error(e):
+def csrfError(e):
     message("1", "CSRF ERROR")
     return render_template("csrfError.html", reason=e.description), 400
 
