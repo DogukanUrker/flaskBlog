@@ -56,9 +56,15 @@ button {
   background-color: transparent;
   border: 0;
 }
+
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
 .ti {
   font-size: 1.5rem;
 }
+
 .form {
   height: fit-content;
   width: fit-content;

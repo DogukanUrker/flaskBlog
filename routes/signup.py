@@ -1,20 +1,27 @@
 from helpers import (
+    abort,
     flash,
     session,
     sqlite3,
     request,
     message,
     redirect,
+    RECAPTCHA,
     addPoints,
     Blueprint,
     signUpForm,
     currentDate,
     currentTime,
+    requestsPost,
     sha256_crypt,
+    REGISTRATION,
     DB_USERS_ROOT,
     render_template,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_SECRET_KEY,
 )
-from constants import REGISTRATION
+
 
 signUpBlueprint = Blueprint("signup", __name__)
 
@@ -48,47 +55,121 @@ def signup():
                                         case True:
                                             match userName.isascii():
                                                 case True:
-                                                    password = sha256_crypt.hash(
-                                                        password
-                                                    )
-                                                    connection = sqlite3.connect(
-                                                        DB_USERS_ROOT
-                                                    )
-                                                    cursor = connection.cursor()
-                                                    cursor.execute(
-                                                        f"""
-                                                        insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) \
-                                                        values(?, ?, ?, ?, ?, ?, ?, ?, ?)
-                                                        """,
-                                                        (
-                                                            userName,
-                                                            email,
-                                                            password,
-                                                            f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                                            "user",
-                                                            0,
-                                                            currentDate(),
-                                                            currentTime(),
-                                                            "False",
-                                                        ),
-                                                    )
-                                                    connection.commit()
-                                                    message(
-                                                        "2",
-                                                        f'USER: "{userName}" ADDED TO DATABASE',
-                                                    )
-                                                    session["userName"] = userName
-                                                    addPoints(1, session["userName"])
-                                                    message(
-                                                        "2",
-                                                        f'USER: "{userName}" LOGGED IN',
-                                                    )
-                                                    flash(
-                                                        f"Welcome {userName}", "success"
-                                                    )
-                                                    return redirect(
-                                                        "/verifyUser/codesent=false"
-                                                    )
+                                                    match RECAPTCHA:
+                                                        case True:
+                                                            secretResponse = request.form["g-recaptcha-response"]
+                                                            verifyResponse = requestsPost(url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}").json()
+                                                            match verifyResponse[
+                                                                "success"
+                                                            ] == True or verifyResponse[
+                                                                "score"
+                                                            ] > 0.5:
+                                                                case True:
+                                                                    message("2",f"VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                                    password = (
+                                                                        sha256_crypt.hash(
+                                                                            password
+                                                                        )
+                                                                    )
+                                                                    connection = (
+                                                                        sqlite3.connect(
+                                                                            DB_USERS_ROOT
+                                                                        )
+                                                                    )
+                                                                    cursor = connection.cursor()
+                                                                    cursor.execute(
+                                                                        f"""
+                                                                        insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) \
+                                                                        values(?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                                                        """,
+                                                                        (
+                                                                            userName,
+                                                                            email,
+                                                                            password,
+                                                                            f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
+                                                                            "user",
+                                                                            0,
+                                                                            currentDate(),
+                                                                            currentTime(),
+                                                                            "False",
+                                                                        ),
+                                                                    )
+                                                                    connection.commit()
+                                                                    message(
+                                                                        "2",
+                                                                        f'USER: "{userName}" ADDED TO DATABASE',
+                                                                    )
+                                                                    session[
+                                                                        "userName"
+                                                                    ] = userName
+                                                                    addPoints(
+                                                                        1, session["userName"]
+                                                                    )
+                                                                    message(
+                                                                        "2",
+                                                                        f'USER: "{userName}" LOGGED IN',
+                                                                    )
+                                                                    flash(
+                                                                        f"Welcome {userName}",
+                                                                        "success",
+                                                                    )
+                                                                    return redirect(
+                                                                        "/verifyUser/codesent=false"
+                                                                    )
+                                                                case False:
+                                                                    message("1",f"VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                                    abort(401)
+                                                        case False:
+                                                            password = (
+                                                                sha256_crypt.hash(
+                                                                    password
+                                                                )
+                                                            )
+                                                            connection = (
+                                                                sqlite3.connect(
+                                                                    DB_USERS_ROOT
+                                                                )
+                                                            )
+                                                            cursor = connection.cursor()
+                                                            cursor.execute(
+                                                                f"""
+                                                                insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) \
+                                                                values(?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                                                """,
+                                                                (
+                                                                    userName,
+                                                                    email,
+                                                                    password,
+                                                                    f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
+                                                                    "user",
+                                                                    0,
+                                                                    currentDate(),
+                                                                    currentTime(),
+                                                                    "False",
+                                                                ),
+                                                            )
+                                                            connection.commit()
+                                                            message(
+                                                                "2",
+                                                                f'USER: "{userName}" ADDED TO DATABASE',
+                                                            )
+                                                            session[
+                                                                "userName"
+                                                            ] = userName
+                                                            addPoints(
+                                                                1, session["userName"]
+                                                            )
+                                                            message(
+                                                                "2",
+                                                                f'USER: "{userName}" LOGGED IN',
+                                                            )
+                                                            flash(
+                                                                f"Welcome {userName}",
+                                                                "success",
+                                                            )
+                                                            return redirect(
+                                                                "/verifyUser/codesent=false"
+                                                            )
                                                 case False:
                                                     message(
                                                         "1",
@@ -123,6 +204,8 @@ def signup():
                                         f'THIS USERNAME "{userName}" IS UNAVAILABLE ',
                                     )
                                     flash("This username is unavailable.", "error")
-                    return render_template("signup.html", form=form, hideSignUp=True)
+                    return render_template(
+                        "signup.html", form=form, hideSignUp=True, siteKey=RECAPTCHA_SITE_KEY, recaptcha = RECAPTCHA,
+                    )
         case False:
             return redirect("/")

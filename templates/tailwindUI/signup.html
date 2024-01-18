@@ -1,7 +1,28 @@
-{% extends 'layout.html'%} {%block head%}
-<title>Signup</title>
+{% extends 'layout.html'%} {%block head%} <title>Signup</title>
 {% endblock head %} {%block body%}
 <div class="w-fit mx-auto mt-36 text-center text-xl">
+  {% if recaptcha %}
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script>
+    function onSubmit(token) {
+      document.getElementById("signUpForm").submit();
+    }
+  </script>
+  <form method="post" id="signUpForm" action="{{ url_for('signup.signup') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.userName(autocomplete="off")}} {{form.email(autocomplete="off")}}
+    {{form.password()}} {{form.passwordConfirm()}}
+    <button
+      type="submit"
+      data-sitekey="{{ siteKey }}"
+      data-callback="onSubmit"
+      data-action="submit"
+      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
+    >
+      Signup
+    </button>
+  </form>
+  {% else %}
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.userName(autocomplete="off")}} {{form.email(autocomplete="off")}}
@@ -13,5 +34,6 @@
       Signup
     </button>
   </form>
+  {% endif %}
 </div>
 {% endblock body %}

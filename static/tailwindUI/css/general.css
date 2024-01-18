@@ -15,3 +15,7 @@ html {
 *::-webkit-scrollbar-button {
   background: transparent;
 }
+
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
