@@ -16,6 +16,7 @@ from helpers import (
     sha256_crypt,
     DB_USERS_ROOT,
     render_template,
+    RECAPTCHA_LOGIN,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
@@ -57,7 +58,7 @@ def login(direct):
                                 case _:
                                     match sha256_crypt.verify(password, user[3]):
                                         case True:
-                                            match RECAPTCHA:
+                                            match RECAPTCHA and RECAPTCHA_LOGIN:
                                                 case True:
                                                     secretResponse = request.form[
                                                         "g-recaptcha-response"
@@ -71,7 +72,7 @@ def login(direct):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            message("2",f"LOGIN | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            message("2",f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
                                                             session["userName"] = user[
                                                                 1
                                                             ]
