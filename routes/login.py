@@ -114,7 +114,6 @@ def login(direct):
                         "login.html",
                         form=form,
                         hideLogin=True,
-                        direct = direct,
                         siteKey=RECAPTCHA_SITE_KEY,
                         recaptcha=RECAPTCHA,
                     )
