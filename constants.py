@@ -19,5 +19,5 @@ APP_SECRET_KEY = secrets.token_urlsafe(32)  # FLASK APP'S SECRET KEY.
 SESSION_PERMANENT = True  # FLASK APP'S SESSIONS.
 RECAPTCHA = False  # TURN ON/OFF RECAPTCHA VERIFICATION. MORE INFO ABOUT RECAPTCHA: https://developers.google.com/recaptcha/docs/v3
 RECAPTCHA_SITE_KEY = ""  # RECAPTCHA SITE KEY. SIGN UP FOR API KEY PAIR: http://www.google.com/recaptcha/admin
-RECAPTCHA_SECRET_KEY = ""  # RECAPTCHA SITE KEY. SIGN UP FOR API KEY PAIR: http://www.google.com/recaptcha/admin
+RECAPTCHA_SECRET_KEY = ""  # RECAPTCHA SECRET KEY. SIGN UP FOR API KEY PAIR: http://www.google.com/recaptcha/admin
 RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"  # RECAPTCHA VERIFY URL. DO NOT NEED TO CHANGE THIS.
