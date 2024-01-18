@@ -17,6 +17,7 @@ from helpers import (
     REGISTRATION,
     DB_USERS_ROOT,
     render_template,
+    RECAPTCHA_SIGN_UP,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
@@ -57,7 +58,7 @@ def signup():
                                                 case True:
                                                     password = (sha256_crypt.hash(password))
                                                     connection = (sqlite3.connect(DB_USERS_ROOT))
-                                                    match RECAPTCHA:
+                                                    match RECAPTCHA and RECAPTCHA_SIGN_UP:
                                                         case True:
                                                             secretResponse = request.form["g-recaptcha-response"]
                                                             verifyResponse = requestsPost(url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}").json()
@@ -67,7 +68,7 @@ def signup():
                                                                 "score"
                                                             ] > 0.5:
                                                                 case True:
-                                                                    message("2",f"SIGN UP | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                                    message("2",f"SIGN UP RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
                                                                     cursor = connection.cursor()
                                                                     cursor.execute(
                                                                         f"""
