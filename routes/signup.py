@@ -55,6 +55,8 @@ def signup():
                                         case True:
                                             match userName.isascii():
                                                 case True:
+                                                    password = (sha256_crypt.hash(password))
+                                                    connection = (sqlite3.connect(DB_USERS_ROOT))
                                                     match RECAPTCHA:
                                                         case True:
                                                             secretResponse = request.form["g-recaptcha-response"]
@@ -66,16 +68,6 @@ def signup():
                                                             ] > 0.5:
                                                                 case True:
                                                                     message("2",f"VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
-                                                                    password = (
-                                                                        sha256_crypt.hash(
-                                                                            password
-                                                                        )
-                                                                    )
-                                                                    connection = (
-                                                                        sqlite3.connect(
-                                                                            DB_USERS_ROOT
-                                                                        )
-                                                                    )
                                                                     cursor = connection.cursor()
                                                                     cursor.execute(
                                                                         f"""
@@ -120,16 +112,6 @@ def signup():
                                                                     message("1",f"VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
                                                                     abort(401)
                                                         case False:
-                                                            password = (
-                                                                sha256_crypt.hash(
-                                                                    password
-                                                                )
-                                                            )
-                                                            connection = (
-                                                                sqlite3.connect(
-                                                                    DB_USERS_ROOT
-                                                                )
-                                                            )
                                                             cursor = connection.cursor()
                                                             cursor.execute(
                                                                 f"""
