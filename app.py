@@ -107,6 +107,7 @@ match RECAPTCHA:
                 message("2", "RECAPTCHA IS ON")
                 message("3", f"RECAPTCHA RECAPTCHA_SITE_KEY KEY: {RECAPTCHA_SITE_KEY}")
                 message("3", f"RECAPTCHA SECRET KEY: {RECAPTCHA_SECRET_KEY}")
+                message("3", f"RECAPTCHA VERIFY URL: {RECAPTCHA_VERIFY_URL}")
                 message("6", f"RECAPTCHA LOGIN: {RECAPTCHA_LOGIN}")
                 message("6", f"RECAPTCHA SIGN UP: {RECAPTCHA_SIGN_UP }")
                 message("6", f"RECAPTCHA POST CREATE: {RECAPTCHA_POST_CREATE}")
