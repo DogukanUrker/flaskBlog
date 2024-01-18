@@ -1,5 +1,7 @@
 # [flaskBlog📜](https://dogukanurker.com/flaskblog)
 
+<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" style='border-radius: 0.5rem;' />
+
 **English** | [Türkçe](docs/readme_tr.md)
 
 Simple blog app built with Flask.
