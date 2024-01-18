@@ -124,6 +124,12 @@ def notFound(e):
     return render_template("404.html"), 404
 
 
+@app.errorhandler(401)
+def unauthorized(e):
+    message("1", "401 UNAUTHORIZED ERROR")
+    return render_template("401.html"), 401
+
+
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
     message("1", "CSRF ERROR")
