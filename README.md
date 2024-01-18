@@ -49,9 +49,7 @@ Simple blog app built with Flask.
 | Custom Profile Picture |   ✅   |
 | User Verification      |   ✅   |
 
-##
-
-Requirements 📦
+## Requirements 📦
 
 - Flask
 - Passlib
@@ -59,6 +57,45 @@ Requirements 📦
 - Flask-WTF
 - Flaskwebgui <sub><sup>( if you run desktop.py )</sup></sub>
 - Python 3.10 or newer
+
+## Languages 🧑🏻‍💻
+
+### Backend
+
+- Python
+
+### Frontend
+
+- HTML
+- CSS
+- JavaScript
+
+## Libraries 📚
+
+### Backend
+
+- OS
+- SSL
+- Socket
+- Smtplib
+- Secrets
+- SQLite3
+- Time
+- Random
+- DateTime
+- Email
+- Passlib
+- Flask
+- WTForms
+- Flask_WTF
+- FlaskWebGui <sub><sup>( if you run desktop.py )</sup></sub>
+
+### Frontend
+
+- jQuery
+- TailwindCSS
+- Tabler Icons
+- Summer Note
 
 ## Installation ⬇️
 
@@ -101,3 +138,7 @@ Password: admin
 ### Support 💰
 
 <a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+### Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date)](https://star-history.com/#dogukanurker/flaskblog&Date)
