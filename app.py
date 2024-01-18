@@ -41,6 +41,8 @@ from constants import (
     LOG_IN,
     APP_HOST,
     APP_NAME,
+    APP_PORT,
+    RECAPTCHA,
     DEBUG_MODE,
     TAILWIND_UI,
     REGISTRATION,
@@ -48,7 +50,8 @@ from constants import (
     APP_ROOT_PATH,
     APP_SECRET_KEY,
     SESSION_PERMANENT,
-    APP_PORT,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_SECRET_KEY,
 )
 
 from UISelector import TEMPLATE_FOLDER, STATIC_FOLDER
@@ -75,6 +78,25 @@ message("3", f"LOG FILE ROOT: {LOG_FILE_ROOT}")
 message("3", f"LOG IN: {LOG_IN}")
 message("3", f"REGISTRATION: {REGISTRATION}")
 
+
+match RECAPTCHA:
+    case True:
+        match RECAPTCHA_SITE_KEY == "" or RECAPTCHA_SECRET_KEY == "":
+            case True:
+                message(
+                    "1",
+                    f"RECAPTCHA KEYS IS UNVALID THIS MAY CAUSE THE APPLICATION TO CRASH",
+                )
+                message(
+                    "1",
+                    f"PLEASE CHECK YOUR RECAPTCHA KEYS OR SET RECAPTCHA TO FALSE FROM TRUE IN 'constants.py'",
+                )
+            case False:
+                message("2", f"RECAPTCHA IS ON")
+                message("3", f"RECAPTCHA RECAPTCHA_SITE_KEY KEY: {RECAPTCHA_SITE_KEY}")
+                message("3", f"RECAPTCHA SECRET KEY: {RECAPTCHA_SECRET_KEY}")
+    case False:
+        message("1", f"RECAPTCHA IS OFF")
 
 match TAILWIND_UI:
     case True:

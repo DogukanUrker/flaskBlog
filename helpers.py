@@ -9,10 +9,21 @@ from time import tzname
 from random import randint
 from os.path import exists
 from datetime import datetime
-from constants import LOG_FILE_ROOT, DB_USERS_ROOT, DB_POSTS_ROOT, DB_COMMENTS_ROOT
+from requests import post as requestsPost
+from constants import (
+    LOG_IN,
+    RECAPTCHA,
+    REGISTRATION,
+    LOG_FILE_ROOT,
+    DB_USERS_ROOT,
+    DB_POSTS_ROOT,
+    DB_COMMENTS_ROOT,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_SECRET_KEY,
+)
 from email.message import EmailMessage
 from passlib.hash import sha256_crypt
-from flask import render_template, Blueprint
 from forms import (
     loginForm,
     signUpForm,
@@ -27,6 +38,7 @@ from forms import (
 from flask import (
     Flask,
     flash,
+    abort,
     url_for,
     request,
     session,
