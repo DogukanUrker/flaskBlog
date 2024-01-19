@@ -1,5 +1,6 @@
 from helpers import (
     ssl,
+    abort,
     flash,
     smtplib,
     randint,
@@ -8,10 +9,16 @@ from helpers import (
     session,
     redirect,
     Blueprint,
+    RECAPTCHA,
     EmailMessage,
+    requestsPost,
     DB_USERS_ROOT,
     verifyUserForm,
     render_template,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_VERIFY_USER,
     message as messageDebugging,
 )
 
@@ -43,24 +50,61 @@ def verifyUser(codeSent):
                                     code = request.form["code"]
                                     match code == verificationCode:
                                         case True:
-                                            cursor.execute(
-                                                """update users set isVerified = "True" where lower(userName) = ? """,
-                                                [(userName.lower())],
-                                            )
-                                            connection.commit()
-                                            messageDebugging(
-                                                "2",
-                                                f'USER: "{userName}" HAS BEEN VERIFIED',
-                                            )
-                                            flash(
-                                                "Your account has been verified.",
-                                                "success",
-                                            )
-                                            return redirect("/")
+                                            match RECAPTCHA and RECAPTCHA_VERIFY_USER:
+                                                case True:
+                                                    secretResponse = request.form[
+                                                                        "g-recaptcha-response"
+                                                                    ]
+                                                    verifyResponse = requestsPost(
+                                                                        url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                                                    ).json()
+                                                    match verifyResponse[
+                                                                        "success"
+                                                                    ] == True or verifyResponse[
+                                                                        "score"
+                                                                    ] > 0.5:
+                                                        case True:
+                                                            messageDebugging("2",f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            cursor.execute(
+                                                                """update users set isVerified = "True" where lower(userName) = ? """,
+                                                                [(userName.lower())],
+                                                            )
+                                                            connection.commit()
+                                                            messageDebugging(
+                                                                "2",
+                                                                f'USER: "{userName}" HAS BEEN VERIFIED',
+                                                            )
+                                                            flash(
+                                                                "Your account has been verified.",
+                                                                "success",
+                                                            )
+                                                            return redirect("/")
+                                                        case False:
+                                                            messageDebugging("1",f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            abort(401)
+                                                case False:
+                                                    cursor.execute(
+                                                        """update users set isVerified = "True" where lower(userName) = ? """,
+                                                        [(userName.lower())],
+                                                    )
+                                                    connection.commit()
+                                                    messageDebugging(
+                                                        "2",
+                                                        f'USER: "{userName}" HAS BEEN VERIFIED',
+                                                    )
+                                                    flash(
+                                                        "Your account has been verified.",
+                                                        "success",
+                                                    )
+                                                    return redirect("/")
                                         case False:
                                             flash("Wrong Code", "error")
                             return render_template(
-                                "verifyUser.html", form=form, mailSent=True
+                                "verifyUser.html",
+                                form=form,
+                                mailSent=True,
+                                siteKey=RECAPTCHA_SITE_KEY,
+                                recaptcha=RECAPTCHA,
                             )
                         case "false":
                             match request.method == "POST":
@@ -112,7 +156,27 @@ def verifyUser(codeSent):
                                                 "From"
                                             ] = "flaskblogdogukanurker@gmail.com"
                                             message["To"] = email
-                                            server.send_message(message)
+                                            match RECAPTCHA and RECAPTCHA_VERIFY_USER:
+                                                case True:
+                                                    secretResponse = request.form[
+                                                                        "g-recaptcha-response"
+                                                                    ]
+                                                    verifyResponse = requestsPost(
+                                                                        url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                                                    ).json()
+                                                    match verifyResponse[
+                                                                        "success"
+                                                                    ] == True or verifyResponse[
+                                                                        "score"
+                                                                    ] > 0.5:
+                                                        case True:
+                                                            messageDebugging("2",f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            server.send_message(message)
+                                                        case False:
+                                                            messageDebugging("1",f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            abort(401)
+                                                case False:
+                                                    server.send_message(message)
                                             server.quit()
                                             messageDebugging(
                                                 "2",
@@ -126,7 +190,7 @@ def verifyUser(codeSent):
                                             )
                                             flash("user not found", "error")
                             return render_template(
-                                "verifyUser.html", form=form, mailSent=False
+                                "verifyUser.html", form=form, mailSent=False, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,
                             )
         case False:
             return redirect("/")
