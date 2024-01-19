@@ -2,6 +2,25 @@
 <title>Edit Post</title>
 {% endblock head %} {%block body%}
 <div class="w-fit mx-auto mt-8">
+  {% if recaptcha %}
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+  <form method="post" id="recaptchaForm">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
+    <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
+    {{form.postContent(id_="editor", autocomplete="off")}}
+    <button
+      type="submit"
+      data-sitekey="{{ siteKey }}"
+      data-callback="onSubmit"
+      data-action="submit"
+      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium "
+    >
+      Save
+    </button>
+  </form>
+  {% else %}
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
@@ -14,5 +33,6 @@
       Save
     </button>
   </form>
+  {% endif %}
 </div>
 {% endblock body %}
