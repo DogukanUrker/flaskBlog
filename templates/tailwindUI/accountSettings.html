@@ -24,17 +24,34 @@
     >
   </h2>
   <h2 class="my-4">
+    {% if recaptcha %}
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+    <form method="post" id="recaptchaForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <button
+        type="submit"
+        data-sitekey="{{ siteKey }}"
+        data-callback="onSubmit"
+        data-action="submit"
+        class="g-recaptcha hover:text-rose-500 duration-150 flex items-center w-fit mx-auto"
+      >
+        <i class="ti ti-user-x mr-1 text-2xl"></i>
+        delete account
+      </button>
+    </form>
+    {% else %}
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <button
         type="submit"
-        name="userDeleteButton"
         class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto"
       >
         <i class="ti ti-user-x mr-1 text-2xl"></i>
         delete account
       </button>
     </form>
+    {% endif %}
   </h2>
 </div>
 {% endblock body %}
