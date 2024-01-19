@@ -2,6 +2,23 @@
 <title>Change Username</title>
 {% endblock head %} {%block body%}
 <div class="text-center mt-32">
+  {% if recaptcha %}
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+  <form method="post" class="mx-auto w-fit mt-8" id="recaptchaForm">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.newUserName()}}
+    <button
+      type="submit"
+      data-sitekey="{{ siteKey }}"
+      data-callback="onSubmit"
+      data-action="submit"
+      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
+    >
+      change my username
+    </button>
+  </form>
+  {% else %}
   <form method="post" class="mx-auto w-fit mt-8">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.newUserName()}}
@@ -12,5 +29,6 @@
       change my username
     </button>
   </form>
+  {% endif %}
 </div>
 {% endblock body %}
