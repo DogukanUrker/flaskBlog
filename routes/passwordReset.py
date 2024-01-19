@@ -1,6 +1,7 @@
 from helpers import (
     ssl,
     flash,
+    abort,
     smtplib,
     randint,
     sqlite3,
@@ -9,9 +10,15 @@ from helpers import (
     Blueprint,
     EmailMessage,
     sha256_crypt,
+    RECAPTCHA,
+    requestsPost,
     DB_USERS_ROOT,
     render_template,
     passwordResetForm,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_PASSWORD_RESET,
     message as messageDebugging,
 )
 
@@ -51,25 +58,58 @@ def passwordReset(codeSent):
                                             )
                                         case False:
                                             password = sha256_crypt.hash(password)
-                                            cursor.execute(
-                                                """update users set password = ? where lower(userName) = ? """,
-                                                [(password), (userName.lower())],
-                                            )
-                                            connection.commit()
-                                            messageDebugging(
-                                                "2",
-                                                f'USER: "{userName}" CHANGED HIS PASSWORD',
-                                            )
-                                            flash(
-                                                "you need login with new password",
-                                                "success",
-                                            )
-                                            return redirect("/login/redirect=&")
+                                            match RECAPTCHA and RECAPTCHA_PASSWORD_RESET:
+                                                case True:
+                                                    secretResponse = request.form[
+                                                                        "g-recaptcha-response"
+                                                                    ]
+                                                    verifyResponse = requestsPost(
+                                                                        url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                                                    ).json()
+                                                    match verifyResponse[
+                                                                        "success"
+                                                                    ] == True or verifyResponse[
+                                                                        "score"
+                                                                    ] > 0.5:
+                                                        case True:
+                                                            messageDebugging("2",f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            cursor.execute(
+                                                                """update users set password = ? where lower(userName) = ? """,
+                                                                [(password), (userName.lower())],
+                                                            )
+                                                            connection.commit()
+                                                            messageDebugging(
+                                                                "2",
+                                                                f'USER: "{userName}" CHANGED HIS PASSWORD',
+                                                            )
+                                                            flash(
+                                                                "you need login with new password",
+                                                                "success",
+                                                            )
+                                                            return redirect("/login/redirect=&")
+                                                        case False:
+                                                            messageDebugging("1",f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            abort(401)
+                                                case False:
+                                                    cursor.execute(
+                                                        """update users set password = ? where lower(userName) = ? """,
+                                                        [(password), (userName.lower())],
+                                                    )
+                                                    connection.commit()
+                                                    messageDebugging(
+                                                        "2",
+                                                        f'USER: "{userName}" CHANGED HIS PASSWORD',
+                                                    )
+                                                    flash(
+                                                        "you need login with new password",
+                                                        "success",
+                                                    )
+                                                    return redirect("/login/redirect=&")
                                 case False:
                                     flash("passwords must match", "error")
                         case False:
                             flash("Wrong Code", "error")
-            return render_template("passwordReset.html", form=form, mailSent=True)
+            return render_template("passwordReset.html", form=form, mailSent=True, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
         case "false":
             match request.method == "POST":
                 case True:
@@ -120,7 +160,27 @@ def passwordReset(codeSent):
                             message["Subject"] = "Forgot Password?😕"
                             message["From"] = "flaskblogdogukanurker@gmail.com"
                             message["To"] = email
-                            server.send_message(message)
+                            match RECAPTCHA and RECAPTCHA_PASSWORD_RESET:
+                                case True:
+                                    secretResponse = request.form[
+                                                        "g-recaptcha-response"
+                                                    ]
+                                    verifyResponse = requestsPost(
+                                                        url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                                    ).json()
+                                    match verifyResponse[
+                                                        "success"
+                                                    ] == True or verifyResponse[
+                                                        "score"
+                                                    ] > 0.5:
+                                        case True:
+                                            messageDebugging("2",f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                            server.send_message(message)
+                                        case False:
+                                            messageDebugging("1",f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                            abort(401)
+                                case False:
+                                    server.send_message(message)
                             server.quit()
                             messageDebugging(
                                 "2",
@@ -131,4 +191,4 @@ def passwordReset(codeSent):
                         case True:
                             messageDebugging("1", f'USER: "{userName}" NOT FOUND')
                             flash("user not found", "error")
-            return render_template("passwordReset.html", form=form, mailSent=False)
+            return render_template("passwordReset.html", form=form, mailSent=False, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
