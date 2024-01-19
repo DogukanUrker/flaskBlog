@@ -10,6 +10,23 @@
     >
   </div>
   <div>
+    {% if recaptcha %}
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+    <form method="post" id="recaptchaForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      {{form.newProfilePictureSeed()}}
+      <button
+        type="submit"
+        data-sitekey="{{ siteKey }}"
+        data-callback="onSubmit"
+        data-action="submit"
+        class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
+      >
+        Set Profile Picture Seed
+      </button>
+    </form>
+    {% else %}
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       {{form.newProfilePictureSeed()}}
@@ -20,6 +37,7 @@
         Set Profile Picture Seed
       </button>
     </form>
+    {% endif %}
   </div>
 </div>
 {% endblock body %}
