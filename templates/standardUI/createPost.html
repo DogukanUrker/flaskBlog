@@ -2,6 +2,30 @@
 <title>Create Post</title>
 {% endblock head %} {%block body%}
 <div class="container">
+  {% if recaptcha %}
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+  <form
+    method="post"
+    class="form formPost centeredHorizontally"
+    id="recaptchaForm"
+  >
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
+    {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}
+    <small>(separete with comma)</small>
+    {{form.postContent(class_="editor", autocomplete="off")}}
+    <button
+      type="submit"
+      data-sitekey="{{ siteKey }}"
+      data-callback="onSubmit"
+      data-action="submit"
+      class="g-recaptcha btn btnPrimary"
+    >
+      Post
+    </button>
+  </form>
+  {% else %}
   <form method="post" class="form formPost centeredHorizontally">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
@@ -10,5 +34,6 @@
     {{form.postContent(class_="editor", autocomplete="off")}}
     <button type="submit" class="btn btnPrimary">Post</button>
   </form>
+  {% endif %}
 </div>
 {% endblock body %}
