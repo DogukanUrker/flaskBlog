@@ -11,14 +11,16 @@ if (localStorage.getItem(theme) === "dark") {
 
 function toLight() {
   localStorage.setItem(theme, "light");
-  body.className = "text-neutral-100 bg-neutral-900 selection:bg-rose-500";
+  body.className =
+    "text-neutral-100 bg-neutral-900 selection:bg-neutral-800 selection:text-rose-500";
   changeTheme.innerHTML = '<i class="ti ti-moon"></i>';
   changeTheme.setAttribute("onclick", "javascript: toDark();");
 }
 
 function toDark() {
   localStorage.setItem(theme, "dark");
-  body.className = "text-neutral-900 bg-neutral-100 selection:bg-rose-500";
+  body.className =
+    "text-neutral-900 bg-neutral-100 selection:bg-neutral-200 selection:text-rose-500";
   changeTheme.innerHTML = '<i class="ti ti-sun"></i>';
   changeTheme.setAttribute("onclick", "javascript: toLight();");
 }

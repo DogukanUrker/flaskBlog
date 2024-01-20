@@ -28,11 +28,13 @@
 }
 
 *::selection {
-  background: var(--primaryColor);
+  color: var(--primaryColor);
+  background: var(--themePrimary);
 }
 
 *::-moz-selection {
-  background: var(--primaryColor);
+  color: var(--primaryColor);
+  background: var(--themePrimary);
 }
 
 *::-webkit-selection {
