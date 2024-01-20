@@ -59,19 +59,20 @@
           delete user
         </button>
       </form>
-      {% if user[5] == "admin" %}
-      <a
-        href="/setuserrole/{{user[1].lower()}}/user"
-        class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
-        ><i class="ti ti-user-down mr-1 text-xl"></i> set user role to user</a
-      >
-      {% else %}
-      <a
-        href="/setuserrole/{{user[1].lower()}}/admin"
-        class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
-        ><i class="ti ti-user-up mr-1 text-xl"></i>set user role to admin</a
-      >
-      {% endif %}
+      <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="userName" value="{{user[1]}}" />
+        <button
+          type="submit"
+          name="userRoleChangeButton"
+          class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
+        >
+          {% if user[5] == "admin" %}
+          <i class="ti ti-user-down mr-1 text-xl"></i> set user role to user {%
+          else %} <i class="ti ti-user-up mr-1 text-xl"></i> set user role to
+          admin {% endif %}
+        </button>
+      </form>
     </section>
   </div>
   {% endfor %}

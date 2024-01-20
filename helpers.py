@@ -134,3 +134,31 @@ def getProfilePicture(userName):
         [(userName.lower())],
     )
     return cursor.fetchone()[0]
+
+
+def changeUserRole(userName):
+    userName = userName.lower()
+    connection = sqlite3.connect(DB_USERS_ROOT)
+    cursor = connection.cursor()
+    cursor.execute(
+        """select role from users where lower(userName) = ? """,
+        [(userName)],
+    )
+    role = cursor.fetchone()[0]
+    match role:
+        case "admin":
+            newRole = "user"
+        case "user":
+            newRole = "admin"
+    cursor.execute(
+        """update users set role = ? where lower(userName) = ? """,
+        [(newRole), (userName)],
+    )
+    message(
+        "2",
+        f'ADMIN: "{session["userName"]}" CHANGED USER: "{userName}"s ROLE TO "{newRole}" ',
+    )
+    connection.commit()
+    match session["userName"].lower() == userName:
+        case True:
+            return redirect("/")

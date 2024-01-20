@@ -5,6 +5,7 @@ from helpers import (
     redirect,
     Blueprint,
     DB_USERS_ROOT,
+    changeUserRole,
     render_template,
 )
 from delete import deleteUser
@@ -29,6 +30,9 @@ def adminPanelUsers():
                     match "userDeleteButton" in request.form:
                         case True:
                             deleteUser(request.form["userName"])
+                    match "userRoleChangeButton" in request.form:
+                        case True:
+                            changeUserRole(request.form["userName"])
             match role == "admin":
                 case True:
                     connection = sqlite3.connect(DB_USERS_ROOT)
