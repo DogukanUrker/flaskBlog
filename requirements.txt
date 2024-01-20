@@ -3,3 +3,4 @@ flask_wtf==1.2.1
 flaskwebgui==1.0.8
 passlib==1.7.4
 WTForms==3.1.2
+requests==2.31.0
