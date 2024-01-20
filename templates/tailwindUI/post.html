@@ -2,13 +2,13 @@
 <title>{{title}}</title>
 {% endblock head %} {%block body%}
 <div class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 mx-auto mt-16 break-words">
-  <h1 class="text-3xl mb-6 text-rose-500 w-full text-center select-none font-bold">
+  <h1 class="text-3xl mb-6 text-rose-500 w-full text-center font-bold">
     {{title}}
   </h1>
   <p>
     {{content|safe}} <br />
   </p>
-  <div>
+  <div class="select-none">
     <div class="flex w-full justify-between my-1">
       <div class="flex items-center"><i class="ti ti-tags mr-1 text-2xl"></i>
         {{tags.replace(",",", ")}} </div>
@@ -73,7 +73,7 @@
       <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2"><i class="ti ti-arrow-narrow-up mr-1 text-xl"></i>
       </button></div>
     {% else %}
-    <p>
+    <p class="select-none">
       you need
       <a
         href="/login/redirect=&post&{{id}}"
