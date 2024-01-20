@@ -67,7 +67,7 @@
     </div>
     {% endfor %}
   </div>
-  <div class="mx-auto w-fit text-center my-8"><form method="post" class="w-full">
+  <div class="mx-auto text-center my-8 w-10/12 md:w-5/12 lg:w-4/12 xl:w-3/12"><form method="post" class="">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if session["userName"] %} <div class="border w-full mx-auto rounded border-rose-500/25 flex justify-between content-center">{{form.comment(class_="bg-transparent focus:outline-none rounded-md p-2 text-center h-20 w-72 resize-none mx-auto mb-0")}}
       <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2"><i class="ti ti-arrow-narrow-up mr-1 text-xl"></i>
