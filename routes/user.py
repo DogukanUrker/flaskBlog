@@ -13,11 +13,12 @@ userBlueprint = Blueprint("user", __name__)
 
 @userBlueprint.route("/user/<userName>")
 def user(userName):
+    userName = userName.lower()
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(f"select userName from users")
     users = cursor.fetchall()
-    match str(userName).lower() in str(users).lower():
+    match userName in str(users).lower():
         case True:
             message("2", f'USER: "{userName}" FOUND')
             cursor.execute(
