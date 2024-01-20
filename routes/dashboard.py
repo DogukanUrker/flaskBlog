@@ -1,6 +1,4 @@
 from helpers import (
-    abort,
-    message,
     flash,
     url_for,
     request,
@@ -9,15 +7,9 @@ from helpers import (
     message,
     redirect,
     Blueprint,
-    RECAPTCHA,
-    requestsPost,
     DB_POSTS_ROOT,
-    render_template,
     DB_COMMENTS_ROOT,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_POST_DELETE,
+    render_template,
 )
 from delete import deletePost
 
@@ -32,35 +24,17 @@ def dashboard(userName):
                 case True:
                     match request.method == "POST":
                         case True:
-                            match RECAPTCHA and RECAPTCHA_POST_DELETE:
+                            match "postDeleteButton" in request.form:
                                 case True:
-                                    secretResponse = request.form[
-                                                "g-recaptcha-response"
-                                            ]
-                                    verifyResponse = requestsPost(
-                                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                                            ).json()
-                                    match verifyResponse[
-                                                "success"
-                                            ] == True or verifyResponse[
-                                                "score"
-                                            ] > 0.5:
-                                        case True:
-                                            message("2",f"POST DELETE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
-                                            deletePost(request.form["postID"])
-                                        case False:
-                                            message("1",f"POST DELETE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
-                                            abort(401)
-                                case False:
                                     deletePost(request.form["postID"])
-                            return (
-                                redirect(
-                                    url_for(
-                                        "dashboard.dashboard", userName=userName,
+                                    return (
+                                        redirect(
+                                            url_for(
+                                                "dashboard.dashboard", userName=userName
+                                            )
+                                        ),
+                                        301,
                                     )
-                                ),
-                                301,
-                            )
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
@@ -90,7 +64,7 @@ def dashboard(userName):
                         posts=posts,
                         comments=comments,
                         showPosts=showPosts,
-                        showComments=showComments, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,
+                        showComments=showComments,
                     )
                 case False:
                     message(
