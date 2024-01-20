@@ -97,8 +97,12 @@
   >
     <div tag="content my-2">{{comment[2]}}</div>
     <section class="flex w-full justify-between my-2">
-      <p>Creation Date: {{comment[4]}}</p>
-      <p>Creation Time: {{comment[5]}}</p>
+      <p class="flex items-center">
+        <i class="ti ti-calendar mr-1 text-xl"></i>{{comment[4]}}
+      </p>
+      <p class="flex items-center">
+        <i class="ti ti-clock mr-1 text-xl"></i>{{comment[5]}}
+      </p>
     </section>
     <a
       href="/post/{{comment[1]}}"
