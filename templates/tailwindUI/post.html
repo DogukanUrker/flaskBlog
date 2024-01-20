@@ -20,7 +20,7 @@
        <h5 >{{time}}</h5>
     </div>
     <div class="flex w-full justify-between my-1">
-      <a href="/user/{{author|lower}}">
+      <a href="/user/{{author|lower}}" class="hover:text-rose-500 duration-150">
         <h5 class="m-1 flex">
           <img
             class="w-6 mr-2 select-none"
@@ -44,24 +44,24 @@
     </a>
   </div>
   {% endif %}
-  <div class="flex flex-col">
+  <div>
     {% for comment in comments %}
-    <div class="flex justify-between gap-8 mx-auto mt-8 mb-4 p-2 items-center max-w-xl">
-      <div >
-        <a href="/user/{{comment[3]}}" class="flex gap-3 items-center"><img
-          class="w-8 select-none"
+    <div class="flex flex-col mx-auto mt-8 mb-4 p-2 max-w-lg">
+      <div class="flex w-full justify-between my-1"><div class="mx-2 my-1">
+        <a href="/user/{{comment[3]}}" class="flex gap-3 items-center hover:text-rose-500 duration-150 select-none"><img
+          class="w-8"
           src="{{ getProfilePicture(comment[3]) }}"
           alt=""
-        /> <div class="hidden md:block">{{comment[3]}}:</div> </a>
+        /> <div class="mr-1">{{comment[3]}}:</div> </a>
       </div>
-      <p class="break-words max-w-52 md:max-w-72">{{comment[2]}}</p>{% if session["userName"] == comment[3] %}
-      <form method="post">
+      <form method="post" class="mx-2 my-1">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="commentID" value="{{comment[0]}}" />
         <button type="submit" name="commentDeleteButton" class="hover:text-rose-500 duration-150">
           <i class="ti ti-trash-x mr-1 text-xl"></i>
         </button>
-      </form>
+      </form></div>
+      <p class="break-words ml-8">{{comment[2]}}</p>{% if session["userName"] == comment[3] %}
     </div>
     {% endif %} 
     </div>
