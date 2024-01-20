@@ -20,6 +20,24 @@
   <div class="content" tag="content">{{post[3]|safe}}</div>
   <section>
     <a href="/editpost/{{post[0]}}" class="btn btnLink textPrimary">edit</a>
+    {% if recaptcha %}
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+    <form method="post" id="recaptchaForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <input type="hidden" name="postID" value="{{post[0]}}" />
+      <button
+        type="submit"
+        name="postDeleteButton"
+        data-sitekey="{{ siteKey }}"
+        data-callback="onSubmit"
+        data-action="submit"
+        class="g-recaptcha btn btnLink textPrimary"
+      >
+        delete
+      </button>
+    </form>
+    {% else %}
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <input type="hidden" name="postID" value="{{post[0]}}" />
@@ -31,6 +49,7 @@
         delete
       </button>
     </form>
+    {% endif %}
   </section>
   <div class="info">
     <p class="tags">Tags: {{post[2]}}</p>
