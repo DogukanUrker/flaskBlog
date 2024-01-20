@@ -1,8 +1,10 @@
-# [flaskBlog](https://dogukanurker.com/flaskblog)  [<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" style='border-radius: 0.5rem; widht:60px; height: 60px;' />](https://dogukanurker.com/flaskblog)
+<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/GitHubBanner.png" style='border-radius: 0.5rem; widht:768px; height: 384px;' />
+
+ # [FlaskBlog](https://dogukanurker.com/flaskblog)  
 
 **English** | [Türkçe](docs/readme_tr.md)
 
-<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/GitHubBanner.png" style='border-radius: 0.5rem; widht:768px; height: 384px;' />
+
 
 Simple blog app built with Flask.
 <br/>
