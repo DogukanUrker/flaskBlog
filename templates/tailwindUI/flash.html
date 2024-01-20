@@ -2,15 +2,18 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/flash.css') }}"
 />
-<div id="flashContainer" class="absolute w-fit text-center text-xl select-none">
+<div id="flashContainer" class="fixed w-fit text-center text-xl select-none">
   {% with messages = get_flashed_messages(with_categories=true) %} {% if
   messages %} {% for category, message in messages %} {% if category ==
   "success" %}
-  <p id="flash" class="bg-green-500 rounded p-2">
+  <p
+    id="flash"
+    class="text-green-500 bg-green-200 rounded p-2 font-medium shadow"
+  >
     {{ message }}
   </p>
   {% else %}
-  <p id="flash" class="bg-red-500 rounded p-2">
+  <p id="flash" class="text-red-500 bg-red-200 rounded p-2 font-medium shadow">
     {{ message }}
   </p>
   {% endif %} {% endfor %} {% endif %} {% endwith %}
