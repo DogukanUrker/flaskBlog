@@ -12,6 +12,7 @@ from datetime import datetime
 from requests import post as requestsPost
 from constants import (
     LOG_IN,
+    APP_NAME,
     BREAKER_TEXT,
     REGISTRATION,
     LOG_FILE_ROOT,

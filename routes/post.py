@@ -5,6 +5,7 @@ from helpers import (
     request,
     message,
     url_for,
+    APP_NAME,
     redirect,
     addPoints,
     Blueprint,
@@ -93,6 +94,7 @@ def post(postID):
                 time=post[6],
                 form=form,
                 comments=comments,
+                appName=APP_NAME,
             )
         case False:
             return render_template("404.html")

@@ -7,15 +7,21 @@
   </h1>
   <p>
     {{content|safe}} <br />
-    <div class="flex items-center"><i class="ti ti-tags mr-1 text-2xl"></i>
-     {{tags.replace(",",", ")}} </div>
   </p>
-  <div class="flex place-content-between my-4">
-    <div class="text-left">
-      <h5 class="m-2"><div class="flex items-center"><i class="ti ti-eye mr-1 text-2xl"></i>
+  <div>
+    <div class="flex w-full justify-between my-1">
+      <div class="flex items-center"><i class="ti ti-tags mr-1 text-2xl"></i>
+        {{tags.replace(",",", ")}} </div>
+        <a target="_blank" href="https://x.com/intent/tweet?text={{title}} by {{author}} on {{appName}} {{ request.url }}"><i class="hover:text-rose-500 duration-150 ti ti-brand-x text-2xl"></i></a>
+    </div>
+    <div class="flex w-full justify-between my-1">
+      <h5 ><div class="flex items-center"><i class="ti ti-eye mr-1 text-2xl"></i>
        {{views}}</div></h5>
+       <h5 >{{time}}</h5>
+    </div>
+    <div class="flex w-full justify-between my-1">
       <a href="/user/{{author|lower}}">
-        <h5 class="m-2 flex items-baseline">
+        <h5 class="m-1 flex">
           <img
             class="w-6 mr-2 select-none"
             src="{{ getProfilePicture(author) }}"
@@ -23,10 +29,7 @@
           />{{author}}
         </h5></a
       >
-    </div>
-    <div class="text-right">
-      <h5 class="m-2">{{time}}</h5>
-      <h5 class="m-2">{{date}}</h5>
+      <h5 >{{date}}</h5>
     </div>
   </div>
   {% if author == session["userName"] %}
