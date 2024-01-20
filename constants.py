@@ -2,7 +2,7 @@ from helpers import secrets, socket
 
 
 ### GENERAL APP SETTINGS ###
-APP_NAME = "flaskblog"  # NAME OF THE FLASK APP.
+APP_NAME = "flaskBlog"  # NAME OF THE FLASK APP.
 APP_ROOT_PATH = "."  # THE PATH TO THE ROOT OF THE APP FILES.
 APP_HOST = socket.gethostbyname(
     socket.gethostname()
