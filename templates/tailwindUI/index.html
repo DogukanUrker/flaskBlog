@@ -2,12 +2,12 @@
 <title>flaskBlog</title>
 {% endblock head %} {%block body%} {% for post in posts %}
 <div
-  class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md
+  class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md
 border-gray-500/25"
 >
   <a
     href="post/{{post[0]}}"
-    class="text-rose-500 h-64 pb-8 text-2xl hover:text-rose-500/75 duration-150 break-words"
+    class="text-rose-500 h-64 pb-8 text-2xl hover:text-rose-500/75 duration-150 break-words font-medium"
     >{{post[1]}}</a
   >
   <div tag="content" class="h-60 overflow-y-hidden mt-6 mb-3 break-words">
