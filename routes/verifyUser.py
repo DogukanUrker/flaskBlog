@@ -1,3 +1,4 @@
+# Import the necessary modules and functions
 from helpers import (
     ssl,
     abort,
@@ -22,11 +23,22 @@ from helpers import (
     message as messageDebugging,
 )
 
+# Create a blueprint for the verify user route
 verifyUserBlueprint = Blueprint("verifyUser", __name__)
 
 
 @verifyUserBlueprint.route("/verifyUser/codesent=<codeSent>", methods=["GET", "POST"])
 def verifyUser(codeSent):
+    """
+    This function handles the verification of the user's account.
+
+    Args:
+        codeSent (str): A string indicating whether the verification code has been sent or not.
+
+    Returns:
+        redirect: A redirect to the homepage if the user is verified, or a rendered template with the verification form.
+
+    """
     match "userName" in session:
         case True:
             userName = session["userName"]
