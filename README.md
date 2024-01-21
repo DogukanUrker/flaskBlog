@@ -1,10 +1,8 @@
 <img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/GitHubBanner.png" style='border-radius: 0.5rem; widht:768px; height: 384px;' />
 
- # [FlaskBlog](https://dogukanurker.com/flaskblog)  
+# [FlaskBlog](https://dogukanurker.com/flaskblog)
 
 **English** | [Türkçe](docs/readme_tr.md)
-
-
 
 Simple blog app built with Flask.
 <br/>
@@ -21,7 +19,6 @@ Simple blog app built with Flask.
 [click for more images📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
 
 ## Features 💫
-
 
 | Feature                | Status |
 | :--------------------- | :----: |
@@ -60,7 +57,6 @@ Simple blog app built with Flask.
 - Passlib
 - WTForms
 - Flask-WTF
-- Flaskwebgui <sub><sup>( if you run desktop.py )</sup></sub>
 - Python 3.10 or newer
 
 ## Languages 🧑🏻‍💻
@@ -93,7 +89,6 @@ Simple blog app built with Flask.
 - Flask
 - WTForms
 - Flask_WTF
-- FlaskWebGui <sub><sup>( if you run desktop.py )</sup></sub>
 
 ### Frontend
 

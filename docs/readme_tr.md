@@ -20,34 +20,34 @@ Flask ile oluşturulmuş basit bir blog uygulaması.
 
 | Özellik                    | Durum |
 | :------------------------- | :---: |
-| Kullanıcı Sayfası          |   ✅   |
-| Kullanıcı Girişi           |   ✅   |
-| Kullanıcı Puanları         |   ✅   |
-| Kullanıcı Silme            |   ✅   |
-| Kullanıcı Oturumu Kapat    |   ✅   |
-| Kullanıcı Kaydı            |   ✅   |
-| Kullanıcı Adı Değişikliği  |   ✅   |
-| Kullanıcı Ayarları Sayfası |   ✅   |
-| Kullanıcı Profil Resimleri |   ✅   |
-| Yönetici Paneli            |   ✅   |
-| Gösterge Tablosu Sayfası   |   ✅   |
-| Şifre Sıfırlama            |   ✅   |
-| Şifre Değiştirme           |   ✅   |
-| Yaz Notları Editörü        |   ✅   |
-| Arama Çubuğu               |   ✅   |
-| Düzenleme Sonrası          |   ✅   |
-| Gönderi Görüntüleme        |   ✅   |
-| Gönderi Sil                |   ✅   |
-| Gönderi Oluşturma          |   ✅   |
-| Yorum                      |   ✅   |
-| Yorum Sil                  |   ✅   |
-| Günlük kaydı               |   ✅   |
-| Hata Ayıklama Mesajları    |   ✅   |
-| Veritabanı Denetleyicisi   |   ✅   |
-| Koyu/Açık Temalar          |   ✅   |
-| Duyarlı Tasarım            |   ✅   |
-| Özel Profil Resmi          |   ✅   |
-| Kullanıcı Doğrulama        |   ✅   |
+| Kullanıcı Sayfası          |  ✅   |
+| Kullanıcı Girişi           |  ✅   |
+| Kullanıcı Puanları         |  ✅   |
+| Kullanıcı Silme            |  ✅   |
+| Kullanıcı Oturumu Kapat    |  ✅   |
+| Kullanıcı Kaydı            |  ✅   |
+| Kullanıcı Adı Değişikliği  |  ✅   |
+| Kullanıcı Ayarları Sayfası |  ✅   |
+| Kullanıcı Profil Resimleri |  ✅   |
+| Yönetici Paneli            |  ✅   |
+| Gösterge Tablosu Sayfası   |  ✅   |
+| Şifre Sıfırlama            |  ✅   |
+| Şifre Değiştirme           |  ✅   |
+| Yaz Notları Editörü        |  ✅   |
+| Arama Çubuğu               |  ✅   |
+| Düzenleme Sonrası          |  ✅   |
+| Gönderi Görüntüleme        |  ✅   |
+| Gönderi Sil                |  ✅   |
+| Gönderi Oluşturma          |  ✅   |
+| Yorum                      |  ✅   |
+| Yorum Sil                  |  ✅   |
+| Günlük kaydı               |  ✅   |
+| Hata Ayıklama Mesajları    |  ✅   |
+| Veritabanı Denetleyicisi   |  ✅   |
+| Koyu/Açık Temalar          |  ✅   |
+| Duyarlı Tasarım            |  ✅   |
+| Özel Profil Resmi          |  ✅   |
+| Kullanıcı Doğrulama        |  ✅   |
 
 ## Gereksinimler 📦
 
@@ -55,7 +55,6 @@ Flask ile oluşturulmuş basit bir blog uygulaması.
 - Passlib
 - WTForms
 - Flask-WTF
-- Flaskwebgui <sub><sup>( desktop.py dosyasını çalıştırırsanız )</sup></sub>
 - Python 3.10 veya daha yeni
 
 ## Kurulum ⬇️
