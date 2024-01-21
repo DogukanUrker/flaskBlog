@@ -1,8 +1,25 @@
+"""
+This file contains the database schemas for the app.
+
+The database consists of three tables:
+1. Users: stores information about the users, including their username, email, password, profile picture, role, points, creation date, creation time, and verification status.
+2. Posts: stores information about the posts, including their title, tags, content, author, date, time, views, last edit date, and last edit time.
+3. Comments: stores information about the comments, including the post they are associated with, the comment text, the user who wrote the comment, the date, and the time.
+
+This file contains functions to create the tables if they do not already exist, and to ensure that they have the correct structure.
+"""
+
 from helpers import mkdir, exists, message, sqlite3
 from constants import DB_FOLDER_ROOT, DB_USERS_ROOT, DB_POSTS_ROOT, DB_COMMENTS_ROOT
 
 
 def dbFolder():
+    """
+    Checks if the database folder exists, and creates it if it does not.
+
+    Returns:
+        None
+    """
     match exists(DB_FOLDER_ROOT):
         case True:
             message("6", f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" FOUND')
@@ -13,6 +30,12 @@ def dbFolder():
 
 
 def usersTable():
+    """
+    Checks if the users table exists in the database, and creates it if it does not.
+
+    Returns:
+        None
+    """
     match exists(DB_USERS_ROOT):
         case True:
             message("6", f'USERS DATABASE: "{DB_USERS_ROOT}" FOUND')
@@ -30,17 +53,17 @@ def usersTable():
         message("1", f'TABLE: "Users" NOT FOUND IN "{DB_USERS_ROOT}"')
         usersTable = """
         CREATE TABLE IF NOT EXISTS Users(
-	    "userID"	INTEGER NOT NULL UNIQUE,
-	    "userName"	TEXT UNIQUE,
-	    "email"	TEXT UNIQUE,
-	    "password"	TEXT,
-        "profilePicture" TEXT,
-	    "role"	TEXT,
-	    "points"	INTEGER,
-	    "creationDate"	TEXT,
-	    "creationTime"	TEXT,
-        "isVerified"	TEXT,
-	    PRIMARY KEY("userID" AUTOINCREMENT)
+            "userID"	INTEGER NOT NULL UNIQUE,
+            "userName"	TEXT UNIQUE,
+            "email"	TEXT UNIQUE,
+            "password"	TEXT,
+            "profilePicture" TEXT,
+            "role"	TEXT,
+            "points"	INTEGER,
+            "creationDate"	TEXT,
+            "creationTime"	TEXT,
+            "isVerified"	TEXT,
+            PRIMARY KEY("userID" AUTOINCREMENT)
         );"""
         cursor.execute(usersTable)
         connection.commit()
@@ -49,6 +72,12 @@ def usersTable():
 
 
 def postsTable():
+    """
+    Checks if the posts table exists in the database, and creates it if it does not.
+
+    Returns:
+        None
+    """
     match exists(DB_POSTS_ROOT):
         case True:
             message("6", f'POSTS DATABASE: "{DB_POSTS_ROOT}" FOUND')
@@ -66,17 +95,17 @@ def postsTable():
         message("1", f'TABLE: "Posts" NOT FOUND IN "{DB_POSTS_ROOT}"')
         postsTable = """
         CREATE TABLE "posts" (
-    	"id"	INTEGER NOT NULL UNIQUE,
-    	"title"	TEXT NOT NULL,
-    	"tags"	TEXT,
-    	"content"	TEXT NOT NULL,
-    	"author"	TEXT NOT NULL,
-    	"date"	TEXT NOT NULL,
-    	"time"	TEXT NOT NULL,
-    	"views"	TEXT,
-    	"lastEditDate"	TEXT,
-        "lastEditTime"	TEXT,
-    	PRIMARY KEY("id" AUTOINCREMENT)
+            "id"	INTEGER NOT NULL UNIQUE,
+            "title"	TEXT NOT NULL,
+            "tags"	TEXT,
+            "content"	TEXT NOT NULL,
+            "author"	TEXT NOT NULL,
+            "date"	TEXT NOT NULL,
+            "time"	TEXT NOT NULL,
+            "views"	TEXT,
+            "lastEditDate"	TEXT,
+            "lastEditTime"	TEXT,
+            PRIMARY KEY("id" AUTOINCREMENT)
         );"""
         cursor.execute(postsTable)
         connection.commit()
@@ -85,6 +114,12 @@ def postsTable():
 
 
 def commentsTable():
+    """
+    Checks if the comments table exists in the database, and creates it if it does not.
+
+    Returns:
+        None
+    """
     match exists(DB_COMMENTS_ROOT):
         case True:
             message("6", f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" FOUND')
@@ -102,13 +137,13 @@ def commentsTable():
         message("1", f'TABLE: "Comments" NOT FOUND IN "{DB_COMMENTS_ROOT}"')
         commentsTable = """
         CREATE TABLE IF NOT EXISTS comments(
-	    "id"	INTEGER NOT NULL,
-	    "post"	INTEGER,
-	    "comment"	TEXT,
-	    "user"	TEXT,
-	    "date"	TEXT,
-	    "time"	TEXT,
-	    PRIMARY KEY("id" AUTOINCREMENT)
+            "id"	INTEGER NOT NULL,
+            "post"	INTEGER,
+            "comment"	TEXT,
+            "user"	TEXT,
+            "date"	TEXT,
+            "time"	TEXT,
+            PRIMARY KEY("id" AUTOINCREMENT)
         );"""
         cursor.execute(commentsTable)
         connection.commit()
