@@ -1,27 +1,34 @@
+/* Select all the elements that are descendants of the element with the class note-btn-group and set their color to black */
 .note-btn-group * {
   color: black;
 }
 
+/* Select the element with the class note-editable and set its color to black, its background color to white and its text alignment to left */
 .note-editable {
   color: black !important;
   background-color: white;
   text-align: left !important;
 }
 
+/* Select all the elements that are descendants of the element with the class note-editable and set their color to black */
 .note-editable * {
   color: black !important;
 }
 
+/* Select all the elements that are descendants of the element with the class note-modal-content and set their color to black */
 .note-modal-content * {
   color: black !important;
 }
 
+/* Select the element with the class note-editor and set its width to 37.22rem and its margin to auto */
 .note-editor {
   width: 37.22rem;
   margin: auto;
 }
 
+/* Use a media query to apply the following rules when the screen width is less than or equal to 900px */
 @media screen and (max-width: 900px) {
+  /* Select the element with the class note-editor and set its width to 90% */
   .note-editor {
     width: 90%;
   }

@@ -1,3 +1,4 @@
+/* Select all the elements with the class container and set their text alignment to center, position to absolute, transform to center, top to 50% and left to 50% and padding to 1rem */
 .container {
   text-align: center;
   transform: translate(-50%, -50%);
@@ -7,6 +8,7 @@
   padding: 1rem;
 }
 
+/* Select the element with the id passwordReset and set its display to block, font size to 0.75rem and top margin to 0.5rem */
 #passwordReset {
   display: block;
   font-size: 0.75rem;

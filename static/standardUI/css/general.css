@@ -1,3 +1,4 @@
+/* Define the root element and set the custom properties for the theme colors and the primary color */
 :root {
   --themePrimary: #000;
   --themeSecondary: #fff;
@@ -6,6 +7,7 @@
   --primaryHelper: #f43f5dc5;
 }
 
+/* Select all the elements and set their font family to system-ui, color to theme primary color and overflow wrap to break word */
 * {
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -13,65 +15,79 @@
   overflow-wrap: break-word !important;
 }
 
+/* Select all the elements that have a webkit scrollbar and set their width to 0.4rem */
 *::-webkit-scrollbar {
   width: 0.4rem;
 }
 
+/* Select all the elements that have a webkit scrollbar thumb and set their border radius to 1rem and background to primary color */
 *::-webkit-scrollbar-thumb {
   border-radius: 1rem;
   background: var(--primaryColor);
 }
 
+/* Select all the elements that have a webkit scrollbar track or button and set their background to transparent */
 *::-webkit-scrollbar-track,
 *::-webkit-scrollbar-button {
   background: transparent;
 }
 
+/* Select all the elements that have a selection and set their color to primary color and background to theme primary color */
 *::selection {
   color: var(--primaryColor);
   background: var(--themePrimary);
 }
 
+/* Select all the elements that have a moz selection and set their color to primary color and background to theme primary color */
 *::-moz-selection {
   color: var(--primaryColor);
   background: var(--themePrimary);
 }
 
+/* Select all the elements that have a webkit selection and set their background to primary color */
 *::-webkit-selection {
   background: var(--primaryColor);
 }
 
+/* Select the html element and set its font size to 125% */
 html {
   font-size: 125% !important;
 }
 
+/* Select the body element and set its background color to theme secondary color */
 body {
   background-color: var(--themeSecondary);
 }
 
+/* Select all the anchor elements and set their text decoration to none and user-select to none */
 a {
   text-decoration: none;
   user-select: none;
 }
 
+/* Select all the button elements and set their background color to transparent and border to 0 */
 button {
   background-color: transparent;
   border: 0;
 }
 
+/* Select the element with the class grecaptcha-badge and set its visibility to hidden */
 .grecaptcha-badge {
   visibility: hidden !important;
 }
 
+/* Select the element with the class ti and set its font size to 1.5rem */
 .ti {
   font-size: 1.5rem;
 }
 
+/* Select the element with the class form and set its height to fit content and width to fit content */
 .form {
   height: fit-content;
   width: fit-content;
 }
 
+/* Select the element with the class input and set its bottom margin to 1rem, border to 0px, height to 2rem, width to 14rem, text alignment to center, display to block, color to theme primary color, background color to transparent, font size to 1rem, border bottom to 1px solid theme primary color, transition to 0.4s and border radius to 0.1rem */
 .input {
   margin-bottom: 1rem;
   border: 0px;
@@ -87,16 +103,19 @@ button {
   border-radius: 0.1rem;
 }
 
+/* Select the element with the class centeredHorizontally and set its left and right margin to auto */
 .centeredHorizontally {
   margin-left: auto;
   margin-right: auto;
 }
 
+/* Select the element with the class input that is focused and set its border color to primary color */
 .input:focus {
   outline: none;
   border-color: var(--primaryColor);
 }
 
+/* Select the element with the class btn and set its height to fit content, width to fit content, border radius to 2rem, border to 0px, transition to 0.25s, font weight to 500, cursor to pointer, font size to 0.9rem, text alignment to center and margin to 0rem 0.25rem */
 .btn {
   height: fit-content;
   width: fit-content;
@@ -110,54 +129,66 @@ button {
   margin: 0rem 0.25rem;
 }
 
+/* Select the element with the class btnPrimary and set its padding to 0.5rem 1rem 0.5rem 1rem, color to theme secondary color and background color to theme primary color */
 .btnPrimary {
   padding: 0.5rem 1rem 0.5rem 1rem;
   color: var(--themeSecondary);
   background-color: var(--themePrimary);
 }
 
+/* Select the element with the class btnLink and set its background color to transparent */
 .btnLink {
   background-color: transparent;
 }
 
+/* Select the element with the class btnPrimary that is hovered and set its background color to theme helper color */
 .btnPrimary:hover {
   background-color: var(--themeHelper);
 }
 
+/* Select the element with the class btnLink that is hovered and set its color to theme helper color */
 .btnLink:hover {
   color: var(--themeHelper);
 }
 
+/* Select the element with the class textPrimary and set its color to primary color and transition to 0.25s */
 .textPrimary {
   color: var(--primaryColor);
   transition: 0.25s;
 }
 
+/* Select the element with the class textPrimary that is hovered and set its color to primary helper color */
 .textPrimary:hover {
   color: var(--primaryHelper);
 }
 
+/* Select the element with the class errorMessage or the element with the class formPost and set their text alignment to center and top margin to 6rem */
 .errorMessage,
 .formPost {
   text-align: center;
   margin-top: 6rem;
 }
 
+/* Select the element with the class textCenter and set its text alignment to center */
 .textCenter {
   text-align: center;
 }
 
+/* Select the element with the class goBackToAdmin and set its position to fixed, bottom to 0px and left to 0px */
 .goBackToAdmin {
   position: fixed;
   bottom: 0px;
   left: 0px;
 }
 
+/* Use a media query to apply the following rules when the screen width is less than or equal to 600px */
 @media screen and (max-width: 600px) {
+  /* Select the body element and set its max-width to 100% */
   body {
     max-width: 100% !important;
   }
 
+  /* Select all the elements that are children of the element with the class navbar and set their width to 100% */
   .navbar * {
     width: 100% !important;
   }

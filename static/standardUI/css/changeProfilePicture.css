@@ -1,7 +1,9 @@
+/* Select all the paragraph elements and set their margin to 0.5rem */
 p {
   margin: 0.5rem;
 }
 
+/* Select all the elements with the class seedForm and set their width to fit content and their margin to 1rem auto 0 auto */
 .seedForm {
   width: fit-content;
   margin: 1rem auto 0 auto;

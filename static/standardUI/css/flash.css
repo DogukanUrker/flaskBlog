@@ -1,3 +1,4 @@
+/* Select the element with the id flash and set its text alignment to center, border radius to 1rem, padding to 0.5rem and user-select to none */
 #flash {
   text-align: center;
   border-radius: 1rem;
@@ -5,14 +6,17 @@
   user-select: none;
 }
 
+/* Select the element with the class error and set its background color to #ed1c24 */
 .error {
   background-color: #ed1c24;
 }
 
+/* Select the element with the class success and set its background color to #00a550 */
 .success {
   background-color: #00a550;
 }
 
+/* Select the element with the class flashContainer and set its width to 10rem, text alignment to center, position to fixed, transform to center, top to 15% and left to 50% */
 .flashContainer {
   width: 10rem;
   text-align: center;
@@ -20,6 +24,7 @@
   position: fixed;
   top: 15%;
   left: 50%;
+  /* Apply the cssAnimation keyframes to the element for 4 seconds and keep the final state */
   -moz-animation: cssAnimation 4s forwards;
   -webkit-animation: cssAnimation 4s forwards;
   -o-animation: cssAnimation 4s forwards;
@@ -28,31 +33,41 @@
   animation-fill-mode: forwards;
 }
 
+/* Define the cssAnimation keyframes */
 @keyframes cssAnimation {
+  /* At the start, set the top position to 0% */
   0% {
     top: 0%;
   }
+  /* At 10%, set the top position to 15% */
   10% {
     top: 15%;
   }
+  /* At 90%, keep the top position at 15% */
   90% {
     top: 15%;
   }
+  /* At the end, set the top position to -5% */
   100% {
     top: -5%;
   }
 }
 
+/* Define the same keyframes for webkit browsers */
 @-webkit-keyframes cssAnimation {
+  /* At the start, set the top position to 0% */
   0% {
     top: 0%;
   }
+  /* At 10%, set the top position to 15% */
   10% {
     top: 15%;
   }
+  /* At 90%, keep the top position at 15% */
   90% {
     top: 15%;
   }
+  /* At the end, set the top position to -5% */
   100% {
     top: -5%;
   }

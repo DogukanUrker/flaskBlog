@@ -1,17 +1,21 @@
+/* Select all the h1 elements and set their width to 36rem and their top margin to 1rem */
 h1 {
   width: 36rem;
   margin: 1rem 0 0 0;
 }
 
+/* Select all the h2 elements and set their font size to 2rem */
 h2 {
   font-size: 2rem;
 }
 
+/* Select all the img elements that are children of the element with the class head and all the h2 elements and set their display to inline-block */
 .head img,
 h2 {
   display: inline-block;
 }
 
+/* Select all the elements with the class container and set their display to flex, flex direction to column, alignment to center and top padding to 2rem */
 .container {
   display: flex;
   flex-direction: column;
@@ -19,6 +23,7 @@ h2 {
   padding-top: 2rem;
 }
 
+/* Select all the elements with the class userProfilePicture and set their height to 6rem, width to 6rem, border to 1px solid primary color, border radius to 1rem and padding to 1rem */
 .userProfilePicture {
   height: 6rem;
   width: 6rem;
@@ -27,90 +32,109 @@ h2 {
   padding: 1rem;
 }
 
+/* Select all the elements with the class userName and set their top margin to 6rem and left margin to 1rem */
 .userName {
   margin: 6rem 0 0 1rem;
 }
 
+/* Select all the elements with the class head and set their display to flex, width to 20rem and margin to 2rem 0 */
 .head {
   display: flex;
   width: 20rem;
   margin: 2rem 0 2rem 0;
 }
 
+/* Select all the elements with the class stats and set their display to flex, width to 22rem and justify content to space between */
 .stats {
   display: flex;
   width: 22rem;
   justify-content: space-between;
 }
 
+/* Select all the paragraph elements and anchor elements that are children of the element with the class stats and set their text alignment to left and left margin to 1rem */
 .stats p,
 .stats a {
   text-align: left;
   margin-left: 1rem;
 }
 
+/* Select all the elements with the class content and set their line clamp to 4 */
 .content {
   -webkit-line-clamp: 4;
 }
 
+/* Select all the elements with the class comment and set their display to flex and justify content to space between */
 .comment {
   display: flex;
   justify-content: space-between;
 }
 
+/* Select all the elements with the class commentCreationDate and set their right margin to 1rem */
 .commentCreationDate {
   margin-right: 1rem;
 }
 
+/* Select all the elements with the class post and set their min-width to 35rem */
 .post {
   min-width: 35rem;
 }
 
+/* Use a media query to apply the following rules when the screen width is less than or equal to 600px */
 @media screen and (max-width: 600px) {
+  /* Select all the elements with the class userName and set their display to block, font size to 1.5rem and top margin to 0 */
   .userName {
     display: block;
     font-size: 1.5rem;
     margin-top: 0;
   }
 
+  /* Select all the elements with the class userProfilePicture and set their display to block */
   .userProfilePicture {
     display: block;
   }
 
+  /* Select all the elements with the class stats and set their width to 100% and margin to 0 */
   .stats {
     width: 100%;
     margin: 0;
   }
 
+  /* Select all the elements that are children of the element with the class stats and set their bottom margin to 0.5rem */
   .stats * {
     margin: 0 0 0.5rem 0 !important;
   }
 
+  /* Select all the elements with the class container and set their display to block and width to 100% */
   .container {
     display: block;
     width: 100%;
   }
 
+  /* Select all the elements with the class userContainer and set their padding to 1rem */
   .userContainer {
     padding: 1rem;
   }
 
+  /* Select all the elements with the class userProfilePicture and set their height to 3rem and width to 3rem */
   .userProfilePicture {
     height: 3rem;
     width: 3rem;
   }
 
+  /* Select all the elements with the class head and set their display to block, text alignment to center and width to 100% */
   .head {
     display: block;
     text-align: center;
     width: 100%;
   }
 
+  /* Select all the elements with the class postsText or commentsText and set their width to fit content */
   .postsText,
   .commentsText {
     width: fit-content;
   }
 
+  /* Select all the elements with the class post and set their min-width to 90% */
   .post {
     min-width: 90%;
   }
