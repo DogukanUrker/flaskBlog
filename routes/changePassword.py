@@ -1,3 +1,4 @@
+# Import the necessary modules and functions
 from helpers import (
     flash,
     abort,
@@ -20,11 +21,25 @@ from helpers import (
     RECAPTCHA_PASSWORD_CHANGE,
 )
 
+# Create a blueprint for the change password route
 changePasswordBlueprint = Blueprint("changePassword", __name__)
 
 
 @changePasswordBlueprint.route("/changepassword", methods=["GET", "POST"])
 def changePassword():
+    """
+    This function is the route for the change password page.
+    It is used to change the user's password.
+
+    Args:
+        request.form (dict): the form data from the request
+
+    Returns:
+        render_template: a rendered template with the form and reCAPTCHA
+
+    Raises:
+        401: if the reCAPTCHA is not passed
+    """
     match "userName" in session:
         case True:
             form = changePasswordForm(request.form)
