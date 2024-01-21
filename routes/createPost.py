@@ -16,6 +16,7 @@ from helpers import (
     DB_POSTS_ROOT,
     createPostForm,
     render_template,
+    currentTimeStamp,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
@@ -74,18 +75,16 @@ def createPost():
                                                 connection = sqlite3.connect(DB_POSTS_ROOT)
                                                 cursor = connection.cursor()
                                                 cursor.execute(
-                                                    "insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) \
-                                                    values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                                                    "insert into posts(title,tags,content,author,views,timeStamp,lastEditTimeStamp) \
+                                                    values(?, ?, ?, ?, ?, ?, ?)",
                                                     (
                                                         postTitle,
                                                         postTags,
                                                         postContent,
                                                         session["userName"],
                                                         0,
-                                                        currentDate(),
-                                                        currentTime(),
-                                                        currentDate(),
-                                                        currentTime(),
+                                                        currentTimeStamp(),
+                                                        currentTimeStamp(),
                                                     ),
                                                 )
                                                 connection.commit()
@@ -100,20 +99,18 @@ def createPost():
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
                                             cursor = connection.cursor()
                                             cursor.execute(
-                                                "insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) \
-                                                values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                                                (
-                                                    postTitle,
-                                                    postTags,
-                                                    postContent,
-                                                    session["userName"],
-                                                    0,
-                                                    currentDate(),
-                                                    currentTime(),
-                                                    currentDate(),
-                                                    currentTime(),
-                                                ),
-                                            )
+                                                    "insert into posts(title,tags,content,author,views,timeStamp,lastEditTimeStamp) \
+                                                    values(?, ?, ?, ?, ?, ?, ?)",
+                                                    (
+                                                        postTitle,
+                                                        postTags,
+                                                        postContent,
+                                                        session["userName"],
+                                                        0,
+                                                        currentTimeStamp(),
+                                                        currentTimeStamp(),
+                                                    ),
+                                                )
                                             connection.commit()
                                             message("2", f'POST: "{postTitle}" POSTED')
                                             addPoints(20, session["userName"])

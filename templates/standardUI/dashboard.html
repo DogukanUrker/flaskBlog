@@ -34,15 +34,15 @@
   </section>
   <div class="info">
     <p class="tags">Tags: {{post[2]}}</p>
-    <p>Views: {{post[7]}}</p>
+    <p>Views: {{post[5]}}</p>
   </div>
   <div class="info">
-    <p>Creation Time: {{post[6]}}</p>
-    <p>Last Edit Time: {{post[9]}}</p>
+    <p>Creation Time: <p class="time">{{post[6]}}</p></p>
+    <p>Last Edit Time: <p class="time">{{post[7]}}</p></p>
   </div>
   <div class="info">
-    <p>Creation Date: {{post[5]}}</p>
-    <p>Last Edit Date: {{post[8]}}</p>
+    <p>Creation Date: <p class="date">{{post[6]}}</p></p>
+    <p>Last Edit Date: <p class="date">{{post[7]}}</p></p>
   </div>
   {% if request.path == "/admin/posts" %}
   <p>
@@ -65,8 +65,8 @@
 <div class="post centeredHorizontally">
   <div class="content" tag="content">{{comment[2]}}</div>
   <section class="comment">
-    <p class="commentCreationDate">Creation Date: {{comment[4]}}</p>
-    <p class="commentCreationTime">Creation Time: {{comment[5]}}</p>
+    <p class="commentCreationDate">Creation Date: <p class="date">{{comment[4]}}</p></p>
+    <p class="commentCreationTime">Creation Time: <p class="time">{{comment[4]}}</p></p>
   </section>
   <a href="/post/{{comment[1]}}" class="btn btnLink textPrimary">go to post</a>
 </div>

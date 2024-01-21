@@ -37,26 +37,30 @@ border-gray-500/25"
     </form>
   </section>
   <div class="flex items-center justify-between my-2">
-    <p class="flex ">
+    <div class="flex ">
       <i class="ti ti-tags mr-1 text-xl"></i>Tags: {{post[2]}}
-    </p>
-    <p class="flex"><i class="ti ti-eye mr-1 text-xl"></i>Views: {{post[7]}}</p>
+    </div>
+    <p class="flex"><i class="ti ti-eye mr-1 text-xl"></i>Views: {{post[5]}}</p>
   </div>
   <div class="flex items-center justify-between my-2">
-    <p class="flex">
-      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time: {{post[6]}}
-    </p>
-    <p class="flex">
-      <i class="ti ti-clock-edit mr-1 text-xl"></i>Last Edit Time: {{post[9]}}
-    </p>
+    <div class="flex">
+      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time:
+      <p class="time ml-1">{{post[6]}}</p>
+    </div>
+    <div class="flex">
+      <i class="ti ti-clock-edit mr-1 text-xl"></i>Last Edit Time:
+      <p class="time ml-1">{{post[7]}}</p>
+    </div>
   </div>
   <div class="flex items-center justify-between my-2">
-    <p class="flex">
-      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date: {{post[5]}}
-    </p>
-    <p class="flex">
-      <i class="ti ti-calendar-dot mr-1 text-xl"></i>Last Edit Date: {{post[8]}}
-    </p>
+    <div class="flex">
+      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date:
+      <p class="date ml-1">{{post[6]}}</p>
+    </div>
+    <div class="flex">
+      <i class="ti ti-calendar-dot mr-1 text-xl"></i>Last Edit Date:
+      <p class="date ml-1">{{post[7]}}</p>
+    </div>
   </div>
   {% if request.path == "/admin/posts" %}
   <p class="flex">
@@ -87,12 +91,14 @@ border-gray-500/25"
 >
   <div tag="content">{{comment[2]}}</div>
   <section class="flex items-center justify-between my-2">
-    <p class="flex">
-      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date: {{comment[4]}}
-    </p>
-    <p class="flex">
-      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time: {{comment[5]}}
-    </p>
+    <div class="flex">
+      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date:
+      <p class="date ml-1">{{comment[4]}}</p>
+    </div>
+    <div class="flex">
+      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time:
+      <p class="time ml-1">{{comment[4]}}</p>
+    </div>
   </section>
   <a
     href="/post/{{comment[1]}}"

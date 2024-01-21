@@ -60,8 +60,7 @@ def usersTable():
             "profilePicture" TEXT,
             "role"	TEXT,
             "points"	INTEGER,
-            "creationDate"	TEXT,
-            "creationTime"	TEXT,
+            "timeStamp"	INTEGER,
             "isVerified"	TEXT,
             PRIMARY KEY("userID" AUTOINCREMENT)
         );"""
@@ -100,11 +99,9 @@ def postsTable():
             "tags"	TEXT,
             "content"	TEXT NOT NULL,
             "author"	TEXT NOT NULL,
-            "date"	TEXT NOT NULL,
-            "time"	TEXT NOT NULL,
             "views"	TEXT,
-            "lastEditDate"	TEXT,
-            "lastEditTime"	TEXT,
+            "timeStamp"	INTEGER,
+            "lastEditTimeStamp"	INTEGER,
             PRIMARY KEY("id" AUTOINCREMENT)
         );"""
         cursor.execute(postsTable)
@@ -141,8 +138,7 @@ def commentsTable():
             "post"	INTEGER,
             "comment"	TEXT,
             "user"	TEXT,
-            "date"	TEXT,
-            "time"	TEXT,
+            "timeStamp"	INTEGER,
             PRIMARY KEY("id" AUTOINCREMENT)
         );"""
         cursor.execute(commentsTable)

@@ -31,8 +31,11 @@
     </form>
   </section>
   <div class="info">
-    <p>Creation Time: {{comment[5]}}</p>
-    <p>Creation Date: {{comment[4]}}</p>
+    <p>Creation Time: <p class="time">{{comment[4]}}</p></p>
+    <p>
+      Creation Date:
+      <p class="date">{{comment[4]}}</p>
+    </p>
   </div>
   {% if request.path == "/admin/comments" %}
   <p>

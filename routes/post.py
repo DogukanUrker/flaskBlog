@@ -14,6 +14,7 @@ from helpers import (
     currentTime,
     commentForm,
     DB_POSTS_ROOT,
+    currentTimeStamp,
     DB_COMMENTS_ROOT,
     render_template,
 )
@@ -77,14 +78,13 @@ def post(postID):
                     cursor = connection.cursor()
                     # Insert the comment into the comments database with the post ID, comment, user name, date and time
                     cursor.execute(
-                        "insert into comments(post,comment,user,date,time) \
-                        values(?, ?, ?, ?, ?)",
+                        "insert into comments(post,comment,user,timeStamp) \
+                        values(?, ?, ?, ?)",
                         (
                             postID,
                             comment,
                             session["userName"],
-                            currentDate(),
-                            currentTime(),
+                            currentTimeStamp(),
                         ),
                     )
                     connection.commit()
@@ -116,9 +116,9 @@ def post(postID):
                 tags=post[2],
                 content=post[3],
                 author=post[4],
-                views=post[7],
-                date=post[5],
-                time=post[6],
+                views=post[5],
+                timeStamp=post[6],
+                lastEditTimeStamp=post[7],
                 form=form,
                 comments=comments,
                 appName=APP_NAME,

@@ -17,7 +17,7 @@
     <div class="flex w-full justify-between my-1">
       <h5 ><div class="flex items-center"><i class="ti ti-eye mr-1 text-2xl"></i>
        {{views}}</div></h5>
-       <h5 >{{time}}</h5>
+       <h5 class="time">{{timeStamp}}</h5>
     </div>
     <div class="flex w-full justify-between my-1">
       <a href="/user/{{author|lower}}" class="hover:text-rose-500 duration-150">
@@ -29,7 +29,7 @@
           />{{author}}
         </h5></a
       >
-      <h5 >{{date}}</h5>
+      <h5 class="date">{{timeStamp}}</h5>
     </div>
   </div>
   {% if author == session["userName"] %}

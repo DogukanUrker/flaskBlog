@@ -15,12 +15,14 @@ border-gray-500/25"
   </div>
   <div tag="content" class="w-fit mx-auto my-4">{{comment[2]}}</div>
   <div class="flex items-center justify-between my-2">
-    <p class="flex items-center">
-      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time: {{comment[5]}}
-    </p>
-    <p class="flex items-center">
-      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date: {{comment[4]}}
-    </p>
+    <div class="flex items-center">
+      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time:
+      <p class="time ml-1">{{comment[4]}}</p>
+    </div>
+    <div class="flex items-center">
+      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date:
+      <p class="date ml-1">{{comment[4]}}</p>
+    </div>
   </div>
   {% if request.path == "/admin/comments" %}
   <div class="flex items-center justify-between mt-2">

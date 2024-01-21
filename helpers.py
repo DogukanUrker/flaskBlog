@@ -99,6 +99,15 @@ def currentTime(seconds=False, microSeconds=False):
                     return datetime.now().strftime("%H:%M:%S")
 
 
+def currentTimeStamp():
+    """
+    Returns the current time stamp as a integer.
+    """
+    timeStamp = datetime.now().timestamp()
+    timeStamp = int(timeStamp)
+    return timeStamp
+
+
 def message(
     color="0",
     message="NO MESSAGE CONTENT",

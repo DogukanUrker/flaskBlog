@@ -28,8 +28,8 @@
         >
       </div>
       <div class="dateTime">
-        <h5>{{time}}</h5>
-        <h5 class="date">{{date}}</h5>
+        <h5 class="time">{{timeStamp}}</h5>
+        <h5 class="date">{{timeStamp}}</h5>
       </div>
     </div>
     {% if author == session["userName"] %}
@@ -84,5 +84,6 @@
       {% endif %}
     </form>
   </div>
-  {% endblock body %}
 </div>
+  {% endblock body %}
+

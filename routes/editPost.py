@@ -16,10 +16,11 @@ from helpers import (
     DB_USERS_ROOT,
     createPostForm,
     render_template,
+    currentTimeStamp,
     RECAPTCHA_SITE_KEY,
+    RECAPTCHA_POST_EDIT,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_POST_EDIT,
 )
 
 # Create a blueprint for the edit post route
@@ -112,12 +113,8 @@ def editPost(postID):
                                                                 (postContent, post[0]),
                                                             )
                                                             cursor.execute(
-                                                                """update posts set lastEditDate = ? where id = ? """,
-                                                                [(currentDate()), (post[0])],
-                                                            )
-                                                            cursor.execute(
-                                                                """update posts set lastEditTime = ? where id = ? """,
-                                                                [(currentTime()), (post[0])],
+                                                                """update posts set lastEditTimeStamp = ? where id = ? """,
+                                                                [(currentTimeStamp()), (post[0])],
                                                             )
                                                             connection.commit()
                                                             message("2", f'POST: "{postTitle}" EDITED')
@@ -142,12 +139,8 @@ def editPost(postID):
                                                         (postContent, post[0]),
                                                     )
                                                     cursor.execute(
-                                                        """update posts set lastEditDate = ? where id = ? """,
-                                                        [(currentDate()), (post[0])],
-                                                    )
-                                                    cursor.execute(
-                                                        """update posts set lastEditTime = ? where id = ? """,
-                                                        [(currentTime()), (post[0])],
+                                                                """update posts set lastEditTimeStamp = ? where id = ? """,
+                                                                [(currentTimeStamp()), (post[0])],
                                                     )
                                                     connection.commit()
                                                     message("2", f'POST: "{postTitle}" EDITED')

@@ -1,5 +1,5 @@
 {% extends 'layout.html'%} {%block head%}
-<title>Admin Panel</title>
+<title>Admin Panel --> Users</title>
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/adminPanel.css') }}"
@@ -25,8 +25,8 @@
       <p>Points: {{user[6]}}</p>
     </section>
     <section class="stats">
-      <p>Join Date: {{user[7]}}</p>
-      <p>Join Time: {{user[8]}}</p>
+      <p>Join Date: <p class="date">{{user[7]}}</p></p>
+      <p>Join Time: <p class="time">{{user[7]}}</p></p>
     </section>
     <section class="stats">
       <form method="post">

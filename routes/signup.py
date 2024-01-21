@@ -18,6 +18,7 @@ from helpers import (
     REGISTRATION,
     DB_USERS_ROOT,
     render_template,
+    currentTimeStamp,
     RECAPTCHA_SIGN_UP,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
@@ -83,8 +84,8 @@ def signup():
                                                                     cursor = connection.cursor()
                                                                     cursor.execute(
                                                                         f"""
-                                                                        insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) \
-                                                                        values(?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                                                        insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
+                                                                        values(?, ?, ?, ?, ?, ?, ?, ?)
                                                                         """,
                                                                         (
                                                                             userName,
@@ -93,8 +94,7 @@ def signup():
                                                                             f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
                                                                             "user",
                                                                             0,
-                                                                            currentDate(),
-                                                                            currentTime(),
+                                                                            currentTimeStamp(),
                                                                             "False",
                                                                         ),
                                                                     )
@@ -128,7 +128,7 @@ def signup():
                                                             cursor.execute(
                                                                 f"""
                                                                 insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) \
-                                                                values(?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                                                values(?, ?, ?, ?, ?, ?, ?, ?)
                                                                 """,
                                                                 (
                                                                     userName,
