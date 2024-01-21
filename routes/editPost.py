@@ -1,3 +1,4 @@
+# Import the necessary modules and functions
 from helpers import (
     flash,
     abort,
@@ -21,11 +22,25 @@ from helpers import (
     RECAPTCHA_POST_EDIT,
 )
 
+# Create a blueprint for the edit post route
 editPostBlueprint = Blueprint("editPost", __name__)
 
 
 @editPostBlueprint.route("/editpost/<int:postID>", methods=["GET", "POST"])
 def editPost(postID):
+    """
+    This function handles the edit post route.
+
+    Args:
+        postID (int): the ID of the post to edit
+
+    Returns:
+        The rendered edit post template or a redirect to the homepage if the user is not authorized to edit the post
+
+    Raises:
+        abort(404): if the post does not exist
+        abort(401): if the user is not authorized to edit the post
+    """
     match "userName" in session:
         case True:
             connection = sqlite3.connect(DB_POSTS_ROOT)
