@@ -1,3 +1,6 @@
+"""
+This module contains all the general application settings.
+"""
 from helpers import secrets, socket
 
 
