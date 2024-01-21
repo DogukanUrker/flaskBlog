@@ -1,3 +1,4 @@
+# Import the necessary modules and functions
 from helpers import (
     ssl,
     flash,
@@ -22,6 +23,7 @@ from helpers import (
     message as messageDebugging,
 )
 
+# Create a blueprint for the password reset route
 passwordResetBlueprint = Blueprint("passwordReset", __name__)
 
 
@@ -29,6 +31,18 @@ passwordResetBlueprint = Blueprint("passwordReset", __name__)
     "/passwordreset/codesent=<codeSent>", methods=["GET", "POST"]
 )
 def passwordReset(codeSent):
+    """
+    This function handles the password reset process.
+
+    Args:
+        codeSent (str): A string indicating whether the code has been sent or not.
+
+    Returns:
+        A rendered template with the appropriate form and messages.
+
+    Raises:
+        401: If the reCAPTCHA verification fails.
+    """
     global userName
     global passwordResetCode
     form = passwordResetForm(request.form)
