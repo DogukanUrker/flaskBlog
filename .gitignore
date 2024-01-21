@@ -2,4 +2,3 @@
 *.pyc
 __pycache__
 log.log
-UISelector.py
