@@ -1,3 +1,28 @@
+"""
+This module contains the database functions for the social media website.
+
+The functions in this module are responsible for managing the database
+and interacting with the posts, users, and comments tables.
+
+The functions in this module are:
+
+- deletePost(postID): This function deletes a post and all associated comments
+from the database.
+- deleteUser(userName): This function deletes a user and all associated data
+from the database.
+- deleteComment(commentID): This function deletes a comment from the database.
+
+The functions in this module use the following helper functions:
+
+- flash(message, category): This function flashes a message to the user.
+- message(type, message): This function sends a message to the server.
+- session: This variable stores information about the current user's session.
+- redirect(url): This function redirects the user to a new URL.
+- DB_POSTS_ROOT: This variable stores the path to the posts database.
+- DB_USERS_ROOT: This variable stores the path to the users database.
+- DB_COMMENTS_ROOT: This variable stores the path to the comments database.
+
+"""
 from helpers import (
     flash,
     sqlite3,
@@ -11,6 +36,16 @@ from helpers import (
 
 
 def deletePost(postID):
+    """
+    This function deletes a post and all associated comments from the database.
+
+    Parameters:
+    postID (str): The ID of the post to be deleted.
+
+    Returns:
+    None
+
+    """
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
@@ -45,6 +80,16 @@ def deletePost(postID):
 
 
 def deleteUser(userName):
+    """
+    This function deletes a user and all associated data from the database.
+
+    Parameters:
+    userName (str): The username of the user to be deleted.
+
+    Returns:
+    None
+
+    """
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
@@ -73,6 +118,16 @@ def deleteUser(userName):
 
 
 def deleteComment(commentID):
+    """
+    This function deletes a comment from the database.
+
+    Parameters:
+    commentID (str): The ID of the comment to be deleted.
+
+    Returns:
+    None
+
+    """
     connection = sqlite3.connect(DB_COMMENTS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
