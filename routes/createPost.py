@@ -1,3 +1,4 @@
+# Import the necessary modules and functions
 from helpers import (
     flash,
     abort,
@@ -21,11 +22,24 @@ from helpers import (
     RECAPTCHA_POST_CREATE,
 )
 
+# Create a blueprint for the create post route
 createPostBlueprint = Blueprint("createPost", __name__)
 
 
 @createPostBlueprint.route("/createpost", methods=["GET", "POST"])
 def createPost():
+    """
+    This function creates a new post for the user.
+
+    Args:
+        request (Request): The request object from the user.
+
+    Returns:
+        Response: The response object with the HTML template for the create post page.
+
+    Raises:
+        401: If the user is not authenticated.
+    """
     match "userName" in session:
         case True:
             form = createPostForm(request.form)
