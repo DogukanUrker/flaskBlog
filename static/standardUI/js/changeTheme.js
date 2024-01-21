@@ -1,28 +1,30 @@
 var root = document.querySelector(":root");
 var changeTheme = document.querySelector(".changeTheme");
 
-var theme = localStorage.setItem("theme", "dark");
+var theme;
 
-if (localStorage.getItem(theme) === "dark") {
+if (localStorage.getItem("theme") === "dark") {
   toDark();
-} else if (localStorage.getItem(theme) === "light") {
+} else if (localStorage.getItem("theme") === "light") {
   toLight();
+} else if (localStorage.getItem("theme") === null) {
+  toDark();
 }
 
 function toLight() {
-  localStorage.setItem(theme, "light");
+  localStorage.setItem("theme", "light");
   root.style.setProperty("--themePrimary", "#000");
   root.style.setProperty("--themeSecondary", "#fff");
   root.style.setProperty("--themeHelper", "#303030");
-  changeTheme.innerHTML = '<i class="ti ti-moon"></i>';
+  changeTheme.innerHTML = '<i class="ti ti-sun"></i>';
   changeTheme.setAttribute("onclick", "javascript: toDark();");
 }
 
 function toDark() {
-  localStorage.setItem(theme, "dark");
+  localStorage.setItem("theme", "dark");
   root.style.setProperty("--themePrimary", "#fff");
   root.style.setProperty("--themeSecondary", "#000");
   root.style.setProperty("--themeHelper", "#C6C6C6");
-  changeTheme.innerHTML = '<i class="ti ti-sun"></i>';
+  changeTheme.innerHTML = '<i class="ti ti-moon"></i>';
   changeTheme.setAttribute("onclick", "javascript: toLight();");
 }
