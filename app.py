@@ -1,3 +1,6 @@
+"""
+This file contains the main function
+"""
 from helpers import message
 
 message(breaker=True)
