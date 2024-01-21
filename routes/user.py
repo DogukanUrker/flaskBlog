@@ -1,3 +1,6 @@
+"""
+This module contains the code for the user page.
+"""
 from helpers import (
     sqlite3,
     message,
@@ -13,11 +16,24 @@ userBlueprint = Blueprint("user", __name__)
 
 @userBlueprint.route("/user/<userName>")
 def user(userName):
+    """
+    This function is used to render the user page.
+
+    :param userName: The username of the user.
+    :type userName: str
+    :return: The rendered user page.
+    :rtype: flask.Response
+    """
     userName = userName.lower()
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     cursor.execute(f"select userName from users")
     users = cursor.fetchall()
+    """
+    This match statement checks if the given username exists in the database.
+    If the username exists, the function fetches the user details and the number of views their posts have received.
+    It also fetches all the posts made by the user and all the comments made by the user.
+    """
     match userName in str(users).lower():
         case True:
             message("2", f'USER: "{userName}" FOUND')
@@ -48,6 +64,11 @@ def user(userName):
                 [(userName.lower())],
             )
             comments = cursor.fetchall()
+            """
+            This match statement checks if the user has any posts or comments.
+            If the user has any posts, the variable showPosts is set to True.
+            If the user has any comments, the variable showComments is set to True.
+            """
             match posts:
                 case []:
                     showPosts = False
