@@ -40,7 +40,6 @@ from routes.accountSettings import accountSettingsBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
 from routes.changeProfilePicture import changeProfilePictureBlueprint
 
-
 # Import the CSRFProtect and CSRFError classes from the flask_wtf.csrf module
 from flask_wtf.csrf import CSRFProtect, CSRFError
 
@@ -105,6 +104,7 @@ app = Flask(
 # Set the secret key and the session permanent flag for the app
 app.secret_key = APP_SECRET_KEY
 app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
+
 # Create a CSRFProtect object for the app
 csrf = CSRFProtect(app)
 
