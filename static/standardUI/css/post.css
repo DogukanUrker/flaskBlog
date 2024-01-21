@@ -105,6 +105,18 @@ small {
   text-align: right;
 }
 
+.tags {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width: 600px) {
   .comments,
   .comments small {
