@@ -1,3 +1,4 @@
+# Import the necessary modules and functions
 from helpers import (
     abort,
     flash,
@@ -23,12 +24,22 @@ from helpers import (
     RECAPTCHA_SECRET_KEY,
 )
 
-
+# Create a blueprint for the signup route
 signUpBlueprint = Blueprint("signup", __name__)
 
 
 @signUpBlueprint.route("/signup", methods=["GET", "POST"])
 def signup():
+    """
+    This function handles the sign up route.
+
+    If the user is already signed in, they will be redirected to the homepage.
+    If the user submits the sign up form, their information is checked to ensure it is valid.
+    If the information is valid, their account is created and they are signed in.
+
+    Returns:
+    The sign up page with any errors or a confirmation message.
+    """
     match REGISTRATION:
         case True:
             match "userName" in session:
