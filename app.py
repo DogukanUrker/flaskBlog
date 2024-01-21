@@ -69,7 +69,14 @@ from helpers import (
     RECAPTCHA_USERNAME_CHANGE,
     RECAPTCHA_PROFILE_PICTURE_CHANGE,
 )
-from UISelector import TEMPLATE_FOLDER, STATIC_FOLDER
+
+match TAILWIND_UI:
+    case True:
+        TEMPLATE_FOLDER = "templates/tailwindUI"
+        STATIC_FOLDER = "static/tailwindUI"
+    case False:
+        TEMPLATE_FOLDER = "templates/standardUI"
+        STATIC_FOLDER = "static/standardUI"
 
 app = Flask(
     import_name=APP_NAME,
