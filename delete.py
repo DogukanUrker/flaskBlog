@@ -1,5 +1,5 @@
 """
-This module contains the database functions for the social media website.
+This module contains the database delete functions for the app.
 
 The functions in this module are responsible for managing the database
 and interacting with the posts, users, and comments tables.
