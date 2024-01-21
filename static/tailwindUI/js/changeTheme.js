@@ -22,7 +22,7 @@ function toLight() {
 
   // Update the CSS class of the body element
   document.body.className =
-    "text-neutral-900 bg-neutral-100 selection:bg-neutral-800 selection:text-rose-500";
+    "text-neutral-900 bg-neutral-100 selection:bg-neutral-200 selection:text-rose-500";
 
   // Update the HTML content of the button
   document.querySelector(".changeTheme").innerHTML =
