@@ -1,3 +1,4 @@
+# Import the necessary modules and functions
 from helpers import (
     flash,
     abort,
@@ -21,11 +22,29 @@ from helpers import (
     RECAPTCHA_USERNAME_CHANGE,
 )
 
+# Create a blueprint for the change username route
 changeUserNameBlueprint = Blueprint("changeUserName", __name__)
 
 
 @changeUserNameBlueprint.route("/changeusername", methods=["GET", "POST"])
 def changeUserName():
+    """
+    Checks if the user is logged in:
+    If the user is not logged in, they are redirected to the homepage.
+
+    Checks if the user has submitted a new username:
+    If the user has submitted a new username, the new username is checked to ensure it meets the requirements.
+
+    If the new username meets the requirements:
+    The user's details are updated in the database.
+    The user is redirected to their profile page.
+
+    If the new username does not meet the requirements:
+    An error message is displayed.
+
+    Returns:
+    The change username template with the form and reCAPTCHA.
+    """
     match "userName" in session:
         case True:
             form = changeUserNameForm(request.form)
