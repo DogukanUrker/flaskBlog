@@ -26,6 +26,18 @@ loginBlueprint = Blueprint("login", __name__)
 
 @loginBlueprint.route("/login/redirect=<direct>", methods=["GET", "POST"])
 def login(direct):
+    """
+    This function handles the login process for the website.
+
+    Args:
+        direct (str): The direct link to redirect to after login.
+
+    Returns:
+        tuple: A tuple containing the redirect response and status code.
+
+    Raises:
+        401: If the login is unsuccessful.
+    """
     direct = direct.replace("&", "/")
     match LOG_IN:
         case True:
@@ -71,7 +83,11 @@ def login(direct):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            message("2",f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            # Logs the user in if the reCAPTCHA verification is successful
+                                                            message(
+                                                                "2",
+                                                                f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                            )
                                                             session["userName"] = user[
                                                                 1
                                                             ]
@@ -90,10 +106,17 @@ def login(direct):
                                                                 redirect(direct),
                                                                 301,
                                                             )
+
                                                         case False:
-                                                            message("1",f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            # Returns an unauthorized error if the reCAPTCHA verification is unsuccessful
+                                                            message(
+                                                                "1",
+                                                                f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                            )
                                                             abort(401)
+
                                                 case False:
+                                                    # Logs the user in if reCAPTCHA is not required
                                                     session["userName"] = user[1]
                                                     addPoints(1, session["userName"])
                                                     message(
@@ -107,7 +130,9 @@ def login(direct):
                                                         redirect(direct),
                                                         301,
                                                     )
+
                                         case _:
+                                            # Returns an incorrect password error if the password is incorrect
                                             message("1", "WRONG PASSWORD")
                                             flash("wrong  password", "error")
                     return render_template(
