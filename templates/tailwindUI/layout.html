@@ -38,5 +38,11 @@
       href="{{ url_for('static', filename='css/editor.css') }}"
     />
     <script src="{{ url_for('static', filename='js/timeStamp.js') }}"></script>
+    {% if not recaptchaBadge %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/recaptcha.css') }}"
+    />
+    {% endif %}
   </body>
 </html>

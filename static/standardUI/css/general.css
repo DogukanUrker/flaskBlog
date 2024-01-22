@@ -71,11 +71,6 @@ button {
   border: 0;
 }
 
-/* Select the element with the class grecaptcha-badge and set its visibility to hidden */
-.grecaptcha-badge {
-  visibility: hidden !important;
-}
-
 /* Select the element with the class ti and set its font size to 1.5rem */
 .ti {
   font-size: 1.5rem;

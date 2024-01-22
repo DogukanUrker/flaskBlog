@@ -58,6 +58,7 @@ from constants import (
     LOG_FILE_ROOT,
     APP_ROOT_PATH,
     APP_SECRET_KEY,
+    RECAPTCHA_BADGE,
     SESSION_PERMANENT,
 )
 
@@ -140,11 +141,12 @@ match RECAPTCHA:
                     f"PLEASE CHECK YOUR RECAPTCHA KEYS OR SET RECAPTCHA TO FALSE FROM TRUE IN 'constants.py'",
                 )
             case False:
-                # Log a success message that recaptcha is on and print the recaptcha keys and url
+                # Log a success message that recaptcha is on and print the recaptcha keys, url and badge status
                 message("2", "RECAPTCHA IS ON")
                 message("3", f"RECAPTCHA RECAPTCHA_SITE_KEY KEY: {RECAPTCHA_SITE_KEY}")
                 message("3", f"RECAPTCHA SECRET KEY: {RECAPTCHA_SECRET_KEY}")
                 message("3", f"RECAPTCHA VERIFY URL: {RECAPTCHA_VERIFY_URL}")
+                message("3", f"RECAPTCHA BADGE: {RECAPTCHA_BADGE}")
                 # Log the recaptcha settings for different actions
                 message("6", f"RECAPTCHA LOGIN: {RECAPTCHA_LOGIN}")
                 message("6", f"RECAPTCHA SIGN UP: {RECAPTCHA_SIGN_UP }")
@@ -202,6 +204,21 @@ def utility_processor():
     # Return a dictionary with the getProfilePicture function as a value
     getProfilePicture
     return dict(getProfilePicture=getProfilePicture)
+
+
+# Define a context processor function for the app
+@app.context_processor
+def recaptchaBadge():
+    # This function checks the recaptcha and recaptcha badge values. If values are both True, then returns True
+    def recaptchaBadge():
+        match RECAPTCHA and RECAPTCHA_BADGE:
+            case True:
+                return True
+            case False:
+                return False
+
+    # Return a dictionary with the recaptchaBadge function as a value
+    return dict(recaptchaBadge=recaptchaBadge())
 
 
 # Define an error handler function for the 404 error

@@ -19,8 +19,3 @@ html {
 *::-webkit-scrollbar-button {
   background: transparent;
 }
-
-/* Select the element with the class grecaptcha-badge and set its visibility to hidden */
-.grecaptcha-badge {
-  visibility: hidden !important;
-}
