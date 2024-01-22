@@ -64,7 +64,7 @@ def editPost(postID):
                         """select userName from users where userName = ? """,
                         [(session["userName"])],
                     )
-                    match post[4] == session["userName"]:
+                    match post[4] == session["userName"] or session["userRole"] == "admin":
                         case True:
                             form = createPostForm(request.form)
                             form.postTitle.data = post[1]
