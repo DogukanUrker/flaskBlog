@@ -54,16 +54,16 @@
           alt=""
         /> <div class="mr-1">{{comment[3]}}:</div> </a>
       </div>
+      {% if session["userName"] == comment[3] %}
       <form method="post" class="mx-2 my-1">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="commentID" value="{{comment[0]}}" />
         <button type="submit" name="commentDeleteButton" class="hover:text-rose-500 duration-150">
           <i class="ti ti-trash-x mr-1 text-xl"></i>
         </button>
-      </form></div>
-      <p class="break-words ml-8">{{comment[2]}}</p>{% if session["userName"] == comment[3] %}
+      </form>{% endif %}</div>
+      <p class="break-words ml-8">{{comment[2]}}</p>
     </div>
-    {% endif %} 
     </div>
     {% endfor %}
   </div>
