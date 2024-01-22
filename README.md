@@ -1,3 +1,21 @@
+![GitHub License](<https://img.shields.io/github/license/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fblob%2Fmain%2FLICENSE>)
+![GitHub Repo stars](<https://img.shields.io/github/stars/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fstargazers>)
+![GitHub forks](<https://img.shields.io/github/forks/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fforks>)
+![GitHub commit activity](<https://img.shields.io/github/commit-activity/t/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fcommits%2Fmain%2F>)
+![GitHub contributors](<https://img.shields.io/github/contributors/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fgraphs%2Fcontributors>)
+![GitHub last commit (branch)](<https://img.shields.io/github/last-commit/dogukanurker/flaskblog/main?style=flat&logoColor=rgb(250%20250%20250)&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fcommits%2Fmain%2F>)
+![GitHub Release](<https://img.shields.io/github/v/release/dogukanurker/flaskblog?display_name=release&style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Freleases>)
+![GitHub commits since latest release](<https://img.shields.io/github/commits-since/dogukanurker/flaskblog/latest?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
+![GitHub issues](<https://img.shields.io/github/issues/dogukanurker/flaskblog?style=flat&logoColor=rgb(24%2024%2027)&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fissues>)
+![GitHub closed issues](<https://img.shields.io/github/issues-closed/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fissues%3Fq%3Dis%253Aissue%2Bis%253Aclosed>)
+![GitHub pull requests](<https://img.shields.io/github/issues-pr/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fpulls>)
+![GitHub closed pull requests](<https://img.shields.io/github/issues-pr-closed/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fpulls%3Fq%3Dis%253Apr%2Bis%253Aclosed>)
+![GitHub watchers](<https://img.shields.io/github/watchers/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fwatchers>)
+![GitHub language count](<https://img.shields.io/github/languages/count/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
+![GitHub top language](<https://img.shields.io/github/languages/top/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Drepo%253ADogukanUrker%252FflaskBlog%2B%2Blanguage%253APython%26type%3Dcode>)
+![GitHub code size in bytes](<https://img.shields.io/github/languages/code-size/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
+![GitHub repo size](<https://img.shields.io/github/repo-size/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
+
 <img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/GitHubBanner.png" style='border-radius: 0.5rem; widht:768px; height: 384px;' />
 
 # [FlaskBlog](https://dogukanurker.com/flaskblog)
