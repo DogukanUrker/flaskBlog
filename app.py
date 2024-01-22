@@ -200,7 +200,7 @@ message(breaker=True)
 
 # Define a context processor function for the app
 @app.context_processor
-def utility_processor():
+def returnUserProfilePicture():
     # Return a dictionary with the getProfilePicture function as a value
     getProfilePicture
     return dict(getProfilePicture=getProfilePicture)
