@@ -19,7 +19,7 @@ class commentForm(Form):
     comment = TextAreaField(
         "Comment",
         [validators.Length(min=20, max=500), validators.InputRequired()],
-        render_kw={"placeholder": "leave a comment"},
+        render_kw={"placeholder": "What are your thoughts?"},
     )
 
 
