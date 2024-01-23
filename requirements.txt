@@ -1,4 +1,4 @@
-Flask==3.0.0
+Flask==3.0.1
 flask_wtf==1.2.1
 passlib==1.7.4
 WTForms==3.1.2
