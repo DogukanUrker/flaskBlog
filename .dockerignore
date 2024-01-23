@@ -1,1 +1,10 @@
 __pycache__
+*.pyc
+docs
+*.md
+images
+.git
+.github
+.gitignore
+LICENSE
+log.log
