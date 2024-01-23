@@ -42,9 +42,14 @@ function toLight() {
   localStorage.setItem("theme", "light");
 
   // set the CSS variables
-  selectDocumentRoot().style.setProperty("--themePrimary", "#000");
-  selectDocumentRoot().style.setProperty("--themeSecondary", "#fff");
+  selectDocumentRoot().style.setProperty("--themePrimary", "#000000");
+  selectDocumentRoot().style.setProperty("--themeSecondary", "#ffffff");
   selectDocumentRoot().style.setProperty("--themeHelper", "#303030");
+
+  // Update the meta tag for the theme color to match the light background document
+  document
+    .querySelector('meta[name="theme-color"]')
+    .setAttribute("content", "#ffffff");
 
   // update the theme button
   selectElementByClassName("changeTheme").innerHTML =
@@ -63,9 +68,14 @@ function toDark() {
   localStorage.setItem("theme", "dark");
 
   // set the CSS variables
-  selectDocumentRoot().style.setProperty("--themePrimary", "#fff");
-  selectDocumentRoot().style.setProperty("--themeSecondary", "#000");
+  selectDocumentRoot().style.setProperty("--themePrimary", "#ffffff");
+  selectDocumentRoot().style.setProperty("--themeSecondary", "#000000");
   selectDocumentRoot().style.setProperty("--themeHelper", "#C6C6C6");
+
+  // Update the meta tag for the theme color to match the dark background document
+  document
+    .querySelector('meta[name="theme-color"]')
+    .setAttribute("content", "#000000");
 
   // update the theme button
   selectElementByClassName("changeTheme").innerHTML =

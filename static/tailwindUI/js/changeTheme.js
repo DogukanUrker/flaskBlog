@@ -36,6 +36,11 @@ function toLight() {
   document.querySelector(".changeTheme").innerHTML =
     '<i class="ti ti-sun"></i>';
 
+  // Update the meta tag for the theme color to match the light background document
+  document
+    .querySelector('meta[name="theme-color"]')
+    .setAttribute("content", "#f5f5f5");
+
   // Update the onclick event of the button to call the toDark function when clicked
   document
     .querySelector(".changeTheme")
@@ -59,6 +64,11 @@ function toDark() {
   // Update the HTML content of the button to show a moon icon
   document.querySelector(".changeTheme").innerHTML =
     '<i class="ti ti-moon"></i>';
+
+  // Update the meta tag for the theme color to match the dark background document
+  document
+    .querySelector('meta[name="theme-color"]')
+    .setAttribute("content", "#171717");
 
   // Update the onclick event of the button to call the toLight function when clicked
   document
