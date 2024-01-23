@@ -9,8 +9,19 @@ The database consists of three tables:
 This file contains functions to create the tables if they do not already exist, and to ensure that they have the correct structure.
 """
 
-from helpers import mkdir, exists, message, sqlite3
-from constants import DB_FOLDER_ROOT, DB_USERS_ROOT, DB_POSTS_ROOT, DB_COMMENTS_ROOT
+from helpers import mkdir, exists, message, sqlite3, currentTimeStamp, sha256_crypt
+from constants import (
+    DB_USERS_ROOT,
+    DB_POSTS_ROOT,
+    DEFAULT_ADMIN,
+    DB_FOLDER_ROOT,
+    DB_COMMENTS_ROOT,
+    DEFAULT_ADMIN_POINT,
+    DEFAULT_ADMIN_EMAIL,
+    DEFAULT_ADMIN_USERNAME,
+    DEFAULT_ADMIN_PASSWORD,
+    DEFAULT_ADMIN_PROFILE_PICTURE,
+)
 
 
 def dbFolder():
@@ -65,6 +76,30 @@ def usersTable():
             PRIMARY KEY("userID" AUTOINCREMENT)
         );"""
         cursor.execute(usersTable)
+        match DEFAULT_ADMIN:
+            case True:
+                password = sha256_crypt.hash(DEFAULT_ADMIN_PASSWORD)
+                cursor.execute(
+                    """
+                    INSERT INTO Users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
+                    values(?,?,?,?,?,?,?,?)
+                    """,
+                    (
+                        DEFAULT_ADMIN_USERNAME,
+                        DEFAULT_ADMIN_EMAIL,
+                        password,
+                        DEFAULT_ADMIN_PROFILE_PICTURE,
+                        "admin",
+                        DEFAULT_ADMIN_POINT,
+                        currentTimeStamp(),
+                        "True",
+                    ),
+                )
+                connection.commit()
+                message(
+                    "2",
+                    f'ADMIN: "{DEFAULT_ADMIN_USERNAME}" ADDED TO DATABASE AS INITIAL ADMIN',
+                )
         connection.commit()
         connection.close()
         message("2", f'TABLE: "Users" CREATED IN "{DB_USERS_ROOT}"')

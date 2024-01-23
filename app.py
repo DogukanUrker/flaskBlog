@@ -55,11 +55,17 @@ from constants import (
     DEBUG_MODE,
     TAILWIND_UI,
     REGISTRATION,
+    DEFAULT_ADMIN,
     LOG_FILE_ROOT,
     APP_ROOT_PATH,
     APP_SECRET_KEY,
     RECAPTCHA_BADGE,
     SESSION_PERMANENT,
+    DEFAULT_ADMIN_POINT,
+    DEFAULT_ADMIN_EMAIL,
+    DEFAULT_ADMIN_USERNAME,
+    DEFAULT_ADMIN_PASSWORD,
+    DEFAULT_ADMIN_PROFILE_PICTURE,
 )
 
 # Import the recaptcha-related variables from the helpers module
@@ -171,6 +177,22 @@ match RECAPTCHA:
     case False:
         # Log a warning message that recaptcha is off
         message("1", f"RECAPTCHA IS OFF")
+message(breaker=True)
+
+# Check if default admin is enabled
+match DEFAULT_ADMIN:
+    case True:
+        # Log a success message that admin is on and print the default admin settings
+        message("2", f"DEFAULT ADMIN IS ON")
+        message("6", f"DEFAULT ADMIN USERNAME: {DEFAULT_ADMIN_USERNAME}")
+        message("6", f"DEFAULT ADMIN EMAIL: {DEFAULT_ADMIN_EMAIL}")
+        message("6", f"DEFAULT ADMIN PASSWORD: {DEFAULT_ADMIN_PASSWORD}")
+        message("6", f"DEFAULT ADMIN POINT: {DEFAULT_ADMIN_POINT}")
+        message("6", f"DEFAULT ADMIN PROFILE PICTURE: {DEFAULT_ADMIN_PROFILE_PICTURE}")
+    case False:
+        # Log a warning message that admin is off
+        message("1", f"DEFAULT ADMIN IS OFF")
+
 message(breaker=True)
 # Check if the tailwind UI flag is True
 match TAILWIND_UI:
