@@ -5,7 +5,7 @@
   <h1 class="my-4 text-4xl font-medium select-none">Users</h1>
   {% for user in users %}
   <div
-    class="w-12/12 md:w-8/12 lg:w-2/4 xl:w-4/12 h-fit mx-px md:mx-auto py-2 px-2 my-4 border-2 rounded-md shadow-md
+    class="w-12/12 md:w-8/12 lg:w-7/12 xl:w-5/12 h-fit mx-px md:mx-auto py-2 px-2 my-4 border-2 rounded-md shadow-md
     border-gray-500/25"
   >
     <section class="mb-4 text-center">
@@ -25,37 +25,37 @@
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
         <i class="ti ti-id mr-1 text-xl"></i>
-        <p class="hidden md:block">ID:</p>
-        <p class="ml-2">{{user[0]}}</p>
+        <p class="hidden md:block mr-2">ID:</p>
+        <p>{{user[0]}}</p>
       </div>
       <div class="flex items-center">
         <i class="ti ti-user mr-1 text-xl"></i>
-        <p class="hidden md:block">Role:</p>
-        <p class="ml-2">{{user[5]}}</p>
+        <p class="hidden md:block mr-2">Role:</p>
+        <p>{{user[5]}}</p>
       </div>
     </section>
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center text-left text-sm md:text-base">
         <i class="ti ti-mail mr-1 text-xl"></i>
-        <p class="hidden md:block">Email:</p>
-        <p class="ml-2 break-all">{{user[2]}}</p>
+        <p class="hidden md:block mr-2">Email:</p>
+        <p class="break-all">{{user[2]}}</p>
       </div>
       <div class="flex items-center">
         <i class="ti ti-sparkles mr-1 text-xl"></i>
-        <p class="hidden md:block">Points:</p>
-        <p class="ml-2">{{user[6]}}</p>
+        <p class="hidden md:block mr-2">Points:</p>
+        <p>{{user[6]}}</p>
       </div>
     </section>
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
         <i class="ti ti-calendar mr-1 text-xl"></i>
-        <p class="hidden md:block">Join Date:</p>
-        <p class="ml-2 date">{{user[7]}}</p>
+        <p class="hidden md:block mr-2">Join Date:</p>
+        <p class="date">{{user[7]}}</p>
       </div>
       <div class="flex items-center w-fit">
         <i class="ti ti-clock mr-1 text-xl"></i>
-        <p class="hidden md:block">Join Time:</p>
-        <p class="ml-2 time">{{user[7]}}</p>
+        <p class="hidden md:block mr-2">Join Time:</p>
+        <p class="time">{{user[7]}}</p>
       </div>
     </section>
     <section class="flex w-full justify-between mt-4">
