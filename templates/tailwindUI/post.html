@@ -23,7 +23,7 @@
       <a href="/user/{{author|lower}}" class="hover:text-rose-500 duration-150">
         <h5 class="m-1 flex">
           <img
-            class="w-6 mr-2 select-none"
+            class="w-7 mr-2 select-none"
             src="{{ getProfilePicture(author) }}"
             alt="{{author}}"
           />{{author}}
@@ -47,12 +47,12 @@
   <div>
     {% for comment in comments %}
     <div class="flex flex-col mx-auto mt-8 mb-4 p-2 max-w-lg">
-      <div class="flex w-full justify-between my-1"><div class="mx-2 my-1">
-        <a href="/user/{{comment[3]}}" class="flex gap-3 items-center hover:text-rose-500 duration-150 select-none"><img
-          class="w-8"
+      <div class="flex w-full justify-between"><div class="mx-2">
+        <a href="/user/{{comment[3]}}" class="flex items-center hover:text-rose-500 duration-150 select-none"><img
+          class="w-7 mr-2"
           src="{{ getProfilePicture(comment[3]) }}"
           alt=""
-        /> <div class="mr-1">{{comment[3]}}:</div> </a>
+        /> <div>{{comment[3]}}</div> </a>
       </div>
       {% if session["userName"] == comment[3] %}
       <form method="post" class="mx-2 my-1">
@@ -62,7 +62,7 @@
           <i class="ti ti-trash-x mr-1 text-xl"></i>
         </button>
       </form>{% endif %}</div>
-      <p class="break-words ml-8">{{comment[2]}}</p>
+      <p class="break-words ml-8"><i class="ti ti-arrow-forward mr-1 text-xl inline-block"></i>{{comment[2]}}</p>
     </div>
     </div>
     {% endfor %}
@@ -73,16 +73,6 @@
   {% if session["userName"] %} <div class="border rounded border-rose-500/25">{{form.comment(class_="bg-transparent focus:outline-none rounded-md p-2 text-center h-20 w-72 resize-none mx-auto mb-0")}}
     <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2"><i class="ti ti-arrow-narrow-up mr-1 text-xl"></i>
     </button></div></form>
-  {% else %}
-  <p class="select-none">
-    you need
-    <a
-      href="/login/redirect=&post&{{id}}"
-      class="hover:text-rose-500 duration-150"
-      >login</a
-    >
-    for comment
-  </p>
   {% endif %}
 </div>
 {% endblock body %}
