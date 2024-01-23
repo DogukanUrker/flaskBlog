@@ -24,30 +24,38 @@
     </section>
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
-        <i class="ti ti-id mr-1 text-xl"></i>ID: {{user[0]}}
+        <i class="ti ti-id mr-1 text-xl"></i>
+        <p class="hidden md:block">ID:</p>
+        <p class="ml-2">{{user[0]}}</p>
       </div>
       <div class="flex items-center">
-        <i class="ti ti-user mr-1 text-xl"></i>Role: {{user[5]}}
+        <i class="ti ti-user mr-1 text-xl"></i>
+        <p class="hidden md:block">Role:</p>
+        <p class="ml-2">{{user[5]}}</p>
       </div>
     </section>
     <section class="flex w-full justify-between my-4">
-      <div class="flex items-centers text-left text-xs md:text-base">
-        <i class="ti ti-mail mr-1 text-xl"></i>Email:
-        <br class="block md:hidden" />
-        {{user[2]}}
+      <div class="flex items-center text-left text-sm md:text-base">
+        <i class="ti ti-mail mr-1 text-xl"></i>
+        <p class="hidden md:block">Email:</p>
+        <p class="ml-2 break-all">{{user[2]}}</p>
       </div>
       <div class="flex items-center">
-        <i class="ti ti-sparkles mr-1 text-xl"></i>Points: {{user[6]}}
+        <i class="ti ti-sparkles mr-1 text-xl"></i>
+        <p class="hidden md:block">Points:</p>
+        <p class="ml-2">{{user[6]}}</p>
       </div>
     </section>
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
-        <i class="ti ti-calendar mr-1 text-xl"></i>Join Date:
-        <p class="date ml-1">{{user[7]}}</p>
+        <i class="ti ti-calendar mr-1 text-xl"></i>
+        <p class="hidden md:block">Join Date:</p>
+        <p class="ml-2 date">{{user[7]}}</p>
       </div>
       <div class="flex items-center w-fit">
-        <i class="ti ti-clock mr-1 text-xl"></i>Join Time:
-        <p class="time ml-1">{{user[7]}}</p>
+        <i class="ti ti-clock mr-1 text-xl"></i>
+        <p class="hidden md:block">Join Time:</p>
+        <p class="ml-2 time">{{user[7]}}</p>
       </div>
     </section>
     <section class="flex w-full justify-between mt-4">
@@ -60,7 +68,7 @@
           class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
         >
           <i class="ti ti-trash mr-1 text-xl"></i>
-          delete user
+          <p class="hidden md:block">delete user</p>
         </button>
       </form>
       <form method="post">
@@ -72,9 +80,11 @@
           class="flex items-center hover:text-rose-500 duration-150 font-medium select-none"
         >
           {% if user[5] == "admin" %}
-          <i class="ti ti-user-down mr-1 text-xl"></i> set user role to user {%
-          else %} <i class="ti ti-user-up mr-1 text-xl"></i> set user role to
-          admin {% endif %}
+          <i class="ti ti-user-down mr-1 text-xl"></i>
+          <p class="hidden md:block">set user role to user</p>
+          {% else %} <i class="ti ti-user-up mr-1 text-xl"></i>
+          <p class="hidden md:block">set user role to user</p>
+          {% endif %}
         </button>
       </form>
     </section>

@@ -37,39 +37,49 @@ border-gray-500/25"
     </form>
   </section>
   <div class="flex items-center justify-between my-2">
-    <div class="flex ">
-      <i class="ti ti-tags mr-1 text-xl"></i>Tags: {{post[2]}}
+    <div class="flex items-center">
+      <i class="ti ti-tags mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Tags:</p>
+      <p>{{post[2]}}</p>
     </div>
-    <p class="flex"><i class="ti ti-eye mr-1 text-xl"></i>Views: {{post[5]}}</p>
-  </div>
-  <div class="flex items-center justify-between my-2">
-    <div class="flex">
-      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time:
-      <p class="time ml-1">{{post[6]}}</p>
-    </div>
-    <div class="flex">
-      <i class="ti ti-clock-edit mr-1 text-xl"></i>Last Edit Time:
-      <p class="time ml-1">{{post[7]}}</p>
+    <div class="flex items-center">
+      <i class="ti ti-eye mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Views:</p>
+      <p>{{post[5]}}</p>
     </div>
   </div>
   <div class="flex items-center justify-between my-2">
-    <div class="flex">
-      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date:
-      <p class="date ml-1">{{post[6]}}</p>
+    <div class="flex items-center">
+      <i class="ti ti-clock mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Creation Time:</p>
+      <p class="time">{{post[6]}}</p>
     </div>
-    <div class="flex">
-      <i class="ti ti-calendar-dot mr-1 text-xl"></i>Last Edit Date:
-      <p class="date ml-1">{{post[7]}}</p>
+    <div class="flex items-center">
+      <i class="ti ti-clock-edit mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Last Edit Time:</p>
+      <p class="time">{{post[7]}}</p>
+    </div>
+  </div>
+  <div class="flex items-center justify-between my-2">
+    <div class="flex items-center">
+      <i class="ti ti-calendar mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Creation Date:</p>
+      <p class="date">{{post[6]}}</p>
+    </div>
+    <div class="flex items-center">
+      <i class="ti ti-calendar-dot mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Last Edit Date:</p>
+      <p class="date">{{post[7]}}</p>
     </div>
   </div>
   {% if request.path == "/admin/posts" %}
-  <p class="flex">
+  <div class="flex items-center">
     <i class="ti ti-user mr-1 text-xl"></i>
-    Author:&nbsp;
+    <p class="hidden md:block mr-2">Author:</p>
     <a href="/user/{{post[4].lower()}}" class="hover:text-rose-500 duration-150"
       >{{post[4]}}</a
     >
-  </p>
+  </div>
   {% endif %}
 </div>
 {% endfor %} {% elif not showPosts %} {% if request.path == "/admin/posts" %}
@@ -91,13 +101,15 @@ border-gray-500/25"
 >
   <div tag="content">{{comment[2]}}</div>
   <section class="flex items-center justify-between my-2">
-    <div class="flex">
-      <i class="ti ti-calendar mr-1 text-xl"></i>Creation Date:
-      <p class="date ml-1">{{comment[4]}}</p>
+    <div class="flex items-center">
+      <i class="ti ti-calendar mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Creation Date:</p>
+      <p class="date">{{comment[4]}}</p>
     </div>
-    <div class="flex">
-      <i class="ti ti-clock mr-1 text-xl"></i>Creation Time:
-      <p class="time ml-1">{{comment[4]}}</p>
+    <div class="flex items-center">
+      <i class="ti ti-clock mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Creation Time:</p>
+      <p class="time">{{comment[4]}}</p>
     </div>
   </section>
   <a
