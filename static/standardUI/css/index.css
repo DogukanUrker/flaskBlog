@@ -26,3 +26,11 @@
 .title {
   font-size: 1.5rem;
 }
+
+/* Select all the elements with the class aboutBox and set their top margin to 1.5rem, bottom margin to 0.25rem, text alignment to center and font size to 0.75rem */
+.aboutBox {
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+  font-size: 0.75rem;
+}
