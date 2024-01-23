@@ -47,9 +47,9 @@
   90% {
     top: 15%;
   }
-  /* At the end, set the top position to -5% */
+  /* At the end, set the top position to -7% */
   100% {
-    top: -5%;
+    top: -7%;
   }
 }
 
@@ -67,8 +67,8 @@
   90% {
     top: 15%;
   }
-  /* At the end, set the top position to -5% */
+  /* At the end, set the top position to -7% */
   100% {
-    top: -5%;
+    top: -7%;
   }
 }
