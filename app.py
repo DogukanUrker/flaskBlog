@@ -53,6 +53,7 @@ from constants import (
     APP_NAME,
     APP_PORT,
     DEBUG_MODE,
+    APP_VERSION,
     TAILWIND_UI,
     REGISTRATION,
     DEFAULT_ADMIN,
@@ -116,10 +117,11 @@ app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
 csrf = CSRFProtect(app)
 
 
-# Print a line breaker and a message that the app is starting
+# Print a line breaker, a message that the app is starting and app settings
 message(breaker=True)
 message("1", f"APP DEBUG MODE: {DEBUG_MODE}")
 message("3", f"APP NAME: {APP_NAME}")
+message("3", f"APP VERSION: {APP_VERSION}")
 message("3", f"APP HOST: {APP_HOST}")
 message("3", f"APP PORT: {APP_PORT}")
 message("3", f"APP SECRET KEY: {APP_SECRET_KEY}")
