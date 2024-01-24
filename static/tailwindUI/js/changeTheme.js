@@ -30,7 +30,7 @@ function toLight() {
 
   // Update the CSS class of the body element to use light colors
   document.body.className =
-    "text-neutral-900 bg-neutral-100 selection:bg-neutral-200 selection:text-rose-500";
+    "text-[#0B0104] bg-rose-50/25 selection:bg-rose-100 selection:text-rose-500";
 
   // Update the HTML content of the button to show a sun icon
   document.querySelector(".changeTheme").innerHTML =
@@ -39,7 +39,7 @@ function toLight() {
   // Update the meta tag for the theme color to match the light background document
   document
     .querySelector('meta[name="theme-color"]')
-    .setAttribute("content", "#f5f5f5");
+    .setAttribute("content", "#FFFBFB");
 
   // Update the onclick event of the button to call the toDark function when clicked
   document
