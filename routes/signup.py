@@ -11,8 +11,6 @@ from helpers import (
     addPoints,
     Blueprint,
     signUpForm,
-    currentDate,
-    currentTime,
     requestsPost,
     sha256_crypt,
     REGISTRATION,
@@ -126,21 +124,20 @@ def signup():
                                                         case False:
                                                             cursor = connection.cursor()
                                                             cursor.execute(
-                                                                f"""
-                                                                insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) \
-                                                                values(?, ?, ?, ?, ?, ?, ?, ?)
-                                                                """,
-                                                                (
-                                                                    userName,
-                                                                    email,
-                                                                    password,
-                                                                    f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                                                    "user",
-                                                                    0,
-                                                                    currentDate(),
-                                                                    currentTime(),
-                                                                    "False",
-                                                                ),
+                                                                        f"""
+                                                                        insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
+                                                                        values(?, ?, ?, ?, ?, ?, ?, ?)
+                                                                        """,
+                                                                        (
+                                                                            userName,
+                                                                            email,
+                                                                            password,
+                                                                            f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
+                                                                            "user",
+                                                                            0,
+                                                                            currentTimeStamp(),
+                                                                            "False",
+                                                                        ),
                                                             )
                                                             connection.commit()
                                                             message(
