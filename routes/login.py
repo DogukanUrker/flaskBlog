@@ -121,6 +121,7 @@ def login(direct):
                                                 case False:
                                                     # Logs the user in if reCAPTCHA is not required
                                                     session["userName"] = user[1]
+                                                    session["userRole"] = user[5]
                                                     addPoints(1, session["userName"])
                                                     message(
                                                         "2",
