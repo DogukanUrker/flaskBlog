@@ -59,7 +59,7 @@ function toDark() {
 
   // Update the CSS class of the body element to use dark colors
   document.body.className =
-    "text-neutral-100 bg-neutral-900 selection:bg-neutral-800 selection:text-rose-500";
+    "text-[#FFFBFB] bg-neutral-900 selection:bg-rose-950/25 selection:text-rose-500";
 
   // Update the HTML content of the button to show a moon icon
   document.querySelector(".changeTheme").innerHTML =
