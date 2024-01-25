@@ -9,8 +9,6 @@ from helpers import (
     redirect,
     Blueprint,
     RECAPTCHA,
-    currentDate,
-    currentTime,
     requestsPost,
     DB_POSTS_ROOT,
     DB_USERS_ROOT,
