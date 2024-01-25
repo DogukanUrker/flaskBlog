@@ -172,13 +172,14 @@ def postsTable():
         CREATE TABLE "posts" (
             "id"	INTEGER NOT NULL UNIQUE,
             "title"	TEXT NOT NULL,
-            "tags"	TEXT,
+            "tags"	TEXT NOT NULL,
             "content"	TEXT NOT NULL,
             "banner"	BLOB NOT NULL,
             "author"	TEXT NOT NULL,
-            "views"	TEXT,
+            "views"	INTEGER,
             "timeStamp"	INTEGER,
             "lastEditTimeStamp"	INTEGER,
+            "category"	TEXT NOT NULL,
             PRIMARY KEY("id" AUTOINCREMENT)
         );"""
         # Execute the SQL statement to create the table
