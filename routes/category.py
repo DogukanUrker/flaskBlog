@@ -42,15 +42,15 @@ def category(category):
     Raises:
         404: If the specified category does not exist.
     """
-    categories = ["Games", "History", "Science", "Code", "Technology"]
+    categories = ["games", "history", "science", "code", "technology"]
     match category.lower() in categories:
         case False:
             abort(404)
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
-        """select * from posts where category = ? """,
-        [(category)],
+        """select * from posts where lower(category) = ? """,
+        [(category.lower())],
     )
     posts = cursor.fetchall()
     return render_template("category.html", posts=posts, category=category)
