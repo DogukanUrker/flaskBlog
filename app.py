@@ -2,7 +2,11 @@
 This file contains the main function
 """
 # Import the message function from the helpers module
-from helpers import message
+from helpers import message, terminalASCII
+
+# Print a line breaker and a ASCII art.
+message(breaker=True)
+print(terminalASCII())
 
 # Print a line breaker and a message that the app is starting
 message(breaker=True)
@@ -283,8 +287,14 @@ match __name__:
         message("2", "APP STARTED SUCCESSFULLY")
         message("2", f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
         message(breaker=True)
+
+        # Print a line breaker and a ASCII art.
+        print(terminalASCII())
+        message(breaker=True)
+
         # Run the app with the debug mode, host and port settings
         app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
         message(breaker=True)
+
         # Log a message that the app shut down
         message("1", "APP SHUT DOWN")
