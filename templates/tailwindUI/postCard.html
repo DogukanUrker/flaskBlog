@@ -1,0 +1,44 @@
+<div
+  class="w-[17rem] group flex flex-col justify-between h-min-max mx-auto rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-150 "
+>
+  <div class="overflow-hidden">
+    <img
+      src="{{ url_for('returnPostBanner.returnPostBanner', postID = post[0]) }}"
+      class="h-48 group-hover:scale-110 transition duration-150 object-cover w-max rounded-t-md mx-auto select-none"
+    />
+  </div>
+  <div class="px-2 mt-1">
+    <a
+      href="/post/{{post[0]}}"
+      class="text-rose-500 text-lg hover:text-rose-500/75 duration-150 break-words font-medium"
+      >{{post[1]}}</a
+    >
+  </div>
+  <div class="text-base px-2 overflow-y-hidden h-32">
+    {{post[3]|safe}}
+  </div>
+  <div class="flex justify-between text-sm font-medium px-2 select-none">
+    <div class="my-2 flex items-center w-fit gap-2 ">
+      <img class="block w-8 h-8" src="{{ getProfilePicture(post[5]) }}" />
+      <a href="/user/{{post[5]}}">{{post[5]}}</a>
+    </div>
+    <div class="flex items-center">
+      <div class="mr-1 text-base">
+        {% if post[9] == 'Games' %}
+        <i class="ti ti-device-gamepad text-rose-500"></i>
+        {% elif post[9] == 'History' %}
+        <i class="ti ti-books text-sky-500"></i>
+        {% elif post[9] == 'Science' %}
+        <i class="ti ti-square-root-2 text-emerald-500"></i>
+        {% elif post[9] == 'Code' %}
+        <i class="ti ti-code text-indigo-500"></i>
+        {% elif post[9] == 'Technology' %}
+        <i class="ti ti-cpu text-slate-500"></i>
+        {% else %}
+        <i class="ti ti-stack-2 text-neutral-500"></i>
+        {% endif %}
+      </div>
+      <p class="date">{{post[7]}}</p>
+    </div>
+  </div>
+</div>
