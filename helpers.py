@@ -8,6 +8,7 @@ import smtplib
 import secrets
 import sqlite3
 from os import mkdir
+from io import BytesIO
 from time import tzname
 from random import randint
 from os.path import exists
@@ -65,6 +66,7 @@ from flask import (
     session,
     redirect,
     Blueprint,
+    send_file,
     render_template,
     send_from_directory,
 )

@@ -9,6 +9,7 @@
   <h1 class="title">{{title}}</h1>
   <p class="content">{{content|safe}} <br />
   </p>
+  <img src='{{ url_for("returnPostBanner.returnPostBanner", postID = id) }}' />
   <div class="tags"><h5 class="tag"><i class="ti ti-tags"></i> Tags: {{tags.replace(",",", ")}}</h5>
     <a
       target="_blank"

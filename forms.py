@@ -1,7 +1,14 @@
 """
 This file contains classes that are used to create forms for the application.
 """
-from wtforms import validators, Form, StringField, PasswordField, TextAreaField
+from wtforms import (
+    validators,
+    Form,
+    StringField,
+    PasswordField,
+    TextAreaField,
+    FileField,
+)
 
 
 def inputStyle():
@@ -58,6 +65,11 @@ class createPostForm(Form):
     postContent = TextAreaField(
         "Post Content",
         [validators.Length(min=50)],
+    )
+    postBanner = FileField(
+        "Post Banner",
+        [validators.InputRequired()],
+        render_kw={"placeholder": "post banner"},
     )
 
 

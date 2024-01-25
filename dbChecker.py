@@ -71,8 +71,8 @@ def usersTable():
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
     try:
-        # Try to execute a SQL query to select all records from the users table
-        cursor.execute("""SELECT * FROM users; """).fetchall()
+        # Try to execute a SQL query to select userID records from the users table
+        cursor.execute("""SELECT userID FROM users; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
         message("6", f'TABLE: "Users" FOUND IN "{DB_USERS_ROOT}"')
         # Close the connection to the database
@@ -158,8 +158,8 @@ def postsTable():
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
     try:
-        # Try to execute a SQL query to select all records from the posts table
-        cursor.execute("""SELECT * FROM posts; """).fetchall()
+        # Try to execute a SQL query to select id records from the posts table
+        cursor.execute("""SELECT id FROM posts; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
         message("6", f'TABLE: "Posts" FOUND IN "{DB_POSTS_ROOT}"')
         # Close the connection to the database
@@ -174,6 +174,7 @@ def postsTable():
             "title"	TEXT NOT NULL,
             "tags"	TEXT,
             "content"	TEXT NOT NULL,
+            "banner"	BLOB NOT NULL,
             "author"	TEXT NOT NULL,
             "views"	TEXT,
             "timeStamp"	INTEGER,
@@ -214,8 +215,8 @@ def commentsTable():
     connection = sqlite3.connect(DB_COMMENTS_ROOT)
     cursor = connection.cursor()
     try:
-        # Try to execute a SQL query to select all records from the comments table
-        cursor.execute("""SELECT * FROM comments; """).fetchall()
+        # Try to execute a SQL query to select id records from the comments table
+        cursor.execute("""SELECT id FROM comments; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
         message("6", f'TABLE: "Comments" FOUND IN "{DB_COMMENTS_ROOT}"')
         # Close the connection to the database

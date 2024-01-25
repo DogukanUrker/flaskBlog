@@ -9,6 +9,7 @@
     method="post"
     class="form formPost centeredHorizontally"
     id="recaptchaForm"
+    enctype="multipart/form-data"
   >
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
@@ -26,7 +27,11 @@
     </button>
   </form>
   {% else %}
-  <form method="post" class="form formPost centeredHorizontally">
+  <form
+    method="post"
+    class="form formPost centeredHorizontally"
+    enctype="multipart/form-data"
+  >
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(class_="input centeredHorizontally" , autocomplete="off")}}
     {{form.postTags(class_="input centeredHorizontally" , autocomplete="off")}}

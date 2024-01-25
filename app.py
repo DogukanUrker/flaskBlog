@@ -38,6 +38,7 @@ from routes.changePassword import changePasswordBlueprint
 from routes.adminPanelUsers import adminPanelUsersBlueprint
 from routes.adminPanelPosts import adminPanelPostsBlueprint
 from routes.accountSettings import accountSettingsBlueprint
+from routes.returnPostBanner import returnPostBannerBlueprint
 from routes.adminPanelComments import adminPanelCommentsBlueprint
 from routes.changeProfilePicture import changeProfilePictureBlueprint
 
@@ -292,6 +293,7 @@ app.register_blueprint(changePasswordBlueprint)
 app.register_blueprint(adminPanelUsersBlueprint)
 app.register_blueprint(adminPanelPostsBlueprint)
 app.register_blueprint(accountSettingsBlueprint)
+app.register_blueprint(returnPostBannerBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
 app.register_blueprint(changeProfilePictureBlueprint)
 

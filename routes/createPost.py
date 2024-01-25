@@ -10,8 +10,6 @@ from helpers import (
     addPoints,
     Blueprint,
     RECAPTCHA,
-    currentDate,
-    currentTime,
     requestsPost,
     DB_POSTS_ROOT,
     createPostForm,
@@ -49,6 +47,7 @@ def createPost():
                     postTitle = request.form["postTitle"]
                     postTags = request.form["postTags"]
                     postContent = request.form["postContent"]
+                    postBanner = request.files["postBanner"].read()
                     match postContent == "":
                         case True:
                             flash("post content not be empty", "error")
@@ -75,12 +74,13 @@ def createPost():
                                                 connection = sqlite3.connect(DB_POSTS_ROOT)
                                                 cursor = connection.cursor()
                                                 cursor.execute(
-                                                    "insert into posts(title,tags,content,author,views,timeStamp,lastEditTimeStamp) \
-                                                    values(?, ?, ?, ?, ?, ?, ?)",
+                                                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp) \
+                                                    values(?, ?, ?, ?, ?, ?, ?, ?)",
                                                     (
                                                         postTitle,
                                                         postTags,
                                                         postContent,
+                                                        postBanner,
                                                         session["userName"],
                                                         0,
                                                         currentTimeStamp(),
@@ -99,12 +99,13 @@ def createPost():
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
                                             cursor = connection.cursor()
                                             cursor.execute(
-                                                    "insert into posts(title,tags,content,author,views,timeStamp,lastEditTimeStamp) \
-                                                    values(?, ?, ?, ?, ?, ?, ?)",
+                                                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp) \
+                                                    values(?, ?, ?, ?, ?, ?, ?, ?)",
                                                     (
                                                         postTitle,
                                                         postTags,
                                                         postContent,
+                                                        postBanner,
                                                         session["userName"],
                                                         0,
                                                         currentTimeStamp(),

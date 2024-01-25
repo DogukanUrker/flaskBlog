@@ -1,8 +1,9 @@
 {% extends 'layout.html'%} {%block head%}
 <title>{{title}}</title>
 {% endblock head %} {%block body%}
-<div class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 mx-auto mt-6 md:mt-16 break-words">
-  <h1 class="text-2xl md:text-3xl mb-6 text-rose-500 w-full text-center font-bold">
+<div class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 mx-auto mt-6 md:mt-10 break-words">
+  <img src="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}" class="mx-auto rounded-md shadow-md">
+  <h1 class="text-2xl md:text-3xl mb-5 mt-3 text-rose-500 w-full text-center font-bold">
     {{title}}
   </h1>
   <p>
