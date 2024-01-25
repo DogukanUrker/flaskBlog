@@ -51,18 +51,20 @@ from dbChecker import dbFolder, usersTable, postsTable, commentsTable
 # Import the constants from the constants module
 from constants import (
     LOG_IN,
+    UI_NAME,
     APP_HOST,
     APP_NAME,
     APP_PORT,
     DEBUG_MODE,
     APP_VERSION,
-    TAILWIND_UI,
     REGISTRATION,
     DEFAULT_ADMIN,
     LOG_FILE_ROOT,
     APP_ROOT_PATH,
+    STATIC_FOLDER,
     APP_SECRET_KEY,
     RECAPTCHA_BADGE,
+    TEMPLATE_FOLDER,
     SESSION_PERMANENT,
     DEFAULT_ADMIN_POINT,
     DEFAULT_ADMIN_EMAIL,
@@ -92,16 +94,6 @@ from helpers import (
     RECAPTCHA_PROFILE_PICTURE_CHANGE,
 )
 
-# Check if the TAILWIND_UI flag is True
-match TAILWIND_UI:
-    case True:
-        # Set the template folder and the static folder to the tailwindUI subfolders
-        TEMPLATE_FOLDER = "templates/tailwindUI"
-        STATIC_FOLDER = "static/tailwindUI"
-    case False:
-        # Set the template folder and the static folder to the standardUI subfolders
-        TEMPLATE_FOLDER = "templates/standardUI"
-        STATIC_FOLDER = "static/standardUI"
 
 # Create a Flask app object with the app name, root path, static folder and template folder
 app = Flask(
@@ -132,6 +124,10 @@ message("3", f"APP ROOT PATH: {APP_ROOT_PATH}")
 message("3", f"LOG FILE ROOT: {LOG_FILE_ROOT}")
 message("3", f"LOG IN: {LOG_IN}")
 message("3", f"REGISTRATION: {REGISTRATION}")
+# Log the UI name, template folder and the static folder
+message("4", f"UI: {UI_NAME}")
+message("4", f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
+message("4", f"STATIC FOLDER: {STATIC_FOLDER}")
 message(breaker=True)
 
 
@@ -196,24 +192,6 @@ match DEFAULT_ADMIN:
     case False:
         # Log a warning message that admin is off
         message("1", f"DEFAULT ADMIN IS OFF")
-
-message(breaker=True)
-# Check if the tailwind UI flag is True
-match TAILWIND_UI:
-    case True:
-        # Log a message that the UI mode is tailwind-css and set the template folder and the static folder accordingly
-        message("4", f"UI MODE: TAILWIND-CSS")
-        TEMPLATE_FOLDER = "templates/tailwindUI"
-        STATIC_FOLDER = "static/tailwindUI"
-    case False:
-        # Log a message that the UI mode is standard-css and set the template folder and the static folder accordingly
-        message("4", f"UI MODE: STANDARD-CSS")
-        TEMPLATE_FOLDER = "templates/standardUI"
-        STATIC_FOLDER = "static/standardUI"
-
-# Log the template folder and the static folder
-message("4", f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
-message("4", f"STATIC FOLDER: {STATIC_FOLDER}")
 
 message(breaker=True)
 # Call the dbFolder, usersTable, postsTable and commentsTable functions to check the database status
