@@ -25,17 +25,41 @@
     <div class="flex items-center">
       <div class="mr-1 text-base">
         {% if post[9] == 'Games' %}
-        <i class="ti ti-device-gamepad text-rose-500"></i>
+        <a href="/category/Games"
+          ><i
+            class="ti ti-device-gamepad text-rose-500 hover:text-rose-600 duration-150"
+          ></i
+        ></a>
         {% elif post[9] == 'History' %}
-        <i class="ti ti-books text-sky-500"></i>
+        <a href="/category/History"
+          ><i
+            class="ti ti-books text-sky-500 hover:text-sky-600 duration-150"
+          ></i
+        ></a>
         {% elif post[9] == 'Science' %}
-        <i class="ti ti-square-root-2 text-emerald-500"></i>
+        <a href="/category/Science"
+          ><i
+            class="ti ti-square-root-2 text-emerald-500 hover:text-emerald-600 duration-150"
+          ></i
+        ></a>
         {% elif post[9] == 'Code' %}
-        <i class="ti ti-code text-indigo-500"></i>
+        <a href="/category/Code"
+          ><i
+            class="ti ti-code text-indigo-500 hover:text-indigo-600 duration-150"
+          ></i
+        ></a>
         {% elif post[9] == 'Technology' %}
-        <i class="ti ti-cpu text-slate-500"></i>
+        <a href="/category/Technology"
+          ><i
+            class="ti ti-cpu text-slate-500 hover:text-slate-600 duration-150"
+          ></i
+        ></a>
         {% else %}
-        <i class="ti ti-stack-2 text-neutral-500"></i>
+        <a href="/"
+          ><i
+            class="ti ti-stack-2 text-neutral-500 hover:text-neutral-600 duration-150"
+          ></i
+        ></a>
         {% endif %}
       </div>
       <p class="date">{{post[7]}}</p>
