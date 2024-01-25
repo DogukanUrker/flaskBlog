@@ -4,6 +4,7 @@ This file contains classes that are used to create forms for the application.
 from wtforms import (
     validators,
     Form,
+    RadioField,
     StringField,
     PasswordField,
     TextAreaField,
@@ -70,6 +71,17 @@ class createPostForm(Form):
         "Post Banner",
         [validators.InputRequired()],
         render_kw={"placeholder": "post banner"},
+    )
+    postCategory = RadioField(
+        "Post Category",
+        [validators.InputRequired()],
+        choices=[
+            ("Games", "Games"),
+            ("History", "History"),
+            ("Science", "Science"),
+            ("Code", "Code"),
+            ("Technology", "Technology"),
+        ],
     )
 
 

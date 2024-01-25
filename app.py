@@ -30,6 +30,7 @@ from routes.about import aboutBlueprint
 from routes.signup import signUpBlueprint
 from routes.logout import logoutBlueprint
 from routes.search import searchBlueprint
+from routes.category import categoryBlueprint
 from routes.editPost import editPostBlueprint
 from routes.searchBar import searchBarBlueprint
 from routes.dashboard import dashboardBlueprint
@@ -263,6 +264,7 @@ app.register_blueprint(loginBlueprint)
 app.register_blueprint(signUpBlueprint)
 app.register_blueprint(logoutBlueprint)
 app.register_blueprint(searchBlueprint)
+app.register_blueprint(categoryBlueprint)
 app.register_blueprint(editPostBlueprint)
 app.register_blueprint(dashboardBlueprint)
 app.register_blueprint(searchBarBlueprint)

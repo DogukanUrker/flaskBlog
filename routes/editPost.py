@@ -68,11 +68,13 @@ def editPost(postID):
                             form.postTitle.data = post[1]
                             form.postTags.data = post[2]
                             form.postContent.data = post[3]
+                            form.postCategory.data = post[9]
                             match request.method == "POST":
                                 case True:
                                     postTitle = request.form["postTitle"]
                                     postTags = request.form["postTags"]
                                     postContent = request.form["postContent"]
+                                    postCategory = request.form["postCategory"]
                                     match postContent == "":
                                         case True:
                                             flash("post content not be empty", "error")
@@ -111,6 +113,10 @@ def editPost(postID):
                                                                 (postContent, post[0]),
                                                             )
                                                             cursor.execute(
+                                                                """update posts set category = ? where id = ? """,
+                                                                (postCategory, post[0]),
+                                                            )
+                                                            cursor.execute(
                                                                 """update posts set lastEditTimeStamp = ? where id = ? """,
                                                                 [(currentTimeStamp()), (post[0])],
                                                             )
@@ -135,6 +141,10 @@ def editPost(postID):
                                                     cursor.execute(
                                                         """update posts set content = ? where id = ? """,
                                                         (postContent, post[0]),
+                                                    )
+                                                    cursor.execute(
+                                                                """update posts set category = ? where id = ? """,
+                                                                (postCategory, post[0]),
                                                     )
                                                     cursor.execute(
                                                                 """update posts set lastEditTimeStamp = ? where id = ? """,

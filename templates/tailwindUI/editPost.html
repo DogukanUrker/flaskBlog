@@ -9,7 +9,14 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
-    {{form.postContent(id_="editor", autocomplete="off")}}
+    <div>
+      <label class="block mt-2 mb-1 text-center">
+        Select a Category
+      </label>
+      {{form.postCategory(class_="flex items-center w-fit flex-wrap mx-auto p-2
+      mb-2 rounded shadow-md select-none gap-2")}}
+      {{form.postContent(id_="editor", autocomplete="off")}}
+    </div>
     <button
       type="submit"
       data-sitekey="{{ siteKey }}"
@@ -25,7 +32,14 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
-    {{form.postContent(id_="editor", autocomplete="off")}}
+    <div>
+      <label class="block mt-2 mb-1 text-center">
+        Select a Category
+      </label>
+      {{form.postCategory(class_="flex items-center w-fit flex-wrap mx-auto p-2
+      mb-2 rounded shadow-md select-none gap-2")}}
+      {{form.postContent(id_="editor", autocomplete="off")}}
+    </div>
     <button
       type="submit"
       class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium "

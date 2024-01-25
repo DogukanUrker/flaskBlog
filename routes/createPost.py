@@ -48,6 +48,7 @@ def createPost():
                     postTags = request.form["postTags"]
                     postContent = request.form["postContent"]
                     postBanner = request.files["postBanner"].read()
+                    postCategory = request.form["postCategory"]
                     match postContent == "":
                         case True:
                             flash("post content not be empty", "error")
@@ -74,8 +75,8 @@ def createPost():
                                                 connection = sqlite3.connect(DB_POSTS_ROOT)
                                                 cursor = connection.cursor()
                                                 cursor.execute(
-                                                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp) \
-                                                    values(?, ?, ?, ?, ?, ?, ?, ?)",
+                                                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category) \
+                                                    values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                                     (
                                                         postTitle,
                                                         postTags,
@@ -85,6 +86,7 @@ def createPost():
                                                         0,
                                                         currentTimeStamp(),
                                                         currentTimeStamp(),
+                                                        postCategory
                                                     ),
                                                 )
                                                 connection.commit()
@@ -99,8 +101,8 @@ def createPost():
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
                                             cursor = connection.cursor()
                                             cursor.execute(
-                                                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp) \
-                                                    values(?, ?, ?, ?, ?, ?, ?, ?)",
+                                                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category) \
+                                                    values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                                     (
                                                         postTitle,
                                                         postTags,
@@ -110,6 +112,7 @@ def createPost():
                                                         0,
                                                         currentTimeStamp(),
                                                         currentTimeStamp(),
+                                                        postCategory
                                                     ),
                                                 )
                                             connection.commit()

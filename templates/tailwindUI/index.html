@@ -1,38 +1,10 @@
 {% extends 'layout.html'%} {%block head%}
 <title>flaskBlog</title>
-{% endblock head %} {%block body%}
+{% endblock head %} {%block body%} {% include "categories.html" %}
 <div
-  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 2xl:w-7/12 mt-12"
+  class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6"
 >
-  {% for post in posts %}
-  <div
-    class="w-64 group flex flex-col justify-between h-min-max mx-auto rounded-md overflow-hidden shadow-xl hover:scale-105 transition duration-150 "
-  >
-    <div class="overflow-hidden">
-      <img
-        src="{{ url_for('returnPostBanner.returnPostBanner', postID = post[0]) }}"
-        class="h-48 group-hover:scale-110 transition duration-150 object-cover w-max rounded-t-md mx-auto select-none"
-      />
-    </div>
-    <div class="px-2 mt-1">
-      <a
-        href="post/{{post[0]}}"
-        class="text-rose-500 text-lg hover:text-rose-500/75 duration-150 break-words font-medium"
-        >{{post[1]}}</a
-      >
-    </div>
-    <div class="text-base px-2 overflow-y-hidden h-32">
-      {{post[3]|safe}}
-    </div>
-    <div class="flex justify-between text-sm font-medium px-2">
-      <div class="my-2 flex items-center w-fit gap-2 ">
-        <img class="block w-8 h-8" src="{{ getProfilePicture(post[5]) }}" />
-        <a href="user/{{post[5]}}">{{post[5]}}</a>
-      </div>
-      <div class="flex items-center"><p class="date">{{post[7]}}</p></div>
-    </div>
-  </div>
-  {% endfor %}
+  {% for post in posts %} {% include "postCard.html" %} {% endfor %}
 </div>
 <div class="text-center mt-4 mb-2 text-xs font-medium">
   <div class="mb-1">
