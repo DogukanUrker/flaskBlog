@@ -14,8 +14,8 @@ if (localStorage.getItem("theme") === "dark") {
   // If it is light, call the toLight function
   toLight();
 } else if (localStorage.getItem("theme") === null) {
-  // If it is null, meaning the user has not set a preference, call the toDark function
-  toDark();
+  // If it is null, meaning the user has not set a preference, call the toLight function
+  toLight();
 }
 
 /**
