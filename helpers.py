@@ -14,6 +14,7 @@ from random import randint
 from os.path import exists
 from datetime import datetime
 from requests import post as requestsPost
+from constants import SMTP_MAIL, SMTP_PORT, SMTP_SERVER, SMTP_PASSWORD
 from constants import (
     LOG_IN,
     APP_NAME,

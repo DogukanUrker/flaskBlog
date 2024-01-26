@@ -10,9 +10,13 @@ from helpers import (
     session,
     redirect,
     Blueprint,
+    SMTP_PORT,
+    SMTP_MAIL,
     RECAPTCHA,
+    SMTP_SERVER,
     EmailMessage,
     requestsPost,
+    SMTP_PASSWORD,
     DB_USERS_ROOT,
     verifyUserForm,
     render_template,
@@ -135,16 +139,14 @@ def verifyUser(codeSent):
                                     email = cursor.fetchone()
                                     match not userNameDB:
                                         case False:
-                                            port = 587
-                                            smtp_server = "smtp.gmail.com"
                                             context = ssl.create_default_context()
-                                            server = smtplib.SMTP(smtp_server, port)
+                                            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
                                             server.ehlo()
                                             server.starttls(context=context)
                                             server.ehlo()
                                             server.login(
-                                                "flaskblogdogukanurker@gmail.com",
-                                                "lsooxsmnsfnhnixy",
+                                                SMTP_MAIL,
+                                                SMTP_PASSWORD,
                                             )
                                             verificationCode = str(randint(1000, 9999))
                                             message = EmailMessage()
@@ -166,7 +168,7 @@ def verifyUser(codeSent):
                                             message["Subject"] = "Verification Code🔢"
                                             message[
                                                 "From"
-                                            ] = "flaskblogdogukanurker@gmail.com"
+                                            ] = SMTP_MAIL
                                             message["To"] = email
                                             match RECAPTCHA and RECAPTCHA_VERIFY_USER:
                                                 case True:

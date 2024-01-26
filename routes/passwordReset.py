@@ -9,10 +9,14 @@ from helpers import (
     request,
     redirect,
     Blueprint,
+    SMTP_PORT,
+    SMTP_MAIL,
+    RECAPTCHA,
+    SMTP_SERVER,
     EmailMessage,
     sha256_crypt,
-    RECAPTCHA,
     requestsPost,
+    SMTP_PASSWORD,
     DB_USERS_ROOT,
     render_template,
     passwordResetForm,
@@ -144,15 +148,13 @@ def passwordReset(codeSent):
                     emailDB = cursor.fetchone()
                     match not userNameDB or not emailDB:
                         case False:
-                            port = 587
-                            smtp_server = "smtp.gmail.com"
                             context = ssl.create_default_context()
-                            server = smtplib.SMTP(smtp_server, port)
+                            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
                             server.ehlo()
                             server.starttls(context=context)
                             server.ehlo()
                             server.login(
-                                "flaskblogdogukanurker@gmail.com", "lsooxsmnsfnhnixy"
+                                SMTP_MAIL, SMTP_PASSWORD
                             )
                             passwordResetCode = str(randint(1000, 9999))
                             message = EmailMessage()
@@ -172,7 +174,7 @@ def passwordReset(codeSent):
                                 subtype="html",
                             )
                             message["Subject"] = "Forgot Password?😕"
-                            message["From"] = "flaskblogdogukanurker@gmail.com"
+                            message["From"] = SMTP_MAIL
                             message["To"] = email
                             match RECAPTCHA and RECAPTCHA_PASSWORD_RESET:
                                 case True:

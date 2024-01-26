@@ -60,9 +60,13 @@ from constants import (
     APP_HOST,
     APP_NAME,
     APP_PORT,
+    SMTP_MAIL,
+    SMTP_PORT,
     DEBUG_MODE,
     APP_VERSION,
+    SMTP_SERVER,
     REGISTRATION,
+    SMTP_PASSWORD,
     DEFAULT_ADMIN,
     LOG_FILE_ROOT,
     APP_ROOT_PATH,
@@ -116,7 +120,7 @@ app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
 csrf = CSRFProtect(app)
 
 
-# Print a line breaker, a message that the app is starting and app settings
+# Print a line breaker and log app settings
 message(breaker=True)
 message("1", f"APP DEBUG MODE: {DEBUG_MODE}")
 message("3", f"APP NAME: {APP_NAME}")
@@ -134,7 +138,12 @@ message("4", f"UI: {UI_NAME}")
 message("4", f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
 message("4", f"STATIC FOLDER: {STATIC_FOLDER}")
 message(breaker=True)
-
+# Log the SMTP server settings
+message("6", f"SMTP SERVER: {SMTP_SERVER}")
+message("6", f"SMTP PORT: {SMTP_PORT}")
+message("6", f"SMTP MAIL: {SMTP_MAIL}")
+message("6", f"SMTP PASSWORD: {SMTP_PASSWORD}")
+message(breaker=True)
 
 # Check if recaptcha is enabled
 match RECAPTCHA:
