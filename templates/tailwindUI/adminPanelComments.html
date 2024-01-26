@@ -10,7 +10,7 @@ border-gray-500/25"
   <div class="flex items-center justify-between mb-2">
     <div class="flex items-center">
       <i class="ti ti-id mr-1 text-xl"></i> Post ID:
-      <a href="/post/{{comment[0]}}" class="ml-1">{{comment[1]}}</a>
+      <a href="/post/{{comment[0]}}" class="ml-1 font-medium">{{comment[1]}}</a>
     </div>
   </div>
   <div tag="content" class="w-fit mx-auto my-4">{{comment[2]}}</div>
@@ -18,12 +18,12 @@ border-gray-500/25"
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
       <p class="hidden md:block mr-1">Creation Time:</p>
-      <p class="time">{{comment[4]}}</p>
+      <p class="time font-medium">{{comment[4]}}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
       <p class="hidden md:block mr-1">Creation Date:</p>
-      <p class="date">{{comment[4]}}</p>
+      <p class="date font-medium">{{comment[4]}}</p>
     </div>
   </div>
   {% if request.path == "/admin/comments" %}
@@ -33,7 +33,7 @@ border-gray-500/25"
       <p class="hidden md:block mr-1">Author:</p>
       <a
         href="/user/{{comment[3].lower()}}"
-        class="hover:text-rose-500 duration-150"
+        class="hover:text-rose-500 duration-150 font-medium"
         >{{comment[3]}}</a
       >
     </div>
