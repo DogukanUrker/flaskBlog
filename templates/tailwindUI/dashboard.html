@@ -76,15 +76,25 @@ border-gray-500/25"
       <p class="date">{{post[8]}}</p>
     </div>
   </div>
-  {% if request.path == "/admin/posts" %}
-  <div class="flex items-center">
-    <i class="ti ti-user mr-1 text-xl"></i>
-    <p class="hidden md:block mr-2">Author:</p>
-    <a href="/user/{{post[5].lower()}}" class="hover:text-rose-500 duration-150"
-      >{{post[5]}}</a
-    >
+
+  <div class="flex items-center justify-between my-2">
+    {% if request.path == "/admin/posts" %}
+    <div class="flex items-center">
+      <i class="ti ti-user mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Author:</p>
+      <a
+        href="/user/{{post[5].lower()}}"
+        class="hover:text-rose-500 duration-150"
+        >{{post[5]}}</a
+      >
+    </div>
+    {% endif %}
+    <div class="flex items-center">
+      <i class="ti ti-category mr-1 text-xl"></i>
+      <p class="hidden md:block mr-2">Category:</p>
+      <p>{{post[9]}}</p>
+    </div>
   </div>
-  {% endif %}
 </div>
 {% endfor %} {% elif not showPosts %} {% if request.path == "/admin/posts" %}
 <h1>This user haven't posted yet.</h1>
