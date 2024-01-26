@@ -9,12 +9,13 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
-    <div>
-      <label class="block mt-2 mb-1 text-center">
+    <div class="mx-auto w-fit">
+      <label class="block my-1 text-center">
         Select a Category
       </label>
-      {{form.postCategory(class_="flex items-center w-fit flex-wrap mx-auto p-2
-      mb-2 rounded shadow-md select-none gap-2")}}
+      {{form.postCategory()}}
+    </div>
+    <div>
       {{form.postContent(id_="editor", autocomplete="off")}}
     </div>
     <button
@@ -32,12 +33,13 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
-    <div>
-      <label class="block mt-2 mb-1 text-center">
+    <div class="mx-auto w-fit">
+      <label class="block my-1 text-center">
         Select a Category
       </label>
-      {{form.postCategory(class_="flex items-center w-fit flex-wrap mx-auto p-2
-      mb-2 rounded shadow-md select-none gap-2")}}
+      {{form.postCategory()}}
+    </div>
+    <div>
       {{form.postContent(id_="editor", autocomplete="off")}}
     </div>
     <button

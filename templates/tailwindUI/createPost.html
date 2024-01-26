@@ -15,12 +15,13 @@
       </label>
       {{form.postBanner(class_="")}}
     </div>
-    <div>
-      <label class="block mt-2 mb-1 text-center">
+    <div class="mx-auto w-fit">      
+      <label class="block my-1 text-center">
         Select a Category
       </label>
-      {{form.postCategory(class_="flex items-center w-fit flex-wrap mx-auto p-2
-      mb-2 rounded shadow-md select-none gap-2")}}
+      {{form.postCategory()}}</div>
+    <div>
+    <div>
       {{form.postContent(id_="editor", autocomplete="off")}}
     </div>
     <button
@@ -42,12 +43,13 @@
       </label>
       {{form.postBanner(class_="")}}
     </div>
-    <div>
-      <label class="block mt-2 mb-1 text-center">
+    <div class="mx-auto w-fit">      
+      <label class="block my-1 text-center">
         Select a Category
       </label>
-      {{form.postCategory(class_="flex items-center w-fit flex-wrap mx-auto p-2
-      mb-2 rounded shadow-md select-none gap-2")}}
+      {{form.postCategory()}}
+    </div>
+    <div>
       {{form.postContent(id_="editor", autocomplete="off")}}
     </div>
     <button

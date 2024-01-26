@@ -42,7 +42,29 @@ def category(category):
     Raises:
         404: If the specified category does not exist.
     """
-    categories = ["games", "history", "science", "code", "technology"]
+    categories = [
+        "games",
+        "history",
+        "science",
+        "code",
+        "technology",
+        "education",
+        "sports",
+        "foods",
+        "health",
+        "apps",
+        "movies",
+        "series",
+        "travel",
+        "books",
+        "music",
+        "nature",
+        "art",
+        "finance",
+        "business",
+        "web",
+        "other",
+    ]
     match category.lower() in categories:
         case False:
             abort(404)
