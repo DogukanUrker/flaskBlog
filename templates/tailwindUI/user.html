@@ -13,44 +13,44 @@
       <div class="flex items-center">
         <i class="ti ti-user mr-1 text-xl"></i>
         <p class="hidden md:block">Role:</p>
-        <p class="ml-2">{{user[5]}}</p>
+        <p class="ml-1">{{user[5]}}</p>
       </div>
       <div class="flex items-center">
         <i class="ti ti-eye mr-1 text-xl"></i>
         <p class="hidden md:block">Views:</p>
-        <p class="ml-2">{{views}}</p>
+        <p class="ml-1">{{views}}</p>
       </div>
     </section>
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
         <i class="ti ti-calendar mr-1 text-xl"></i>
         <p class="hidden md:block">Join Date:</p>
-        <p class="ml-2 date">{{user[7]}}</p>
+        <p class="ml-1 date">{{user[7]}}</p>
       </div>
       <div class="flex items-center">
         <i class="ti ti-sparkles mr-1 text-xl"></i>
         <p class="hidden md:block">Points:</p>
-        <p class="ml-2">{{user[6]}}</p>
+        <p class="ml-1">{{user[6]}}</p>
       </div>
     </section>
-    <section class="flex w-full justify-between my-4">
+    <section class="flex w-full items-center justify-between my-4">
       {% if session["userName"] == user[1] %}
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/accountsettings"
           ><i class="ti ti-settings mr-1 text-xl"></i
         ></a>
-        <a href="/accountsettings" class="hidden md:block">account settings</a>
+        <a href="/accountsettings" class="">settings</a>
       </div>
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/dashboard/{{user[1]}}"
           ><i class="ti ti-clipboard-text mr-1 text-xl"></i
         ></a>
-        <a href="/dashboard/{{user[1]}}" class="hidden md:block">dashboard</a>
+        <a href="/dashboard/{{user[1]}}" class="">dashboard</a>
       </div>
       {% endif %} {% if user[5] == "admin" and session["userName"] == user[1] %}
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/admin"><i class="ti ti-tie mr-1 text-xl"></i></a>
-        <a href="/admin" class="hidden md:block">admin panel</a>
+        <a href="/admin" class="">admin</a>
       </div>
       {% endif %}
     </section>
@@ -59,9 +59,7 @@
       <a href="/dashboard/{{session['userName']}}"
         ><i class="ti ti-clipboard-text mr-1 text-xl"></i
       ></a>
-      <a href="/dashboard/{{session['userName']}}" class="hidden md:block"
-        >dashboard</a
-      >
+      <a href="/dashboard/{{session['userName']}}" class="">dashboard</a>
     </div>
     {% endif %}
   </div>
