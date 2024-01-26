@@ -43,36 +43,36 @@ border-gray-500/25"
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-tags mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Tags:</p>
+      <p class="hidden md:block mr-1">Tags:</p>
       <p>{{post[2]}}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-eye mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Views:</p>
+      <p class="hidden md:block mr-1">Views:</p>
       <p>{{post[6]}}</p>
     </div>
   </div>
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Creation Time:</p>
+      <p class="hidden md:block mr-1">Creation Time:</p>
       <p class="time">{{post[7]}}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-clock-edit mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Last Edit Time:</p>
+      <p class="hidden md:block mr-1">Last Edit Time:</p>
       <p class="time">{{post[8]}}</p>
     </div>
   </div>
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Creation Date:</p>
+      <p class="hidden md:block mr-1">Creation Date:</p>
       <p class="date">{{post[7]}}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-calendar-dot mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Last Edit Date:</p>
+      <p class="hidden md:block mr-1">Last Edit Date:</p>
       <p class="date">{{post[8]}}</p>
     </div>
   </div>
@@ -81,7 +81,7 @@ border-gray-500/25"
     {% if request.path == "/admin/posts" %}
     <div class="flex items-center">
       <i class="ti ti-user mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Author:</p>
+      <p class="hidden md:block mr-1">Author:</p>
       <a
         href="/user/{{post[5].lower()}}"
         class="hover:text-rose-500 duration-150"
@@ -91,7 +91,7 @@ border-gray-500/25"
     {% endif %}
     <div class="flex items-center">
       <i class="ti ti-category mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Category:</p>
+      <p class="hidden md:block mr-1">Category:</p>
       <p>{{post[9]}}</p>
     </div>
   </div>
@@ -117,12 +117,12 @@ border-gray-500/25"
   <section class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Creation Date:</p>
+      <p class="hidden md:block mr-1">Creation Date:</p>
       <p class="date">{{comment[4]}}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
-      <p class="hidden md:block mr-2">Creation Time:</p>
+      <p class="hidden md:block mr-1">Creation Time:</p>
       <p class="time">{{comment[4]}}</p>
     </div>
   </section>
