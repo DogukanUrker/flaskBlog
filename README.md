@@ -22,6 +22,7 @@
 
 **English** | [Türkçe](docs/readme_tr.md)
 
+
 Simple blog app built with Flask.
 <br/>
 [Contact](mailto:dogukanurker@icloud.com)<br/>
@@ -85,7 +86,7 @@ Simple blog app built with Flask.
 
 ### Frontend
 
-- HTML
+- HTML | Jinja
 - CSS
 - JavaScript
 
