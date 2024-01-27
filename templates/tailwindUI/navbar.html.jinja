@@ -1,36 +1,24 @@
 <div
-  class="w-11/12 lg:w-10/12 xl:w-9/12 2xl:w-8/12 flex items-center justify-between mt-8 lg:mt-4 text-2xl font-medium select-none mx-auto"
->
-  <a href="/" class="duration-150"
-    ><img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" class="rounded w-14 hover:scale-110 duration-150 shadow"></a
-  >
+  class="w-11/12 lg:w-10/12 xl:w-9/12 2xl:w-8/12 flex items-center justify-between mt-8 lg:mt-4 text-2xl font-medium select-none mx-auto">
+  <a href="/" class="duration-150"><img
+      src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico"
+      class="rounded w-14 hover:scale-110 duration-150 shadow"></a>
   <div class="hidden md:block">
-    <input
-      type="text"
-      id="searchInput"
-      autocomplete="off"
-      placeholder="search"
-      class="w-64 h-10 m-2 rounded-md p-2 text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-150"
-    /><button
-      onclick="search()"
-      class="hover:text-rose-500 duration-150"
-    >
-    <i class="ti ti-search text-2xl"></i>
+    <input type="text" id="searchInput" autocomplete="off" placeholder="search"
+      class="w-64 h-10 m-2 rounded-md p-2 text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-150" /><button
+      onclick="search()" class="hover:text-rose-500 duration-150">
+      <i class="ti ti-search text-2xl"></i>
     </button>
   </div>
   <div class="flex items-center justify-center gap-4 font-medium select-none">
     <div class="block md:hidden">
-      <a href="/searchbar"
-        ><i class="ti ti-search text-2xl"></i>
-        </a>
+      <a href="/searchbar"><i class="ti ti-search text-2xl"></i>
+      </a>
     </div>
     {% if session["userName"] %}
     <a href="/user/{{session['userName'].lower()}}">
       <div>
-        <img
-          class="block w-7 h-7"
-          src="{{ getProfilePicture(session['userName']) }}"
-        />
+        <img class="block w-7 h-7" src="{{ getProfilePicture(session['userName']) }}" />
       </div>
     </a>
     <a href="/createpost" class="text-center">
@@ -38,34 +26,31 @@
         <i class="ti ti-pencil-plus text-2xl"></i>
       </button>
     </a>
-    <a
-      href="/logout"
-      title="logout"
-      class="hover:text-rose-500 duration-150"
-      ><i class="ti ti-logout text-2xl"></i>
-      </a>
+    <a href="/logout" title="logout" class="hover:text-rose-500 duration-150"><i class="ti ti-logout text-2xl"></i>
+    </a>
     {% elif hideLogin %}
-    <a href="/signup"
-      ><button class="hover:text-rose-500 duration-150">
+    {% if isRegistration %}
+    <a href="/signup"><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-user-plus text-2xl"></i>
-        </a>
+      </button></a>
+    {% endif %}
     {% elif hideSignUp %}
-    <a href="/login/redirect=&"
-      ><button class="hover:text-rose-500 duration-150">
+    {% if isLogin %}
+    <a href="/login/redirect=&"><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-login text-2xl"></i>
-        </button
-    ></a>
+      </button></a>
+    {% endif %}
     {%else%}
-    <a href="/login/redirect=&"
-      ><button class="hover:text-rose-500 duration-150">
+    {% if isLogin %}
+    <a href="/login/redirect=&"><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-login text-2xl"></i>
-        </button
-    ></a>
-    <a href="/signup"
-      ><button class="hover:text-rose-500 duration-150">
+      </button></a>
+    {% endif %}
+    {% if isRegistration %}
+    <a href="/signup"><button class="hover:text-rose-500 duration-150">
         <i class="ti ti-user-plus text-2xl"></i>
-        </button
-    ></a>
+      </button></a>
+    {% endif %}
     {% endif %}
   </div>
   <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>

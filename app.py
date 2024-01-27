@@ -239,6 +239,20 @@ def recaptchaBadge():
     return dict(recaptchaBadge=recaptchaBadge())
 
 
+# Define a context processor function for the login
+@app.context_processor
+def isLogin():
+    # Return a dictionary with the isLogin function as a value of the LOG_IN constant
+    return dict(isLogin=LOG_IN)
+
+
+# Define a context processor function for the registration
+@app.context_processor
+def isRegistration():
+    # Return a dictionary with the isRegistration function as a value of the REGISTRATION constant
+    return dict(isRegistration=REGISTRATION)
+
+
 # Define an error handler function for the 404 error
 @app.errorhandler(404)
 def notFound(e):
