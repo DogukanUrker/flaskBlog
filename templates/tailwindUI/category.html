@@ -7,7 +7,10 @@
 <div
   class="flex flex-wrap gap-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 2xl:w-7/12 mt-4"
 >
-  {% for post in posts %} {% include "postCard.html" %} {% endfor %}
+  {% for post in posts %} {% from "components/postCardMacro.html.jinja" import
+  postCard%} {{
+  postCard(post=post,authorProfilePicture=getProfilePicture(post[5])) }} {%
+  endfor %}
 </div>
 <div class="text-center mt-4 mb-2 text-xs font-medium">
   <div class="mb-1">

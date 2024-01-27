@@ -1,3 +1,4 @@
+{% macro postCard(post,authorProfilePicture) %}
 <div
   class="w-[17rem] group flex flex-col justify-between h-min-max mx-auto rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-150 "
 >
@@ -19,7 +20,7 @@
   </div>
   <div class="flex justify-between text-sm font-medium px-2 select-none">
     <div class="my-2 flex items-center w-fit gap-2 ">
-      <img class="block w-8 h-8" src="{{ getProfilePicture(post[5]) }}" />
+      <img class="block w-8 h-8" src="{{ authorProfilePicture }}" />
       <a href="/user/{{post[5]}}">{{post[5]}}</a>
     </div>
     <div class="flex items-center">
@@ -162,3 +163,5 @@
     </div>
   </div>
 </div>
+
+{% endmacro %}
