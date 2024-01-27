@@ -74,7 +74,7 @@ def accountSettings():
                             # Redirect to the home page
                             return redirect(f"/")
             # Render the account settings template with the user and recaptcha data
-            return render_template("accountSettings.html", user=user, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
+            return render_template("accountSettings.html.jinja", user=user, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
         case False:
             # Redirect to the login page with the account settings as the next destination
             return redirect("/login/redirect=&accountsettings")

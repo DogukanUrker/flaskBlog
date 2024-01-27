@@ -1,5 +1,5 @@
-{% extends 'layout.html'%} {%block head%}
-<title>Change Password</title>
+{% extends 'layout.html.jinja'%} {%block head%}
+<title>Change Username</title>
 {% endblock head %} {%block body%}
 <div class="text-center mt-32">
   {% if recaptcha %}
@@ -7,7 +7,7 @@
   <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
   <form method="post" class="mx-auto w-fit mt-8" id="recaptchaForm">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.oldPassword()}} {{form.password()}} {{form.passwordConfirm()}}
+    {{form.newUserName()}}
     <button
       type="submit"
       data-sitekey="{{ siteKey }}"
@@ -15,18 +15,18 @@
       data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
     >
-      change my password
+      change my username
     </button>
   </form>
   {% else %}
   <form method="post" class="mx-auto w-fit mt-8">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.oldPassword()}} {{form.password()}} {{form.passwordConfirm()}}
+    {{form.newUserName()}}
     <button
       type="submit"
       class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
     >
-      change my password
+      change my username
     </button>
   </form>
   {% endif %}

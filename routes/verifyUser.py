@@ -116,7 +116,7 @@ def verifyUser(codeSent):
                                         case False:
                                             flash("Wrong Code", "error")
                             return render_template(
-                                "verifyUser.html",
+                                "verifyUser.html.jinja",
                                 form=form,
                                 mailSent=True,
                                 siteKey=RECAPTCHA_SITE_KEY,
@@ -204,7 +204,7 @@ def verifyUser(codeSent):
                                             )
                                             flash("user not found", "error")
                             return render_template(
-                                "verifyUser.html", form=form, mailSent=False, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,
+                                "verifyUser.html.jinja", form=form, mailSent=False, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,
                             )
         case False:
             return redirect("/")

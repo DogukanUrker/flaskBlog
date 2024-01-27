@@ -127,7 +127,7 @@ def changePassword():
                         case _:
                             flash("old is password wrong", "error")
             return render_template(
-                "changePassword.html",
+                "changePassword.html.jinja",
                 form=form,
                 siteKey=RECAPTCHA_SITE_KEY,
                 recaptcha=RECAPTCHA,

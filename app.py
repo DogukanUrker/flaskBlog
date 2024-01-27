@@ -243,7 +243,7 @@ def recaptchaBadge():
 @app.errorhandler(404)
 def notFound(e):
     # Render the 404 template and return a 404 status code
-    return render_template("404.html"), 404
+    return render_template("404.html.jinja"), 404
 
 
 # Define an error handler function for the 401 error
@@ -252,7 +252,7 @@ def unauthorized(e):
     # Log a message that a 401 unauthorized error occurred
     message("1", "401 UNAUTHORIZED ERROR")
     # Render the 401 template and return a 401 status code
-    return render_template("401.html"), 401
+    return render_template("401.html.jinja"), 401
 
 
 # Define an error handler function for the CSRFError
@@ -261,7 +261,7 @@ def csrfError(e):
     # Log a message that a CSRF error occurred
     message("1", "CSRF ERROR")
     # Render the csrfError template with the reason and return a 400 status code
-    return render_template("csrfError.html", reason=e.description), 400
+    return render_template("csrfError.html.jinja", reason=e.description), 400
 
 
 # Register the blueprints for the different routes with the app object

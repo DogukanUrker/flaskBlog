@@ -140,7 +140,7 @@ def login(direct):
                                             message("1", "WRONG PASSWORD")
                                             flash("wrong  password", "error")
                     return render_template(
-                        "login.html",
+                        "login.html.jinja",
                         form=form,
                         hideLogin=True,
                         siteKey=RECAPTCHA_SITE_KEY,

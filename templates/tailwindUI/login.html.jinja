@@ -1,17 +1,13 @@
-{% extends 'layout.html'%} {%block head%} <title>Signup</title>
+{% extends 'layout.html.jinja'%} {%block head%}
+<title>Login</title>
 {% endblock head %} {%block body%}
 <div class="w-fit mx-auto mt-36 text-center text-xl">
   {% if recaptcha %}
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
-  <form
-    method="post"
-    id="recaptchaForm"
-    action="{{ url_for('signup.signup') }}"
-  >
+  <form method="post" id="recaptchaForm">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.userName(autocomplete="off")}} {{form.email(autocomplete="off")}}
-    {{form.password()}} {{form.passwordConfirm()}}
+    {{form.userName(autocomplete="off")}}{{form.password(autocomplete="off")}}
     <button
       type="submit"
       data-sitekey="{{ siteKey }}"
@@ -19,20 +15,31 @@
       data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
     >
-      Signup
+      Login
     </button>
+    <a
+      href="/passwordreset/codesent=false"
+      id="passwordReset"
+      class="hover:text-rose-500 duration-150 text-sm font-normal select-none"
+      >Forgot password?</a
+    >
   </form>
   {% else %}
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.userName(autocomplete="off")}} {{form.email(autocomplete="off")}}
-    {{form.password()}} {{form.passwordConfirm()}}
+    {{form.userName(autocomplete="off")}}{{form.password(autocomplete="off")}}
     <button
       type="submit"
       class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
     >
-      Signup
+      Login
     </button>
+    <a
+      href="/passwordreset/codesent=false"
+      id="passwordReset"
+      class="hover:text-rose-500 duration-150 text-sm font-normal select-none"
+      >Forgot password?</a
+    >
   </form>
   {% endif %}
 </div>

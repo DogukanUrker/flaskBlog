@@ -47,7 +47,7 @@ def adminPanelPosts():
                     posts = cursor.fetchall()
                     # Render the dashboard template with the posts data and showPosts flag
                     return render_template(
-                        "dashboard.html", posts=posts, showPosts=True
+                        "dashboard.html.jinja", posts=posts, showPosts=True
                     )
                 case False:
                     # Redirect to the home page

@@ -155,7 +155,7 @@ def editPost(postID):
                                                     flash("Post edited", "success")
                                                     return redirect(f"/post/{post[0]}")
                             return render_template(
-                                "/editPost.html",
+                                "/editPost.html.jinja",
                                 title=post[1],
                                 tags=post[2],
                                 content=post[3],
@@ -172,7 +172,7 @@ def editPost(postID):
                             return redirect("/")
                 case False:
                     message("1", f'POST: "{postID}" NOT FOUND')
-                    return render_template("404.html")
+                    return render_template("404.html.jinja")
         case False:
             message("1", "USER NOT LOGGED IN")
             flash("you need login for edit a post", "error")

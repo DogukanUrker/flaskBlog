@@ -1,10 +1,9 @@
-{% extends 'layout.html'%} {%block head%}
+{% extends 'layout.html.jinja'%} {%block head%}
 <title>{{user[1]}}</title>
 {% endblock head %} {%block body%}
 <div>
   <div
-    class="w-11/12 md:w-10/12 lg:w-6/12 xl:w-5/12 mx-auto text-center mt-8 select-none border border-gray-500/25 p-2 rounded shadow"
-  >
+    class="w-11/12 md:w-10/12 lg:w-6/12 xl:w-5/12 mx-auto text-center mt-8 select-none border border-gray-500/25 p-2 rounded shadow">
     <section class="mb-4">
       <img class="w-16 mx-auto" src="{{user[4]}}" alt="{{user[1]}}" />
       <h2 class="mx-2 font-medium">{{user[1]}}</h2>
@@ -36,15 +35,11 @@
     <section class="flex w-full items-center justify-between my-4">
       {% if session["userName"] == user[1] %}
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
-        <a href="/accountsettings"
-          ><i class="ti ti-settings mr-1 text-xl"></i
-        ></a>
+        <a href="/accountsettings"><i class="ti ti-settings mr-1 text-xl"></i></a>
         <a href="/accountsettings" class="">settings</a>
       </div>
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
-        <a href="/dashboard/{{user[1]}}"
-          ><i class="ti ti-clipboard-text mr-1 text-xl"></i
-        ></a>
+        <a href="/dashboard/{{user[1]}}"><i class="ti ti-clipboard-text mr-1 text-xl"></i></a>
         <a href="/dashboard/{{user[1]}}" class="">dashboard</a>
       </div>
       {% endif %} {% if user[5] == "admin" and session["userName"] == user[1] %}
@@ -56,9 +51,7 @@
     </section>
     {% if "userName" in session and session['userName'] == "{{user[1]}}"%}
     <div class="flex items-center w-fit hover:text-rose-500 duration-150">
-      <a href="/dashboard/{{session['userName']}}"
-        ><i class="ti ti-clipboard-text mr-1 text-xl"></i
-      ></a>
+      <a href="/dashboard/{{session['userName']}}"><i class="ti ti-clipboard-text mr-1 text-xl"></i></a>
       <a href="/dashboard/{{session['userName']}}" class="">dashboard</a>
     </div>
     {% endif %}
@@ -66,20 +59,17 @@
   {% if showPosts %}
   <h1 class="my-4 text-center text-2xl text-rose-500 select-none">Posts</h1>
   <div
-    class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 my-6"
-  >
-    {% for post in posts %} {% from "components/postCardMacro.html.jinja" import
-    postCard%} {{
+    class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 my-6">
+    {% for post in posts %} {% from "components/postCardMacro.html.jinja"
+    import postCard%} {{
     postCard(post=post,authorProfilePicture=getProfilePicture(post[5])) }} {%
     endfor %}
   </div>
   {% endif %} {% if showComments %}
   <h1 class="mb-4 text-center text-2xl text-rose-500 select-none">Comments</h1>
   {% for comment in comments %}
-  <div
-    class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md
-  border-gray-500/25"
-  >
+  <div class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md
+  border-gray-500/25">
     <div tag="content my-2">{{comment[2]}}</div>
     <section class="flex w-full justify-between my-2">
       <p class="flex items-center">
@@ -89,11 +79,8 @@
         <i class="ti ti-clock mr-1 text-xl"></i>{{comment[5]}}
       </p>
     </section>
-    <a
-      href="/post/{{comment[1]}}"
-      class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2"
-      >go to post</a
-    >
+    <a href="/post/{{comment[1]}}" class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2">go to
+      post</a>
   </div>
   {% endfor %} {% endif %}
 </div>

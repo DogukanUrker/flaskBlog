@@ -75,4 +75,4 @@ def category(category):
         [(category.lower())],
     )
     posts = cursor.fetchall()
-    return render_template("category.html", posts=posts, category=category)
+    return render_template("category.html.jinja", posts=posts, category=category)

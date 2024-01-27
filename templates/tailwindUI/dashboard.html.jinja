@@ -1,5 +1,5 @@
-{% extends 'layout.html'%} {%block head%} {% if request.path == "/admin/posts"
-%}
+{% extends 'layout.html.jinja'%} {%block head%} {% if request.path ==
+"/admin/posts" %}
 <title>Admin Panel --> Posts</title>
 {% else %}
 <title>{{session["userName"]}}'s Dashboard</title>

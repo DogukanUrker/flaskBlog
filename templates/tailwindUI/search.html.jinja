@@ -1,4 +1,4 @@
-{% extends 'layout.html'%} {%block head%}
+{% extends 'layout.html.jinja'%} {%block head%}
 <title>Search results for {{query}}</title>
 {% endblock head %} {%block body%}
 <div class="w-fit mx-auto">
@@ -6,18 +6,15 @@
     search results for "{{query}}"
   </h3>
   {% if users %} {% for user in users %} {% for user in user %}
-  <div
-    class="w-fit mx-auto flex items-end border-2 rounded-md shadow-md border-gray-500/25"
-  >
+  <div class="w-fit mx-auto flex items-end border-2 rounded-md shadow-md border-gray-500/25">
     <img src="{{user[4]}}" class="w-20 m-2" />
     <a href="/user/{{user[1]|lower}}" class="m-2">{{user[1]}}</a>
   </div>
   {% endfor %} {% endfor %} {% endif %} {% if posts %} {% for post in posts %}
   <div
-    class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 2xl:w-7/12 mt-6"
-  >
-    {% for post in post %} {% from "components/postCardMacro.html.jinja" import
-    postCard%} {{
+    class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 2xl:w-7/12 mt-6">
+    {% for post in post %} {% from "components/postCardMacro.html.jinja"
+    import postCard%} {{
     postCard(post=post,authorProfilePicture=getProfilePicture(post[5])) }} {%
     endfor %}
   </div>

@@ -110,7 +110,7 @@ def post(postID):
             comments = cursor.fetchall()
             # Render the post template with the post and comments data, the form object and the app name
             return render_template(
-                "post.html",
+                "post.html.jinja",
                 id=post[0],
                 title=post[1],
                 tags=post[2],
@@ -125,4 +125,4 @@ def post(postID):
             )
         case False:
             # Render the 404 template if the post ID does not exist
-            return render_template("404.html")
+            return render_template("404.html.jinja")

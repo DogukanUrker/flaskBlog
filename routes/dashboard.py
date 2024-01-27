@@ -75,7 +75,7 @@ def dashboard(userName):
                             showComments = True
                     # Render the dashboard template with the posts, comments, showPosts and showComments data
                     return render_template(
-                        "/dashboard.html",
+                        "/dashboard.html.jinja",
                         posts=posts,
                         comments=comments,
                         showPosts=showPosts,

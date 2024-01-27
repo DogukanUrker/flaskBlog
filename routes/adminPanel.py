@@ -29,7 +29,7 @@ def adminPanel():
             match role == "admin":
                 case True:
                     # Render the admin panel template
-                    return render_template("adminPanel.html")
+                    return render_template("adminPanel.html.jinja")
                 case False:
                     # Redirect to the home page
                     return redirect("/")

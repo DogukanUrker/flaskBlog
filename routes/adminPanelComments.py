@@ -48,7 +48,9 @@ def adminPanelComments():
                     cursor.execute("select * from comments")
                     comments = cursor.fetchall()
                     # Render the admin panel comments template with the comments data
-                    return render_template("adminPanelComments.html", comments=comments)
+                    return render_template(
+                        "adminPanelComments.html.jinja", comments=comments
+                    )
                 case False:
                     # Redirect to the home page
                     return redirect("/")

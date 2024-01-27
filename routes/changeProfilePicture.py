@@ -98,7 +98,7 @@ def changeProfilePicture():
                             return redirect(f"/changeprofilepicture")
             # Render the change profile picture template with the form object, the site key and the recaptcha flag
             return render_template(
-                "changeProfilePicture.html",
+                "changeProfilePicture.html.jinja",
                 form=form,
                 siteKey=RECAPTCHA_SITE_KEY,
                 recaptcha=RECAPTCHA,

@@ -81,7 +81,7 @@ def user(userName):
                     showComments = True
             message("2", f'USER: "{userName}"s PAGE LOADED')
             return render_template(
-                "user.html",
+                "user.html.jinja",
                 user=user,
                 views=views,
                 posts=posts,
@@ -91,4 +91,4 @@ def user(userName):
             )
         case _:
             message("1", f'USER: "{userName}" NOT FOUND')
-            return render_template("404.html")
+            return render_template("404.html.jinja")

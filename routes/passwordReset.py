@@ -127,7 +127,7 @@ def passwordReset(codeSent):
                                     flash("passwords must match", "error")
                         case False:
                             flash("Wrong Code", "error")
-            return render_template("passwordReset.html", form=form, mailSent=True, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
+            return render_template("passwordReset.html.jinja", form=form, mailSent=True, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
         case "false":
             match request.method == "POST":
                 case True:
@@ -207,4 +207,4 @@ def passwordReset(codeSent):
                         case True:
                             messageDebugging("1", f'USER: "{userName}" NOT FOUND')
                             flash("user not found", "error")
-            return render_template("passwordReset.html", form=form, mailSent=False, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
+            return render_template("passwordReset.html.jinja", form=form, mailSent=False, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)

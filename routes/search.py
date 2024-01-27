@@ -134,7 +134,7 @@ def search(query):
         posts.append(cursor.fetchall())
     # Render the search template with the posts, users, query and empty data
     return render_template(
-        "search.html",
+        "search.html.jinja",
         posts=posts,
         users=users,
         query=query,

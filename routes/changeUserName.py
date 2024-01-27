@@ -199,7 +199,7 @@ def changeUserName():
                         case False:
                             flash("username does not fit ascii charecters", "error")
             return render_template(
-                "changeUserName.html",
+                "changeUserName.html.jinja",
                 form=form,
                 siteKey=RECAPTCHA_SITE_KEY,
                 recaptcha=RECAPTCHA,

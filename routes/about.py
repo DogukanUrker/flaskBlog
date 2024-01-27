@@ -20,4 +20,4 @@ def about():
     :return: The rendered about page
     :rtype: flask.Response
     """
-    return render_template("about.html", appName=APP_NAME)
+    return render_template("about.html.jinja", appName=APP_NAME)

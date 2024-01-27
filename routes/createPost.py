@@ -120,7 +120,7 @@ def createPost():
                                             addPoints(20, session["userName"])
                                             flash("You earned 20 points by posting ", "success")
                                             return redirect("/") 
-            return render_template("createPost.html", form=form, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
+            return render_template("createPost.html.jinja", form=form, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
         case False:
             message("1", "USER NOT LOGGED IN")
             flash("you need loin for create a post", "error")

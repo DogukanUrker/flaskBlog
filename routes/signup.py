@@ -196,7 +196,7 @@ def signup():
                                     )
                                     flash("This username is unavailable.", "error")
                     return render_template(
-                        "signup.html", form=form, hideSignUp=True, siteKey=RECAPTCHA_SITE_KEY, recaptcha = RECAPTCHA,
+                        "signup.html.jinja", form=form, hideSignUp=True, siteKey=RECAPTCHA_SITE_KEY, recaptcha = RECAPTCHA,
                     )
         case False:
             return redirect("/")

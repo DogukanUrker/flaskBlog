@@ -1,0 +1,21 @@
+{% extends 'layout.html.jinja'%} {%block head%}
+<title>flaskBlog</title>
+{% endblock head %} {%block body%} {% include "categories.html.jinja" %}
+<div
+  class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">
+  {% for post in posts %} {% from "components/postCardMacro.html.jinja"
+  import postCard%} {{
+  postCard(post=post,authorProfilePicture=getProfilePicture(post[5])) }} {%
+  endfor %}
+</div>
+<div class="text-center mt-4 mb-2 text-xs font-medium">
+  <div class="mb-1">
+    <a href="/about" class="text-rose-400 hover:text-rose-500 duration-150" target="_blank">About</a>
+  </div>
+  <!-- Please respect this code’s originality and credit the original repo. Thanks for your cooperation. 💜 -->
+  Made with <i class="ti ti-heart-filled text-rose-500"></i> by
+  <a href="https://dogukanurker.com/" target="_blank" class="text-rose-400 hover:text-rose-500 font-medium">Dogukan
+    Urker</a>
+  <br />
+</div>
+{% endblock body %}

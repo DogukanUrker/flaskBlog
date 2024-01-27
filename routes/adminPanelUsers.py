@@ -52,7 +52,7 @@ def adminPanelUsers():
                     users = cursor.fetchall()
                     # Render the admin panel users template with the users data
                     return render_template(
-                        "adminPanelUsers.html",
+                        "adminPanelUsers.html.jinja",
                         users=users,
                     )
                 case False:
