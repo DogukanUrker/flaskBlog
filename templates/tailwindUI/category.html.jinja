@@ -1,6 +1,9 @@
 {% extends 'layout.html.jinja'%} {%block head%}
 <title>flaskBlog</title>
-{% endblock head %} {%block body%} {% include "categories.html.jinja" %}
+{% endblock head %} {%block body%} {% from
+"components/categoryContainer.html.jinja"
+import categoryContainer%} {{
+categoryContainer() }}
 <h1 class="text-center font-bold text-3xl text-rose-500 mt-4 select-none">
   {{category}}
 </h1>
