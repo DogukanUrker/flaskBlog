@@ -15,7 +15,6 @@ message("3", "APP IS STARTING...")
 
 # Import other functions and modules from the helpers module
 from helpers import (
-    render_template,
     Flask,
 )
 
