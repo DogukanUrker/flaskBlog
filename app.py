@@ -232,7 +232,7 @@ match DEFAULT_ADMIN:
         message("6", f"DEFAULT ADMIN POINT: {DEFAULT_ADMIN_POINT}")
         message("6", f"DEFAULT ADMIN PROFILE PICTURE: {DEFAULT_ADMIN_PROFILE_PICTURE}")
     case False:
-        # Log a warning message that admin is off
+        # Log a danger message that admin is off
         message("1", f"DEFAULT ADMIN IS OFF")
 
 message(breaker=True)
