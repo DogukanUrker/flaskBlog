@@ -10,6 +10,8 @@ def notFoundErrorHandler(e):
     :param e: The exception object
     :return: A tuple containing the Jinja template for the 404 error and the status code
     """
+    # Log a danger message with 404 error
+    message("1", "404 | NOT FOUND")
     # Render a template for 404 errors and return it with a 404 status code
     return render_template("404.html.jinja"), 404
 
@@ -22,7 +24,7 @@ def unauthorizedErrorHandler(e):
     :param e: The exception object
     :return: A tuple containing the Jinja template for the 401 error and the status code
     """
-    # Call the message function with a level and a text argument
+    # Log a danger message with 401 error
     message("1", "401 | UNAUTHORIZED ERROR")
     # Render a template for 401 errors and return it with a 401 status code
     return render_template("401.html.jinja"), 401
@@ -36,7 +38,7 @@ def csrfErrorErrorHandler(e):
     :param e: The exception object
     :return: A tuple containing the Jinja template for the 400 error and the status code
     """
-    # Call the message function with a level and a text argument
+    # Log a danger message with 400 error
     message("1", "400 | CSRF ERROR")
     # Render a template for CSRF errors and pass the reason as a variable
     return render_template("csrfError.html.jinja", reason=e.description), 400
