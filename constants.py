@@ -37,8 +37,9 @@ DB_COMMENTS_ROOT = (
 ### SMTP MAIL SETTINGS ###
 SMTP_SERVER = "smtp.gmail.com"  # SMTP SERVER ADDRESS. (str)
 SMTP_PORT = 587  # SMTP SERVER PORT. (int)
-SMTP_MAIL = "flaskblogdogukanurker@gmail.com"  # EMAIL FOR SEND MAILS TO USER. (str)
-SMTP_PASSWORD = "lsooxsmnsfnhnixy"  # EMAIL
+SMTP_MAIL = "flaskblogdogukanurker@gmail.com"  # SMTP MAIL ADDRESS. (str)
+SMTP_PASSWORD = "lsooxsmnsfnhnixy"  # SMTP MAIL PASSWORD. (str)
+
 
 ### DEFAULT ADMIN ACCOUNT SETTINGS ###
 DEFAULT_ADMIN = True  # CREATE A DEFAULT ADMIN ACCOUNT AT USER DATABASE CREATION (bool)
