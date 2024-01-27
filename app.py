@@ -16,7 +16,6 @@ message("3", "APP IS STARTING...")
 # Import other functions and modules from the helpers module
 from helpers import (
     render_template,
-    getProfilePicture,
     Flask,
 )
 
@@ -103,22 +102,45 @@ from helpers import (
     RECAPTCHA_PROFILE_PICTURE_CHANGE,
 )
 
+# Import the contextProcessor module that contains custom functions for the app
+from contextProcessor import (
+    isLogin,  # A function that checks LOG_IN constant
+    recaptchaBadge,  # A function that checks RECAPTCHA_BADGE constant
+    isRegistration,  # A function that checks REGISTRATION constant
+    returnUserProfilePicture,  # A function that returns the user's profile picture
+)
 
 # Create a Flask app object with the app name, root path, static folder and template folder
 app = Flask(
-    import_name=APP_NAME,
-    root_path=APP_ROOT_PATH,
-    static_folder=STATIC_FOLDER,
-    template_folder=TEMPLATE_FOLDER,
+    import_name=APP_NAME,  # The name of the app
+    root_path=APP_ROOT_PATH,  # The root path of the app
+    static_folder=STATIC_FOLDER,  # The folder where the static files(*.js/*.css) are stored
+    template_folder=TEMPLATE_FOLDER,  # The folder where the Jinja(*.html.jinja) templates are stored
 )
 
 # Set the secret key and the session permanent flag for the app
-app.secret_key = APP_SECRET_KEY
-app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
+app.secret_key = APP_SECRET_KEY  # The secret key for the app
+app.config[
+    "SESSION_PERMANENT"
+] = SESSION_PERMANENT  # A flag that determines if the session is permanent or not
 
 # Create a CSRFProtect object for the app
-csrf = CSRFProtect(app)
+csrf = CSRFProtect(app)  # A CSRF protection mechanism for the app
 
+# Register the custom functions from the contextProcessor module as context processors for the app
+# Context processors are functions that run before rendering a template and add variables to the template context
+app.context_processor(
+    isLogin
+)  # A context processor that adds the isLogin variable to the template context
+app.context_processor(
+    recaptchaBadge
+)  # A context processor that adds the recaptchaBadge variable to the template context
+app.context_processor(
+    isRegistration
+)  # A context processor that adds the isRegistration variable to the template context
+app.context_processor(
+    returnUserProfilePicture
+)  # A context processor that adds the getProfilePicture variable to the template context
 
 # Print a line breaker and log app settings
 message(breaker=True)
@@ -214,43 +236,6 @@ usersTable()
 postsTable()
 commentsTable()
 message(breaker=True)
-
-
-# Define a context processor function for the app
-@app.context_processor
-def returnUserProfilePicture():
-    # Return a dictionary with the getProfilePicture function as a value
-    getProfilePicture
-    return dict(getProfilePicture=getProfilePicture)
-
-
-# Define a context processor function for the app
-@app.context_processor
-def recaptchaBadge():
-    # This function checks the recaptcha and recaptcha badge values. If values are both True, then returns True
-    def recaptchaBadge():
-        match RECAPTCHA and RECAPTCHA_BADGE:
-            case True:
-                return True
-            case False:
-                return False
-
-    # Return a dictionary with the recaptchaBadge function as a value
-    return dict(recaptchaBadge=recaptchaBadge())
-
-
-# Define a context processor function for the login
-@app.context_processor
-def isLogin():
-    # Return a dictionary with the isLogin function as a value of the LOG_IN constant
-    return dict(isLogin=LOG_IN)
-
-
-# Define a context processor function for the registration
-@app.context_processor
-def isRegistration():
-    # Return a dictionary with the isRegistration function as a value of the REGISTRATION constant
-    return dict(isRegistration=REGISTRATION)
 
 
 # Define an error handler function for the 404 error

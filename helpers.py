@@ -28,6 +28,7 @@ from constants import (
 )
 from constants import (
     RECAPTCHA,
+    RECAPTCHA_BADGE,
     RECAPTCHA_LOGIN,
     RECAPTCHA_COMMENT,
     RECAPTCHA_SIGN_UP,
