@@ -104,7 +104,7 @@ from helpers import (
 # Import the error handler functions from the errorHandlers module
 from errorHandlers import (
     notFoundErrorHandler,  # This function handles 404 errors
-    csrfErrorErrorHandler,  # This function handles CSRF errors
+    csrfErrorHandler,  # This function handles CSRF errors
     unauthorizedErrorHandler,  # This function handles unauthorized access errors
 )
 
@@ -261,8 +261,8 @@ def unauthorized(e):
 # Use the app.errorhandler decorator to register error handler functions for your app
 @app.errorhandler(CSRFError)
 def csrfError(e):
-    # Call the csrfErrorErrorHandler function and return its result
-    return csrfErrorErrorHandler(e)
+    # Call the csrfErrorHandler function and return its result
+    return csrfErrorHandler(e)
 
 
 # Register the blueprints for the different routes with the app object

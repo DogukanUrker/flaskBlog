@@ -31,7 +31,7 @@ def unauthorizedErrorHandler(e):
 
 
 # Define a function to handle CSRF errors
-def csrfErrorErrorHandler(e):
+def csrfErrorHandler(e):
     """
     This function handles 400 errors, which are CSRF errors.
 
