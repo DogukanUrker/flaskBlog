@@ -2,13 +2,13 @@
 This file contains classes that are used to create forms for the application.
 """
 from wtforms import (
-    validators,
     Form,
+    FileField,
+    validators,
     SelectField,
     StringField,
     PasswordField,
     TextAreaField,
-    FileField,
 )
 
 
