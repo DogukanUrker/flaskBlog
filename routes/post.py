@@ -125,4 +125,4 @@ def post(postID):
             )
         case False:
             # Render the 404 template if the post ID does not exist
-            return render_template("404.html.jinja")
+            return render_template("notFound.html.jinja")

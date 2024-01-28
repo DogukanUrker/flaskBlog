@@ -13,7 +13,7 @@ def notFoundErrorHandler(e):
     # Log a danger message with 404 error
     message("1", "404 | NOT FOUND")
     # Render a template for 404 errors and return it with a 404 status code
-    return render_template("404.html.jinja"), 404
+    return render_template("notFound.html.jinja"), 404
 
 
 # Define a function to handle unauthorized access errors
@@ -27,7 +27,7 @@ def unauthorizedErrorHandler(e):
     # Log a danger message with 401 error
     message("1", "401 | UNAUTHORIZED ERROR")
     # Render a template for 401 errors and return it with a 401 status code
-    return render_template("401.html.jinja"), 401
+    return render_template("unauthorized.html.jinja"), 401
 
 
 # Define a function to handle CSRF errors

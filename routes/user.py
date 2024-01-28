@@ -91,4 +91,4 @@ def user(userName):
             )
         case _:
             message("1", f'USER: "{userName}" NOT FOUND')
-            return render_template("404.html.jinja")
+            return render_template("notFound.html.jinja")
