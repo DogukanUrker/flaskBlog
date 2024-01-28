@@ -5,10 +5,17 @@
   {% if recaptcha %}
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
-  <form method="post" id="recaptchaForm">
+  <form method="post" id="recaptchaForm" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
+    <div class="w-fit mx-auto text-center my-4">
+      <p class="mb-2"> Current Banner </p> <img
+        src="{{ url_for('returnPostBanner.returnPostBanner', postID = postID) }}"
+        class="h-48 group-hover:scale-110 transition duration-150 object-cover w-max rounded-t-md mx-auto select-none" />
+      <p class="mt-2">New Banner</p>
+      {{form.postBanner(class_="")}}
+    </div>
     <div class="mx-auto w-fit">
       <label class="block my-1 text-center">
         Select a Category
@@ -18,21 +25,22 @@
     <div>
       {{form.postContent(id_="editor", autocomplete="off")}}
     </div>
-    <button
-      type="submit"
-      data-sitekey="{{ siteKey }}"
-      data-callback="onSubmit"
-      data-action="submit"
-      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium "
-    >
+    <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
+      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium ">
       Save
     </button>
   </form>
   {% else %}
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
     <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
+    <div class="w-fit mx-auto text-center my-4">
+      <p class="mb-2"> Current Banner </p> <img src="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+        class="h-48 group-hover:scale-110 transition duration-150 object-cover w-max rounded-t-md mx-auto select-none" />
+      <p class="mt-2">New Banner</p>
+      {{form.postBanner(class_="")}}
+    </div>
     <div class="mx-auto w-fit">
       <label class="block my-1 text-center">
         Select a Category
@@ -42,10 +50,7 @@
     <div>
       {{form.postContent(id_="editor", autocomplete="off")}}
     </div>
-    <button
-      type="submit"
-      class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium "
-    >
+    <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium ">
       Save
     </button>
   </form>

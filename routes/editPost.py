@@ -75,6 +75,7 @@ def editPost(postID):
                                     postTags = request.form["postTags"]
                                     postContent = request.form["postContent"]
                                     postCategory = request.form["postCategory"]
+                                    postBanner=request.files["postBanner"].read()
                                     match postContent == "":
                                         case True:
                                             flash("post content not be empty", "error")
@@ -117,6 +118,10 @@ def editPost(postID):
                                                                 (postCategory, post[0]),
                                                             )
                                                             cursor.execute(
+                                                                """update posts set banner = ? where id = ? """,
+                                                                (postBanner, post[0]),
+                                                            )
+                                                            cursor.execute(
                                                                 """update posts set lastEditTimeStamp = ? where id = ? """,
                                                                 [(currentTimeStamp()), (post[0])],
                                                             )
@@ -147,6 +152,10 @@ def editPost(postID):
                                                                 (postCategory, post[0]),
                                                     )
                                                     cursor.execute(
+                                                                """update posts set banner = ? where id = ? """,
+                                                                (postBanner, post[0]),
+                                                    )
+                                                    cursor.execute(
                                                                 """update posts set lastEditTimeStamp = ? where id = ? """,
                                                                 [(currentTimeStamp()), (post[0])],
                                                     )
@@ -156,6 +165,7 @@ def editPost(postID):
                                                     return redirect(f"/post/{post[0]}")
                             return render_template(
                                 "/editPost.html.jinja",
+                                id = post[0],
                                 title=post[1],
                                 tags=post[2],
                                 content=post[3],
