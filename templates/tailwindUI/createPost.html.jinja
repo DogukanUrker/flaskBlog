@@ -15,21 +15,19 @@
       </label>
       {{form.postBanner(class_="")}}
     </div>
-    <div class="mx-auto w-fit">      
+    <div class="mx-auto w-fit">
       <label class="block my-1 text-center">
         Select a Category
       </label>
-      {{form.postCategory()}}</div>
-    <div>
-    <div>
-      {{form.postContent(id_="editor", autocomplete="off")}}
+      {{form.postCategory()}}
     </div>
-    <button
-      type="submit"
-      class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium "
-    >
-      Post
-    </button>
+    <div>
+      <div>
+        {{form.postContent(id_="editor", autocomplete="off")}}
+      </div>
+      <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium ">
+        Post
+      </button>
   </form>n>
   </form>
   {% else %}
@@ -43,7 +41,7 @@
       </label>
       {{form.postBanner(class_="")}}
     </div>
-    <div class="mx-auto w-fit">      
+    <div class="mx-auto w-fit">
       <label class="block my-1 text-center">
         Select a Category
       </label>
@@ -52,14 +50,10 @@
     <div>
       {{form.postContent(id_="editor", autocomplete="off")}}
     </div>
-    <button
-      type="submit"
-      class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium "
-    >
+    <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium ">
       Post
     </button>
   </form>
   {% endif %}
 </div>
-<script src="{{ url_for('static', filename='js/postBanner.js') }}"></script>
 {% endblock body %}
