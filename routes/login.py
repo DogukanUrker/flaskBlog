@@ -11,8 +11,8 @@ from helpers import (
     addPoints,
     Blueprint,
     loginForm,
+    encryption,
     requestsPost,
-    sha256_crypt,
     DB_USERS_ROOT,
     render_template,
     RECAPTCHA_LOGIN,
@@ -67,7 +67,7 @@ def login(direct):
                                     message("1", f'USER: "{userName}" NOT FOUND')
                                     flash("user not found", "error")
                                 case _:
-                                    match sha256_crypt.verify(password, user[3]):
+                                    match encryption.verify(password, user[3]):
                                         case True:
                                             match RECAPTCHA and RECAPTCHA_LOGIN:
                                                 case True:

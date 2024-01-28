@@ -9,7 +9,7 @@ The database consists of three tables:
 This file contains functions to create the tables if they do not already exist, and to ensure that they have the correct structure.
 """
 
-from helpers import mkdir, exists, message, sqlite3, currentTimeStamp, sha256_crypt
+from helpers import mkdir, exists, message, sqlite3, currentTimeStamp, encryption
 from constants import (
     DB_USERS_ROOT,
     DB_POSTS_ROOT,
@@ -100,8 +100,8 @@ def usersTable():
         match DEFAULT_ADMIN:
             # If True, create a default admin account with the specified values
             case True:
-                # Hash the DEFAULT_ADMIN_PASSWORD using the sha256_crypt module
-                password = sha256_crypt.hash(DEFAULT_ADMIN_PASSWORD)
+                # Hash the DEFAULT_ADMIN_PASSWORD using the encryption module
+                password = encryption.hash(DEFAULT_ADMIN_PASSWORD)
                 # Execute a SQL query to insert the default admin account into the users table
                 cursor.execute(
                     """

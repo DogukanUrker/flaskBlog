@@ -9,8 +9,8 @@ from helpers import (
     message,
     redirect,
     Blueprint,
-    sha256_crypt,
     RECAPTCHA,
+    encryption,
     requestsPost,
     DB_USERS_ROOT,
     render_template,
@@ -54,7 +54,7 @@ def changePassword():
                         """select password from users where userName = ? """,
                         [(session["userName"])],
                     )
-                    match sha256_crypt.verify(oldPassword, cursor.fetchone()[0]):
+                    match encryption.verify(oldPassword, cursor.fetchone()[0]):
                         case True:
                             match oldPassword == password:
                                 case True:
@@ -67,7 +67,7 @@ def changePassword():
                                     flash("passwords must match", "error")
                             match oldPassword != password and password == passwordConfirm:
                                 case True:
-                                    newPassword = sha256_crypt.hash(password)
+                                    newPassword = encryption.hash(password)
                                     connection = sqlite3.connect(DB_USERS_ROOT)
                                     match RECAPTCHA and RECAPTCHA_PASSWORD_CHANGE:
                                         case True:

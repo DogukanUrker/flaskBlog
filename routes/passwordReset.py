@@ -12,9 +12,9 @@ from helpers import (
     SMTP_PORT,
     SMTP_MAIL,
     RECAPTCHA,
+    encryption,
     SMTP_SERVER,
     EmailMessage,
-    sha256_crypt,
     requestsPost,
     SMTP_PASSWORD,
     DB_USERS_ROOT,
@@ -68,14 +68,14 @@ def passwordReset(codeSent):
                             oldPassword = cursor.fetchone()[0]
                             match password == passwordConfirm:
                                 case True:
-                                    match sha256_crypt.verify(password, oldPassword):
+                                    match encryption.verify(password, oldPassword):
                                         case True:
                                             flash(
                                                 "new password can not be same with old password",
                                                 "error",
                                             )
                                         case False:
-                                            password = sha256_crypt.hash(password)
+                                            password = encryption.hash(password)
                                             match RECAPTCHA and RECAPTCHA_PASSWORD_RESET:
                                                 case True:
                                                     secretResponse = request.form[

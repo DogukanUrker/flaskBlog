@@ -10,9 +10,9 @@ from helpers import (
     RECAPTCHA,
     addPoints,
     Blueprint,
+    encryption,
     signUpForm,
     requestsPost,
-    sha256_crypt,
     REGISTRATION,
     DB_USERS_ROOT,
     render_template,
@@ -66,7 +66,7 @@ def signup():
                                         case True:
                                             match userName.isascii():
                                                 case True:
-                                                    password = (sha256_crypt.hash(password))
+                                                    password = (encryption.hash(password))
                                                     connection = (sqlite3.connect(DB_USERS_ROOT))
                                                     match RECAPTCHA and RECAPTCHA_SIGN_UP:
                                                         case True:

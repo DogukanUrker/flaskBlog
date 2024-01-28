@@ -47,7 +47,7 @@ from constants import (
     RECAPTCHA_PROFILE_PICTURE_CHANGE,
 )
 from email.message import EmailMessage
-from passlib.hash import sha256_crypt
+from passlib.hash import sha512_crypt as encryption
 from forms import (
     loginForm,
     signUpForm,
