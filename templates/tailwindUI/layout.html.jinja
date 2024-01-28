@@ -1,49 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#171717" />
-    <link
-      rel="icon"
-      href="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/general.css') }}"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css"
-    />
-    {% block head %} {% endblock head %}
-  </head>
-  <body id="body">
-    {% include 'changeTheme.html.jinja'%} {% include 'navbar.html.jinja'%} {%
-    include 'flash.html.jinja'%} {% block body %} {% endblock body %}
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/editor.css') }}"
-    />
-    <script src="{{ url_for('static', filename='js/timeStamp.js') }}"></script>
-    {% if not recaptchaBadge %}
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/recaptcha.css') }}"
-    />
-    {% endif %}
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#171717" />
+  <link rel="icon" href="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css" />
+  {% block head %} {% endblock head %}
+</head>
+
+<body id="body">
+  {% from "components/changeTheme.html.jinja"
+  import changeTheme%} {{
+  changeTheme() }} {% include 'components/navbar.html.jinja'%} {% from "components/flash.html.jinja"
+  import flash%} {{
+  flash() }} {% block body %} {% endblock body %}
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+  <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/editor.css') }}" />
+  <script src="{{ url_for('static', filename='js/timeStamp.js') }}"></script>
+  {% if not recaptchaBadge %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/recaptcha.css') }}" />
+  {% endif %}
+</body>
+
 </html>
