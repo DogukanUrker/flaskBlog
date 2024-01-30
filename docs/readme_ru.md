@@ -1,4 +1,5 @@
 ###### <sub> Поставь звезду ⭐️. <sub/>
+
 [![GitHub Release](<https://img.shields.io/github/v/release/dogukanurker/flaskblog?display_name=release&style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Freleases>)](https://github.com/DogukanUrker/flaskBlog/releases)
 [![GitHub License](<https://img.shields.io/github/license/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fblob%2Fmain%2FLICENSE>)](https://github.com/DogukanUrker/flaskBlog/blob/main/LICENSE)
 [![GitHub Repo stars](<https://img.shields.io/github/stars/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fstargazers>)](https://github.com/DogukanUrker/flaskBlog/stargazers)
@@ -21,8 +22,7 @@
 
 # [FlaskBlog](https://dogukanurker.com/flaskblog)
 
-[English](../README.md) | [Türkçe](docs/readme_tr.md) | **Russian** 
-
+[English](../README.md) | [Türkçe](docs/readme_tr.md) | **Russian**
 
 Простая система для ведения блога, написанная на Python framework-е Flask.
 <br/>
@@ -32,15 +32,15 @@
 ### [Демо Ролик 📺](https://youtu.be/BTBXe6yPbLE)
 
 | [ПК](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Мобильник](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
-| :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
-|                    ![Светлая тема на ПК](/images/desktop/light.png)                     |                    ![Светлая тема на Мобильник](/images/mobile/light.jpeg)                    |
-|                     ![Темная тема на Пк](/images/desktop/dark.png)                     |                    ![Темная тема на Мобильник](/images/mobile/dark.jpeg)                     |
+| :------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
+|              ![Светлая тема на ПК](/images/desktop/light.png)              |             ![Светлая тема на Мобильник](/images/mobile/light.jpeg)              |
+|               ![Темная тема на Пк](/images/desktop/dark.png)               |              ![Темная тема на Мобильник](/images/mobile/dark.jpeg)               |
 
 [Больше фото 📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
 
 ## Фишки 💫
 
-| Фишки                | Статус |
+| Фишки                  | Статус |
 | :--------------------- | :----: |
 | User Page              |   ✅   |
 | User Login             |   ✅   |
@@ -79,7 +79,7 @@
 - Flask-WTF
 - Python 3.10 or newer
 
-##  Языки 🧑🏻‍💻
+## Языки 🧑🏻‍💻
 
 ### Backend
 
@@ -156,6 +156,7 @@ Password: admin
 [![Forkers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
 
 ### Поддержка 💰
+
 <a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ### Звездная история ✨
