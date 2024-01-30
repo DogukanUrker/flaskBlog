@@ -20,7 +20,7 @@
 
 # [FlaskBlog](https://dogukanurker.com/flaskblog)
 
-[English](../README.md) | **Türkçe**
+[English](../README.md) | **Türkçe** | [Russian](./readme_ru.md)
 
 Flask ile oluşturulmuş basit bir blog uygulaması.
 <br/>
