@@ -313,8 +313,11 @@ match __name__:
         # Declare a variable for the time when app shutdown
         endTime = currentTimeStamp()
 
+        # Declare a variable for the app run time
+        runTime = endTime - startTime
+
         # Log a message that the app shut down
-        message("3", f"APP RUN TIME: {endTime-startTime} SECONDS")
+        message("3", f"APP RUN TIME: {runTime} SECONDS")
 
         # Log a message that the app shut down
         message("1", "APP SHUT DOWN")
