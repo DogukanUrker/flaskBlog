@@ -24,23 +24,23 @@
 [English](../README.md) | [Türkçe](docs/readme_tr.md) | **Russian** 
 
 
-Simple blog app built with Flask.
+Прстая система для ведения блога, написанная на Python framework-е Flask.
 <br/>
 [Contact](mailto:dogukanurker@icloud.com)<br/>
 [Dogukan Urker](https://dogukanurker.com)
 
-### [Demo Video 📺](https://youtu.be/BTBXe6yPbLE)
+### [Демо Ролик 📺](https://youtu.be/BTBXe6yPbLE)
 
-| [Desktop](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Mobile](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
+| [ПК](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Мобильник](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
 | :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
-|                    ![appDesktop](/images/desktop/light.png)                     |                    ![appMobile](/images/mobile/light.jpeg)                    |
-|                     ![appDesktop](/images/desktop/dark.png)                     |                    ![appMobile](/images/mobile/dark.jpeg)                     |
+|                    ![Светлая тема на ПК](/images/desktop/light.png)                     |                    ![Светлая тема на Мобильник](/images/mobile/light.jpeg)                    |
+|                     ![Темная тема на Пк](/images/desktop/dark.png)                     |                    ![Темная тема на Мобильник](/images/mobile/dark.jpeg)                     |
 
-[click for more images📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
+[Больше фото 📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
 
-## Features 💫
+## Фишки 💫
 
-| Feature                | Status |
+| Фишки                | Status |
 | :--------------------- | :----: |
 | User Page              |   ✅   |
 | User Login             |   ✅   |
@@ -71,7 +71,7 @@ Simple blog app built with Flask.
 | Custom Profile Picture |   ✅   |
 | User Verification      |   ✅   |
 
-## Requirements 📦
+## Зависимости 📦
 
 - Flask
 - Passlib
@@ -79,7 +79,7 @@ Simple blog app built with Flask.
 - Flask-WTF
 - Python 3.10 or newer
 
-## Languages 🧑🏻‍💻
+##  Языки 🧑🏻‍💻
 
 ### Backend
 
@@ -91,7 +91,7 @@ Simple blog app built with Flask.
 - CSS
 - JavaScript
 
-## Libraries 📚
+## Библиотеки 📚
 
 ### Backend
 
@@ -117,47 +117,47 @@ Simple blog app built with Flask.
 - Tabler Icons
 - Summer Note
 
-## Installation ⬇️
+## Установка ⬇️
 
-download source code from Github 💾
+Склонируйте исходники с Github 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
 
-go to directory 📁
+Перейдите в директорию 📁
 `cd flaskBlog`
 
-install requirements.txt 🔽
+Установите зависимости из requirements.txt 🔽
 `pip install -r requirements.txt`
 
-it's ready to run 🎉
+Запустите и наслаждайтесь 🎉
 `python app.py`
 or
 `python desktop.py`
-for run flaskBlog as a desktop app 💯
+Присутствует костыль для ПК 💯
 
-### Default Admin Account
+### Вход
 
 Username: admin
 
 Password: admin
 
-### Contributors 💕
+### Наша команда 💕
 
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="dogukanurker" width="80" height="80"></a>
 <a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="adindrabkin" width="80" height="80"></a>
 <a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="codehwang" width="80" height="80"></a>
 <a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/67013355" title="dkashkarev" width="80" height="80"></a>
 
-### Stars ⭐
+### Звезды ⭐
 
 [![Stargazers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
 
-### Forks 🍴
+### Форки 🍴
 
 [![Forkers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
 
-### Support 💰
+### Поддержка 💰
 <a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
-### Star History ✨
+### Звездная история ✨
 
 [![Star History Chart](https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date)](https://star-history.com/#dogukanurker/flaskblog&Date)
