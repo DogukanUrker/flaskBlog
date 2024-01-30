@@ -21,7 +21,7 @@
 
 # [FlaskBlog](https://dogukanurker.com/flaskblog)
 
-**Russian** | [English](../README.md) | [Türkçe](docs/readme_tr.md)
+[English](../README.md) | [Türkçe](docs/readme_tr.md) | **Russian** 
 
 
 Simple blog app built with Flask.
