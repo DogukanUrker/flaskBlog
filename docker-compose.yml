@@ -1,0 +1,12 @@
+version: "1"
+
+services:
+  flaskblog:
+    image: fliberd/flaskblog:latest
+    container_name: flaskblog
+    restart: always
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - ./flaskblog-config:/app/
