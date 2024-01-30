@@ -2,7 +2,7 @@ version: "1"
 
 services:
   flaskblog:
-    image: fliberd/flaskblog:latest
+    image: dogukanurker/flaskblog:latest
     container_name: flaskblog
     restart: always
     build: .
