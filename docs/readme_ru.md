@@ -1,4 +1,4 @@
-###### <sub> This project needs a ⭐️ from you. Don't forget to leave a star ⭐️. <sub/>
+###### <sub> Поставь звезду ⭐️. <sub/>
 [![GitHub Release](<https://img.shields.io/github/v/release/dogukanurker/flaskblog?display_name=release&style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Freleases>)](https://github.com/DogukanUrker/flaskBlog/releases)
 [![GitHub License](<https://img.shields.io/github/license/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fblob%2Fmain%2FLICENSE>)](https://github.com/DogukanUrker/flaskBlog/blob/main/LICENSE)
 [![GitHub Repo stars](<https://img.shields.io/github/stars/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fstargazers>)](https://github.com/DogukanUrker/flaskBlog/stargazers)
@@ -24,7 +24,7 @@
 [English](../README.md) | [Türkçe](docs/readme_tr.md) | **Russian** 
 
 
-Прстая система для ведения блога, написанная на Python framework-е Flask.
+Простая система для ведения блога, написанная на Python framework-е Flask.
 <br/>
 [Contact](mailto:dogukanurker@icloud.com)<br/>
 [Dogukan Urker](https://dogukanurker.com)
@@ -40,7 +40,7 @@
 
 ## Фишки 💫
 
-| Фишки                | Status |
+| Фишки                | Статус |
 | :--------------------- | :----: |
 | User Page              |   ✅   |
 | User Login             |   ✅   |
