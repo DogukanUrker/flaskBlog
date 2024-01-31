@@ -49,15 +49,15 @@ from constants import (
 from email.message import EmailMessage
 from passlib.hash import sha512_crypt as encryption
 from forms import (
-    loginForm,
-    signUpForm,
-    commentForm,
-    createPostForm,
-    verifyUserForm,
-    passwordResetForm,
-    changePasswordForm,
-    changeUserNameForm,
-    changeProfilePictureForm,
+    LoginForm,
+    SignUpForm,
+    CommentForm,
+    CreatePostForm,
+    VerifyUserForm,
+    PasswordResetForm,
+    ChangePasswordForm,
+    ChangeUserNameForm,
+    ChangeProfilePictureForm,
 )
 from flask import (
     Flask,

@@ -10,7 +10,7 @@ from helpers import (
     RECAPTCHA,
     addPoints,
     Blueprint,
-    loginForm,
+    LoginForm,
     encryption,
     requestsPost,
     DB_USERS_ROOT,
@@ -49,7 +49,7 @@ def login(direct):
                         301,
                     )
                 case False:
-                    form = loginForm(request.form)
+                    form = LoginForm(request.form)
                     match request.method == "POST":
                         case True:
                             userName = request.form["userName"]

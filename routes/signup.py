@@ -11,7 +11,7 @@ from helpers import (
     addPoints,
     Blueprint,
     encryption,
-    signUpForm,
+    SignUpForm,
     requestsPost,
     REGISTRATION,
     DB_USERS_ROOT,
@@ -46,7 +46,7 @@ def signup():
                     message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
                     return redirect("/")
                 case False:
-                    form = signUpForm(request.form)
+                    form = SignUpForm(request.form)
                     match request.method == "POST":
                         case True:
                             userName = request.form["userName"]

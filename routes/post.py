@@ -12,7 +12,7 @@ from helpers import (
     Blueprint,
     currentDate,
     currentTime,
-    commentForm,
+    CommentForm,
     DB_POSTS_ROOT,
     currentTimeStamp,
     DB_COMMENTS_ROOT,
@@ -27,7 +27,7 @@ postBlueprint = Blueprint("post", __name__)
 @postBlueprint.route("/post/<int:postID>", methods=["GET", "POST"])
 def post(postID):
     # Create a comment form object from the request form
-    form = commentForm(request.form)
+    form = CommentForm(request.form)
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()

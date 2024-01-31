@@ -19,7 +19,7 @@ from helpers import (
     SMTP_PASSWORD,
     DB_USERS_ROOT,
     render_template,
-    passwordResetForm,
+    PasswordResetForm,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
@@ -49,7 +49,7 @@ def passwordReset(codeSent):
     """
     global userName
     global passwordResetCode
-    form = passwordResetForm(request.form)
+    form = PasswordResetForm(request.form)
     match codeSent:
         case "true":
             connection = sqlite3.connect(DB_USERS_ROOT)

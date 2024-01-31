@@ -15,7 +15,7 @@ from helpers import (
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
-    changeProfilePictureForm,
+    ChangeProfilePictureForm,
     RECAPTCHA_PROFILE_PICTURE_CHANGE,
 )
 
@@ -29,7 +29,7 @@ def changeProfilePicture():
     match "userName" in session:
         case True:
             # Create a change profile picture form object from the request form
-            form = changeProfilePictureForm(request.form)
+            form = ChangeProfilePictureForm(request.form)
             # Check if the request method is POST
             match request.method == "POST":
                 case True:

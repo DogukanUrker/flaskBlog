@@ -14,7 +14,7 @@ from helpers import (
     requestsPost,
     DB_USERS_ROOT,
     render_template,
-    changePasswordForm,
+    ChangePasswordForm,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
@@ -42,7 +42,7 @@ def changePassword():
     """
     match "userName" in session:
         case True:
-            form = changePasswordForm(request.form)
+            form = ChangePasswordForm(request.form)
             match request.method == "POST":
                 case True:
                     oldPassword = request.form["oldPassword"]

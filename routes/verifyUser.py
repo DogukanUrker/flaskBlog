@@ -18,7 +18,7 @@ from helpers import (
     requestsPost,
     SMTP_PASSWORD,
     DB_USERS_ROOT,
-    verifyUserForm,
+    VerifyUserForm,
     render_template,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
@@ -58,7 +58,7 @@ def verifyUser(codeSent):
                     return redirect("/")
                 case "False":
                     global verificationCode
-                    form = verifyUserForm(request.form)
+                    form = VerifyUserForm(request.form)
                     match codeSent:
                         case "true":
                             match request.method == "POST":

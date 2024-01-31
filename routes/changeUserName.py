@@ -15,7 +15,7 @@ from helpers import (
     DB_USERS_ROOT,
     render_template,
     DB_COMMENTS_ROOT,
-    changeUserNameForm,
+    ChangeUserNameForm,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
@@ -47,7 +47,7 @@ def changeUserName():
     """
     match "userName" in session:
         case True:
-            form = changeUserNameForm(request.form)
+            form = ChangeUserNameForm(request.form)
             match request.method == "POST":
                 case True:
                     newUserName = request.form["newUserName"]

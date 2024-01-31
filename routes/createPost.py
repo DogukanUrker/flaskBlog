@@ -12,7 +12,7 @@ from helpers import (
     RECAPTCHA,
     requestsPost,
     DB_POSTS_ROOT,
-    createPostForm,
+    CreatePostForm,
     render_template,
     currentTimeStamp,
     RECAPTCHA_SITE_KEY,
@@ -41,7 +41,7 @@ def createPost():
     """
     match "userName" in session:
         case True:
-            form = createPostForm(request.form)
+            form = CreatePostForm(request.form)
             match request.method == "POST":
                 case True:
                     postTitle = request.form["postTitle"]

@@ -12,7 +12,7 @@ from helpers import (
     requestsPost,
     DB_POSTS_ROOT,
     DB_USERS_ROOT,
-    createPostForm,
+    CreatePostForm,
     render_template,
     currentTimeStamp,
     RECAPTCHA_SITE_KEY,
@@ -64,7 +64,7 @@ def editPost(postID):
                     )
                     match post[5] == session["userName"] or session["userRole"] == "admin":
                         case True:
-                            form = createPostForm(request.form)
+                            form = CreatePostForm(request.form)
                             form.postTitle.data = post[1]
                             form.postTags.data = post[2]
                             form.postContent.data = post[3]
