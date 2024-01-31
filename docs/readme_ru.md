@@ -22,7 +22,7 @@
 
 # [FlaskBlog](https://dogukanurker.com/flaskblog)
 
-[English](../README.md) | [Türkçe](docs/readme_tr.md) | **Russian**
+[English](../README.md) | [Türkçe](readme_tr.md) | **Russian**
 
 Простая система для ведения блога, написанная на Python framework-е Flask.
 <br/>
