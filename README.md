@@ -25,6 +25,7 @@
 
 
 Simple blog app built with Flask.
+
 <br/>
 [Contact](mailto:dogukanurker@icloud.com)<br/>
 [Dogukan Urker](https://dogukanurker.com)
@@ -146,6 +147,7 @@ Password: admin
 <a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="adindrabkin" width="80" height="80"></a>
 <a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="codehwang" width="80" height="80"></a>
 <a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/67013355" title="dkashkarev" width="80" height="80"></a>
+<a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/2644169" title="barmar" width="80" height="80"></a>
 
 ### Stars ⭐
 
