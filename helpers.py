@@ -12,7 +12,7 @@ from io import BytesIO
 from time import tzname
 from random import randint
 from os.path import exists
-from datetime import datetime
+from datetime import datetime, timedelta
 from requests import post as requestsPost
 from constants import SMTP_MAIL, SMTP_PORT, SMTP_SERVER, SMTP_PASSWORD
 from constants import (

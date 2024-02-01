@@ -2,9 +2,9 @@
 This file contains the main function
 """
 # Import the message function from the helpers module
-from helpers import message, terminalASCII, currentTimeStamp
+from helpers import message, terminalASCII, currentTimeStamp, timedelta
 
-# Declare a variable for the time when app started
+# Get the start time of the app
 startTime = currentTimeStamp()
 
 # Print a line breaker and a ASCII art
@@ -310,14 +310,17 @@ match __name__:
         # Run the app with the debug mode, host and port settings
         app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
 
-        # Declare a variable for the time when app shutdown
+        # Get the end time of the app
         endTime = currentTimeStamp()
 
-        # Declare a variable for the app run time
+        # Calculate the run time of the app
         runTime = endTime - startTime
 
-        # Log a message that the app shut down
-        message("3", f"APP RUN TIME: {runTime} SECONDS")
+        # Convert the run time to a string
+        runTime = str(timedelta(seconds=runTime))
+
+        # Log a message that shows the run time of the app
+        message("3", f"APP RUN TIME: {runTime} ")
 
         # Log a message that the app shut down
         message("1", "APP SHUT DOWN")
