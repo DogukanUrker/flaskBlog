@@ -25,8 +25,8 @@ def run(playwright: Playwright) -> None:
     page.get_by_placeholder("password").fill("testuser")
     # Click on the button with the name "Login"
     page.get_by_role("button", name="Login").click()
-    # Click on the link with the name "Unveiling the Essence of"
-    page.get_by_role("link", name="Unveiling the Essence of").click()
+    # Navigate to the first post in the database
+    page.goto(f"{URL}/post/1")
     # Click on the input field with the placeholder "What are your thoughts?"
     page.get_by_placeholder("What are your thoughts?").click()
     # Fill the input field with the value "Wow that's really fun to read! 💖"
