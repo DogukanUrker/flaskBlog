@@ -4,8 +4,8 @@ const dateElements = document.getElementsByClassName("date");
 
 // Function to format and display the time from a UNIX timestamp
 function formatTimeElement(element) {
-  // Extract UNIX timestamp from the element's innerHTML
-  let unixTimeStamp = element.innerHTML;
+  // Extract UNIX timestamp from the element's innerText
+  let unixTimeStamp = element.innerText;
 
   // Convert UNIX timestamp to a JavaScript Date object
   let dateObject = new Date(unixTimeStamp * 1000);
@@ -23,8 +23,8 @@ function formatTimeElement(element) {
 
 // Function to format and display the date from a UNIX timestamp
 function formatDateElement(element) {
-  // Extract UNIX timestamp from the element's innerHTML
-  let unixTimeStamp = element.innerHTML;
+  // Extract UNIX timestamp from the element's innerText
+  let unixTimeStamp = element.innerText;
 
   // Convert UNIX timestamp to a JavaScript Date object
   let dateObject = new Date(unixTimeStamp * 1000);
