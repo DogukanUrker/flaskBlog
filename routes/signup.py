@@ -1,19 +1,27 @@
 # Import the necessary modules and functions
 from helpers import (
+    ssl,
     abort,
     flash,
     session,
     sqlite3,
     request,
     message,
+    smtplib,
     redirect,
+    APP_NAME,
+    SMTP_PORT,
+    SMTP_MAIL,
     RECAPTCHA,
     addPoints,
     Blueprint,
     encryption,
     SignUpForm,
+    SMTP_SERVER,
+    EmailMessage,    
     requestsPost,
     REGISTRATION,
+    SMTP_PASSWORD,
     DB_USERS_ROOT,
     render_template,
     currentTimeStamp,
@@ -115,6 +123,35 @@ def signup():
                                                                         f"Welcome {userName}",
                                                                         "success",
                                                                     )
+                                                                    context = ssl.create_default_context()
+                                                                    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                                                                    server.ehlo()
+                                                                    server.starttls(context=context)
+                                                                    server.ehlo()
+                                                                    server.login(
+                                                                        SMTP_MAIL, SMTP_PASSWORD
+                                                                    )
+                                                                    mail = EmailMessage()
+                                                                    mail.set_content(
+                                                                        f"Hi {userName}👋,\n Welcome to {APP_NAME}"
+                                                                    )
+                                                                    mail.add_alternative(
+                                                                        f"""\
+                                                                    <html>
+                                                                        <body>
+                                                                            <h2>Hi {userName}👋,</h2>
+                                                                            <h2>Welcome to <b>{APP_NAME}</b></h2>
+                                                                            <img style="margin: 0 auto 0 auto;" src="https://github.com/DogukanUrker/flaskBlog/blob/main/images/LogoSmall.png?raw=true">
+                                                                            </body>
+                                                                    </html>
+                                                                    """,
+                                                                        subtype="html",
+                                                                    )
+                                                                    mail["Subject"] = f"Welcome to {APP_NAME}"
+                                                                    mail["From"] = SMTP_MAIL
+                                                                    mail["To"] = email
+                                                                    server.send_message(mail)
+                                                                    server.quit()
                                                                     return redirect(
                                                                         "/verifyUser/codesent=false"
                                                                     )
@@ -158,6 +195,35 @@ def signup():
                                                                 f"Welcome {userName}",
                                                                 "success",
                                                             )
+                                                            context = ssl.create_default_context()
+                                                            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                                                            server.ehlo()
+                                                            server.starttls(context=context)
+                                                            server.ehlo()
+                                                            server.login(
+                                                                SMTP_MAIL, SMTP_PASSWORD
+                                                            )
+                                                            mail = EmailMessage()
+                                                            mail.set_content(
+                                                                f"Hi {userName}👋,\n Welcome to {APP_NAME}"
+                                                            )
+                                                            mail.add_alternative(
+                                                                f"""\
+                                                            <html>
+                                                                <body>
+                                                                    <h2>Hi {userName}👋,</h2>
+                                                                    <h2>Welcome to <b>{APP_NAME}</b></h2>
+                                                                    <img style="margin: 0 auto 0 auto;" src="https://github.com/DogukanUrker/flaskBlog/blob/main/images/LogoSmall.png?raw=true">
+                                                                    </body>
+                                                            </html>
+                                                            """,
+                                                                subtype="html",
+                                                            )
+                                                            mail["Subject"] = f"Welcome to {APP_NAME}"
+                                                            mail["From"] = SMTP_MAIL
+                                                            mail["To"] = email
+                                                            server.send_message(mail)
+                                                            server.quit()
                                                             return redirect(
                                                                 "/verifyUser/codesent=false"
                                                             )
