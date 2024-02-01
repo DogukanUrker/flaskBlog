@@ -71,13 +71,17 @@
   <div class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md
   border-gray-500/25">
     <div tag="content my-2">{{comment[2]}}</div>
-    <section class="flex w-full justify-between my-2">
-      <p class="flex items-center">
-        <i class="ti ti-calendar mr-1 text-xl"></i>{{comment[4]}}
-      </p>
-      <p class="flex items-center">
-        <i class="ti ti-clock mr-1 text-xl"></i>{{comment[5]}}
-      </p>
+    <section class="flex items-center w-full justify-between my-2">
+      <div class="flex items-center">
+        <i class="ti ti-clock mr-1 text-xl"></i>
+        <p class="hidden md:block mr-1">Creation Time:</p>
+        <p class="time font-medium">{{comment[4]}}</p>
+      </div>
+      <div class="flex items-center">
+        <i class="ti ti-calendar mr-1 text-xl"></i>
+        <p class="hidden md:block mr-1">Creation Date:</p>
+        <p class="date font-medium">{{comment[4]}}</p>
+      </div>
     </section>
     <a href="/post/{{comment[1]}}" class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2">go to
       post</a>
