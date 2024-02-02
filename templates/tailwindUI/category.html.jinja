@@ -7,7 +7,8 @@ categoryContainer() }}
 <h1 class="text-center font-bold text-3xl text-rose-500 mt-4 select-none">
   {{category}}
 </h1>
-<div class="flex flex-wrap gap-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 2xl:w-7/12 mt-4">
+<div
+  class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">
   {% for post in posts %} {% from "components/postCardMacro.html.jinja"
   import postCard%} {{
   postCard(post=post,authorProfilePicture=getProfilePicture(post[5])) }} {%
