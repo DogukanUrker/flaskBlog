@@ -1,6 +1,7 @@
 """
 This file contains the main function
 """
+
 # Import the message function from the helpers module
 from helpers import message, terminalASCII, currentTimeStamp, timedelta
 
@@ -129,9 +130,9 @@ app = Flask(
 
 # Set the secret key and the session permanent flag for the app
 app.secret_key = APP_SECRET_KEY  # The secret key for the app
-app.config[
-    "SESSION_PERMANENT"
-] = SESSION_PERMANENT  # A flag that determines if the session is permanent or not
+app.config["SESSION_PERMANENT"] = (
+    SESSION_PERMANENT  # A flag that determines if the session is permanent or not
+)
 
 # Create a CSRFProtect object for the app
 csrf = CSRFProtect(app)  # A CSRF protection mechanism for the app

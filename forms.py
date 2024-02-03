@@ -1,6 +1,7 @@
 """
 This file contains classes that are used to create forms for the application.
 """
+
 from wtforms import (
     Form,
     FileField,

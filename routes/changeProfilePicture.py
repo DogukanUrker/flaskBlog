@@ -44,22 +44,21 @@ def changeProfilePicture():
                     match RECAPTCHA and RECAPTCHA_PROFILE_PICTURE_CHANGE:
                         case True:
                             # Get the recaptcha response from the form
-                            secretResponse = request.form[
-                                                        "g-recaptcha-response"
-                                                    ]
+                            secretResponse = request.form["g-recaptcha-response"]
                             # Verify the recaptcha response with the recaptcha API
                             verifyResponse = requestsPost(
-                                                        url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                                                    ).json()
+                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                            ).json()
                             # Check if the recaptcha verification is successful or has a high score
-                            match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                            match verifyResponse["success"] == True or verifyResponse[
+                                "score"
+                            ] > 0.5:
                                 case True:
                                     # Log the recaptcha verification result
-                                    message("2",f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                    message(
+                                        "2",
+                                        f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                    )
                                     # Update the users database by setting the new profile picture for the user name
                                     cursor.execute(
                                         """update users set profilePicture = ? where userName = ? """,
@@ -77,21 +76,24 @@ def changeProfilePicture():
                                     return redirect(f"/changeprofilepicture")
                                 case False:
                                     # Log the recaptcha verification result
-                                    message("1",f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                    message(
+                                        "1",
+                                        f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                    )
                                     # Abort the request with a 401 error
                                     abort(401)
                         case False:
                             # Update the users database by setting the new profile picture for the user name
                             cursor.execute(
-                                        """update users set profilePicture = ? where userName = ? """,
-                                        [(newProfilePicture), (session["userName"])],
-                                    )
+                                """update users set profilePicture = ? where userName = ? """,
+                                [(newProfilePicture), (session["userName"])],
+                            )
                             connection.commit()
                             # Log a message that the user changed their profile picture
                             message(
-                                        "2",
-                                        f'USER: "{session["userName"]}" CHANGED HIS PROFILE PICTURE TO "{newProfilePicture}"',
-                                    )
+                                "2",
+                                f'USER: "{session["userName"]}" CHANGED HIS PROFILE PICTURE TO "{newProfilePicture}"',
+                            )
                             # Flash a success message to the user
                             flash("profile picture changed", "success")
                             # Redirect to the same route

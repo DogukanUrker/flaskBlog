@@ -1,6 +1,7 @@
 """
 This file contains the blueprint and routes for the about page.
 """
+
 from helpers import (
     APP_NAME,
     Blueprint,

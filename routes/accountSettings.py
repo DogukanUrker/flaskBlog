@@ -42,30 +42,32 @@ def accountSettings():
                     match RECAPTCHA and RECAPTCHA_DELETE_USER:
                         case True:
                             # Get the recaptcha response from the form
-                            secretResponse = request.form[
-                                                "g-recaptcha-response"
-                                            ]
+                            secretResponse = request.form["g-recaptcha-response"]
                             # Verify the recaptcha response with the recaptcha API
                             verifyResponse = requestsPost(
-                                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                                            ).json()
+                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                            ).json()
                             # Check if the recaptcha verification is successful or has a high score
-                            match verifyResponse[
-                                                "success"
-                                            ] == True or verifyResponse[
-                                                "score"
-                                            ] > 0.5:
-                                
+                            match verifyResponse["success"] == True or verifyResponse[
+                                "score"
+                            ] > 0.5:
+
                                 case True:
                                     # Log the recaptcha verification result
-                                    message("2",f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                    message(
+                                        "2",
+                                        f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                    )
                                     # Delete the user from the database
                                     deleteUser(user[0][0])
                                     # Redirect to the home page
                                     return redirect(f"/")
                                 case False:
                                     # Log the recaptcha verification result
-                                    message("1",f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                    message(
+                                        "1",
+                                        f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                    )
                                     # Abort the request with a 401 error
                                     abort(401)
                         case False:
@@ -74,7 +76,12 @@ def accountSettings():
                             # Redirect to the home page
                             return redirect(f"/")
             # Render the account settings template with the user and recaptcha data
-            return render_template("accountSettings.html.jinja", user=user, siteKey=RECAPTCHA_SITE_KEY, recaptcha=RECAPTCHA,)
+            return render_template(
+                "accountSettings.html.jinja",
+                user=user,
+                siteKey=RECAPTCHA_SITE_KEY,
+                recaptcha=RECAPTCHA,
+            )
         case False:
             # Redirect to the login page with the account settings as the next destination
             return redirect("/login/redirect=&accountsettings")

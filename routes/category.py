@@ -17,6 +17,7 @@ The code in this file is organized as follows:
 4. The posts are retrieved from the database and rendered as HTML.
 
 """
+
 from helpers import (
     abort,
     sqlite3,

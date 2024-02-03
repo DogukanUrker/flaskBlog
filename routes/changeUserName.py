@@ -81,7 +81,10 @@ def changeUserName():
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            message("2",f"USERNAME CHANGE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            message(
+                                                                "2",
+                                                                f"USERNAME CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                            )
                                                             cursor.execute(
                                                                 """update users set userName = ? where userName = ? """,
                                                                 [
@@ -134,9 +137,9 @@ def changeUserName():
                                                                 "2",
                                                                 f'USER: "{session["userName"]}" CHANGED USER NAME TO "{newUserName}"',
                                                             )
-                                                            session[
-                                                                "userName"
-                                                            ] = newUserName
+                                                            session["userName"] = (
+                                                                newUserName
+                                                            )
                                                             flash(
                                                                 "user name changed",
                                                                 "success",
@@ -145,7 +148,10 @@ def changeUserName():
                                                                 f"/user/{newUserName.lower()}"
                                                             )
                                                         case False:
-                                                            message("1",f"USERNAME CHANGE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            message(
+                                                                "1",
+                                                                f"USERNAME CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                            )
                                                             abort(401)
                                                 case False:
                                                     cursor.execute(

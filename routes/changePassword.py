@@ -81,7 +81,10 @@ def changePassword():
                                                 "success"
                                             ] == True or verifyResponse["score"] > 0.5:
                                                 case True:
-                                                    message("2",f"PASSWORD CHANGE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                    message(
+                                                        "2",
+                                                        f"PASSWORD CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                    )
                                                     cursor = connection.cursor()
                                                     cursor.execute(
                                                         """update users set password = ? where userName = ? """,
@@ -102,27 +105,30 @@ def changePassword():
                                                     )
                                                     return redirect("/login/redirect=&")
                                                 case False:
-                                                    message("1",f"PASSWORD CHANGE DELETE RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                    message(
+                                                        "1",
+                                                        f"PASSWORD CHANGE DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                    )
                                                     abort(401)
                                         case False:
                                             cursor = connection.cursor()
                                             cursor.execute(
-                                                        """update users set password = ? where userName = ? """,
-                                                        [
-                                                            (newPassword),
-                                                            (session["userName"]),
-                                                        ],
-                                                    )
+                                                """update users set password = ? where userName = ? """,
+                                                [
+                                                    (newPassword),
+                                                    (session["userName"]),
+                                                ],
+                                            )
                                             connection.commit()
                                             message(
-                                                        "2",
-                                                        f'USER: "{session["userName"]}" CHANGED HIS PASSWORD',
-                                                    )
+                                                "2",
+                                                f'USER: "{session["userName"]}" CHANGED HIS PASSWORD',
+                                            )
                                             session.clear()
                                             flash(
-                                                        "you need login with new password",
-                                                        "success",
-                                                    )
+                                                "you need login with new password",
+                                                "success",
+                                            )
                                             return redirect("/login/redirect=&")
                         case _:
                             flash("old is password wrong", "error")

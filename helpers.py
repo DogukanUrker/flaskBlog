@@ -1,6 +1,7 @@
 """
 This module contains all the necessary functions and classes to run the application.
 """
+
 import os
 import ssl
 import socket

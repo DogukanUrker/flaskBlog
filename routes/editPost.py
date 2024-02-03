@@ -62,7 +62,9 @@ def editPost(postID):
                         """select userName from users where userName = ? """,
                         [(session["userName"])],
                     )
-                    match post[5] == session["userName"] or session["userRole"] == "admin":
+                    match post[5] == session["userName"] or session[
+                        "userRole"
+                    ] == "admin":
                         case True:
                             form = CreatePostForm(request.form)
                             form.postTitle.data = post[1]
@@ -75,7 +77,7 @@ def editPost(postID):
                                     postTags = request.form["postTags"]
                                     postContent = request.form["postContent"]
                                     postCategory = request.form["postCategory"]
-                                    postBanner=request.files["postBanner"].read()
+                                    postBanner = request.files["postBanner"].read()
                                     match postContent == "":
                                         case True:
                                             flash("post content not be empty", "error")
@@ -87,19 +89,26 @@ def editPost(postID):
                                             match RECAPTCHA and RECAPTCHA_POST_EDIT:
                                                 case True:
                                                     secretResponse = request.form[
-                                                                        "g-recaptcha-response"
-                                                                    ]
+                                                        "g-recaptcha-response"
+                                                    ]
                                                     verifyResponse = requestsPost(
-                                                                        url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                                                                    ).json()
+                                                        url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                                    ).json()
                                                     match verifyResponse[
-                                                                        "success"
-                                                                    ] == True or verifyResponse[
-                                                                        "score"
-                                                                    ] > 0.5:
+                                                        "success"
+                                                    ] == True or verifyResponse[
+                                                        "score"
+                                                    ] > 0.5:
                                                         case True:
-                                                            message("2",f"POST EDIT RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
-                                                            connection = sqlite3.connect(DB_POSTS_ROOT)
+                                                            message(
+                                                                "2",
+                                                                f"POST EDIT RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                            )
+                                                            connection = (
+                                                                sqlite3.connect(
+                                                                    DB_POSTS_ROOT
+                                                                )
+                                                            )
                                                             cursor = connection.cursor()
                                                             cursor.execute(
                                                                 """update posts set title = ? where id = ? """,
@@ -123,17 +132,34 @@ def editPost(postID):
                                                             )
                                                             cursor.execute(
                                                                 """update posts set lastEditTimeStamp = ? where id = ? """,
-                                                                [(currentTimeStamp()), (post[0])],
+                                                                [
+                                                                    (
+                                                                        currentTimeStamp()
+                                                                    ),
+                                                                    (post[0]),
+                                                                ],
                                                             )
                                                             connection.commit()
-                                                            message("2", f'POST: "{postTitle}" EDITED')
-                                                            flash("Post edited", "success")
-                                                            return redirect(f"/post/{post[0]}")
+                                                            message(
+                                                                "2",
+                                                                f'POST: "{postTitle}" EDITED',
+                                                            )
+                                                            flash(
+                                                                "Post edited", "success"
+                                                            )
+                                                            return redirect(
+                                                                f"/post/{post[0]}"
+                                                            )
                                                         case False:
-                                                            message("1",f"POST EDIT RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                            message(
+                                                                "1",
+                                                                f"POST EDIT RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                            )
                                                             abort(401)
                                                 case False:
-                                                    connection = sqlite3.connect(DB_POSTS_ROOT)
+                                                    connection = sqlite3.connect(
+                                                        DB_POSTS_ROOT
+                                                    )
                                                     cursor = connection.cursor()
                                                     cursor.execute(
                                                         """update posts set title = ? where id = ? """,
@@ -148,24 +174,30 @@ def editPost(postID):
                                                         (postContent, post[0]),
                                                     )
                                                     cursor.execute(
-                                                                """update posts set category = ? where id = ? """,
-                                                                (postCategory, post[0]),
+                                                        """update posts set category = ? where id = ? """,
+                                                        (postCategory, post[0]),
                                                     )
                                                     cursor.execute(
-                                                                """update posts set banner = ? where id = ? """,
-                                                                (postBanner, post[0]),
+                                                        """update posts set banner = ? where id = ? """,
+                                                        (postBanner, post[0]),
                                                     )
                                                     cursor.execute(
-                                                                """update posts set lastEditTimeStamp = ? where id = ? """,
-                                                                [(currentTimeStamp()), (post[0])],
+                                                        """update posts set lastEditTimeStamp = ? where id = ? """,
+                                                        [
+                                                            (currentTimeStamp()),
+                                                            (post[0]),
+                                                        ],
                                                     )
                                                     connection.commit()
-                                                    message("2", f'POST: "{postTitle}" EDITED')
+                                                    message(
+                                                        "2",
+                                                        f'POST: "{postTitle}" EDITED',
+                                                    )
                                                     flash("Post edited", "success")
                                                     return redirect(f"/post/{post[0]}")
                             return render_template(
                                 "/editPost.html.jinja",
-                                id = post[0],
+                                id=post[0],
                                 title=post[1],
                                 tags=post[2],
                                 content=post[3],

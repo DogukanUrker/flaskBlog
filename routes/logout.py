@@ -3,6 +3,7 @@ This file contains the blueprint for the logout page.
 
 The functions and methods used in this blueprint are imported from the helpers module.
 """
+
 from helpers import flash, message, Blueprint, session, redirect
 
 

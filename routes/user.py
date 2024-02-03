@@ -1,6 +1,7 @@
 """
 This module contains the code for the user page.
 """
+
 from helpers import (
     sqlite3,
     message,

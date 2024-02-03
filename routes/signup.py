@@ -18,7 +18,7 @@ from helpers import (
     encryption,
     SignUpForm,
     SMTP_SERVER,
-    EmailMessage,    
+    EmailMessage,
     requestsPost,
     REGISTRATION,
     SMTP_PASSWORD,
@@ -74,20 +74,31 @@ def signup():
                                         case True:
                                             match userName.isascii():
                                                 case True:
-                                                    password = (encryption.hash(password))
-                                                    connection = (sqlite3.connect(DB_USERS_ROOT))
+                                                    password = encryption.hash(password)
+                                                    connection = sqlite3.connect(
+                                                        DB_USERS_ROOT
+                                                    )
                                                     match RECAPTCHA and RECAPTCHA_SIGN_UP:
                                                         case True:
-                                                            secretResponse = request.form["g-recaptcha-response"]
-                                                            verifyResponse = requestsPost(url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}").json()
+                                                            secretResponse = request.form[
+                                                                "g-recaptcha-response"
+                                                            ]
+                                                            verifyResponse = requestsPost(
+                                                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                                            ).json()
                                                             match verifyResponse[
                                                                 "success"
                                                             ] == True or verifyResponse[
                                                                 "score"
                                                             ] > 0.5:
                                                                 case True:
-                                                                    message("2",f"SIGN UP RECAPTCHA | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
-                                                                    cursor = connection.cursor()
+                                                                    message(
+                                                                        "2",
+                                                                        f"SIGN UP RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                    )
+                                                                    cursor = (
+                                                                        connection.cursor()
+                                                                    )
                                                                     cursor.execute(
                                                                         f"""
                                                                         insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
@@ -113,7 +124,10 @@ def signup():
                                                                         "userName"
                                                                     ] = userName
                                                                     addPoints(
-                                                                        1, session["userName"]
+                                                                        1,
+                                                                        session[
+                                                                            "userName"
+                                                                        ],
                                                                     )
                                                                     message(
                                                                         "2",
@@ -123,20 +137,32 @@ def signup():
                                                                         f"Welcome {userName}",
                                                                         "success",
                                                                     )
-                                                                    context = ssl.create_default_context()
-                                                                    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                                                                    context = (
+                                                                        ssl.create_default_context()
+                                                                    )
+                                                                    server = (
+                                                                        smtplib.SMTP(
+                                                                            SMTP_SERVER,
+                                                                            SMTP_PORT,
+                                                                        )
+                                                                    )
                                                                     server.ehlo()
-                                                                    server.starttls(context=context)
+                                                                    server.starttls(
+                                                                        context=context
+                                                                    )
                                                                     server.ehlo()
                                                                     server.login(
-                                                                        SMTP_MAIL, SMTP_PASSWORD
+                                                                        SMTP_MAIL,
+                                                                        SMTP_PASSWORD,
                                                                     )
-                                                                    mail = EmailMessage()
+                                                                    mail = (
+                                                                        EmailMessage()
+                                                                    )
                                                                     mail.set_content(
                                                                         f"Hi {userName}👋,\n Welcome to {APP_NAME}"
                                                                     )
                                                                     mail.add_alternative(
-                                                                    f"""\
+                                                                        f"""\
                                                                     <html>
                                                                     <body>
                                                                         <div
@@ -155,45 +181,54 @@ def signup():
                                                                     </body>
                                                                     </html>
                                                                     """,
-                                                                    subtype="html",
+                                                                        subtype="html",
                                                                     )
-                                                                    mail["Subject"] = f"Welcome to {APP_NAME}"
-                                                                    mail["From"] = SMTP_MAIL
+                                                                    mail["Subject"] = (
+                                                                        f"Welcome to {APP_NAME}"
+                                                                    )
+                                                                    mail["From"] = (
+                                                                        SMTP_MAIL
+                                                                    )
                                                                     mail["To"] = email
-                                                                    server.send_message(mail)
+                                                                    server.send_message(
+                                                                        mail
+                                                                    )
                                                                     server.quit()
                                                                     return redirect(
                                                                         "/verifyUser/codesent=false"
                                                                     )
                                                                 case False:
-                                                                    message("1",f"SIGN UP | VERIFICATION: {verifyResponse["success"]} | VERIFICATION SCORE: {verifyResponse["score"]}")
+                                                                    message(
+                                                                        "1",
+                                                                        f"SIGN UP | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                    )
                                                                     abort(401)
                                                         case False:
                                                             cursor = connection.cursor()
                                                             cursor.execute(
-                                                                        f"""
+                                                                f"""
                                                                         insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
                                                                         values(?, ?, ?, ?, ?, ?, ?, ?)
                                                                         """,
-                                                                        (
-                                                                            userName,
-                                                                            email,
-                                                                            password,
-                                                                            f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                                                            "user",
-                                                                            0,
-                                                                            currentTimeStamp(),
-                                                                            "False",
-                                                                        ),
+                                                                (
+                                                                    userName,
+                                                                    email,
+                                                                    password,
+                                                                    f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
+                                                                    "user",
+                                                                    0,
+                                                                    currentTimeStamp(),
+                                                                    "False",
+                                                                ),
                                                             )
                                                             connection.commit()
                                                             message(
                                                                 "2",
                                                                 f'USER: "{userName}" ADDED TO DATABASE',
                                                             )
-                                                            session[
-                                                                "userName"
-                                                            ] = userName
+                                                            session["userName"] = (
+                                                                userName
+                                                            )
                                                             addPoints(
                                                                 1, session["userName"]
                                                             )
@@ -205,10 +240,16 @@ def signup():
                                                                 f"Welcome {userName}",
                                                                 "success",
                                                             )
-                                                            context = ssl.create_default_context()
-                                                            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                                                            context = (
+                                                                ssl.create_default_context()
+                                                            )
+                                                            server = smtplib.SMTP(
+                                                                SMTP_SERVER, SMTP_PORT
+                                                            )
                                                             server.ehlo()
-                                                            server.starttls(context=context)
+                                                            server.starttls(
+                                                                context=context
+                                                            )
                                                             server.ehlo()
                                                             server.login(
                                                                 SMTP_MAIL, SMTP_PASSWORD
@@ -239,7 +280,9 @@ def signup():
                                                             """,
                                                                 subtype="html",
                                                             )
-                                                            mail["Subject"] = f"Welcome to {APP_NAME}"
+                                                            mail["Subject"] = (
+                                                                f"Welcome to {APP_NAME}"
+                                                            )
                                                             mail["From"] = SMTP_MAIL
                                                             mail["To"] = email
                                                             server.send_message(mail)
@@ -282,7 +325,11 @@ def signup():
                                     )
                                     flash("This username is unavailable.", "error")
                     return render_template(
-                        "signup.html.jinja", form=form, hideSignUp=True, siteKey=RECAPTCHA_SITE_KEY, recaptcha = RECAPTCHA,
+                        "signup.html.jinja",
+                        form=form,
+                        hideSignUp=True,
+                        siteKey=RECAPTCHA_SITE_KEY,
+                        recaptcha=RECAPTCHA,
                     )
         case False:
             return redirect("/")
