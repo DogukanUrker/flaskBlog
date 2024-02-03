@@ -9,6 +9,7 @@ from helpers import (
     request,
     session,
     redirect,
+    APP_NAME,
     Blueprint,
     SMTP_PORT,
     SMTP_MAIL,
@@ -155,13 +156,23 @@ def verifyUser(codeSent):
                                             )
                                             message.add_alternative(
                                                 f"""\
-                                            <html>
+                                                <html>
+                                                <head>
+                                                </head>
                                                 <body>
-                                                    <h2>Hi {userName}👋,</h2>
-                                                    <h3>Here is your account verification code🔢:</h3>
-                                                    <h1>{verificationCode}</h1>
-                                                    </body>
-                                            </html>
+                                                <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;">
+                                                    <div style="text-align: center;">
+                                                    <h1 style="color: #F43F5E;">Thank you for creating an account!</h1>
+                                                    <p style="font-family: Arial, sans-serif; font-size: 16px;">Hello, {userName}.</p>
+                                                    <p style="font-family: Arial, sans-serif; font-size: 16px;">We are glad you joined us at {APP_NAME}. You can now enjoy our amazing features and services.</p>
+                                                    <p style="font-family: Arial, sans-serif; font-size: 16px;">To verify your email address, enter the following code in the app:</p>
+                                                    <span style="display: inline-block; background-color: #e0e0e0; color: #000000; padding: 10px 20px; font-size: 24px; font-weight: bold; border-radius: 0.5rem;">{verificationCode}</span>
+                                                    <p style="font-family: Arial, sans-serif; font-size: 16px;">This code will expire when you refresh the page.</p>
+                                                    <p style="font-family: Arial, sans-serif; font-size: 16px;">Thank you for choosing {APP_NAME}.</p>
+                                                    </div>
+                                                </div>
+                                                </body>
+                                                </html>
                                             """,
                                                 subtype="html",
                                             )

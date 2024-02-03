@@ -136,16 +136,21 @@ def signup():
                                                                         f"Hi {userName}👋,\n Welcome to {APP_NAME}"
                                                                     )
                                                                     mail.add_alternative(
-                                                                        f"""\
+                                                                    f"""\
                                                                     <html>
-                                                                        <body>
-                                                                            <h2>Hi {userName}👋,</h2>
-                                                                            <h2>Welcome to <b>{APP_NAME}</b></h2>
-                                                                            <img style="margin: 0 auto 0 auto;" src="https://github.com/DogukanUrker/flaskBlog/blob/main/images/LogoSmall.png?raw=true">
-                                                                            </body>
+                                                                    <head>
+                                                                    </head>
+                                                                    <body>
+                                                                    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;">
+                                                                        <div style="text-align: center;">
+                                                                        <h1 style="color: #F43F5E;">Hi {userName}, welcome to {APP_NAME}!</h1>
+                                                                        <p style="font-family: Arial, sans-serif; font-size: 16px;">We are glad you joined us.</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    </body>
                                                                     </html>
                                                                     """,
-                                                                        subtype="html",
+                                                                    subtype="html",
                                                                     )
                                                                     mail["Subject"] = f"Welcome to {APP_NAME}"
                                                                     mail["From"] = SMTP_MAIL
@@ -209,13 +214,18 @@ def signup():
                                                             )
                                                             mail.add_alternative(
                                                                 f"""\
-                                                            <html>
-                                                                <body>
-                                                                    <h2>Hi {userName}👋,</h2>
-                                                                    <h2>Welcome to <b>{APP_NAME}</b></h2>
-                                                                    <img style="margin: 0 auto 0 auto;" src="https://github.com/DogukanUrker/flaskBlog/blob/main/images/LogoSmall.png?raw=true">
+                                                                    <html>
+                                                                    <head>
+                                                                    </head>
+                                                                    <body>
+                                                                    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;">
+                                                                        <div style="text-align: center;">
+                                                                        <h1 style="color: #F43F5E;">Hi {userName}, welcome to {APP_NAME}!</h1>
+                                                                        <p style="font-family: Arial, sans-serif; font-size: 16px;">We are glad you joined us.</p>
+                                                                        </div>
+                                                                    </div>
                                                                     </body>
-                                                            </html>
+                                                                    </html>
                                                             """,
                                                                 subtype="html",
                                                             )

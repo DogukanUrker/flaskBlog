@@ -8,6 +8,7 @@ from helpers import (
     sqlite3,
     request,
     redirect,
+    APP_NAME,
     Blueprint,
     SMTP_PORT,
     SMTP_MAIL,
@@ -163,17 +164,24 @@ def passwordReset(codeSent):
                             )
                             message.add_alternative(
                                 f"""\
-                            <html>
-                                <body>
-                                    <h2>Hi {userName}👋,</h2>
-                                    <h3>Forgot your password😶‍🌫️? No problem👌.<br>Here is your password reset code🔢:</h3>
-                                    <h1>{passwordResetCode}</h1>
-                                    </body>
-                            </html>
-                            """,
-                                subtype="html",
+                                <html>
+                                <body style="font-family: Arial, sans-serif;">
+                                <div style="max-width: 600px;margin: 0 auto;background-color: #ffffff;padding: 20px; border-radius:0.5rem;">
+                                    <div style="text-align: center;">
+                                    <h1 style="color: #F43F5E;">Password Reset</h1>
+                                    <p>Hello, {userName}.</p>
+                                    <p>We received a request to reset your password for your account. If you did not request this, please ignore this email.</p>
+                                    <p>To reset your password, enter the following code in the app:</p>
+                                    <span style="display: inline-block; background-color: #e0e0e0; color: #000000;padding: 10px 20px;font-size: 24px;font-weight: bold; border-radius: 0.5rem;">{passwordResetCode}</span>
+                                    <p style="font-family: Arial, sans-serif; font-size: 16px;">This code will expire when you refresh the page.</p>
+                                    <p>Thank you for using {APP_NAME}.</p>
+                                    </div>
+                                </div>
+                                </body>
+                                </html>
+                            """,subtype="html",
                             )
-                            message["Subject"] = "Forgot Password?😕"
+                            message["Subject"] = "Forget Password?🔒"
                             message["From"] = SMTP_MAIL
                             message["To"] = email
                             match RECAPTCHA and RECAPTCHA_PASSWORD_RESET:
