@@ -1,8 +1,8 @@
 # Import the helpers module that contains constants and functions for the app
 from helpers import (
-    LOG_IN,  # A constant that apps is allowed to user log in
+    LOG_IN,  # A constant that apps are allowed to user login
     RECAPTCHA,  # A constant that indicates if the recaptcha is enabled
-    REGISTRATION,  # A constant that apps is allowed to user register
+    REGISTRATION,  # A constant that apps are allowed to user register
     RECAPTCHA_BADGE,  # A constant indicating whether the recaptcha badge should be visible or not
     getProfilePicture,  # A function that returns the user's profile picture URL
 )
