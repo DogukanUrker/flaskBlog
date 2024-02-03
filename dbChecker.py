@@ -27,7 +27,7 @@ from constants import (
 # This function checks if the database folder exists, and creates it if it does not.
 def dbFolder():
     """
-    Checks if the database folder exists, and creates it if it does not.
+    Checks if the database folder exists, and create it if it does not.
 
     Returns:
         None
@@ -49,8 +49,8 @@ def dbFolder():
 # This function checks if the users table exists in the database, and creates it if it does not.
 def usersTable():
     """
-    Checks if the users table exists in the database, and creates it if it does not.
-    Checks if default admin is true create admin user with custom admin account settings if it does.
+    Checks if the users' table exists in the database, and create it if it does not.
+    Checks if default admin is true create an admin user with custom admin account settings if it is.
 
     Returns:
         None
