@@ -205,7 +205,7 @@ def verifyUser(codeSent):
                                             server.quit()
                                             messageDebugging(
                                                 "2",
-                                                f'VERIFICATION CODE: "{verificationCode}" SENT TO "{email}"',
+                                                f'VERIFICATION CODE: "{verificationCode}" SENT TO "{email[0]}"',
                                             )
                                             flash("code sent", "success")
                                             return redirect("/verifyUser/codesent=true")
