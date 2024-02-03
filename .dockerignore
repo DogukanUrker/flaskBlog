@@ -1,10 +1,22 @@
+# This file tells Docker to ignore certain files and directories when building an image
+# For more information, see https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+# Ignore the __pycache__ directory and any .pyc files
 __pycache__
 *.pyc
+
+# Ignore the docs directory and any .md files
 docs
 *.md
+
+# Ignore the images directory
 images
+
+# Ignore the .git directory, the .github directory, the .gitignore file, and the LICENSE file
 .git
 .github
 .gitignore
 LICENSE
+
+# Ignore the log.log file
 log.log
