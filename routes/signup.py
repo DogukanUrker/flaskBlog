@@ -138,15 +138,20 @@ def signup():
                                                                     mail.add_alternative(
                                                                     f"""\
                                                                     <html>
-                                                                    <head>
-                                                                    </head>
                                                                     <body>
-                                                                    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;">
+                                                                        <div
+                                                                        style="font-family: Arial, sans-serif;  max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;"
+                                                                        >
                                                                         <div style="text-align: center;">
-                                                                        <h1 style="color: #F43F5E;">Hi {userName}, welcome to {APP_NAME}!</h1>
-                                                                        <p style="font-family: Arial, sans-serif; font-size: 16px;">We are glad you joined us.</p>
+                                                                            <h1 style="color: #F43F5E;">
+                                                                            Hi {userName}, <br />
+                                                                            Welcome to {APP_NAME}!
+                                                                            </h1>
+                                                                            <p style="font-size: 16px;">
+                                                                            We are glad you joined us.
+                                                                            </p>
                                                                         </div>
-                                                                    </div>
+                                                                        </div>
                                                                     </body>
                                                                     </html>
                                                                     """,
@@ -214,18 +219,23 @@ def signup():
                                                             )
                                                             mail.add_alternative(
                                                                 f"""\
-                                                                    <html>
-                                                                    <head>
-                                                                    </head>
-                                                                    <body>
-                                                                    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;">
-                                                                        <div style="text-align: center;">
-                                                                        <h1 style="color: #F43F5E;">Hi {userName}, welcome to {APP_NAME}!</h1>
-                                                                        <p style="font-family: Arial, sans-serif; font-size: 16px;">We are glad you joined us.</p>
-                                                                        </div>
+                                                                <html>
+                                                                <body>
+                                                                    <div
+                                                                    style="font-family: Arial, sans-serif;  max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;"
+                                                                    >
+                                                                    <div style="text-align: center;">
+                                                                        <h1 style="color: #F43F5E;">
+                                                                        Hi {userName}, <br />
+                                                                        Welcome to {APP_NAME}!
+                                                                        </h1>
+                                                                        <p style="font-size: 16px;">
+                                                                        We are glad you joined us.
+                                                                        </p>
                                                                     </div>
-                                                                    </body>
-                                                                    </html>
+                                                                    </div>
+                                                                </body>
+                                                                </html>
                                                             """,
                                                                 subtype="html",
                                                             )
