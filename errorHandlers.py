@@ -1,6 +1,7 @@
 # Import the message and render_template functions from the helpers module
 from helpers import message, render_template
 
+
 # Define a function to handle 404 errors
 def notFoundErrorHandler(e):
     """
@@ -14,6 +15,7 @@ def notFoundErrorHandler(e):
     # Render the 404 template and return it with the status code
     return render_template("notFound.html.jinja"), 404
 
+
 # Define a function to handle unauthorized access errors
 def unauthorizedErrorHandler(e):
     """
@@ -26,6 +28,7 @@ def unauthorizedErrorHandler(e):
     message("1", f"401 | {e}")
     # Render the 401 template and return it with the status code
     return render_template("unauthorized.html.jinja"), 401
+
 
 # Define a function to handle CSRF errors
 def csrfErrorHandler(e):
