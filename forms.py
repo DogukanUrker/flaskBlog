@@ -6,6 +6,7 @@ from wtforms import (
     Form,
     FileField,
     validators,
+    EmailField,
     SelectField,
     StringField,
     PasswordField,
@@ -113,7 +114,7 @@ class PasswordResetForm(Form):
         [validators.Length(min=4, max=25), validators.InputRequired()],
         render_kw={"class": inputStyle(), "placeholder": "username"},
     )
-    email = StringField(
+    email = EmailField(
         "Email",
         [validators.Length(min=6, max=50), validators.InputRequired()],
         render_kw={"class": inputStyle(), "placeholder": "email"},
@@ -221,7 +222,7 @@ class SignUpForm(Form):
         [validators.Length(min=4, max=25), validators.InputRequired()],
         render_kw={"class": inputStyle(), "placeholder": "username"},
     )
-    email = StringField(
+    email = EmailField(
         "Email",
         [validators.Length(min=6, max=50), validators.InputRequired()],
         render_kw={"class": inputStyle(), "placeholder": "email"},
