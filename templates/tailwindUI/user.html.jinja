@@ -1,25 +1,34 @@
 {% extends 'layout.html.jinja'%} {%block head%}
+<!-- Set the title of the page to the username -->
 <title>{{user[1]}}</title>
 {% endblock head %} {%block body%}
+<!-- Main content of the user profile page -->
 <div>
+  <!-- User information container -->
   <div
     class="w-11/12 md:w-10/12 lg:w-6/12 xl:w-5/12 mx-auto text-center mt-8 select-none border border-gray-500/25 p-2 rounded shadow">
+    <!-- User profile image and name section -->
     <section class="mb-4">
       <img class="w-16 mx-auto" src="{{user[4]}}" alt="{{user[1]}}" />
       <h2 class="mx-2 font-medium">{{user[1]}}</h2>
     </section>
+    <!-- User details sections -->
     <section class="flex w-full justify-between my-4">
+      <!-- Role information -->
       <div class="flex items-center">
         <i class="ti ti-user mr-1 text-xl"></i>
         <p class="hidden md:block">Role:</p>
         <p class="ml-1 font-medium">{{user[5]}}</p>
       </div>
+      <!-- Views information -->
       <div class="flex items-center">
         <i class="ti ti-eye mr-1 text-xl"></i>
         <p class="hidden md:block">Views:</p>
         <p class="ml-1 font-medium">{{views}}</p>
       </div>
     </section>
+    <!-- Additional user details sections -->
+    <!-- (Join Date, Points) -->
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
         <i class="ti ti-calendar mr-1 text-xl"></i>
@@ -33,44 +42,58 @@
       </div>
     </section>
     <section class="flex w-full items-center justify-between my-4">
+      <!-- Check if the logged-in user is the profile owner -->
       {% if session["userName"] == user[1] %}
+      <!-- User settings link -->
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/accountsettings"><i class="ti ti-settings mr-1 text-xl"></i></a>
         <a href="/accountsettings" class="">settings</a>
       </div>
+      <!-- User dashboard link -->
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/dashboard/{{user[1]}}"><i class="ti ti-clipboard-text mr-1 text-xl"></i></a>
         <a href="/dashboard/{{user[1]}}" class="">dashboard</a>
       </div>
-      {% endif %} {% if user[5] == "admin" and session["userName"] == user[1] %}
+      {% endif %}
+      <!-- Check if the user is an admin and the logged-in user is the profile owner -->
+      {% if user[5] == "admin" and session["userName"] == user[1] %}
+      <!-- Admin link for the profile owner -->
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/admin"><i class="ti ti-tie mr-1 text-xl"></i></a>
         <a href="/admin" class="">admin</a>
       </div>
       {% endif %}
     </section>
+    <!-- Check if the logged-in user is viewing their own profile -->
     {% if "userName" in session and session['userName'] == "{{user[1]}}"%}
+    <!-- User dashboard link for the profile owner -->
     <div class="flex items-center w-fit hover:text-rose-500 duration-150">
       <a href="/dashboard/{{session['userName']}}"><i class="ti ti-clipboard-text mr-1 text-xl"></i></a>
       <a href="/dashboard/{{session['userName']}}" class="">dashboard</a>
     </div>
     {% endif %}
   </div>
+  <!-- Check if to display posts section -->
   {% if showPosts %}
   <h1 class="my-4 text-center text-2xl text-rose-500 select-none">Posts</h1>
   <div
     class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 my-6">
+    <!-- Loop through and display user's posts using the postCard macro -->
     {% for post in posts %} {% from "components/postCardMacro.html.jinja"
     import postCard%} {{
     postCard(post=post,authorProfilePicture=getProfilePicture(post[5])) }} {%
     endfor %}
   </div>
   {% endif %} {% if showComments %}
+  <!-- Check if to display comments section -->
   <h1 class="mb-4 text-center text-2xl text-rose-500 select-none">Comments</h1>
+  <!-- Loop through and display user's comments -->
   {% for comment in comments %}
   <div class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md
   border-gray-500/25">
+    <!-- Display comment content -->
     <div tag="content my-2">{{comment[2]}}</div>
+    <!-- Additional information about the comment (Creation Time, Creation Date) -->
     <section class="flex items-center w-full justify-between my-2">
       <div class="flex items-center">
         <i class="ti ti-clock mr-1 text-xl"></i>
@@ -83,6 +106,7 @@
         <p class="date font-medium">{{comment[4]}}</p>
       </div>
     </section>
+    <!-- Link to go to the associated post -->
     <a href="/post/{{comment[1]}}" class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2">go to
       post</a>
   </div>

@@ -1,59 +1,83 @@
-{% extends 'layout.html.jinja'%} {%block head%}
+{% extends 'layout.html.jinja' %}
+
+{% block head %}
+<!-- Set the title of the page to "Create Post" -->
 <title>Create Post</title>
-{% endblock head %} {%block body%}
+{% endblock head %}
+
+{% block body %}
+<!-- Create Post Form Section -->
 <div class="w-fit mx-auto mt-8">
+
   {% if recaptcha %}
+  <!-- Include Google reCAPTCHA scripts -->
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+
+  <!-- Form with reCAPTCHA enabled and enctype set for handling file uploads -->
   <form method="post" id="recaptchaForm" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
-    <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
+
+    <!-- Input fields for post title and tags -->
+    {{ form.postTitle(autocomplete="off") }} {{ form.postTags(autocomplete="off") }}
+    <p class="text-xs text-center w-fit mx-auto mb-2">(separate with commas)</p>
+
+    <!-- Banner Upload Section -->
     <div class="w-72 mx-auto text-center mb-4">
-      <label class="block mt-2 mb-1">
-        Upload Banner
-      </label>
-      {{form.postBanner(class_="")}}
+      <label class="block mt-2 mb-1">Upload Banner</label>
+      {{ form.postBanner(class_="") }}
     </div>
+
+    <!-- Category Selection Section -->
     <div class="mx-auto w-fit">
-      <label class="block my-1 text-center">
-        Select a Category
-      </label>
-      {{form.postCategory()}}
+      <label class="block my-1 text-center">Select a Category</label>
+      {{ form.postCategory() }}
     </div>
+
+    <!-- Post Content Section -->
     <div>
-      <div>
-        {{form.postContent(id_="editor", autocomplete="off")}}
-      </div>
-      <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium ">
-        Post
-      </button>
-  </form>n>
-  </form>
-  {% else %}
-  <form method="post" enctype="multipart/form-data">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {{form.postTitle(autocomplete="off")}} {{form.postTags(autocomplete="off")}}
-    <p class="text-xs text-center w-fit mx-auto mb-2">(separete with comma)</p>
-    <div class="w-72 mx-auto text-center mb-4">
-      <label class="block mt-2 mb-1">
-        Upload Banner
-      </label>
-      {{form.postBanner(class_="")}}
+      {{ form.postContent(id_="editor", autocomplete="off") }}
     </div>
-    <div class="mx-auto w-fit">
-      <label class="block my-1 text-center">
-        Select a Category
-      </label>
-      {{form.postCategory()}}
-    </div>
-    <div>
-      {{form.postContent(id_="editor", autocomplete="off")}}
-    </div>
-    <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium ">
+
+    <!-- Post Button Section -->
+    <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
       Post
     </button>
+
+  </form>
+  {% else %}
+  <!-- Form without reCAPTCHA, enctype set for handling file uploads -->
+  <form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+    <!-- Input fields for post title and tags -->
+    {{ form.postTitle(autocomplete="off") }} {{ form.postTags(autocomplete="off") }}
+    <p class="text-xs text-center w-fit mx-auto mb-2">(separate with commas)</p>
+
+    <!-- Banner Upload Section -->
+    <div class="w-72 mx-auto text-center mb-4">
+      <label class="block mt-2 mb-1">Upload Banner</label>
+      {{ form.postBanner(class_="") }}
+    </div>
+
+    <!-- Category Selection Section -->
+    <div class="mx-auto w-fit">
+      <label class="block my-1 text-center">Select a Category</label>
+      {{ form.postCategory() }}
+    </div>
+
+    <!-- Post Content Section -->
+    <div>
+      {{ form.postContent(id_="editor", autocomplete="off") }}
+    </div>
+
+    <!-- Post Button Section -->
+    <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
+      Post
+    </button>
+
   </form>
   {% endif %}
 </div>
+<!-- End of Create Post Form Section -->
 {% endblock body %}

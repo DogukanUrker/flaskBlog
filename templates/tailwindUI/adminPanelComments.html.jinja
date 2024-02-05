@@ -1,51 +1,60 @@
-{% extends 'layout.html.jinja'%} {%block head%}
+{% extends 'layout.html.jinja' %}
+
+{% block head %}
+<!-- Set the title of the page to "Admin Panel -> Comments" -->
 <title>Admin Panel --> Comments</title>
-{% endblock head %} {%block body%}
+{% endblock head %}
+
+{% block body %}
+<!-- Display the heading for the comments section -->
 <h1 class="my-4 text-4xl font-medium select-none text-center">Comments</h1>
+
+<!-- Loop through each comment and display comment details -->
 {% for comment in comments %}
 <div
-  class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md
-border-gray-500/25"
->
+  class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md border-gray-500/25">
+  <!-- Display post ID and link to the corresponding post -->
   <div class="flex items-center justify-between mb-2">
     <div class="flex items-center">
       <i class="ti ti-id mr-1 text-xl"></i> Post ID:
-      <a href="/post/{{comment[0]}}" class="ml-1 font-medium">{{comment[1]}}</a>
+      <a href="/post/{{ comment[0] }}" class="ml-1 font-medium">{{ comment[1] }}</a>
     </div>
   </div>
-  <div tag="content" class="w-fit mx-auto my-4">{{comment[2]}}</div>
+  <!-- Display comment content -->
+  <div tag="content" class="w-fit mx-auto my-4">{{ comment[2] }}</div>
+
+  <!-- Display creation time and date of the comment -->
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
       <p class="hidden md:block mr-1">Creation Time:</p>
-      <p class="time font-medium">{{comment[4]}}</p>
+      <p class="time font-medium">{{ comment[4] }}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
       <p class="hidden md:block mr-1">Creation Date:</p>
-      <p class="date font-medium">{{comment[4]}}</p>
+      <p class="date font-medium">{{ comment[4] }}</p>
     </div>
   </div>
+
+  <!-- Check if the path is "/admin/comments" to show additional details -->
   {% if request.path == "/admin/comments" %}
   <div class="flex items-center justify-between mt-2">
     <div class="flex items-center">
+      <!-- Display author details with a link to the author's profile -->
       <i class="ti ti-user mr-1 text-xl"></i>
       <p class="hidden md:block mr-1">Author:</p>
-      <a
-        href="/user/{{comment[3].lower()}}"
-        class="hover:text-rose-500 duration-150 font-medium"
-        >{{comment[3]}}</a
-      >
+      <a href="/user/{{ comment[3].lower() }}" class="hover:text-rose-500 duration-150 font-medium">
+        {{ comment[3] }}
+      </a>
     </div>
+
+    <!-- Display delete button within a form for comment deletion -->
     <div class="flex items-center">
       <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        <input type="hidden" name="commentID" value="{{comment[0]}}" />
-        <button
-          type="submit"
-          name="commentDeleteButton"
-          class="hover:text-rose-500 duration-150 font-medium"
-        >
+        <input type="hidden" name="commentID" value="{{ comment[0] }}" />
+        <button type="submit" name="commentDeleteButton" class="hover:text-rose-500 duration-150 font-medium">
           <i class="ti ti-trash-x mr-1 text-2xl"></i>
         </button>
       </form>
@@ -53,10 +62,12 @@ border-gray-500/25"
   </div>
   {% endif %}
 </div>
-{% endfor %} {% if request.path == "/admin/comments" %}
-<a href="/admin" class="hidden md:block fixed bottom-0 left-1"
-  ><i
-    class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"
-  ></i>
+{% endfor %}
+
+<!-- Check if the path is "/admin/comments" to display a back button -->
+{% if request.path == "/admin/comments" %}
+<a href="/admin" class="hidden md:block fixed bottom-0 left-1">
+  <i class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"></i>
 </a>
-{% endif %} {% endblock body %}
+{% endif %}
+{% endblock body %}

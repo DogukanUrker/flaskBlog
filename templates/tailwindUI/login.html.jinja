@@ -1,46 +1,45 @@
-{% extends 'layout.html.jinja'%} {%block head%}
+{% extends 'layout.html.jinja'%}
+{%block head%}
+<!-- Set the title of the page to "Login" -->
 <title>Login</title>
-{% endblock head %} {%block body%}
+<!-- End of the head block -->
+{% endblock head %}
+{%block body%}
+<!-- Start of the body block -->
 <div class="w-fit mx-auto mt-36 text-center text-xl">
   {% if recaptcha %}
+  <!-- Check if recaptcha is enabled -->
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+  <!-- Create a form with recaptcha -->
   <form method="post" id="recaptchaForm">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <!-- Render form fields for username and password with autocomplete turned off -->
     {{form.userName(autocomplete="off")}}{{form.password(autocomplete="off")}}
-    <button
-      type="submit"
-      data-sitekey="{{ siteKey }}"
-      data-callback="onSubmit"
-      data-action="submit"
-      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
-    >
+    <!-- Add the recaptcha button for login -->
+    <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
+      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none">
       Login
     </button>
-    <a
-      href="/passwordreset/codesent=false"
-      id="passwordReset"
-      class="hover:text-rose-500 duration-150 text-sm font-normal select-none"
-      >Forgot password?</a
-    >
+    <!-- Add a link for password reset -->
+    <a href="/passwordreset/codesent=false" id="passwordReset"
+      class="hover:text-rose-500 duration-150 text-sm font-normal select-none">Forgot password?</a>
   </form>
   {% else %}
+  <!-- If recaptcha is not enabled, create a form without it -->
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <!-- Render form fields for username and password with autocomplete turned off -->
     {{form.userName(autocomplete="off")}}{{form.password(autocomplete="off")}}
-    <button
-      type="submit"
-      class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
-    >
+    <!-- Add a button for login -->
+    <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none">
       Login
     </button>
-    <a
-      href="/passwordreset/codesent=false"
-      id="passwordReset"
-      class="hover:text-rose-500 duration-150 text-sm font-normal select-none"
-      >Forgot password?</a
-    >
+    <!-- Add a link for password reset -->
+    <a href="/passwordreset/codesent=false" id="passwordReset"
+      class="hover:text-rose-500 duration-150 text-sm font-normal select-none">Forgot password?</a>
   </form>
   {% endif %}
 </div>
+<!-- End of the body block -->
 {% endblock body %}
