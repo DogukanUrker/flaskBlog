@@ -19,6 +19,7 @@ from constants import SMTP_MAIL, SMTP_PORT, SMTP_SERVER, SMTP_PASSWORD
 from constants import (
     LOG_IN,
     APP_NAME,
+    APP_VERSION,
     BREAKER_TEXT,
     REGISTRATION,
     LOG_FILE_ROOT,

@@ -5,6 +5,7 @@ This file contains the blueprint and routes for the about page.
 from helpers import (
     APP_NAME,
     Blueprint,
+    APP_VERSION,
     render_template,
 )
 
@@ -21,4 +22,4 @@ def about():
     :return: The rendered about page
     :rtype: flask.Response
     """
-    return render_template("about.html.jinja", appName=APP_NAME)
+    return render_template("about.html.jinja", appName=APP_NAME, appVersion=APP_VERSION)
