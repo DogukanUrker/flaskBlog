@@ -44,7 +44,6 @@ def deletePost(postID):
 
     Returns:
     None
-
     """
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
@@ -88,7 +87,6 @@ def deleteUser(userName):
 
     Returns:
     None
-
     """
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
@@ -126,7 +124,6 @@ def deleteComment(commentID):
 
     Returns:
     None
-
     """
     connection = sqlite3.connect(DB_COMMENTS_ROOT)
     cursor = connection.cursor()
