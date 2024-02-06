@@ -4,13 +4,21 @@ This file contains the blueprint for the logout page.
 The functions and methods used in this blueprint are imported from the helpers module.
 """
 
-from helpers import flash, message, Blueprint, session, redirect
+from helpers import (
+    flash,  # A function for displaying flash messages
+    message,  # A function for logging messages
+    Blueprint,  # A class for creating Flask blueprints
+    session,  # A dictionary for storing session data
+    redirect,  # A function for returning redirect responses
+)
 
 
-logoutBlueprint = Blueprint("logout", __name__)
+logoutBlueprint = Blueprint(
+    "logout", __name__
+)  # Create a blueprint for the logout route with the name "logout" and the current module name
 
 
-@logoutBlueprint.route("/logout")
+@logoutBlueprint.route("/logout")  # Define a route for the logout page
 def logout():
     """
     This function handles the logout process.
@@ -21,11 +29,18 @@ def logout():
     If the user is not logged in, a message is displayed indicating that they are not logged in.
     The user is then redirected to the homepage.
     """
-    if "userName" in session:
-        message("2", f"USER: {session['userName']} LOGGED OUT")
-        session.clear()
-        flash("logged out", "error")
-        return redirect("/")
-    else:
-        message("1", "USER NOT LOGGED IN")
-        return redirect("/")
+    match "userName" in session:  # Use a match statement to check if the "userName" key is present in the session dictionary
+        case True:  # If the user is logged in
+            message(
+                "2", f"USER: {session['userName']} LOGGED OUT"
+            )  # Log a message with level 2 indicating the user has logged out
+            session.clear()  # Clear the session dictionary
+            flash(
+                "logged out", "error"
+            )  # Display a flash message with the text "logged out" and the category "error"
+            return redirect("/")  # Return a redirect response to the homepage
+        case False:  # If the user is not logged in
+            message(
+                "1", "USER NOT LOGGED IN"
+            )  # Log a message with level 1 indicating the user is not logged in
+            return redirect("/")  # Return a redirect response to the homepage
