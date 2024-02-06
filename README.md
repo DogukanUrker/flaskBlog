@@ -1,4 +1,5 @@
 ###### <sub> This project needs a ⭐️ from you. Don't forget to leave a star ⭐️. <sub/>
+
 [![GitHub Release](<https://img.shields.io/github/v/release/dogukanurker/flaskblog?display_name=release&style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Freleases>)](https://github.com/DogukanUrker/flaskBlog/releases)
 [![GitHub License](<https://img.shields.io/github/license/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fblob%2Fmain%2FLICENSE>)](https://github.com/DogukanUrker/flaskBlog/blob/main/LICENSE)
 [![GitHub Repo stars](<https://img.shields.io/github/stars/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fstargazers>)](https://github.com/DogukanUrker/flaskBlog/stargazers)
@@ -23,7 +24,6 @@
 
 **English** | [Türkçe](docs/readme_tr.md) | [Russian](docs/readme_ru.md)
 
-
 Simple blog app built with Flask.
 
 [Contact](mailto:dogukanurker@icloud.com)<br/>
@@ -40,84 +40,81 @@ Simple blog app built with Flask.
 
 ## Features 💫
 
-| Feature                | Status |
-| :--------------------- | :----: |
-| User Page              |   ✅   |
-| User Login             |   ✅   |
-| User Points            |   ✅   |
-| User Delete            |   ✅   |
-| User Log Out           |   ✅   |
-| User Sign Up           |   ✅   |
-| User Name Change       |   ✅   |
-| User Settings Page     |   ✅   |
-| User Profile Pictures  |   ✅   |
-| Admin Panel            |   ✅   |
-| Dashboard Page         |   ✅   |
-| Password Reset         |   ✅   |
-| Password Change        |   ✅   |
-| Summer Note Editor     |   ✅   |
-| Search Bar             |   ✅   |
-| Post Edit              |   ✅   |
-| Post Views             |   ✅   |
-| Post Delete            |   ✅   |
-| Post Creation          |   ✅   |
-| Comment                |   ✅   |
-| Comment Delete         |   ✅   |
-| Logging                |   ✅   |
-| Debug Messages         |   ✅   |
-| Database Checker       |   ✅   |
-| Dark/Light Themes      |   ✅   |
-| Responsive Design      |   ✅   |
-| Custom Profile Picture |   ✅   |
-| User Verification      |   ✅   |
+- Admin Panel
+- Comment
+  - Comment Delete
+- Custom Profile Picture
+- Dashboard Page
+- Dark/Light Themes
+- Database Checker
+- Debug Messages
+- Docker
+- Google reCAPTCHA v3
+- Logging
+- Password
+  - Password Change
+  - Password Reset
+- Post
+  - Post Banner Photos
+  - Post Categories
+  - Post Creation
+  - Post Delete
+  - Post Edit
+  - Post Views
+- Responsive Design w/TailwindCSS
+- Search Bar
+- Summer Note Editor
+- Testing w/PlayWright
+- Time Zone Awareness
+- User
+  - User Delete
+  - User Login
+  - User Log Out
+  - User Name Change
+  - User Page
+  - User Points
+  - User Profile Pictures
+  - User Settings Page
+  - User Sign Up
+  - User Verification
 
 ## Requirements 📦
 
 - Flask
 - Passlib
 - WTForms
+- Requests
 - Flask-WTF
+- PlayWright
 - Python 3.10 or newer
 
 ## Languages 🧑🏻‍💻
 
-### Backend
-
 - Python
-
-### Frontend
-
 - HTML | Jinja
 - CSS
 - JavaScript
 
-## Libraries 📚
+## Technologies 📚
 
 ### Backend
 
-- OS
-- SSL
-- Socket
-- Smtplib
-- Secrets
 - SQLite3
-- Time
-- Random
-- DateTime
-- Email
 - Passlib
 - Flask
 - WTForms
 - Flask_WTF
+- Requests
+- PlayWright
 
 ### Frontend
 
 - jQuery
 - TailwindCSS
 - Tabler Icons
-- Summer Note
+- Summer Note Editor
 
-## Installation ⬇️
+## Running the Project 🚦
 
 download source code from Github 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
@@ -140,6 +137,30 @@ Username: admin
 
 Password: admin
 
+## What I Learned 🧠
+
+FlaskBlog is my biggest and most comprehensive project so far. I have learned a lot of things about web development and programming while working on it. Some of the main topics that I learned are:
+
+### First Time Learned This
+
+- Docker: a tool for creating and managing containers that run applications in a consistent environment.
+- PlayWright: a library for automating browser testing and web scraping.
+- Summer Note Editor: a WYSIWYG editor that allows users to create and edit rich text content on web pages.
+- Tabler Icons: a set of free and open-source icons that are designed for web development.
+- Google reCAPTCHA v3: a service that protects websites from spam and abuse by using a risk analysis engine that scores user interactions.
+
+### I've Got Better at This
+
+- Python: a versatile and powerful programming language that is widely used for web development, data analysis, machine learning, and more.
+- JavaScript: a scripting language that runs in the browser and enables dynamic and interactive web pages.
+- TailwindCSS: a utility-first CSS framework that provides a lot of classes for styling web elements.
+- CSS: a language that defines the appearance and layout of web pages.
+- WTForms: a library that simplifies the creation and validation of web forms in Flask applications.
+- SQLite3: a lightweight and embedded database that stores data in a single file.
+- Jinja: a templating engine that allows you to use Python expressions and logic in HTML files.
+
+These are some of the main things that I learned from building FlaskBlog. It was a rewarding and enjoyable project that helped me improve my skills and knowledge as a full stack developer. I am proud of the result and I hope you like it too. 😊
+
 ### Contributors 💕
 
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="dogukanurker" width="80" height="80"></a>
@@ -157,6 +178,7 @@ Password: admin
 [![Forkers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
 
 ### Support 💰
+
 <a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ### Star History ✨
