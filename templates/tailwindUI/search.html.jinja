@@ -24,18 +24,18 @@
   {% endif %}
 
   <!-- Display search results for posts -->
-  {% if posts %}
-  {% for post in posts %}
   <div
     class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">
+    {% if posts %}
+    {% for post in posts %}
     {% for post_data in post %}
     <!-- Post card component -->
     {% from "components/postCardMacro.html.jinja" import postCard %}
     {{ postCard(post=post_data, authorProfilePicture=getProfilePicture(post_data[5])) }}
     {% endfor %}
+    {% endfor %}
+    {% endif %}
   </div>
-  {% endfor %}
-  {% endif %}
 
   <!-- Displayed when no results are found -->
   {% if empty %}
