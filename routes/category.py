@@ -72,7 +72,7 @@ def category(category):
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
     cursor.execute(
-        """select * from posts where lower(category) = ? """,
+        """select * from posts where lower(category) = ? order by timeStamp desc""",
         [(category.lower())],
     )
     posts = cursor.fetchall()

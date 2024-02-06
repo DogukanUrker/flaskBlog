@@ -34,6 +34,6 @@ def index():
     """
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
-    cursor.execute("select * from posts")
+    cursor.execute("select * from posts order by timeStamp desc")
     posts = cursor.fetchall()
     return render_template("index.html.jinja", posts=posts)

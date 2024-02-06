@@ -48,7 +48,7 @@ def dashboard(userName):
                     cursor = connection.cursor()
                     # Query the posts database for the posts authored by the session user name
                     cursor.execute(
-                        """select * from posts where author = ? """,
+                        """select * from posts where author = ? order by timeStamp desc""",
                         [(session["userName"])],
                     )
                     posts = cursor.fetchall()
@@ -57,7 +57,7 @@ def dashboard(userName):
                     cursor = connection.cursor()
                     # Query the comments database for the comments made by the route user name
                     cursor.execute(
-                        """select * from comments where lower(user) = ? """,
+                        """select * from comments where lower(user) = ? order by timeStamp desc""",
                         [(userName.lower())],
                     )
                     comments = cursor.fetchall()

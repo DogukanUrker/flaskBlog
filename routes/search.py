@@ -39,42 +39,42 @@ def search(query):
     cursor = connection.cursor()
     # Search for posts whose tags contain the query
     queryTags = cursor.execute(
-        """select * from posts where tags like ? """,
+        """select * from posts where tags like ? order by timeStamp desc""",
         [
             ("%" + query + "%"),
         ],
     ).fetchall()
     # Search for posts whose title contains the query
     queryTitles = cursor.execute(
-        """select * from posts where title like ? """,
+        """select * from posts where title like ? order by timeStamp desc""",
         [
             ("%" + query + "%"),
         ],
     ).fetchall()
     # Search for posts whose author contains the query
     queryAuthors = cursor.execute(
-        """select * from posts where author like ? """,
+        """select * from posts where author like ? order by timeStamp desc""",
         [
             ("%" + query + "%"),
         ],
     ).fetchall()
     # Search for posts whose tags contain the query without spaces
     queryTags = cursor.execute(
-        """select * from posts where tags like ? """,
+        """select * from posts where tags like ? order by timeStamp desc""",
         [
             ("%" + queryNoWhiteSpace + "%"),
         ],
     ).fetchall()
     # Search for posts whose title contains the query without spaces
     queryTitles = cursor.execute(
-        """select * from posts where title like ? """,
+        """select * from posts where title like ? order by timeStamp desc""",
         [
             ("%" + queryNoWhiteSpace + "%"),
         ],
     ).fetchall()
     # Search for posts whose author contains the query without spaces
     queryAuthors = cursor.execute(
-        """select * from posts where author like ? """,
+        """select * from posts where author like ? order by timeStamp desc""",
         [
             ("%" + queryNoWhiteSpace + "%"),
         ],

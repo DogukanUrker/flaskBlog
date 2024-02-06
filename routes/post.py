@@ -104,7 +104,7 @@ def post(postID):
             cursor = connection.cursor()
             # Query the comments database for the comments related to the post ID
             cursor.execute(
-                """select * from comments where post = ? """,
+                """select * from comments where post = ? order by timeStamp desc""",
                 [(postID)],
             )
             comments = cursor.fetchall()

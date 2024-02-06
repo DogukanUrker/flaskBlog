@@ -43,7 +43,7 @@ def adminPanelPosts():
                     # Connect to the posts database and get all the posts
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     cursor = connection.cursor()
-                    cursor.execute("select * from posts")
+                    cursor.execute("select * from posts order by timeStamp desc")
                     posts = cursor.fetchall()
                     # Render the dashboard template with the posts data and showPosts flag
                     return render_template(

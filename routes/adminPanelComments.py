@@ -45,7 +45,7 @@ def adminPanelComments():
                     # Connect to the comments database and get all the comments
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     cursor = connection.cursor()
-                    cursor.execute("select * from comments")
+                    cursor.execute("select * from comments order by timeStamp desc")
                     comments = cursor.fetchall()
                     # Render the admin panel comments template with the comments data
                     return render_template(

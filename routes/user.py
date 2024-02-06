@@ -46,7 +46,7 @@ def user(userName):
             connection = sqlite3.connect(DB_POSTS_ROOT)
             cursor = connection.cursor()
             cursor.execute(
-                """select views from posts where author = ? """,
+                """select views from posts where author = ? order by timeStamp desc""",
                 [(user[1])],
             )
             viewsData = cursor.fetchall()
@@ -54,7 +54,7 @@ def user(userName):
             for view in viewsData:
                 views += int(view[0])
             cursor.execute(
-                """select * from posts where author = ? """,
+                """select * from posts where author = ? order by timeStamp desc""",
                 [(user[1])],
             )
             posts = cursor.fetchall()
