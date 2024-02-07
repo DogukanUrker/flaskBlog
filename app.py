@@ -39,6 +39,7 @@ from routes.dashboard import dashboardBlueprint
 from routes.verifyUser import verifyUserBlueprint
 from routes.adminPanel import adminPanelBlueprint
 from routes.createPost import createPostBlueprint
+from routes.privacyPolicy import privacyPolicyBlueprint
 from routes.passwordReset import passwordResetBlueprint
 from routes.changeUserName import changeUserNameBlueprint
 from routes.changePassword import changePasswordBlueprint
@@ -285,6 +286,7 @@ app.register_blueprint(searchBarBlueprint)
 app.register_blueprint(adminPanelBlueprint)
 app.register_blueprint(createPostBlueprint)
 app.register_blueprint(verifyUserBlueprint)
+app.register_blueprint(privacyPolicyBlueprint)
 app.register_blueprint(passwordResetBlueprint)
 app.register_blueprint(changeUserNameBlueprint)
 app.register_blueprint(changePasswordBlueprint)
