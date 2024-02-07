@@ -91,7 +91,10 @@ def createPost():
                                                 ),
                                             )
                                             connection.commit()
-                                            message("2", f'POST: "{postTitle}" POSTED')
+                                            message(
+                                                "2",
+                                                f'POST: "{postTitle}" POSTED BY "{session["userName"]}"',
+                                            )
                                             addPoints(20, session["userName"])
                                             flash(
                                                 "You earned 20 points by posting ",
@@ -123,7 +126,10 @@ def createPost():
                                         ),
                                     )
                                     connection.commit()
-                                    message("2", f'POST: "{postTitle}" POSTED')
+                                    message(
+                                        "2",
+                                        f'POST: "{postTitle}" POSTED BY "{session["userName"]}"',
+                                    )
                                     addPoints(20, session["userName"])
                                     flash("You earned 20 points by posting ", "success")
                                     return redirect("/")
