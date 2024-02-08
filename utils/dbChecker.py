@@ -36,7 +36,7 @@ def dbFolder():
     match exists(DB_FOLDER_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the folder name
         case True:
-            Log.info(f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" FOUND')
+            Log.app(f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the folder name
         case False:
             Log.danger(f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" NOT FOUND')
@@ -59,7 +59,7 @@ def usersTable():
     match exists(DB_USERS_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the database name
         case True:
-            Log.info(f'USERS DATABASE: "{DB_USERS_ROOT}" FOUND')
+            Log.app(f'USERS DATABASE: "{DB_USERS_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the database name
         case False:
             Log.danger(f'USERS DATABASE: "{DB_USERS_ROOT}" NOT FOUND')
@@ -74,7 +74,7 @@ def usersTable():
         # Try to execute a SQL query to select userID records from the users table
         cursor.execute("""SELECT userID FROM users; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
-        Log.info(f'TABLE: "Users" FOUND IN "{DB_USERS_ROOT}"')
+        Log.app(f'TABLE: "Users" FOUND IN "{DB_USERS_ROOT}"')
         # Close the connection to the database
         connection.close()
     except:
@@ -145,7 +145,7 @@ def postsTable():
     match exists(DB_POSTS_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the database name
         case True:
-            Log.info(f'POSTS DATABASE: "{DB_POSTS_ROOT}" FOUND')
+            Log.app(f'POSTS DATABASE: "{DB_POSTS_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the database name
         case False:
             Log.danger(f'POSTS DATABASE: "{DB_POSTS_ROOT}" NOT FOUND')
@@ -160,7 +160,7 @@ def postsTable():
         # Try to execute a SQL query to select id records from the posts table
         cursor.execute("""SELECT id FROM posts; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
-        Log.info(f'TABLE: "Posts" FOUND IN "{DB_POSTS_ROOT}"')
+        Log.app(f'TABLE: "Posts" FOUND IN "{DB_POSTS_ROOT}"')
         # Close the connection to the database
         connection.close()
     except:
@@ -203,7 +203,7 @@ def commentsTable():
     match exists(DB_COMMENTS_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the database name
         case True:
-            Log.info(f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" FOUND')
+            Log.app(f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the database name
         case False:
             Log.danger(f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" NOT FOUND')
@@ -218,7 +218,7 @@ def commentsTable():
         # Try to execute a SQL query to select id records from the comments table
         cursor.execute("""SELECT id FROM comments; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
-        Log.info(f'TABLE: "Comments" FOUND IN "{DB_COMMENTS_ROOT}"')
+        Log.app(f'TABLE: "Comments" FOUND IN "{DB_COMMENTS_ROOT}"')
         # Close the connection to the database
         connection.close()
     except:

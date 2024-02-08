@@ -13,7 +13,7 @@ Log.breaker()
 print(terminalASCII())
 
 # Print a line breaker and a message that the app is starting
-Log.success("APP IS STARTING...")
+Log.app("STARTING...")
 
 
 # Import other functions and modules from the modules module
@@ -159,26 +159,26 @@ app.context_processor(
 )  # A context processor that adds the getProfilePicture variable to the template context
 
 # Log app settings
-Log.danger(f"APP DEBUG MODE: {DEBUG_MODE}")
-Log.warning(f"APP NAME: {APP_NAME}")
-Log.warning(f"APP VERSION: {APP_VERSION}")
-Log.warning(f"APP HOST: {APP_HOST}")
-Log.warning(f"APP PORT: {APP_PORT}")
-Log.warning(f"APP SECRET KEY: {APP_SECRET_KEY}")
-Log.warning(f"APP SESSION PERMANENT: {SESSION_PERMANENT}")
-Log.warning(f"APP ROOT PATH: {APP_ROOT_PATH}")
-Log.warning(f"LOG FILE ROOT: {LOG_FILE_ROOT}")
-Log.warning(f"LOG IN: {LOG_IN}")
-Log.warning(f"REGISTRATION: {REGISTRATION}")
+Log.app(f"DEBUG MODE: {DEBUG_MODE}")
+Log.app(f"NAME: {APP_NAME}")
+Log.app(f"VERSION: {APP_VERSION}")
+Log.app(f"HOST: {APP_HOST}")
+Log.app(f"PORT: {APP_PORT}")
+Log.app(f"SECRET KEY: {APP_SECRET_KEY}")
+Log.app(f"SESSION PERMANENT: {SESSION_PERMANENT}")
+Log.app(f"ROOT PATH: {APP_ROOT_PATH}")
+Log.app(f"LOG FILE ROOT: {LOG_FILE_ROOT}")
+Log.app(f"LOG IN: {LOG_IN}")
+Log.app(f"REGISTRATION: {REGISTRATION}")
 # Log the UI name, template folder and the static folder
-Log.info(f"UI: {UI_NAME}")
-Log.info(f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
-Log.info(f"STATIC FOLDER: {STATIC_FOLDER}")
+Log.app(f"UI: {UI_NAME}")
+Log.app(f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
+Log.app(f"STATIC FOLDER: {STATIC_FOLDER}")
 # Log the SMTP server settings
-Log.info(f"SMTP SERVER: {SMTP_SERVER}")
-Log.info(f"SMTP PORT: {SMTP_PORT}")
-Log.info(f"SMTP MAIL: {SMTP_MAIL}")
-Log.info(f"SMTP PASSWORD: {SMTP_PASSWORD}")
+Log.app(f"SMTP SERVER: {SMTP_SERVER}")
+Log.app(f"SMTP PORT: {SMTP_PORT}")
+Log.app(f"SMTP MAIL: {SMTP_MAIL}")
+Log.app(f"SMTP PASSWORD: {SMTP_PASSWORD}")
 
 # Check if recaptcha is enabled
 match RECAPTCHA:
@@ -195,47 +195,47 @@ match RECAPTCHA:
                 )
             case False:
                 # Log a success message that recaptcha is on and print the recaptcha keys, url and badge status
-                Log.success("RECAPTCHA IS ON")
-                Log.warning(f"RECAPTCHA RECAPTCHA_SITE_KEY KEY: {RECAPTCHA_SITE_KEY}")
-                Log.warning(f"RECAPTCHA SECRET KEY: {RECAPTCHA_SECRET_KEY}")
-                Log.warning(f"RECAPTCHA VERIFY URL: {RECAPTCHA_VERIFY_URL}")
-                Log.warning(f"RECAPTCHA BADGE: {RECAPTCHA_BADGE}")
+                Log.app("RECAPTCHA IS ON")
+                Log.app(f"RECAPTCHA RECAPTCHA_SITE_KEY KEY: {RECAPTCHA_SITE_KEY}")
+                Log.app(f"RECAPTCHA SECRET KEY: {RECAPTCHA_SECRET_KEY}")
+                Log.app(f"RECAPTCHA VERIFY URL: {RECAPTCHA_VERIFY_URL}")
+                Log.app(f"RECAPTCHA BADGE: {RECAPTCHA_BADGE}")
                 # Log the recaptcha settings for different actions
-                Log.info(f"RECAPTCHA LOGIN: {RECAPTCHA_LOGIN}")
-                Log.info(f"RECAPTCHA SIGN UP: {RECAPTCHA_SIGN_UP }")
-                Log.info(f"RECAPTCHA POST CREATE: {RECAPTCHA_POST_CREATE}")
-                Log.info(f"RECAPTCHA POST EDIT: {RECAPTCHA_POST_EDIT }")
-                Log.info(f"RECAPTCHA POST DELETE: {RECAPTCHA_POST_DELETE}")
-                Log.info(f"RECAPTCHA COMMENT: {RECAPTCHA_COMMENT}")
-                Log.info(f"RECAPTCHA COMMENT DELETE: {RECAPTCHA_COMMENT_DELETE}")
-                Log.info(f"RECAPTCHA PASSWORD RESET: {RECAPTCHA_PASSWORD_RESET}")
-                Log.info(f"RECAPTCHA PASSWORD CHANGE: {RECAPTCHA_PASSWORD_CHANGE}")
-                Log.info(f"RECAPTCHA USERNAME CHANGE: {RECAPTCHA_USERNAME_CHANGE}")
-                Log.info(f"RECAPTCHA VERIFY USER: {RECAPTCHA_VERIFY_USER}")
-                Log.info(f"RECAPTCHA DELETE USER: {RECAPTCHA_DELETE_USER}")
-                Log.info(
+                Log.app(f"RECAPTCHA LOGIN: {RECAPTCHA_LOGIN}")
+                Log.app(f"RECAPTCHA SIGN UP: {RECAPTCHA_SIGN_UP }")
+                Log.app(f"RECAPTCHA POST CREATE: {RECAPTCHA_POST_CREATE}")
+                Log.app(f"RECAPTCHA POST EDIT: {RECAPTCHA_POST_EDIT }")
+                Log.app(f"RECAPTCHA POST DELETE: {RECAPTCHA_POST_DELETE}")
+                Log.app(f"RECAPTCHA COMMENT: {RECAPTCHA_COMMENT}")
+                Log.app(f"RECAPTCHA COMMENT DELETE: {RECAPTCHA_COMMENT_DELETE}")
+                Log.app(f"RECAPTCHA PASSWORD RESET: {RECAPTCHA_PASSWORD_RESET}")
+                Log.app(f"RECAPTCHA PASSWORD CHANGE: {RECAPTCHA_PASSWORD_CHANGE}")
+                Log.app(f"RECAPTCHA USERNAME CHANGE: {RECAPTCHA_USERNAME_CHANGE}")
+                Log.app(f"RECAPTCHA VERIFY USER: {RECAPTCHA_VERIFY_USER}")
+                Log.app(f"RECAPTCHA DELETE USER: {RECAPTCHA_DELETE_USER}")
+                Log.app(
                     f"RECAPTCHA USER PROFILE PICTURE CHANGE: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
                 )
-                Log.info(
+                Log.app(
                     f"RECAPTCHA PROFILE PICTURE CHANGE: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
                 )
     case False:
         # Log a warning message that recaptcha is off
-        Log.danger(f"RECAPTCHA IS OFF")
+        Log.app(f"RECAPTCHA IS OFF")
 
 # Check if default admin is enabled
 match DEFAULT_ADMIN:
     case True:
         # Log a success message that admin is on and print the default admin settings
-        Log.success(f"DEFAULT ADMIN IS ON")
-        Log.info(f"DEFAULT ADMIN USERNAME: {DEFAULT_ADMIN_USERNAME}")
-        Log.info(f"DEFAULT ADMIN EMAIL: {DEFAULT_ADMIN_EMAIL}")
-        Log.info(f"DEFAULT ADMIN PASSWORD: {DEFAULT_ADMIN_PASSWORD}")
-        Log.info(f"DEFAULT ADMIN POINT: {DEFAULT_ADMIN_POINT}")
-        Log.info(f"DEFAULT ADMIN PROFILE PICTURE: {DEFAULT_ADMIN_PROFILE_PICTURE}")
+        Log.app(f"DEFAULT ADMIN IS ON")
+        Log.app(f"DEFAULT ADMIN USERNAME: {DEFAULT_ADMIN_USERNAME}")
+        Log.app(f"DEFAULT ADMIN EMAIL: {DEFAULT_ADMIN_EMAIL}")
+        Log.app(f"DEFAULT ADMIN PASSWORD: {DEFAULT_ADMIN_PASSWORD}")
+        Log.app(f"DEFAULT ADMIN POINT: {DEFAULT_ADMIN_POINT}")
+        Log.app(f"DEFAULT ADMIN PROFILE PICTURE: {DEFAULT_ADMIN_PROFILE_PICTURE}")
     case False:
         # Log a danger message that admin is off
-        Log.danger(f"DEFAULT ADMIN IS OFF")
+        Log.app(f"DEFAULT ADMIN IS OFF")
 
 # Call the dbFolder, usersTable, postsTable and commentsTable functions to check the database status
 dbFolder()
@@ -297,8 +297,8 @@ app.register_blueprint(changeProfilePictureBlueprint)
 match __name__:
     case "__main__":
         # Log a message that the app started successfully and print the host and port
-        Log.success("APP STARTED SUCCESSFULLY")
-        Log.success(f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
+        Log.app("STARTED SUCCESSFULLY")
+        Log.app(f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
 
         # Print a ASCII art
         print(terminalASCII())
@@ -316,10 +316,10 @@ match __name__:
         runTime = str(timedelta(seconds=runTime))
 
         # Log a message that shows the run time of the app
-        Log.warning(f"APP RUN TIME: {runTime} ")
+        Log.app(f"RUN TIME: {runTime} ")
 
         # Log a message that the app shut down
-        Log.danger("APP SHUT DOWN")
+        Log.app("SHUT DOWN")
 
         # Print a ASCII art
         print(terminalASCII())
