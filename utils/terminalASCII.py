@@ -3,7 +3,7 @@ def terminalASCII():
     """
     This function returns a string containing the terminal ASCII art.
     """
-    return """\033[91m
+    return """\033[38;2;244;63;94m 
   __ _           _    ____  _                   ____  
  / _| | __ _ ___| | _| __ )| | ___   __ ___   _|___ \ 
 | |_| |/ _` / __| |/ /  _ \| |/ _ \ / _` \ \ / / __) |
