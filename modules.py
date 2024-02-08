@@ -63,7 +63,7 @@ from email.message import EmailMessage  # Email handling
 
 from passlib.hash import sha512_crypt as encryption  # Password hashing library
 
-from forms import (  # Importing various form classes used in the application
+from utils.forms import (  # Importing various form classes used in the application
     LoginForm,
     SignUpForm,
     CommentForm,
@@ -107,3 +107,19 @@ from utils.getProfilePicture import getProfilePicture
 
 # Importing the 'terminalASCII' function from the 'utils.terminalASCII' module for displaying ASCII art in the terminal.
 from utils.terminalASCII import terminalASCII
+
+
+# Importing the 'isLogin' context processor from the 'utils.contextProcessor.isLogin' module
+from utils.contextProcessor.isLogin import isLogin
+
+# Importing the 'isRegistration' context processor from the 'utils.contextProcessor.isRegistration' module
+from utils.contextProcessor.isRegistration import isRegistration
+
+# Importing the 'recaptchaBadge' context processor from the 'utils.contextProcessor.recaptchaBadge' module
+from utils.contextProcessor.recaptchaBadge import recaptchaBadge
+
+# Importing the 'returnUserProfilePicture' context processor from the 'utils.contextProcessor.returnUserProfilePicture' module
+from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture
+
+# Importing the 'Delete' class from the 'utils.delete' module for handling delete operations.
+from utils.delete import Delete

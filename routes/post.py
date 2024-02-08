@@ -1,6 +1,7 @@
 # Import the necessary modules and functions
 from modules import (
     flash,
+    Delete,
     session,
     sqlite3,
     request,
@@ -18,7 +19,6 @@ from modules import (
     DB_COMMENTS_ROOT,
     render_template,
 )
-from delete import deleteComment, deletePost
 
 # Create a blueprint for the post route
 postBlueprint = Blueprint("post", __name__)
@@ -61,14 +61,14 @@ def post(postID):
                     match "postDeleteButton" in request.form:
                         case True:
                             # Delete the post from the database
-                            deletePost(postID)
+                            Delete.post(postID)
                             # Redirect to the home page
                             return redirect(f"/")
                     # Check if the comment delete button is clicked
                     match "commentDeleteButton" in request.form:
                         case True:
                             # Delete the comment from the database
-                            deleteComment(request.form["commentID"])
+                            Delete.comment(request.form["commentID"])
                             # Redirect to the same route with a 301 status code
                             return redirect(url_for("post.post", postID=postID)), 301
                     # Get the comment from the form

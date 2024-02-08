@@ -1,23 +1,8 @@
 # Import the modules module that contains constants and functions for the app
 from modules import (
-    LOG_IN,  # A constant that apps are allowed to user login
     RECAPTCHA,  # A constant that indicates if the recaptcha is enabled
-    REGISTRATION,  # A constant that apps are allowed to user register
     RECAPTCHA_BADGE,  # A constant indicating whether the recaptcha badge should be visible or not
-    getProfilePicture,  # A function that returns the user's profile picture URL
 )
-
-
-# Define a function that returns a dictionary with the user's profile picture URL
-def returnUserProfilePicture():
-    """
-    Returns a dictionary with the user's profile picture URL.
-
-    Returns:
-        dict: A dictionary containing the user's profile picture URL.
-    """
-
-    return dict(getProfilePicture=getProfilePicture)  # Return the dictionary
 
 
 # Define a function that returns a dictionary with a constant indicating whether the recaptcha badge should be visible or not
@@ -40,27 +25,3 @@ def recaptchaBadge():
             # No default case to handle other possible combinations of the constants
 
     return dict(recaptchaBadge=recaptchaBadge())  # Return the dictionary
-
-
-# Define a function that returns a dictionary with the login enabled
-def isLogin():
-    """
-    Returns a dictionary with a constant login is enabled or not.
-
-    Returns:
-        dict: A dictionary with a constant login is enabled or not.
-    """
-
-    return dict(isLogin=LOG_IN)  # Return the dictionary
-
-
-# Define a function that returns a dictionary with the registration enabled
-def isRegistration():
-    """
-    Returns a dictionary with a constant registration is enabled or not.
-
-    Returns:
-        dict: A dictionary with a constant registration is enabled or not.
-    """
-
-    return dict(isRegistration=REGISTRATION)  # Return the dictionary

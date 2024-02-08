@@ -54,7 +54,7 @@ from routes.changeProfilePicture import changeProfilePictureBlueprint
 from flask_wtf.csrf import CSRFProtect, CSRFError
 
 # Import the dbFolder, usersTable, postsTable and commentsTable functions from the dbChecker module
-from dbChecker import dbFolder, usersTable, postsTable, commentsTable
+from utils.dbChecker import dbFolder, usersTable, postsTable, commentsTable
 
 # Import the constants from the constants module
 from constants import (
@@ -106,15 +106,21 @@ from modules import (
     RECAPTCHA_PROFILE_PICTURE_CHANGE,
 )
 
-# Import the error handler functions from the errorHandlers module
-from errorHandlers import (
-    notFoundErrorHandler,  # This function handles 404 errors
-    csrfErrorHandler,  # This function handles CSRF errors
-    unauthorizedErrorHandler,  # This function handles unauthorized access errors
-)
+from utils.errorHandlers.notFoundErrorHandler import (
+    notFoundErrorHandler,
+)  # This function handles 404 errors
+
+from utils.errorHandlers.csrfErrorHandler import (
+    csrfErrorHandler,
+)  # This function handles CSRF errors
+
+from utils.errorHandlers.unauthorizedErrorHandler import (
+    unauthorizedErrorHandler,
+)  # This function handles unauthorized access errors
+
 
 # Import the contextProcessor module that contains custom functions for the app
-from contextProcessor import (
+from modules import (
     isLogin,  # A function that checks LOG_IN constant
     recaptchaBadge,  # A function that checks RECAPTCHA_BADGE constant
     isRegistration,  # A function that checks REGISTRATION constant

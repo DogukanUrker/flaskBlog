@@ -1,6 +1,7 @@
 # Import the necessary modules and functions
 from modules import (
     abort,
+    Delete,
     message,
     request,
     sqlite3,
@@ -16,7 +17,6 @@ from modules import (
     RECAPTCHA_SECRET_KEY,
     RECAPTCHA_DELETE_USER,
 )
-from delete import deleteUser
 
 # Create a blueprint for the account settings route
 accountSettingsBlueprint = Blueprint("accountSettings", __name__)
@@ -59,7 +59,7 @@ def accountSettings():
                                         f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
                                     # Delete the user from the database
-                                    deleteUser(user[0][0])
+                                    Delete.user(user[0][0])
                                     # Redirect to the home page
                                     return redirect(f"/")
                                 case False:
@@ -72,7 +72,7 @@ def accountSettings():
                                     abort(401)
                         case False:
                             # Delete the user from the database
-                            deleteUser(user[0][0])
+                            Delete.user(user[0][0])
                             # Redirect to the home page
                             return redirect(f"/")
             # Render the account settings template with the user and recaptcha data

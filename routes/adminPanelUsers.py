@@ -1,5 +1,6 @@
 # Import the necessary modules and functions
 from modules import (
+    Delete,
     sqlite3,
     session,
     request,
@@ -9,7 +10,6 @@ from modules import (
     changeUserRole,
     render_template,
 )
-from delete import deleteUser
 
 # Create a blueprint for the admin panel users route
 adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)
@@ -36,7 +36,7 @@ def adminPanelUsers():
                     match "userDeleteButton" in request.form:
                         case True:
                             # Delete the user from the database
-                            deleteUser(request.form["userName"])
+                            Delete.user(request.form["userName"])
                     # Check if the user role change button is clicked
                     match "userRoleChangeButton" in request.form:
                         case True:

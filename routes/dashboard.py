@@ -1,6 +1,7 @@
 # Import the necessary modules and functions
 from modules import (
     flash,
+    Delete,
     url_for,
     request,
     session,
@@ -12,7 +13,6 @@ from modules import (
     DB_COMMENTS_ROOT,
     render_template,
 )
-from delete import deletePost
 
 # Create a blueprint for the dashboard route
 dashboardBlueprint = Blueprint("dashboard", __name__)
@@ -33,7 +33,7 @@ def dashboard(userName):
                             match "postDeleteButton" in request.form:
                                 case True:
                                     # Delete the post from the database
-                                    deletePost(request.form["postID"])
+                                    Delete.user(request.form["postID"])
                                     # Redirect to the same route with a 301 status code
                                     return (
                                         redirect(

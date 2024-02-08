@@ -1,5 +1,6 @@
 # Import the necessary modules and functions
 from modules import (
+    Delete,
     request,
     sqlite3,
     session,
@@ -9,7 +10,6 @@ from modules import (
     render_template,
     DB_COMMENTS_ROOT,
 )
-from delete import deleteComment
 
 # Create a blueprint for the admin panel comments route
 adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
@@ -36,7 +36,7 @@ def adminPanelComments():
                     match "commentDeleteButton" in request.form:
                         case True:
                             # Delete the comment from the database
-                            deleteComment(request.form["commentID"])
+                            Delete.comment(request.form["commentID"])
                     # Redirect to the same route
                     return redirect(f"/admin/comments")
             # Check if the user role is admin

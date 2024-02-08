@@ -1,5 +1,6 @@
 # Import the necessary modules and functions
 from modules import (
+    Delete,
     sqlite3,
     session,
     request,
@@ -9,7 +10,6 @@ from modules import (
     DB_USERS_ROOT,
     render_template,
 )
-from delete import deletePost
 
 # Create a blueprint for the admin panel posts route
 adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
@@ -36,7 +36,7 @@ def adminPanelPosts():
                     match "postDeleteButton" in request.form:
                         case True:
                             # Delete the post from the database
-                            deletePost(request.form["postID"])
+                            Delete.post(request.form["postID"])
             # Check if the user role is admin
             match role == "admin":
                 case True:
