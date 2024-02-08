@@ -2,7 +2,7 @@
 from modules import (
     abort,
     Delete,
-    message,
+    Log,
     request,
     sqlite3,
     session,
@@ -54,7 +54,7 @@ def accountSettings():
 
                                 case True:
                                     # Log the recaptcha verification result
-                                    message(
+                                    Log.success(
                                         "2",
                                         f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
@@ -64,8 +64,7 @@ def accountSettings():
                                     return redirect(f"/")
                                 case False:
                                     # Log the recaptcha verification result
-                                    message(
-                                        "1",
+                                    Log.danger(
                                         f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
                                     # Abort the request with a 401 error

@@ -1,12 +1,12 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     flash,
     Delete,
     url_for,
     request,
     session,
     sqlite3,
-    message,
     redirect,
     Blueprint,
     DB_POSTS_ROOT,
@@ -83,15 +83,14 @@ def dashboard(userName):
                     )
                 case False:
                     # Log a message that the dashboard does not belong to the session user name
-                    message(
-                        "1",
+                    Log.danger(
                         f'THIS IS DASHBOARD NOT BELONGS TO USER: "{session["userName"]}"',
                     )
                     # Redirect to the dashboard of the session user name
                     return redirect(f'/dashboard/{session["userName"].lower()}')
         case False:
             # Log a message that the dashboard cannot be accessed without user login
-            message("1", "DASHBOARD CANNOT BE ACCESSED WITHOUT USER LOGIN")
+            Log.danger("DASHBOARD CANNOT BE ACCESSED WITHOUT USER LOGIN")
             # Flash an error message to the user
             flash("you need login for reach to dashboard", "error")
             # Redirect to the login page with the dashboard and user as the next destination

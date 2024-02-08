@@ -1,11 +1,11 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     abort,
     flash,
     session,
     sqlite3,
     request,
-    message,
     redirect,
     Blueprint,
     RECAPTCHA,
@@ -55,8 +55,7 @@ def changeProfilePicture():
                             ] > 0.5:
                                 case True:
                                     # Log the recaptcha verification result
-                                    message(
-                                        "2",
+                                    Log.success(
                                         f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
                                     # Update the users database by setting the new profile picture for the user name
@@ -66,8 +65,7 @@ def changeProfilePicture():
                                     )
                                     connection.commit()
                                     # Log a message that the user changed their profile picture
-                                    message(
-                                        "2",
+                                    Log.success(
                                         f'USER: "{session["userName"]}" CHANGED HIS PROFILE PICTURE TO "{newProfilePicture}"',
                                     )
                                     # Flash a success message to the user
@@ -76,8 +74,7 @@ def changeProfilePicture():
                                     return redirect(f"/changeprofilepicture")
                                 case False:
                                     # Log the recaptcha verification result
-                                    message(
-                                        "1",
+                                    Log.danger(
                                         f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
                                     # Abort the request with a 401 error
@@ -90,8 +87,7 @@ def changeProfilePicture():
                             )
                             connection.commit()
                             # Log a message that the user changed their profile picture
-                            message(
-                                "2",
+                            Log.success(
                                 f'USER: "{session["userName"]}" CHANGED HIS PROFILE PICTURE TO "{newProfilePicture}"',
                             )
                             # Flash a success message to the user

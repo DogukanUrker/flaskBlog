@@ -5,8 +5,8 @@ The functions and methods used in this blueprint are imported from the modules m
 """
 
 from modules import (
+    Log,  # A function for logging messages
     flash,  # A function for displaying flash messages
-    message,  # A function for logging messages
     Blueprint,  # A class for creating Flask blueprints
     session,  # A dictionary for storing session data
     redirect,  # A function for returning redirect responses
@@ -31,8 +31,8 @@ def logout():
     """
     match "userName" in session:  # Use a match statement to check if the "userName" key is present in the session dictionary
         case True:  # If the user is logged in
-            message(
-                "2", f"USER: {session['userName']} LOGGED OUT"
+            Log.success(
+                f"USER: {session['userName']} LOGGED OUT"
             )  # Log a message with level 2 indicating the user has logged out
             session.clear()  # Clear the session dictionary
             flash(
@@ -40,7 +40,7 @@ def logout():
             )  # Display a flash message with the text "logged out" and the category "error"
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in
-            message(
-                "1", "USER NOT LOGGED IN"
+            Log.danger(
+                "USER NOT LOGGED IN"
             )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Return a redirect response to the homepage

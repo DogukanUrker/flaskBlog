@@ -1,8 +1,8 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,  # Importing log class for logging messages
     flash,  # Importing flash function for displaying messages
     abort,  # Importing abort function for aborting requests
-    message,  # Importing message function for logging messages
     session,  # Importing session for managing user sessions
     sqlite3,  # Importing sqlite3 for working with SQLite databases
     request,  # Importing request for handling HTTP requests
@@ -100,8 +100,7 @@ def changePassword():
                                             ] == True or verifyResponse["score"] > 0.5:
                                                 case True:
                                                     # Log reCAPTCHA verification
-                                                    message(
-                                                        "2",
+                                                    Log.success(
                                                         f"PASSWORD CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                     )
                                                     # Update password in the database
@@ -116,8 +115,7 @@ def changePassword():
                                                     # Commit the transaction
                                                     connection.commit()
                                                     # Log password change
-                                                    message(
-                                                        "2",
+                                                    Log.success(
                                                         f'USER: "{session["userName"]}" CHANGED HIS PASSWORD',
                                                     )
                                                     # Clear session
@@ -131,8 +129,7 @@ def changePassword():
                                                     return redirect("/login/redirect=&")
                                                 case False:
                                                     # Log reCAPTCHA failure
-                                                    message(
-                                                        "1",
+                                                    Log.danger(
                                                         f"PASSWORD CHANGE DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                     )
                                                     # Abort the request
@@ -150,8 +147,7 @@ def changePassword():
                                             # Commit the transaction
                                             connection.commit()
                                             # Log password change
-                                            message(
-                                                "2",
+                                            Log.success(
                                                 f'USER: "{session["userName"]}" CHANGED HIS PASSWORD',
                                             )
                                             # Clear session
@@ -175,7 +171,7 @@ def changePassword():
             )
         case False:
             # Log user not logged in
-            message("1", "USER NOT LOGGED IN")
+            Log.danger("USER NOT LOGGED IN")
             # Display error message
             flash("you need login for change your password", "error")
             # Redirect to login page

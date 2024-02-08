@@ -1,5 +1,5 @@
 # Import the message and render_template functions from the modules module
-from modules import message, render_template
+from modules import Log, render_template
 
 
 # Define a function to handle unauthorized access errors
@@ -11,6 +11,6 @@ def unauthorizedErrorHandler(e):
     :return: A tuple containing the Jinja template for the 401 error and the status code
     """
     # Log a danger message with the error code and message
-    message("1", f"401 | {e}")
+    Log.danger(f"401 | {e}")
     # Render the 401 template and return it with the status code
     return render_template("unauthorized.html.jinja"), 401

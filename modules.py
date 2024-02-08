@@ -54,8 +54,8 @@ from flask import (  # Importing Flask components for web application developmen
 # Importing functions from the 'utils.time' module for handling date and time-related operations.
 from utils.time import currentDate, currentTime, currentTimeStamp, currentTimeZone
 
-# Importing the 'message' function from the 'utils.log' module for logging messages.
-from utils.log import message
+# Importing the 'Log' class from the 'utils.log' module for logging messages.
+from utils.log import Log
 
 # Importing the 'addPoints' function from the 'utils.addPoints' module for adding points to user accounts.
 from utils.addPoints import addPoints

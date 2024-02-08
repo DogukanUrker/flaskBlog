@@ -1,12 +1,11 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     flash,
     abort,
-    message,
     session,
     sqlite3,
     request,
-    message,
     redirect,
     Blueprint,
     RECAPTCHA,
@@ -81,8 +80,7 @@ def changeUserName():
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f"USERNAME CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             cursor.execute(
@@ -133,8 +131,7 @@ def changeUserName():
                                                                 ],
                                                             )
                                                             connection.commit()
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f'USER: "{session["userName"]}" CHANGED USER NAME TO "{newUserName}"',
                                                             )
                                                             session["userName"] = (
@@ -148,8 +145,7 @@ def changeUserName():
                                                                 f"/user/{newUserName.lower()}"
                                                             )
                                                         case False:
-                                                            message(
-                                                                "1",
+                                                            Log.danger(
                                                                 f"USERNAME CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -186,8 +182,7 @@ def changeUserName():
                                                         ],
                                                     )
                                                     connection.commit()
-                                                    message(
-                                                        "2",
+                                                    Log.success(
                                                         f'USER: "{session["userName"]}" CHANGED USER NAME TO "{newUserName}"',
                                                     )
                                                     session["userName"] = newUserName

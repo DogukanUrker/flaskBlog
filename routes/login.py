@@ -1,11 +1,11 @@
 from modules import (
+    Log,
     abort,
     flash,
     LOG_IN,
     session,
     request,
     sqlite3,
-    message,
     redirect,
     RECAPTCHA,
     addPoints,
@@ -43,7 +43,7 @@ def login(direct):
         case True:
             match "userName" in session:
                 case True:
-                    message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
+                    Log.danger(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
                     return (
                         redirect(direct),
                         301,
@@ -64,7 +64,7 @@ def login(direct):
                             user = cursor.fetchone()
                             match not user:
                                 case True:
-                                    message("1", f'USER: "{userName}" NOT FOUND')
+                                    Log.danger(f'USER: "{userName}" NOT FOUND')
                                     flash("user not found", "error")
                                 case _:
                                     match encryption.verify(password, user[3]):
@@ -84,8 +84,7 @@ def login(direct):
                                                     ] > 0.5:
                                                         case True:
                                                             # Logs the user in if the reCAPTCHA verification is successful
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             session["userName"] = user[
@@ -97,8 +96,7 @@ def login(direct):
                                                             addPoints(
                                                                 1, session["userName"]
                                                             )
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f'USER: "{user[1]}" LOGGED IN',
                                                             )
                                                             flash(
@@ -112,8 +110,7 @@ def login(direct):
 
                                                         case False:
                                                             # Returns an unauthorized error if the reCAPTCHA verification is unsuccessful
-                                                            message(
-                                                                "1",
+                                                            Log.danger(
                                                                 f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -123,8 +120,7 @@ def login(direct):
                                                     session["userName"] = user[1]
                                                     session["userRole"] = user[5]
                                                     addPoints(1, session["userName"])
-                                                    message(
-                                                        "2",
+                                                    Log.success(
                                                         f'USER: "{user[1]}" LOGGED IN',
                                                     )
                                                     flash(
@@ -137,7 +133,7 @@ def login(direct):
 
                                         case _:
                                             # Returns an incorrect password error if the password is incorrect
-                                            message("1", "WRONG PASSWORD")
+                                            Log.danger("WRONG PASSWORD")
                                             flash("wrong  password", "error")
                     return render_template(
                         "login.html.jinja",

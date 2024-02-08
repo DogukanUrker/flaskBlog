@@ -15,7 +15,7 @@ from the database.
 The functions in this module use the following helper functions:
 
 - flash(message, category): This function flashes a message to the user.
-- message(type, message): This function sends a message to the server.
+- Log.{type}(message): This function sends a message to the server.
 - session: This variable stores information about the current user's session.
 - redirect(url): This function redirects the user to a new URL.
 - DB_POSTS_ROOT: This variable stores the path to the posts database.
@@ -24,9 +24,9 @@ The functions in this module use the following helper functions:
 """
 
 from modules import (
+    Log,  # A function for logging messages
     flash,  # A function for displaying flash messages
     sqlite3,  # A module for working with SQLite databases
-    message,  # A function for logging messages
     session,  # A dictionary for storing session data
     redirect,  # A function for returning redirect responses
     DB_POSTS_ROOT,  # A constant for the path to the posts database
@@ -84,8 +84,8 @@ class Delete:
         flash(
             "post deleted", "error"
         )  # Display a flash message with the text "post deleted" and the category "error"
-        message(
-            "2", f'POST: "{postID}" DELETED'
+        Log.success(
+            f'POST: "{postID}" DELETED'
         )  # Log a message with level 2 indicating the post was deleted
 
     def user(userName):
@@ -126,8 +126,8 @@ class Delete:
         flash(
             f"user: {userName} deleted", "error"
         )  # Display a flash message with the text "user: {userName} deleted" and the category "error"
-        message(
-            "2", f'USER: "{userName}" DELETED'
+        Log.success(
+            f'USER: "{userName}" DELETED'
         )  # Log a message with level 2 indicating the user was deleted
         match perpetrator[
             0
@@ -169,6 +169,6 @@ class Delete:
         flash(
             "comment deleted", "error"
         )  # Display a flash message with the text "comment deleted" and the category "error"
-        message(
-            "2", f'COMMENT: "{commentID}" DELETED'
+        Log.success(
+            f'COMMENT: "{commentID}" DELETED'
         )  # Log a message with level 2 indicating the comment was deleted

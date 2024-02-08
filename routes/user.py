@@ -3,8 +3,8 @@ This module contains the code for the user page.
 """
 
 from modules import (
+    Log,  # A class for logging messages
     sqlite3,  # A module for working with SQLite databases
-    message,  # A function for logging messages
     Blueprint,  # A class for creating Flask blueprints
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     DB_USERS_ROOT,  # A constant for the path to the users database
@@ -43,7 +43,7 @@ def user(userName):
         users
     ).lower():  # Use a match statement to compare the username with the list of usernames
         case True:  # If the username exists
-            message(
+            Log.success(
                 "2", f'USER: "{userName}" FOUND'
             )  # Log a message with level 2 indicating the user was found
             cursor.execute(
@@ -100,8 +100,8 @@ def user(userName):
                     showComments = False  # Set the showComments variable to False
                 case _:  # If the comments list is not empty
                     showComments = True  # Set the showComments variable to True
-            message(
-                "2", f'USER: "{userName}"s PAGE LOADED'
+            Log.success(
+                f'USER: "{userName}"s PAGE LOADED'
             )  # Log a message with level 2 indicating the user's page was loaded
             return render_template(  # Return the rendered template of the user page
                 "user.html.jinja",  # The name of the template file
@@ -113,8 +113,8 @@ def user(userName):
                 showComments=showComments,  # Pass the showComments variable as a keyword argument
             )
         case _:  # If the username does not exist
-            message(
-                "1", f'USER: "{userName}" NOT FOUND'
+            Log.danger(
+                f'USER: "{userName}" NOT FOUND'
             )  # Log an error message the user was not found
             return render_template(
                 "notFound.html.jinja"

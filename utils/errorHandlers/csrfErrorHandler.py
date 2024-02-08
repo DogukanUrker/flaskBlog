@@ -1,5 +1,5 @@
 # Import the message and render_template functions from the modules module
-from modules import message, render_template
+from modules import Log, render_template
 
 
 # Define a function to handle CSRF errors
@@ -11,6 +11,6 @@ def csrfErrorHandler(e):
     :return: A tuple containing the Jinja template for the 400 error and the status code
     """
     # Log a danger message with the error code and message
-    message("1", f"400 | {e}")
+    Log.danger(f"400 | {e}")
     # Render the 400 template and pass the reason as a variable
     return render_template("csrfError.html.jinja", reason=e.description), 400

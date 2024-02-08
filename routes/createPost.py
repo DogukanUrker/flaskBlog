@@ -1,11 +1,11 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     flash,
     abort,
     session,
     sqlite3,
     request,
-    message,
     redirect,
     addPoints,
     Blueprint,
@@ -52,8 +52,7 @@ def createPost():
                     match postContent == "":
                         case True:
                             flash("post content not be empty", "error")
-                            message(
-                                "1",
+                            Log.danger(
                                 f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                             )
                         case False:
@@ -69,8 +68,7 @@ def createPost():
                                         "success"
                                     ] == True or verifyResponse["score"] > 0.5:
                                         case True:
-                                            message(
-                                                "2",
+                                            Log.success(
                                                 f"POST CREATE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                             )
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
@@ -91,8 +89,7 @@ def createPost():
                                                 ),
                                             )
                                             connection.commit()
-                                            message(
-                                                "2",
+                                            Log.success(
                                                 f'POST: "{postTitle}" POSTED BY "{session["userName"]}"',
                                             )
                                             addPoints(20, session["userName"])
@@ -102,8 +99,7 @@ def createPost():
                                             )
                                             return redirect("/")
                                         case False:
-                                            message(
-                                                "1",
+                                            Log.danger(
                                                 f"POST CREATE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                             )
                                             abort(401)
@@ -126,8 +122,7 @@ def createPost():
                                         ),
                                     )
                                     connection.commit()
-                                    message(
-                                        "2",
+                                    Log.success(
                                         f'POST: "{postTitle}" POSTED BY "{session["userName"]}"',
                                     )
                                     addPoints(20, session["userName"])
@@ -140,6 +135,6 @@ def createPost():
                 recaptcha=RECAPTCHA,
             )
         case False:
-            message("1", "USER NOT LOGGED IN")
+            Log.danger("USER NOT LOGGED IN")
             flash("you need loin for create a post", "error")
             return redirect("/login/redirect=&createpost")

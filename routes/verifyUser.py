@@ -1,5 +1,6 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     ssl,
     abort,
     flash,
@@ -25,7 +26,6 @@ from modules import (
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
     RECAPTCHA_VERIFY_USER,
-    message as messageDebugging,
 )
 
 # Create a blueprint for the verify user route
@@ -81,8 +81,7 @@ def verifyUser(codeSent):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            messageDebugging(
-                                                                "2",
+                                                            Log.success(
                                                                 f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             cursor.execute(
@@ -90,8 +89,7 @@ def verifyUser(codeSent):
                                                                 [(userName.lower())],
                                                             )
                                                             connection.commit()
-                                                            messageDebugging(
-                                                                "2",
+                                                            Log.success(
                                                                 f'USER: "{userName}" HAS BEEN VERIFIED',
                                                             )
                                                             flash(
@@ -100,7 +98,7 @@ def verifyUser(codeSent):
                                                             )
                                                             return redirect("/")
                                                         case False:
-                                                            messageDebugging(
+                                                            Log(
                                                                 "1",
                                                                 f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
@@ -111,8 +109,7 @@ def verifyUser(codeSent):
                                                         [(userName.lower())],
                                                     )
                                                     connection.commit()
-                                                    messageDebugging(
-                                                        "2",
+                                                    Log.success(
                                                         f'USER: "{userName}" HAS BEEN VERIFIED',
                                                     )
                                                     flash(
@@ -215,30 +212,25 @@ def verifyUser(codeSent):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            messageDebugging(
-                                                                "2",
+                                                            Log.success(
                                                                 f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             server.send_message(message)
                                                         case False:
-                                                            messageDebugging(
-                                                                "1",
+                                                            Log.danger(
                                                                 f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
                                                 case False:
                                                     server.send_message(message)
                                             server.quit()
-                                            messageDebugging(
-                                                "2",
+                                            Log.success(
                                                 f'VERIFICATION CODE: "{verificationCode}" SENT TO "{email[0]}"',
                                             )
                                             flash("code sent", "success")
                                             return redirect("/verifyUser/codesent=true")
                                         case True:
-                                            messageDebugging(
-                                                "1", f'USER: "{userName}" NOT FOUND'
-                                            )
+                                            Log.danger(f'USER: "{userName}" NOT FOUND')
                                             flash("user not found", "error")
                             return render_template(
                                 "verifyUser.html.jinja",

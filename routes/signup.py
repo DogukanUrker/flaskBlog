@@ -1,12 +1,12 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     ssl,
     abort,
     flash,
     session,
     sqlite3,
     request,
-    message,
     smtplib,
     redirect,
     APP_NAME,
@@ -51,7 +51,7 @@ def signup():
         case True:
             match "userName" in session:
                 case True:
-                    message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
+                    Log.danger(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
                     return redirect("/")
                 case False:
                     form = SignUpForm(request.form)
@@ -92,8 +92,7 @@ def signup():
                                                                 "score"
                                                             ] > 0.5:
                                                                 case True:
-                                                                    message(
-                                                                        "2",
+                                                                    Log.success(
                                                                         f"SIGN UP RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                                     )
                                                                     cursor = (
@@ -116,8 +115,7 @@ def signup():
                                                                         ),
                                                                     )
                                                                     connection.commit()
-                                                                    message(
-                                                                        "2",
+                                                                    Log.success(
                                                                         f'USER: "{userName}" ADDED TO DATABASE',
                                                                     )
                                                                     session[
@@ -129,8 +127,7 @@ def signup():
                                                                             "userName"
                                                                         ],
                                                                     )
-                                                                    message(
-                                                                        "2",
+                                                                    Log.success(
                                                                         f'USER: "{userName}" LOGGED IN',
                                                                     )
                                                                     flash(
@@ -198,8 +195,7 @@ def signup():
                                                                         "/verifyUser/codesent=false"
                                                                     )
                                                                 case False:
-                                                                    message(
-                                                                        "1",
+                                                                    Log.danger(
                                                                         f"SIGN UP | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                                     )
                                                                     abort(401)
@@ -222,8 +218,7 @@ def signup():
                                                                 ),
                                                             )
                                                             connection.commit()
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f'USER: "{userName}" ADDED TO DATABASE',
                                                             )
                                                             session["userName"] = (
@@ -232,8 +227,7 @@ def signup():
                                                             addPoints(
                                                                 1, session["userName"]
                                                             )
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f'USER: "{userName}" LOGGED IN',
                                                             )
                                                             flash(
@@ -291,8 +285,7 @@ def signup():
                                                                 "/verifyUser/codesent=false"
                                                             )
                                                 case False:
-                                                    message(
-                                                        "1",
+                                                    Log.danger(
                                                         f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
                                                     )
                                                     flash(
@@ -300,12 +293,12 @@ def signup():
                                                         "error",
                                                     )
                                         case False:
-                                            message("1", " PASSWORDS MUST MATCH ")
+                                            Log.danger(" PASSWORDS MUST MATCH ")
                                             flash("password must match", "error")
                             match userName in users and email in mails:
                                 case True:
-                                    message(
-                                        "1", f'"{userName}" & "{email}" IS UNAVAILABLE '
+                                    Log.danger(
+                                        f'"{userName}" & "{email}" IS UNAVAILABLE '
                                     )
                                     flash(
                                         "This username and email is unavailable.",
@@ -313,14 +306,11 @@ def signup():
                                     )
                             match not userName in users and email in mails:
                                 case True:
-                                    message(
-                                        "1", f'THIS EMAIL "{email}" IS UNAVAILABLE '
-                                    )
+                                    Log.danger(f'THIS EMAIL "{email}" IS UNAVAILABLE ')
                                     flash("This email is unavailable.", "error")
                             match userName in users and not email in mails:
                                 case True:
-                                    message(
-                                        "1",
+                                    Log.danger(
                                         f'THIS USERNAME "{userName}" IS UNAVAILABLE ',
                                     )
                                     flash("This username is unavailable.", "error")

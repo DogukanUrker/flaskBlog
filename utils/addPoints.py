@@ -1,4 +1,4 @@
-from modules import sqlite3, DB_USERS_ROOT, message
+from modules import sqlite3, DB_USERS_ROOT, Log
 
 
 # Function to add points to a user
@@ -13,4 +13,4 @@ def addPoints(points, user):
         [(points), (user)],
     )
     connection.commit()  # Commit changes to the database
-    message("2", f'{points} POINTS ADDED TO "{user}"')
+    Log.success(f'{points} POINTS ADDED TO "{user}"')

@@ -1,5 +1,6 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     ssl,
     flash,
     abort,
@@ -25,7 +26,6 @@ from modules import (
     RECAPTCHA_VERIFY_URL,
     RECAPTCHA_SECRET_KEY,
     RECAPTCHA_PASSWORD_RESET,
-    message as messageDebugging,
 )
 
 # Create a blueprint for the password reset route
@@ -91,8 +91,7 @@ def passwordReset(codeSent):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            messageDebugging(
-                                                                "2",
+                                                            Log.success(
                                                                 f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             cursor.execute(
@@ -103,8 +102,7 @@ def passwordReset(codeSent):
                                                                 ],
                                                             )
                                                             connection.commit()
-                                                            messageDebugging(
-                                                                "2",
+                                                            Log.success(
                                                                 f'USER: "{userName}" CHANGED HIS PASSWORD',
                                                             )
                                                             flash(
@@ -115,8 +113,7 @@ def passwordReset(codeSent):
                                                                 "/login/redirect=&"
                                                             )
                                                         case False:
-                                                            messageDebugging(
-                                                                "1",
+                                                            Log.danger(
                                                                 f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -129,8 +126,7 @@ def passwordReset(codeSent):
                                                         ],
                                                     )
                                                     connection.commit()
-                                                    messageDebugging(
-                                                        "2",
+                                                    Log.success(
                                                         f'USER: "{userName}" CHANGED HIS PASSWORD',
                                                     )
                                                     flash(
@@ -215,28 +211,25 @@ def passwordReset(codeSent):
                                         "success"
                                     ] == True or verifyResponse["score"] > 0.5:
                                         case True:
-                                            messageDebugging(
-                                                "2",
+                                            Log.success(
                                                 f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                             )
                                             server.send_message(message)
                                         case False:
-                                            messageDebugging(
-                                                "1",
+                                            Log.danger(
                                                 f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                             )
                                             abort(401)
                                 case False:
                                     server.send_message(message)
                             server.quit()
-                            messageDebugging(
-                                "2",
+                            Log.success(
                                 f'PASSWORD RESET CODE: "{passwordResetCode}" SENT TO "{email}"',
                             )
                             flash("code sent", "success")
                             return redirect("/passwordreset/codesent=true")
                         case True:
-                            messageDebugging("1", f'USER: "{userName}" NOT FOUND')
+                            Log.danger(f'USER: "{userName}" NOT FOUND')
                             flash("user not found", "error")
             return render_template(
                 "passwordReset.html.jinja",

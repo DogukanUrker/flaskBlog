@@ -1,4 +1,4 @@
-from modules import sqlite3, DB_USERS_ROOT, message, session, redirect
+from modules import sqlite3, DB_USERS_ROOT, Log, session, redirect
 
 
 # Function to change the role of a user
@@ -23,8 +23,7 @@ def changeUserRole(userName):
         """update users set role = ? where lower(userName) = ? """,
         [(newRole), (userName)],
     )
-    message(  # Log the role change event
-        "2",
+    Log.success(  # Log the role change event
         f'ADMIN: "{session["userName"]}" CHANGED USER: "{userName}"s ROLE TO "{newRole}" ',
     )
     connection.commit()  # Commit changes to the database

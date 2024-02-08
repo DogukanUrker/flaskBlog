@@ -9,7 +9,7 @@ The database consists of three tables:
 This file contains functions to create the tables if they do not already exist, and to ensure that they have the correct structure.
 """
 
-from modules import mkdir, exists, message, sqlite3, currentTimeStamp, encryption
+from modules import mkdir, exists, Log, sqlite3, currentTimeStamp, encryption
 from modules import (
     DB_USERS_ROOT,
     DB_POSTS_ROOT,
@@ -36,14 +36,14 @@ def dbFolder():
     match exists(DB_FOLDER_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the folder name
         case True:
-            message("6", f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" FOUND')
+            Log.info(f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the folder name
         case False:
-            message("1", f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" NOT FOUND')
+            Log.danger(f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" NOT FOUND')
             # Use the mkdir function to create the folder
             mkdir(DB_FOLDER_ROOT)
             # Print a message with the level 2 (success) and the folder name
-            message("2", f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" CREATED')
+            Log.success(f'DATABASE FOLDER: "/{DB_FOLDER_ROOT}" CREATED')
 
 
 # This function checks if the users table exists in the database, and creates it if it does not.
@@ -59,14 +59,14 @@ def usersTable():
     match exists(DB_USERS_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the database name
         case True:
-            message("6", f'USERS DATABASE: "{DB_USERS_ROOT}" FOUND')
+            Log.info(f'USERS DATABASE: "{DB_USERS_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the database name
         case False:
-            message("1", f'USERS DATABASE: "{DB_USERS_ROOT}" NOT FOUND')
+            Log.danger(f'USERS DATABASE: "{DB_USERS_ROOT}" NOT FOUND')
             # Use the open function with the "x" mode to create a new file for the database
             open(DB_USERS_ROOT, "x")
             # Print a message with the level 2 (success) and the database name
-            message("2", f'USERS DATABASE: "{DB_USERS_ROOT}" CREATED')
+            Log.success(f'USERS DATABASE: "{DB_USERS_ROOT}" CREATED')
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_USERS_ROOT)
     cursor = connection.cursor()
@@ -74,12 +74,12 @@ def usersTable():
         # Try to execute a SQL query to select userID records from the users table
         cursor.execute("""SELECT userID FROM users; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
-        message("6", f'TABLE: "Users" FOUND IN "{DB_USERS_ROOT}"')
+        Log.info(f'TABLE: "Users" FOUND IN "{DB_USERS_ROOT}"')
         # Close the connection to the database
         connection.close()
     except:
         # If the query fails, print a message with the level 1 (alert) and the table name
-        message("1", f'TABLE: "Users" NOT FOUND IN "{DB_USERS_ROOT}"')
+        Log.danger(f'TABLE: "Users" NOT FOUND IN "{DB_USERS_ROOT}"')
         # Define a SQL statement to create the users table with the specified columns and constraints
         usersTable = """
         CREATE TABLE IF NOT EXISTS Users(
@@ -122,8 +122,7 @@ def usersTable():
                 # Commit the changes to the database
                 connection.commit()
                 # Print a message with the level 2 (success) and the default admin username
-                message(
-                    "2",
+                Log.success(
                     f'ADMIN: "{DEFAULT_ADMIN_USERNAME}" ADDED TO DATABASE AS INITIAL ADMIN',
                 )
         # Commit the changes to the database
@@ -131,7 +130,7 @@ def usersTable():
         # Close the connection to the database
         connection.close()
         # Print a message with the level 2 (success) and the table name
-        message("2", f'TABLE: "Users" CREATED IN "{DB_USERS_ROOT}"')
+        Log.success(f'TABLE: "Users" CREATED IN "{DB_USERS_ROOT}"')
 
 
 # This function checks if the posts table exists in the database, and creates it if it does not.
@@ -146,14 +145,14 @@ def postsTable():
     match exists(DB_POSTS_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the database name
         case True:
-            message("6", f'POSTS DATABASE: "{DB_POSTS_ROOT}" FOUND')
+            Log.info(f'POSTS DATABASE: "{DB_POSTS_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the database name
         case False:
-            message("1", f'POSTS DATABASE: "{DB_POSTS_ROOT}" NOT FOUND')
+            Log.danger(f'POSTS DATABASE: "{DB_POSTS_ROOT}" NOT FOUND')
             # Use the open function with the "x" mode to create a new file for the database
             open(DB_POSTS_ROOT, "x")
             # Print a message with the level 2 (success) and the database name
-            message("2", f'POSTS DATABASE: "{DB_POSTS_ROOT}" CREATED')
+            Log.success(f'POSTS DATABASE: "{DB_POSTS_ROOT}" CREATED')
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
@@ -161,12 +160,12 @@ def postsTable():
         # Try to execute a SQL query to select id records from the posts table
         cursor.execute("""SELECT id FROM posts; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
-        message("6", f'TABLE: "Posts" FOUND IN "{DB_POSTS_ROOT}"')
+        Log.info(f'TABLE: "Posts" FOUND IN "{DB_POSTS_ROOT}"')
         # Close the connection to the database
         connection.close()
     except:
         # If the query fails, print a message with the level 1 (alert) and the table name
-        message("1", f'TABLE: "Posts" NOT FOUND IN "{DB_POSTS_ROOT}"')
+        Log.danger(f'TABLE: "Posts" NOT FOUND IN "{DB_POSTS_ROOT}"')
         # Define a SQL statement to create the posts table with the specified columns and constraints
         postsTable = """
         CREATE TABLE "posts" (
@@ -189,7 +188,7 @@ def postsTable():
         # Close the connection to the database
         connection.close()
         # Print a message with the level 2 (success) and the table name
-        message("2", f'TABLE: "Posts" CREATED IN "{DB_POSTS_ROOT}"')
+        Log.success(f'TABLE: "Posts" CREATED IN "{DB_POSTS_ROOT}"')
 
 
 # This function checks if the comments table exists in the database, and creates it if it does not.
@@ -204,14 +203,14 @@ def commentsTable():
     match exists(DB_COMMENTS_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the database name
         case True:
-            message("6", f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" FOUND')
+            Log.info(f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" FOUND')
         # If the path does not exist, print a message with the level 1 (alert) and the database name
         case False:
-            message("1", f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" NOT FOUND')
+            Log.danger(f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" NOT FOUND')
             # Use the open function with the "x" mode to create a new file for the database
             open(DB_COMMENTS_ROOT, "x")
             # Print a message with the level 2 (success) and the database name
-            message("2", f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" CREATED')
+            Log.success(f'COMMENTS DATABASE: "{DB_COMMENTS_ROOT}" CREATED')
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_COMMENTS_ROOT)
     cursor = connection.cursor()
@@ -219,12 +218,12 @@ def commentsTable():
         # Try to execute a SQL query to select id records from the comments table
         cursor.execute("""SELECT id FROM comments; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
-        message("6", f'TABLE: "Comments" FOUND IN "{DB_COMMENTS_ROOT}"')
+        Log.info(f'TABLE: "Comments" FOUND IN "{DB_COMMENTS_ROOT}"')
         # Close the connection to the database
         connection.close()
     except:
         # If the query fails, print a message with the level 1 (alert) and the table name
-        message("1", f'TABLE: "Comments" NOT FOUND IN "{DB_COMMENTS_ROOT}"')
+        Log.danger(f'TABLE: "Comments" NOT FOUND IN "{DB_COMMENTS_ROOT}"')
         # Define a SQL statement to create the comments table with the specified columns and constraints
         commentsTable = """
         CREATE TABLE IF NOT EXISTS comments(
@@ -242,4 +241,4 @@ def commentsTable():
         # Close the connection to the database
         connection.close()
         # Print a message with the level 2 (success) and the table name
-        message("2", f'TABLE: "Comments" CREATED IN "{DB_COMMENTS_ROOT}"')
+        Log.success(f'TABLE: "Comments" CREATED IN "{DB_COMMENTS_ROOT}"')

@@ -1,11 +1,11 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     flash,
     abort,
     session,
     sqlite3,
     request,
-    message,
     redirect,
     Blueprint,
     RECAPTCHA,
@@ -55,7 +55,7 @@ def editPost(postID):
                         [(postID)],
                     )
                     post = cursor.fetchone()
-                    message("2", f'POST: "{postID}" FOUND')
+                    Log.success(f'POST: "{postID}" FOUND')
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     cursor = connection.cursor()
                     cursor.execute(
@@ -81,8 +81,7 @@ def editPost(postID):
                                     match postContent == "":
                                         case True:
                                             flash("post content not be empty", "error")
-                                            message(
-                                                "1",
+                                            Log.danger(
                                                 f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                                             )
                                         case False:
@@ -100,8 +99,7 @@ def editPost(postID):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f"POST EDIT RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             connection = (
@@ -140,8 +138,7 @@ def editPost(postID):
                                                                 ],
                                                             )
                                                             connection.commit()
-                                                            message(
-                                                                "2",
+                                                            Log.success(
                                                                 f'POST: "{postTitle}" EDITED',
                                                             )
                                                             flash(
@@ -151,8 +148,7 @@ def editPost(postID):
                                                                 f"/post/{post[0]}"
                                                             )
                                                         case False:
-                                                            message(
-                                                                "1",
+                                                            Log.danger(
                                                                 f"POST EDIT RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -189,8 +185,7 @@ def editPost(postID):
                                                         ],
                                                     )
                                                     connection.commit()
-                                                    message(
-                                                        "2",
+                                                    Log.success(
                                                         f'POST: "{postTitle}" EDITED',
                                                     )
                                                     flash("Post edited", "success")
@@ -207,15 +202,14 @@ def editPost(postID):
                             )
                         case False:
                             flash("this post not yours", "error")
-                            message(
-                                "1",
+                            Log.danger(
                                 f'THIS POST DOES NOT BELONG TO USER: "{session["userName"]}"',
                             )
                             return redirect("/")
                 case False:
-                    message("1", f'POST: "{postID}" NOT FOUND')
+                    Log.danger(f'POST: "{postID}" NOT FOUND')
                     return render_template("notFound.html.jinja")
         case False:
-            message("1", "USER NOT LOGGED IN")
+            Log.danger("USER NOT LOGGED IN")
             flash("you need login for edit a post", "error")
             return redirect(f"/login/redirect=&editpost&{postID}")

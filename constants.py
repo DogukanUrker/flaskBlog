@@ -39,8 +39,24 @@ LOG_IN = True  # (bool)
 # Toggle user registration feature
 REGISTRATION = True  # (bool)
 
+# Root path of the log folder
+LOG_FOLDER_ROOT = "log/"  # (str)
+
 # Root path of the log file
-LOG_FILE_ROOT = "log.log"  # (str)
+LOG_FILE_ROOT = LOG_FOLDER_ROOT + "log.log"  # (str)
+
+# Root path of the danger log file
+LOG_DANGER_FILE_ROOT = LOG_FOLDER_ROOT + "logDanger.log"  # (str)
+
+# Root path of the success log file
+LOG_SUCCESS_FILE_ROOT = LOG_FOLDER_ROOT + "logSuccess.log"  # (str)
+
+# Root path of the warning log file
+LOG_WARNING_FILE_ROOT = LOG_FOLDER_ROOT + "logWarning.log"  # (str)
+
+# Root path of the info log file
+LOG_INFO_FILE_ROOT = LOG_FOLDER_ROOT + "logInfo.log"  # (str)
+
 
 # Secret key for Flask sessions
 APP_SECRET_KEY = secrets.token_urlsafe(32)  # (str)
@@ -55,16 +71,16 @@ BREAKER_TEXT = "\n"  # (str)
 ### DATABASE SETTINGS ###
 
 # Root path of the database folder
-DB_FOLDER_ROOT = "db"  # (str)
+DB_FOLDER_ROOT = "db/"  # (str)
 
 # Root path of the users database
-DB_USERS_ROOT = DB_FOLDER_ROOT + "/users.db"  # (str)
+DB_USERS_ROOT = DB_FOLDER_ROOT + "users.db"  # (str)
 
 # Root path of the posts database
-DB_POSTS_ROOT = DB_FOLDER_ROOT + "/posts.db"  # (str)
+DB_POSTS_ROOT = DB_FOLDER_ROOT + "posts.db"  # (str)
 
 # Root path of the comments database
-DB_COMMENTS_ROOT = DB_FOLDER_ROOT + "/comments.db"  # (str)
+DB_COMMENTS_ROOT = DB_FOLDER_ROOT + "comments.db"  # (str)
 
 
 ### SMTP MAIL SETTINGS ###

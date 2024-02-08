@@ -1,11 +1,11 @@
 # Import the necessary modules and functions
 from modules import (
+    Log,
     flash,
     Delete,
     session,
     sqlite3,
     request,
-    message,
     url_for,
     APP_NAME,
     redirect,
@@ -38,7 +38,7 @@ def post(postID):
     match str(postID) in posts:
         case True:
             # Log a message that the post is found
-            message("2", f'POST: "{postID}" FOUND')
+            Log.success(f'POST: "{postID}" FOUND')
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
             cursor = connection.cursor()
@@ -89,8 +89,7 @@ def post(postID):
                     )
                     connection.commit()
                     # Log a message that the user commented on the post
-                    message(
-                        "2",
+                    Log.success(
                         f'USER: "{session["userName"]}" COMMENTED TO POST: "{postID}"',
                     )
                     # Add 5 points to the user's score
