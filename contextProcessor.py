@@ -1,5 +1,5 @@
-# Import the helpers module that contains constants and functions for the app
-from helpers import (
+# Import the modules module that contains constants and functions for the app
+from modules import (
     LOG_IN,  # A constant that apps are allowed to user login
     RECAPTCHA,  # A constant that indicates if the recaptcha is enabled
     REGISTRATION,  # A constant that apps are allowed to user register

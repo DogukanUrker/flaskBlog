@@ -1,5 +1,5 @@
-# Import the message and render_template functions from the helpers module
-from helpers import message, render_template
+# Import the message and render_template functions from the modules module
+from modules import message, render_template
 
 
 # Define a function to handle 404 errors

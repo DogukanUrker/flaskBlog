@@ -23,7 +23,7 @@ The functions in this module use the following helper functions:
 - DB_COMMENTS_ROOT: This variable stores the path to the comments database.
 """
 
-from helpers import (
+from modules import (
     flash,  # A function for displaying flash messages
     sqlite3,  # A module for working with SQLite databases
     message,  # A function for logging messages

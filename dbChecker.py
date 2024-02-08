@@ -9,7 +9,7 @@ The database consists of three tables:
 This file contains functions to create the tables if they do not already exist, and to ensure that they have the correct structure.
 """
 
-from helpers import mkdir, exists, message, sqlite3, currentTimeStamp, encryption
+from modules import mkdir, exists, message, sqlite3, currentTimeStamp, encryption
 from constants import (
     DB_USERS_ROOT,
     DB_POSTS_ROOT,

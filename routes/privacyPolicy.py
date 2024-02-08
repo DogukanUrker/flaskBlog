@@ -1,7 +1,7 @@
 # This file contains the blueprint and routes for the Privacy Policy page.
 
-# Import the necessary modules from the helpers file
-from helpers import (
+# Import the necessary modules from the modules file
+from modules import (
     Blueprint,  # A class that represents a Flask blueprint
     render_template,  # A function that renders a template file
 )

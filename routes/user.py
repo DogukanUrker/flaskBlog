@@ -2,7 +2,7 @@
 This module contains the code for the user page.
 """
 
-from helpers import (
+from modules import (
     sqlite3,  # A module for working with SQLite databases
     message,  # A function for logging messages
     Blueprint,  # A class for creating Flask blueprints

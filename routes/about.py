@@ -1,7 +1,7 @@
 # This file contains the blueprint and routes for the about page.
 
-# Import the necessary modules from the helpers file
-from helpers import (
+# Import the necessary modules from the modules file
+from modules import (
     APP_NAME,  # A constant that stores the name of the application
     Blueprint,  # A class that represents a Flask blueprint
     APP_VERSION,  # A constant that stores the version of the application

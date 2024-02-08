@@ -2,8 +2,8 @@
 This file contains the main function
 """
 
-# Import the message function from the helpers module
-from helpers import message, terminalASCII, currentTimeStamp, timedelta
+# Import the message function from the modules module
+from modules import message, terminalASCII, currentTimeStamp, timedelta
 
 # Get the start time of the app
 startTime = currentTimeStamp()
@@ -17,8 +17,8 @@ message(breaker=True)
 message("3", "APP IS STARTING...")
 
 
-# Import other functions and modules from the helpers module
-from helpers import (
+# Import other functions and modules from the modules module
+from modules import (
     Flask,
 )
 
@@ -85,8 +85,8 @@ from constants import (
     DEFAULT_ADMIN_PROFILE_PICTURE,
 )
 
-# Import the recaptcha-related variables from the helpers module
-from helpers import (
+# Import the recaptcha-related variables from the modules module
+from modules import (
     RECAPTCHA,
     RECAPTCHA_LOGIN,
     RECAPTCHA_COMMENT,

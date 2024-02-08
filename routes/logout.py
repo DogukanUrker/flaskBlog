@@ -1,10 +1,10 @@
 """
 This file contains the blueprint for the logout page.
 
-The functions and methods used in this blueprint are imported from the helpers module.
+The functions and methods used in this blueprint are imported from the modules module.
 """
 
-from helpers import (
+from modules import (
     flash,  # A function for displaying flash messages
     message,  # A function for logging messages
     Blueprint,  # A class for creating Flask blueprints

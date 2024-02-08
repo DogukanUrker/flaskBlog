@@ -11,7 +11,7 @@ The posts variable is passed to the index.html.jinja template as a list of dicti
 The index.html.jinja template displays the title and content of each post.
 """
 
-from helpers import (
+from modules import (
     sqlite3,  # A module for working with SQLite databases
     Blueprint,  # A class for creating Flask blueprints
     DB_POSTS_ROOT,  # A constant for the path to the posts database

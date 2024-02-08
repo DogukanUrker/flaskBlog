@@ -7,7 +7,7 @@
 
 # 1. Import statements: The necessary modules are imported.
 
-from helpers import (
+from modules import (
     abort,  # A function to abort the request and return an error code
     sqlite3,  # A module to interact with SQLite databases
     Blueprint,  # A class to create modular routes for the application

@@ -2,8 +2,8 @@
 This module contains all the general application settings.
 """
 
-# Import necessary modules from the helpers module
-from helpers import secrets, socket
+# Import necessary modules from the modules module
+from modules import secrets, socket
 
 
 # Name of the Flask application
@@ -49,7 +49,7 @@ APP_SECRET_KEY = secrets.token_urlsafe(32)  # (str)
 SESSION_PERMANENT = True  # (bool)
 
 # Separator text used in log files
-BREAKER_TEXT = "===================================================================================================="  # (str)
+BREAKER_TEXT = "\n"  # (str)
 
 
 ### DATABASE SETTINGS ###
