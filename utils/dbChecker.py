@@ -10,7 +10,7 @@ This file contains functions to create the tables if they do not already exist, 
 """
 
 from modules import mkdir, exists, message, sqlite3, currentTimeStamp, encryption
-from constants import (
+from modules import (
     DB_USERS_ROOT,
     DB_POSTS_ROOT,
     DEFAULT_ADMIN,

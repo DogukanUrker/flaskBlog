@@ -57,7 +57,7 @@ from flask_wtf.csrf import CSRFProtect, CSRFError
 from utils.dbChecker import dbFolder, usersTable, postsTable, commentsTable
 
 # Import the constants from the constants module
-from constants import (
+from modules import (
     LOG_IN,
     UI_NAME,
     APP_HOST,

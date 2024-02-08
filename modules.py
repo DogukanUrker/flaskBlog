@@ -17,48 +17,9 @@ from os.path import exists  # Importing exists function from os.path module
 from datetime import datetime, timedelta  # Date and time handling
 from requests import post as requestsPost  # HTTP library for sending POST requests
 
-# Importing constants and forms from other modules
+# Importing constants
+from constants import *
 
-from constants import (  # Constants related to SMTP settings
-    SMTP_MAIL,
-    SMTP_PORT,
-    SMTP_SERVER,
-    SMTP_PASSWORD,
-)
-
-from constants import (  # Importing multiple constants related to the application configuration
-    LOG_IN,
-    APP_NAME,
-    APP_VERSION,
-    BREAKER_TEXT,
-    REGISTRATION,
-    LOG_FILE_ROOT,
-    DB_USERS_ROOT,
-    DB_POSTS_ROOT,
-    BREAKER_TEXT,
-    DB_COMMENTS_ROOT,
-)
-
-from constants import (  # Importing constants related to reCAPTCHA configuration
-    RECAPTCHA,
-    RECAPTCHA_BADGE,
-    RECAPTCHA_LOGIN,
-    RECAPTCHA_COMMENT,
-    RECAPTCHA_SIGN_UP,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_POST_EDIT,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_VERIFY_USER,
-    RECAPTCHA_POST_CREATE,
-    RECAPTCHA_DELETE_USER,
-    RECAPTCHA_POST_DELETE,
-    RECAPTCHA_COMMENT_DELETE,
-    RECAPTCHA_PASSWORD_RESET,
-    RECAPTCHA_PASSWORD_CHANGE,
-    RECAPTCHA_USERNAME_CHANGE,
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,
-)
 from email.message import EmailMessage  # Email handling
 
 from passlib.hash import sha512_crypt as encryption  # Password hashing library
