@@ -1,7 +1,5 @@
-Flask==3.0.2
+Flask==3.0.0
 flask_wtf==1.2.1
+flaskwebgui==1.0.8
 passlib==1.7.4
-playwright==1.41.2
-Requests==2.31.0
-pipenv==2023.12.1
-WTForms==3.1.2
+WTForms==3.1.1

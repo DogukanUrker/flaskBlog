@@ -1,0 +1,17 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Signup</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/submit.css') }}"
+/>
+{% endblock head %} {%block body%}
+<div class="container">
+  <form method="post" class="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.userName(class_="input" , autocomplete="off")}}
+    {{form.email(class_="input",autocomplete="off")}}
+    {{form.password(class_="input")}} {{form.passwordConfirm(class_="input")}}
+    <button type="submit" class="btn btnPrimary">Signup</button>
+  </form>
+</div>
+{% endblock body %}

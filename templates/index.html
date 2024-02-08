@@ -1,0 +1,13 @@
+{% extends 'layout.html'%} {%block head%}
+<title>flaskBlog</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+{% endblock head %} {%block body%} {% for post in posts %}
+<div class="post centeredHorizontally">
+  <a class="title textPrimary" href="post/{{post[0]}}">{{post[1]}}</a>
+  <div class="content" tag="content">{{post[3]|safe}}</div>
+  <a href="post/{{post[0]}}" class="btn btnLink">read more</a>
+</div>
+{% endfor %} {% endblock body %}

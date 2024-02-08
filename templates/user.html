@@ -1,0 +1,65 @@
+{% extends 'layout.html'%} {%block head%}
+<title>{{user[1]}}</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/user.css') }}"
+/>
+{% endblock head %} {%block body%}
+<div class="container">
+  <div class="userContainer">
+    <section class="head">
+      <img src="{{user[4]}}" alt="{{user[1]}}" class="userProfilePicture" />
+      <h2 class="userName">{{user[1]}}</h2>
+    </section>
+    <section class="stats">
+      <p class="userRole">Role: {{user[5]}}</p>
+      <p class="userViews">Views: {{views}}</p>
+    </section>
+    <section class="stats">
+      <p class="userCreationDate">Join Date: {{user[7]}}</p>
+      <p class="userPoint">Points: {{user[6]}}</p>
+    </section>
+    <section class="stats">
+      {% if session["userName"] == user[1] %}
+      <a href="/accountsettings" class="btn btnLink textPrimary"
+        >account settings</a
+      >
+      <a href="/dashboard/{{user[1]}}" class="btn btnLink textPrimary"
+        >dashboard</a
+      >
+      {% endif %} {% if user[5] == "admin" and session["userName"] == user[1] %}
+      <a href="/admin" class="btn btnLink textPrimary">admin panel</a>
+      {% endif %}
+    </section>
+    {% if "userName" in session and session['userName'] == "{{user[1]}}"%}
+    <a href="/dashboard/{{session['userName']}}">dashboard</a>
+    {% endif %}
+  </div>
+  {% if showPosts %}
+  <h1 class="postsText">Posts</h1>
+  {% for post in posts %}
+  <div class="post centeredHorizontally">
+    <a class="title textPrimary" href="/post/{{post[0]}}">{{post[1]}}</a>
+    <div class="content" tag="content">{{post[3]|safe}}</div>
+    <a href="/post/{{post[0]}}" class="btn btnLink">go to post</a>
+  </div>
+  {% endfor %} {% endif %} {% if showComments %}
+  <h1 class="commentsText">Comments</h1>
+  {% for comment in comments %}
+  <div class="post centeredHorizontally">
+    <div class="content" tag="content">{{comment[2]}}</div>
+    <section class="comment">
+      <p class="commentCreationDate">Creation Date: {{comment[4]}}</p>
+      <p class="commentCreationTime">Creation Time: {{comment[5]}}</p>
+    </section>
+    <a href="/post/{{comment[1]}}" class="btn btnLink textPrimary"
+      >go to post</a
+    >
+  </div>
+  {% endfor %} {% endif %}
+</div>
+{% endblock body %}

@@ -1,0 +1,115 @@
+.navbar {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding-top: 1rem;
+  user-select: none;
+}
+
+.btns {
+  margin-right: 12rem;
+  order: 5;
+}
+
+.btnHome {
+  margin-left: 12rem;
+  order: 1;
+  font-size: 2rem;
+  font-weight: 550;
+}
+
+.fa-solid {
+  transition: 0.25s;
+  margin-left: 0.25rem;
+}
+
+.fa-solid:hover {
+  color: var(--themeHelper);
+}
+
+.profilePicture {
+  height: 1rem;
+  width: 1rem;
+  display: inline-block;
+}
+
+.user {
+  text-align: center;
+  display: inline-block;
+  height: fit-content;
+}
+
+.profileText {
+  margin: 0;
+  padding-left: 0;
+  color: var(--themeSecondary);
+}
+
+#searchInput {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.hamburger {
+  position: relative;
+  display: none;
+  width: fit-content;
+}
+
+.hamburgerContent {
+  display: none;
+  position: absolute;
+  background-color: var(--themeSecondary);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.hamburgerContent a {
+  color: var(--themePrimary);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.show {
+  display: block;
+}
+
+.hamburgerBtn {
+  font-size: 1rem;
+  text-align: right;
+  width: fit-content !important;
+  margin-left: 5rem;
+}
+
+@media screen and (max-width: 1068px) {
+  .btnHome {
+    margin: 0 1rem 0 0;
+  }
+
+  .btns,
+  .searchBar {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+
+  .searchBarPage {
+    display: block;
+  }
+}
+
+@media (min-width: 1068px) and (max-width: 1600px) {
+  .btnHome,
+  .btns {
+    margin-right: 2rem;
+  }
+
+  .btnHome {
+    margin-left: 1rem;
+  }
+}

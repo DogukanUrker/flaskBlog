@@ -1,0 +1,18 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Login</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/submit.css') }}"
+/>
+{% endblock head %} {%block body%}
+<div class="container">
+  <form method="post" class="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.userName(class_="input",autocomplete="off")}}{{form.password(autocomplete="off",class_="input")}}
+    <button type="submit" class="btn btnPrimary">Login</button>
+    <a href="/passwordreset/codesent=false" id="passwordReset"
+      >Forgot password?</a
+    >
+  </form>
+</div>
+{% endblock body %}

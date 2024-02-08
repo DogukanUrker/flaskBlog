@@ -1,0 +1,24 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Search</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/search.css') }}"
+/>
+{% endblock head %} {%block body%}
+<div class="container">
+  <div class="searchBar searchBarPage">
+    <input
+      type="text"
+      id="searchBarInput"
+      class="input"
+      autocomplete="off"
+      placeholder="search"
+    /><button onclick="searchBar()" class="btn">🔍</button>
+  </div>
+</div>
+<script src="/static/js/searchBar.js"></script>
+{% endblock body %}

@@ -1,0 +1,30 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Search results for {{query}}</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/search.css') }}"
+/>
+{% endblock head %} {%block body%}
+<h3>
+  search results for
+  <h2 class="textPrimary">"{{query}}"</h2>
+</h3>
+{% if users %} {% for user in users %} {% for user in user %}
+<div class="post centeredHorizontally userBox">
+  <img src="{{user[4]}}" />
+  <a class="title textPrimary" href="/user/{{user[1]|lower}}">{{user[1]}}</a>
+</div>
+{% endfor %} {% endfor %} {% endif %} {% if posts %} {% for post in posts %} {%
+for post in post %}
+<div class="post centeredHorizontally">
+  <a class="title textPrimary" href="/post/{{post[0]}}">{{post[1]}}</a>
+  <div class="content" tag="content">{{post[3]|safe}}</div>
+  <a href="/post/{{post[0]}}" class="btn btnLink">read more</a>
+</div>
+{% endfor %} {% endfor %} {% endif %} {% if empty%}
+<h3>not found</h3>
+{% endif %} {% endblock body %}

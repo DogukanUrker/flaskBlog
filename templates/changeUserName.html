@@ -1,0 +1,15 @@
+{% extends 'layout.html'%} {%block head%}
+<title>Change Username</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/submit.css') }}"
+/>
+{% endblock head %} {%block body%}
+<div class="container">
+  <form method="post" class="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{form.newUserName(class_="input")}}
+    <button type="submit" class="btn btnPrimary">change my username</button>
+  </form>
+</div>
+{% endblock body %}

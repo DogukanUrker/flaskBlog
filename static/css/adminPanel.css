@@ -1,0 +1,67 @@
+a {
+  margin-left: 0rem !important;
+}
+
+section p {
+  width: 50rem !important;
+}
+
+.toPanel {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.deleteUserButton {
+  font-size: 1rem;
+}
+
+.deleteUserButton,
+.toPanel {
+  cursor: pointer;
+}
+
+.userContainer {
+  display: block;
+  text-align: center;
+  border: 1px solid var(--primaryColor);
+  border-radius: 0.5rem;
+  width: fit-content;
+  padding: 1rem;
+  margin: 1rem auto 1rem auto;
+}
+
+.userContainer .picture {
+  width: 2rem;
+  height: 2rem;
+}
+
+.stats {
+  display: flex;
+  width: 22rem;
+  justify-content: space-between;
+}
+
+.stats p,
+.stats a {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.toPanelsContainer {
+  text-align: center;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .userContainer {
+    width: 90%;
+  }
+
+  .stats {
+    width: 100%;
+  }
+}

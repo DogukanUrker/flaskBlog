@@ -1,0 +1,77 @@
+{% extends 'layout.html'%} {%block head%} {% if request.path == "/admin/posts"
+%}
+<title>Admin Panel --> Posts</title>
+{% else %}
+<title>{{session["userName"]}}'s Dashboard</title>
+{% endif %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/dashboard.css') }}"
+/>
+{% endblock head %} {%block body%} {% if showPosts %}
+<h1 class="textCenter">Posts</h1>
+{% for post in posts %}
+<div class="post centeredHorizontally">
+  <a class="title textPrimary" href="/post/{{post[0]}} ">{{post[1]}}</a>
+  <div class="content" tag="content">{{post[3]|safe}}</div>
+  <section>
+    <a href="/editpost/{{post[0]}}" class="btn btnLink textPrimary">edit</a>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <input type="hidden" name="postID" value="{{post[0]}}" />
+      <button
+        type="submit"
+        name="postDeleteButton"
+        class="btn btnLink textPrimary"
+      >
+        delete
+      </button>
+    </form>
+  </section>
+  <div class="info">
+    <p class="tags">Tags: {{post[2]}}</p>
+    <p>Views: {{post[7]}}</p>
+  </div>
+  <div class="info">
+    <p>Creation Time: {{post[6]}}</p>
+    <p>Last Edit Time: {{post[9]}}</p>
+  </div>
+  <div class="info">
+    <p>Creation Date: {{post[5]}}</p>
+    <p>Last Edit Date: {{post[8]}}</p>
+  </div>
+  {% if request.path == "/admin/posts" %}
+  <p>
+    Author:
+    <a href="/user/{{post[4].lower()}}" class="textPrimary">{{post[4]}}</a>
+  </p>
+  {% endif %}
+</div>
+{% endfor %} {% elif not showPosts %} {% if request.path == "/admin/posts" %}
+<h1>This user haven't posted yet.</h1>
+{% else %}
+<p class="userDashboardNoPost">
+  No post yet,
+  <a href="/createpost" class="textPrimary">create one</a>?
+</p>
+{% endif %} {% endif %} {% if showComments and not request.path ==
+"/admin/posts"%}
+<h1 class="textCenter">Comments</h1>
+{% for comment in comments %}
+<div class="post centeredHorizontally">
+  <div class="content" tag="content">{{comment[2]}}</div>
+  <section class="comment">
+    <p class="commentCreationDate">Creation Date: {{comment[4]}}</p>
+    <p class="commentCreationTime">Creation Time: {{comment[5]}}</p>
+  </section>
+  <a href="/post/{{comment[1]}}" class="btn btnLink textPrimary">go to post</a>
+</div>
+{% endfor %} {% endif %} {% if request.path == "/admin/posts" %}
+<a href="/admin" class="btn btnLink textPrimary goBackToAdmin"
+  >↩️go back to admin panel</a
+>
+{% endif %} {% endblock body %}

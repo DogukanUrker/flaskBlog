@@ -1,52 +1,26 @@
-# Import the necessary modules and functions
-from modules import (
-    ssl,
-    abort,
-    flash,
+from helpers import (
     session,
     sqlite3,
     request,
+    flash,
     message,
-    smtplib,
     redirect,
-    APP_NAME,
-    SMTP_PORT,
-    SMTP_MAIL,
-    RECAPTCHA,
     addPoints,
-    Blueprint,
-    encryption,
-    SignUpForm,
-    SMTP_SERVER,
-    EmailMessage,
-    requestsPost,
-    REGISTRATION,
-    SMTP_PASSWORD,
-    DB_USERS_ROOT,
+    currentDate,
+    currentTime,
     render_template,
-    currentTimeStamp,
-    RECAPTCHA_SIGN_UP,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
+    Blueprint,
+    signUpForm,
+    sha256_crypt,
 )
 
-# Create a blueprint for the signup route
 signUpBlueprint = Blueprint("signup", __name__)
+
+REGISTRATION = True
 
 
 @signUpBlueprint.route("/signup", methods=["GET", "POST"])
 def signup():
-    """
-    This function handles the sign up route.
-
-    If the user is already signed in, they will be redirected to the homepage.
-    If the user submits the sign up form, their information is checked to ensure it is valid.
-    If the information is valid, their account is created and they are signed in.
-
-    Returns:
-    The sign up page with any errors or a confirmation message.
-    """
     match REGISTRATION:
         case True:
             match "userName" in session:
@@ -54,282 +28,66 @@ def signup():
                     message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
                     return redirect("/")
                 case False:
-                    form = SignUpForm(request.form)
-                    match request.method == "POST":
-                        case True:
-                            userName = request.form["userName"]
-                            email = request.form["email"]
-                            password = request.form["password"]
-                            passwordConfirm = request.form["passwordConfirm"]
-                            userName = userName.replace(" ", "")
-                            connection = sqlite3.connect(DB_USERS_ROOT)
-                            cursor = connection.cursor()
-                            cursor.execute("select userName from users")
-                            users = str(cursor.fetchall())
-                            cursor.execute("select email from users")
-                            mails = str(cursor.fetchall())
-                            match not userName in users and not email in mails:
-                                case True:
-                                    match passwordConfirm == password:
-                                        case True:
-                                            match userName.isascii():
-                                                case True:
-                                                    password = encryption.hash(password)
-                                                    connection = sqlite3.connect(
-                                                        DB_USERS_ROOT
-                                                    )
-                                                    match RECAPTCHA and RECAPTCHA_SIGN_UP:
-                                                        case True:
-                                                            secretResponse = request.form[
-                                                                "g-recaptcha-response"
-                                                            ]
-                                                            verifyResponse = requestsPost(
-                                                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                                                            ).json()
-                                                            match verifyResponse[
-                                                                "success"
-                                                            ] == True or verifyResponse[
-                                                                "score"
-                                                            ] > 0.5:
-                                                                case True:
-                                                                    message(
-                                                                        "2",
-                                                                        f"SIGN UP RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
-                                                                    )
-                                                                    cursor = (
-                                                                        connection.cursor()
-                                                                    )
-                                                                    cursor.execute(
-                                                                        f"""
-                                                                        insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
-                                                                        values(?, ?, ?, ?, ?, ?, ?, ?)
-                                                                        """,
-                                                                        (
-                                                                            userName,
-                                                                            email,
-                                                                            password,
-                                                                            f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                                                            "user",
-                                                                            0,
-                                                                            currentTimeStamp(),
-                                                                            "False",
-                                                                        ),
-                                                                    )
-                                                                    connection.commit()
-                                                                    message(
-                                                                        "2",
-                                                                        f'USER: "{userName}" ADDED TO DATABASE',
-                                                                    )
-                                                                    session[
-                                                                        "userName"
-                                                                    ] = userName
-                                                                    addPoints(
-                                                                        1,
-                                                                        session[
-                                                                            "userName"
-                                                                        ],
-                                                                    )
-                                                                    message(
-                                                                        "2",
-                                                                        f'USER: "{userName}" LOGGED IN',
-                                                                    )
-                                                                    flash(
-                                                                        f"Welcome {userName}",
-                                                                        "success",
-                                                                    )
-                                                                    context = (
-                                                                        ssl.create_default_context()
-                                                                    )
-                                                                    server = (
-                                                                        smtplib.SMTP(
-                                                                            SMTP_SERVER,
-                                                                            SMTP_PORT,
-                                                                        )
-                                                                    )
-                                                                    server.ehlo()
-                                                                    server.starttls(
-                                                                        context=context
-                                                                    )
-                                                                    server.ehlo()
-                                                                    server.login(
-                                                                        SMTP_MAIL,
-                                                                        SMTP_PASSWORD,
-                                                                    )
-                                                                    mail = (
-                                                                        EmailMessage()
-                                                                    )
-                                                                    mail.set_content(
-                                                                        f"Hi {userName}👋,\n Welcome to {APP_NAME}"
-                                                                    )
-                                                                    mail.add_alternative(
-                                                                        f"""\
-                                                                    <html>
-                                                                    <body>
-                                                                        <div
-                                                                        style="font-family: Arial, sans-serif;  max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;"
-                                                                        >
-                                                                        <div style="text-align: center;">
-                                                                            <h1 style="color: #F43F5E;">
-                                                                            Hi {userName}, <br />
-                                                                            Welcome to {APP_NAME}!
-                                                                            </h1>
-                                                                            <p style="font-size: 16px;">
-                                                                            We are glad you joined us.
-                                                                            </p>
-                                                                        </div>
-                                                                        </div>
-                                                                    </body>
-                                                                    </html>
-                                                                    """,
-                                                                        subtype="html",
-                                                                    )
-                                                                    mail["Subject"] = (
-                                                                        f"Welcome to {APP_NAME}"
-                                                                    )
-                                                                    mail["From"] = (
-                                                                        SMTP_MAIL
-                                                                    )
-                                                                    mail["To"] = email
-                                                                    server.send_message(
-                                                                        mail
-                                                                    )
-                                                                    server.quit()
-                                                                    return redirect(
-                                                                        "/verifyUser/codesent=false"
-                                                                    )
-                                                                case False:
-                                                                    message(
-                                                                        "1",
-                                                                        f"SIGN UP | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
-                                                                    )
-                                                                    abort(401)
-                                                        case False:
-                                                            cursor = connection.cursor()
-                                                            cursor.execute(
-                                                                f"""
-                                                                        insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
-                                                                        values(?, ?, ?, ?, ?, ?, ?, ?)
-                                                                        """,
-                                                                (
-                                                                    userName,
-                                                                    email,
-                                                                    password,
-                                                                    f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                                                    "user",
-                                                                    0,
-                                                                    currentTimeStamp(),
-                                                                    "False",
-                                                                ),
-                                                            )
-                                                            connection.commit()
-                                                            message(
-                                                                "2",
-                                                                f'USER: "{userName}" ADDED TO DATABASE',
-                                                            )
-                                                            session["userName"] = (
-                                                                userName
-                                                            )
-                                                            addPoints(
-                                                                1, session["userName"]
-                                                            )
-                                                            message(
-                                                                "2",
-                                                                f'USER: "{userName}" LOGGED IN',
-                                                            )
-                                                            flash(
-                                                                f"Welcome {userName}",
-                                                                "success",
-                                                            )
-                                                            context = (
-                                                                ssl.create_default_context()
-                                                            )
-                                                            server = smtplib.SMTP(
-                                                                SMTP_SERVER, SMTP_PORT
-                                                            )
-                                                            server.ehlo()
-                                                            server.starttls(
-                                                                context=context
-                                                            )
-                                                            server.ehlo()
-                                                            server.login(
-                                                                SMTP_MAIL, SMTP_PASSWORD
-                                                            )
-                                                            mail = EmailMessage()
-                                                            mail.set_content(
-                                                                f"Hi {userName}👋,\n Welcome to {APP_NAME}"
-                                                            )
-                                                            mail.add_alternative(
-                                                                f"""\
-                                                                <html>
-                                                                <body>
-                                                                    <div
-                                                                    style="font-family: Arial, sans-serif;  max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;"
-                                                                    >
-                                                                    <div style="text-align: center;">
-                                                                        <h1 style="color: #F43F5E;">
-                                                                        Hi {userName}, <br />
-                                                                        Welcome to {APP_NAME}!
-                                                                        </h1>
-                                                                        <p style="font-size: 16px;">
-                                                                        We are glad you joined us.
-                                                                        </p>
-                                                                    </div>
-                                                                    </div>
-                                                                </body>
-                                                                </html>
-                                                            """,
-                                                                subtype="html",
-                                                            )
-                                                            mail["Subject"] = (
-                                                                f"Welcome to {APP_NAME}"
-                                                            )
-                                                            mail["From"] = SMTP_MAIL
-                                                            mail["To"] = email
-                                                            server.send_message(mail)
-                                                            server.quit()
-                                                            return redirect(
-                                                                "/verifyUser/codesent=false"
-                                                            )
-                                                case False:
-                                                    message(
-                                                        "1",
-                                                        f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
-                                                    )
-                                                    flash(
-                                                        "username does not fit ascii charecters",
-                                                        "error",
-                                                    )
-                                        case False:
-                                            message("1", " PASSWORDS MUST MATCH ")
-                                            flash("password must match", "error")
-                            match userName in users and email in mails:
-                                case True:
-                                    message(
-                                        "1", f'"{userName}" & "{email}" IS UNAVAILABLE '
-                                    )
-                                    flash(
-                                        "This username and email is unavailable.",
-                                        "error",
-                                    )
-                            match not userName in users and email in mails:
-                                case True:
-                                    message(
-                                        "1", f'THIS EMAIL "{email}" IS UNAVAILABLE '
-                                    )
-                                    flash("This email is unavailable.", "error")
-                            match userName in users and not email in mails:
-                                case True:
-                                    message(
-                                        "1",
-                                        f'THIS USERNAME "{userName}" IS UNAVAILABLE ',
-                                    )
-                                    flash("This username is unavailable.", "error")
-                    return render_template(
-                        "signup.html.jinja",
-                        form=form,
-                        hideSignUp=True,
-                        siteKey=RECAPTCHA_SITE_KEY,
-                        recaptcha=RECAPTCHA,
-                    )
+                    form = signUpForm(request.form)
+                    if request.method == "POST":
+                        userName = request.form["userName"]
+                        email = request.form["email"]
+                        password = request.form["password"]
+                        passwordConfirm = request.form["passwordConfirm"]
+                        userName = userName.replace(" ", "")
+                        connection = sqlite3.connect("db/users.db")
+                        cursor = connection.cursor()
+                        cursor.execute("select userName from users")
+                        users = str(cursor.fetchall())
+                        cursor.execute("select email from users")
+                        mails = str(cursor.fetchall())
+                        if not userName in users and not email in mails:
+                            if passwordConfirm == password:
+                                match userName.isascii():
+                                    case True:
+                                        password = sha256_crypt.hash(password)
+                                        connection = sqlite3.connect("db/users.db")
+                                        cursor = connection.cursor()
+                                        cursor.execute(
+                                            f"""
+                                            insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime,isVerified) 
+                                            values("{userName}","{email}","{password}",
+                                            "https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
+                                            "user",0,
+                                            "{currentDate()}",
+                                            "{currentTime()}","False")
+                                            """
+                                        )
+                                        connection.commit()
+                                        message(
+                                            "2", f'USER: "{userName}" ADDED TO DATABASE'
+                                        )
+                                        session["userName"] = userName
+                                        addPoints(1, session["userName"])
+                                        message("2", f'USER: "{userName}" LOGGED IN')
+                                        flash(f"Welcome {userName}", "success")
+                                        return redirect("/verifyUser/codesent=false")
+                                    case False:
+                                        message(
+                                            "1",
+                                            f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
+                                        )
+                                        flash(
+                                            "username does not fit ascii charecters",
+                                            "error",
+                                        )
+                            elif passwordConfirm != password:
+                                message("1", " PASSWORDS MUST MATCH ")
+                                flash("password must match", "error")
+                        elif userName in users and email in mails:
+                            message("1", f'"{userName}" & "{email}" IS UNAVAILABLE ')
+                            flash("This username and email is unavailable.", "error")
+                        elif not userName in users and email in mails:
+                            message("1", f'THIS EMAIL "{email}" IS UNAVAILABLE ')
+                            flash("This email is unavailable.", "error")
+                        elif userName in users and not email in mails:
+                            message("1", f'THIS USERNAME "{userName}" IS UNAVAILABLE ')
+                            flash("This username is unavailable.", "error")
+                    return render_template("signup.html", form=form, hideSignUp=True)
         case False:
             return redirect("/")
