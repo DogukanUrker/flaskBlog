@@ -18,8 +18,8 @@ images
 .gitignore
 LICENSE
 
-# Ignore the log.log file
-log.log
+# Ignore the *.log files
+*.log
 
 # Ignore the Pipfile.lock file
 Pipfile.lock
