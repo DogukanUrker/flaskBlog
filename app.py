@@ -297,7 +297,7 @@ app.register_blueprint(changeProfilePictureBlueprint)
 match __name__:
     case "__main__":
         # Log a message that the app started successfully and print the host and port
-        Log.app("STARTED SUCCESSFULLY")
+        Log.success("STARTED SUCCESSFULLY")
         Log.app(f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
 
         # Print a ASCII art
@@ -320,6 +320,9 @@ match __name__:
 
         # Log a message that the app shut down
         Log.app("SHUT DOWN")
+
+        # Log a warning message that the app shut down
+        Log.warning("APP SHUT DOWN")
 
         # Print a ASCII art
         print(terminalASCII())
