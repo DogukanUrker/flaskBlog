@@ -1,60 +1,68 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Log,
-    flash,
-    Delete,
-    session,
-    sqlite3,
-    request,
-    url_for,
-    APP_NAME,
-    redirect,
-    addPoints,
-    Blueprint,
-    currentDate,
-    currentTime,
-    CommentForm,
-    DB_POSTS_ROOT,
-    currentTimeStamp,
-    DB_COMMENTS_ROOT,
-    render_template,
+    Log,  # Custom logging module
+    flash,  # Flash messaging module
+    Delete,  # Module for deleting posts and comments
+    session,  # Session management module
+    sqlite3,  # SQLite database module
+    request,  # Request handling module
+    url_for,  # URL generation module
+    APP_NAME,  # Application name
+    redirect,  # Redirect function
+    addPoints,  # Function to add points to user's score
+    Blueprint,  # Blueprint for defining routes
+    currentDate,  # Function to get current date
+    currentTime,  # Function to get current time
+    CommentForm,  # Form class for comments
+    DB_POSTS_ROOT,  # Path to the posts database
+    currentTimeStamp,  # Function to get current timestamp
+    DB_COMMENTS_ROOT,  # Path to the comments database
+    render_template,  # Template rendering function
 )
 
 # Create a blueprint for the post route
 postBlueprint = Blueprint("post", __name__)
 
 
+# Define the route handler for individual posts
 @postBlueprint.route("/post/<int:postID>", methods=["GET", "POST"])
 def post(postID):
     # Create a comment form object from the request form
     form = CommentForm(request.form)
+
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
     cursor = connection.cursor()
-    # Query the posts database for the post ID
+
+    # Query the posts database for all post IDs
     cursor.execute("select id from posts")
     posts = str(cursor.fetchall())
-    # Check if the post ID exists in the posts database
+
+    # Check if the requested post ID exists in the posts database
     match str(postID) in posts:
         case True:
-            # Log a message that the post is found
+            # Log a message indicating that the post is found
             Log.success(f'POST: "{postID}" FOUND')
+
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
             cursor = connection.cursor()
+
             # Query the posts database for the post with the matching ID
             cursor.execute(
                 """select * from posts where id = ? """,
                 [(postID)],
             )
             post = cursor.fetchone()
-            # Update the posts database by incrementing the views of the post by 1
+
+            # Increment the views of the post by 1 in the posts database
             cursor.execute(
                 """update posts set views = views+1 where id = ? """,
                 [(postID)],
             )
             connection.commit()
-            # Check if the request method is POST
+
+            # Handle POST requests
             match request.method == "POST":
                 case True:
                     # Check if the post delete button is clicked
@@ -64,6 +72,7 @@ def post(postID):
                             Delete.post(postID)
                             # Redirect to the home page
                             return redirect(f"/")
+
                     # Check if the comment delete button is clicked
                     match "commentDeleteButton" in request.form:
                         case True:
@@ -71,12 +80,15 @@ def post(postID):
                             Delete.comment(request.form["commentID"])
                             # Redirect to the same route with a 301 status code
                             return redirect(url_for("post.post", postID=postID)), 301
+
                     # Get the comment from the form
                     comment = request.form["comment"]
+
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     cursor = connection.cursor()
-                    # Insert the comment into the comments database with the post ID, comment, user name, date and time
+
+                    # Insert the comment into the comments database with the post ID, comment, user name, date, and time
                     cursor.execute(
                         "insert into comments(post,comment,user,timeStamp) \
                         values(?, ?, ?, ?)",
@@ -88,26 +100,33 @@ def post(postID):
                         ),
                     )
                     connection.commit()
-                    # Log a message that the user commented on the post
+
+                    # Log a message indicating that the user commented on the post
                     Log.success(
                         f'USER: "{session["userName"]}" COMMENTED TO POST: "{postID}"',
                     )
+
                     # Add 5 points to the user's score
                     addPoints(5, session["userName"])
+
                     # Flash a success message to the user
                     flash("You earned 5 points by commenting ", "success")
+
                     # Redirect to the same route with a 301 status code
                     return redirect(url_for("post.post", postID=postID)), 301
+
             # Connect to the comments database
             connection = sqlite3.connect(DB_COMMENTS_ROOT)
             cursor = connection.cursor()
+
             # Query the comments database for the comments related to the post ID
             cursor.execute(
                 """select * from comments where post = ? order by timeStamp desc""",
                 [(postID)],
             )
             comments = cursor.fetchall()
-            # Render the post template with the post and comments data, the form object and the app name
+
+            # Render the post template with the post and comments data, the form object, and the app name
             return render_template(
                 "post.html.jinja",
                 id=post[0],
@@ -122,6 +141,7 @@ def post(postID):
                 comments=comments,
                 appName=APP_NAME,
             )
+
         case False:
             # Render the 404 template if the post ID does not exist
             return render_template("notFound.html.jinja")
