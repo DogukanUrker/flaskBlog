@@ -24,30 +24,30 @@ from email.message import EmailMessage  # Email handling
 
 from passlib.hash import sha512_crypt as encryption  # Password hashing library
 
-from utils.forms import (  # Importing various form classes used in the application
-    LoginForm,
-    SignUpForm,
-    CommentForm,
-    CreatePostForm,
-    VerifyUserForm,
-    PasswordResetForm,
-    ChangePasswordForm,
-    ChangeUserNameForm,
-    ChangeProfilePictureForm,
+from utils.forms import (
+    LoginForm,  # Form class for user login
+    SignUpForm,  # Form class for user sign-up
+    CommentForm,  # Form class for commenting
+    CreatePostForm,  # Form class for creating a new post
+    VerifyUserForm,  # Form class for verifying user information
+    PasswordResetForm,  # Form class for resetting a user's password
+    ChangePasswordForm,  # Form class for changing a user's password
+    ChangeUserNameForm,  # Form class for changing a user's username
+    ChangeProfilePictureForm,  # Form class for changing a user's profile picture
 )
 
-from flask import (  # Importing Flask components for web application development
-    Flask,
-    flash,
-    abort,
-    url_for,
-    request,
-    session,
-    redirect,
-    Blueprint,
-    send_file,
-    render_template,
-    send_from_directory,
+from flask import (
+    Flask,  # Flask web application framework
+    flash,  # Provides feedback messages to users
+    abort,  # Stops processing and returns an HTTP error response
+    url_for,  # Generates URLs for Flask routes
+    request,  # Provides access to incoming request data
+    session,  # Stores user session information
+    redirect,  # Redirects the client to a different URL
+    Blueprint,  # Helps organize related routes in Flask applications
+    send_file,  # Sends a file to the client
+    render_template,  # Renders HTML templates
+    send_from_directory,  # Sends a file from a directory to the client
 )
 
 
