@@ -11,16 +11,16 @@ This file contains functions to create the tables if they do not already exist, 
 
 from modules import mkdir, exists, Log, sqlite3, currentTimeStamp, encryption
 from modules import (
-    DB_USERS_ROOT,
-    DB_POSTS_ROOT,
-    DEFAULT_ADMIN,
-    DB_FOLDER_ROOT,
-    DB_COMMENTS_ROOT,
-    DEFAULT_ADMIN_POINT,
-    DEFAULT_ADMIN_EMAIL,
-    DEFAULT_ADMIN_USERNAME,
-    DEFAULT_ADMIN_PASSWORD,
-    DEFAULT_ADMIN_PROFILE_PICTURE,
+    DB_USERS_ROOT,  # Root directory path for the users database
+    DB_POSTS_ROOT,  # Root directory path for the posts database
+    DEFAULT_ADMIN,  # Boolean indicating whether a default admin account should be created
+    DB_FOLDER_ROOT,  # Root directory path for the database folder
+    DB_COMMENTS_ROOT,  # Root directory path for the comments database
+    DEFAULT_ADMIN_POINT,  # Default points assigned to the admin user
+    DEFAULT_ADMIN_EMAIL,  # Default email for the admin user
+    DEFAULT_ADMIN_USERNAME,  # Default username for the admin user
+    DEFAULT_ADMIN_PASSWORD,  # Default password for the admin user
+    DEFAULT_ADMIN_PROFILE_PICTURE,  # Default profile picture for the admin user
 )
 
 
