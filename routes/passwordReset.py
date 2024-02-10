@@ -1,31 +1,31 @@
 # Import necessary modules and functions
 from modules import (
-    Log,
-    ssl,
-    flash,
-    abort,
-    smtplib,
-    randint,
-    sqlite3,
-    request,
-    redirect,
-    APP_NAME,
-    Blueprint,
-    SMTP_PORT,
-    SMTP_MAIL,
-    RECAPTCHA,
-    encryption,
-    SMTP_SERVER,
-    EmailMessage,
-    requestsPost,
-    SMTP_PASSWORD,
-    DB_USERS_ROOT,
-    render_template,
-    PasswordResetForm,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_PASSWORD_RESET,
+    Log,  # Custom logging module
+    ssl,  # SSL/TLS support module
+    flash,  # Flash messaging module
+    abort,  # Function to abort request processing
+    smtplib,  # SMTP protocol client module
+    randint,  # Function to generate random integers
+    sqlite3,  # SQLite database module
+    request,  # Request handling module
+    redirect,  # Redirect function
+    APP_NAME,  # Application name
+    Blueprint,  # Blueprint for defining routes
+    SMTP_PORT,  # SMTP server port
+    SMTP_MAIL,  # SMTP server email
+    RECAPTCHA,  # Flag for enabling reCAPTCHA
+    encryption,  # Encryption utility module
+    SMTP_SERVER,  # SMTP server address
+    EmailMessage,  # Class for creating email messages
+    requestsPost,  # Function for making POST requests
+    SMTP_PASSWORD,  # SMTP server password
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Template rendering function
+    PasswordResetForm,  # Form class for password reset
+    RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
+    RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
+    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling reCAPTCHA for password reset
 )
 
 # Create a blueprint for the password reset route
@@ -82,7 +82,7 @@ def passwordReset(codeSent):
                                     match encryption.verify(password, oldPassword):
                                         case True:
                                             flash(
-                                                "new password can not be same with old password",
+                                                "New password cannot be the same as the old password",
                                                 "error",
                                             )
                                         case False:
@@ -119,7 +119,7 @@ def passwordReset(codeSent):
                                                                 f'USER: "{userName}" CHANGED HIS PASSWORD',
                                                             )
                                                             flash(
-                                                                "you need login with new password",
+                                                                "You need to login with the new password",
                                                                 "success",
                                                             )
                                                             return redirect(
@@ -145,13 +145,13 @@ def passwordReset(codeSent):
                                                         f'USER: "{userName}" CHANGED HIS PASSWORD',
                                                     )
                                                     flash(
-                                                        "you need login with new password",
+                                                        "You need to login with the new password",
                                                         "success",
                                                     )
                                                     return redirect("/login/redirect=&")
                                 case False:
                                     # Passwords don't match
-                                    flash("passwords must match", "error")
+                                    flash("Passwords must match", "error")
                         case False:
                             # Incorrect code entered
                             flash("Wrong Code", "error")
@@ -251,12 +251,12 @@ def passwordReset(codeSent):
                             Log.success(
                                 f'PASSWORD RESET CODE: "{passwordResetCode}" SENT TO "{email}"',
                             )
-                            flash("code sent", "success")
+                            flash("Code sent", "success")
                             return redirect("/passwordreset/codesent=true")
                         case True:
                             # User or email not found
                             Log.danger(f'USER: "{userName}" NOT FOUND')
-                            flash("user not found", "error")
+                            flash("User not found", "error")
             # Render password reset template with appropriate form and messages
             return render_template(
                 "passwordReset.html.jinja",
