@@ -54,15 +54,15 @@ class Log:
         """
         # Print formatted danger message with timestamp
         print(
-            "\n\033[38;2;115;115;115m[\033[0m" # Open the square brackets in neutral-500
+            "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
             f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
-            "\033[38;2;115;115;115m] \033[0m" # Close the square brackets in neutral-500
-            "\033[38;2;220;38;38m" # Set text color to red-600
-            "\033[48;2;248;113;113m"   # Set background color to red-400
+            "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
+            "\033[38;2;220;38;38m"  # Set text color to red-600
+            "\033[48;2;248;113;113m"  # Set background color to red-400
             "\033[1m DANGER \033[0m"  # Print "DANGER:" in bold red-600
             "\033[0m"  # Reset color
             "\033[0m"  # Reset color
@@ -102,15 +102,15 @@ class Log:
         """
         # Print formatted success message with timestamp
         print(
-            "\n\033[38;2;115;115;115m[\033[0m" # Open the square brackets in neutral-500
+            "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
             f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
-            "\033[38;2;115;115;115m] \033[0m" # Close the square brackets in neutral-500
-            "\033[38;2;22;163;74m" # Set text color to green-600
-            "\033[48;2;74;222;128m"   # Set background color to green-400
+            "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
+            "\033[38;2;22;163;74m"  # Set text color to green-600
+            "\033[48;2;74;222;128m"  # Set background color to green-400
             "\033[1m SUCCESS \033[0m"  # Print "SUCCESS:" in bold green-600
             "\033[0m"  # Reset color
             "\033[0m"  # Reset color
@@ -150,15 +150,15 @@ class Log:
         """
         # Print formatted warning message with timestamp
         print(
-            "\n\033[38;2;115;115;115m[\033[0m" # Open the square brackets in neutral-500
+            "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
             f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
-            "\033[38;2;115;115;115m] \033[0m" # Close the square brackets in neutral-500
-            "\033[38;2;234;88;12m" # Set text color to orange-600
-            "\033[48;2;251;146;60m"   # Set background color to orange-400
+            "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
+            "\033[38;2;234;88;12m"  # Set text color to orange-600
+            "\033[48;2;251;146;60m"  # Set background color to orange-400
             "\033[1m WARNING \033[0m"  # Print "WARNING:" in bold orange-600
             "\033[0m"  # Reset color
             "\033[0m"  # Reset color
@@ -198,15 +198,15 @@ class Log:
         """
         # Print formatted info message with timestamp
         print(
-            "\n\033[38;2;115;115;115m[\033[0m" # Open the square brackets in neutral-500
+            "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
             f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
-            "\033[38;2;115;115;115m] \033[0m" # Close the square brackets in neutral-500
-            "\033[38;2;37;99;235m" # Set text color to info-600
-            "\033[48;2;96;165;250m"   # Set background color to info-400
+            "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
+            "\033[38;2;37;99;235m"  # Set text color to info-600
+            "\033[48;2;96;165;250m"  # Set background color to info-400
             "\033[1m INFO \033[0m"  # Print "INFO:" in bold info-600
             "\033[0m"  # Reset color
             "\033[0m"  # Reset color
@@ -246,14 +246,14 @@ class Log:
         """
         # Print formatted app message with timestamp
         print(
-            "\n\033[38;2;115;115;115m[\033[0m" # Open the square brackets in neutral-500
+            "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
             f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
-            "\033[38;2;115;115;115m |\033[0m" # Print vertical line in neutral-500
+            "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
             f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
-            "\033[38;2;115;115;115m] \033[0m" # Close the square brackets in neutral-500
-            "\033[38;2;13;148;136m" # Set text color to teal-600
+            "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
+            "\033[38;2;13;148;136m"  # Set text color to teal-600
             "\033[48;2;45;212;191m"  # Set background color to teal-400
             "\033[1m APP \033[0m"  # Print "APP:" in bold teal-600
             "\033[0m"  # Reset color
@@ -290,7 +290,9 @@ class Log:
             None: None
         """
         # Print breaker line
-        print(f"\033[38;2;115;155;155m{BREAKER_TEXT}\033[0m") # Set text color to neutral-500
+        print(
+            f"\033[38;2;115;155;155m{BREAKER_TEXT}\033[0m"
+        )  # Set text color to neutral-500
         # Open log file in append mode and write the breaker line
         logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
         logFile.write(BREAKER_TEXT + "\n")
