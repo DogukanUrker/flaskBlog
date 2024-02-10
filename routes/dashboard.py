@@ -1,23 +1,24 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Log,
-    flash,
-    Delete,
-    url_for,
-    request,
-    session,
-    sqlite3,
-    redirect,
-    Blueprint,
-    DB_POSTS_ROOT,
-    DB_COMMENTS_ROOT,
-    render_template,
+    Log,  # Custom logging module
+    flash,  # Flash messaging module
+    Delete,  # Function for deleting data
+    url_for,  # URL building function
+    request,  # Request handling module
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
+    redirect,  # Redirect function
+    Blueprint,  # Blueprint for defining routes
+    DB_POSTS_ROOT,  # Path to the posts database
+    DB_COMMENTS_ROOT,  # Path to the comments database
+    render_template,  # Template rendering function
 )
 
 # Create a blueprint for the dashboard route
 dashboardBlueprint = Blueprint("dashboard", __name__)
 
 
+# Define a route for the dashboard
 @dashboardBlueprint.route("/dashboard/<userName>", methods=["GET", "POST"])
 def dashboard(userName):
     # Check if the user is logged in
