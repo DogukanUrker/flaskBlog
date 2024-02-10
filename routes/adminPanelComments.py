@@ -1,20 +1,21 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Delete,
-    request,
-    sqlite3,
-    session,
-    redirect,
-    Blueprint,
-    DB_USERS_ROOT,
-    render_template,
-    DB_COMMENTS_ROOT,
+    Delete,  # Function for deleting comments
+    request,  # Request handling module
+    sqlite3,  # SQLite database module
+    session,  # Session handling module
+    redirect,  # Redirect function
+    Blueprint,  # Blueprint for defining routes
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Template rendering function
+    DB_COMMENTS_ROOT,  # Path to the comments database
 )
 
 # Create a blueprint for the admin panel comments route
 adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
 
 
+# Define routes for the admin panel comments
 @adminPanelCommentsBlueprint.route("/admin/comments", methods=["GET", "POST"])
 @adminPanelCommentsBlueprint.route("/adminpanel/comments", methods=["GET", "POST"])
 def adminPanelComments():
@@ -52,8 +53,8 @@ def adminPanelComments():
                         "adminPanelComments.html.jinja", comments=comments
                     )
                 case False:
-                    # Redirect to the home page
+                    # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            # Redirect to the login page
+            # Redirect to the login page if the user is not logged in
             return redirect("/")
