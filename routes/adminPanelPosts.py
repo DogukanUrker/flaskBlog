@@ -1,20 +1,21 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Delete,
-    sqlite3,
-    session,
-    request,
-    redirect,
-    Blueprint,
-    DB_POSTS_ROOT,
-    DB_USERS_ROOT,
-    render_template,
+    Delete,  # Function for deleting posts
+    sqlite3,  # SQLite database module
+    session,  # Session handling module
+    request,  # Request handling module
+    redirect,  # Redirect function
+    Blueprint,  # Blueprint for defining routes
+    DB_POSTS_ROOT,  # Path to the posts database
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Template rendering function
 )
 
 # Create a blueprint for the admin panel posts route
 adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
 
 
+# Define routes for the admin panel posts
 @adminPanelPostsBlueprint.route("/admin/posts", methods=["GET", "POST"])
 @adminPanelPostsBlueprint.route("/adminpanel/posts", methods=["GET", "POST"])
 def adminPanelPosts():
@@ -50,8 +51,8 @@ def adminPanelPosts():
                         "dashboard.html.jinja", posts=posts, showPosts=True
                     )
                 case False:
-                    # Redirect to the home page
+                    # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            # Redirect to the login page
+            # Redirect to the login page if the user is not logged in
             return redirect("/")
