@@ -1,37 +1,38 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Log,
-    ssl,
-    abort,
-    flash,
-    smtplib,
-    randint,
-    sqlite3,
-    request,
-    session,
-    redirect,
-    APP_NAME,
-    Blueprint,
-    SMTP_PORT,
-    SMTP_MAIL,
-    RECAPTCHA,
-    SMTP_SERVER,
-    EmailMessage,
-    requestsPost,
-    SMTP_PASSWORD,
-    DB_USERS_ROOT,
-    VerifyUserForm,
-    render_template,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_VERIFY_USER,
+    Log,  # Logging module
+    ssl,  # SSL/TLS module
+    abort,  # Function for aborting requests
+    flash,  # Flash messaging module
+    smtplib,  # SMTP client module
+    randint,  # Function for generating random integers
+    sqlite3,  # SQLite database module
+    request,  # Module for handling HTTP requests
+    session,  # Session management module
+    redirect,  # Function for redirecting requests
+    APP_NAME,  # Constant for application name
+    Blueprint,  # Blueprint class for creating modular applications
+    SMTP_PORT,  # SMTP port number
+    SMTP_MAIL,  # SMTP email address
+    RECAPTCHA,  # Recaptcha module
+    SMTP_SERVER,  # SMTP server address
+    EmailMessage,  # Class for creating email messages
+    requestsPost,  # Module for making HTTP POST requests
+    SMTP_PASSWORD,  # SMTP password
+    DB_USERS_ROOT,  # Path to the users database
+    VerifyUserForm,  # Form for verifying user
+    render_template,  # Function for rendering templates
+    RECAPTCHA_SITE_KEY,  # Recaptcha site key
+    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
+    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
+    RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling Recaptcha for verify user
 )
 
 # Create a blueprint for the verify user route
 verifyUserBlueprint = Blueprint("verifyUser", __name__)
 
 
+# Define a route for verifying user
 @verifyUserBlueprint.route("/verifyUser/codesent=<codeSent>", methods=["GET", "POST"])
 def verifyUser(codeSent):
     """
@@ -44,53 +45,66 @@ def verifyUser(codeSent):
         redirect: A redirect to the homepage if the user is verified, or a rendered template with the verification form.
 
     """
+    # Check if "userName" exists in session
     match "userName" in session:
         case True:
+            # Get the username from session
             userName = session["userName"]
+            # Connect to the users database
             connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
+            # Check if the user is already verified
             cursor.execute(
                 """select isVerified from users where lower(username) = ? """,
                 [(userName.lower())],
             )
             isVerfied = cursor.fetchone()[0]
+            # Check if the user is already verified
             match isVerfied:
                 case "True":
-                    return redirect("/")
+                    return redirect(
+                        "/"
+                    )  # Redirect to homepage if user is already verified
                 case "False":
-                    global verificationCode
+                    global verificationCode  # Declare a global variable for verification code
+                    # Create verification form instance
                     form = VerifyUserForm(request.form)
+                    # Check if code has been sent
                     match codeSent:
                         case "true":
+                            # Check if request method is POST
                             match request.method == "POST":
                                 case True:
+                                    # Retrieve verification code from the form
                                     code = request.form["code"]
+                                    # Check if the entered code matches the verification code
                                     match code == verificationCode:
                                         case True:
+                                            # Check Recaptcha if enabled
                                             match RECAPTCHA and RECAPTCHA_VERIFY_USER:
                                                 case True:
+                                                    # Verify Recaptcha response
                                                     secretResponse = request.form[
                                                         "g-recaptcha-response"
                                                     ]
                                                     verifyResponse = requestsPost(
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
+                                                    # Check Recaptcha verification result
                                                     match verifyResponse[
                                                         "success"
                                                     ] == True or verifyResponse[
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
-                                                            Log.success(
-                                                                f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
-                                                            )
+                                                            # Update user's verification status in the database
                                                             cursor.execute(
                                                                 """update users set isVerified = "True" where lower(userName) = ? """,
                                                                 [(userName.lower())],
                                                             )
                                                             connection.commit()
                                                             Log.success(
-                                                                f'USER: "{userName}" HAS BEEN VERIFIED',
+                                                                f'USER: "{userName}" HAS BEEN VERIFIED'
                                                             )
                                                             flash(
                                                                 "Your account has been verified.",
@@ -98,19 +112,21 @@ def verifyUser(codeSent):
                                                             )
                                                             return redirect("/")
                                                         case False:
+                                                            # Recaptcha verification failed
                                                             Log(
                                                                 "1",
                                                                 f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
                                                 case False:
+                                                    # Recaptcha not enabled
                                                     cursor.execute(
                                                         """update users set isVerified = "True" where lower(userName) = ? """,
                                                         [(userName.lower())],
                                                     )
                                                     connection.commit()
                                                     Log.success(
-                                                        f'USER: "{userName}" HAS BEEN VERIFIED',
+                                                        f'USER: "{userName}" HAS BEEN VERIFIED'
                                                     )
                                                     flash(
                                                         "Your account has been verified.",
@@ -118,7 +134,9 @@ def verifyUser(codeSent):
                                                     )
                                                     return redirect("/")
                                         case False:
+                                            # Wrong verification code entered
                                             flash("Wrong Code", "error")
+                            # Render the verification form template
                             return render_template(
                                 "verifyUser.html.jinja",
                                 form=form,
@@ -127,22 +145,25 @@ def verifyUser(codeSent):
                                 recaptcha=RECAPTCHA,
                             )
                         case "false":
+                            # Check if request method is POST
                             match request.method == "POST":
                                 case True:
-                                    connection = sqlite3.connect(DB_USERS_ROOT)
-                                    cursor = connection.cursor()
+                                    # Check if user exists in the database
                                     cursor.execute(
                                         """select * from users where lower(userName) = ? """,
                                         [(userName.lower())],
                                     )
                                     userNameDB = cursor.fetchone()
+                                    # Get user's email from the database
                                     cursor.execute(
                                         """select email from users where lower(username) = ? """,
                                         [(userName.lower())],
                                     )
                                     email = cursor.fetchone()
+                                    # Check if user exists in the database
                                     match not userNameDB:
                                         case False:
+                                            # Connect to SMTP server and send verification code via email
                                             context = ssl.create_default_context()
                                             server = smtplib.SMTP(
                                                 SMTP_SERVER, SMTP_PORT
@@ -154,7 +175,9 @@ def verifyUser(codeSent):
                                                 SMTP_MAIL,
                                                 SMTP_PASSWORD,
                                             )
+                                            # Generate a random verification code
                                             verificationCode = str(randint(1000, 9999))
+                                            # Create an email message with the verification code
                                             message = EmailMessage()
                                             message.set_content(
                                                 f"Hi {userName}👋,\nHere is your account verification code🔢:\n{verificationCode}"
@@ -198,31 +221,38 @@ def verifyUser(codeSent):
                                             message["Subject"] = "Verification Code🔢"
                                             message["From"] = SMTP_MAIL
                                             message["To"] = email
+                                            # Check Recaptcha if enabled
                                             match RECAPTCHA and RECAPTCHA_VERIFY_USER:
                                                 case True:
+                                                    # Verify Recaptcha response
                                                     secretResponse = request.form[
                                                         "g-recaptcha-response"
                                                     ]
                                                     verifyResponse = requestsPost(
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
+                                                    # Check Recaptcha verification result
                                                     match verifyResponse[
                                                         "success"
                                                     ] == True or verifyResponse[
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
+                                                            # Recaptcha verification successful, send verification email
                                                             Log.success(
                                                                 f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             server.send_message(message)
                                                         case False:
+                                                            # Recaptcha verification failed
                                                             Log.danger(
                                                                 f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
                                                 case False:
+                                                    # Recaptcha not enabled, send verification email
                                                     server.send_message(message)
+                                            # Close connection to SMTP server
                                             server.quit()
                                             Log.success(
                                                 f'VERIFICATION CODE: "{verificationCode}" SENT TO "{email[0]}"',
@@ -230,8 +260,10 @@ def verifyUser(codeSent):
                                             flash("code sent", "success")
                                             return redirect("/verifyUser/codesent=true")
                                         case True:
+                                            # User not found in the database
                                             Log.danger(f'USER: "{userName}" NOT FOUND')
                                             flash("user not found", "error")
+                            # Render the verification form template
                             return render_template(
                                 "verifyUser.html.jinja",
                                 form=form,
@@ -240,4 +272,4 @@ def verifyUser(codeSent):
                                 recaptcha=RECAPTCHA,
                             )
         case False:
-            return redirect("/")
+            return redirect("/")  # Redirect to homepage if user is not logged in
