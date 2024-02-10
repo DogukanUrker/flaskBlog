@@ -4,14 +4,14 @@ This file contains classes that are used to create forms for the application.
 
 # Importing necessary modules from WTForms library
 from wtforms import (
-    Form,
-    FileField,
-    validators,
-    EmailField,
-    SelectField,
-    StringField,
-    PasswordField,
-    TextAreaField,
+    Form,  # Importing the base class for forms
+    FileField,  # Importing the field class for file uploads
+    validators,  # Importing validators for form fields
+    EmailField,  # Importing the field class for email inputs
+    SelectField,  # Importing the field class for dropdown/select inputs
+    StringField,  # Importing the field class for string/text inputs
+    PasswordField,  # Importing the field class for password inputs
+    TextAreaField,  # Importing the field class for multi-line text inputs
 )
 
 
