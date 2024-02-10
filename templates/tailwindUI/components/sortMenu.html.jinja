@@ -1,0 +1,66 @@
+{% macro sortMenu(sortName) %}
+<!-- Macro to generate sort dropdown menu -->
+
+<div class="mx-auto md:w-11/12 lg:w-8/12 mt-4 flex mt-6 justify-end font-medium">
+    <!-- Container for the dropdown menu -->
+    <div class="relative inline-block text-left text-rose-500/75">
+        <!-- Dropdown select element -->
+        <select
+            class="block w-full pl-3 pr-10 py-2 rounded-md text-base sm:text-sm outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-transparent block shadow-md select-none"
+            onchange="location = this.value;" aria-placeholder="sex">
+            <!-- Placeholder option displaying the current sorting selection -->
+            <option disabled selected hidden>{{sortName}}</option>
+            <!-- Group for ascending sorting options -->
+            <optgroup label="Ascending" class="font-bold">
+                <!-- Option for sorting by creation date in descending order -->
+                <option value="/by=timeStamp/sort=desc" class="block px-4 py-2 font-medium">
+                    Creation Date
+                </option>
+                <!-- Option for sorting by title in descending order -->
+                <option value="/by=title/sort=desc" class="block px-4 py-2 font-medium">
+                    Title
+                </option>
+                <!-- Option for sorting by views in descending order -->
+                <option value="/by=views/sort=desc" class="block px-4 py-2 font-medium">
+                    Views
+                </option>
+                <!-- Option for sorting by category in descending order -->
+                <option value="/by=category/sort=desc" class="block px-4 py-2 font-medium">
+                    Category
+                </option>
+                <!-- Option for sorting by last edit date in descending order -->
+                <option value="/by=lastEditTimeStamp/sort=desc" class="block px-4 py-2 font-medium">
+                    Last Edit Date
+                </option>
+            </optgroup>
+            <!-- Group for descending sorting options -->
+            <optgroup label="Descending" class="font-bold">
+                <!-- Option for sorting by creation date in ascending order -->
+                <option value="/by=timeStamp/sort=asc" class="block px-4 py-2 font-medium">
+                    Creation Date
+                </option>
+                <!-- Option for sorting by title in ascending order -->
+                <option value="/by=title/sort=asc" class="block px-4 py-2 font-medium">
+                    Title
+                </option>
+                <!-- Option for sorting by views in ascending order -->
+                <option value="/by=views/sort=asc" class="block px-4 py-2 font-medium">
+                    Views
+                </option>
+                <!-- Option for sorting by category in ascending order -->
+                <option value="/by=category/sort=asc" class="block px-4 py-2 font-medium">
+                    Category
+                </option>
+                <!-- Option for sorting by last edit date in ascending order -->
+                <option value="/by=lastEditTimeStamp/sort=asc" class="block px-4 py-2 font-medium">
+                    Last Edit Date
+                </option>
+            </optgroup>
+        </select>
+        <!-- Icon indicating sorting -->
+        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <i class="ti ti-arrows-sort mr-2"></i>
+        </div>
+    </div>
+</div>
+{% endmacro %}

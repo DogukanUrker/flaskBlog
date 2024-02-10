@@ -9,6 +9,10 @@
 {% from "components/categoryContainer.html.jinja" import categoryContainer %}
 {{ categoryContainer() }}
 
+<!-- Include the sort dropdown component -->
+{% from "components/sortMenu.html.jinja" import sortMenu %}
+{{ sortMenu(sortName) }}
+
 <!-- Main content section with posts -->
 <div
   class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">

@@ -12,22 +12,21 @@ The index.html.jinja template displays the title and content of each post.
 """
 
 from modules import (
-    sqlite3,  # A module for working with SQLite databases
-    redirect,  # Function for redirecting requests
-    Blueprint,  # A class for creating Flask blueprints
-    DB_POSTS_ROOT,  # A constant for the path to the posts database
-    render_template,  # A function for rendering Jinja templates
+    sqlite3,  # Importing the SQLite module for working with SQLite databases
+    redirect,  # Importing the redirect function for redirecting requests
+    Blueprint,  # Importing the Blueprint class for creating Flask blueprints
+    DB_POSTS_ROOT,  # Importing the constant for the path to the posts database
+    render_template,  # Importing the render_template function for rendering Jinja templates
 )
 
-indexBlueprint = Blueprint(
-    "index", __name__
-)  # Create a blueprint for the home page with the name "index" and the current module name
+# Create a blueprint for the home page with the name "index" and the current module name
+indexBlueprint = Blueprint("index", __name__)
 
 
-@indexBlueprint.route("/")  # Define a route for the home page
-@indexBlueprint.route(
-    "/by=<by>/sort=<sort>"
-)  # Define a route for the home page with sorting parameters
+# Define a route for the home page
+@indexBlueprint.route("/")
+# Define a route for the home page with sorting parameters
+@indexBlueprint.route("/by=<by>/sort=<sort>")
 def index(by="timeStamp", sort="desc"):
     """
     This function maps the home page route ("/") to the index function.
@@ -62,5 +61,14 @@ def index(by="timeStamp", sort="desc"):
     cursor.execute(f"SELECT * FROM posts ORDER BY {by} {sort}")
     # Fetch all the results as a list of tuples
     posts = cursor.fetchall()
-    # Return the rendered template of the home page and pass the posts list as a keyword argument
-    return render_template("index.html.jinja", posts=posts)
+
+    # Modify the sorting name for better readability
+    match by:
+        case "timeStamp":
+            by = "Creation Date"
+        case "lastEditTimeStamp":
+            by = "Last Edit Date"
+    sortName = f"{by} {sort}".title()
+
+    # Return the rendered template of the home page and pass the posts list and sorting name as keyword arguments
+    return render_template("index.html.jinja", posts=posts, sortName=sortName)
