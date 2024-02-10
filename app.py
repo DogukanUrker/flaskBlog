@@ -2,8 +2,13 @@
 This file contains the main function
 """
 
-# Import the log class from the modules module
-from modules import Log, terminalASCII, currentTimeStamp, timedelta
+from modules import (
+    Log,  # Importing the Log class for logging
+    timedelta,  # Importing the timedelta class for working with time differences
+    terminalASCII,  # Importing the terminalASCII function for displaying ASCII art in the terminal
+    currentTimeStamp,  # Importing the currentTimeStamp function for getting the current timestamp
+)
+
 
 # Get the start time of the app
 startTime = currentTimeStamp()
@@ -16,93 +21,140 @@ print(terminalASCII())
 Log.app("STARTING...")
 
 
-# Import other functions and modules from the modules module
+# Importing necessary modules and classes
 from modules import (
     Flask,
-)
+)  # Importing Flask class for creating the Flask application instance
 
+# Importing blueprints for different routes
+from routes.post import postBlueprint  # Importing the blueprint for post route
+from routes.user import userBlueprint  # Importing the blueprint for user route
+from routes.index import (
+    indexBlueprint,
+)  # Importing the blueprint for index route
+from routes.login import (
+    loginBlueprint,
+)  # Importing the blueprint for login route
+from routes.about import (
+    aboutBlueprint,
+)  # Importing the blueprint for about route
+from routes.signup import (
+    signUpBlueprint,
+)  # Importing the blueprint for signup route
+from routes.logout import (
+    logoutBlueprint,
+)  # Importing the blueprint for logout route
+from routes.search import (
+    searchBlueprint,
+)  # Importing the blueprint for search route
+from routes.category import (
+    categoryBlueprint,
+)  # Importing the blueprint for category route
+from routes.editPost import (
+    editPostBlueprint,
+)  # Importing the blueprint for post editing route
+from routes.searchBar import (
+    searchBarBlueprint,
+)  # Importing the blueprint for search bar route
+from routes.dashboard import (
+    dashboardBlueprint,
+)  # Importing the blueprint for dashboard route
+from routes.verifyUser import (
+    verifyUserBlueprint,
+)  # Importing the blueprint for user verification route
+from routes.adminPanel import (
+    adminPanelBlueprint,
+)  # Importing the blueprint for admin panel route
+from routes.createPost import (
+    createPostBlueprint,
+)  # Importing the blueprint for creating post route
+from routes.privacyPolicy import (
+    privacyPolicyBlueprint,
+)  # Importing the blueprint for privacy policy route
+from routes.passwordReset import (
+    passwordResetBlueprint,
+)  # Importing the blueprint for password reset route
+from routes.changeUserName import (
+    changeUserNameBlueprint,
+)  # Importing the blueprint for changing username route
+from routes.changePassword import (
+    changePasswordBlueprint,
+)  # Importing the blueprint for changing password route
+from routes.adminPanelUsers import (
+    adminPanelUsersBlueprint,
+)  # Importing the blueprint for admin panel users route
+from routes.adminPanelPosts import (
+    adminPanelPostsBlueprint,
+)  # Importing the blueprint for admin panel posts route
+from routes.accountSettings import (
+    accountSettingsBlueprint,
+)  # Importing the blueprint for account settings route
+from routes.returnPostBanner import (
+    returnPostBannerBlueprint,
+)  # Importing the blueprint for returning post banners
+from routes.adminPanelComments import (
+    adminPanelCommentsBlueprint,
+)  # Importing the blueprint for admin panel comments route
+from routes.changeProfilePicture import (
+    changeProfilePictureBlueprint,
+)  # Importing the blueprint for changing profile picture route
 
-# Import the blueprints for the different routes from the routes module
-from routes.post import postBlueprint
-from routes.user import userBlueprint
-from routes.index import indexBlueprint
-from routes.login import loginBlueprint
-from routes.about import aboutBlueprint
-from routes.signup import signUpBlueprint
-from routes.logout import logoutBlueprint
-from routes.search import searchBlueprint
-from routes.category import categoryBlueprint
-from routes.editPost import editPostBlueprint
-from routes.searchBar import searchBarBlueprint
-from routes.dashboard import dashboardBlueprint
-from routes.verifyUser import verifyUserBlueprint
-from routes.adminPanel import adminPanelBlueprint
-from routes.createPost import createPostBlueprint
-from routes.privacyPolicy import privacyPolicyBlueprint
-from routes.passwordReset import passwordResetBlueprint
-from routes.changeUserName import changeUserNameBlueprint
-from routes.changePassword import changePasswordBlueprint
-from routes.adminPanelUsers import adminPanelUsersBlueprint
-from routes.adminPanelPosts import adminPanelPostsBlueprint
-from routes.accountSettings import accountSettingsBlueprint
-from routes.returnPostBanner import returnPostBannerBlueprint
-from routes.adminPanelComments import adminPanelCommentsBlueprint
-from routes.changeProfilePicture import changeProfilePictureBlueprint
+from flask_wtf.csrf import (
+    CSRFProtect,
+    CSRFError,
+)  # Importing CSRF protection for Flask forms
 
-# Import the CSRFProtect and CSRFError classes from the flask_wtf.csrf module
-from flask_wtf.csrf import CSRFProtect, CSRFError
-
-# Import the dbFolder, usersTable, postsTable and commentsTable functions from the dbChecker module
+# Importing database related utilities
 from utils.dbChecker import dbFolder, usersTable, postsTable, commentsTable
 
-# Import the constants from the constants module
+# Importing various configuration variables from the modules
 from modules import (
-    LOG_IN,
-    UI_NAME,
-    APP_HOST,
-    APP_NAME,
-    APP_PORT,
-    SMTP_MAIL,
-    SMTP_PORT,
-    DEBUG_MODE,
-    APP_VERSION,
-    SMTP_SERVER,
-    REGISTRATION,
-    SMTP_PASSWORD,
-    DEFAULT_ADMIN,
-    LOG_FILE_ROOT,
-    APP_ROOT_PATH,
-    STATIC_FOLDER,
-    APP_SECRET_KEY,
-    RECAPTCHA_BADGE,
-    TEMPLATE_FOLDER,
-    SESSION_PERMANENT,
-    DEFAULT_ADMIN_POINT,
-    DEFAULT_ADMIN_EMAIL,
-    DEFAULT_ADMIN_USERNAME,
-    DEFAULT_ADMIN_PASSWORD,
-    DEFAULT_ADMIN_PROFILE_PICTURE,
+    LOG_IN,  # Importing the log-in configuration
+    UI_NAME,  # Importing the UI name configuration
+    APP_HOST,  # Importing the application host configuration
+    APP_NAME,  # Importing the application name configuration
+    APP_PORT,  # Importing the application port configuration
+    SMTP_MAIL,  # Importing the SMTP mail configuration
+    SMTP_PORT,  # Importing the SMTP port configuration
+    DEBUG_MODE,  # Importing the debug mode configuration
+    APP_VERSION,  # Importing the application version configuration
+    SMTP_SERVER,  # Importing the SMTP server configuration
+    REGISTRATION,  # Importing the registration configuration
+    SMTP_PASSWORD,  # Importing the SMTP password configuration
+    DEFAULT_ADMIN,  # Importing the default admin configuration
+    LOG_FILE_ROOT,  # Importing the log file root configuration
+    APP_ROOT_PATH,  # Importing the application root path configuration
+    STATIC_FOLDER,  # Importing the static folder configuration
+    APP_SECRET_KEY,  # Importing the application secret key configuration
+    RECAPTCHA_BADGE,  # Flag for enabling/disabling Recaptcha for badge configuration
+    TEMPLATE_FOLDER,  # Importing the template folder configuration
+    SESSION_PERMANENT,  # Importing the session permanence configuration
+    DEFAULT_ADMIN_POINT,  # Importing the default admin point configuration
+    DEFAULT_ADMIN_EMAIL,  # Importing the default admin email configuration
+    DEFAULT_ADMIN_USERNAME,  # Importing the default admin username configuration
+    DEFAULT_ADMIN_PASSWORD,  # Importing the default admin password configuration
+    DEFAULT_ADMIN_PROFILE_PICTURE,  # Importing the default admin profile picture configuration
 )
 
-# Import the recaptcha-related variables from the modules module
+# Importing reCAPTCHA configurations
 from modules import (
-    RECAPTCHA,
-    RECAPTCHA_LOGIN,
-    RECAPTCHA_COMMENT,
-    RECAPTCHA_SIGN_UP,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_POST_EDIT,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_DELETE_USER,
-    RECAPTCHA_POST_DELETE,
-    RECAPTCHA_VERIFY_USER,
-    RECAPTCHA_POST_CREATE,
-    RECAPTCHA_COMMENT_DELETE,
-    RECAPTCHA_PASSWORD_RESET,
-    RECAPTCHA_PASSWORD_CHANGE,
-    RECAPTCHA_USERNAME_CHANGE,
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,
+    RECAPTCHA,  # Flag for enabling/disabling Recaptcha
+    RECAPTCHA_LOGIN,  # Flag for enabling/disabling Recaptcha for login
+    RECAPTCHA_COMMENT,  # Flag for enabling/disabling Recaptcha for comment
+    RECAPTCHA_SIGN_UP,  # Flag for enabling/disabling Recaptcha for sign-up
+    RECAPTCHA_SITE_KEY,  # Flag for enabling/disabling Recaptcha for site key
+    RECAPTCHA_POST_EDIT,  # Flag for enabling/disabling Recaptcha for post edit
+    RECAPTCHA_SECRET_KEY,  # Flag for enabling/disabling Recaptcha for secret key
+    RECAPTCHA_VERIFY_URL,  # Flag for enabling/disabling Recaptcha for verify URL
+    RECAPTCHA_DELETE_USER,  # Flag for enabling/disabling Recaptcha for delete user
+    RECAPTCHA_POST_DELETE,  # Flag for enabling/disabling Recaptcha for post delete
+    RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling Recaptcha for verify user
+    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post create
+    RECAPTCHA_COMMENT_DELETE,  # Flag for enabling/disabling Recaptcha for comment delete
+    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling/disabling Recaptcha for password reset
+    RECAPTCHA_PASSWORD_CHANGE,  # Flag for enabling/disabling Recaptcha for password change
+    RECAPTCHA_USERNAME_CHANGE,  # Flag for enabling/disabling Recaptcha for username change
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag for enabling/disabling Recaptcha for profile picture change
 )
 
 from utils.errorHandlers.notFoundErrorHandler import (
@@ -265,32 +317,76 @@ def csrfError(e):
     return csrfErrorHandler(e)
 
 
-# Register the blueprints for the different routes with the app object
-app.register_blueprint(postBlueprint)
-app.register_blueprint(userBlueprint)
-app.register_blueprint(indexBlueprint)
-app.register_blueprint(aboutBlueprint)
-app.register_blueprint(loginBlueprint)
-app.register_blueprint(signUpBlueprint)
-app.register_blueprint(logoutBlueprint)
-app.register_blueprint(searchBlueprint)
-app.register_blueprint(categoryBlueprint)
-app.register_blueprint(editPostBlueprint)
-app.register_blueprint(dashboardBlueprint)
-app.register_blueprint(searchBarBlueprint)
-app.register_blueprint(adminPanelBlueprint)
-app.register_blueprint(createPostBlueprint)
-app.register_blueprint(verifyUserBlueprint)
-app.register_blueprint(privacyPolicyBlueprint)
-app.register_blueprint(passwordResetBlueprint)
-app.register_blueprint(changeUserNameBlueprint)
-app.register_blueprint(changePasswordBlueprint)
-app.register_blueprint(adminPanelUsersBlueprint)
-app.register_blueprint(adminPanelPostsBlueprint)
-app.register_blueprint(accountSettingsBlueprint)
-app.register_blueprint(returnPostBannerBlueprint)
-app.register_blueprint(adminPanelCommentsBlueprint)
-app.register_blueprint(changeProfilePictureBlueprint)
+# Registering blueprints for different routes with the Flask application instance
+app.register_blueprint(
+    postBlueprint
+)  # Registering the blueprint for handling post routes
+app.register_blueprint(
+    userBlueprint
+)  # Registering the blueprint for handling user routes
+app.register_blueprint(indexBlueprint)  # Registering the blueprint for the index route
+app.register_blueprint(aboutBlueprint)  # Registering the blueprint for the about route
+app.register_blueprint(loginBlueprint)  # Registering the blueprint for the login route
+app.register_blueprint(
+    signUpBlueprint
+)  # Registering the blueprint for the sign-up route
+app.register_blueprint(
+    logoutBlueprint
+)  # Registering the blueprint for the logout route
+app.register_blueprint(
+    searchBlueprint
+)  # Registering the blueprint for the search route
+app.register_blueprint(
+    categoryBlueprint
+)  # Registering the blueprint for the category route
+app.register_blueprint(
+    editPostBlueprint
+)  # Registering the blueprint for the edit post route
+app.register_blueprint(
+    dashboardBlueprint
+)  # Registering the blueprint for the dashboard route
+app.register_blueprint(
+    searchBarBlueprint
+)  # Registering the blueprint for the search bar route
+app.register_blueprint(
+    adminPanelBlueprint
+)  # Registering the blueprint for the admin panel route
+app.register_blueprint(
+    createPostBlueprint
+)  # Registering the blueprint for the create post route
+app.register_blueprint(
+    verifyUserBlueprint
+)  # Registering the blueprint for the verify user route
+app.register_blueprint(
+    privacyPolicyBlueprint
+)  # Registering the blueprint for the privacy policy route
+app.register_blueprint(
+    passwordResetBlueprint
+)  # Registering the blueprint for the password reset route
+app.register_blueprint(
+    changeUserNameBlueprint
+)  # Registering the blueprint for the change username route
+app.register_blueprint(
+    changePasswordBlueprint
+)  # Registering the blueprint for the change password route
+app.register_blueprint(
+    adminPanelUsersBlueprint
+)  # Registering the blueprint for the admin panel users route
+app.register_blueprint(
+    adminPanelPostsBlueprint
+)  # Registering the blueprint for the admin panel posts route
+app.register_blueprint(
+    accountSettingsBlueprint
+)  # Registering the blueprint for the account settings route
+app.register_blueprint(
+    returnPostBannerBlueprint
+)  # Registering the blueprint for the return post banner route
+app.register_blueprint(
+    adminPanelCommentsBlueprint
+)  # Registering the blueprint for the admin panel comments route
+app.register_blueprint(
+    changeProfilePictureBlueprint
+)  # Registering the blueprint for the change profile picture route
 
 
 # Check if the name of the module is the main module
