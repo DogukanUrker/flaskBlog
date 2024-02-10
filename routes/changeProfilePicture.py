@@ -1,28 +1,29 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Log,
-    abort,
-    flash,
-    session,
-    sqlite3,
-    request,
-    redirect,
-    Blueprint,
-    RECAPTCHA,
-    requestsPost,
-    DB_USERS_ROOT,
-    render_template,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
-    ChangeProfilePictureForm,
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,
+    Log,  # Custom logging module
+    abort,  # Function to abort request
+    flash,  # Flash messaging module
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
+    request,  # Request handling module
+    redirect,  # Redirect function
+    Blueprint,  # Blueprint for defining routes
+    RECAPTCHA,  # Flag indicating if reCAPTCHA is enabled
+    requestsPost,  # Function for making HTTP POST requests
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Template rendering function
+    RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
+    RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
+    ChangeProfilePictureForm,  # Form for changing profile picture
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag indicating if reCAPTCHA is required for changing profile picture
 )
 
 # Create a blueprint for the change profile picture route
 changeProfilePictureBlueprint = Blueprint("changeProfilePicture", __name__)
 
 
+# Define a route for changing profile picture
 @changeProfilePictureBlueprint.route("/changeprofilepicture", methods=["GET", "POST"])
 def changeProfilePicture():
     # Check if the user is logged in
@@ -40,21 +41,21 @@ def changeProfilePicture():
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     cursor = connection.cursor()
-                    # Check if recaptcha is enabled and required for changing profile picture
+                    # Check if reCAPTCHA is enabled and required for changing profile picture
                     match RECAPTCHA and RECAPTCHA_PROFILE_PICTURE_CHANGE:
                         case True:
-                            # Get the recaptcha response from the form
+                            # Get the reCAPTCHA response from the form
                             secretResponse = request.form["g-recaptcha-response"]
-                            # Verify the recaptcha response with the recaptcha API
+                            # Verify the reCAPTCHA response with the reCAPTCHA API
                             verifyResponse = requestsPost(
                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                             ).json()
-                            # Check if the recaptcha verification is successful or has a high score
+                            # Check if the reCAPTCHA verification is successful or has a high score
                             match verifyResponse["success"] == True or verifyResponse[
                                 "score"
                             ] > 0.5:
                                 case True:
-                                    # Log the recaptcha verification result
+                                    # Log the reCAPTCHA verification result
                                     Log.success(
                                         f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
@@ -73,7 +74,7 @@ def changeProfilePicture():
                                     # Redirect to the same route
                                     return redirect(f"/changeprofilepicture")
                                 case False:
-                                    # Log the recaptcha verification result
+                                    # Log the reCAPTCHA verification result
                                     Log.danger(
                                         f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
@@ -94,7 +95,7 @@ def changeProfilePicture():
                             flash("profile picture changed", "success")
                             # Redirect to the same route
                             return redirect(f"/changeprofilepicture")
-            # Render the change profile picture template with the form object, the site key and the recaptcha flag
+            # Render the change profile picture template with the form object, the site key, and the reCAPTCHA flag
             return render_template(
                 "changeProfilePicture.html.jinja",
                 form=form,
