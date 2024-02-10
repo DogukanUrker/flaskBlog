@@ -1,34 +1,34 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Log,
-    ssl,
-    abort,
-    flash,
-    session,
-    sqlite3,
-    request,
-    smtplib,
-    redirect,
-    APP_NAME,
-    SMTP_PORT,
-    SMTP_MAIL,
-    RECAPTCHA,
-    addPoints,
-    Blueprint,
-    encryption,
-    SignUpForm,
-    SMTP_SERVER,
-    EmailMessage,
-    requestsPost,
-    REGISTRATION,
-    SMTP_PASSWORD,
-    DB_USERS_ROOT,
-    render_template,
-    currentTimeStamp,
-    RECAPTCHA_SIGN_UP,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
+    Log,  # Logging module
+    ssl,  # SSL/TLS module
+    abort,  # Function for aborting requests
+    flash,  # Flash messaging module
+    session,  # Session management module
+    sqlite3,  # SQLite database module
+    request,  # Module for handling HTTP requests
+    smtplib,  # SMTP client module
+    redirect,  # Function for redirecting requests
+    APP_NAME,  # Constant for application name
+    SMTP_PORT,  # SMTP port number
+    SMTP_MAIL,  # SMTP email address
+    RECAPTCHA,  # Recaptcha module
+    addPoints,  # Function for adding points to user
+    Blueprint,  # Blueprint class for creating modular applications
+    encryption,  # Encryption module
+    SignUpForm,  # Form for user sign-up
+    SMTP_SERVER,  # SMTP server address
+    EmailMessage,  # Class for creating email messages
+    requestsPost,  # Module for making HTTP POST requests
+    REGISTRATION,  # Flag for enabling/disabling user registration
+    SMTP_PASSWORD,  # SMTP password
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Function for rendering templates
+    currentTimeStamp,  # Function for getting current timestamp
+    RECAPTCHA_SIGN_UP,  # Flag for enabling/disabling Recaptcha for sign-up
+    RECAPTCHA_SITE_KEY,  # Recaptcha site key
+    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
+    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
 )
 
 # Create a blueprint for the signup route
