@@ -18,7 +18,7 @@ Log.breaker()
 print(terminalASCII())
 
 # Print a line breaker and a message that the app is starting
-Log.app("STARTING...")
+Log.app("Starting...")
 
 
 # Importing necessary modules and classes
@@ -126,11 +126,17 @@ from modules import (
     APP_ROOT_PATH,  # Importing the application root path configuration
     STATIC_FOLDER,  # Importing the static folder configuration
     APP_SECRET_KEY,  # Importing the application secret key configuration
-    RECAPTCHA_BADGE,  # Flag for enabling/disabling Recaptcha for badge configuration
+    RECAPTCHA_BADGE,  # Flag for enabling/disabling reCAPTCHA for badge configuration
     TEMPLATE_FOLDER,  # Importing the template folder configuration
+    LOG_FOLDER_ROOT,  # Importing the log folder root configuration
+    LOG_APP_FILE_ROOT,  # Importing the app log file root configuration
     SESSION_PERMANENT,  # Importing the session permanence configuration
+    LOG_INFO_FILE_ROOT,  # Importing the info log file root configuration
     DEFAULT_ADMIN_POINT,  # Importing the default admin point configuration
     DEFAULT_ADMIN_EMAIL,  # Importing the default admin email configuration
+    LOG_DANGER_FILE_ROOT,  # Importing the danger log file root configuration
+    LOG_SUCCESS_FILE_ROOT,  # Importing the success log file root configuration
+    LOG_WARNING_FILE_ROOT,  # Importing the warning log file root configuration
     DEFAULT_ADMIN_USERNAME,  # Importing the default admin username configuration
     DEFAULT_ADMIN_PASSWORD,  # Importing the default admin password configuration
     DEFAULT_ADMIN_PROFILE_PICTURE,  # Importing the default admin profile picture configuration
@@ -138,23 +144,23 @@ from modules import (
 
 # Importing reCAPTCHA configurations
 from modules import (
-    RECAPTCHA,  # Flag for enabling/disabling Recaptcha
-    RECAPTCHA_LOGIN,  # Flag for enabling/disabling Recaptcha for login
-    RECAPTCHA_COMMENT,  # Flag for enabling/disabling Recaptcha for comment
-    RECAPTCHA_SIGN_UP,  # Flag for enabling/disabling Recaptcha for sign-up
-    RECAPTCHA_SITE_KEY,  # Flag for enabling/disabling Recaptcha for site key
-    RECAPTCHA_POST_EDIT,  # Flag for enabling/disabling Recaptcha for post edit
-    RECAPTCHA_SECRET_KEY,  # Flag for enabling/disabling Recaptcha for secret key
-    RECAPTCHA_VERIFY_URL,  # Flag for enabling/disabling Recaptcha for verify URL
-    RECAPTCHA_DELETE_USER,  # Flag for enabling/disabling Recaptcha for delete user
-    RECAPTCHA_POST_DELETE,  # Flag for enabling/disabling Recaptcha for post delete
-    RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling Recaptcha for verify user
-    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post create
-    RECAPTCHA_COMMENT_DELETE,  # Flag for enabling/disabling Recaptcha for comment delete
-    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling/disabling Recaptcha for password reset
-    RECAPTCHA_PASSWORD_CHANGE,  # Flag for enabling/disabling Recaptcha for password change
-    RECAPTCHA_USERNAME_CHANGE,  # Flag for enabling/disabling Recaptcha for username change
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag for enabling/disabling Recaptcha for profile picture change
+    RECAPTCHA,  # Flag for enabling/disabling reCAPTCHA
+    RECAPTCHA_LOGIN,  # Flag for enabling/disabling reCAPTCHA for login
+    RECAPTCHA_COMMENT,  # Flag for enabling/disabling reCAPTCHA for comment
+    RECAPTCHA_SIGN_UP,  # Flag for enabling/disabling reCAPTCHA for sign-up
+    RECAPTCHA_SITE_KEY,  # Flag for enabling/disabling reCAPTCHA for site key
+    RECAPTCHA_POST_EDIT,  # Flag for enabling/disabling reCAPTCHA for post edit
+    RECAPTCHA_SECRET_KEY,  # Flag for enabling/disabling reCAPTCHA for secret key
+    RECAPTCHA_VERIFY_URL,  # Flag for enabling/disabling reCAPTCHA for verify URL
+    RECAPTCHA_DELETE_USER,  # Flag for enabling/disabling reCAPTCHA for delete user
+    RECAPTCHA_POST_DELETE,  # Flag for enabling/disabling reCAPTCHA for post delete
+    RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling reCAPTCHA for verify user
+    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling reCAPTCHA for post create
+    RECAPTCHA_COMMENT_DELETE,  # Flag for enabling/disabling reCAPTCHA for comment delete
+    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling/disabling reCAPTCHA for password reset
+    RECAPTCHA_PASSWORD_CHANGE,  # Flag for enabling/disabling reCAPTCHA for password change
+    RECAPTCHA_USERNAME_CHANGE,  # Flag for enabling/disabling reCAPTCHA for username change
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag for enabling/disabling reCAPTCHA for profile picture change
 )
 
 from utils.errorHandlers.notFoundErrorHandler import (
@@ -211,26 +217,32 @@ app.context_processor(
 )  # A context processor that adds the getProfilePicture variable to the template context
 
 # Log app settings
-Log.app(f"DEBUG MODE: {DEBUG_MODE}")
-Log.app(f"NAME: {APP_NAME}")
-Log.app(f"VERSION: {APP_VERSION}")
-Log.app(f"HOST: {APP_HOST}")
-Log.app(f"PORT: {APP_PORT}")
-Log.app(f"SECRET KEY: {APP_SECRET_KEY}")
-Log.app(f"SESSION PERMANENT: {SESSION_PERMANENT}")
-Log.app(f"ROOT PATH: {APP_ROOT_PATH}")
-Log.app(f"LOG FILE ROOT: {LOG_FILE_ROOT}")
-Log.app(f"LOG IN: {LOG_IN}")
-Log.app(f"REGISTRATION: {REGISTRATION}")
+Log.app(f"Debug mode: {DEBUG_MODE}")
+Log.app(f"Name: {APP_NAME}")
+Log.app(f"Version: {APP_VERSION}")
+Log.app(f"Host: {APP_HOST}")
+Log.app(f"Port: {APP_PORT}")
+Log.app(f"Secret key: {APP_SECRET_KEY}")
+Log.app(f"Session permanent: {SESSION_PERMANENT}")
+Log.app(f"Root path: {APP_ROOT_PATH}")
+Log.app(f"Log folder root: {LOG_FOLDER_ROOT}")
+Log.app(f"Log file root: {LOG_FILE_ROOT}")
+Log.app(f"Log app file root: {LOG_APP_FILE_ROOT}")
+Log.app(f"Log danger file root: {LOG_DANGER_FILE_ROOT}")
+Log.app(f"Log success file root: {LOG_SUCCESS_FILE_ROOT}")
+Log.app(f"Log info file root: {LOG_INFO_FILE_ROOT}")
+Log.app(f"Log warning file root: {LOG_WARNING_FILE_ROOT}")
+Log.app(f"Log in: {LOG_IN}")
+Log.app(f"Registration: {REGISTRATION}")
 # Log the UI name, template folder and the static folder
 Log.app(f"UI: {UI_NAME}")
-Log.app(f"TEMPLATE FOLDER: {TEMPLATE_FOLDER}")
-Log.app(f"STATIC FOLDER: {STATIC_FOLDER}")
+Log.app(f"Template folder: {TEMPLATE_FOLDER}")
+Log.app(f"Static folder: {STATIC_FOLDER}")
 # Log the SMTP server settings
-Log.app(f"SMTP SERVER: {SMTP_SERVER}")
-Log.app(f"SMTP PORT: {SMTP_PORT}")
-Log.app(f"SMTP MAIL: {SMTP_MAIL}")
-Log.app(f"SMTP PASSWORD: {SMTP_PASSWORD}")
+Log.app(f"SMTP server: {SMTP_SERVER}")
+Log.app(f"SMTP port: {SMTP_PORT}")
+Log.app(f"SMTP mail: {SMTP_MAIL}")
+Log.app(f"SMTP password: {SMTP_PASSWORD}")
 
 # Check if recaptcha is enabled
 match RECAPTCHA:
@@ -240,54 +252,54 @@ match RECAPTCHA:
             case True:
                 # Log a warning message that the recaptcha keys are invalid and may cause the app to crash
                 Log.danger(
-                    f"RECAPTCHA KEYS IS UNVALID THIS MAY CAUSE THE APPLICATION TO CRASH",
+                    f"reCAPTCHA keys is unvalid this may cause the application to crash",
                 )
                 Log.danger(
-                    f"PLEASE CHECK YOUR RECAPTCHA KEYS OR SET RECAPTCHA TO FALSE FROM TRUE IN 'constants.py'",
+                    f"Please check your recaptcha keys or set recaptcha to false from true in 'constants.py'",
                 )
             case False:
                 # Log a success message that recaptcha is on and print the recaptcha keys, url and badge status
-                Log.app("RECAPTCHA IS ON")
-                Log.app(f"RECAPTCHA RECAPTCHA_SITE_KEY KEY: {RECAPTCHA_SITE_KEY}")
-                Log.app(f"RECAPTCHA SECRET KEY: {RECAPTCHA_SECRET_KEY}")
-                Log.app(f"RECAPTCHA VERIFY URL: {RECAPTCHA_VERIFY_URL}")
-                Log.app(f"RECAPTCHA BADGE: {RECAPTCHA_BADGE}")
+                Log.app("reCAPTCHA is on")
+                Log.app(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
+                Log.app(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
+                Log.app(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
+                Log.app(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
                 # Log the recaptcha settings for different actions
-                Log.app(f"RECAPTCHA LOGIN: {RECAPTCHA_LOGIN}")
-                Log.app(f"RECAPTCHA SIGN UP: {RECAPTCHA_SIGN_UP }")
-                Log.app(f"RECAPTCHA POST CREATE: {RECAPTCHA_POST_CREATE}")
-                Log.app(f"RECAPTCHA POST EDIT: {RECAPTCHA_POST_EDIT }")
-                Log.app(f"RECAPTCHA POST DELETE: {RECAPTCHA_POST_DELETE}")
-                Log.app(f"RECAPTCHA COMMENT: {RECAPTCHA_COMMENT}")
-                Log.app(f"RECAPTCHA COMMENT DELETE: {RECAPTCHA_COMMENT_DELETE}")
-                Log.app(f"RECAPTCHA PASSWORD RESET: {RECAPTCHA_PASSWORD_RESET}")
-                Log.app(f"RECAPTCHA PASSWORD CHANGE: {RECAPTCHA_PASSWORD_CHANGE}")
-                Log.app(f"RECAPTCHA USERNAME CHANGE: {RECAPTCHA_USERNAME_CHANGE}")
-                Log.app(f"RECAPTCHA VERIFY USER: {RECAPTCHA_VERIFY_USER}")
-                Log.app(f"RECAPTCHA DELETE USER: {RECAPTCHA_DELETE_USER}")
+                Log.app(f"reCAPTCHA login: {RECAPTCHA_LOGIN}")
+                Log.app(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP }")
+                Log.app(f"reCAPTCHA post create: {RECAPTCHA_POST_CREATE}")
+                Log.app(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT }")
+                Log.app(f"reCAPTCHA post delete: {RECAPTCHA_POST_DELETE}")
+                Log.app(f"reCAPTCHA comment: {RECAPTCHA_COMMENT}")
+                Log.app(f"reCAPTCHA comment delete: {RECAPTCHA_COMMENT_DELETE}")
+                Log.app(f"reCAPTCHA password reset: {RECAPTCHA_PASSWORD_RESET}")
+                Log.app(f"reCAPTCHA password change: {RECAPTCHA_PASSWORD_CHANGE}")
+                Log.app(f"reCAPTCHA username change: {RECAPTCHA_USERNAME_CHANGE}")
+                Log.app(f"reCAPTCHA verify user: {RECAPTCHA_VERIFY_USER}")
+                Log.app(f"reCAPTCHA delete user: {RECAPTCHA_DELETE_USER}")
                 Log.app(
-                    f"RECAPTCHA USER PROFILE PICTURE CHANGE: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
+                    f"reCAPTCHA user profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
                 )
                 Log.app(
-                    f"RECAPTCHA PROFILE PICTURE CHANGE: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
+                    f"reCAPTCHA profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
                 )
     case False:
         # Log a warning message that recaptcha is off
-        Log.app(f"RECAPTCHA IS OFF")
+        Log.app(f"reCAPTCHA is off")
 
 # Check if default admin is enabled
 match DEFAULT_ADMIN:
     case True:
         # Log a success message that admin is on and print the default admin settings
-        Log.app(f"DEFAULT ADMIN IS ON")
-        Log.app(f"DEFAULT ADMIN USERNAME: {DEFAULT_ADMIN_USERNAME}")
-        Log.app(f"DEFAULT ADMIN EMAIL: {DEFAULT_ADMIN_EMAIL}")
-        Log.app(f"DEFAULT ADMIN PASSWORD: {DEFAULT_ADMIN_PASSWORD}")
-        Log.app(f"DEFAULT ADMIN POINT: {DEFAULT_ADMIN_POINT}")
-        Log.app(f"DEFAULT ADMIN PROFILE PICTURE: {DEFAULT_ADMIN_PROFILE_PICTURE}")
+        Log.app(f"Default admin is on")
+        Log.app(f"Default admin username: {DEFAULT_ADMIN_USERNAME}")
+        Log.app(f"Default admin email: {DEFAULT_ADMIN_EMAIL}")
+        Log.app(f"Default admin password: {DEFAULT_ADMIN_PASSWORD}")
+        Log.app(f"Default admin point: {DEFAULT_ADMIN_POINT}")
+        Log.app(f"Default admin profile picture: {DEFAULT_ADMIN_PROFILE_PICTURE}")
     case False:
         # Log a danger message that admin is off
-        Log.app(f"DEFAULT ADMIN IS OFF")
+        Log.app(f"Default admin is off")
 
 # Call the dbFolder, usersTable, postsTable and commentsTable functions to check the database status
 dbFolder()
@@ -392,9 +404,11 @@ app.register_blueprint(
 # Check if the name of the module is the main module
 match __name__:
     case "__main__":
-        # Log a message that the app started successfully and print the host and port
-        Log.success("STARTED SUCCESSFULLY")
-        Log.app(f"RUNNING ON http://{APP_HOST}:{APP_PORT}")
+        # Log the host and port
+        Log.app(f"Running on http://{APP_HOST}:{APP_PORT}")
+
+        # Log a message that the app started successfully
+        Log.success("App started")
 
         # Print a ASCII art
         print(terminalASCII())
@@ -412,13 +426,13 @@ match __name__:
         runTime = str(timedelta(seconds=runTime))
 
         # Log a message that shows the run time of the app
-        Log.app(f"RUN TIME: {runTime} ")
+        Log.app(f"Run time: {runTime} ")
 
         # Log a message that the app shut down
-        Log.app("SHUT DOWN")
+        Log.app("Shut down")
 
         # Log a warning message that the app shut down
-        Log.warning("APP SHUT DOWN")
+        Log.warning("App shut down")
 
         # Print a ASCII art
         print(terminalASCII())
