@@ -1,17 +1,18 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    sqlite3,
-    session,
-    redirect,
-    Blueprint,
-    DB_USERS_ROOT,
-    render_template,
+    sqlite3,  # SQLite database module
+    session,  # Session handling module
+    redirect,  # Redirect function
+    Blueprint,  # Blueprint for defining routes
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Template rendering function
 )
 
 # Create a blueprint for the admin panel route
 adminPanelBlueprint = Blueprint("adminPanel", __name__)
 
 
+# Define route for the admin panel
 @adminPanelBlueprint.route("/admin")
 def adminPanel():
     # Check if the user is logged in
@@ -31,8 +32,8 @@ def adminPanel():
                     # Render the admin panel template
                     return render_template("adminPanel.html.jinja")
                 case False:
-                    # Redirect to the home page
+                    # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            # Redirect to the login page
+            # Redirect to the login page if the user is not logged in
             return redirect("/")
