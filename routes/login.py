@@ -1,29 +1,32 @@
+# Import necessary modules and functions
 from modules import (
-    Log,
-    abort,
-    flash,
-    LOG_IN,
-    session,
-    request,
-    sqlite3,
-    redirect,
-    RECAPTCHA,
-    addPoints,
-    Blueprint,
-    LoginForm,
-    encryption,
-    requestsPost,
-    DB_USERS_ROOT,
-    render_template,
-    RECAPTCHA_LOGIN,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
+    Log,  # Custom logging module
+    abort,  # Function to abort request processing
+    flash,  # Flash messaging module
+    LOG_IN,  # Flag indicating if login is enabled
+    session,  # Session handling module
+    request,  # Request handling module
+    sqlite3,  # SQLite database module
+    redirect,  # Redirect function
+    RECAPTCHA,  # Flag for enabling reCAPTCHA
+    addPoints,  # Function to add points to user's score
+    Blueprint,  # Blueprint for defining routes
+    LoginForm,  # Form class for login
+    encryption,  # Encryption utility module
+    requestsPost,  # Function for making POST requests
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Template rendering function
+    RECAPTCHA_LOGIN,  # Flag for enabling reCAPTCHA for login
+    RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
+    RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
 )
 
+# Create a blueprint for the login route
 loginBlueprint = Blueprint("login", __name__)
 
 
+# Define a route for login
 @loginBlueprint.route("/login/redirect=<direct>", methods=["GET", "POST"])
 def login(direct):
     """
@@ -38,11 +41,12 @@ def login(direct):
     Raises:
         401: If the login is unsuccessful.
     """
-    direct = direct.replace("&", "/")
+    direct = direct.replace("&", "/")  # Convert direct link parameter
     match LOG_IN:
         case True:
             match "userName" in session:
                 case True:
+                    # If user is already logged in, redirect
                     Log.danger(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
                     return (
                         redirect(direct),
@@ -52,6 +56,7 @@ def login(direct):
                     form = LoginForm(request.form)
                     match request.method == "POST":
                         case True:
+                            # Retrieve form data
                             userName = request.form["userName"]
                             password = request.form["password"]
                             userName = userName.replace(" ", "")
@@ -64,13 +69,15 @@ def login(direct):
                             user = cursor.fetchone()
                             match not user:
                                 case True:
+                                    # If user not found, show error message
                                     Log.danger(f'USER: "{userName}" NOT FOUND')
-                                    flash("user not found", "error")
+                                    flash("User not found", "error")
                                 case _:
                                     match encryption.verify(password, user[3]):
                                         case True:
                                             match RECAPTCHA and RECAPTCHA_LOGIN:
                                                 case True:
+                                                    # Perform reCAPTCHA verification
                                                     secretResponse = request.form[
                                                         "g-recaptcha-response"
                                                     ]
@@ -134,7 +141,8 @@ def login(direct):
                                         case _:
                                             # Returns an incorrect password error if the password is incorrect
                                             Log.danger("WRONG PASSWORD")
-                                            flash("wrong  password", "error")
+                                            flash("Wrong password", "error")
+                    # Render login template with appropriate form and messages
                     return render_template(
                         "login.html.jinja",
                         form=form,
