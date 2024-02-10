@@ -1,20 +1,21 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    Delete,
-    sqlite3,
-    session,
-    request,
-    redirect,
-    Blueprint,
-    DB_USERS_ROOT,
-    changeUserRole,
-    render_template,
+    Delete,  # Function for deleting users
+    sqlite3,  # SQLite database module
+    session,  # Session handling module
+    request,  # Request handling module
+    redirect,  # Redirect function
+    Blueprint,  # Blueprint for defining routes
+    DB_USERS_ROOT,  # Path to the users database
+    changeUserRole,  # Function for changing user roles
+    render_template,  # Template rendering function
 )
 
 # Create a blueprint for the admin panel users route
 adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)
 
 
+# Define routes for the admin panel users
 @adminPanelUsersBlueprint.route("/admin/users", methods=["GET", "POST"])
 @adminPanelUsersBlueprint.route("/adminpanel/users", methods=["GET", "POST"])
 def adminPanelUsers():
@@ -56,8 +57,8 @@ def adminPanelUsers():
                         users=users,
                     )
                 case False:
-                    # Redirect to the home page
+                    # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            # Redirect to the login page
+            # Redirect to the login page if the user is not logged in
             return redirect("/")
