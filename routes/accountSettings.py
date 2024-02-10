@@ -1,27 +1,28 @@
-# Import the necessary modules and functions
+# Import necessary modules and functions
 from modules import (
-    abort,
-    Delete,
-    Log,
-    request,
-    sqlite3,
-    session,
-    redirect,
-    Blueprint,
-    RECAPTCHA,
-    requestsPost,
-    DB_USERS_ROOT,
-    render_template,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_DELETE_USER,
+    Log,  # Module for logging
+    abort,  # Function to abort the request
+    Delete,  # Function to delete user from the database
+    request,  # Module for handling HTTP requests
+    sqlite3,  # SQLite database module
+    session,  # Session handling module
+    redirect,  # Function to redirect
+    Blueprint,  # Blueprint for defining routes
+    RECAPTCHA,  # Flag indicating whether reCAPTCHA is enabled
+    requestsPost,  # Function to make POST requests
+    DB_USERS_ROOT,  # Path to the users database
+    render_template,  # Function to render HTML templates
+    RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
+    RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
+    RECAPTCHA_DELETE_USER,  # Flag indicating whether reCAPTCHA is required for deleting user
 )
 
 # Create a blueprint for the account settings route
 accountSettingsBlueprint = Blueprint("accountSettings", __name__)
 
 
+# Define route for account settings
 @accountSettingsBlueprint.route("/accountsettings", methods=["GET", "POST"])
 def accountSettings():
     # Check if the user is logged in
@@ -38,22 +39,21 @@ def accountSettings():
             # Check if the request method is POST
             match request.method == "POST":
                 case True:
-                    # Check if recaptcha is enabled and required for deleting user
+                    # Check if reCAPTCHA is enabled and required for deleting user
                     match RECAPTCHA and RECAPTCHA_DELETE_USER:
                         case True:
-                            # Get the recaptcha response from the form
+                            # Get the reCAPTCHA response from the form
                             secretResponse = request.form["g-recaptcha-response"]
-                            # Verify the recaptcha response with the recaptcha API
+                            # Verify the reCAPTCHA response with the reCAPTCHA API
                             verifyResponse = requestsPost(
                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                             ).json()
-                            # Check if the recaptcha verification is successful or has a high score
+                            # Check if the reCAPTCHA verification is successful or has a high score
                             match verifyResponse["success"] == True or verifyResponse[
                                 "score"
                             ] > 0.5:
-
                                 case True:
-                                    # Log the recaptcha verification result
+                                    # Log the reCAPTCHA verification result
                                     Log.success(
                                         "2",
                                         f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
@@ -63,7 +63,7 @@ def accountSettings():
                                     # Redirect to the home page
                                     return redirect(f"/")
                                 case False:
-                                    # Log the recaptcha verification result
+                                    # Log the reCAPTCHA verification result
                                     Log.danger(
                                         f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                     )
@@ -74,7 +74,7 @@ def accountSettings():
                             Delete.user(user[0][0])
                             # Redirect to the home page
                             return redirect(f"/")
-            # Render the account settings template with the user and recaptcha data
+            # Render the account settings template with the user and reCAPTCHA data
             return render_template(
                 "accountSettings.html.jinja",
                 user=user,
