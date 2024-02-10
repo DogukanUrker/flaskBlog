@@ -35,6 +35,7 @@ from modules import (
 signUpBlueprint = Blueprint("signup", __name__)
 
 
+# Define the route handler for the signup page
 @signUpBlueprint.route("/signup", methods=["GET", "POST"])
 def signup():
     """
@@ -47,54 +48,80 @@ def signup():
     Returns:
     The sign up page with any errors or a confirmation message.
     """
+    # Check if registration is enabled
     match REGISTRATION:
+        # If registration is enabled
         case True:
+            # Check if the user is already logged in
             match "userName" in session:
+                # If user is already logged in, redirect to homepage
                 case True:
                     Log.danger(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
                     return redirect("/")
+                # If user is not logged in
                 case False:
+                    # Create sign up form object
                     form = SignUpForm(request.form)
+                    # Check if request method is POST (form submitted)
                     match request.method == "POST":
+                        # If form is submitted
                         case True:
+                            # Extract form data
                             userName = request.form["userName"]
                             email = request.form["email"]
                             password = request.form["password"]
                             passwordConfirm = request.form["passwordConfirm"]
+                            # Remove spaces from username
                             userName = userName.replace(" ", "")
+                            # Connect to the database
                             connection = sqlite3.connect(DB_USERS_ROOT)
                             cursor = connection.cursor()
+                            # Fetch existing usernames and emails from the database
                             cursor.execute("select userName from users")
                             users = str(cursor.fetchall())
                             cursor.execute("select email from users")
                             mails = str(cursor.fetchall())
+                            # Check if username and email are available
                             match not userName in users and not email in mails:
+                                # If username and email are available
                                 case True:
+                                    # Check if passwords match
                                     match passwordConfirm == password:
+                                        # If passwords match
                                         case True:
+                                            # Check if username contains only ASCII characters
                                             match userName.isascii():
+                                                # If username contains only ASCII characters
                                                 case True:
+                                                    # Hash the password
                                                     password = encryption.hash(password)
+                                                    # Connect to the database
                                                     connection = sqlite3.connect(
                                                         DB_USERS_ROOT
                                                     )
+                                                    # Check if reCAPTCHA is enabled for sign up
                                                     match RECAPTCHA and RECAPTCHA_SIGN_UP:
+                                                        # If reCAPTCHA is enabled
                                                         case True:
+                                                            # Verify reCAPTCHA response
                                                             secretResponse = request.form[
                                                                 "g-recaptcha-response"
                                                             ]
                                                             verifyResponse = requestsPost(
                                                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                             ).json()
+                                                            # If reCAPTCHA verification is successful
                                                             match verifyResponse[
                                                                 "success"
                                                             ] == True or verifyResponse[
                                                                 "score"
                                                             ] > 0.5:
+                                                                # If reCAPTCHA verification is successful
                                                                 case True:
                                                                     Log.success(
                                                                         f"SIGN UP RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                                     )
+                                                                    # Insert user data into the database
                                                                     cursor = (
                                                                         connection.cursor()
                                                                     )
@@ -115,25 +142,31 @@ def signup():
                                                                         ),
                                                                     )
                                                                     connection.commit()
+                                                                    # Log user addition
                                                                     Log.success(
                                                                         f'USER: "{userName}" ADDED TO DATABASE',
                                                                     )
+                                                                    # Store username in session (log user in)
                                                                     session[
                                                                         "userName"
                                                                     ] = userName
+                                                                    # Add points to the user
                                                                     addPoints(
                                                                         1,
                                                                         session[
                                                                             "userName"
                                                                         ],
                                                                     )
+                                                                    # Log user login
                                                                     Log.success(
                                                                         f'USER: "{userName}" LOGGED IN',
                                                                     )
+                                                                    # Flash success message
                                                                     flash(
                                                                         f"Welcome {userName}",
                                                                         "success",
                                                                     )
+                                                                    # Set up email server connection
                                                                     context = (
                                                                         ssl.create_default_context()
                                                                     )
@@ -152,6 +185,7 @@ def signup():
                                                                         SMTP_MAIL,
                                                                         SMTP_PASSWORD,
                                                                     )
+                                                                    # Compose email message
                                                                     mail = (
                                                                         EmailMessage()
                                                                     )
@@ -187,19 +221,24 @@ def signup():
                                                                         SMTP_MAIL
                                                                     )
                                                                     mail["To"] = email
+                                                                    # Send email
                                                                     server.send_message(
                                                                         mail
                                                                     )
                                                                     server.quit()
+                                                                    # Redirect user for further verification
                                                                     return redirect(
                                                                         "/verifyUser/codesent=false"
                                                                     )
+                                                                # If reCAPTCHA verification fails
                                                                 case False:
                                                                     Log.danger(
                                                                         f"SIGN UP | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
                                                                     )
                                                                     abort(401)
+                                                        # If reCAPTCHA is not enabled
                                                         case False:
+                                                            # Insert user data into the database
                                                             cursor = connection.cursor()
                                                             cursor.execute(
                                                                 f"""
@@ -218,22 +257,28 @@ def signup():
                                                                 ),
                                                             )
                                                             connection.commit()
+                                                            # Log user addition
                                                             Log.success(
                                                                 f'USER: "{userName}" ADDED TO DATABASE',
                                                             )
+                                                            # Store username in session (log user in)
                                                             session["userName"] = (
                                                                 userName
                                                             )
+                                                            # Add points to the user
                                                             addPoints(
                                                                 1, session["userName"]
                                                             )
+                                                            # Log user login
                                                             Log.success(
                                                                 f'USER: "{userName}" LOGGED IN',
                                                             )
+                                                            # Flash success message
                                                             flash(
                                                                 f"Welcome {userName}",
                                                                 "success",
                                                             )
+                                                            # Set up email server connection
                                                             context = (
                                                                 ssl.create_default_context()
                                                             )
@@ -248,6 +293,7 @@ def signup():
                                                             server.login(
                                                                 SMTP_MAIL, SMTP_PASSWORD
                                                             )
+                                                            # Compose email message
                                                             mail = EmailMessage()
                                                             mail.set_content(
                                                                 f"Hi {userName}👋,\n Welcome to {APP_NAME}"
@@ -279,27 +325,35 @@ def signup():
                                                             )
                                                             mail["From"] = SMTP_MAIL
                                                             mail["To"] = email
+                                                            # Send email
                                                             server.send_message(mail)
                                                             server.quit()
+                                                            # Redirect user for further verification
                                                             return redirect(
                                                                 "/verifyUser/codesent=false"
                                                             )
+                                                # If username contains non-ASCII characters
                                                 case False:
                                                     Log.danger(
                                                         f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
                                                     )
+                                                    # Flash error message
                                                     flash(
                                                         "username does not fit ascii charecters",
                                                         "error",
                                                     )
+                                        # If passwords do not match
                                         case False:
                                             Log.danger(" PASSWORDS MUST MATCH ")
+                                            # Flash error message
                                             flash("password must match", "error")
+                            # If username or email is not available
                             match userName in users and email in mails:
                                 case True:
                                     Log.danger(
                                         f'"{userName}" & "{email}" IS UNAVAILABLE '
                                     )
+                                    # Flash error message
                                     flash(
                                         "This username and email is unavailable.",
                                         "error",
@@ -307,13 +361,16 @@ def signup():
                             match not userName in users and email in mails:
                                 case True:
                                     Log.danger(f'THIS EMAIL "{email}" IS UNAVAILABLE ')
+                                    # Flash error message
                                     flash("This email is unavailable.", "error")
                             match userName in users and not email in mails:
                                 case True:
                                     Log.danger(
                                         f'THIS USERNAME "{userName}" IS UNAVAILABLE ',
                                     )
+                                    # Flash error message
                                     flash("This username is unavailable.", "error")
+                    # Render sign up template with form data
                     return render_template(
                         "signup.html.jinja",
                         form=form,
@@ -321,5 +378,7 @@ def signup():
                         siteKey=RECAPTCHA_SITE_KEY,
                         recaptcha=RECAPTCHA,
                     )
+        # If registration is disabled
         case False:
+            # Redirect to homepage
             return redirect("/")
