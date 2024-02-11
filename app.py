@@ -176,6 +176,11 @@ from utils.errorHandlers.unauthorizedErrorHandler import (
 )  # This function handles unauthorized access errors
 
 
+from utils.afterRequest import (
+    afterRequestLogger,
+)  # This function handles loggins of every request
+
+
 # Import the contextProcessor module that contains custom functions for the app
 from modules import (
     isLogin,  # A function that checks LOG_IN constant
@@ -308,25 +313,32 @@ postsTable()
 commentsTable()
 
 
-# Use the app.errorhandler decorator to register error handler functions for your app
+# Use the app.errorhandler decorator to register error handler functions for app
 @app.errorhandler(404)
 def notFound(e):
     # Call the notFoundErrorHandler function and return its result
     return notFoundErrorHandler(e)
 
 
-# Use the app.errorhandler decorator to register error handler functions for your app
+# Use the app.errorhandler decorator to register error handler functions for app
 @app.errorhandler(401)
 def unauthorized(e):
     # Call the unauthorizedErrorHandler function and return its result
     return unauthorizedErrorHandler(e)
 
 
-# Use the app.errorhandler decorator to register error handler functions for your app
+# Use the app.errorhandler decorator to register error handler functions for app
 @app.errorhandler(CSRFError)
 def csrfError(e):
     # Call the csrfErrorHandler function and return its result
     return csrfErrorHandler(e)
+
+
+# Use the app.after_request decorator to handle every request
+@app.after_request
+def afterRequest(response):
+    # Call the afterRequestLogger function and return its result
+    return afterRequestLogger(response)
 
 
 # Registering blueprints for different routes with the Flask application instance
