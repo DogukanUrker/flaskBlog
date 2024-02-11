@@ -44,7 +44,7 @@ def user(userName):
     ).lower():  # Use a match statement to compare the username with the list of usernames
         case True:  # If the username exists
             Log.success(
-                f'USER: "{userName}" FOUND'
+                f'User: "{userName}" found'
             )  # Log a message with level 2 indicating the user was found
             cursor.execute(
                 """select * from users where lower(userName) = ? """,  # Select all the columns from the users table where the username matches the given username
@@ -101,7 +101,7 @@ def user(userName):
                 case _:  # If the comments list is not empty
                     showComments = True  # Set the showComments variable to True
             Log.success(
-                f'USER: "{userName}"s PAGE LOADED'
+                f'User: "{userName}"s data loaded'
             )  # Log a message with level 2 indicating the user's page was loaded
             return render_template(  # Return the rendered template of the user page
                 "user.html.jinja",  # The name of the template file
@@ -114,7 +114,7 @@ def user(userName):
             )
         case _:  # If the username does not exist
             Log.danger(
-                f'USER: "{userName}" NOT FOUND'
+                f'User: "{userName}" not found'
             )  # Log an error message the user was not found
             return render_template(
                 "notFound.html.jinja"

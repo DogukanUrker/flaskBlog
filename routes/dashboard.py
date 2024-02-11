@@ -85,13 +85,13 @@ def dashboard(userName):
                 case False:
                     # Log a message that the dashboard does not belong to the session user name
                     Log.danger(
-                        f'THIS IS DASHBOARD NOT BELONGS TO USER: "{session["userName"]}"',
+                        f'User: "{session["userName"]}" tried to login to another users dashboard',
                     )
                     # Redirect to the dashboard of the session user name
                     return redirect(f'/dashboard/{session["userName"].lower()}')
         case False:
             # Log a message that the dashboard cannot be accessed without user login
-            Log.danger("DASHBOARD CANNOT BE ACCESSED WITHOUT USER LOGIN")
+            Log.danger("User tried to access the dashboard without login")
             # Flash an error message to the user
             flash("you need login for reach to dashboard", "error")
             # Redirect to the login page with the dashboard and user as the next destination

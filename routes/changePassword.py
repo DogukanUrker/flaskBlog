@@ -101,7 +101,7 @@ def changePassword():
                                                 case True:
                                                     # Log reCAPTCHA verification
                                                     Log.success(
-                                                        f"PASSWORD CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                        f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                     )
                                                     # Update password in the database
                                                     cursor = connection.cursor()
@@ -116,7 +116,7 @@ def changePassword():
                                                     connection.commit()
                                                     # Log password change
                                                     Log.success(
-                                                        f'USER: "{session["userName"]}" CHANGED HIS PASSWORD',
+                                                        f'User: "{session["userName"]}" changed his password',
                                                     )
                                                     # Clear session
                                                     session.clear()
@@ -130,7 +130,7 @@ def changePassword():
                                                 case False:
                                                     # Log reCAPTCHA failure
                                                     Log.danger(
-                                                        f"PASSWORD CHANGE DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                        f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                     )
                                                     # Abort the request
                                                     abort(401)
@@ -148,7 +148,7 @@ def changePassword():
                                             connection.commit()
                                             # Log password change
                                             Log.success(
-                                                f'USER: "{session["userName"]}" CHANGED HIS PASSWORD',
+                                                f'User: "{session["userName"]}" changed his password',
                                             )
                                             # Clear session
                                             session.clear()
@@ -171,7 +171,7 @@ def changePassword():
             )
         case False:
             # Log user not logged in
-            Log.danger("USER NOT LOGGED IN")
+            Log.danger("User not logged in")
             # Display error message
             flash("you need login for change your password", "error")
             # Redirect to login page

@@ -57,7 +57,7 @@ def changeProfilePicture():
                                 case True:
                                     # Log the reCAPTCHA verification result
                                     Log.success(
-                                        f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                        f"Change profile picture reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Update the users database by setting the new profile picture for the user name
                                     cursor.execute(
@@ -67,7 +67,7 @@ def changeProfilePicture():
                                     connection.commit()
                                     # Log a message that the user changed their profile picture
                                     Log.success(
-                                        f'USER: "{session["userName"]}" CHANGED HIS PROFILE PICTURE TO "{newProfilePicture}"',
+                                        f'User: "{session["userName"]}" changed his profile picture to "{newProfilePicture}"',
                                     )
                                     # Flash a success message to the user
                                     flash("profile picture changed", "success")
@@ -76,7 +76,7 @@ def changeProfilePicture():
                                 case False:
                                     # Log the reCAPTCHA verification result
                                     Log.danger(
-                                        f"CHANGE PROFILE PICTURE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                        f"Change profile picture reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Abort the request with a 401 error
                                     abort(401)
@@ -89,7 +89,7 @@ def changeProfilePicture():
                             connection.commit()
                             # Log a message that the user changed their profile picture
                             Log.success(
-                                f'USER: "{session["userName"]}" CHANGED HIS PROFILE PICTURE TO "{newProfilePicture}"',
+                                f'User: "{session["userName"]}" changed his profile picture to "{newProfilePicture}"',
                             )
                             # Flash a success message to the user
                             flash("profile picture changed", "success")

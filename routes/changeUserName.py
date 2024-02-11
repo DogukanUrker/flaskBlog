@@ -98,6 +98,10 @@ def changeUserName():
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
+                                                            # Log the reCAPTCHA verification result
+                                                            Log.success(
+                                                                f"Change username reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                                                            )
                                                             # Update username in the database
                                                             cursor.execute(
                                                                 """update users set userName = ? where userName = ? """,
@@ -154,7 +158,7 @@ def changeUserName():
                                                                 newUserName
                                                             )
                                                             Log.success(
-                                                                f'USER: "{session["userName"]}" CHANGED USER NAME TO "{newUserName}"'
+                                                                f'User: "{session["userName"]}" changed his username to "{newUserName}"'
                                                             )
                                                             flash(
                                                                 "user name changed",
@@ -166,7 +170,7 @@ def changeUserName():
                                                         case False:
                                                             # Recaptcha verification failed
                                                             Log.danger(
-                                                                f"USERNAME CHANGE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}"
+                                                                f"Username change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}"
                                                             )
                                                             abort(401)
                                                 case False:
@@ -206,7 +210,7 @@ def changeUserName():
                                                     )
                                                     connection.commit()
                                                     Log.success(
-                                                        f'USER: "{session["userName"]}" CHANGED USER NAME TO "{newUserName}"'
+                                                        f'User: "{session["userName"]}" changed his username to "{newUserName}"'
                                                     )
                                                     session["userName"] = newUserName
                                                     flash(

@@ -97,6 +97,10 @@ def verifyUser(codeSent):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
+                                                            # Recaptcha verification successful
+                                                            Log.success(
+                                                                f"User verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                                                            )
                                                             # Update user's verification status in the database
                                                             cursor.execute(
                                                                 """update users set isVerified = "True" where lower(userName) = ? """,
@@ -104,7 +108,7 @@ def verifyUser(codeSent):
                                                             )
                                                             connection.commit()
                                                             Log.success(
-                                                                f'USER: "{userName}" HAS BEEN VERIFIED'
+                                                                f'User: "{userName}" has been verified'
                                                             )
                                                             flash(
                                                                 "Your account has been verified.",
@@ -113,9 +117,8 @@ def verifyUser(codeSent):
                                                             return redirect("/")
                                                         case False:
                                                             # Recaptcha verification failed
-                                                            Log(
-                                                                "1",
-                                                                f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                            Log.danger(
+                                                                f"User Verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
                                                 case False:
@@ -126,7 +129,7 @@ def verifyUser(codeSent):
                                                     )
                                                     connection.commit()
                                                     Log.success(
-                                                        f'USER: "{userName}" HAS BEEN VERIFIED'
+                                                        f'User: "{userName}" has been verified'
                                                     )
                                                     flash(
                                                         "Your account has been verified.",
@@ -240,13 +243,13 @@ def verifyUser(codeSent):
                                                         case True:
                                                             # Recaptcha verification successful, send verification email
                                                             Log.success(
-                                                                f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                f"User verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             server.send_message(message)
                                                         case False:
                                                             # Recaptcha verification failed
                                                             Log.danger(
-                                                                f"USER VERIFY RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                f"User verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
                                                 case False:
@@ -255,13 +258,13 @@ def verifyUser(codeSent):
                                             # Close connection to SMTP server
                                             server.quit()
                                             Log.success(
-                                                f'VERIFICATION CODE: "{verificationCode}" SENT TO "{email[0]}"',
+                                                f'Verification code: "{verificationCode}" sent to "{email[0]}"',
                                             )
                                             flash("code sent", "success")
                                             return redirect("/verifyUser/codesent=true")
                                         case True:
                                             # User not found in the database
-                                            Log.danger(f'USER: "{userName}" NOT FOUND')
+                                            Log.danger(f'User: "{userName}" not found')
                                             flash("user not found", "error")
                             # Render the verification form template
                             return render_template(

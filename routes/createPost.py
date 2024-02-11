@@ -60,7 +60,7 @@ def createPost():
                             # Flash an error message
                             flash("post content not be empty", "error")
                             Log.danger(
-                                f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
+                                f'User: "{session["userName"]}" tried to create a post with empty content',
                             )
                         case False:
                             # Check Recaptcha if enabled
@@ -78,6 +78,10 @@ def createPost():
                                         "success"
                                     ] == True or verifyResponse["score"] > 0.5:
                                         case True:
+                                            # Log the reCAPTCHA verification result
+                                            Log.success(
+                                                f"Post create reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                                            )
                                             # Insert new post into the database
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
                                             cursor = connection.cursor()
@@ -98,7 +102,7 @@ def createPost():
                                             )
                                             connection.commit()
                                             Log.success(
-                                                f'POST: "{postTitle}" POSTED BY "{session["userName"]}"',
+                                                f'Post: "{postTitle}" posted by "{session["userName"]}"',
                                             )
                                             # Award points to the user for posting
                                             addPoints(20, session["userName"])
@@ -110,7 +114,7 @@ def createPost():
                                         case False:
                                             # Recaptcha verification failed
                                             Log.danger(
-                                                f"POST CREATE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                f"Post create reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
                                             abort(401)
                                 case False:
@@ -134,7 +138,7 @@ def createPost():
                                     )
                                     connection.commit()
                                     Log.success(
-                                        f'POST: "{postTitle}" POSTED BY "{session["userName"]}"',
+                                        f'Post: "{postTitle}" posted by "{session["userName"]}"',
                                     )
                                     # Award points to the user for posting
                                     addPoints(20, session["userName"])
@@ -149,6 +153,6 @@ def createPost():
             )
         case False:
             # User is not logged in
-            Log.danger("USER NOT LOGGED IN")
+            Log.danger("User tried to create a new post without login")
             flash("you need loin for create a post", "error")
             return redirect("/login/redirect=&createpost")

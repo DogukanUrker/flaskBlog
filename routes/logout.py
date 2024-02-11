@@ -32,7 +32,7 @@ def logout():
     match "userName" in session:  # Use a match statement to check if the "userName" key is present in the session dictionary
         case True:  # If the user is logged in
             Log.success(
-                f"USER: {session['userName']} LOGGED OUT"
+                f"User: {session['userName']} logged out"
             )  # Log a message with level 2 indicating the user has logged out
             session.clear()  # Clear the session dictionary
             flash(
@@ -41,6 +41,6 @@ def logout():
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in
             Log.danger(
-                "USER NOT LOGGED IN"
+                "User tried to logout without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Return a redirect response to the homepage

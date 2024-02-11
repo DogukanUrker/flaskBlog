@@ -119,7 +119,7 @@ def signup():
                                                                 # If reCAPTCHA verification is successful
                                                                 case True:
                                                                     Log.success(
-                                                                        f"SIGN UP RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                        f"Sign up reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                                     )
                                                                     # Insert user data into the database
                                                                     cursor = (
@@ -144,7 +144,7 @@ def signup():
                                                                     connection.commit()
                                                                     # Log user addition
                                                                     Log.success(
-                                                                        f'USER: "{userName}" ADDED TO DATABASE',
+                                                                        f'User: "{userName}" added to database',
                                                                     )
                                                                     # Store username in session (log user in)
                                                                     session[
@@ -159,7 +159,7 @@ def signup():
                                                                     )
                                                                     # Log user login
                                                                     Log.success(
-                                                                        f'USER: "{userName}" LOGGED IN',
+                                                                        f'User: "{userName}" logged in',
                                                                     )
                                                                     # Flash success message
                                                                     flash(
@@ -233,7 +233,7 @@ def signup():
                                                                 # If reCAPTCHA verification fails
                                                                 case False:
                                                                     Log.danger(
-                                                                        f"SIGN UP | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                        f"Sign up reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                                     )
                                                                     abort(401)
                                                         # If reCAPTCHA is not enabled
@@ -259,7 +259,7 @@ def signup():
                                                             connection.commit()
                                                             # Log user addition
                                                             Log.success(
-                                                                f'USER: "{userName}" ADDED TO DATABASE',
+                                                                f'User: "{userName}" added to databse',
                                                             )
                                                             # Store username in session (log user in)
                                                             session["userName"] = (
@@ -271,7 +271,7 @@ def signup():
                                                             )
                                                             # Log user login
                                                             Log.success(
-                                                                f'USER: "{userName}" LOGGED IN',
+                                                                f'User: "{userName}" logged in',
                                                             )
                                                             # Flash success message
                                                             flash(
@@ -335,7 +335,7 @@ def signup():
                                                 # If username contains non-ASCII characters
                                                 case False:
                                                     Log.danger(
-                                                        f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
+                                                        f'Username: "{userName}" do not fits to ascii characters',
                                                     )
                                                     # Flash error message
                                                     flash(
@@ -344,14 +344,14 @@ def signup():
                                                     )
                                         # If passwords do not match
                                         case False:
-                                            Log.danger(" PASSWORDS MUST MATCH ")
+                                            Log.danger("Passwords do not match")
                                             # Flash error message
                                             flash("password must match", "error")
                             # If username or email is not available
                             match userName in users and email in mails:
                                 case True:
                                     Log.danger(
-                                        f'"{userName}" & "{email}" IS UNAVAILABLE '
+                                        f'"{userName}" & "{email}" is unavailable '
                                     )
                                     # Flash error message
                                     flash(
@@ -360,13 +360,13 @@ def signup():
                                     )
                             match not userName in users and email in mails:
                                 case True:
-                                    Log.danger(f'THIS EMAIL "{email}" IS UNAVAILABLE ')
+                                    Log.danger(f'This email "{email}" is unavailable')
                                     # Flash error message
                                     flash("This email is unavailable.", "error")
                             match userName in users and not email in mails:
                                 case True:
                                     Log.danger(
-                                        f'THIS USERNAME "{userName}" IS UNAVAILABLE ',
+                                        f'This username "{userName}" is unavailable',
                                     )
                                     # Flash error message
                                     flash("This username is unavailable.", "error")

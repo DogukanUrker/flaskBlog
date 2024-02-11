@@ -42,7 +42,7 @@ def post(postID):
     match str(postID) in posts:
         case True:
             # Log a message indicating that the post is found
-            Log.success(f'POST: "{postID}" FOUND')
+            Log.success(f'post: "{postID}" loaded')
 
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
@@ -103,7 +103,7 @@ def post(postID):
 
                     # Log a message indicating that the user commented on the post
                     Log.success(
-                        f'USER: "{session["userName"]}" COMMENTED TO POST: "{postID}"',
+                        f'User: "{session["userName"]}" commented to post: "{postID}"',
                     )
 
                     # Add 5 points to the user's score

@@ -113,6 +113,10 @@ def editPost(postID):
                                                         "score"
                                                     ] > 0.5:
                                                         case True:
+                                                            # Log the reCAPTCHA verification result
+                                                            Log.success(
+                                                                f"Post edit reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                                                            )
                                                             # Update post data in the database
                                                             connection = (
                                                                 sqlite3.connect(
@@ -162,7 +166,7 @@ def editPost(postID):
                                                         case False:
                                                             # Recaptcha verification failed
                                                             Log.danger(
-                                                                f"POST EDIT RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                f"Post edit reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
                                                 case False:
@@ -200,7 +204,7 @@ def editPost(postID):
                                                     )
                                                     connection.commit()
                                                     Log.success(
-                                                        f'POST: "{postTitle}" EDITED',
+                                                        f'Post: "{postTitle}" edited',
                                                     )
                                                     flash("Post edited", "success")
                                                     return redirect(f"/post/{post[0]}")
@@ -224,10 +228,10 @@ def editPost(postID):
                             return redirect("/")
                 case False:
                     # Post with postID does not exist
-                    Log.danger(f'POST: "{postID}" NOT FOUND')
+                    Log.danger(f'Post: "{postID}" not found')
                     return render_template("notFound.html.jinja")
         case False:
             # User is not logged in
-            Log.danger("USER NOT LOGGED IN")
+            Log.danger("User tried to edit post without login")
             flash("you need login for edit a post", "error")
             return redirect(f"/login/redirect=&editpost&{postID}")

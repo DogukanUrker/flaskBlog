@@ -47,7 +47,7 @@ def login(direct):
             match "userName" in session:
                 case True:
                     # If user is already logged in, redirect
-                    Log.danger(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
+                    Log.danger(f'User: "{session["userName"]}" already logged in')
                     return (
                         redirect(direct),
                         301,
@@ -70,7 +70,7 @@ def login(direct):
                             match not user:
                                 case True:
                                     # If user not found, show error message
-                                    Log.danger(f'USER: "{userName}" NOT FOUND')
+                                    Log.danger(f'User: "{userName}" not found')
                                     flash("User not found", "error")
                                 case _:
                                     match encryption.verify(password, user[3]):
@@ -92,7 +92,7 @@ def login(direct):
                                                         case True:
                                                             # Logs the user in if the reCAPTCHA verification is successful
                                                             Log.success(
-                                                                f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                f"Login reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             session["userName"] = user[
                                                                 1
@@ -118,7 +118,7 @@ def login(direct):
                                                         case False:
                                                             # Returns an unauthorized error if the reCAPTCHA verification is unsuccessful
                                                             Log.danger(
-                                                                f"LOGIN RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                f"Login reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
 
@@ -128,7 +128,7 @@ def login(direct):
                                                     session["userRole"] = user[5]
                                                     addPoints(1, session["userName"])
                                                     Log.success(
-                                                        f'USER: "{user[1]}" LOGGED IN',
+                                                        f'User: "{user[1]}" logged in',
                                                     )
                                                     flash(
                                                         f"Welcome {user[1]}", "success"
@@ -140,7 +140,7 @@ def login(direct):
 
                                         case _:
                                             # Returns an incorrect password error if the password is incorrect
-                                            Log.danger("WRONG PASSWORD")
+                                            Log.danger("Wrong password")
                                             flash("Wrong password", "error")
                     # Render login template with appropriate form and messages
                     return render_template(

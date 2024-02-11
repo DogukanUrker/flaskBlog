@@ -105,7 +105,7 @@ def passwordReset(codeSent):
                                                         case True:
                                                             # Successful reCAPTCHA verification, update password
                                                             Log.success(
-                                                                f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                f"Password reset reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             cursor.execute(
                                                                 """update users set password = ? where lower(userName) = ? """,
@@ -116,7 +116,7 @@ def passwordReset(codeSent):
                                                             )
                                                             connection.commit()
                                                             Log.success(
-                                                                f'USER: "{userName}" CHANGED HIS PASSWORD',
+                                                                f'User: "{userName}" changed his password',
                                                             )
                                                             flash(
                                                                 "You need to login with the new password",
@@ -128,7 +128,7 @@ def passwordReset(codeSent):
                                                         case False:
                                                             # Failed reCAPTCHA verification
                                                             Log.danger(
-                                                                f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                                f"Password reset reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
                                                 case False:
@@ -142,7 +142,7 @@ def passwordReset(codeSent):
                                                     )
                                                     connection.commit()
                                                     Log.success(
-                                                        f'USER: "{userName}" CHANGED HIS PASSWORD',
+                                                        f'User: "{userName}" changed his password',
                                                     )
                                                     flash(
                                                         "You need to login with the new password",
@@ -235,13 +235,13 @@ def passwordReset(codeSent):
                                         case True:
                                             # Successful reCAPTCHA verification, send email
                                             Log.success(
-                                                f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                f"Password reset reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
                                             server.send_message(message)
                                         case False:
                                             # Failed reCAPTCHA verification
                                             Log.danger(
-                                                f"PASSWORD RESET RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                                f"Password reset reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
                                             abort(401)
                                 case False:
@@ -249,13 +249,13 @@ def passwordReset(codeSent):
                                     server.send_message(message)
                             server.quit()
                             Log.success(
-                                f'PASSWORD RESET CODE: "{passwordResetCode}" SENT TO "{email}"',
+                                f'Password reset code: "{passwordResetCode}" sent to "{email}"',
                             )
                             flash("Code sent", "success")
                             return redirect("/passwordreset/codesent=true")
                         case True:
                             # User or email not found
-                            Log.danger(f'USER: "{userName}" NOT FOUND')
+                            Log.danger(f'User: "{userName}" not found')
                             flash("User not found", "error")
             # Render password reset template with appropriate form and messages
             return render_template(
