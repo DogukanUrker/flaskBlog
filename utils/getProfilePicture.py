@@ -1,3 +1,4 @@
+# Importing necessary modules
 from modules import sqlite3, DB_USERS_ROOT, Log
 
 
@@ -5,17 +6,30 @@ from modules import sqlite3, DB_USERS_ROOT, Log
 def getProfilePicture(userName):
     """
     Returns the profile picture of the user with the specified username.
+
+    Parameters:
+        userName (str): The username of the user whose profile picture is to be retrieved.
+
+    Returns:
+        str or None: The profile picture URL of the user, or None if not found.
     """
-    connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the SQLite database
-    cursor = connection.cursor()  # Create a cursor object
-    cursor.execute(  # Execute SQL query to retrieve user profile picture
-        """select profilePicture from users where lower(userName) = ? """,
+    # Connect to the SQLite database
+    connection = sqlite3.connect(DB_USERS_ROOT)
+    # Create a cursor object
+    cursor = connection.cursor()
+    # Execute SQL query to retrieve user profile picture
+    cursor.execute(
+        """SELECT profilePicture FROM users WHERE lower(userName) = ? """,
         [(userName.lower())],
     )
-    profilePicture = cursor.fetchone()[0]  # Fetch the profile picture value
+    try:
+        # Fetch the profile picture URL
+        profilePicture = cursor.fetchone()[0]
+        # Log successful retrieval of profile picture
+        Log.info(f"Returning {userName}'s profile picture: {profilePicture}")
+    except:
+        # If profile picture retrieval fails, set profilePicture to None and log danger message
+        profilePicture = None
+        Log.danger(f"Failed to retrieve profile picture for user: {userName}")
 
-    # Log a message indicating that the user's profile picture is sending
-    Log.info(f"Returning {userName}'s profile picture: {profilePicture}")
-
-    # Return the profile picture
-    return profilePicture
+    return profilePicture  # Return the profile picture URL
