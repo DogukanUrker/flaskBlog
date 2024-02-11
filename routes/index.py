@@ -51,11 +51,12 @@ def index(by="timeStamp", sort="desc"):
     sortOptions = ["asc", "desc"]
 
     # Check if the provided sorting options are valid, if not, redirect to the default route
-    if by not in byOptions or sort not in sortOptions:
-        Log.warning(
-            f"The provided sorting options are not valid: By: {by} Sort: {sort}"
-        )
-        return redirect("/")
+    match by not in byOptions or sort not in sortOptions:
+        case True:
+            Log.warning(
+                f"The provided sorting options are not valid: By: {by} Sort: {sort}"
+            )
+            return redirect("/")
 
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
@@ -75,7 +76,9 @@ def index(by="timeStamp", sort="desc"):
     sortName = f"{by} {sort}".title()
 
     # Log a info message that posts sorted by the specified field
-    Log.info(f"Sorting post on index page by: {sortName}")
+    Log.info(f"Sorting posts on index page by: {sortName}")
 
     # Return the rendered template of the home page and pass the posts list and sorting name as keyword arguments
-    return render_template("index.html.jinja", posts=posts, sortName=sortName)
+    return render_template(
+        "index.html.jinja", posts=posts, sortName=sortName, source=""
+    )

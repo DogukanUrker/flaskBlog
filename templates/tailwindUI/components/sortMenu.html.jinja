@@ -1,58 +1,57 @@
-{% macro sortMenu(sortName) %}
+{% macro sortMenu(sortName,source) %}
 <!-- Macro to generate sort dropdown menu -->
-
 <div class="mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6 flex justify-end font-medium">
     <!-- Container for the dropdown menu -->
     <div class="relative inline-block text-left text-rose-500/75 w-full md:w-fit">
         <!-- Dropdown select element -->
         <select
             class="block w-full pl-3 pr-10 py-2 rounded-md text-base sm:text-sm outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-transparent block shadow-md select-none"
-            onchange="location = this.value;" aria-placeholder="sex">
+            onchange="location =  this.value;">
             <!-- Placeholder option displaying the current sorting selection -->
             <option disabled selected hidden>{{sortName}}</option>
             <!-- Group for ascending sorting options -->
             <optgroup label="Ascending" class="font-bold">
                 <!-- Option for sorting by creation date in descending order -->
-                <option value="/by=timeStamp/sort=desc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=timeStamp/sort=desc" class="block px-4 py-2 font-medium">
                     Creation Date
                 </option>
                 <!-- Option for sorting by title in descending order -->
-                <option value="/by=title/sort=desc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=title/sort=desc" class="block px-4 py-2 font-medium">
                     Title
                 </option>
                 <!-- Option for sorting by views in descending order -->
-                <option value="/by=views/sort=desc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=views/sort=desc" class="block px-4 py-2 font-medium">
                     Views
                 </option>
                 <!-- Option for sorting by category in descending order -->
-                <option value="/by=category/sort=desc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=category/sort=desc" class="block px-4 py-2 font-medium">
                     Category
                 </option>
                 <!-- Option for sorting by last edit date in descending order -->
-                <option value="/by=lastEditTimeStamp/sort=desc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=lastEditTimeStamp/sort=desc" class="block px-4 py-2 font-medium">
                     Last Edit Date
                 </option>
             </optgroup>
             <!-- Group for descending sorting options -->
             <optgroup label="Descending" class="font-bold">
                 <!-- Option for sorting by creation date in ascending order -->
-                <option value="/by=timeStamp/sort=asc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=timeStamp/sort=asc" class="block px-4 py-2 font-medium">
                     Creation Date
                 </option>
                 <!-- Option for sorting by title in ascending order -->
-                <option value="/by=title/sort=asc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=title/sort=asc" class="block px-4 py-2 font-medium">
                     Title
                 </option>
                 <!-- Option for sorting by views in ascending order -->
-                <option value="/by=views/sort=asc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=views/sort=asc" class="block px-4 py-2 font-medium">
                     Views
                 </option>
                 <!-- Option for sorting by category in ascending order -->
-                <option value="/by=category/sort=asc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=category/sort=asc" class="block px-4 py-2 font-medium">
                     Category
                 </option>
                 <!-- Option for sorting by last edit date in ascending order -->
-                <option value="/by=lastEditTimeStamp/sort=asc" class="block px-4 py-2 font-medium">
+                <option value="{{source}}/by=lastEditTimeStamp/sort=asc" class="block px-4 py-2 font-medium">
                     Last Edit Date
                 </option>
             </optgroup>
