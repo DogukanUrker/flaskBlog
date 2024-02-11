@@ -1,4 +1,4 @@
-# Import the message and render_template functions from the modules module
+# Import the Log and render_template functions from the modules module
 from modules import Log, render_template
 
 
