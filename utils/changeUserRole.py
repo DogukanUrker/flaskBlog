@@ -24,9 +24,10 @@ def changeUserRole(userName):
         [(newRole), (userName)],
     )
     Log.success(  # Log the role change event
-        f'ADMIN: "{session["userName"]}" CHANGED USER: "{userName}"s ROLE TO "{newRole}" ',
+        f'Admin: "{session["userName"]}" changed user: "{userName}"s role to "{newRole}" ',
     )
     connection.commit()  # Commit changes to the database
     match session["userName"].lower() == userName:
         case True:
+            Log.success(f'Admin: "{session["userName"]}" changed his role to "user"')
             return redirect("/")

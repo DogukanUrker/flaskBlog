@@ -24,7 +24,7 @@ The functions in this module use the following helper functions:
 """
 
 from modules import (
-    Log,  # A function for logging messages
+    Log,  # A class for logging messages
     flash,  # A function for displaying flash messages
     sqlite3,  # A module for working with SQLite databases
     session,  # A dictionary for storing session data
@@ -124,10 +124,10 @@ class Delete:
         )  # Update the sqlite_sequence table to decrement the sequence value by 1
         connection.commit()  # Commit the changes to the database
         flash(
-            f"user: {userName} deleted", "error"
+            f"User: {userName} deleted", "error"
         )  # Display a flash message with the text "user: {userName} deleted" and the category "error"
         Log.success(
-            f'USER: "{userName}" DELETED'
+            f'User: "{userName}" deleted'
         )  # Log a message with level 2 indicating the user was deleted
         match perpetrator[
             0
@@ -170,5 +170,5 @@ class Delete:
             "comment deleted", "error"
         )  # Display a flash message with the text "comment deleted" and the category "error"
         Log.success(
-            f'COMMENT: "{commentID}" DELETED'
+            f'Comment: "{commentID}" deleted'
         )  # Log a message with level 2 indicating the comment was deleted

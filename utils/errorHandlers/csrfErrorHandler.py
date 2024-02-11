@@ -11,6 +11,6 @@ def csrfErrorHandler(e):
     :return: A tuple containing the Jinja template for the 400 error and the status code
     """
     # Log a danger message with the error code and message
-    Log.danger(f"400 | {e}")
+    Log.danger(e)
     # Render the 400 template and pass the reason as a variable
     return render_template("csrfError.html.jinja", reason=e.description), 400

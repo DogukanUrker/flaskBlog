@@ -1,4 +1,4 @@
-from modules import sqlite3, DB_USERS_ROOT
+from modules import sqlite3, DB_USERS_ROOT, Log
 
 
 # Function to get the profile picture of a user
@@ -12,4 +12,6 @@ def getProfilePicture(userName):
         """select profilePicture from users where lower(userName) = ? """,
         [(userName.lower())],
     )
-    return cursor.fetchone()[0]  # Fetch the profile picture value
+    profilePicture = cursor.fetchone()[0]
+    Log.info(f"Returning {userName}'s profile picture: {profilePicture}")
+    return profilePicture  # Fetch the profile picture value

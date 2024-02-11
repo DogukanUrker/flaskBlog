@@ -1,6 +1,6 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Module for logging
+    Log,  # A class for logging messages
     abort,  # Function to abort the request
     Delete,  # Function to delete user from the database
     request,  # Module for handling HTTP requests
@@ -56,7 +56,7 @@ def accountSettings():
                                     # Log the reCAPTCHA verification result
                                     Log.success(
                                         "2",
-                                        f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Delete the user from the database
                                     Delete.user(user[0][0])
@@ -65,7 +65,7 @@ def accountSettings():
                                 case False:
                                     # Log the reCAPTCHA verification result
                                     Log.danger(
-                                        f"USER DELETE RECAPTCHA | VERIFICATION: {verifyResponse['success']} | VERIFICATION SCORE: {verifyResponse['score']}",
+                                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Abort the request with a 401 error
                                     abort(401)

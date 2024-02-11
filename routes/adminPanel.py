@@ -1,5 +1,6 @@
 # Import necessary modules and functions
 from modules import (
+    Log,  # A class for logging messages
     sqlite3,  # SQLite database module
     session,  # Session handling module
     redirect,  # Redirect function
@@ -29,6 +30,10 @@ def adminPanel():
             # Check if the user role is admin
             match role == "admin":
                 case True:
+
+                    # Log info message that the admin reached to the admin panel
+                    Log.info(f'Admin: {session["userName"]} reached to the admin panel')
+
                     # Render the admin panel template
                     return render_template("adminPanel.html.jinja")
                 case False:

@@ -12,6 +12,7 @@ The index.html.jinja template displays the title and content of each post.
 """
 
 from modules import (
+    Log,  # A class for logging messages
     sqlite3,  # Importing the SQLite module for working with SQLite databases
     redirect,  # Importing the redirect function for redirecting requests
     Blueprint,  # Importing the Blueprint class for creating Flask blueprints
@@ -51,6 +52,9 @@ def index(by="timeStamp", sort="desc"):
 
     # Check if the provided sorting options are valid, if not, redirect to the default route
     if by not in byOptions or sort not in sortOptions:
+        Log.warning(
+            f"The provided sorting options are not valid: By: {by} Sort: {sort}"
+        )
         return redirect("/")
 
     # Connect to the posts database
@@ -69,6 +73,9 @@ def index(by="timeStamp", sort="desc"):
         case "lastEditTimeStamp":
             by = "Last Edit Date"
     sortName = f"{by} {sort}".title()
+
+    # Log a info message that posts sorted by the specified field
+    Log.info(f"Sorting post on index page by: {sortName}")
 
     # Return the rendered template of the home page and pass the posts list and sorting name as keyword arguments
     return render_template("index.html.jinja", posts=posts, sortName=sortName)
