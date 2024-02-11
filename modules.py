@@ -24,17 +24,28 @@ from email.message import EmailMessage  # Email handling
 
 from passlib.hash import sha512_crypt as encryption  # Password hashing library
 
-from utils.forms import (
-    LoginForm,  # Form class for user login
-    SignUpForm,  # Form class for user sign-up
-    CommentForm,  # Form class for commenting
-    CreatePostForm,  # Form class for creating a new post
-    VerifyUserForm,  # Form class for verifying user information
-    PasswordResetForm,  # Form class for resetting a user's password
-    ChangePasswordForm,  # Form class for changing a user's password
-    ChangeUserNameForm,  # Form class for changing a user's username
-    ChangeProfilePictureForm,  # Form class for changing a user's profile picture
-)
+# Importing forms
+from utils.forms.LoginForm import LoginForm  # Form class for user login
+from utils.forms.SignUpForm import SignUpForm  # Form class for user sign-up
+from utils.forms.CommentForm import CommentForm  # Form class for commenting
+from utils.forms.CreatePostForm import (
+    CreatePostForm,
+)  # Form class for creating a new post
+from utils.forms.VerifyUserForm import (
+    VerifyUserForm,
+)  # Form class for verifying user information
+from utils.forms.PasswordResetForm import (
+    PasswordResetForm,
+)  # Form class for resetting a user's password
+from utils.forms.ChangePasswordForm import (
+    ChangePasswordForm,
+)  # Form class for changing a user's password
+from utils.forms.ChangeUserNameForm import (
+    ChangeUserNameForm,
+)  # Form class for changing a user's username
+from utils.forms.ChangeProfilePictureForm import (
+    ChangeProfilePictureForm,
+)  # Form class for changing a user's profile picture
 
 from flask import (
     Flask,  # Flask web application framework
