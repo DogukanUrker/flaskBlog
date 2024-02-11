@@ -44,7 +44,7 @@ def user(userName):
     ).lower():  # Use a match statement to compare the username with the list of usernames
         case True:  # If the username exists
             Log.success(
-                "2", f'USER: "{userName}" FOUND'
+                f'USER: "{userName}" FOUND'
             )  # Log a message with level 2 indicating the user was found
             cursor.execute(
                 """select * from users where lower(userName) = ? """,  # Select all the columns from the users table where the username matches the given username
