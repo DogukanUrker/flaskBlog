@@ -12,6 +12,10 @@ def getProfilePicture(userName):
         """select profilePicture from users where lower(userName) = ? """,
         [(userName.lower())],
     )
-    profilePicture = cursor.fetchone()[0]
+    profilePicture = cursor.fetchone()[0]  # Fetch the profile picture value
+
+    # Log a message indicating that the user's profile picture is sending
     Log.info(f"Returning {userName}'s profile picture: {profilePicture}")
-    return profilePicture  # Fetch the profile picture value
+
+    # Return the profile picture
+    return profilePicture
