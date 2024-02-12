@@ -39,6 +39,13 @@ LOG_IN = True  # (bool)
 # Toggle user registration feature
 REGISTRATION = True  # (bool)
 
+### LOGGER SETTINGS ###
+# Toggle custom logging feature
+CUSTOM_LOGGER = True  # (bool)
+
+# Toggle werkzeug logging feature
+WERKZEUG_LOGGER = False  # (bool)
+
 # Root path of the log folder
 LOG_FOLDER_ROOT = "log/"  # (str)
 

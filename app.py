@@ -125,10 +125,12 @@ from modules import (
     LOG_FILE_ROOT,  # Importing the log file root configuration
     APP_ROOT_PATH,  # Importing the application root path configuration
     STATIC_FOLDER,  # Importing the static folder configuration
+    CUSTOM_LOGGER,  # Importing the custom logger configuration
     APP_SECRET_KEY,  # Importing the application secret key configuration
     RECAPTCHA_BADGE,  # Flag for enabling/disabling reCAPTCHA for badge configuration
     TEMPLATE_FOLDER,  # Importing the template folder configuration
     LOG_FOLDER_ROOT,  # Importing the log folder root configuration
+    WERKZEUG_LOGGER,  # Importing the werkzeug logger configuration
     LOG_APP_FILE_ROOT,  # Importing the app log file root configuration
     SESSION_PERMANENT,  # Importing the session permanence configuration
     LOG_INFO_FILE_ROOT,  # Importing the info log file root configuration
@@ -220,6 +222,35 @@ app.context_processor(
 app.context_processor(
     returnUserProfilePicture
 )  # A context processor that adds the getProfilePicture variable to the template context
+
+
+# Match WERKZEUG_LOGGER status
+match WERKZEUG_LOGGER:
+    # If Werkzeug default logger is enabled
+    case True:
+        # Log that Werkzeug default logger is enabled
+        Log.app("Werkzeug default logger is enabled")
+    # If Werkzeug default logger is disabled
+    case False:
+        # Import getLogger from logging module
+        from logging import getLogger
+
+        # Log that Werkzeug default logger is disabled
+        Log.app("Werkzeug default logger is disabled")
+        # Disable the Werkzeug default logger
+        getLogger("werkzeug").disabled = True
+
+# Match CUSTOM_LOGGER status
+match CUSTOM_LOGGER:
+    # If Custom logger is enabled
+    case True:
+        # Log that Custom logger is enabled
+        Log.app("Custom logger is enabled")
+    # If Custom logger is disabled
+    case False:
+        # Log that Custom logger is disabled
+        Log.app("Custom logger is disabled")
+
 
 # Log app settings
 Log.app(f"Debug mode: {DEBUG_MODE}")
