@@ -153,6 +153,6 @@ def createPost():
             )
         case False:
             # User is not logged in
-            Log.danger("User tried to create a new post without login")
+            Log.danger(f"{request.remote_addr} tried to create a new post without login")
             flash("you need loin for create a post", "error")
             return redirect("/login/redirect=&createpost")

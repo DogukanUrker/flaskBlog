@@ -232,6 +232,6 @@ def editPost(postID):
                     return render_template("notFound.html.jinja")
         case False:
             # User is not logged in
-            Log.danger("User tried to edit post without login")
+            Log.danger(f"{request.remote_addr} tried to edit post without login")
             flash("you need login for edit a post", "error")
             return redirect(f"/login/redirect=&editpost&{postID}")

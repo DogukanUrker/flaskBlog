@@ -7,9 +7,10 @@ The functions and methods used in this blueprint are imported from the modules m
 from modules import (
     Log,  # A function for logging messages
     flash,  # A function for displaying flash messages
-    Blueprint,  # A class for creating Flask blueprints
     session,  # A dictionary for storing session data
+    request,  # Module for handling HTTP requests
     redirect,  # A function for returning redirect responses
+    Blueprint,  # A class for creating Flask blueprints
 )
 
 
@@ -41,6 +42,6 @@ def logout():
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in
             Log.danger(
-                "User tried to logout without being logged in"
+                f"{request.remote_addr} tried to logout without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Return a redirect response to the homepage

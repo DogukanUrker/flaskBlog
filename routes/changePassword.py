@@ -171,7 +171,7 @@ def changePassword():
             )
         case False:
             # Log user not logged in
-            Log.danger("User tried to change his password without logging in")
+            Log.danger(f"{request.remote_addr} tried to change his password without logging in")
             # Display error message
             flash("you need login for change your password", "error")
             # Redirect to login page

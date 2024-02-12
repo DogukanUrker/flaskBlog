@@ -91,7 +91,7 @@ def dashboard(userName):
                     return redirect(f'/dashboard/{session["userName"].lower()}')
         case False:
             # Log a message that the dashboard cannot be accessed without user login
-            Log.danger("User tried to access the dashboard without login")
+            Log.danger(f"{request.remote_addr} tried to access the dashboard without login")
             # Flash an error message to the user
             flash("you need login for reach to dashboard", "error")
             # Redirect to the login page with the dashboard and user as the next destination
