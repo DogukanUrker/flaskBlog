@@ -3,6 +3,7 @@ from modules import (
     Log,  # A class for logging messages
     sqlite3,  # SQLite database module
     session,  # Session handling module
+    request,  # Request handling module
     redirect,  # Redirect function
     Blueprint,  # Blueprint for defining routes
     DB_USERS_ROOT,  # Path to the users database
@@ -33,12 +34,19 @@ def adminPanel():
 
                     # Log info message that the admin reached to the admin panel
                     Log.info(f'Admin: {session["userName"]} reached to the admin panel')
-
+                    # Log a message that admin panel loaded
+                    Log.info(f"Rendering adminPanel.html.jinja: params: None")
                     # Render the admin panel template
                     return render_template("adminPanel.html.jinja")
                 case False:
+                    Log.danger(
+                        f"{request.remote_addr} tried to reach admin panel without being admin"
+                    )  # Log a message that the user tried to reach admin panel without being admin
                     # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to reach admin panel being logged in"
+            )  # Log a message that the user tried to reach admin panel without being logged in
             # Redirect to the login page if the user is not logged in
             return redirect("/")

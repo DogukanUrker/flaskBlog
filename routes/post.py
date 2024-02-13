@@ -143,5 +143,8 @@ def post(postID):
             )
 
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to reach unknown post"
+            )  # Log a message with level 1 indicating the post is not found
             # Render the 404 template if the post ID does not exist
             return render_template("notFound.html.jinja")

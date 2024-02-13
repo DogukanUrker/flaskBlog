@@ -275,4 +275,7 @@ def verifyUser(codeSent):
                                 recaptcha=RECAPTCHA,
                             )
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to verify his account without being logged in"
+            )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Redirect to homepage if user is not logged in

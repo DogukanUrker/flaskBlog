@@ -1,5 +1,6 @@
 # Import necessary modules and functions
 from modules import (
+    Log,  # A class for logging messages
     Delete,  # Function for deleting comments
     request,  # Request handling module
     sqlite3,  # SQLite database module
@@ -22,6 +23,9 @@ def adminPanelComments():
     # Check if the user is logged in
     match "userName" in session:
         case True:
+            Log.info(
+                f"Admin: {session['userName']} reached to comments admin panel"
+            )  # Log a message that the admin reached to comments admin panel
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
@@ -36,6 +40,9 @@ def adminPanelComments():
                     # Check if the comment delete button is clicked
                     match "commentDeleteButton" in request.form:
                         case True:
+                            Log.info(
+                                f"Admin: {session['userName']} deleted comment: {request.form['commentID']}"
+                            )  # Log a message that admin deleted a comment
                             # Delete the comment from the database
                             Delete.comment(request.form["commentID"])
                     # Redirect to the same route
@@ -48,13 +55,23 @@ def adminPanelComments():
                     cursor = connection.cursor()
                     cursor.execute("select * from comments order by timeStamp desc")
                     comments = cursor.fetchall()
+                    # Log a message that admin panel comments page loaded with comment data
+                    Log.info(
+                        f"Rendering adminPanelComments.html.jinja: params: comments={comments}"
+                    )
                     # Render the admin panel comments template with the comments data
                     return render_template(
                         "adminPanelComments.html.jinja", comments=comments
                     )
                 case False:
+                    Log.danger(
+                        f"{request.remote_addr} tried to reach comment admin panel without being admin"
+                    )  # Log a message that the user tried to reach admin panel without being admin
                     # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to reach comment admin panel being logged in"
+            )  # Log a message that the user tried to reach admin panel without being logged in
             # Redirect to the login page if the user is not logged in
             return redirect("/")

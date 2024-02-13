@@ -82,5 +82,8 @@ def accountSettings():
                 recaptcha=RECAPTCHA,
             )
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to reach account settings without being logged in"
+            )  # Log a message with level 1 indicating the user is not logged in
             # Redirect to the login page with the account settings as the next destination
             return redirect("/login/redirect=&accountsettings")

@@ -103,5 +103,8 @@ def changeProfilePicture():
                 recaptcha=RECAPTCHA,
             )
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to change his profile picture without being logged in"
+            )  # Log a message with level 1 indicating the user is not logged in
             # Redirect to the home page if the user is not logged in
             return redirect("/")

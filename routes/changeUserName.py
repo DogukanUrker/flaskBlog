@@ -236,5 +236,8 @@ def changeUserName():
                 recaptcha=RECAPTCHA,
             )
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to change his username without being logged in"
+            )  # Log a message with level 1 indicating the user is not logged in
             # User is not logged in, redirect to homepage
             return redirect("/")

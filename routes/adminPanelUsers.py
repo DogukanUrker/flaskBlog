@@ -1,5 +1,6 @@
 # Import necessary modules and functions
 from modules import (
+    Log,  # A class for logging messages
     Delete,  # Function for deleting users
     sqlite3,  # SQLite database module
     session,  # Session handling module
@@ -22,6 +23,9 @@ def adminPanelUsers():
     # Check if the user is logged in
     match "userName" in session:
         case True:
+            Log.info(
+                f"Admin: {session['userName']} reached to users admin panel"
+            )  # Log a message that the admin reached to users admin panel
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             cursor = connection.cursor()
@@ -36,11 +40,17 @@ def adminPanelUsers():
                     # Check if the user delete button is clicked
                     match "userDeleteButton" in request.form:
                         case True:
+                            Log.info(
+                                f"Admin: {session['userName']} deleted user: {request.form['userName']}"
+                            )  # Log a message that admin deleted a user
                             # Delete the user from the database
                             Delete.user(request.form["userName"])
                     # Check if the user role change button is clicked
                     match "userRoleChangeButton" in request.form:
                         case True:
+                            Log.info(
+                                f"Admin: {session['userName']} changed {request.form['userName']}'s role"
+                            )  # Log a message that admin changed a user's role
                             # Change the user role in the database
                             changeUserRole(request.form["userName"])
             # Check if the user role is admin
@@ -51,14 +61,24 @@ def adminPanelUsers():
                     cursor = connection.cursor()
                     cursor.execute("select * from users")
                     users = cursor.fetchall()
+                    # Log a message that admin panel users page loaded with user data
+                    Log.info(
+                        f"Rendering adminPanelUsers.html.jinja: params: users={users}"
+                    )
                     # Render the admin panel users template with the users data
                     return render_template(
                         "adminPanelUsers.html.jinja",
                         users=users,
                     )
                 case False:
+                    Log.danger(
+                        f"{request.remote_addr} tried to reach user admin panel without being admin"
+                    )  # Log a message that the user tried to reach admin panel without being admin
                     # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
+            Log.danger(
+                f"{request.remote_addr} tried to reach user admin panel being logged in"
+            )  # Log a message that the user tried to reach admin panel without being logged in
             # Redirect to the login page if the user is not logged in
             return redirect("/")
