@@ -79,7 +79,7 @@ class Log:
                     f"|{currentTime(seconds=True,microSeconds=True)}"  # Write current time with microseconds
                     f"|{currentTimeZone()}]"  # Write current time zone
                     "\t"  # Separate fields with tab
-                    f"DANGER --> {message}\n"  # Write the danger message
+                    f"DANGER | {message}\n"  # Write the danger message
                 )
                 logFile.close()  # Close the log file
                 # Open danger log file in append mode and write the formatted message
@@ -130,7 +130,7 @@ class Log:
                     f"|{currentTime(seconds=True,microSeconds=True)}"  # Write current time with microseconds
                     f"|{currentTimeZone()}]"  # Write current time zone
                     "\t"  # Separate fields with tab
-                    f"SUCCESS --> {message}\n"  # Write the success message
+                    f"SUCCESS | {message}\n"  # Write the success message
                 )
                 logFile.close()  # Close the log file
                 # Open success log file in append mode and write the formatted message
@@ -181,7 +181,7 @@ class Log:
                     f"|{currentTime(seconds=True,microSeconds=True)}"  # Write current time with microseconds
                     f"|{currentTimeZone()}]"  # Write current time zone
                     "\t"  # Separate fields with tab
-                    f"WARNING --> {message}\n"  # Write the warning message
+                    f"WARNING | {message}\n"  # Write the warning message
                 )
                 logFile.close()  # Close the log file
                 # Open warning log file in append mode and write the formatted message
@@ -232,7 +232,7 @@ class Log:
                     f"|{currentTime(seconds=True,microSeconds=True)}"  # Write current time with microseconds
                     f"|{currentTimeZone()}]"  # Write current time zone
                     "\t"  # Separate fields with tab
-                    f"INFO --> {message}\n"  # Write the info message
+                    f"INFO | {message}\n"  # Write the info message
                 )
                 logFile.close()  # Close the log file
                 # Open info log file in append mode and write the formatted message
@@ -283,7 +283,7 @@ class Log:
                     f"|{currentTime(seconds=True,microSeconds=True)}"  # Write current time with microseconds
                     f"|{currentTimeZone()}]"  # Write current time zone
                     "\t"  # Separate fields with tab
-                    f"APP --> {message}\n"  # Write the app message
+                    f"APP | {message}\n"  # Write the app message
                 )
                 logFile.close()  # Close the log file
                 # Open app log file in append mode and write the formatted message
