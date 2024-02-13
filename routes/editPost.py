@@ -93,7 +93,7 @@ def editPost(postID):
                                         case True:
                                             flash("Post content not be empty.", "error")
                                             Log.danger(
-                                                f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
+                                                f'User: "{session["userName"]}" tried to edit a post with empty content',
                                             )
                                         case False:
                                             # Check Recaptcha if enabled
@@ -155,7 +155,7 @@ def editPost(postID):
                                                             )
                                                             connection.commit()
                                                             Log.success(
-                                                                f'POST: "{postTitle}" EDITED',
+                                                                f'Post: "{postTitle}" edited',
                                                             )
                                                             flash(
                                                                 "Post edited.",
@@ -222,9 +222,9 @@ def editPost(postID):
                             )
                         case False:
                             # User is not authorized to edit the post
-                            flash("This post not yours.", "error")
+                            flash("This post is not yours.", "error")
                             Log.danger(
-                                f'THIS POST DOES NOT BELONG TO USER: "{session["userName"]}"',
+                                f'User: "{session["userName"]}" tried to edit another authors post',
                             )
                             return redirect("/")
                 case False:
