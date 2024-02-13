@@ -82,7 +82,7 @@ class Delete:
         )
         connection.commit()  # Commit the changes to the database
         flash(
-            "post deleted", "error"
+            f"Post: {postID} deleted.", "error"
         )  # Display a flash message with the text "post deleted" and the category "error"
         Log.success(
             f'Post: "{postID}" deleted'
@@ -124,7 +124,7 @@ class Delete:
         )  # Update the sqlite_sequence table to decrement the sequence value by 1
         connection.commit()  # Commit the changes to the database
         flash(
-            f"User: {userName} deleted", "error"
+            f"User: {userName} deleted.", "error"
         )  # Display a flash message with the text "user: {userName} deleted" and the category "error"
         Log.success(
             f'User: "{userName}" deleted'
@@ -167,7 +167,7 @@ class Delete:
         )  # Update the sqlite_sequence table to decrement the sequence value by 1
         connection.commit()  # Commit the changes to the database
         flash(
-            "comment deleted", "error"
+            f"Comment: {commentID} deleted.", "error"
         )  # Display a flash message with the text "comment deleted" and the category "error"
         Log.success(
             f'Comment: "{commentID}" deleted'

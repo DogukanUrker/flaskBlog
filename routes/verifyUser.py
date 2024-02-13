@@ -138,7 +138,7 @@ def verifyUser(codeSent):
                                                     return redirect("/")
                                         case False:
                                             # Wrong verification code entered
-                                            flash("Wrong Code", "error")
+                                            flash("Wrong code.", "error")
                             # Render the verification form template
                             return render_template(
                                 "verifyUser.html.jinja",
@@ -260,12 +260,12 @@ def verifyUser(codeSent):
                                             Log.success(
                                                 f'Verification code: "{verificationCode}" sent to "{email[0]}"',
                                             )
-                                            flash("code sent", "success")
+                                            flash("Code sent.", "success")
                                             return redirect("/verifyUser/codesent=true")
                                         case True:
                                             # User not found in the database
                                             Log.danger(f'User: "{userName}" not found')
-                                            flash("user not found", "error")
+                                            flash("User not found.", "error")
                             # Render the verification form template
                             return render_template(
                                 "verifyUser.html.jinja",

@@ -91,7 +91,7 @@ def editPost(postID):
                                     # Check if post content is empty
                                     match postContent == "":
                                         case True:
-                                            flash("post content not be empty", "error")
+                                            flash("Post content not be empty.", "error")
                                             Log.danger(
                                                 f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                                             )
@@ -158,7 +158,8 @@ def editPost(postID):
                                                                 f'POST: "{postTitle}" EDITED',
                                                             )
                                                             flash(
-                                                                "Post edited", "success"
+                                                                "Post edited.",
+                                                                "success",
                                                             )
                                                             return redirect(
                                                                 f"/post/{post[0]}"
@@ -206,7 +207,7 @@ def editPost(postID):
                                                     Log.success(
                                                         f'Post: "{postTitle}" edited',
                                                     )
-                                                    flash("Post edited", "success")
+                                                    flash("Post edited.", "success")
                                                     return redirect(f"/post/{post[0]}")
                             # Render the edit post template
                             return render_template(
@@ -221,7 +222,7 @@ def editPost(postID):
                             )
                         case False:
                             # User is not authorized to edit the post
-                            flash("this post not yours", "error")
+                            flash("This post not yours.", "error")
                             Log.danger(
                                 f'THIS POST DOES NOT BELONG TO USER: "{session["userName"]}"',
                             )
@@ -233,5 +234,5 @@ def editPost(postID):
         case False:
             # User is not logged in
             Log.danger(f"{request.remote_addr} tried to edit post without login")
-            flash("you need login for edit a post", "error")
+            flash("You need login for edit a post.", "error")
             return redirect(f"/login/redirect=&editpost&{postID}")

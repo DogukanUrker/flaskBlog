@@ -75,7 +75,7 @@ def changeUserName():
                             match newUserName == session["userName"]:
                                 case True:
                                     flash(
-                                        "this is your username", "error"
+                                        "This is your username.", "error"
                                     )  # Flash an error message
                                 case False:
                                     # Check if new username is available
@@ -161,7 +161,7 @@ def changeUserName():
                                                                 f'User: "{session["userName"]}" changed his username to "{newUserName}"'
                                                             )
                                                             flash(
-                                                                "user name changed",
+                                                                "Username changed.",
                                                                 "success",
                                                             )
                                                             return redirect(
@@ -214,7 +214,7 @@ def changeUserName():
                                                     )
                                                     session["userName"] = newUserName
                                                     flash(
-                                                        "user name changed", "success"
+                                                        "Username changed.", "success"
                                                     )
                                                     return redirect(
                                                         f"/user/{newUserName.lower()}"
@@ -227,7 +227,7 @@ def changeUserName():
                                             )
                         case False:
                             # Username contains non-ASCII characters
-                            flash("username does not fit ascii characters", "error")
+                            flash("Username contains non-ASCII characters.", "error")
             # Render the change username template
             return render_template(
                 "changeUserName.html.jinja",

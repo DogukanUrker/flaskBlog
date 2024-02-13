@@ -108,7 +108,7 @@ def post(postID):
                     addPoints(5, session["userName"])
 
                     # Flash a success message to the user
-                    flash("You earned 5 points by commenting ", "success")
+                    flash("You earned 5 points by commenting.", "success")
 
                     # Redirect to the same route with a 301 status code
                     return redirect(url_for("post.post", postID=postID)), 301

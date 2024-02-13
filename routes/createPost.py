@@ -58,7 +58,7 @@ def createPost():
                     match postContent == "":
                         case True:
                             # Flash an error message
-                            flash("post content not be empty", "error")
+                            flash("Post content not be empty.", "error")
                             Log.danger(
                                 f'User: "{session["userName"]}" tried to create a post with empty content',
                             )
@@ -107,7 +107,7 @@ def createPost():
                                             # Award points to the user for posting
                                             addPoints(20, session["userName"])
                                             flash(
-                                                "You earned 20 points by posting ",
+                                                "You earned 20 points by posting.",
                                                 "success",
                                             )
                                             return redirect("/")
@@ -142,7 +142,7 @@ def createPost():
                                     )
                                     # Award points to the user for posting
                                     addPoints(20, session["userName"])
-                                    flash("You earned 20 points by posting ", "success")
+                                    flash("You earned 20 points by posting.", "success")
                                     return redirect("/")
             # Render the create post template
             return render_template(
@@ -156,5 +156,5 @@ def createPost():
             Log.danger(
                 f"{request.remote_addr} tried to create a new post without login"
             )
-            flash("you need loin for create a post", "error")
+            flash("You need loin for create a post.", "error")
             return redirect("/login/redirect=&createpost")

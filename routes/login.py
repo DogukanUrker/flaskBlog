@@ -71,7 +71,7 @@ def login(direct):
                                 case True:
                                     # If user not found, show error message
                                     Log.danger(f'User: "{userName}" not found')
-                                    flash("User not found", "error")
+                                    flash("User not found.", "error")
                                 case _:
                                     match encryption.verify(password, user[3]):
                                         case True:
@@ -107,7 +107,7 @@ def login(direct):
                                                                 f'USER: "{user[1]}" LOGGED IN',
                                                             )
                                                             flash(
-                                                                f"Welcome {user[1]}",
+                                                                f"Welcome, {user[1]}!",
                                                                 "success",
                                                             )
                                                             return (
@@ -131,7 +131,8 @@ def login(direct):
                                                         f'User: "{user[1]}" logged in',
                                                     )
                                                     flash(
-                                                        f"Welcome {user[1]}", "success"
+                                                        f"Welcome, {user[1]}!",
+                                                        "success",
                                                     )
                                                     return (
                                                         redirect(direct),
@@ -141,7 +142,7 @@ def login(direct):
                                         case _:
                                             # Returns an incorrect password error if the password is incorrect
                                             Log.danger("Wrong password")
-                                            flash("Wrong password", "error")
+                                            flash("Wrong password.", "error")
                     # Render login template with appropriate form and messages
                     return render_template(
                         "login.html.jinja",

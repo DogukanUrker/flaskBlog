@@ -68,14 +68,14 @@ def changePassword():
                                 case True:
                                     # Display error message
                                     flash(
-                                        "new password can not be same with old password",
+                                        "New password can not be same with old password.",
                                         "error",
                                     )
                             # Check if passwords match
                             match password != passwordConfirm:
                                 case True:
                                     # Display error message
-                                    flash("passwords must match", "error")
+                                    flash("Passwords must match.", "error")
                             # Check if old password is different from new password and passwords match
                             match oldPassword != password and password == passwordConfirm:
                                 case True:
@@ -122,7 +122,7 @@ def changePassword():
                                                     session.clear()
                                                     # Display success message
                                                     flash(
-                                                        "you need login with new password",
+                                                        "You need login with new password.",
                                                         "success",
                                                     )
                                                     # Redirect to login page
@@ -154,14 +154,14 @@ def changePassword():
                                             session.clear()
                                             # Display success message
                                             flash(
-                                                "you need login with new password",
+                                                "You need login with new password.",
                                                 "success",
                                             )
                                             # Redirect to login page
                                             return redirect("/login/redirect=&")
                         case _:
                             # Display error message
-                            flash("old is password wrong", "error")
+                            flash("Old is password wrong.", "error")
             # Render the change password form template
             return render_template(
                 "changePassword.html.jinja",
@@ -175,6 +175,6 @@ def changePassword():
                 f"{request.remote_addr} tried to change his password without logging in"
             )
             # Display error message
-            flash("you need login for change your password", "error")
+            flash("You need login for change your password.", "error")
             # Redirect to login page
             return redirect("/login/redirect=changepassword")

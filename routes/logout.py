@@ -37,7 +37,7 @@ def logout():
             )  # Log a message with level 2 indicating the user has logged out
             session.clear()  # Clear the session dictionary
             flash(
-                "logged out", "error"
+                "Logged out.", "error"
             )  # Display a flash message with the text "logged out" and the category "error"
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in

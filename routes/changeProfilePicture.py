@@ -70,7 +70,7 @@ def changeProfilePicture():
                                         f'User: "{session["userName"]}" changed his profile picture to "{newProfilePicture}"',
                                     )
                                     # Flash a success message to the user
-                                    flash("profile picture changed", "success")
+                                    flash("Profile picture changed.", "success")
                                     # Redirect to the same route
                                     return redirect(f"/changeprofilepicture")
                                 case False:
@@ -92,7 +92,7 @@ def changeProfilePicture():
                                 f'User: "{session["userName"]}" changed his profile picture to "{newProfilePicture}"',
                             )
                             # Flash a success message to the user
-                            flash("profile picture changed", "success")
+                            flash("Profile picture changed.", "success")
                             # Redirect to the same route
                             return redirect(f"/changeprofilepicture")
             # Render the change profile picture template with the form object, the site key, and the reCAPTCHA flag

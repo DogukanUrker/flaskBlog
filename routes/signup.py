@@ -163,7 +163,7 @@ def signup():
                                                                     )
                                                                     # Flash success message
                                                                     flash(
-                                                                        f"Welcome {userName}",
+                                                                        f"Welcome, {userName}!",
                                                                         "success",
                                                                     )
                                                                     # Set up email server connection
@@ -275,7 +275,7 @@ def signup():
                                                             )
                                                             # Flash success message
                                                             flash(
-                                                                f"Welcome {userName}",
+                                                                f"Welcome, {userName}!",
                                                                 "success",
                                                             )
                                                             # Set up email server connection
@@ -339,14 +339,14 @@ def signup():
                                                     )
                                                     # Flash error message
                                                     flash(
-                                                        "username does not fit ascii charecters",
+                                                        "Username does not fit ascii charecters.",
                                                         "error",
                                                     )
                                         # If passwords do not match
                                         case False:
                                             Log.danger("Passwords do not match")
                                             # Flash error message
-                                            flash("password must match", "error")
+                                            flash("Password must match.", "error")
                             # If username or email is not available
                             match userName in users and email in mails:
                                 case True:

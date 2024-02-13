@@ -82,7 +82,7 @@ def passwordReset(codeSent):
                                     match encryption.verify(password, oldPassword):
                                         case True:
                                             flash(
-                                                "New password cannot be the same as the old password",
+                                                "New password cannot be the same as the old password.",
                                                 "error",
                                             )
                                         case False:
@@ -119,7 +119,7 @@ def passwordReset(codeSent):
                                                                 f'User: "{userName}" changed his password',
                                                             )
                                                             flash(
-                                                                "You need to login with the new password",
+                                                                "You need to login with the new password.",
                                                                 "success",
                                                             )
                                                             return redirect(
@@ -145,16 +145,16 @@ def passwordReset(codeSent):
                                                         f'User: "{userName}" changed his password',
                                                     )
                                                     flash(
-                                                        "You need to login with the new password",
+                                                        "You need to login with the new password.",
                                                         "success",
                                                     )
                                                     return redirect("/login/redirect=&")
                                 case False:
                                     # Passwords don't match
-                                    flash("Passwords must match", "error")
+                                    flash("Passwords must match.", "error")
                         case False:
                             # Incorrect code entered
-                            flash("Wrong Code", "error")
+                            flash("Wrong code.", "error")
             # Render password reset template with appropriate form and messages
             return render_template(
                 "passwordReset.html.jinja",
@@ -251,12 +251,12 @@ def passwordReset(codeSent):
                             Log.success(
                                 f'Password reset code: "{passwordResetCode}" sent to "{email}"',
                             )
-                            flash("Code sent", "success")
+                            flash("Code sent.", "success")
                             return redirect("/passwordreset/codesent=true")
                         case True:
                             # User or email not found
                             Log.danger(f'User: "{userName}" not found')
-                            flash("User not found", "error")
+                            flash("User not found.", "error")
             # Render password reset template with appropriate form and messages
             return render_template(
                 "passwordReset.html.jinja",

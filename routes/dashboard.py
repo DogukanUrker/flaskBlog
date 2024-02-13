@@ -95,6 +95,6 @@ def dashboard(userName):
                 f"{request.remote_addr} tried to access the dashboard without login"
             )
             # Flash an error message to the user
-            flash("you need login for reach to dashboard", "error")
+            flash("You need login for reach to dashboard.", "error")
             # Redirect to the login page with the dashboard and user as the next destination
             return redirect("/login/redirect=&dashboard&user")
