@@ -24,6 +24,12 @@ def afterRequestLogger(response):
                 f"Adress: {request.remote_addr} | Method: {request.method} | Path: {request.path} | Scheme: {request.scheme} | Status: {response.status} | Content Length: {response.content_length} | Referrer: {request.referrer} | User Agent: {request.user_agent}",
             )
 
+        # If the response status is "404 NOT FOUND", log as a danger message
+        case "404 NOT FOUND":
+            Log.danger(
+                f"Adress: {request.remote_addr} | Method: {request.method} | Path: {request.path} | Scheme: {request.scheme} | Status: {response.status} | Content Length: {response.content_length} | Referrer: {request.referrer} | User Agent: {request.user_agent}",
+            )
+
         # For any other response status, log as an info message
         case _:
             Log.info(

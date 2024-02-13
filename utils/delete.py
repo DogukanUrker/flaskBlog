@@ -85,7 +85,7 @@ class Delete:
             "post deleted", "error"
         )  # Display a flash message with the text "post deleted" and the category "error"
         Log.success(
-            f'POST: "{postID}" DELETED'
+            f'Post: "{postID}" deleted'
         )  # Log a message with level 2 indicating the post was deleted
 
     def user(userName):

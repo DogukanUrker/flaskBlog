@@ -13,4 +13,4 @@ def addPoints(points, user):
         [(points), (user)],
     )
     connection.commit()  # Commit changes to the database
-    Log.success(f'{points} points added to "{user}"')
+    Log.info(f'{points} points added to "{user}"')
