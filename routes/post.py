@@ -11,8 +11,6 @@ from modules import (
     redirect,  # Redirect function
     addPoints,  # Function to add points to user's score
     Blueprint,  # Blueprint for defining routes
-    currentDate,  # Function to get current date
-    currentTime,  # Function to get current time
     CommentForm,  # Form class for comments
     DB_POSTS_ROOT,  # Path to the posts database
     currentTimeStamp,  # Function to get current timestamp
