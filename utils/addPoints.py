@@ -6,6 +6,9 @@ def addPoints(points, user):
     """
     Adds the specified number of points to the user with the specified username.
     """
+    Log.sql(
+        f"Connecting to '{DB_USERS_ROOT}' database"
+    )  # Log the database connection is started
     connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the SQLite database
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object

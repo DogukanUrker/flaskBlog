@@ -59,6 +59,9 @@ def passwordReset(codeSent):
     # Check if code has been sent
     match codeSent:
         case "true":
+            Log.sql(
+                f"Connecting to '{DB_USERS_ROOT}' database"
+            )  # Log the database connection is started
             # Code has been sent, handle form submission
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
@@ -174,6 +177,9 @@ def passwordReset(codeSent):
                     userName = request.form["userName"]
                     email = request.form["email"]
                     userName = userName.replace(" ", "")
+                    Log.sql(
+                        f"Connecting to '{DB_USERS_ROOT}' database"
+                    )  # Log the database connection is started
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
                         Log.sql

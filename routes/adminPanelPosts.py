@@ -26,6 +26,9 @@ def adminPanelPosts():
             Log.info(
                 f"Admin: {session['userName']} reached to posts admin panel"
             )  # Log a message that the admin reached to posts admin panel
+            Log.sql(
+                f"Connecting to '{DB_USERS_ROOT}' database"
+            )  # Log the database connection is started
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
@@ -51,6 +54,9 @@ def adminPanelPosts():
             # Check if the user role is admin
             match role == "admin":
                 case True:
+                    Log.sql(
+                        f"Connecting to '{DB_POSTS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the posts database and get all the posts
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(

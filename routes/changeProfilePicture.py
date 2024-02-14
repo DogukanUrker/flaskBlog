@@ -38,6 +38,12 @@ def changeProfilePicture():
                     newProfilePictureSeed = request.form["newProfilePictureSeed"]
                     # Generate the new profile picture URL from the seed
                     newProfilePicture = f"https://api.dicebear.com/7.x/identicon/svg?seed={newProfilePictureSeed}&radius=10"
+                    Log.sql(
+                        f"Connecting to '{DB_USERS_ROOT}' database"
+                    )  # Log the database connection is started
+                    Log.sql(
+                        f"Connecting to '{DB_USERS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(

@@ -58,6 +58,9 @@ def index(by="timeStamp", sort="desc"):
             )
             return redirect("/")
 
+    Log.sql(
+        f"Connecting to '{DB_POSTS_ROOT}' database"
+    )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection

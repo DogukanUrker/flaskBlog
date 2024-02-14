@@ -20,6 +20,13 @@ def search(query):
     queryNoWhiteSpace = query.replace("+", "")
     query = query.replace("+", " ")
 
+    # Log the query
+    Log.info(f"Searching for query: {query}")
+
+    Log.sql(
+        f"Connecting to '{DB_USERS_ROOT}' database"
+    )  # Log the database connection is started
+
     # Connect to the users database
     connection = sqlite3.connect(DB_USERS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
@@ -40,7 +47,9 @@ def search(query):
             ("%" + queryNoWhiteSpace + "%"),
         ],
     ).fetchall()
-
+    Log.sql(
+        f"Connecting to '{DB_POSTS_ROOT}' database"
+    )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
@@ -158,6 +167,11 @@ def search(query):
         )
         # Append the post to the posts list
         posts.append(cursor.fetchall())
+
+    # Use the Log module to log information to the console
+    Log.info(
+        f"Rendering search.html.jinja: params: query={query} | users={users} | posts={posts} | empty={empty}"
+    )
 
     # Render the search template with the posts, users, query and empty data
     return render_template(

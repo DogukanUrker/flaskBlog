@@ -67,6 +67,9 @@ def usersTable():
             open(DB_USERS_ROOT, "x")
             # Print a message with the level 2 (success) and the database name
             Log.success(f'Users database: "{DB_USERS_ROOT}" created')
+    Log.sql(
+        f"Connecting to '{DB_USERS_ROOT}' database"
+    )  # Log the database connection is started
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_USERS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
@@ -154,6 +157,9 @@ def postsTable():
             open(DB_POSTS_ROOT, "x")
             # Print a message with the level 2 (success) and the database name
             Log.success(f'Posts database: "{DB_POSTS_ROOT}" created')
+    Log.sql(
+        f"Connecting to '{DB_POSTS_ROOT}' database"
+    )  # Log the database connection is started
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_POSTS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
@@ -213,6 +219,9 @@ def commentsTable():
             open(DB_COMMENTS_ROOT, "x")
             # Print a message with the level 2 (success) and the database name
             Log.success(f'Comments database: "{DB_COMMENTS_ROOT}" created')
+    Log.sql(
+        f"Connecting to '{DB_COMMENTS_ROOT}' database"
+    )  # Log the database connection is started
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_COMMENTS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection

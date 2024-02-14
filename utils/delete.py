@@ -46,6 +46,9 @@ class Delete:
         Returns:
         None
         """
+        Log.sql(
+            f"Connecting to '{DB_POSTS_ROOT}' database"
+        )  # Log the database connection is started
         connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
         connection.set_trace_callback(
             Log.sql
@@ -104,6 +107,9 @@ class Delete:
         Returns:
         None
         """
+        Log.sql(
+            f"Connecting to '{DB_USERS_ROOT}' database"
+        )  # Log the database connection is started
         connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
         connection.set_trace_callback(
             Log.sql

@@ -13,6 +13,9 @@ def getProfilePicture(userName):
     Returns:
         str or None: The profile picture URL of the user, or None if not found.
     """
+    Log.sql(
+        f"Connecting to '{DB_USERS_ROOT}' database"
+    )  # Log the database connection is started
     # Connect to the SQLite database
     connection = sqlite3.connect(DB_USERS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection

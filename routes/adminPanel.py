@@ -20,6 +20,9 @@ def adminPanel():
     # Check if the user is logged in
     match "userName" in session:
         case True:
+            Log.sql(
+                f"Connecting to '{DB_USERS_ROOT}' database"
+            )  # Log the database connection is started
             # Connect to the database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(

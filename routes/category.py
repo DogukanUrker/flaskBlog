@@ -74,6 +74,10 @@ def category(category, by="timeStamp", sort="desc"):
         case False:
             abort(404)
 
+    Log.sql(
+        f"Connecting to '{DB_POSTS_ROOT}' database"
+    )  # Log the database connection is started
+
     # Establishing a connection to the SQLite database
     connection = sqlite3.connect(DB_POSTS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection

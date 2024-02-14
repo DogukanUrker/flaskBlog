@@ -73,6 +73,9 @@ def signup():
                             passwordConfirm = request.form["passwordConfirm"]
                             # Remove spaces from username
                             userName = userName.replace(" ", "")
+                            Log.sql(
+                                f"Connecting to '{DB_USERS_ROOT}' database"
+                            )  # Log the database connection is started
                             # Connect to the database
                             connection = sqlite3.connect(DB_USERS_ROOT)
                             connection.set_trace_callback(

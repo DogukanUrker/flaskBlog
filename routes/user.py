@@ -28,6 +28,9 @@ def user(userName):
     :rtype: flask.Response
     """
     userName = userName.lower()  # Convert the username to lowercase for consistency
+    Log.sql(
+        f"Connecting to '{DB_USERS_ROOT}' database"
+    )  # Log the database connection is started
     connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object for executing queries
@@ -52,6 +55,9 @@ def user(userName):
                 [(userName)],  # Use a parameterized query to avoid SQL injection
             )
             user = cursor.fetchone()  # Fetch the first result as a tuple
+            Log.sql(
+                f"Connecting to '{DB_POSTS_ROOT}' database"
+            )  # Log the database connection is started
             connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
             connection.set_trace_callback(
                 Log.sql

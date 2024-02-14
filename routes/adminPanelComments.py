@@ -26,6 +26,9 @@ def adminPanelComments():
             Log.info(
                 f"Admin: {session['userName']} reached to comments admin panel"
             )  # Log a message that the admin reached to comments admin panel
+            Log.sql(
+                f"Connecting to '{DB_USERS_ROOT}' database"
+            )  # Log the database connection is started
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
@@ -53,6 +56,9 @@ def adminPanelComments():
             # Check if the user role is admin
             match role == "admin":
                 case True:
+                    Log.sql(
+                        f"Connecting to '{DB_COMMENTS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the comments database and get all the comments
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(

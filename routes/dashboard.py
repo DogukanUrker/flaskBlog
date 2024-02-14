@@ -44,6 +44,9 @@ def dashboard(userName):
                                         ),
                                         301,
                                     )
+                    Log.sql(
+                        f"Connecting to '{DB_POSTS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the posts database
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
@@ -56,6 +59,9 @@ def dashboard(userName):
                         [(session["userName"])],
                     )
                     posts = cursor.fetchall()
+                    Log.sql(
+                        f"Connecting to '{DB_COMMENTS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(

@@ -60,6 +60,9 @@ def login(direct):
                             userName = request.form["userName"]
                             password = request.form["password"]
                             userName = userName.replace(" ", "")
+                            Log.sql(
+                                f"Connecting to '{DB_USERS_ROOT}' database"
+                            )  # Log the database connection is started
                             connection = sqlite3.connect(DB_USERS_ROOT)
                             connection.set_trace_callback(
                                 Log.sql

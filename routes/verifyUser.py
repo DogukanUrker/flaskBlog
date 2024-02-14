@@ -50,6 +50,12 @@ def verifyUser(codeSent):
         case True:
             # Get the username from session
             userName = session["userName"]
+            Log.sql(
+                f"Connecting to '{DB_USERS_ROOT}' database"
+            )  # Log the database connection is started
+            Log.sql(
+                f"Connecting to '{DB_USERS_ROOT}' database"
+            )  # Log the database connection is started
             # Connect to the users database
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(

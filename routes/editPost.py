@@ -44,6 +44,9 @@ def editPost(postID):
     # Check if "userName" exists in session
     match "userName" in session:
         case True:
+            Log.sql(
+                f"Connecting to '{DB_POSTS_ROOT}' database"
+            )  # Log the database connection is started
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
             connection.set_trace_callback(
@@ -55,6 +58,9 @@ def editPost(postID):
             # Check if postID exists in posts
             match str(postID) in posts:
                 case True:
+                    Log.sql(
+                        f"Connecting to '{DB_POSTS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the posts database
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
@@ -67,6 +73,9 @@ def editPost(postID):
                     )
                     post = cursor.fetchone()
                     Log.success(f'POST: "{postID}" FOUND')
+                    Log.sql(
+                        f"Connecting to '{DB_USERS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(

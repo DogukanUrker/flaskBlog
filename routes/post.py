@@ -28,6 +28,9 @@ def post(postID):
     # Create a comment form object from the request form
     form = CommentForm(request.form)
 
+    Log.sql(
+        f"Connecting to '{DB_POSTS_ROOT}' database"
+    )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
@@ -43,6 +46,9 @@ def post(postID):
             # Log a message indicating that the post is found
             Log.success(f'post: "{postID}" loaded')
 
+            Log.sql(
+                f"Connecting to '{DB_POSTS_ROOT}' database"
+            )  # Log the database connection is started
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
             connection.set_trace_callback(
@@ -86,6 +92,9 @@ def post(postID):
                     # Get the comment from the form
                     comment = request.form["comment"]
 
+                    Log.sql(
+                        f"Connecting to '{DB_COMMENTS_ROOT}' database"
+                    )  # Log the database connection is started
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(
@@ -120,6 +129,9 @@ def post(postID):
                     # Redirect to the same route with a 301 status code
                     return redirect(url_for("post.post", postID=postID)), 301
 
+            Log.sql(
+                f"Connecting to '{DB_COMMENTS_ROOT}' database"
+            )  # Log the database connection is started
             # Connect to the comments database
             connection = sqlite3.connect(DB_COMMENTS_ROOT)
             connection.set_trace_callback(

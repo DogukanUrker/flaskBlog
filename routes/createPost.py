@@ -82,6 +82,9 @@ def createPost():
                                             Log.success(
                                                 f"Post create reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
+                                            Log.sql(
+                                                f"Connecting to '{DB_POSTS_ROOT}' database"
+                                            )  # Log the database connection is started
                                             # Insert new post into the database
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
                                             connection.set_trace_callback(
@@ -122,6 +125,9 @@ def createPost():
                                             abort(401)
                                 case False:
                                     # Recaptcha not enabled
+                                    Log.sql(
+                                        f"Connecting to '{DB_POSTS_ROOT}' database"
+                                    )  # Log the database connection is started
                                     connection = sqlite3.connect(DB_POSTS_ROOT)
                                     connection.set_trace_callback(
                                         Log.sql

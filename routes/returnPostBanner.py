@@ -17,6 +17,9 @@ def returnPostBanner(postID):
         The banner image for the given post ID as a Flask Response object.
 
     """
+    Log.sql(
+        f"Connecting to '{DB_POSTS_ROOT}' database"
+    )  # Log the database connection is started
     # Connect to the SQLite database that stores the posts information
     connection = sqlite3.connect(DB_POSTS_ROOT)
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
