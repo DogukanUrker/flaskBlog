@@ -109,7 +109,7 @@ class Log:
             case True:
                 # Print formatted success message with timestamp
                 print(
-                    "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
+                    "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
                     f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
@@ -160,7 +160,7 @@ class Log:
             case True:
                 # Print formatted warning message with timestamp
                 print(
-                    "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
+                    "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
                     f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
@@ -211,7 +211,7 @@ class Log:
             case True:
                 # Print formatted info message with timestamp
                 print(
-                    "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
+                    "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
                     f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
@@ -262,7 +262,7 @@ class Log:
             case True:
                 # Print formatted app message with timestamp
                 print(
-                    "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
+                    "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
                     f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
