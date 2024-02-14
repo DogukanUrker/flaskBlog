@@ -86,17 +86,17 @@ def usersTable():
         Log.danger(f'Table: "users" not found in "{DB_USERS_ROOT}"')
         # Define a SQL statement to create the users table with the specified columns and constraints
         usersTable = """
-        CREATE TABLE IF NOT EXISTS Users(
-            "userID"    INTEGER NOT NULL UNIQUE,
-            "userName"  TEXT UNIQUE,
-            "email" TEXT UNIQUE,
-            "password"  TEXT,
-            "profilePicture" TEXT,
-            "role"  TEXT,
-            "points"    INTEGER,
-            "timeStamp" INTEGER,
-            "isVerified"    TEXT,
-            PRIMARY KEY("userID" AUTOINCREMENT)
+        create table if not exists Users(
+            "userID"    integer not null unique,
+            "userName"  text unique,
+            "email" text unique,
+            "password"  text,
+            "profilePicture" text,
+            "role"  text,
+            "points"    integer,
+            "timeStamp" integer,
+            "isVerified"    text,
+            primary key("userID" autoincrement)
         );"""
         # Execute the SQL statement to create the table
         cursor.execute(usersTable)
@@ -177,17 +177,17 @@ def postsTable():
         # Define a SQL statement to create the posts table with the specified columns and constraints
         postsTable = """
         CREATE TABLE "posts" (
-            "id"    INTEGER NOT NULL UNIQUE,
-            "title" TEXT NOT NULL,
-            "tags"  TEXT NOT NULL,
-            "content"   TEXT NOT NULL,
-            "banner"    BLOB NOT NULL,
-            "author"    TEXT NOT NULL,
-            "views" INTEGER,
-            "timeStamp" INTEGER,
-            "lastEditTimeStamp" INTEGER,
-            "category"  TEXT NOT NULL,
-            PRIMARY KEY("id" AUTOINCREMENT)
+            "id"    integer not null unique,
+            "title" text not null,
+            "tags"  text not null,
+            "content"   text not null,
+            "banner"    BLOB not null,
+            "author"    text not null,
+            "views" integer,
+            "timeStamp" integer,
+            "lastEditTimeStamp" integer,
+            "category"  text not null,
+            primary key("id" autoincrement)
         );"""
         # Execute the SQL statement to create the table
         cursor.execute(postsTable)
@@ -238,13 +238,13 @@ def commentsTable():
         Log.danger(f'Table: "comments" not found in "{DB_COMMENTS_ROOT}"')
         # Define a SQL statement to create the comments table with the specified columns and constraints
         commentsTable = """
-        CREATE TABLE IF NOT EXISTS comments(
-            "id"    INTEGER NOT NULL,
-            "post"  INTEGER,
-            "comment"   TEXT,
-            "user"  TEXT,
-            "timeStamp" INTEGER,
-            PRIMARY KEY("id" AUTOINCREMENT)
+        create table if not exists comments(
+            "id"    integer not null,
+            "post"  integer,
+            "comment"   text,
+            "user"  text,
+            "timeStamp" integer,
+            primary key("id" autoincrement)
         );"""
         # Execute the SQL statement to create the table
         cursor.execute(commentsTable)
