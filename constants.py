@@ -67,6 +67,9 @@ LOG_INFO_FILE_ROOT = LOG_FOLDER_ROOT + "logInfo.log"  # (str)
 # Root path of the app log file
 LOG_APP_FILE_ROOT = LOG_FOLDER_ROOT + "logApp.log"  # (str)
 
+# Root path of the sql log file
+LOG_SQL_FILE_ROOT = LOG_FOLDER_ROOT + "logSQL.log"  # (str)
+
 
 # Secret key for Flask sessions
 APP_SECRET_KEY = secrets.token_urlsafe(32)  # (str)

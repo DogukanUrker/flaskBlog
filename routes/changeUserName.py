@@ -60,6 +60,9 @@ def changeUserName():
                     )  # Remove spaces from username
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
                         """select userName from users where userName = ? """,
@@ -121,6 +124,9 @@ def changeUserName():
                                                                     DB_POSTS_ROOT
                                                                 )
                                                             )
+                                                            connection.set_trace_callback(
+                                                                Log.sql
+                                                            )  # Set the trace callback for the connection
                                                             cursor = connection.cursor()
                                                             cursor.execute(
                                                                 """update posts set Author = ? where author = ? """,
@@ -140,6 +146,9 @@ def changeUserName():
                                                                     DB_COMMENTS_ROOT
                                                                 )
                                                             )
+                                                            connection.set_trace_callback(
+                                                                Log.sql
+                                                            )  # Set the trace callback for the connection
                                                             cursor = connection.cursor()
                                                             cursor.execute(
                                                                 """update comments set user = ? where user = ? """,
@@ -187,6 +196,9 @@ def changeUserName():
                                                     connection = sqlite3.connect(
                                                         DB_POSTS_ROOT
                                                     )
+                                                    connection.set_trace_callback(
+                                                        Log.sql
+                                                    )  # Set the trace callback for the connection
                                                     cursor = connection.cursor()
                                                     cursor.execute(
                                                         """update posts set Author = ? where author = ? """,
@@ -200,6 +212,9 @@ def changeUserName():
                                                     connection = sqlite3.connect(
                                                         DB_COMMENTS_ROOT
                                                     )
+                                                    connection.set_trace_callback(
+                                                        Log.sql
+                                                    )  # Set the trace callback for the connection
                                                     cursor = connection.cursor()
                                                     cursor.execute(
                                                         """update comments set user = ? where user = ? """,

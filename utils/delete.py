@@ -47,6 +47,9 @@ class Delete:
         None
         """
         connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
+        connection.set_trace_callback(
+            Log.sql
+        )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
             """select author from posts where id = ? """,  # Select the author column from the posts table where the id matches the given postID
@@ -64,6 +67,9 @@ class Delete:
         connection = sqlite3.connect(
             DB_COMMENTS_ROOT
         )  # Connect to the comments database
+        connection.set_trace_callback(
+            Log.sql
+        )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a new cursor object for executing queries
         cursor.execute(
             """select count(*) from comments where post = ? """,  # Select the count of rows from the comments table where the post column matches the given postID
@@ -99,6 +105,9 @@ class Delete:
         None
         """
         connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
+        connection.set_trace_callback(
+            Log.sql
+        )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
             """select * from users where lower(userName) = ? """,  # Select all the columns from the users table where the lowercased userName column matches the lowercased given userName
@@ -153,6 +162,9 @@ class Delete:
         connection = sqlite3.connect(
             DB_COMMENTS_ROOT
         )  # Connect to the comments database
+        connection.set_trace_callback(
+            Log.sql
+        )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
             """select user from comments where id = ? """,  # Select the user column from the comments table where the id matches the given commentID

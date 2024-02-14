@@ -19,6 +19,7 @@ def returnPostBanner(postID):
     """
     # Connect to the SQLite database that stores the posts information
     connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     # Create a cursor object to execute SQL queries
     cursor = connection.cursor()
     # Execute a SQL query to select the banner column from the posts table where the id matches the given post ID

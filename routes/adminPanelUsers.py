@@ -28,6 +28,9 @@ def adminPanelUsers():
             )  # Log a message that the admin reached to users admin panel
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
                 """select role from users where userName = ? """,
@@ -58,6 +61,9 @@ def adminPanelUsers():
                 case True:
                     # Connect to the users database and get all the users
                     connection = sqlite3.connect(DB_USERS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute("select * from users")
                     users = cursor.fetchall()

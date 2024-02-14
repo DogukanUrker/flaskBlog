@@ -46,6 +46,9 @@ def dashboard(userName):
                                     )
                     # Connect to the posts database
                     connection = sqlite3.connect(DB_POSTS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Query the posts database for the posts authored by the session user name
                     cursor.execute(
@@ -55,6 +58,9 @@ def dashboard(userName):
                     posts = cursor.fetchall()
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Query the comments database for the comments made by the route user name
                     cursor.execute(

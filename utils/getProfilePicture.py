@@ -15,11 +15,12 @@ def getProfilePicture(userName):
     """
     # Connect to the SQLite database
     connection = sqlite3.connect(DB_USERS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     # Create a cursor object
     cursor = connection.cursor()
     # Execute SQL query to retrieve user profile picture
     cursor.execute(
-        """SELECT profilePicture FROM users WHERE lower(userName) = ? """,
+        """select profilePicture from users where lower(userName) = ? """,
         [(userName.lower())],
     )
     try:

@@ -75,6 +75,9 @@ def signup():
                             userName = userName.replace(" ", "")
                             # Connect to the database
                             connection = sqlite3.connect(DB_USERS_ROOT)
+                            connection.set_trace_callback(
+                                Log.sql
+                            )  # Set the trace callback for the connection
                             cursor = connection.cursor()
                             # Fetch existing usernames and emails from the database
                             cursor.execute("select userName from users")
@@ -99,6 +102,9 @@ def signup():
                                                     connection = sqlite3.connect(
                                                         DB_USERS_ROOT
                                                     )
+                                                    connection.set_trace_callback(
+                                                        Log.sql
+                                                    )  # Set the trace callback for the connection
                                                     # Check if reCAPTCHA is enabled for sign up
                                                     match RECAPTCHA and RECAPTCHA_SIGN_UP:
                                                         # If reCAPTCHA is enabled

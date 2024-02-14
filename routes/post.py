@@ -30,6 +30,7 @@ def post(postID):
 
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Query the posts database for all post IDs
@@ -44,6 +45,9 @@ def post(postID):
 
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
 
             # Query the posts database for the post with the matching ID
@@ -84,6 +88,9 @@ def post(postID):
 
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
 
                     # Insert the comment into the comments database with the post ID, comment, user name, date, and time
@@ -115,6 +122,9 @@ def post(postID):
 
             # Connect to the comments database
             connection = sqlite3.connect(DB_COMMENTS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
 
             # Query the comments database for the comments related to the post ID

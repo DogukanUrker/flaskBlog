@@ -46,6 +46,9 @@ def editPost(postID):
         case True:
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute("select id from posts")
             posts = str(cursor.fetchall())
@@ -54,6 +57,9 @@ def editPost(postID):
                 case True:
                     # Connect to the posts database
                     connection = sqlite3.connect(DB_POSTS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
                         """select * from posts where id = ? """,
@@ -63,6 +69,9 @@ def editPost(postID):
                     Log.success(f'POST: "{postID}" FOUND')
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
                         """select userName from users where userName = ? """,
@@ -123,6 +132,9 @@ def editPost(postID):
                                                                     DB_POSTS_ROOT
                                                                 )
                                                             )
+                                                            connection.set_trace_callback(
+                                                                Log.sql
+                                                            )  # Set the trace callback for the connection
                                                             cursor = connection.cursor()
                                                             cursor.execute(
                                                                 """update posts set title = ? where id = ? """,
@@ -175,6 +187,9 @@ def editPost(postID):
                                                     connection = sqlite3.connect(
                                                         DB_POSTS_ROOT
                                                     )
+                                                    connection.set_trace_callback(
+                                                        Log.sql
+                                                    )  # Set the trace callback for the connection
                                                     cursor = connection.cursor()
                                                     cursor.execute(
                                                         """update posts set title = ? where id = ? """,

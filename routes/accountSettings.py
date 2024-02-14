@@ -30,6 +30,9 @@ def accountSettings():
         case True:
             # Connect to the database and get the user name
             connection = sqlite3.connect(DB_USERS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
                 """select userName from users where userName = ? """,

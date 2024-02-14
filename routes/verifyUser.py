@@ -52,6 +52,9 @@ def verifyUser(codeSent):
             userName = session["userName"]
             # Connect to the users database
             connection = sqlite3.connect(DB_USERS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
             # Check if the user is already verified
             cursor.execute(

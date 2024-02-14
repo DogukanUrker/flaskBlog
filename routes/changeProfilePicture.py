@@ -40,6 +40,9 @@ def changeProfilePicture():
                     newProfilePicture = f"https://api.dicebear.com/7.x/identicon/svg?seed={newProfilePictureSeed}&radius=10"
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Check if reCAPTCHA is enabled and required for changing profile picture
                     match RECAPTCHA and RECAPTCHA_PROFILE_PICTURE_CHANGE:

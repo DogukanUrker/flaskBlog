@@ -60,10 +60,11 @@ def index(by="timeStamp", sort="desc"):
 
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     # Create a cursor object for executing queries
     cursor = connection.cursor()
     # Select all the columns from the posts table and order them by the specified field and sorting order
-    cursor.execute(f"SELECT * FROM posts ORDER BY {by} {sort}")
+    cursor.execute(f"select * from posts order by {by} {sort}")
     # Fetch all the results as a list of tuples
     posts = cursor.fetchall()
 

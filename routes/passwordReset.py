@@ -61,6 +61,9 @@ def passwordReset(codeSent):
         case "true":
             # Code has been sent, handle form submission
             connection = sqlite3.connect(DB_USERS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
             match request.method == "POST":
                 case True:
@@ -172,6 +175,9 @@ def passwordReset(codeSent):
                     email = request.form["email"]
                     userName = userName.replace(" ", "")
                     connection = sqlite3.connect(DB_USERS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
                         """select * from users where lower(userName) = ? """,

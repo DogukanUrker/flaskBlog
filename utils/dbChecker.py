@@ -69,10 +69,11 @@ def usersTable():
             Log.success(f'Users database: "{DB_USERS_ROOT}" created')
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_USERS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
     try:
         # Try to execute a SQL query to select userID records from the users table
-        cursor.execute("""SELECT userID FROM users; """).fetchall()
+        cursor.execute("""select userID from users; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
         Log.app(f'Table: "users" found in "{DB_USERS_ROOT}"')
         # Close the connection to the database
@@ -105,7 +106,7 @@ def usersTable():
                 # Execute a SQL query to insert the default admin account into the users table
                 cursor.execute(
                     """
-                    INSERT INTO Users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
+                    insert into Users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
                     values(?,?,?,?,?,?,?,?)
                     """,
                     (
@@ -155,10 +156,11 @@ def postsTable():
             Log.success(f'Posts database: "{DB_POSTS_ROOT}" created')
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
     try:
         # Try to execute a SQL query to select id records from the posts table
-        cursor.execute("""SELECT id FROM posts; """).fetchall()
+        cursor.execute("""select id from posts; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
         Log.app(f'Table: "posts" found in "{DB_POSTS_ROOT}"')
         # Close the connection to the database
@@ -213,10 +215,11 @@ def commentsTable():
             Log.success(f'Comments database: "{DB_COMMENTS_ROOT}" created')
     # Use the sqlite3 module to connect to the database and get a cursor object
     connection = sqlite3.connect(DB_COMMENTS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
     try:
         # Try to execute a SQL query to select id records from the comments table
-        cursor.execute("""SELECT id FROM comments; """).fetchall()
+        cursor.execute("""select id from comments; """).fetchall()
         # If the query succeeds, print a message with the level 6 (informational) and the table name
         Log.app(f'Table: "comments" found in "{DB_COMMENTS_ROOT}"')
         # Close the connection to the database

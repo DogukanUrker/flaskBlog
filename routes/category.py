@@ -76,6 +76,7 @@ def category(category, by="timeStamp", sort="desc"):
 
     # Establishing a connection to the SQLite database
     connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Executing SQL query to retrieve posts of the requested category and sorting them accordingly

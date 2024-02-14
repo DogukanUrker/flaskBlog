@@ -61,6 +61,9 @@ def login(direct):
                             password = request.form["password"]
                             userName = userName.replace(" ", "")
                             connection = sqlite3.connect(DB_USERS_ROOT)
+                            connection.set_trace_callback(
+                                Log.sql
+                            )  # Set the trace callback for the connection
                             cursor = connection.cursor()
                             cursor.execute(
                                 """select * from users where lower(userName) = ? """,
@@ -126,6 +129,7 @@ def login(direct):
                                                     # Logs the user in if reCAPTCHA is not required
                                                     session["userName"] = user[1]
                                                     session["userRole"] = user[5]
+
                                                     addPoints(1, session["userName"])
                                                     Log.success(
                                                         f'User: "{user[1]}" logged in',

@@ -54,6 +54,9 @@ def changePassword():
                     passwordConfirm = request.form["passwordConfirm"]
                     # Connect to the database
                     connection = sqlite3.connect(DB_USERS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Retrieve hashed password from database
                     cursor.execute(
@@ -83,6 +86,9 @@ def changePassword():
                                     newPassword = encryption.hash(password)
                                     # Connect to the database
                                     connection = sqlite3.connect(DB_USERS_ROOT)
+                                    connection.set_trace_callback(
+                                        Log.sql
+                                    )  # Set the trace callback for the connection
                                     # Check if RECAPTCHA is enabled for password change
                                     match RECAPTCHA and RECAPTCHA_PASSWORD_CHANGE:
                                         case True:

@@ -8,6 +8,7 @@ def changeUserRole(userName):
     """
     userName = userName.lower()  # Convert username to lowercase
     connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the SQLite database
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object
     cursor.execute(  # Execute SQL query to retrieve user role
         """select role from users where lower(userName) = ? """,

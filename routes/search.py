@@ -1,5 +1,6 @@
 # Import necessary modules and functions
 from modules import (
+    Log,  # Logging module
     sqlite3,  # Module for interacting with SQLite databases
     Blueprint,  # Class for defining Flask blueprints, which are sets of routes
     DB_POSTS_ROOT,  # Variable containing the path to the posts database
@@ -21,6 +22,7 @@ def search(query):
 
     # Connect to the users database
     connection = sqlite3.connect(DB_USERS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Search for users whose user name contains the query
@@ -41,6 +43,7 @@ def search(query):
 
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Search for posts whose tags contain the query

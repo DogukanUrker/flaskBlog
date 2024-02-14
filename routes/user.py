@@ -29,6 +29,7 @@ def user(userName):
     """
     userName = userName.lower()  # Convert the username to lowercase for consistency
     connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object for executing queries
     cursor.execute(
         f"select userName from users"
@@ -52,6 +53,9 @@ def user(userName):
             )
             user = cursor.fetchone()  # Fetch the first result as a tuple
             connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = (
                 connection.cursor()
             )  # Create a new cursor object for executing queries
@@ -77,6 +81,9 @@ def user(userName):
             connection = sqlite3.connect(
                 DB_COMMENTS_ROOT
             )  # Connect to the comments database
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = (
                 connection.cursor()
             )  # Create a new cursor object for executing queries

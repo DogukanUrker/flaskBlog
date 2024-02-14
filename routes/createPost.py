@@ -84,6 +84,9 @@ def createPost():
                                             )
                                             # Insert new post into the database
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
+                                            connection.set_trace_callback(
+                                                Log.sql
+                                            )  # Set the trace callback for the connection
                                             cursor = connection.cursor()
                                             cursor.execute(
                                                 "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category) \
@@ -120,6 +123,9 @@ def createPost():
                                 case False:
                                     # Recaptcha not enabled
                                     connection = sqlite3.connect(DB_POSTS_ROOT)
+                                    connection.set_trace_callback(
+                                        Log.sql
+                                    )  # Set the trace callback for the connection
                                     cursor = connection.cursor()
                                     cursor.execute(
                                         "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category) \

@@ -33,6 +33,7 @@ from modules import (
     LOG_FILE_ROOT,  # Importing LOG_FILE_ROOT variable from modules
     currentTimeZone,  # Importing currentTimeZone function from modules
     LOG_APP_FILE_ROOT,  # Importing LOG_APP_FILE_ROOT variable from modules
+    LOG_SQL_FILE_ROOT,  # Importing LOG_SQL_FILE_ROOT variable from modules
     LOG_INFO_FILE_ROOT,  # Importing LOG_INFO_FILE_ROOT variable from modules
     LOG_DANGER_FILE_ROOT,  # Importing LOG_DANGER_FILE_ROOT variable from modules
     LOG_SUCCESS_FILE_ROOT,  # Importing LOG_SUCCESS_FILE_ROOT variable from modules
@@ -218,12 +219,12 @@ class Log:
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
                     f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
-                    "\033[38;2;37;99;235m"  # Set text color to info-600
-                    "\033[48;2;96;165;250m"  # Set background color to info-400
-                    "\033[1m INFO \033[0m"  # Print "INFO:" in bold info-600
+                    "\033[38;2;37;99;235m"  # Set text color to blue-600
+                    "\033[48;2;96;165;250m"  # Set background color to blue-400
+                    "\033[1m INFO \033[0m"  # Print "INFO:" in bold blue-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
-                    f"\033[38;2;59;130;246m {message}\033[0m\n"  # Print the info message in info-500
+                    f"\033[38;2;59;130;246m {message}\033[0m\n"  # Print the info message in blue-500
                 )
                 # Open log file in append mode and write the formatted message
                 logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
@@ -269,12 +270,12 @@ class Log:
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
                     f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
-                    "\033[38;2;13;148;136m"  # Set text color to teal-600
-                    "\033[48;2;45;212;191m"  # Set background color to teal-400
-                    "\033[1m APP \033[0m"  # Print "APP:" in bold teal-600
+                    "\033[38;2;8;145;178m"  # Set text color to sky-600
+                    "\033[48;2;32;211;238m"  # Set background color to sky-400
+                    "\033[1m APP \033[0m"  # Print "APP:" in bold sky-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
-                    f"\033[38;2;20;184;166m {message}\033[0m\n"  # Print the app message in teal-500
+                    f"\033[38;2;6;182;212m {message}\033[0m\n"  # Print the sql message in sky-500
                 )
                 # Open log file in append mode and write the formatted message
                 logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
@@ -296,6 +297,57 @@ class Log:
                     f"{message}\n"  # Write the app message
                 )
                 logAppFile.close()  # Close the app log file
+
+    # Define a method to log sql messages
+    def sql(message: str = "NONE") -> None:
+        """
+        Logs a sql message with a timestamp to the console and to a log file.
+
+        Args:
+            message (str, optional): The message to log. Defaults to "NONE".
+
+        Returns:
+            None: None
+        """
+        # Match CUSTOM_LOGGER status
+        match CUSTOM_LOGGER:
+            case True:
+                # Print formatted sql message with timestamp
+                print(
+                    "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
+                    f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
+                    "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
+                    f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
+                    "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
+                    f"\033[38;2;168;85;247m {currentTimeZone()}\033[0m"  # Print current time zone in purple-500
+                    "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
+                    "\033[38;2;13;148;136m"  # Set text color to teal-600
+                    "\033[48;2;45;212;191m"  # Set background color to teal-400
+                    "\033[1m SQL \033[0m"  # Print "SQL:" in bold teal-600
+                    "\033[0m"  # Reset color
+                    "\033[0m"  # Reset color
+                    f"\033[38;2;20;184;166m {message}\033[0m\n"  # Print the app message in teal-500
+                )
+                # Open log file in append mode and write the formatted message
+                logFile = open(LOG_FILE_ROOT, "a", encoding="utf-8")
+                logFile.write(
+                    f"[{currentDate()}"  # Write current date
+                    f"|{currentTime(seconds=True,microSeconds=True)}"  # Write current time with microseconds
+                    f"|{currentTimeZone()}]"  # Write current time zone
+                    "\t"  # Separate fields with tab
+                    f"SQL | {message}\n"  # Write the sql message
+                )
+                logFile.close()  # Close the log file
+                # Open SQL log file in append mode and write the formatted message
+                logSQLFile = open(LOG_SQL_FILE_ROOT, "a", encoding="utf-8")
+                logSQLFile.write(
+                    f"[{currentDate()}"  # Write current date
+                    f"|{currentTime(seconds=True,microSeconds=True)}"  # Write current time with microseconds
+                    f"|{currentTimeZone()}]"  # Write current time zone
+                    "\t"  # Separate fields with tab
+                    f"{message}\n"  # Write the sql message
+                )
+                logSQLFile.close()  # Close the sql log file
 
     # Define a method to print a breaker line
     def breaker():

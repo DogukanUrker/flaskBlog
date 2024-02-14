@@ -28,6 +28,9 @@ def adminPanelPosts():
             )  # Log a message that the admin reached to posts admin panel
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
                 """select role from users where userName = ? """,
@@ -50,6 +53,9 @@ def adminPanelPosts():
                 case True:
                     # Connect to the posts database and get all the posts
                     connection = sqlite3.connect(DB_POSTS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute("select * from posts order by timeStamp desc")
                     posts = cursor.fetchall()

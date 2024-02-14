@@ -22,6 +22,9 @@ def adminPanel():
         case True:
             # Connect to the database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
+            connection.set_trace_callback(
+                Log.sql
+            )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
                 """select role from users where userName = ? """,
