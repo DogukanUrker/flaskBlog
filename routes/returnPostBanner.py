@@ -1,5 +1,5 @@
 # Import the necessary modules and functions
-from modules import sqlite3, BytesIO, Blueprint, send_file, DB_POSTS_ROOT, Log
+from modules import sqlite3, BytesIO, Blueprint, send_file, DB_POSTS_ROOT, Log, request
 
 # Create a blueprint for the return post banner route
 returnPostBannerBlueprint = Blueprint("returnPostBanner", __name__)
@@ -30,7 +30,7 @@ def returnPostBanner(postID):
     image = BytesIO(cursor.fetchone()[0])
 
     # Log the image data
-    Log.info(f"Post: {postID} image: {image} loaded")
+    Log.info(f"Post: {postID} | Image: {request.base_url} loaded")
 
     # Send the image as a Flask Response object with the mimetype set to image/png
     return send_file(image, mimetype="image/png")
