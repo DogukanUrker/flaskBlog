@@ -50,7 +50,6 @@ class CreatePostForm(Form):
         "Post Category",
         [validators.InputRequired()],
         choices=[
-            ("Other", "Other"),
             ("Apps", "Apps"),
             ("Art", "Art"),
             ("Books", "Books"),
@@ -71,6 +70,7 @@ class CreatePostForm(Form):
             ("Technology", "Technology"),
             ("Travel", "Travel"),
             ("Web", "Web"),
+            ("Other", "Other"),
         ],
         render_kw={"class": inputStyle() + " text-rose-500"},
     )
