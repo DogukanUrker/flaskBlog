@@ -31,8 +31,8 @@ Flask ile oluşturulmuş basit bir blog uygulaması.
 
 | [Desktop](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Mobile](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
 | :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
-|                    ![appDesktop](/images/desktop/light.png)                     |                  ![appMobile](/images/mobile/light/Home.png)                  |
-|                     ![appDesktop](/images/desktop/dark.png)                     |                  ![appMobile](/images/mobile/dark/Home.png)                   |
+|                  ![appDesktop](/images/desktop/light/Home.png)                  |                  ![appMobile](/images/mobile/light/Home.png)                  |
+|                  ![appDesktop](/images/desktop/dark/Home.png)                   |                  ![appMobile](/images/mobile/dark/Home.png)                   |
 
 [daha fazla görüntü için tıklayın📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
 

@@ -33,8 +33,8 @@
 
 | [ПК](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Мобильник](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
 | :------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
-|              ![Светлая тема на ПК](/images/desktop/light.png)              |           ![Светлая тема на Мобильник](/images/mobile/light/Home.png)            |
-|               ![Темная тема на Пк](/images/desktop/dark.png)               |            ![Темная тема на Мобильник](/images/mobile/dark/Home.png)             |
+|           ![Светлая тема на ПК](/images/desktop/light/Home.png)            |           ![Светлая тема на Мобильник](/images/mobile/light/Home.png)            |
+|            ![Темная тема на Пк](/images/desktop/dark/Home.png)             |            ![Темная тема на Мобильник](/images/mobile/dark/Home.png)             |
 
 [Больше фото 📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
 
