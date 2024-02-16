@@ -67,7 +67,7 @@ def adminPanelPosts():
                     posts = cursor.fetchall()
                     # Log a message that admin panel posts page loaded with post data
                     Log.info(
-                        f"Rendering dashboard.html.jinja: params: posts={posts} and showPosts=True"
+                        f"Rendering dashboard.html.jinja: params: posts={len(posts)} and showPosts=True"
                     )
                     # Render the dashboard template with the posts data and showPosts flag
                     return render_template(
