@@ -41,9 +41,10 @@
         <p class="ml-1 font-medium">{{user[6]}}</p>
       </div>
     </section>
+
+    <!-- Check if the logged-in user is the profile owner -->
+    {% if session["userName"] == user[1] %}
     <section class="flex w-full items-center justify-between my-4">
-      <!-- Check if the logged-in user is the profile owner -->
-      {% if session["userName"] == user[1] %}
       <!-- User settings link -->
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/accountsettings"><i class="ti ti-settings mr-1 text-xl"></i></a>
@@ -62,8 +63,9 @@
         <a href="/admin"><i class="ti ti-tie mr-1 text-xl"></i></a>
         <a href="/admin" class="">admin</a>
       </div>
-      {% endif %}
     </section>
+    {% endif %}
+
     <!-- Check if the logged-in user is viewing their own profile -->
     {% if "userName" in session and session['userName'] == "{{user[1]}}"%}
     <!-- User dashboard link for the profile owner -->
