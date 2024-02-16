@@ -12,28 +12,34 @@
     search results for "{{ query }}"
   </h3>
   {% if users %}
+  <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">Users</div>
   {% for user in users %}
   {% for user_data in user %}
   <!-- User result card -->
   <div class="w-fit my-2 mx-auto flex items-end border-2 rounded-md shadow-md border-gray-500/25">
     <img src="{{ user_data[4] }}" class="w-20 m-2" />
-    <a href="/user/{{ user_data[1]|lower }}" class="m-2">{{ user_data[1] }}</a>
+    <a href="/user/{{ user_data[1]|lower }}" class="m-2 text-rose-500 hover:text-rose-600 duration-150 font-medium">{{
+      user_data[1]
+      }}</a>
   </div>
   {% endfor %}
   {% endfor %}
   {% endif %}
 
   <!-- Display search results for posts -->
-  <div
-    class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">
+  <div>
     {% if posts %}
-    {% for post in posts %}
-    {% for post_data in post %}
-    <!-- Post card component -->
-    {% from "components/postCardMacro.html.jinja" import postCard %}
-    {{ postCard(post=post_data, authorProfilePicture=getProfilePicture(post_data[5])) }}
-    {% endfor %}
-    {% endfor %}
+    <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">Posts</div>
+    <div
+      class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12">
+      {% for post in posts %}
+      {% for post_data in post %}
+      <!-- Post card component -->
+      {% from "components/postCardMacro.html.jinja" import postCard %}
+      {{ postCard(post=post_data, authorProfilePicture=getProfilePicture(post_data[5])) }}
+      {% endfor %}
+      {% endfor %}
+    </div>
     {% endif %}
   </div>
 
