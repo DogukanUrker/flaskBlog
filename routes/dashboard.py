@@ -34,7 +34,7 @@ def dashboard(userName):
                             match "postDeleteButton" in request.form:
                                 case True:
                                     # Delete the post from the database
-                                    Delete.user(request.form["postID"])
+                                    Delete.post(request.form["postID"])
                                     # Redirect to the same route with a 301 status code
                                     return (
                                         redirect(
