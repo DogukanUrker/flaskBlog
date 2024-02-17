@@ -31,10 +31,8 @@ Simple blog app built with Flask.
 
 ### [Demo Video 📺](https://youtu.be/BTBXe6yPbLE)
 
-| [Desktop](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Mobile](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
-| :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
-|                  ![appDesktop](/images/desktop/light/Home.png)                  |                  ![appMobile](/images/mobile/light/Home.png)                  |
-|                  ![appDesktop](/images/desktop/dark/Home.png)                   |                  ![appMobile](/images/mobile/dark/Home.png)                   |
+![appLight](/images/Light.png)
+![appDark](/images/Dark.png)
 
 [click for more images📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
 
