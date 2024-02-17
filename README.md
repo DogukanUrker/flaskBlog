@@ -137,6 +137,16 @@ Username: admin
 
 Password: admin
 
+## Figma Files 🎨
+
+- App
+  - [Desktop](https://www.figma.com/file/9HFi36JmzdZbzbjEPio6Om/Flask-Blog-Desktop?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+  - [Mobile](https://www.figma.com/file/qkgrIl15bdTsra6BNSVdAN/Flask-Blog-Mobile?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+- [Terminal](https://www.figma.com/file/FWusS9JrbtEIhCX6Dv7efj/Flask-Blog-Terminal?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+- [Mails](https://www.figma.com/file/6Glzzq1GWIdbZ7xoVOaEEy/Flask-Blog-Mail?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+
+[Files in \*.fig format](https://drive.google.com/drive/folders/12lchfmCCkCRzHTQfHk1gDEY10wz7qhxs?usp=drive_link)
+
 ## What I Learned 🧠
 
 FlaskBlog is my biggest and most comprehensive project so far. I have learned a lot of things about web development and programming while working on it. Some of the main topics that I learned are:
