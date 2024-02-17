@@ -26,6 +26,8 @@ Note: The code is written in Python 3.12, and the docstrings follow the PEP 257 
 
 # Import necessary modules
 from modules import (
+    APP_NAME,  # Importing the application name configuration
+    APP_VERSION,  # Importing the application version configuration
     currentTime,  # Importing currentTime function from modules
     currentDate,  # Importing currentDate function from modules
     BREAKER_TEXT,  # Importing BREAKER_TEXT variable from modules
@@ -59,7 +61,8 @@ class Log:
             case True:
                 # Print formatted danger message with timestamp
                 print(
-                    "\n\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
+                    f"\033[38;2;244;63;94m{APP_NAME}@{APP_VERSION}\033[0m"  # Log app name and version in rose-500
+                    "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
                     f"\033[38;2;236;72;153m {currentTime(seconds=True)}\033[0m"  # Print current time in violet-500
@@ -68,7 +71,7 @@ class Log:
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
                     "\033[38;2;220;38;38m"  # Set text color to red-600
                     "\033[48;2;248;113;113m"  # Set background color to red-400
-                    "\033[1m DANGER \033[0m"  # Print "DANGER:" in bold red-600
+                    "\033[1m DANGER \033[0m"  # Print "DANGER" in bold red-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
                     f"\033[38;2;239;68;68m {message}\033[0m\n"  # Print the danger message in red-500
@@ -110,6 +113,7 @@ class Log:
             case True:
                 # Print formatted success message with timestamp
                 print(
+                    f"\033[38;2;244;63;94m{APP_NAME}@{APP_VERSION}\033[0m"  # Log app name and version in rose-500
                     "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
@@ -119,7 +123,7 @@ class Log:
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
                     "\033[38;2;22;163;74m"  # Set text color to green-600
                     "\033[48;2;74;222;128m"  # Set background color to green-400
-                    "\033[1m SUCCESS \033[0m"  # Print "SUCCESS:" in bold green-600
+                    "\033[1m SUCCESS \033[0m"  # Print "SUCCESS" in bold green-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
                     f"\033[38;2;34;197;94m {message}\033[0m\n"  # Print the success message in green-500
@@ -161,6 +165,7 @@ class Log:
             case True:
                 # Print formatted warning message with timestamp
                 print(
+                    f"\033[38;2;244;63;94m{APP_NAME}@{APP_VERSION}\033[0m"  # Log app name and version in rose-500
                     "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
@@ -170,7 +175,7 @@ class Log:
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
                     "\033[38;2;234;88;12m"  # Set text color to orange-600
                     "\033[48;2;251;146;60m"  # Set background color to orange-400
-                    "\033[1m WARNING \033[0m"  # Print "WARNING:" in bold orange-600
+                    "\033[1m WARNING \033[0m"  # Print "WARNING" in bold orange-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
                     f"\033[38;2;249;115;22m {message}\033[0m\n"  # Print the warning message in orange-500
@@ -212,6 +217,7 @@ class Log:
             case True:
                 # Print formatted info message with timestamp
                 print(
+                    f"\033[38;2;244;63;94m{APP_NAME}@{APP_VERSION}\033[0m"  # Log app name and version in rose-500
                     "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
@@ -221,7 +227,7 @@ class Log:
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
                     "\033[38;2;37;99;235m"  # Set text color to blue-600
                     "\033[48;2;96;165;250m"  # Set background color to blue-400
-                    "\033[1m INFO \033[0m"  # Print "INFO:" in bold blue-600
+                    "\033[1m INFO \033[0m"  # Print "INFO" in bold blue-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
                     f"\033[38;2;59;130;246m {message}\033[0m\n"  # Print the info message in blue-500
@@ -263,6 +269,7 @@ class Log:
             case True:
                 # Print formatted app message with timestamp
                 print(
+                    f"\033[38;2;244;63;94m{APP_NAME}@{APP_VERSION}\033[0m"  # Log app name and version in rose-500
                     "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
@@ -272,7 +279,7 @@ class Log:
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
                     "\033[38;2;8;145;178m"  # Set text color to sky-600
                     "\033[48;2;32;211;238m"  # Set background color to sky-400
-                    "\033[1m APP \033[0m"  # Print "APP:" in bold sky-600
+                    "\033[1m APP \033[0m"  # Print "APP" in bold sky-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
                     f"\033[38;2;6;182;212m {message}\033[0m\n"  # Print the sql message in sky-500
@@ -314,6 +321,7 @@ class Log:
             case True:
                 # Print formatted sql message with timestamp
                 print(
+                    f"\033[38;2;244;63;94m{APP_NAME}@{APP_VERSION}\033[0m"  # Log app name and version in rose-500
                     "\033[38;2;115;115;115m[\033[0m"  # Open the square brackets in neutral-500
                     f"\033[38;2;217;70;239m{currentDate()}\033[0m"  # Print current date in indigo-500
                     "\033[38;2;115;115;115m |\033[0m"  # Print vertical line in neutral-500
@@ -323,7 +331,7 @@ class Log:
                     "\033[38;2;115;115;115m] \033[0m"  # Close the square brackets in neutral-500
                     "\033[38;2;13;148;136m"  # Set text color to teal-600
                     "\033[48;2;45;212;191m"  # Set background color to teal-400
-                    "\033[1m SQL \033[0m"  # Print "SQL:" in bold teal-600
+                    "\033[1m SQL \033[0m"  # Print "SQL" in bold teal-600
                     "\033[0m"  # Reset color
                     "\033[0m"  # Reset color
                     f"\033[38;2;20;184;166m {message}\033[0m\n"  # Print the app message in teal-500
