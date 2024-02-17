@@ -330,7 +330,7 @@ def signup():
                                                                 subtype="html",
                                                             )
                                                             mail["Subject"] = (
-                                                                f"Welcome to {APP_NAME}"
+                                                                f"Welcome to {APP_NAME}!👋🏻"
                                                             )
                                                             mail["From"] = SMTP_MAIL
                                                             mail["To"] = email
