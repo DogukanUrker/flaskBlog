@@ -61,7 +61,6 @@ def accountSettings():
                                 case True:
                                     # Log the reCAPTCHA verification result
                                     Log.success(
-                                        "2",
                                         f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Delete the user from the database
