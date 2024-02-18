@@ -12,7 +12,7 @@
 [👨🏻‍💻 Doğukan Ürker](https://dogukanurker.com)
 
 [📸 Görüntüler](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
-[📽️ Önizleme Videosu](https://youtu.be/BTBXe6yPbLE)<br/>
+[📽️ Önizleme Videosu](https://youtu.be/WyIpAlSp2RM)<br/>
 
 [🆕 Değişiklik Günlüğü V2](/docs/version2Changelog_tr.md)
 

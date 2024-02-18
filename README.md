@@ -12,7 +12,7 @@
 [👨🏻‍💻 Dogukan Urker](https://dogukanurker.com)
 
 [📸 Images](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
-[📽️ Preview Video](https://youtu.be/BTBXe6yPbLE)<br/>
+[📽️ Preview Video](https://youtu.be/WyIpAlSp2RM)<br/>
 
 [🆕 Changelog V2](docs/version2Changelog.md)
 

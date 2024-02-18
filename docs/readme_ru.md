@@ -29,7 +29,7 @@
 [Contact](mailto:dogukanurker@icloud.com)<br/>
 [Dogukan Urker](https://dogukanurker.com)
 
-### [Демо Ролик 📺](https://youtu.be/BTBXe6yPbLE)
+### [Демо Ролик 📺](https://youtu.be/WyIpAlSp2RM)
 
 | [ПК](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Мобильник](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
 | :------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
