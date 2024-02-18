@@ -39,6 +39,7 @@ LOG_IN = True  # (bool)
 # Toggle user registration feature
 REGISTRATION = True  # (bool)
 
+
 ### LOGGER SETTINGS ###
 # Toggle custom logging feature
 CUSTOM_LOGGER = True  # (bool)
