@@ -26,21 +26,29 @@ Note: The code is written in Python 3.12, and the docstrings follow the PEP 257 
 
 # Import necessary modules
 from modules import (
+    mkdir,  # Importing the mkdir function from modules
+    exists,  # Importing the exists function from modules
     APP_NAME,  # Importing the application name configuration
     APP_VERSION,  # Importing the application version configuration
-    currentTime,  # Importing currentTime function from modules
-    currentDate,  # Importing currentDate function from modules
-    BREAKER_TEXT,  # Importing BREAKER_TEXT variable from modules
+    currentTime,  # Importing the currentTime function from modules
+    currentDate,  # Importing the currentDate function from modules
+    BREAKER_TEXT,  # Importing the BREAKER_TEXT variable from modules
     CUSTOM_LOGGER,  # Importing the custom logger configuration
-    LOG_FILE_ROOT,  # Importing LOG_FILE_ROOT variable from modules
-    currentTimeZone,  # Importing currentTimeZone function from modules
-    LOG_APP_FILE_ROOT,  # Importing LOG_APP_FILE_ROOT variable from modules
-    LOG_SQL_FILE_ROOT,  # Importing LOG_SQL_FILE_ROOT variable from modules
-    LOG_INFO_FILE_ROOT,  # Importing LOG_INFO_FILE_ROOT variable from modules
-    LOG_DANGER_FILE_ROOT,  # Importing LOG_DANGER_FILE_ROOT variable from modules
-    LOG_SUCCESS_FILE_ROOT,  # Importing LOG_SUCCESS_FILE_ROOT variable from modules
-    LOG_WARNING_FILE_ROOT,  # Importing LOG_WARNING_FILE_ROOT variable from modules
+    LOG_FILE_ROOT,  # Importing the LOG_FILE_ROOT variable from modules
+    currentTimeZone,  # Importing the currentTimeZone function from modules
+    LOG_FOLDER_ROOT,  # Importing the LOG_FOLDER_ROOT variable from modules
+    LOG_APP_FILE_ROOT,  # Importing the LOG_APP_FILE_ROOT variable from modules
+    LOG_SQL_FILE_ROOT,  # Importing the LOG_SQL_FILE_ROOT variable from modules
+    LOG_INFO_FILE_ROOT,  # Importing the LOG_INFO_FILE_ROOT variable from modules
+    LOG_DANGER_FILE_ROOT,  # Importing the LOG_DANGER_FILE_ROOT variable from modules
+    LOG_SUCCESS_FILE_ROOT,  # Importing the LOG_SUCCESS_FILE_ROOT variable from modules
+    LOG_WARNING_FILE_ROOT,  # Importing the LOG_WARNING_FILE_ROOT variable from modules
 )
+
+# Checking if LOG_FOLDER_ROOT directory exists
+match exists(LOG_FOLDER_ROOT):
+    case False:  # If LOG_FOLDER_ROOT doesn't exist
+        mkdir(LOG_FOLDER_ROOT)  # Create LOG_FOLDER_ROOT directory
 
 
 # Define a Log class
