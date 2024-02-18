@@ -1,121 +1,129 @@
-[![GitHub Release](<https://img.shields.io/github/v/release/dogukanurker/flaskblog?display_name=release&style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Freleases>)](https://github.com/DogukanUrker/flaskBlog/releases)
-[![GitHub License](<https://img.shields.io/github/license/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fblob%2Fmain%2FLICENSE>)](https://github.com/DogukanUrker/flaskBlog/blob/main/LICENSE)
-[![GitHub Repo stars](<https://img.shields.io/github/stars/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fstargazers>)](https://github.com/DogukanUrker/flaskBlog/stargazers)
-[![GitHub forks](<https://img.shields.io/github/forks/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fforks>)](https://github.com/DogukanUrker/flaskBlog/forks)
-[![GitHub commit activity](<https://img.shields.io/github/commit-activity/t/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fcommits%2Fmain%2F>)](https://github.com/DogukanUrker/flaskBlog/commits/main/)
-[![GitHub contributors](<https://img.shields.io/github/contributors/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fgraphs%2Fcontributors>)](https://github.com/DogukanUrker/flaskBlog/graphs/contributors)
-[![GitHub last commit (branch)](<https://img.shields.io/github/last-commit/dogukanurker/flaskblog/main?style=flat&logoColor=rgb(250%20250%20250)&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fcommits%2Fmain%2F>)](https://github.com/DogukanUrker/flaskBlog/commits/main/)
-![GitHub commits since latest release](<https://img.shields.io/github/commits-since/dogukanurker/flaskblog/latest?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
-[![GitHub issues](<https://img.shields.io/github/issues/dogukanurker/flaskblog?style=flat&logoColor=rgb(24%2024%2027)&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fissues>)](https://github.com/DogukanUrker/flaskBlog/issues)
-[![GitHub closed issues](<https://img.shields.io/github/issues-closed/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fissues%3Fq%3Dis%253Aissue%2Bis%253Aclosed>)](https://github.com/DogukanUrker/flaskBlog/issues?q=is%3Aissue+is%3Aclosed)
-[![GitHub pull requests](<https://img.shields.io/github/issues-pr/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fpulls>)](https://github.com/DogukanUrker/flaskBlog/pulls)
-[![GitHub closed pull requests](<https://img.shields.io/github/issues-pr-closed/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fpulls%3Fq%3Dis%253Apr%2Bis%253Aclosed>)](https://github.com/DogukanUrker/flaskBlog/pulls?q=is%3Apr+is%3Aclosed)
-[![GitHub watchers](<https://img.shields.io/github/watchers/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2FDogukanUrker%2FflaskBlog%2Fwatchers>)](https://github.com/DogukanUrker/flaskBlog/watchers)
-![GitHub language count](<https://img.shields.io/github/languages/count/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
-[![GitHub top language](<https://img.shields.io/github/languages/top/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)&link=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Drepo%253ADogukanUrker%252FflaskBlog%2B%2Blanguage%253APython%26type%3Dcode>)](https://github.com/search?q=repo%3ADogukanUrker%2FflaskBlog++language%3APython&type=code)
-![GitHub code size in bytes](<https://img.shields.io/github/languages/code-size/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
-![GitHub repo size](<https://img.shields.io/github/repo-size/dogukanurker/flaskblog?style=flat&labelColor=rgb(24%2024%2027)&color=rgb(244%2063%2094)>)
+###### <sub> Bu projenin sizden bir ⭐️'a ihtiyacı var. Bir yıldız bırakmayı unutmayın ⭐️. <sub/>
 
-<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/GitHubBanner.png" style='border-radius: 0.5rem; widht:768px; height: 384px;' />
+![appLight](/images/Light.png)
 
 # [FlaskBlog](https://dogukanurker.com/flaskblog)
 
 [English](../README.md) | **Türkçe** | [Russian](./readme_ru.md)
 
-Flask ile oluşturulmuş basit bir blog uygulaması.
-<br/>
-[İletişim](mailto:dogukanurker@icloud.com)<br/>
-[Doğukan Ürker](https://dogukanurker.com)
+📜 **Flask ile oluşturulmuş basit blog uygulaması.**
 
-### [Tanıtım Videosu 📺](https://youtu.be/BTBXe6yPbLE)
+[📧 İletişim](mailto:dogukanurker@icloud.com)<br/>
+[👨🏻‍💻 Doğukan Ürker](https://dogukanurker.com)
 
-| [Desktop](https://github.com/DogukanUrker/flaskBlog/tree/master/images/desktop) | [Mobile](https://github.com/DogukanUrker/flaskBlog/tree/master/images/mobile) |
-| :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
-|                  ![appDesktop](/images/desktop/light/Home.png)                  |                  ![appMobile](/images/mobile/light/Home.png)                  |
-|                  ![appDesktop](/images/desktop/dark/Home.png)                   |                  ![appMobile](/images/mobile/dark/Home.png)                   |
+[📽️ Önizleme Videosu](https://youtu.be/BTBXe6yPbLE)<br/>
+[📸 Görüntüler](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
+[🆕 Değişiklik Günlüğü V2](/docs/version2Changelog_tr.md)
 
-[daha fazla görüntü için tıklayın📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
+## 📄 İçindekiler
 
-## Özellikler 💫
+- [💫 Özellikler](#💫-özellikler)
+- [📦 Gereksinimler](#📦-gereksinimler)
+- [🧑🏻‍💻 Diller](#🧑🏻‍💻-diller)
+- [📚 Teknolojiler](#📚-teknolojiler)
+  - [⚙️ Arka Uç](#️⚙️-arka-uç)
+  - [🔮 Ön Uç](#🔮-ön-uç)
+  - [🔨 Araçlar](#🔨-araçlar)
+- [🚦 Projeyi Çalıştırma](#🚦-projeyi-çalıştırma)
+  - [🧑🏻‍💼 Varsayılan Yönetici Hesabı](#🧑🏻‍💼-varsayılan-yönetici-hesabı)
+- [🎨 Figma Tasarım Dosyaları](#🎨-figma-tasarım-dosyaları)
+- [🧠 Ne Öğrendim](#🧠-ne-öğrendim)
+  - [🔥 Keşfedilen Yeni Teknolojiler](#🔥-keşfedilen-yeni-teknolojiler)
+  - [💪🏻 Geliştiğim Teknolojiler](#💪🏻-geliştiğim-teknolojiler)
+  - [🫂 Katkıda Bulunanlar](#🫂-katkıda-bulunanlar)
+- [✨ Yıldızlar](#✨-yıldızlar)
+- [🍴 Çatallar](#🍴-çatallar)
+- [💰 Destek](#💰-destek)
+- [⭐ Yıldız Çizelgesi](#⭐-yıldız-çizelgesi)
+- [⚠️ Uyarı](#⚠️-uyarı)
 
-| Özellik                    | Durum |
-| :------------------------- | :---: |
-| Kullanıcı Sayfası          |  ✅   |
-| Kullanıcı Girişi           |  ✅   |
-| Kullanıcı Puanları         |  ✅   |
-| Kullanıcı Silme            |  ✅   |
-| Kullanıcı Oturumu Kapat    |  ✅   |
-| Kullanıcı Kaydı            |  ✅   |
-| Kullanıcı Adı Değişikliği  |  ✅   |
-| Kullanıcı Ayarları Sayfası |  ✅   |
-| Kullanıcı Profil Resimleri |  ✅   |
-| Yönetici Paneli            |  ✅   |
-| Gösterge Tablosu Sayfası   |  ✅   |
-| Şifre Sıfırlama            |  ✅   |
-| Şifre Değiştirme           |  ✅   |
-| Yaz Notları Editörü        |  ✅   |
-| Arama Çubuğu               |  ✅   |
-| Düzenleme Sonrası          |  ✅   |
-| Gönderi Görüntüleme        |  ✅   |
-| Gönderi Sil                |  ✅   |
-| Gönderi Oluşturma          |  ✅   |
-| Yorum                      |  ✅   |
-| Yorum Sil                  |  ✅   |
-| Günlük kaydı               |  ✅   |
-| Hata Ayıklama Mesajları    |  ✅   |
-| Veritabanı Denetleyicisi   |  ✅   |
-| Koyu/Açık Temalar          |  ✅   |
-| Duyarlı Tasarım            |  ✅   |
-| Özel Profil Resmi          |  ✅   |
-| Kullanıcı Doğrulama        |  ✅   |
+## 💫 Özellikler
 
-## Gereksinimler 📦
+- Yönetici Paneli
+- Yorum
+  - Yorum Sil
+- Özel Profil Resmi
+- Gösterge Tablosu Sayfası
+- Koyu/Açık Temalar
+- Veritabanı Denetleyicisi
+- Hata Ayıklama Mesajları
+- Docker
+- Google reCAPTCHA v3
+- Günlük kaydı
+- Şifre
+  - Şifre Değişikliği
+  - Şifre Sıfırlama
+- Makale
+  - Makale Afiş Fotoğrafları
+  - Makale Kategorileri
+  - Makale Oluşturma
+  - Makale Silme
+  - Makale Düzenleme
+  - Makale Görünümleri
+- TailwindCSS ile Duyarlı Tasarım
+- Arama Çubuğu
+- Yaz Notları Editörü
+- PlayWright ile Test
+- Zaman Dilimi Farkındalığı
+- Kullanıcı
+  - Kullanıcı Silme
+  - Kullanıcı Girişi
+  - Kullanıcı Oturumu Kapatma
+  - Kullanıcı Adı Değişikliği
+  - Kullanıcı Sayfası
+  - Kullanıcı Puanları
+  - Kullanıcı Profil Resimleri
+  - Kullanıcı Ayarları Sayfası
+  - Kullanıcı Kaydı
+  - Kullanıcı Doğrulama
+
+## 📦 Gereksinimler
 
 - Flask
+- Pipenv
 - Passlib
 - WTForms
+- Requests
 - Flask-WTF
-- Python 3.10 veya daha yeni
+- Playwright
+- Python 3.10 veya daha yeni sürüm
 
-## Diller 🧑🏻‍💻
-
-### Backend
+## 🧑🏻‍💻 Diller
 
 - Python
-
-### Frontend
-
-- HTML
+- HTML | Jinja
 - CSS
 - JavaScript
 
-## Kütüphaneler 📚
+## 📚 Teknolojiler
 
-### Backend
+### ⚙️ Arka Uç
 
-- OS
-- SSL
-- Socket
-- Smtplib
-- Secrets
-- SQLite3
-- Time
-- Random
-- DateTime
-- Email
-- Passlib
 - Flask
+- SQLite3
+- Passlib
 - WTForms
+- Requests
 - Flask_WTF
+- PlayWright
 
-### Frontend
+### 🔮 Ön Uç
 
 - jQuery
 - TailwindCSS
 - Tabler Icons
-- Summer Note
+- Summer Note Editörü
 
-## Kurulum ⬇️
+### 🔨 Araçlar
+
+- Git
+- Pipnv
+- Docker
+- VSCode kod düzenleyicisi
+- Black kod biçimlendiricisi
+- Prettier kod biçimlendiricisi
+
+## 🚦 Projeyi Çalıştırma
 
 Github'dan kaynak kodu indirin 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
@@ -123,40 +131,79 @@ Github'dan kaynak kodu indirin 💾
 dizine git 📁
 `cd flaskBlog`
 
-gereksinimleri yükle 🔽
+gereksinimler.txt dosyasını yükle 🔽
 `pip install -r requirements.txt`
 
 çalışmaya hazır 🎉
 `python app.py`
-veya
-`python desktop.py`
-flaskBlog'u bir masaüstü uygulaması olarak çalıştır 💯
 
-### Varsayılan Yönetici Hesabı
+### 🧑🏻‍💼 Varsayılan Yönetici Hesabı
 
 Kullanıcı adı: admin
 
 Şifre: admin
 
-### Katkıda Bulunanlar 💕
+## 🎨 Figma Tasarım Dosyaları
+
+- Uygulama
+  - [Masaüstü](https://www.figma.com/file/9HFi36JmzdZbzbjEPio6Om/Flask-Blog-Desktop?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+  - [Mobil](https://www.figma.com/file/qkgrIl15bdTsra6BNSVdAN/Flask-Blog-Mobile?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+- [Terminal](https://www.figma.com/file/FWusS9JrbtEIhCX6Dv7efj/Flask-Blog-Terminal?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+- [Mailler](https://www.figma.com/file/6Glzzq1GWIdbZ7xoVOaEEy/Flask-Blog-Mail?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
+
+[\*.fig formatındaki dosyalar](https://drive.google.com/drive/folders/12lchfmCCkCRzHTQfHk1gDEY10wz7qhxs?usp=drive_link)
+
+## 🧠 Ne Öğrendim
+
+FlaskBlog, geliştirme kariyerimde önemli bir kilometre taşını işaret eden zenginleştirici bir yolculuk oldu. Bu blog sayesinde web geliştirme ve programlamanın çeşitli yönlerini derinlemesine inceledim, beceri setimi ve anlayışımı genişlettim. İşte bazı temel öğrenimler hakkında bir ayrıntı:
+
+### 🔥 Keşfedilen Yeni Teknolojiler
+
+- Docker: Konteynerleştirmeyi benimsemek, dağıtımı kolaylaştırdı ve ölçeklenebilirliği artırdı.
+- Playwright: Tarayıcı etkileşimlerinin otomatikleştirilmesi, daha sorunsuz test ve doğrulama süreçlerini güçlendirdi.
+- Summer Note Editor: Bu çok yönlü düzenleyicinin entegre edilmesi daha zengin bir içerik oluşturma deneyimini kolaylaştırdı.
+- Tabler Simgeleri: Bu simgelerden yararlanmak görsel çekicilik kattı ve kullanıcı deneyimini geliştirdi.
+- Google reCAPTCHA v3: Gelişmiş güvenlik önlemlerinin uygulanması, uygulamayı botlara ve kötü niyetli faaliyetlere karşı güçlendirdi.
+- Figma: Tasarım için Figma'nın kullanılması, işbirliğine dayalı tasarım süreçlerine ilişkin içgörüler sağladı ve UI/UX planlamasını geliştirdi.
+- Zaman Dilimi Farkındalığı Tasarımı: Zaman dilimi farkındalığının dahil edilmesi, farklı coğrafi konumlardaki kullanıcılar için sorunsuz bir deneyim sağladı.
+- Güvenli SQL Bağlantıları: Güvenli SQL bağlantılarının uygulanması veri bütünlüğünü ve gizliliğini güçlendirdi.
+
+### 💪🏻 Geliştiğim Teknolojiler
+
+- Python: Python üzerindeki ustalık derinleşerek daha verimli ve sağlam arka uç geliştirmeye olanak sağladı.
+- JavaScript: JavaScript becerilerinin güçlendirilmesi dinamik ön uç etkileşimlerini kolaylaştırdı ve kullanıcı etkileşimini artırdı.
+- TailwindCSS: TailwindCSS'deki yetkinlik, daha akıcı ve sürdürülebilir CSS kodu sağlayarak ön uç geliştirmeyi hızlandırdı.
+- CSS: CSS'nin daha fazla keşfedilmesi, stil yeteneklerini geliştirerek uygulamanın görsel sunumu üzerinde daha hassas kontrol sağladı.
+- WTForms: WTForms'un daha iyi anlaşılması ve kullanılması, sorunsuz form işleme ve doğrulamayı kolaylaştırdı.
+- SQLite3: SQLite3'e aşinalık, veritabanı yönetimi ve optimizasyon stratejilerini geliştirdi.
+- Jinja: Jinja şablonlama motoru üzerindeki ustalık, daha dinamik ve verimli içerik oluşturmayı kolaylaştırdı.
+
+FlaskBlog projesine başlamak, yalnızca beceri geliştirme açısından değil, aynı zamanda kişisel tatmin açısından da son derece ödüllendirici oldu. Tam yığın geliştirici olarak bu çaba yeteneklerimi geliştirdi ve zarif, işlevsel çözümler üretme tutkumu derinleştirdi. Bu projenin sonucundan gurur duyuyorum ve içtenlikle sizde de yankı bulmasını umuyorum. 😊
+
+### 🫂 Katkıda Bulunanlar
 
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="dogukanurker" width="80" height="80"></a>
 <a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="adindrabkin" width="80" height="80"></a>
 <a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="codehwang" width="80" height="80"></a>
 <a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/67013355" title="dkashkarev" width="80" height="80"></a>
+<a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/2644169" title="barmar" width="80" height="80"></a>
 
-### Yıldızlar ⭐
+## ✨ Yıldızlar
 
 [![Stargazers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
 
-### Forklar 🍴
+## 🍴 Çatallar
 
 [![Forkers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
 
-### Destek 💰
+## 💰 Destek
 
 <a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
-### Yıldız Çizelgesi ✨
+## ⭐ Yıldız Çizelgesi
 
 [![Star History Chart](https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date)](https://star-history.com/#dogukanurker/flaskblog&Date)
+
+## ⚠️ Uyarı
+
+Örnek veriler AI (ChatGPT 3.5 ve Microsoft Copilot) kullanılarak oluşturulmuştur, bu da bazı örnek verilerin yanlış bilgiler içerebileceği anlamına gelir.

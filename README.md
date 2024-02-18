@@ -1,24 +1,43 @@
 ###### <sub> This project needs a ⭐️ from you. Don't forget to leave a star ⭐️. <sub/>
 
-<img src="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/GitHubBanner.png" style='border-radius: 0.5rem; widht:768px; height: 384px;' />
+![appLight](/images/Light.png)
 
 # [FlaskBlog](https://dogukanurker.com/flaskblog)
 
 **English** | [Türkçe](docs/readme_tr.md) | [Russian](docs/readme_ru.md)
 
-Simple blog app built with Flask.
+📜 **Simple blog app built with Flask.**
 
-[Contact](mailto:dogukanurker@icloud.com)<br/>
-[Dogukan Urker](https://dogukanurker.com)
+[📧 Contact](mailto:dogukanurker@icloud.com)<br/>
+[👨🏻‍💻 Dogukan Urker](https://dogukanurker.com)
 
-### [Demo Video 📺](https://youtu.be/BTBXe6yPbLE)
+[📽️ Preview Video](https://youtu.be/BTBXe6yPbLE)<br/>
+[📸 Images](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
+[🆕 Changelog V2](docs/version2Changelog.md)
 
-![appLight](/images/Light.png)
-![appDark](/images/Dark.png)
+## 📄 Table of Contents
 
-[click for more images📷](https://github.com/DogukanUrker/flaskBlog/tree/master/images)
+- [💫 Features](#💫-features)
+- [📦 Requirements](#📦-requirements)
+- [🧑🏻‍💻 Languages](#🧑🏻‍💻-languages)
+- [📚 Technologies](#📚-technologies)
+  - [⚙️ Backend](#️⚙️-backend)
+  - [🔮 Frontend](#🔮-frontend)
+  - [🔨 Tools](#🔨-tools)
+- [🚦 Running the Project](#🚦-running-the-project)
+  - [🧑🏻‍💼 Default Admin Account](#🧑🏻‍💼-default-admin-account)
+- [🎨 Figma Design Files](#🎨-figma-design-files)
+- [🧠 What I Learned](#🧠-what-i-learned)
+  - [🔥 New Technologies Explored](#🔥-new-technologies-explored)
+  - [💪🏻 Enhanced Proficiency in](#💪🏻-enhanced-proficiency-in)
+- [🫂 Contributors](#🫂-contributors)
+- [✨ Stars](#✨-stars)
+- [🍴 Forks](#🍴-forks)
+- [💰 Support](#💰support)
+- [⭐ Star History](#⭐-star-history)
+- [⚠️ Warning](#⚠️-warning)
 
-## Features 💫
+## 💫 Features
 
 - Admin Panel
 - Comment
@@ -58,7 +77,7 @@ Simple blog app built with Flask.
   - User Sign Up
   - User Verification
 
-## Requirements 📦
+## 📦 Requirements
 
 - Flask
 - Passlib
@@ -66,18 +85,19 @@ Simple blog app built with Flask.
 - Requests
 - Flask-WTF
 - Playwright
+- Pipenv
 - Python 3.10 or newer
 
-## Languages 🧑🏻‍💻
+## 🧑🏻‍💻 Languages
 
 - Python
 - HTML | Jinja
 - CSS
 - JavaScript
 
-## Technologies 📚
+## 📚 Technologies
 
-### Backend
+### ⚙️ Backend
 
 - SQLite3
 - Passlib
@@ -87,14 +107,14 @@ Simple blog app built with Flask.
 - Requests
 - PlayWright
 
-### Frontend
+### 🔮 Frontend
 
 - jQuery
 - TailwindCSS
 - Tabler Icons
 - Summer Note Editor
 
-### Tools
+### 🔨 Tools
 
 - Black formatter
 - Prettier formatter
@@ -103,7 +123,7 @@ Simple blog app built with Flask.
 - Pipnv
 - Git
 
-## Running the Project 🚦
+## 🚦 Running the Project
 
 download source code from Github 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
@@ -116,17 +136,14 @@ install requirements.txt 🔽
 
 it's ready to run 🎉
 `python app.py`
-or
-`python desktop.py`
-for run flaskBlog as a desktop app 💯
 
-### Default Admin Account
+### 🧑🏻‍💼 Default Admin Account
 
 Username: admin
 
 Password: admin
 
-## Figma Files 🎨
+## 🎨 Figma Design Files
 
 - App
   - [Desktop](https://www.figma.com/file/9HFi36JmzdZbzbjEPio6Om/Flask-Blog-Desktop?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
@@ -136,11 +153,11 @@ Password: admin
 
 [Files in \*.fig format](https://drive.google.com/drive/folders/12lchfmCCkCRzHTQfHk1gDEY10wz7qhxs?usp=drive_link)
 
-## What I Learned 🧠
+## 🧠 What I Learned
 
 FlaskBlog has been an enriching journey, marking a significant milestone in my development career. Through its creation, I delved deep into various facets of web development and programming, expanding my skill set and understanding. Here's an elaboration on some of the key learnings:
 
-### New Technologies Explored
+### 🔥 New Technologies Explored
 
 - Docker: Embracing containerization streamlined deployment and enhanced scalability.
 - Playwright: Automating browser interactions empowered smoother testing and validation processes.
@@ -151,7 +168,7 @@ FlaskBlog has been an enriching journey, marking a significant milestone in my d
 - Time Zone Awareness Design: Incorporating time zone awareness ensured a seamless experience for users across different geographical locations.
 - Secure SQL Connections: Implementing secure SQL connections bolstered data integrity and confidentiality.
 
-### Enhanced Proficiency in
+### 💪🏻 Enhanced Proficiency in
 
 - Python: Mastery over Python deepened, enabling more efficient and robust backend development.
 - JavaScript: Strengthening JavaScript skills facilitated dynamic frontend interactions and enhanced user engagement.
@@ -163,7 +180,7 @@ FlaskBlog has been an enriching journey, marking a significant milestone in my d
 
 Embarking on the FlaskBlog project has been immensely rewarding, not only in terms of skill enhancement but also in personal fulfillment. As a full-stack developer, this endeavor has honed my abilities and deepened my passion for crafting elegant, functional solutions. I take pride in the outcome of this project and sincerely hope it resonates with you as well. 😊
 
-## Contributors 💕
+## 🫂 Contributors
 
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="dogukanurker" width="80" height="80"></a>
 <a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="adindrabkin" width="80" height="80"></a>
@@ -171,18 +188,22 @@ Embarking on the FlaskBlog project has been immensely rewarding, not only in ter
 <a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/67013355" title="dkashkarev" width="80" height="80"></a>
 <a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/2644169" title="barmar" width="80" height="80"></a>
 
-## Stars ⭐
+## ✨ Stars
 
 [![Stargazers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
 
-## Forks 🍴
+## 🍴 Forks
 
 [![Forkers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
 
-## Support 💰
+## 💰 Support
 
 <a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
-## Star History ✨
+## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date)](https://star-history.com/#dogukanurker/flaskblog&Date)
+
+## ⚠️ Warning
+
+The sample data was created using AI(ChatGPT 3.5 and Microsoft Copilot) which means that some sample data may contain incorrect information.
