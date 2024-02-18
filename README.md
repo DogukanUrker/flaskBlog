@@ -11,8 +11,9 @@
 [📧 Contact](mailto:dogukanurker@icloud.com)<br/>
 [👨🏻‍💻 Dogukan Urker](https://dogukanurker.com)
 
-[📽️ Preview Video](https://youtu.be/BTBXe6yPbLE)<br/>
 [📸 Images](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
+[📽️ Preview Video](https://youtu.be/BTBXe6yPbLE)<br/>
+
 [🆕 Changelog V2](docs/version2Changelog.md)
 
 ## 📄 Table of Contents

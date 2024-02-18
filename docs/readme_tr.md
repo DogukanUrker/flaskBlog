@@ -11,8 +11,9 @@
 [📧 İletişim](mailto:dogukanurker@icloud.com)<br/>
 [👨🏻‍💻 Doğukan Ürker](https://dogukanurker.com)
 
-[📽️ Önizleme Videosu](https://youtu.be/BTBXe6yPbLE)<br/>
 [📸 Görüntüler](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
+[📽️ Önizleme Videosu](https://youtu.be/BTBXe6yPbLE)<br/>
+
 [🆕 Değişiklik Günlüğü V2](/docs/version2Changelog_tr.md)
 
 ## 📄 İçindekiler
