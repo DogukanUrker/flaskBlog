@@ -24,7 +24,7 @@
     <!-- Section for current and new post banners -->
     <div class="w-fit mx-auto text-center my-4">
       <p class="mb-2">Current Banner</p>
-      <img src="{{ url_for('returnPostBanner.returnPostBanner', postID = postID) }}"
+      <img src="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
         class="h-48 group-hover:scale-110 transition duration-150 object-cover w-max rounded-t-md mx-auto select-none" />
       <p class="mt-2">New Banner</p>
       {{ form.postBanner(class_="") }}
