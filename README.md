@@ -18,7 +18,7 @@
 
 ## 📄 Table of Contents
 
-- [💫 Features](#💫-features)
+- [💫 Features](#-features)
 - [📦 Requirements](#-requirements)
 - [🧑🏻‍💻 Languages](#-languages)
 - [📚 Technologies](#-technologies)
