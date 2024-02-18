@@ -106,7 +106,7 @@
 - WTForms
 - Flask_WTF
 - Requests
-- PlayWright
+- Playwright
 
 ### 🔮 Frontend
 
