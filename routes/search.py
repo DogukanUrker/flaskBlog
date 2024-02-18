@@ -170,7 +170,7 @@ def search(query):
 
     # Use the Log module to log information to the console
     Log.info(
-        f"Rendering search.html.jinja: params: query={query} | users={users} | posts={posts} | empty={empty}"
+        f"Rendering search.html.jinja: params: query={query} | users={users} | posts={len(posts)} | empty={empty}"
     )
 
     # Render the search template with the posts, users, query and empty data
