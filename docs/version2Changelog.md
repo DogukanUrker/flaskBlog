@@ -33,7 +33,7 @@
 ## New Contributors 🫂
 
 - @fliberd made their first contribution in <https://github.com/DogukanUrker/flaskBlog/pull/44>
-- @barmar made their first contribution in <https://github.com/DogukanUrker/flaskBlog/commit/817f407a975f583eb55429dc1f92c0ea14a3ca3c>
+- @barmar made their first contribution in https://github.com/DogukanUrker/flaskBlog/commit/817f407a975f583eb55429dc1f92c0ea14a3ca3c
 - @imgbot made their first contribution in <https://github.com/DogukanUrker/flaskBlog/pull/54>
 - @dependabot made their first contribution in <https://github.com/DogukanUrker/flaskBlog/pull/43>
 
@@ -47,4 +47,4 @@
 | CSS            | 4     | 10    | 25      | 79   | 114   |
 | SUM            | 105   | 759   | 1971    | 6229 | 8959  |
 
-**Full Changelog**: <https://github.com/DogukanUrker/flaskBlog/compare/1.1.0...2.0.0>
+**Full Changelog**: https://github.com/DogukanUrker/flaskBlog/compare/1.1.0...2.0.0
