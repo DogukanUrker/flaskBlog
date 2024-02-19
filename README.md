@@ -34,9 +34,9 @@
 - [🫂 Contributors](#-contributors)
 - [✨ Stars](#-stars)
 - [🍴 Forks](#-forks)
-- [💰 Support](#support)
+- [💰 Support](#-support)
 - [⭐ Star History](#-star-history)
-- [⚠️ Warning](#-warning)
+- [⚠️ Warning](#%EF%B8%8F-warning)
 
 ## 💫 Features
 
