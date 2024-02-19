@@ -36,7 +36,7 @@
 - [🍴 Çatallar](#-çatallar)
 - [💰 Destek](#-destek)
 - [⭐ Yıldız Çizelgesi](#-yıldız-çizelgesi)
-- [⚠️ Uyarı](#-uyarı)
+- [⚠️ Uyarı](#%EF%B8%8F-uyarı)
 
 ## 💫 Özellikler
 
