@@ -42,9 +42,9 @@
 | Dil            | dosyalar | boş | yorum | kod  | toplam |
 | -------------- | -------- | --- | ----- | ---- | ------ |
 | Python         | 63       | 544 | 1514  | 4150 | 6208   |
-| Jinja Template | 32       | 179 | 373   | 1910 | 2462   |
+| Jinja Template | 32       | 179 | 373   | 1911 | 2463   |
 | JavaScript     | 6        | 26  | 59    | 90   | 175    |
 | CSS            | 4        | 10  | 25    | 79   | 114    |
-| Toplam:        | 105      | 759 | 1971  | 6229 | 8959   |
+| Toplam         | 105      | 759 | 1971  | 6230 | 8960   |
 
 [**Değişiklik Günlüğü**](https://github.com/DogukanUrker/flaskBlog/compare/1.1.0...2.0.0)
