@@ -2,6 +2,6 @@ Flask==3.0.3
 flask_wtf==1.2.1
 passlib==1.7.4
 playwright==1.44.0
-Requests==2.31.0
+Requests==2.32.0
 pipenv==2023.12.1
 WTForms==3.1.2
