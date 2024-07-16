@@ -1,6 +1,10 @@
 {
   "about": {
-    "title": "Flask Uygulamama Hoşgeldiniz",
-    "content": "🇹🇷 Bu biraz içerik."
+    "title": "Hakkında",
+    "version": "Sürüm",
+    "description": "Flask, SQLite3, WTForms, Passlib, reCAPTCHA, Requests, TailwindCSS, Tabler Icons ile yapılmış basit blog uygulaması",
+    "moreInfo": "Daha fazla bilgi için tıklayın",
+    "sourceRepo": "kaynak kodu",
+    "credits": "<i class='ti ti-heart-filled text-rose-500'></i> ile yapılmıştır - <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Doğukan Ürker</a>"
   }
 }
