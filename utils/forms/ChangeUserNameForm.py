@@ -24,5 +24,5 @@ class ChangeUserNameForm(Form):
     newUserName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"class": inputStyle(), "placeholder": "new username"},
+        render_kw={"class": inputStyle()},
     )

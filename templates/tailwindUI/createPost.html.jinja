@@ -2,7 +2,7 @@
 
 {% block head %}
 <!-- Set the title of the page to "Create Post" -->
-<title>Create Post</title>
+<title>{{ translations.createPost.title }}</title>
 {% endblock head %}
 
 {% block body %}
@@ -19,18 +19,19 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
     <!-- Input fields for post title and tags -->
-    {{ form.postTitle(autocomplete="off") }} {{ form.postTags(autocomplete="off") }}
-    <p class="text-xs text-center w-fit mx-auto mb-2">(separate with commas)</p>
+    {{ form.postTitle(autocomplete="off",placeholder=translations.createPost.titlePlaceholder) }} {{
+    form.postTags(autocomplete="off",placeholder=translations.createPost.tags) }}
+    <p class="text-xs text-center w-fit mx-auto mb-2">{{ translations.createPost.separate }}</p>
 
     <!-- Banner Upload Section -->
     <div class="w-72 mx-auto text-center mb-4">
-      <label class="block mt-2 mb-1">Upload Banner</label>
-      {{ form.postBanner(class_="") }}
+      <label class="block mt-2 mb-1">{{ translations.createPost.banner }}</label>
+      {{ form.postBanner(placeholder=translations.createPost.bannerPlaceholder) }}
     </div>
 
     <!-- Category Selection Section -->
     <div class="mx-auto w-fit">
-      <label class="block my-1 text-center">Select a Category</label>
+      <label class="block my-1 text-center">{{ translations.createPost.category }}</label>
       {{ form.postCategory() }}
     </div>
 
@@ -42,7 +43,7 @@
     <!-- Post Button Section -->
     <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      Post
+      {{ translations.createPost.post }}
     </button>
 
   </form>
@@ -52,18 +53,19 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
     <!-- Input fields for post title and tags -->
-    {{ form.postTitle(autocomplete="off") }} {{ form.postTags(autocomplete="off") }}
-    <p class="text-xs text-center w-fit mx-auto mb-2">(separate with commas)</p>
+    {{ form.postTitle(autocomplete="off",placeholder=translations.createPost.titlePlaceholder) }} {{
+    form.postTags(autocomplete="off",placeholder=translations.createPost.tags) }}
+    <p class="text-xs text-center w-fit mx-auto mb-2">{{ translations.createPost.separate }}</p>
 
     <!-- Banner Upload Section -->
     <div class="w-72 mx-auto text-center mb-4">
-      <label class="block mt-2 mb-1">Upload Banner</label>
-      {{ form.postBanner(class_="") }}
+      <label class="block mt-2 mb-1">{{ translations.createPost.banner }}</label>
+      {{ form.postBanner(placeholder=translations.createPost.bannerPlaceholder) }}
     </div>
 
     <!-- Category Selection Section -->
     <div class="mx-auto w-fit">
-      <label class="block my-1 text-center">Select a Category</label>
+      <label class="block my-1 text-center">{{ translations.createPost.category }}</label>
       {{ form.postCategory() }}
     </div>
 
@@ -74,7 +76,7 @@
 
     <!-- Post Button Section -->
     <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      Post
+      {{ translations.createPost.post }}
     </button>
 
   </form>

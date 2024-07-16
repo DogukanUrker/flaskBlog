@@ -2,7 +2,7 @@
 
 {% block head %}
 <!-- Set the title of the page to "Change Profile Picture" -->
-<title>Change Profile Picture</title>
+<title>{{translations.changeProfilePicture.title}}</title>
 {% endblock head %}
 
 {% block body %}
@@ -11,9 +11,9 @@
     <!-- Display the default profile picture seed URL -->
     <p>https://api.dicebear.com/7.x/identicon/svg?seed={SEED}</p>
     <!-- Provide information about the default seed (username) and a link for more information -->
-    <small>default seed is your username</small><br />
+    <small>{{translations.changeProfilePicture.default}}</small><br />
     <a href="https://www.dicebear.com/styles/identicon/" target="_blank">
-      <small>click for more information about profile picture seeds</small>
+      <small>{{translations.changeProfilePicture.info}}</small>
     </a>
   </div>
   <div>
@@ -25,11 +25,11 @@
     <form method="post" id="recaptchaForm">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <!-- Include the form field for entering a new profile picture seed -->
-      {{ form.newProfilePictureSeed() }}
+      {{ form.newProfilePictureSeed(placeholder=translations.changeProfilePicture.placeholder) }}
       <!-- Submit button with reCAPTCHA integration -->
       <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
         class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none">
-        set seed
+        {{translations.changeProfilePicture.set}}
       </button>
     </form>
     {% else %}
@@ -37,10 +37,10 @@
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <!-- Include the form field for entering a new profile picture seed -->
-      {{ form.newProfilePictureSeed() }}
+      {{ form.newProfilePictureSeed(placeholder=translations.changeProfilePicture.placeholder) }}
       <!-- Submit button without reCAPTCHA -->
       <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none">
-        set seed
+        {{translations.changeProfilePicture.set}}
       </button>
     </form>
     {% endif %}

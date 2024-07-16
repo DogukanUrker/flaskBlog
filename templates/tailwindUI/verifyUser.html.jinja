@@ -2,7 +2,7 @@
 
 {% block head %}
 <!-- Set the title of the page to "Verify Account" -->
-<title>Verify Account</title>
+<title>{{translations.verifyUser.title}}</title>
 {% endblock head %}
 
 {% block body %}
@@ -16,17 +16,17 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if mailSent %}
     <!-- Display input for verification code if mail has been sent -->
-    {{ form.code(autocomplete="off") }}
+    {{ form.code(autocomplete="off", placeholder=translations.verifyUser.placeholder) }}
     <!-- Button to submit the form and verify the account -->
     <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      Verify Account
+      {{translations.verifyUser.title}}
     </button>
     {% else %}
     <!-- Button to initiate sending the verification code -->
     <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      Click to send verification code
+      {{ translations.verifyUser.send }}
     </button>
     {% endif %}
   </form>
@@ -35,15 +35,15 @@
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if mailSent %}
-    {{ form.code(autocomplete="off") }}
+    {{ form.code(autocomplete="off", placeholder=translations.verifyUser.placeholder) }}
     <!-- Button to submit the form and verify the account -->
     <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      Verify Account
+      {{translations.verifyUser.title}}
     </button>
     {% else %}
     <!-- Button to initiate sending the verification code -->
     <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      Click to send verification code
+      {{ translations.verifyUser.send }}
     </button>
     {% endif %}
   </form>

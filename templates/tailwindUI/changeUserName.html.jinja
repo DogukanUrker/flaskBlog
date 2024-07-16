@@ -2,7 +2,7 @@
 
 {% block head %}
 <!-- Set the title of the page to "Change Username" -->
-<title>Change Username</title>
+<title>{{translations.changeUserName.title}}</title>
 {% endblock head %}
 
 {% block body %}
@@ -15,11 +15,11 @@
   <form method="post" class="mx-auto w-fit mt-8" id="recaptchaForm">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <!-- Include the form field for entering a new username -->
-    {{ form.newUserName() }}
+    {{ form.newUserName(placeholder=translations.changeUserName.placeholder) }}
     <!-- Submit button with reCAPTCHA integration -->
     <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none">
-      change my username
+      {{translations.changeUserName.change}}
     </button>
   </form>
   {% else %}
@@ -27,10 +27,10 @@
   <form method="post" class="mx-auto w-fit mt-8">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <!-- Include the form field for entering a new username -->
-    {{ form.newUserName() }}
+    {{ form.newUserName(placeholder=translations.changeUserName.placeholder) }}
     <!-- Submit button without reCAPTCHA -->
     <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none">
-      change my username
+      {{translations.changeUserName.change}}
     </button>
   </form>
   {% endif %}

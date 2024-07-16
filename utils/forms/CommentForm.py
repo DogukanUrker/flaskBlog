@@ -24,5 +24,4 @@ class CommentForm(Form):
     comment = TextAreaField(
         "Comment",
         [validators.Length(min=20, max=500), validators.InputRequired()],
-        render_kw={"placeholder": "What are your thoughts?"},
     )

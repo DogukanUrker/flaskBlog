@@ -24,5 +24,5 @@ class VerifyUserForm(Form):
     code = StringField(
         "code",
         [validators.Length(min=4, max=4), validators.InputRequired()],
-        render_kw={"class": inputStyle(), "placeholder": "code"},
+        render_kw={"class": inputStyle()},
     )

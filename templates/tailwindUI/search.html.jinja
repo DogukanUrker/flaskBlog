@@ -2,17 +2,17 @@
 
 {% block head %}
 <!-- Set the title of the page to include the search query -->
-<title>Search results for {{ query }}</title>
+<title>{{translations.search.title}}: {{ query }}</title>
 {% endblock head %}
 
 {% block body %}
 <div class="mx-auto">
   <!-- Display search results for users -->
   <h3 class="text-2xl text-center my-4">
-    search results for "{{ query }}"
+    {{translations.search.results}}: "{{ query }}"
   </h3>
   {% if users %}
-  <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">Users</div>
+  <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">{{translations.search.users}}</div>
   {% for user in users %}
   {% for user_data in user %}
   <!-- User result card -->
@@ -29,7 +29,7 @@
   <!-- Display search results for posts -->
   <div>
     {% if posts %}
-    <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">Posts</div>
+    <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">{{translations.search.posts}}</div>
     <div
       class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12">
       {% for post in posts %}
@@ -46,7 +46,7 @@
   <!-- Displayed when no results are found -->
   {% if empty %}
   <h3 class="text-red-500 font-medium text-2xl text-center mt-4 select-none">
-    not found
+    {{translations.search.noResults}}
   </h3>
   {% endif %}
 </div>

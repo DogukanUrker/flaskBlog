@@ -26,13 +26,13 @@ class CreatePostForm(Form):
     postTitle = StringField(
         "Post Title",
         [validators.Length(min=4, max=75), validators.InputRequired()],
-        render_kw={"class": inputStyle(), "placeholder": "post title"},
+        render_kw={"class": inputStyle()},
     )
     # StringField for post tags with input requirement validator
     postTags = StringField(
         "Post Tags",
         [validators.InputRequired()],
-        render_kw={"class": inputStyle(), "placeholder": "tags"},
+        render_kw={"class": inputStyle()},
     )
     # TextAreaField for post content with validator for minimum length
     postContent = TextAreaField(
@@ -42,8 +42,7 @@ class CreatePostForm(Form):
     # FileField for post banner with input requirement validator
     postBanner = FileField(
         "Post Banner",
-        [validators.InputRequired()],
-        render_kw={"placeholder": "post banner"},
+        [validators.InputRequired()]
     )
     # SelectField for post category with input requirement validator and choices
     postCategory = SelectField(

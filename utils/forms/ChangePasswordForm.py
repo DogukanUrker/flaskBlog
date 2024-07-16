@@ -26,7 +26,7 @@ class ChangePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle(), "placeholder": "old password"},
+        render_kw={"class": inputStyle()},
     )
     # PasswordField for new password with validators for length and input requirement
     password = PasswordField(
@@ -35,7 +35,7 @@ class ChangePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle(), "placeholder": "new password"},
+        render_kw={"class": inputStyle()},
     )
     # PasswordField for confirming new password with validators for length and input requirement
     passwordConfirm = PasswordField(
@@ -44,5 +44,5 @@ class ChangePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle(), "placeholder": "confirm your password"},
+        render_kw={"class": inputStyle()},
     )

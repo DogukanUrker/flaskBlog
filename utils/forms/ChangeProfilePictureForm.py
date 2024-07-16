@@ -25,6 +25,5 @@ class ChangeProfilePictureForm(Form):
         [validators.InputRequired()],
         render_kw={
             "class": inputStyle(),
-            "placeholder": "Enter seed for profile picture",
         },
     )

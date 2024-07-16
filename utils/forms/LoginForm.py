@@ -24,11 +24,11 @@ class LoginForm(Form):
     userName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"class": inputStyle(), "placeholder": "username"},
+        render_kw={"class": inputStyle()},
     )
     # PasswordField for password with validators for length and input requirement
     password = PasswordField(
         "Password",
         [validators.Length(min=5), validators.InputRequired()],
-        render_kw={"class": inputStyle(), "placeholder": "password"},
+        render_kw={"class": inputStyle()},
     )

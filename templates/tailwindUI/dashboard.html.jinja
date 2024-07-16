@@ -3,9 +3,9 @@
 {% block head %}
 <!-- Set the title dynamically based on the request path -->
 {% if request.path == "/admin/posts" %}
-<title>Admin Panel --> Posts</title>
+<title>{{translations.dashboard.titleAdmin}}</title>
 {% else %}
-<title>{{ session["userName"] }}'s Dashboard</title>
+<title>{{translations.dashboard.title}}</title>
 {% endif %}
 {% endblock head %}
 
@@ -13,7 +13,7 @@
 <!-- Body Section -->
 {% if showPosts %}
 <!-- Display Posts Section -->
-<h1 class="my-4 text-4xl font-medium select-none text-center">Posts</h1>
+<h1 class="my-4 text-4xl font-medium select-none text-center">{{translations.dashboard.posts}}</h1>
 
 {% for post in posts %}
 <!-- Individual Post Container -->
@@ -51,12 +51,12 @@
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-tags mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Tags:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.tags}}:</p>
       <p class="font-medium">{{ post[2] }}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-eye mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Views:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.views}}:</p>
       <p class="font-medium">{{ post[6] }}</p>
     </div>
   </div>
@@ -65,12 +65,12 @@
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Creation Time:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.creationTime}}:</p>
       <p class="time font-medium">{{ post[7] }}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-clock-edit mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Last Edit Time:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.editTime}}:</p>
       <p class="time font-medium">{{ post[8] }}</p>
     </div>
   </div>
@@ -79,12 +79,12 @@
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Creation Date:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.creationDate}}:</p>
       <p class="date font-medium">{{ post[7] }}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-calendar-dot mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Last Edit Date:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.editDate}}:</p>
       <p class="date font-medium">{{ post[8] }}</p>
     </div>
   </div>
@@ -94,13 +94,13 @@
     {% if request.path == "/admin/posts" %}
     <div class="flex items-center">
       <i class="ti ti-user mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Author:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.author}}:</p>
       <a href="/user/{{ post[5].lower() }}" class="hover:text-rose-500 duration-150 font-medium">{{ post[5] }}</a>
     </div>
     {% endif %}
     <div class="flex items-center">
       <i class="ti ti-category mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Category:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.category}}:</p>
       <p class="font-medium">{{ post[9] }}</p>
     </div>
   </div>
@@ -111,18 +111,18 @@
 {% elif not showPosts %}
 <!-- Display Message for No Posts -->
 {% if request.path == "/admin/posts" %}
-<h1>This user hasn't posted yet.</h1>
+<h1>{{translations.dashboard.noPosts}}</h1>
 {% else %}
 <p class="text-center mt-32 select-none">
-  No post yet,
-  <a href="/createpost" class="hover:text-rose-500 duration-150 font-medium">create one</a>?
+  {{translations.dashboard.noPost}}
+  <a href="/createpost" class="hover:text-rose-500 duration-150 font-medium">{{translations.dashboard.create}}</a>?
 </p>
 {% endif %}
 {% endif %}
 
 <!-- Display Comments Section -->
 {% if showComments and not request.path == "/admin/posts" %}
-<h1 class="my-4 text-4xl font-medium select-none text-center">Comments</h1>
+<h1 class="my-4 text-4xl font-medium select-none text-center">{{translations.dashboard.comments}}</h1>
 
 {% for comment in comments %}
 <!-- Individual Comment Container -->
@@ -136,18 +136,19 @@
   <section class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Creation Date:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.creationDate}}:</p>
       <p class="date">{{ comment[4] }}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Creation Time:</p>
+      <p class="hidden md:block mr-1">{{translations.dashboard.creationTime}}:</p>
       <p class="time">{{ comment[4] }}</p>
     </div>
   </section>
 
   <!-- Link to Go to Post -->
-  <a href="/post/{{ comment[1] }}" class="hover:text-rose-500 duration-150 font-medium">go to post</a>
+  <a href="/post/{{ comment[1] }}"
+    class="hover:text-rose-500 duration-150 font-medium">{{translations.dashboard.go}}</a>
 
 </div>
 {% endfor %}

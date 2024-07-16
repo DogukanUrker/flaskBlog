@@ -113,7 +113,7 @@
     {% if session["userName"] %}
     <div class="border rounded border-rose-500/25">
       {{ form.comment(class_="bg-transparent focus:outline-none rounded-md p-2 text-center h-20 w-72 resize-none mx-auto
-      mb-0") }}
+      mb-0",placeholder=translations.post.placeholder) }}
       <button type="submit" class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2">
         <i class="ti ti-arrow-narrow-up mr-1 text-xl"></i>
       </button>

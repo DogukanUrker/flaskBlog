@@ -68,6 +68,94 @@
   "changeLanguage": {
     "title": "Select Language"
   },
+  "changePassword": {
+    "title": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "change": "Change Password"
+  },
+  "changeProfilePicture": {
+    "title": "Change Profile Picture",
+    "default": "default seed is your username",
+    "info": "click for more information about profile picture seeds",
+    "set": "Set Profile Picture",
+    "placeholder": "Enter seed for profile picture"
+  },
+  "changeUserName": {
+    "title": "Change Username",
+    "placeholder": "New Username",
+    "change": "Change Username"
+  },
+  "createPost": {
+    "title": "Create Post",
+    "titlePlaceholder": "post title",
+    "category": "Select a Category",
+    "content": "Content",
+    "banner": "Upload a Banner",
+    "bannerPlaceholder": "post banner",
+    "tags": "tags",
+    "post": "Post",
+    "separate": "(Separate tags with commas)"
+  },
+  "csrfError": {
+    "reason": "Reason",
+    "description": "Fill the same form again."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "titleAdmin": "Admin Panel - Posts",
+    "posts": "Posts",
+    "comments": "Comments",
+    "tags": "Tags",
+    "views": "Views",
+    "creationTime": "Creation Time",
+    "creationDate": "Creation Date",
+    "editTime": "Last Edit Time",
+    "editDate": "Last Edit Date",
+    "author": "Author",
+    "category": "Category",
+    "noPosts": "This users hasn't created any posts yet.",
+    "noPost": "No post yet,",
+    "create": "create one",
+    "go": "go to post"
+  },
+  "editPost": {
+    "title": "Edit Post",
+    "titlePlaceholder": "post title",
+    "category": "Select a Category",
+    "current": "Current Banner",
+    "new": "New Banner",
+    "tags": "tags",
+    "separate": "(Separate tags with commas)",
+    "save": "Save Changes",
+    "bannerPlaceholder": "post banner"
+  },
+  "login": {
+    "title": "Login",
+    "username": "username",
+    "password": "password",
+    "forgot": "Forgot Password?"
+  },
+  "notFound": {
+    "text": "I don't know what is",
+    "sorry": "sorry",
+    "home": "go to home"
+  },
+  "passwordReset": {
+    "title": "Password Reset",
+    "email": "email",
+    "username": "username",
+    "send": "Send Reset Email",
+    "reset": "Reset Password",
+    "code": "Send Code",
+    "codePlaceholder": "Enter the code you received",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "post": {
+    "placeholder": "What are your thoughts?"
+  },
   "sortMenu": {
     "asc": "Ascending",
     "desc": "Descending",
@@ -76,5 +164,50 @@
     "views": "Views",
     "category": "Category",
     "edit": "Last Edit Date"
+  },
+  "search": {
+    "title": "Search",
+    "noResults": "No results",
+    "users": "Users",
+    "posts": "Posts",
+    "results": "Results"
+  },
+  "searchBar": {
+    "title": "Search",
+    "placeholder": "search"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "username": "username",
+    "email": "email",
+    "password": "password",
+    "confirm": "confirm password",
+    "policy": "Privacy Policy",
+    "by": "By signing up, you accept"
+  },
+  "unauthorized": {
+    "title": "reCAPTCHA Error",
+    "request": "Please submit the form again.",
+    "info": "reCAPTCHA Verification has failed."
+  },
+  "user": {
+    "posts": "Posts",
+    "comments": "Comments",
+    "points": "Points",
+    "joinDate": "Join Date",
+    "createDate": "Creation Date",
+    "createTime": "Creation Time",
+    "dashboard": "dashboard",
+    "role": "Role",
+    "user": "User",
+    "admin": "admin",
+    "settings": "settings",
+    "views": "Views",
+    "go": "go to post"
+  },
+  "verifyUser": {
+    "title": "Verify Account",
+    "placeholder": "Enter the code you received",
+    "send": "Click to send verification code"
   }
 }

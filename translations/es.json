@@ -3,20 +3,47 @@
     "title": "Acerca de",
     "version": "Versión",
     "description": "Aplicación de blog simple hecha con Flask, SQLite3, WTForms, Passlib, reCAPTCHA, Requests, TailwindCSS, Tabler Icons",
-    "moreInfo": "Haga clic para más información sobre",
+    "moreInfo": "Haga clic para obtener más información sobre",
     "sourceRepo": "código fuente",
     "credits": "Hecho con <i class='ti ti-heart-filled text-rose-500'></i> por <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Doğukan Ürker</a>"
   },
   "accountSettings": {
-    "title": "Configuración de la Cuenta",
+    "title": "Configuraciones de la Cuenta",
     "username": "cambiar nombre de usuario",
     "password": "cambiar contraseña",
     "delete": "eliminar cuenta",
     "language": "cambiar idioma",
     "profilePicture": "cambiar foto de perfil"
   },
+  "adminPanel": {
+    "title": "Panel de Administrador",
+    "users": "Usuarios",
+    "posts": "Publicaciones",
+    "comments": "Comentarios"
+  },
+  "adminPanelComments": {
+    "title": "Panel de Administrador - Comentarios",
+    "comments": "Comentarios",
+    "postID": "ID de Publicación",
+    "creationTime": "Hora de Creación",
+    "creationDate": "Fecha de Creación",
+    "author": "Autor"
+  },
+  "adminPanelUsers": {
+    "title": "Panel de Administrador - Usuarios",
+    "id": "ID",
+    "users": "Usuarios",
+    "email": "Correo Electrónico",
+    "joinTime": "Hora de Unión",
+    "joinDate": "Fecha de Unión",
+    "role": "Rol",
+    "points": "Puntos",
+    "delete": "eliminar usuario",
+    "setUser": "establecer rol de usuario a usuario",
+    "setAdmin": "establecer rol de usuario a administrador"
+  },
   "categories": {
-    "all": "Todo",
+    "all": "Todos",
     "apps": "Aplicaciones",
     "art": "Arte",
     "books": "Libros",
@@ -24,7 +51,7 @@
     "code": "Código",
     "education": "Educación",
     "finance": "Finanzas",
-    "foods": "Alimentos",
+    "foods": "Comidas",
     "games": "Juegos",
     "health": "Salud",
     "movies": "Películas",
@@ -34,12 +61,100 @@
     "series": "Series",
     "sports": "Deportes",
     "technology": "Tecnología",
-    "travel": "Viaje",
+    "travel": "Viajes",
     "web": "Web",
-    "other": "Otro"
+    "other": "Otros"
   },
   "changeLanguage": {
     "title": "Seleccionar Idioma"
+  },
+  "changePassword": {
+    "title": "Cambiar Contraseña",
+    "currentPassword": "Contraseña Actual",
+    "newPassword": "Nueva Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "change": "Cambiar Contraseña"
+  },
+  "changeProfilePicture": {
+    "title": "Cambiar Foto de Perfil",
+    "default": "la semilla predeterminada es tu nombre de usuario",
+    "info": "haga clic para obtener más información sobre las semillas de la imagen de perfil",
+    "set": "Establecer Foto de Perfil",
+    "placeholder": "Ingrese semilla para la foto de perfil"
+  },
+  "changeUserName": {
+    "title": "Cambiar Nombre de Usuario",
+    "placeholder": "Nuevo Nombre de Usuario",
+    "change": "Cambiar Nombre de Usuario"
+  },
+  "createPost": {
+    "title": "Crear Publicación",
+    "titlePlaceholder": "título de la publicación",
+    "category": "Selecciona una Categoría",
+    "content": "Contenido",
+    "banner": "Subir un Banner",
+    "bannerPlaceholder": "banner de la publicación",
+    "tags": "etiquetas",
+    "post": "Publicar",
+    "separate": "(Separe las etiquetas con comas)"
+  },
+  "csrfError": {
+    "reason": "Razón",
+    "description": "Complete el mismo formulario nuevamente."
+  },
+  "dashboard": {
+    "title": "Panel de Control",
+    "titleAdmin": "Panel de Administrador - Publicaciones",
+    "posts": "Publicaciones",
+    "comments": "Comentarios",
+    "tags": "Etiquetas",
+    "views": "Vistas",
+    "creationTime": "Hora de Creación",
+    "creationDate": "Fecha de Creación",
+    "editTime": "Hora de Última Edición",
+    "editDate": "Fecha de Última Edición",
+    "author": "Autor",
+    "category": "Categoría",
+    "noPosts": "Este usuario aún no ha creado ninguna publicación.",
+    "noPost": "Aún no hay publicaciones,",
+    "create": "crea una",
+    "go": "ir a la publicación"
+  },
+  "editPost": {
+    "title": "Editar Publicación",
+    "titlePlaceholder": "título de la publicación",
+    "category": "Selecciona una Categoría",
+    "current": "Banner Actual",
+    "new": "Nuevo Banner",
+    "tags": "etiquetas",
+    "separate": "(Separe las etiquetas con comas)",
+    "save": "Guardar Cambios",
+    "bannerPlaceholder": "banner de la publicación"
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "username": "nombre de usuario",
+    "password": "contraseña",
+    "forgot": "¿Olvidaste tu contraseña?"
+  },
+  "notFound": {
+    "text": "No sé qué es",
+    "sorry": "lo siento",
+    "home": "ir a inicio"
+  },
+  "passwordReset": {
+    "title": "Restablecimiento de Contraseña",
+    "email": "correo electrónico",
+    "username": "nombre de usuario",
+    "send": "Enviar Correo de Restablecimiento",
+    "reset": "Restablecer Contraseña",
+    "code": "Enviar Código",
+    "codePlaceholder": "Ingrese el código que recibió",
+    "newPassword": "Nueva Contraseña",
+    "confirmPassword": "Confirmar Contraseña"
+  },
+  "post": {
+    "placeholder": "¿Cuáles son tus pensamientos?"
   },
   "sortMenu": {
     "asc": "Ascendente",
@@ -49,5 +164,50 @@
     "views": "Vistas",
     "category": "Categoría",
     "edit": "Fecha de Última Edición"
+  },
+  "search": {
+    "title": "Buscar",
+    "noResults": "Sin resultados",
+    "users": "Usuarios",
+    "posts": "Publicaciones",
+    "results": "Resultados"
+  },
+  "searchBar": {
+    "title": "Buscar",
+    "placeholder": "buscar"
+  },
+  "signup": {
+    "title": "Registrarse",
+    "username": "nombre de usuario",
+    "email": "correo electrónico",
+    "password": "contraseña",
+    "confirm": "confirmar contraseña",
+    "policy": "Política de Privacidad",
+    "by": "Al registrarse, acepta"
+  },
+  "unauthorized": {
+    "title": "Error de reCAPTCHA",
+    "request": "Por favor, envíe el formulario nuevamente.",
+    "info": "La verificación de reCAPTCHA ha fallado."
+  },
+  "user": {
+    "posts": "Publicaciones",
+    "comments": "Comentarios",
+    "points": "Puntos",
+    "joinDate": "Fecha de Unión",
+    "createDate": "Fecha de Creación",
+    "createTime": "Hora de Creación",
+    "dashboard": "panel de control",
+    "role": "Rol",
+    "user": "Usuario",
+    "admin": "administrador",
+    "settings": "configuraciones",
+    "views": "Vistas",
+    "go": "ir a la publicación"
+  },
+  "verifyUser": {
+    "title": "Verificar Cuenta",
+    "placeholder": "Ingrese el código que recibió",
+    "send": "Haga clic para enviar el código de verificación"
   }
 }

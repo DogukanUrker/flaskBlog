@@ -8,14 +8,14 @@
 {% block body %}
 <div class="w-fit mx-auto mt-32 text-2xl text-center">
   <!-- Display a message indicating uncertainty about the request path -->
-  <h1>I don't know what is</h1>
+  <h1>{{translations.notFound.text}}</h1>
 
   <!-- Display the request path with a highlighted background -->
   <h1 class="bg-rose-500 w-fit mx-auto p-1 m-1 rounded">{{ request.path }}</h1>
 
   <!-- Display an apology message -->
   <h1>
-    sorry
+    {{translations.notFound.sorry}}
   </h1>
 
   <!-- Display a sad mood icon -->
@@ -24,7 +24,7 @@
   <!-- Provide a link to go back to the home page -->
   <a href="/">
     <h3 class="hover:text-rose-500 duration-150">
-      go home
+      {{translations.notFound.home}}
     </h3>
   </a>
 </div>

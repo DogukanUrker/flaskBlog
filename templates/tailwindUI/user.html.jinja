@@ -17,13 +17,13 @@
       <!-- Role information -->
       <div class="flex items-center">
         <i class="ti ti-user mr-1 text-xl"></i>
-        <p class="hidden md:block">Role:</p>
+        <p class="hidden md:block">{{translations.user.role}}:</p>
         <p class="ml-1 font-medium">{{user[5]}}</p>
       </div>
       <!-- Views information -->
       <div class="flex items-center">
         <i class="ti ti-eye mr-1 text-xl"></i>
-        <p class="hidden md:block">Views:</p>
+        <p class="hidden md:block">{{translations.user.views}}:</p>
         <p class="ml-1 font-medium">{{views}}</p>
       </div>
     </section>
@@ -32,12 +32,12 @@
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
         <i class="ti ti-calendar mr-1 text-xl"></i>
-        <p class="hidden md:block">Join Date:</p>
+        <p class="hidden md:block">{{translations.user.joinDate}}:</p>
         <p class="ml-1 date font-medium">{{user[7]}}</p>
       </div>
       <div class="flex items-center">
         <i class="ti ti-sparkles mr-1 text-xl"></i>
-        <p class="hidden md:block">Points:</p>
+        <p class="hidden md:block">{{translations.user.points}}:</p>
         <p class="ml-1 font-medium">{{user[6]}}</p>
       </div>
     </section>
@@ -48,12 +48,12 @@
       <!-- User settings link -->
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/accountsettings"><i class="ti ti-settings mr-1 text-xl"></i></a>
-        <a href="/accountsettings" class="">settings</a>
+        <a href="/accountsettings" class="">{{translations.user.settings}}</a>
       </div>
       <!-- User dashboard link -->
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/dashboard/{{user[1]}}"><i class="ti ti-clipboard-text mr-1 text-xl"></i></a>
-        <a href="/dashboard/{{user[1]}}" class="">dashboard</a>
+        <a href="/dashboard/{{user[1]}}" class="">{{translations.user.dashboard}}</a>
       </div>
       {% endif %}
       <!-- Check if the user is an admin and the logged-in user is the profile owner -->
@@ -61,7 +61,7 @@
       <!-- Admin link for the profile owner -->
       <div class="flex items-center w-fit hover:text-rose-500 duration-150">
         <a href="/admin"><i class="ti ti-tie mr-1 text-xl"></i></a>
-        <a href="/admin" class="">admin</a>
+        <a href="/admin" class="">{{translations.user.admin}}</a>
       </div>
     </section>
     {% endif %}
@@ -71,7 +71,7 @@
     <!-- User dashboard link for the profile owner -->
     <div class="flex items-center w-fit hover:text-rose-500 duration-150">
       <a href="/dashboard/{{session['userName']}}"><i class="ti ti-clipboard-text mr-1 text-xl"></i></a>
-      <a href="/dashboard/{{session['userName']}}" class="">dashboard</a>
+      <a href="/dashboard/{{session['userName']}}" class="">{{translations.user.dashboard}}</a>
     </div>
     {% endif %}
   </div>
@@ -88,7 +88,7 @@
   </div>
   {% endif %} {% if showComments %}
   <!-- Check if to display comments section -->
-  <h1 class="mb-4 text-center text-2xl text-rose-500 select-none">Comments</h1>
+  <h1 class="mb-4 text-center text-2xl text-rose-500 select-none">{{translations.user.comments}}</h1>
   <!-- Loop through and display user's comments -->
   {% for comment in comments %}
   <div class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md
@@ -99,18 +99,18 @@
     <section class="flex items-center w-full justify-between my-2">
       <div class="flex items-center">
         <i class="ti ti-clock mr-1 text-xl"></i>
-        <p class="hidden md:block mr-1">Creation Time:</p>
+        <p class="hidden md:block mr-1">{{translations.user.createTime}}:</p>
         <p class="time font-medium">{{comment[4]}}</p>
       </div>
       <div class="flex items-center">
         <i class="ti ti-calendar mr-1 text-xl"></i>
-        <p class="hidden md:block mr-1">Creation Date:</p>
+        <p class="hidden md:block mr-1">{{translations.user.createDate}}:</p>
         <p class="date font-medium">{{comment[4]}}</p>
       </div>
     </section>
     <!-- Link to go to the associated post -->
-    <a href="/post/{{comment[1]}}" class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2">go to
-      post</a>
+    <a href="/post/{{comment[1]}}"
+      class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2">{{translations.user.go}}</a>
   </div>
   {% endfor %} {% endif %}
 </div>

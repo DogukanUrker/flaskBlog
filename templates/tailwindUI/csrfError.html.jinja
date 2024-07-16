@@ -7,8 +7,8 @@
 {% block body %}
 <div class="w-fit mx-auto text-center mt-16 text-lg">
   <!-- Display a message indicating the user should fill the form again -->
-  <h1>Fill the same form again.</h1>
+  <h1>{{translations.csrfError.description}}</h1>
   <!-- Display the reason for filling the form again (supplied by the 'reason' variable) -->
-  <p>Reason: {{ reason }}</p>
+  <p>{{translations.csrfError.reason}}: {{ reason }}</p>
 </div>
 {% endblock body %}
