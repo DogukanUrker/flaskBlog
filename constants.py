@@ -40,7 +40,7 @@ LOG_IN = True  # (bool)
 REGISTRATION = True  # (bool)
 
 # Supported languages for the application
-LANGUAGES = ["en", "tr", "es"]  # (list)
+LANGUAGES = ["en", "tr", "es", "de"]  # (list)
 
 
 ### LOGGER SETTINGS ###

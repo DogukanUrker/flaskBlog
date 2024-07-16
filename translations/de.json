@@ -1,0 +1,213 @@
+{
+  "about": {
+    "title": "Über",
+    "version": "Version",
+    "description": "Einfache Blog-Anwendung erstellt mit Flask, SQLite3, WTForms, Passlib, reCAPTCHA, Requests, TailwindCSS, Tabler Icons",
+    "moreInfo": "Klicken Sie hier, um mehr über",
+    "sourceRepo": "Quellcode",
+    "credits": "Erstellt mit <i class='ti ti-heart-filled text-rose-500'></i> von <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Doğukan Ürker</a>"
+  },
+  "accountSettings": {
+    "title": "Kontoeinstellungen",
+    "username": "Benutzernamen ändern",
+    "password": "Passwort ändern",
+    "delete": "Konto löschen",
+    "language": "Sprache ändern",
+    "profilePicture": "Profilbild ändern"
+  },
+  "adminPanel": {
+    "title": "Admin-Bereich",
+    "users": "Benutzer",
+    "posts": "Beiträge",
+    "comments": "Kommentare"
+  },
+  "adminPanelComments": {
+    "title": "Admin-Bereich - Kommentare",
+    "comments": "Kommentare",
+    "postID": "Beitrags-ID",
+    "creationTime": "Erstellungszeit",
+    "creationDate": "Erstellungsdatum",
+    "author": "Autor"
+  },
+  "adminPanelUsers": {
+    "title": "Admin-Bereich - Benutzer",
+    "id": "ID",
+    "users": "Benutzer",
+    "email": "E-Mail",
+    "joinTime": "Beitrittszeit",
+    "joinDate": "Beitrittsdatum",
+    "role": "Rolle",
+    "points": "Punkte",
+    "delete": "Benutzer löschen",
+    "setUser": "Rolle als Benutzer festlegen",
+    "setAdmin": "Rolle als Administrator festlegen"
+  },
+  "categories": {
+    "all": "Alle",
+    "apps": "Apps",
+    "art": "Kunst",
+    "books": "Bücher",
+    "business": "Geschäft",
+    "code": "Code",
+    "education": "Bildung",
+    "finance": "Finanzen",
+    "foods": "Lebensmittel",
+    "games": "Spiele",
+    "health": "Gesundheit",
+    "movies": "Filme",
+    "music": "Musik",
+    "nature": "Natur",
+    "science": "Wissenschaft",
+    "series": "Serien",
+    "sports": "Sport",
+    "technology": "Technologie",
+    "travel": "Reisen",
+    "web": "Web",
+    "other": "Andere"
+  },
+  "changeLanguage": {
+    "title": "Sprache auswählen"
+  },
+  "changePassword": {
+    "title": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "change": "Passwort ändern"
+  },
+  "changeProfilePicture": {
+    "title": "Profilbild ändern",
+    "default": "Der Standard-Seed ist Ihr Benutzername",
+    "info": "Klicken Sie hier, um mehr über Profilbild-Seeds zu erfahren",
+    "set": "Profilbild festlegen",
+    "placeholder": "Seed für Profilbild eingeben"
+  },
+  "changeUserName": {
+    "title": "Benutzernamen ändern",
+    "placeholder": "Neuer Benutzername",
+    "change": "Benutzernamen ändern"
+  },
+  "createPost": {
+    "title": "Beitrag erstellen",
+    "titlePlaceholder": "Beitragstitel",
+    "category": "Kategorie auswählen",
+    "content": "Inhalt",
+    "banner": "Banner hochladen",
+    "bannerPlaceholder": "Beitragsbanner",
+    "tags": "Tags",
+    "post": "Beitrag veröffentlichen",
+    "separate": "(Trennen Sie die Tags mit Kommas)"
+  },
+  "csrfError": {
+    "reason": "Grund",
+    "description": "Füllen Sie das gleiche Formular erneut aus."
+  },
+  "dashboard": {
+    "title": "Übersichtsseite",
+    "titleAdmin": "Admin-Bereich - Beiträge",
+    "posts": "Beiträge",
+    "comments": "Kommentare",
+    "tags": "Tags",
+    "views": "Ansichten",
+    "creationTime": "Erstellungszeit",
+    "creationDate": "Erstellungsdatum",
+    "editTime": "Letzte Bearbeitungszeit",
+    "editDate": "Letztes Bearbeitungsdatum",
+    "author": "Autor",
+    "category": "Kategorie",
+    "noPosts": "Dieser Benutzer hat noch keine Beiträge erstellt.",
+    "noPost": "Noch keine Beiträge,",
+    "create": "einen erstellen",
+    "go": "zum Beitrag gehen"
+  },
+  "editPost": {
+    "title": "Beitrag bearbeiten",
+    "titlePlaceholder": "Beitragstitel",
+    "category": "Kategorie auswählen",
+    "current": "Aktuelles Banner",
+    "new": "Neues Banner",
+    "tags": "Tags",
+    "separate": "(Trennen Sie die Tags mit Kommas)",
+    "save": "Änderungen speichern",
+    "bannerPlaceholder": "Beitragsbanner"
+  },
+  "login": {
+    "title": "Anmelden",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "forgot": "Passwort vergessen?"
+  },
+  "notFound": {
+    "text": "Ich weiß nicht, was das ist",
+    "sorry": "Entschuldigung",
+    "home": "Zur Startseite"
+  },
+  "passwordReset": {
+    "title": "Passwort zurücksetzen",
+    "email": "E-Mail",
+    "username": "Benutzername",
+    "send": "Zurücksetzungs-E-Mail senden",
+    "reset": "Passwort zurücksetzen",
+    "code": "Code senden",
+    "codePlaceholder": "Den erhaltenen Code eingeben",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen"
+  },
+  "post": {
+    "placeholder": "Was sind Ihre Gedanken?"
+  },
+  "sortMenu": {
+    "asc": "Aufsteigend",
+    "desc": "Absteigend",
+    "create": "Erstellungsdatum",
+    "title": "Titel",
+    "views": "Ansichten",
+    "category": "Kategorie",
+    "edit": "Letztes Bearbeitungsdatum"
+  },
+  "search": {
+    "title": "Suche",
+    "noResults": "Keine Ergebnisse",
+    "users": "Benutzer",
+    "posts": "Beiträge",
+    "results": "Ergebnisse"
+  },
+  "searchBar": {
+    "title": "Suche",
+    "placeholder": "suche"
+  },
+  "signup": {
+    "title": "Registrieren",
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirm": "Passwort bestätigen",
+    "policy": "Datenschutzrichtlinie",
+    "by": "Durch die Registrierung stimmen Sie zu"
+  },
+  "unauthorized": {
+    "title": "reCAPTCHA Fehler",
+    "request": "Bitte senden Sie das Formular erneut.",
+    "info": "Die reCAPTCHA-Verifizierung ist fehlgeschlagen."
+  },
+  "user": {
+    "posts": "Beiträge",
+    "comments": "Kommentare",
+    "points": "Punkte",
+    "joinDate": "Beitrittsdatum",
+    "createDate": "Erstellungsdatum",
+    "createTime": "Erstellungszeit",
+    "dashboard": "Übersichtsseite",
+    "role": "Rolle",
+    "user": "Benutzer",
+    "admin": "Administrator",
+    "settings": "Einstellungen",
+    "views": "Ansichten",
+    "go": "zum Beitrag gehen"
+  },
+  "verifyUser": {
+    "title": "Konto verifizieren",
+    "placeholder": "Den erhaltenen Code eingeben",
+    "send": "Klicken, um den Verifizierungscode zu senden"
+  }
+}
