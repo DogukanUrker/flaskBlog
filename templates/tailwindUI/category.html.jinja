@@ -8,7 +8,7 @@
 {% block body %}
 <!-- Include the category container component -->
 {% from "components/categoryContainer.html.jinja" import categoryContainer %}
-{{ categoryContainer() }}
+{{ categoryContainer(translations) }}
 
 <!-- Display the category title with specific styling -->
 <h1 class="text-center font-bold text-3xl text-rose-500 mt-4 select-none">

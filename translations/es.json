@@ -7,6 +7,29 @@
     "sourceRepo": "código fuente",
     "credits": "Hecho con <i class='ti ti-heart-filled text-rose-500'></i> por <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Dogukan Urker</a>"
   },
+  "categories": {
+    "all": "Todo",
+    "apps": "Aplicaciones",
+    "art": "Arte",
+    "books": "Libros",
+    "business": "Negocios",
+    "code": "Código",
+    "education": "Educación",
+    "finance": "Finanzas",
+    "foods": "Alimentos",
+    "games": "Juegos",
+    "health": "Salud",
+    "movies": "Películas",
+    "music": "Música",
+    "nature": "Naturaleza",
+    "science": "Ciencia",
+    "series": "Series",
+    "sports": "Deportes",
+    "technology": "Tecnología",
+    "travel": "Viaje",
+    "web": "Web",
+    "other": "Otro"
+  },
   "changeLanguage": {
     "title": "Seleccionar Idioma"
   }

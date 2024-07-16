@@ -7,7 +7,7 @@
 {% block body %}
 <!-- Include the category container component -->
 {% from "components/categoryContainer.html.jinja" import categoryContainer %}
-{{ categoryContainer() }}
+{{ categoryContainer(translations) }}
 
 <!-- Include the sort dropdown component -->
 {% from "components/sortMenu.html.jinja" import sortMenu %}
