@@ -6,5 +6,8 @@
     "moreInfo": "Click for more information about",
     "sourceRepo": "source code",
     "credits": "Made with <i class='ti ti-heart-filled text-rose-500'></i> by <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Dogukan Urker</a>"
+  },
+  "changeLanguage": {
+    "title": "Select Language"
   }
 }

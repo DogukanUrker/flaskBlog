@@ -83,6 +83,9 @@ from routes.changeUserName import (
 from routes.changePassword import (
     changePasswordBlueprint,
 )  # Importing the blueprint for changing password route
+from routes.changeLanguage import (
+    changeLanguageBlueprint,
+)  # Importing the blueprint for changing language route
 from routes.adminPanelUsers import (
     adminPanelUsersBlueprint,
 )  # Importing the blueprint for admin panel users route
@@ -437,6 +440,9 @@ app.register_blueprint(
 app.register_blueprint(
     changePasswordBlueprint
 )  # Registering the blueprint for the change password route
+app.register_blueprint(
+    changeLanguageBlueprint
+)  # Registering the blueprint for the change language route
 app.register_blueprint(
     adminPanelUsersBlueprint
 )  # Registering the blueprint for the admin panel users route

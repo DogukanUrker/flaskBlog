@@ -1,13 +1,10 @@
 # Import necessary modules
 from modules import (
     session,  # Session module for managing user sessions
-    request,  # Request module for handling HTTP requests
-    redirect,  # Redirect module for redirecting to different routes
-    url_for,  # URL module for generating URLs for routes
     LANGUAGES,  # List of supported languages
+    redirect,  # Redirect module for redirecting to routes
     Log,  # Logging module for logging messages
     Blueprint,  # Blueprint module for creating route blueprints
-    render_template,  # Template module for rendering HTML templates
 )
 from utils.translations import loadTranslations  # Load translations for the application
 
@@ -35,21 +32,4 @@ def setLanguage(language):
             Log.info(f"Language set to: {language}")
         case _:
             Log.warning(f"Language not supported: {language}")
-    return language
-
-
-@setLanguageBlueprint.route("/changeLanguage")
-def changeLanguage():
-    """
-    Show the user's current language preference.
-
-    Parameters:
-        None
-
-    Returns:
-        html: The changeLanguage html.jinja file.
-
-    """
-    return render_template(
-        "changeLanguage.html.jinja"
-    )  # Render the showLanguage template
+    return redirect("/changeLanguage")  # Redirect to the changeLanguage route

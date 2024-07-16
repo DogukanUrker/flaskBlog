@@ -1,1 +1,23 @@
-{{ translations }}
+{% extends 'layout.html.jinja' %}
+
+{% block head %}
+<!-- Set the title of the page to "Change Username" -->
+<title>{{ translations.changeLanguage.title }}</title>
+{% endblock head %}
+
+{% block body %}
+<div class="text-center mt-24 flex flex-col text-lg">
+    <h1 class="text-xl font-bold select-none mb-4">
+        {{ translations.changeLanguage.title }}
+    </h1>
+    <a href="/setLanguage/en" class="m-2 hover:text-rose-500 duration-150">
+        🇬🇧 English
+    </a>
+    <a href="/setLanguage/tr" class="m-2 hover:text-rose-500 duration-150">
+        🇹🇷 Türkçe
+    </a>
+    <a href="/setLanguage/es" class="m-2 hover:text-rose-500 duration-150">
+        🇪🇸 Español
+    </a>
+</div>
+{% endblock body %}
