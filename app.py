@@ -68,6 +68,9 @@ from routes.adminPanel import (
 from routes.createPost import (
     createPostBlueprint,
 )  # Importing the blueprint for creating post route
+from routes.setLanguage import (
+    setLanguageBlueprint,
+)  # Importing the blueprint for setting language route
 from routes.privacyPolicy import (
     privacyPolicyBlueprint,
 )  # Importing the blueprint for privacy policy route
@@ -412,6 +415,9 @@ app.register_blueprint(
 app.register_blueprint(
     verifyUserBlueprint
 )  # Registering the blueprint for the verify user route
+app.register_blueprint(
+    setLanguageBlueprint
+)  # Registering the blueprint for the set language route
 app.register_blueprint(
     privacyPolicyBlueprint
 )  # Registering the blueprint for the privacy policy route

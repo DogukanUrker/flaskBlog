@@ -39,6 +39,9 @@ LOG_IN = True  # (bool)
 # Toggle user registration feature
 REGISTRATION = True  # (bool)
 
+# Supported languages for the application
+LANGUAGES = ["en", "tr", "es"]  # (list)
+
 
 ### LOGGER SETTINGS ###
 # Toggle custom logging feature
