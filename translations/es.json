@@ -7,6 +7,14 @@
     "sourceRepo": "código fuente",
     "credits": "Hecho con <i class='ti ti-heart-filled text-rose-500'></i> por <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Dogukan Urker</a>"
   },
+  "accountSettings": {
+    "title": "Configuración de la Cuenta",
+    "username": "cambiar nombre de usuario",
+    "password": "cambiar contraseña",
+    "delete": "eliminar cuenta",
+    "language": "cambiar idioma",
+    "profilePicture": "cambiar foto de perfil"
+  },
   "categories": {
     "all": "Todo",
     "apps": "Aplicaciones",
