@@ -91,6 +91,12 @@ from utils.contextProcessor.isRegistration import isRegistration
 # Importing the 'recaptchaBadge' context processor from the 'utils.contextProcessor.recaptchaBadge' module
 from utils.contextProcessor.recaptchaBadge import recaptchaBadge
 
+# Importing the 'injectTranslations' function from the 'utils.contextProcessor.translations' module
+from utils.contextProcessor.translations import injectTranslations
+
+# Importing the 'browserLanguage' function from the 'utils.beforeRequest.browserLanguage' module
+from utils.beforeRequest.browserLanguage import browserLanguage
+
 # Importing the 'returnUserProfilePicture' context processor from the 'utils.contextProcessor.returnUserProfilePicture' module
 from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture
 

@@ -17,27 +17,6 @@ setLanguageBlueprint = Blueprint(
 )  # Pass the name of the blueprint and the current module name as arguments
 
 
-@setLanguageBlueprint.context_processor
-def injectTranslations():
-    """
-    Inject translations into the context of the application.
-
-    Parameters:
-        None
-
-    Returns:
-        dict: A dictionary containing the translations for the current language.
-    """
-    language = session.get(
-        "language", "en"
-    )  # Get the current language from the session
-    translations = loadTranslations(
-        language
-    )  # Load the translations for the current language
-    Log.info(f"Injecting translations for language: {language}")
-    return dict(translations=translations)  # Return the translations as a dictionary
-
-
 @setLanguageBlueprint.route("/setLanguage/<language>")
 def setLanguage(language):
     """
@@ -57,47 +36,6 @@ def setLanguage(language):
         case _:
             Log.warning(f"Language not supported: {language}")
     return language
-
-
-@setLanguageBlueprint.before_request
-def beforeRequest():
-    """
-    Set the user's language based on the browser's preferred language.
-
-     Parameters:
-        None
-
-    Returns:
-        None
-    """
-    if "language" not in session:
-        # Check if the user's language is not already set in the session
-        browserLanguage = request.headers.get(
-            "Accept-Language"
-        )  # Get the browser's Accept-Language header
-        if browserLanguage:
-            # If the Accept-Language header is present, parse the first preferred language
-            browserLanguage = browserLanguage.split(",")[0].split("-")[0]
-            match browserLanguage:
-                case lang if lang in LANGUAGES:
-                    session["language"] = (
-                        lang  # Set the session language to the browser's preferred language
-                    )
-                    Log.info(f"Browser language detected and set to: {lang}")
-                case _:
-                    session["language"] = (
-                        "en"  # Default to English if the preferred language is not supported
-                    )
-                    Log.warning(
-                        f"Browser language '{browserLanguage}' not supported. Defaulting to English."
-                    )
-        else:
-            session["language"] = (
-                "en"  # Default to English if the Accept-Language header is not present
-            )
-            Log.warning("No browser language detected. Defaulting to English.")
-    else:
-        Log.info(f"Language already set in session: {session['language']}")
 
 
 @setLanguageBlueprint.route("/changeLanguage")

@@ -191,6 +191,8 @@ from modules import (
     isLogin,  # A function that checks LOG_IN constant
     recaptchaBadge,  # A function that checks RECAPTCHA_BADGE constant
     isRegistration,  # A function that checks REGISTRATION constant
+    browserLanguage,  # A function that sets the app language based on the browser's preferred language
+    injectTranslations,  # A function that injects translations into the context of the application
     returnUserProfilePicture,  # A function that returns the user's profile picture
 )
 
@@ -225,7 +227,12 @@ app.context_processor(
 app.context_processor(
     returnUserProfilePicture
 )  # A context processor that adds the getProfilePicture variable to the template context
-
+app.context_processor(
+    injectTranslations
+)  # A context processor that adds the translations variable to the template context
+app.before_request(
+    browserLanguage
+)  # A function that sets the app language based on the browser's preferred language
 
 # Match WERKZEUG_LOGGER status
 match WERKZEUG_LOGGER:
