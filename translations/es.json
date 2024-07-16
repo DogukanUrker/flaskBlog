@@ -32,5 +32,14 @@
   },
   "changeLanguage": {
     "title": "Seleccionar Idioma"
+  },
+  "sortMenu": {
+    "asc": "Ascendente",
+    "desc": "Descendente",
+    "create": "Fecha de Creación",
+    "title": "Título",
+    "views": "Vistas",
+    "category": "Categoría",
+    "edit": "Fecha de Última Edición"
   }
 }

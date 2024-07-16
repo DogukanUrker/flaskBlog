@@ -1,4 +1,4 @@
-{% macro sortMenu(sortName,source) %}
+{% macro sortMenu(sortName,source,translations) %}
 <!-- Macro to generate sort dropdown menu -->
 <div class="mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6 flex justify-end font-medium">
     <!-- Container for the dropdown menu -->
@@ -10,49 +10,49 @@
             <!-- Placeholder option displaying the current sorting selection -->
             <option disabled selected hidden>{{sortName}}</option>
             <!-- Group for ascending sorting options -->
-            <optgroup label="Ascending" class="font-bold">
+            <optgroup label="{{ translations.sortMenu.desc }}" class="font-bold">
                 <!-- Option for sorting by creation date in descending order -->
                 <option value="{{source}}/by=timeStamp/sort=desc" class="block px-4 py-2 font-medium">
-                    Creation Date
+                    {{ translations.sortMenu.create }}
                 </option>
                 <!-- Option for sorting by title in descending order -->
                 <option value="{{source}}/by=title/sort=desc" class="block px-4 py-2 font-medium">
-                    Title
+                    {{ translations.sortMenu.title }}
                 </option>
                 <!-- Option for sorting by views in descending order -->
                 <option value="{{source}}/by=views/sort=desc" class="block px-4 py-2 font-medium">
-                    Views
+                    {{ translations.sortMenu.views }}
                 </option>
                 <!-- Option for sorting by category in descending order -->
                 <option value="{{source}}/by=category/sort=desc" class="block px-4 py-2 font-medium">
-                    Category
+                    {{ translations.sortMenu.category }}
                 </option>
                 <!-- Option for sorting by last edit date in descending order -->
                 <option value="{{source}}/by=lastEditTimeStamp/sort=desc" class="block px-4 py-2 font-medium">
-                    Last Edit Date
+                    {{ translations.sortMenu.edit }}
                 </option>
             </optgroup>
             <!-- Group for descending sorting options -->
-            <optgroup label="Descending" class="font-bold">
+            <optgroup label="{{ translations.sortMenu.asc }}" class="font-bold">
                 <!-- Option for sorting by creation date in ascending order -->
                 <option value="{{source}}/by=timeStamp/sort=asc" class="block px-4 py-2 font-medium">
-                    Creation Date
+                    {{ translations.sortMenu.create }}
                 </option>
                 <!-- Option for sorting by title in ascending order -->
                 <option value="{{source}}/by=title/sort=asc" class="block px-4 py-2 font-medium">
-                    Title
+                    {{ translations.sortMenu.title }}
                 </option>
                 <!-- Option for sorting by views in ascending order -->
                 <option value="{{source}}/by=views/sort=asc" class="block px-4 py-2 font-medium">
-                    Views
+                    {{ translations.sortMenu.views }}
                 </option>
                 <!-- Option for sorting by category in ascending order -->
                 <option value="{{source}}/by=category/sort=asc" class="block px-4 py-2 font-medium">
-                    Category
+                    {{ translations.sortMenu.category }}
                 </option>
                 <!-- Option for sorting by last edit date in ascending order -->
                 <option value="{{source}}/by=lastEditTimeStamp/sort=asc" class="block px-4 py-2 font-medium">
-                    Last Edit Date
+                    {{ translations.sortMenu.edit }}
                 </option>
             </optgroup>
         </select>
