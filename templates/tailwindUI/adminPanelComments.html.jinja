@@ -2,12 +2,12 @@
 
 {% block head %}
 <!-- Set the title of the page to "Admin Panel -> Comments" -->
-<title>Admin Panel --> Comments</title>
+<title>{{translations.adminPanelComments.title}}</title>
 {% endblock head %}
 
 {% block body %}
 <!-- Display the heading for the comments section -->
-<h1 class="my-4 text-4xl font-medium select-none text-center">Comments</h1>
+<h1 class="my-4 text-4xl font-medium select-none text-center">{{translations.adminPanelComments.comments}}</h1>
 
 <!-- Loop through each comment and display comment details -->
 {% for comment in comments %}
@@ -16,7 +16,7 @@
   <!-- Display post ID and link to the corresponding post -->
   <div class="flex items-center justify-between mb-2">
     <div class="flex items-center">
-      <i class="ti ti-id mr-1 text-xl"></i> Post ID:
+      <i class="ti ti-id mr-1 text-xl"></i> {{translations.adminPanelComments.postID}}:
       <a href="/post/{{ comment[0] }}" class="ml-1 font-medium">{{ comment[1] }}</a>
     </div>
   </div>
@@ -27,12 +27,12 @@
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Creation Time:</p>
+      <p class="hidden md:block mr-1">{{translations.adminPanelComments.creationTime}}:</p>
       <p class="time font-medium">{{ comment[4] }}</p>
     </div>
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Creation Date:</p>
+      <p class="hidden md:block mr-1">{{translations.adminPanelComments.creationDate}}:</p>
       <p class="date font-medium">{{ comment[4] }}</p>
     </div>
   </div>
@@ -43,7 +43,7 @@
     <div class="flex items-center">
       <!-- Display author details with a link to the author's profile -->
       <i class="ti ti-user mr-1 text-xl"></i>
-      <p class="hidden md:block mr-1">Author:</p>
+      <p class="hidden md:block mr-1">{{translations.adminPanelComments.author}}:</p>
       <a href="/user/{{ comment[3].lower() }}" class="hover:text-rose-500 duration-150 font-medium">
         {{ comment[3] }}
       </a>

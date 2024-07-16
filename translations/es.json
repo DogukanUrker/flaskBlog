@@ -5,7 +5,7 @@
     "description": "Aplicación de blog simple hecha con Flask, SQLite3, WTForms, Passlib, reCAPTCHA, Requests, TailwindCSS, Tabler Icons",
     "moreInfo": "Haga clic para más información sobre",
     "sourceRepo": "código fuente",
-    "credits": "Hecho con <i class='ti ti-heart-filled text-rose-500'></i> por <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Dogukan Urker</a>"
+    "credits": "Hecho con <i class='ti ti-heart-filled text-rose-500'></i> por <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Doğukan Ürker</a>"
   },
   "accountSettings": {
     "title": "Configuración de la Cuenta",

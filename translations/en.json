@@ -5,7 +5,7 @@
     "description": "Simple blog app made with Flask, SQLite3, WTForms, Passlib, reCAPTCHA, Requests, TailwindCSS, Tabler Icons",
     "moreInfo": "Click for more information about",
     "sourceRepo": "source code",
-    "credits": "Made with <i class='ti ti-heart-filled text-rose-500'></i> by <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Dogukan Urker</a>"
+    "credits": "Made with <i class='ti ti-heart-filled text-rose-500'></i> by <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Doğukan Ürker</a>"
   },
   "accountSettings": {
     "title": "Account Settings",
@@ -14,6 +14,33 @@
     "delete": "delete account",
     "language": "change language",
     "profilePicture": "change profile picture"
+  },
+  "adminPanel": {
+    "title": "Admin Panel",
+    "users": "Users",
+    "posts": "Posts",
+    "comments": "Comments"
+  },
+  "adminPanelComments": {
+    "title": "Admin Panel - Comments",
+    "comments": "Comments",
+    "postID": "Post ID",
+    "creationTime": "Creation Time",
+    "creationDate": "Creation Date",
+    "author": "Author"
+  },
+  "adminPanelUsers": {
+    "title": "Admin Panel - Users",
+    "id": "ID",
+    "users": "Users",
+    "email": "Email",
+    "joinTime": "Join Time",
+    "joinDate": "Join Date",
+    "role": "Role",
+    "points": "Points",
+    "delete": "delete user",
+    "setUser": "set user role to user",
+    "setAdmin": "set user role to admin"
   },
   "categories": {
     "all": "All",

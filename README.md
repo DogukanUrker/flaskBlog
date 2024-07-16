@@ -9,7 +9,7 @@
 📜 **Simple blog app built with Flask.**
 
 [📧 Contact](mailto:dogukanurker@icloud.com)<br/>
-[👨🏻‍💻 Dogukan Urker](https://dogukanurker.com)
+[👨🏻‍💻 Doğukan Ürker](https://dogukanurker.com)
 
 [📸 Images](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
 [📽️ Preview Video](https://youtu.be/WyIpAlSp2RM)<br/>

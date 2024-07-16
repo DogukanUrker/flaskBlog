@@ -1,7 +1,7 @@
 {% extends 'layout.html.jinja' %}
 {% block head %}
 <!-- Set the title of the Admin Panel page -->
-<title>Admin Panel</title>
+<title>{{translations.adminPanel.title }}</title>
 {% endblock head %}
 
 {% block body %}
@@ -11,21 +11,21 @@
   <!-- Link to the Users page in the Admin Panel -->
   <h1 class="my-4">
     <a href="admin/users" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-      <i class="ti ti-users mr-1 text-2xl"></i> Users
+      <i class="ti ti-users mr-1 text-2xl"></i> {{ translations.adminPanel.users }}
     </a>
   </h1>
 
   <!-- Link to the Posts page in the Admin Panel -->
   <h1 class="my-4">
     <a href="admin/posts" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-      <i class="ti ti-files mr-1 text-2xl"></i> Posts
+      <i class="ti ti-files mr-1 text-2xl"></i> {{ translations.adminPanel.posts }}
     </a>
   </h1>
 
   <!-- Link to the Comments page in the Admin Panel -->
   <h1 class="my-4">
     <a href="admin/comments" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-      <i class="ti ti-messages mr-1 text-2xl"></i> Comments
+      <i class="ti ti-messages mr-1 text-2xl"></i> {{ translations.adminPanel.comments }}
     </a>
   </h1>
 </div>

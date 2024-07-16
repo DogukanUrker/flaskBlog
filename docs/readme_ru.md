@@ -27,7 +27,7 @@
 Простая система для ведения блога, написанная на Python framework-е Flask.
 <br/>
 [Contact](mailto:dogukanurker@icloud.com)<br/>
-[Dogukan Urker](https://dogukanurker.com)
+[Doğukan Ürker](https://dogukanurker.com)
 
 ### [Демо Ролик 📺](https://youtu.be/WyIpAlSp2RM)
 
