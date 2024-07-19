@@ -35,13 +35,14 @@ def logout():
             Log.success(
                 f"User: {session['userName']} logged out"
             )  # Log a message with level 2 indicating the user has logged out
-            session.clear()  # Clear the session dictionary
             flashMessage(
                 page="logout",
                 message="success",
                 category="success",
                 language=session["language"],
-            )  # Display a flash message
+            )  # Display a flash message indicating the user has logged out
+            session.pop("userName")  # Clear the userName data from session
+            session.pop("userRole")  # Clear the userRole data from session
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in
             Log.danger(
