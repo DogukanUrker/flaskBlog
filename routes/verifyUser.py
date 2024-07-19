@@ -3,7 +3,7 @@ from modules import (
     Log,  # Logging module
     ssl,  # SSL/TLS module
     abort,  # Function for aborting requests
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     smtplib,  # SMTP client module
     randint,  # Function for generating random integers
     sqlite3,  # SQLite database module
@@ -119,10 +119,14 @@ def verifyUser(codeSent):
                                                             Log.success(
                                                                 f'User: "{userName}" has been verified'
                                                             )
-                                                            flash(
-                                                                "Your account has been verified.",
-                                                                "success",
-                                                            )
+                                                            flashMessage(
+                                                                page="verifyUser",
+                                                                message="success",
+                                                                category="success",
+                                                                language=session[
+                                                                    "language"
+                                                                ],
+                                                            )  # Display a flash message
                                                             return redirect("/")
                                                         case False:
                                                             # Recaptcha verification failed
@@ -140,14 +144,21 @@ def verifyUser(codeSent):
                                                     Log.success(
                                                         f'User: "{userName}" has been verified'
                                                     )
-                                                    flash(
-                                                        "Your account has been verified.",
-                                                        "success",
-                                                    )
+                                                    flashMessage(
+                                                        page="verifyUser",
+                                                        message="success",
+                                                        category="success",
+                                                        language=session["language"],
+                                                    )  # Display a flash message
                                                     return redirect("/")
                                         case False:
                                             # Wrong verification code entered
-                                            flash("Wrong code.", "error")
+                                            flashMessage(
+                                                page="verifyUser",
+                                                message="wrong",
+                                                category="error",
+                                                language=session["language"],
+                                            )  # Display a flash message
                             # Render the verification form template
                             return render_template(
                                 "verifyUser.html.jinja",
@@ -269,12 +280,22 @@ def verifyUser(codeSent):
                                             Log.success(
                                                 f'Verification code: "{verificationCode}" sent to "{email[0]}"',
                                             )
-                                            flash("Code sent.", "success")
+                                            flashMessage(
+                                                page="verifyUser",
+                                                message="code",
+                                                category="success",
+                                                language=session["language"],
+                                            )  # Display a flash message
                                             return redirect("/verifyUser/codesent=true")
                                         case True:
                                             # User not found in the database
                                             Log.danger(f'User: "{userName}" not found')
-                                            flash("User not found.", "error")
+                                            flashMessage(
+                                                page="verifyUser",
+                                                message="notFound",
+                                                category="error",
+                                                language=session["language"],
+                                            )  # Display a flash message
                             # Render the verification form template
                             return render_template(
                                 "verifyUser.html.jinja",

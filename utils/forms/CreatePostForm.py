@@ -40,10 +40,7 @@ class CreatePostForm(Form):
         [validators.Length(min=50)],
     )
     # FileField for post banner with input requirement validator
-    postBanner = FileField(
-        "Post Banner",
-        [validators.InputRequired()]
-    )
+    postBanner = FileField("Post Banner", [validators.InputRequired()])
     # SelectField for post category with input requirement validator and choices
     postCategory = SelectField(
         "Post Category",

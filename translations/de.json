@@ -210,5 +210,82 @@
     "title": "Konto verifizieren",
     "placeholder": "Den erhaltenen Code eingeben",
     "send": "Klicken, um den Verifizierungscode zu senden"
+  },
+  "flash": {
+    "changePassword": {
+      "same": "Das neue Passwort darf nicht mit dem alten Passwort übereinstimmen.",
+      "match": "Passwörter stimmen nicht überein.",
+      "success": "Passwort wurde geändert.",
+      "old": "Altes Passwort ist falsch.",
+      "login": "Sie müssen sich einloggen, um Ihr Passwort zu ändern."
+    },
+    "changeProfilePicture": {
+      "success": "Profilbild wurde geändert."
+    },
+    "changeUserName": {
+      "same": "Das ist bereits Ihr Benutzername.",
+      "success": "Benutzername wurde geändert.",
+      "taken": "Dieser Benutzername ist bereits vergeben.",
+      "ascii": "Benutzername darf nur ASCII-Zeichen enthalten."
+    },
+    "createPost": {
+      "success": "Sie haben 20 Punkte für das Erstellen eines Beitrags erhalten.",
+      "login": "Sie müssen sich einloggen, um einen Beitrag zu erstellen.",
+      "empty": "Titel oder Inhalt dürfen nicht leer sein."
+    },
+    "dashboard": {
+      "login": "Sie müssen sich einloggen, um Ihr Dashboard zu sehen."
+    },
+    "editPost": {
+      "success": "Beitrag wurde bearbeitet.",
+      "login": "Sie müssen sich einloggen, um einen Beitrag zu bearbeiten.",
+      "empty": "Titel oder Inhalt dürfen nicht leer sein.",
+      "author": "Sie können den Beitrag eines anderen nicht bearbeiten."
+    },
+    "login": {
+      "success": "Sie haben sich erfolgreich eingeloggt.",
+      "password": "Falsches Passwort",
+      "notFound": "Benutzer nicht gefunden"
+    },
+    "logout": {
+      "success": "Sie haben sich erfolgreich ausgeloggt."
+    },
+    "passwordReset": {
+      "success": "Passwort wurde zurückgesetzt. Sie können sich mit Ihrem neuen Passwort einloggen.",
+      "email": "E-Mail wurde gesendet.",
+      "code": "Code wurde gesendet.",
+      "same": "Das neue Passwort darf nicht mit dem alten Passwort übereinstimmen.",
+      "match": "Passwörter stimmen nicht überein.",
+      "notFound": "Benutzer nicht gefunden.",
+      "wrong": "Falscher Code."
+    },
+    "delete": {
+      "user": "Benutzer wurde gelöscht.",
+      "post": "Beitrag wurde gelöscht.",
+      "comment": "Kommentar wurde gelöscht."
+    },
+    "setLanguage": {
+      "success": "Sprache wurde geändert."
+    },
+    "post": {
+      "success": "Sie haben 5 Punkte für das Kommentieren erhalten."
+    },
+    "signup": {
+      "success": "Sie haben sich erfolgreich registriert.",
+      "ascii": "Benutzername darf nur ASCII-Zeichen enthalten.",
+      "username": "Dieser Benutzername ist bereits vergeben.",
+      "email": "Diese E-Mail ist bereits vergeben.",
+      "password": "Passwörter stimmen nicht überein.",
+      "taken": "Dieser Benutzername und diese E-Mail sind bereits vergeben."
+    },
+    "verifyUser": {
+      "success": "Ihr Konto wurde verifiziert.",
+      "code": "Code wurde gesendet.",
+      "notFound": "Benutzer nicht gefunden.",
+      "wrong": "Falscher Code."
+    },
+    "error": {
+      "wrongCall": "Sie haben einen falschen Flash-Nachrichtenaufruf auf der Serverseite gemacht."
+    }
   }
 }

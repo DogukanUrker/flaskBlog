@@ -1,7 +1,7 @@
 # Import necessary modules and functions
 from modules import (
     Log,  # Logging module
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     abort,  # Function for aborting requests
     session,  # Session management module
     sqlite3,  # SQLite database module
@@ -57,8 +57,12 @@ def createPost():
                     # Check if post content is empty
                     match postContent == "":
                         case True:
-                            # Flash an error message
-                            flash("Post content not be empty.", "error")
+                            flashMessage(
+                                page="createPost",
+                                message="empty",
+                                category="error",
+                                language=session["language"],
+                            )  # Display a flash message
                             Log.danger(
                                 f'User: "{session["userName"]}" tried to create a post with empty content',
                             )
@@ -112,10 +116,12 @@ def createPost():
                                             )
                                             # Award points to the user for posting
                                             addPoints(20, session["userName"])
-                                            flash(
-                                                "You earned 20 points by posting.",
-                                                "success",
-                                            )
+                                            flashMessage(
+                                                page="createPost",
+                                                message="success",
+                                                category="success",
+                                                language=session["language"],
+                                            )  # Display a flash message
                                             return redirect("/")
                                         case False:
                                             # Recaptcha verification failed
@@ -154,7 +160,12 @@ def createPost():
                                     )
                                     # Award points to the user for posting
                                     addPoints(20, session["userName"])
-                                    flash("You earned 20 points by posting.", "success")
+                                    flashMessage(
+                                        page="createPost",
+                                        message="success",
+                                        category="success",
+                                        language=session["language"],
+                                    )  # Display a flash message
                                     return redirect("/")
             # Render the create post template
             return render_template(
@@ -168,5 +179,10 @@ def createPost():
             Log.danger(
                 f"{request.remote_addr} tried to create a new post without login"
             )
-            flash("You need loin for create a post.", "error")
+            flashMessage(
+                page="createPost",
+                message="login",
+                category="error",
+                language=session["language"],
+            )  # Display a flash message
             return redirect("/login/redirect=&createpost")

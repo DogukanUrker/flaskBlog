@@ -62,6 +62,8 @@ from flask import (
     send_from_directory,  # Sends a file from a directory to the client
 )
 
+# Importing the 'flashMessage' function from the 'utils.flashMessage' module for displaying flash messages.
+from utils.flashMessage import flashMessage  # Function for displaying flash messages
 
 # Importing functions from the 'utils.time' module for handling date and time-related operations.
 from utils.time import currentDate, currentTime, currentTimeStamp, currentTimeZone

@@ -1,7 +1,7 @@
 # Import the necessary modules and functions
 from modules import (
     Log,  # Importing log class for logging messages
-    flash,  # Importing flash function for displaying messages
+    flashMessage,  # Importing flash function for displaying messages
     abort,  # Importing abort function for aborting requests
     session,  # Importing session for managing user sessions
     sqlite3,  # Importing sqlite3 for working with SQLite databases
@@ -72,16 +72,21 @@ def changePassword():
                             # Check if new password is same as old password
                             match oldPassword == password:
                                 case True:
-                                    # Display error message
-                                    flash(
-                                        "New password can not be same with old password.",
-                                        "error",
-                                    )
+                                    flashMessage(
+                                        page="changePassword",
+                                        message="same",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                             # Check if passwords match
                             match password != passwordConfirm:
                                 case True:
-                                    # Display error message
-                                    flash("Passwords must match.", "error")
+                                    flashMessage(
+                                        page="changePassword",
+                                        message="match",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                             # Check if old password is different from new password and passwords match
                             match oldPassword != password and password == passwordConfirm:
                                 case True:
@@ -132,11 +137,12 @@ def changePassword():
                                                     )
                                                     # Clear session
                                                     session.clear()
-                                                    # Display success message
-                                                    flash(
-                                                        "You need login with new password.",
-                                                        "success",
-                                                    )
+                                                    flashMessage(
+                                                        page="changePassword",
+                                                        message="success",
+                                                        category="success",
+                                                        language=session["language"],
+                                                    )  # Display a flash message
                                                     # Redirect to login page
                                                     return redirect("/login/redirect=&")
                                                 case False:
@@ -164,16 +170,21 @@ def changePassword():
                                             )
                                             # Clear session
                                             session.clear()
-                                            # Display success message
-                                            flash(
-                                                "You need login with new password.",
-                                                "success",
-                                            )
+                                            flashMessage(
+                                                page="changePassword",
+                                                message="success",
+                                                category="success",
+                                                language=session["language"],
+                                            )  # Display a flash message
                                             # Redirect to login page
                                             return redirect("/login/redirect=&")
                         case _:
-                            # Display error message
-                            flash("Old is password wrong.", "error")
+                            flashMessage(
+                                page="changePassword",
+                                message="old",
+                                category="error",
+                                language=session["language"],
+                            )  # Display a flash message
             # Render the change password form template
             return render_template(
                 "changePassword.html.jinja",
@@ -186,7 +197,11 @@ def changePassword():
             Log.danger(
                 f"{request.remote_addr} tried to change his password without logging in"
             )
-            # Display error message
-            flash("You need login for change your password.", "error")
+            flashMessage(
+                page="changePassword",
+                message="login",
+                category="error",
+                language=session["language"],
+            )  # Display a flash message
             # Redirect to login page
             return redirect("/login/redirect=changepassword")

@@ -2,7 +2,7 @@
 from modules import (
     Log,  # Custom logging module
     abort,  # Function to abort request
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     session,  # Session handling module
     sqlite3,  # SQLite database module
     request,  # Request handling module
@@ -78,8 +78,12 @@ def changeProfilePicture():
                                     Log.success(
                                         f'User: "{session["userName"]}" changed his profile picture to "{newProfilePicture}"',
                                     )
-                                    # Flash a success message to the user
-                                    flash("Profile picture changed.", "success")
+                                    flashMessage(
+                                        page="changeProfilePicture",
+                                        message="success",
+                                        category="success",
+                                        language=session["language"],
+                                    )  # Display a flash message
                                     # Redirect to the same route
                                     return redirect(f"/changeprofilepicture")
                                 case False:
@@ -100,8 +104,12 @@ def changeProfilePicture():
                             Log.success(
                                 f'User: "{session["userName"]}" changed his profile picture to "{newProfilePicture}"',
                             )
-                            # Flash a success message to the user
-                            flash("Profile picture changed.", "success")
+                            flashMessage(
+                                page="changeProfilePicture",
+                                message="success",
+                                category="success",
+                                language=session["language"],
+                            )  # Display a flash message
                             # Redirect to the same route
                             return redirect(f"/changeprofilepicture")
             # Render the change profile picture template with the form object, the site key, and the reCAPTCHA flag

@@ -210,5 +210,82 @@
     "title": "Verify Account",
     "placeholder": "Enter the code you received",
     "send": "Click to send verification code"
+  },
+  "flash": {
+    "changePassword": {
+      "same": "New password can not be same with old password.",
+      "match": "Passwords do not match.",
+      "success": "Password has been changed.",
+      "old": "Old password is wrong.",
+      "login": "You need to login to change your password."
+    },
+    "changeProfilePicture": {
+      "success": "Profile picture has been changed."
+    },
+    "changeUserName": {
+      "same": "This is already your username.",
+      "success": "Username has been changed.",
+      "taken": "This username is already taken.",
+      "ascii": "Username can only contain ASCII characters."
+    },
+    "createPost": {
+      "success": "You earned 20 points for creating a post.",
+      "login": "You need to login to create a post.",
+      "empty": "You can not leave title or content empty."
+    },
+    "dashboard": {
+      "login": "You need to login to see your dashboard."
+    },
+    "editPost": {
+      "success": "Post has been edited.",
+      "login": "You need to login to edit a post.",
+      "empty": "You can not leave title or content empty.",
+      "author": "You can not edit someone else's post."
+    },
+    "login": {
+      "success": "You have successfully logged in.",
+      "password": "Wrong password",
+      "notFound": "User not found"
+    },
+    "logout": {
+      "success": "You have successfully logged out."
+    },
+    "passwordReset": {
+      "success": "Password has been reset. You can login with your new password.",
+      "email": "Email has been sent.",
+      "code": "Code has been sent.",
+      "same": "New password can not be same with old password.",
+      "match": "Passwords do not match.",
+      "notFound": "User not found.",
+      "wrong": "Wrong code."
+    },
+    "delete": {
+      "user": "User has been deleted.",
+      "post": "Post has been deleted.",
+      "comment": "Comment has been deleted."
+    },
+    "setLanguage": {
+      "success": "Language has been changed."
+    },
+    "post": {
+      "success": "You earned 5 points by commenting."
+    },
+    "signup": {
+      "success": "You have successfully signed up.",
+      "ascii": "Username can only contain ASCII characters.",
+      "username": "This username is already taken.",
+      "email": "This email is already taken.",
+      "password": "Passwords do not match.",
+      "taken": "This username and email is already taken."
+    },
+    "verifyUser": {
+      "success": "Your account has been verified.",
+      "code": "Code has been sent.",
+      "notFound": "User not found.",
+      "wrong": "Wrong code."
+    },
+    "error": {
+      "wrongCall": "You made a wrong flash message call on server side."
+    }
   }
 }

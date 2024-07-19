@@ -2,7 +2,7 @@
 from modules import (
     Log,  # Custom logging module
     abort,  # Function to abort request processing
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     LOG_IN,  # Flag indicating if login is enabled
     session,  # Session handling module
     request,  # Request handling module
@@ -77,7 +77,12 @@ def login(direct):
                                 case True:
                                     # If user not found, show error message
                                     Log.danger(f'User: "{userName}" not found')
-                                    flash("User not found.", "error")
+                                    flashMessage(
+                                        page="login",
+                                        message="notFound",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                                 case _:
                                     match encryption.verify(password, user[3]):
                                         case True:
@@ -110,12 +115,17 @@ def login(direct):
                                                                 1, session["userName"]
                                                             )
                                                             Log.success(
-                                                                f'USER: "{user[1]}" LOGGED IN',
+                                                                f'User: "{user[1]}" logged in',
                                                             )
-                                                            flash(
-                                                                f"Welcome, {user[1]}!",
-                                                                "success",
-                                                            )
+                                                            flashMessage(
+                                                                page="login",
+                                                                message="success",
+                                                                category="success",
+                                                                language=session[
+                                                                    "language"
+                                                                ],
+                                                            )  # Display a flash message
+
                                                             return (
                                                                 redirect(direct),
                                                                 301,
@@ -137,10 +147,13 @@ def login(direct):
                                                     Log.success(
                                                         f'User: "{user[1]}" logged in',
                                                     )
-                                                    flash(
-                                                        f"Welcome, {user[1]}!",
-                                                        "success",
-                                                    )
+                                                    flashMessage(
+                                                        page="login",
+                                                        message="success",
+                                                        category="success",
+                                                        language=session["language"],
+                                                    )  # Display a flash message
+
                                                     return (
                                                         redirect(direct),
                                                         301,
@@ -149,7 +162,12 @@ def login(direct):
                                         case _:
                                             # Returns an incorrect password error if the password is incorrect
                                             Log.danger("Wrong password")
-                                            flash("Wrong password.", "error")
+                                            flashMessage(
+                                                page="login",
+                                                message="password",
+                                                category="error",
+                                                language=session["language"],
+                                            )  # Display a flash message
                     # Render login template with appropriate form and messages
                     return render_template(
                         "login.html.jinja",

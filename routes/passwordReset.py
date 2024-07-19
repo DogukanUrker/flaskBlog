@@ -2,13 +2,14 @@
 from modules import (
     Log,  # Custom logging module
     ssl,  # SSL/TLS support module
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     abort,  # Function to abort request processing
     smtplib,  # SMTP protocol client module
     randint,  # Function to generate random integers
     sqlite3,  # SQLite database module
     request,  # Request handling module
     redirect,  # Redirect function
+    session,  # Session module
     APP_NAME,  # Application name
     Blueprint,  # Blueprint for defining routes
     SMTP_PORT,  # SMTP server port
@@ -87,10 +88,12 @@ def passwordReset(codeSent):
                                     # Check if new password is different from old password
                                     match encryption.verify(password, oldPassword):
                                         case True:
-                                            flash(
-                                                "New password cannot be the same as the old password.",
-                                                "error",
-                                            )
+                                            flashMessage(
+                                                page="passwordReset",
+                                                message="same",
+                                                category="error",
+                                                language=session["language"],
+                                            )  # Display a flash message
                                         case False:
                                             # Hash new password and update in the database
                                             password = encryption.hash(password)
@@ -124,10 +127,14 @@ def passwordReset(codeSent):
                                                             Log.success(
                                                                 f'User: "{userName}" changed his password',
                                                             )
-                                                            flash(
-                                                                "You need to login with the new password.",
-                                                                "success",
-                                                            )
+                                                            flashMessage(
+                                                                page="passwordReset",
+                                                                message="success",
+                                                                category="success",
+                                                                language=session[
+                                                                    "language"
+                                                                ],
+                                                            )  # Display a flash message
                                                             return redirect(
                                                                 "/login/redirect=&"
                                                             )
@@ -150,17 +157,29 @@ def passwordReset(codeSent):
                                                     Log.success(
                                                         f'User: "{userName}" changed his password',
                                                     )
-                                                    flash(
-                                                        "You need to login with the new password.",
-                                                        "success",
-                                                    )
+                                                    flashMessage(
+                                                        page="passwordReset",
+                                                        message="success",
+                                                        category="success",
+                                                        language=session["language"],
+                                                    )  # Display a flash message
                                                     return redirect("/login/redirect=&")
                                 case False:
                                     # Passwords don't match
-                                    flash("Passwords must match.", "error")
+                                    flashMessage(
+                                        page="passwordReset",
+                                        message="match",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                         case False:
                             # Incorrect code entered
-                            flash("Wrong code.", "error")
+                            flashMessage(
+                                page="passwordReset",
+                                message="wrong",
+                                category="error",
+                                language=session["language"],
+                            )  # Display a flash message
             # Render password reset template with appropriate form and messages
             return render_template(
                 "passwordReset.html.jinja",
@@ -263,12 +282,22 @@ def passwordReset(codeSent):
                             Log.success(
                                 f'Password reset code: "{passwordResetCode}" sent to "{email}"',
                             )
-                            flash("Code sent.", "success")
+                            flashMessage(
+                                page="passwordReset",
+                                message="code",
+                                category="success",
+                                language=session["language"],
+                            )  # Display a flash message
                             return redirect("/passwordreset/codesent=true")
                         case True:
                             # User or email not found
                             Log.danger(f'User: "{userName}" not found')
-                            flash("User not found.", "error")
+                            flashMessage(
+                                page="passwordReset",
+                                message="notFound",
+                                category="error",
+                                language=session["language"],
+                            )  # Display a flash message
             # Render password reset template with appropriate form and messages
             return render_template(
                 "passwordReset.html.jinja",

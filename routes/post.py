@@ -1,7 +1,7 @@
 # Import necessary modules and functions
 from modules import (
     Log,  # Custom logging module
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     Delete,  # Module for deleting posts and comments
     session,  # Session management module
     sqlite3,  # SQLite database module
@@ -123,8 +123,12 @@ def post(postID):
                     # Add 5 points to the user's score
                     addPoints(5, session["userName"])
 
-                    # Flash a success message to the user
-                    flash("You earned 5 points by commenting.", "success")
+                    flashMessage(
+                        page="post",
+                        message="success",
+                        category="success",
+                        language=session["language"],
+                    )  # Display a flash message
 
                     # Redirect to the same route with a 301 status code
                     return redirect(url_for("post.post", postID=postID)), 301

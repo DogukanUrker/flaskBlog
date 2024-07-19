@@ -210,5 +210,82 @@
     "title": "Verificar Cuenta",
     "placeholder": "Ingrese el código que recibió",
     "send": "Haga clic para enviar el código de verificación"
+  },
+  "flash": {
+    "changePassword": {
+      "same": "La nueva contraseña no puede ser la misma que la antigua.",
+      "match": "Las contraseñas no coinciden.",
+      "success": "La contraseña ha sido cambiada.",
+      "old": "La antigua contraseña es incorrecta.",
+      "login": "Necesitas iniciar sesión para cambiar tu contraseña."
+    },
+    "changeProfilePicture": {
+      "success": "La imagen de perfil ha sido cambiada."
+    },
+    "changeUserName": {
+      "same": "Este ya es tu nombre de usuario.",
+      "success": "El nombre de usuario ha sido cambiado.",
+      "taken": "Este nombre de usuario ya está en uso.",
+      "ascii": "El nombre de usuario solo puede contener caracteres ASCII."
+    },
+    "createPost": {
+      "success": "Has ganado 20 puntos por crear una publicación.",
+      "login": "Necesitas iniciar sesión para crear una publicación.",
+      "empty": "No puedes dejar el título o el contenido vacío."
+    },
+    "dashboard": {
+      "login": "Necesitas iniciar sesión para ver tu panel."
+    },
+    "editPost": {
+      "success": "La publicación ha sido editada.",
+      "login": "Necesitas iniciar sesión para editar una publicación.",
+      "empty": "No puedes dejar el título o el contenido vacío.",
+      "author": "No puedes editar la publicación de otra persona."
+    },
+    "login": {
+      "success": "Has iniciado sesión con éxito.",
+      "password": "Contraseña incorrecta",
+      "notFound": "Usuario no encontrado"
+    },
+    "logout": {
+      "success": "Has cerrado sesión con éxito."
+    },
+    "passwordReset": {
+      "success": "La contraseña ha sido restablecida. Puedes iniciar sesión con tu nueva contraseña.",
+      "email": "Correo electrónico enviado.",
+      "code": "Código enviado.",
+      "same": "La nueva contraseña no puede ser la misma que la antigua.",
+      "match": "Las contraseñas no coinciden.",
+      "notFound": "Usuario no encontrado.",
+      "wrong": "Código incorrecto."
+    },
+    "delete": {
+      "user": "El usuario ha sido eliminado.",
+      "post": "La publicación ha sido eliminada.",
+      "comment": "El comentario ha sido eliminado."
+    },
+    "setLanguage": {
+      "success": "El idioma ha sido cambiado."
+    },
+    "post": {
+      "success": "Has ganado 5 puntos por comentar."
+    },
+    "signup": {
+      "success": "Te has registrado con éxito.",
+      "ascii": "El nombre de usuario solo puede contener caracteres ASCII.",
+      "username": "Este nombre de usuario ya está en uso.",
+      "email": "Este correo electrónico ya está en uso.",
+      "password": "Las contraseñas no coinciden.",
+      "taken": "Este nombre de usuario y correo electrónico ya están en uso."
+    },
+    "verifyUser": {
+      "success": "Tu cuenta ha sido verificada.",
+      "code": "Código enviado.",
+      "notFound": "Usuario no encontrado.",
+      "wrong": "Código incorrecto."
+    },
+    "error": {
+      "wrongCall": "Has hecho una llamada de mensaje flash incorrecta en el servidor."
+    }
   }
 }

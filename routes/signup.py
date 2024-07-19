@@ -3,7 +3,7 @@ from modules import (
     Log,  # Logging module
     ssl,  # SSL/TLS module
     abort,  # Function for aborting requests
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     session,  # Session management module
     sqlite3,  # SQLite database module
     request,  # Module for handling HTTP requests
@@ -171,10 +171,14 @@ def signup():
                                                                         f'User: "{userName}" logged in',
                                                                     )
                                                                     # Flash success message
-                                                                    flash(
-                                                                        f"Welcome, {userName}!",
-                                                                        "success",
-                                                                    )
+                                                                    flashMessage(
+                                                                        page="signup",
+                                                                        message="success",
+                                                                        category="success",
+                                                                        language=session[
+                                                                            "language"
+                                                                        ],
+                                                                    )  # Display a flash message
                                                                     # Set up email server connection
                                                                     context = (
                                                                         ssl.create_default_context()
@@ -282,11 +286,14 @@ def signup():
                                                             Log.success(
                                                                 f'User: "{userName}" logged in',
                                                             )
-                                                            # Flash success message
-                                                            flash(
-                                                                f"Welcome, {userName}!",
-                                                                "success",
-                                                            )
+                                                            flashMessage(
+                                                                page="signup",
+                                                                message="success",
+                                                                category="success",
+                                                                language=session[
+                                                                    "language"
+                                                                ],
+                                                            )  # Display a flash message
                                                             # Set up email server connection
                                                             context = (
                                                                 ssl.create_default_context()
@@ -346,39 +353,56 @@ def signup():
                                                     Log.danger(
                                                         f'Username: "{userName}" do not fits to ascii characters',
                                                     )
-                                                    # Flash error message
-                                                    flash(
-                                                        "Username does not fit ascii charecters.",
-                                                        "error",
-                                                    )
+                                                    flashMessage(
+                                                        page="signup",
+                                                        message="ascii",
+                                                        category="error",
+                                                        language=session["language"],
+                                                    )  # Display a flash message
                                         # If passwords do not match
                                         case False:
                                             Log.danger("Passwords do not match")
                                             # Flash error message
-                                            flash("Password must match.", "error")
+                                            flashMessage(
+                                                page="signup",
+                                                message="password",
+                                                category="error",
+                                                language=session["language"],
+                                            )  # Display a flash message
                             # If username or email is not available
                             match userName in users and email in mails:
                                 case True:
                                     Log.danger(
                                         f'"{userName}" & "{email}" is unavailable '
                                     )
-                                    # Flash error message
-                                    flash(
-                                        "This username and email is unavailable.",
-                                        "error",
-                                    )
+                                    flashMessage(
+                                        page="signup",
+                                        message="taken",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                             match not userName in users and email in mails:
                                 case True:
                                     Log.danger(f'This email "{email}" is unavailable')
                                     # Flash error message
-                                    flash("This email is unavailable.", "error")
+                                    flashMessage(
+                                        page="signup",
+                                        message="email",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                             match userName in users and not email in mails:
                                 case True:
                                     Log.danger(
                                         f'This username "{userName}" is unavailable',
                                     )
                                     # Flash error message
-                                    flash("This username is unavailable.", "error")
+                                    flashMessage(
+                                        page="signup",
+                                        message="username",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                     # Render sign up template with form data
                     return render_template(
                         "signup.html.jinja",

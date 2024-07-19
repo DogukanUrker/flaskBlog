@@ -1,7 +1,7 @@
 # Import necessary modules and functions
 from modules import (
     Log,  # Custom logging module
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     Delete,  # Function for deleting data
     url_for,  # URL building function
     request,  # Request handling module
@@ -106,7 +106,11 @@ def dashboard(userName):
             Log.danger(
                 f"{request.remote_addr} tried to access the dashboard without login"
             )
-            # Flash an error message to the user
-            flash("You need login for reach to dashboard.", "error")
+            flashMessage(
+                page="dashboard",
+                message="login",
+                category="error",
+                language=session["language"],
+            )  # Display a flash message
             # Redirect to the login page with the dashboard and user as the next destination
             return redirect("/login/redirect=&dashboard&user")

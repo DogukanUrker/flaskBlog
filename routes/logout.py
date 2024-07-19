@@ -6,7 +6,7 @@ The functions and methods used in this blueprint are imported from the modules m
 
 from modules import (
     Log,  # A function for logging messages
-    flash,  # A function for displaying flash messages
+    flashMessage,  # A function for displaying flash messages
     session,  # A dictionary for storing session data
     request,  # Module for handling HTTP requests
     redirect,  # A function for returning redirect responses
@@ -36,9 +36,12 @@ def logout():
                 f"User: {session['userName']} logged out"
             )  # Log a message with level 2 indicating the user has logged out
             session.clear()  # Clear the session dictionary
-            flash(
-                "Logged out.", "error"
-            )  # Display a flash message with the text "logged out" and the category "error"
+            flashMessage(
+                page="logout",
+                message="success",
+                category="success",
+                language=session["language"],
+            )  # Display a flash message
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in
             Log.danger(

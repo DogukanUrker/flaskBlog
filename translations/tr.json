@@ -210,5 +210,82 @@
     "title": "Hesabı Doğrula",
     "placeholder": "Aldığınız kodu girin",
     "send": "Doğrulama kodunu göndermek için tıklayın"
+  },
+  "flash": {
+    "changePassword": {
+      "same": "Yeni şifre eski şifre ile aynı olamaz.",
+      "match": "Şifreler uyuşmuyor.",
+      "success": "Şifre değiştirildi.",
+      "old": "Eski şifre yanlış.",
+      "login": "Şifrenizi değiştirmek için giriş yapmanız gerekiyor."
+    },
+    "changeProfilePicture": {
+      "success": "Profil resmi değiştirildi."
+    },
+    "changeUserName": {
+      "same": "Bu zaten sizin kullanıcı adınız.",
+      "success": "Kullanıcı adı değiştirildi.",
+      "taken": "Bu kullanıcı adı zaten alınmış.",
+      "ascii": "Kullanıcı adı sadece ASCII karakterler içerebilir."
+    },
+    "createPost": {
+      "success": "Gönderi oluşturduğunuz için 20 puan kazandınız.",
+      "login": "Gönderi oluşturmak için giriş yapmanız gerekiyor.",
+      "empty": "Başlık veya içerik boş bırakılamaz."
+    },
+    "dashboard": {
+      "login": "Gösterge panelinizi görmek için giriş yapmanız gerekiyor."
+    },
+    "editPost": {
+      "success": "Gönderi düzenlendi.",
+      "login": "Gönderiyi düzenlemek için giriş yapmanız gerekiyor.",
+      "empty": "Başlık veya içerik boş bırakılamaz.",
+      "author": "Başkasının gönderisini düzenleyemezsiniz."
+    },
+    "login": {
+      "success": "Başarıyla giriş yaptınız.",
+      "password": "Yanlış şifre",
+      "notFound": "Kullanıcı bulunamadı"
+    },
+    "logout": {
+      "success": "Başarıyla çıkış yaptınız."
+    },
+    "passwordReset": {
+      "success": "Şifre sıfırlandı. Yeni şifrenizle giriş yapabilirsiniz.",
+      "email": "E-posta gönderildi.",
+      "code": "Kod gönderildi.",
+      "same": "Yeni şifre eski şifre ile aynı olamaz.",
+      "match": "Şifreler uyuşmuyor.",
+      "notFound": "Kullanıcı bulunamadı.",
+      "wrong": "Yanlış kod."
+    },
+    "delete": {
+      "user": "Kullanıcı silindi.",
+      "post": "Gönderi silindi.",
+      "comment": "Yorum silindi."
+    },
+    "setLanguage": {
+      "success": "Dil değiştirildi."
+    },
+    "post": {
+      "success": "Yorum yaparak 5 puan kazandınız."
+    },
+    "signup": {
+      "success": "Başarıyla kayıt oldunuz.",
+      "ascii": "Kullanıcı adı sadece ASCII karakterler içerebilir.",
+      "username": "Bu kullanıcı adı zaten alınmış.",
+      "email": "Bu e-posta zaten alınmış.",
+      "password": "Şifreler uyuşmuyor.",
+      "taken": "Bu kullanıcı adı ve e-posta zaten alınmış."
+    },
+    "verifyUser": {
+      "success": "Hesabınız doğrulandı.",
+      "code": "Kod gönderildi.",
+      "notFound": "Kullanıcı bulunamadı.",
+      "wrong": "Yanlış kod."
+    },
+    "error": {
+      "wrongCall": "Sunucu tarafında yanlış bir flash mesaj çağrısı yaptınız."
+    }
   }
 }

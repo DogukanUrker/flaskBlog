@@ -1,5 +1,6 @@
 # Import necessary modules
 from modules import (
+    flashMessage,  # Flash module for flashing messages to the user
     session,  # Session module for managing user sessions
     LANGUAGES,  # List of supported languages
     redirect,  # Redirect module for redirecting to routes
@@ -30,6 +31,12 @@ def setLanguage(language):
                 language  # Set the session language to the selected language
             )
             Log.info(f"Language set to: {language}")
+            flashMessage(
+                page="setLanguage",
+                message="success",
+                category="success",
+                language=session["language"],
+            )  # Display a flash message
         case _:
             Log.warning(f"Language not supported: {language}")
     return redirect("/changeLanguage")  # Redirect to the changeLanguage route

@@ -1,7 +1,7 @@
 # Import necessary modules and functions
 from modules import (
     Log,  # Logging module
-    flash,  # Flash messaging module
+    flashMessage,  # Flash messaging module
     abort,  # Function for aborting requests
     session,  # Session management module
     sqlite3,  # SQLite database module
@@ -80,9 +80,12 @@ def changeUserName():
                             # Check if new username is the same as the current username
                             match newUserName == session["userName"]:
                                 case True:
-                                    flash(
-                                        "This is your username.", "error"
-                                    )  # Flash an error message
+                                    flashMessage(
+                                        page="changeUserName",
+                                        message="same",
+                                        category="error",
+                                        language=session["language"],
+                                    )  # Display a flash message
                                 case False:
                                     # Check if new username is available
                                     match userNameCheck == None:
@@ -172,10 +175,14 @@ def changeUserName():
                                                             Log.success(
                                                                 f'User: "{session["userName"]}" changed his username to "{newUserName}"'
                                                             )
-                                                            flash(
-                                                                "Username changed.",
-                                                                "success",
-                                                            )
+                                                            flashMessage(
+                                                                page="changeUserName",
+                                                                message="success",
+                                                                category="success",
+                                                                language=session[
+                                                                    "language"
+                                                                ],
+                                                            )  # Display a flash message
                                                             return redirect(
                                                                 f"/user/{newUserName.lower()}"
                                                             )
@@ -231,21 +238,30 @@ def changeUserName():
                                                         f'User: "{session["userName"]}" changed his username to "{newUserName}"'
                                                     )
                                                     session["userName"] = newUserName
-                                                    flash(
-                                                        "Username changed.", "success"
-                                                    )
+                                                    flashMessage(
+                                                        page="changeUserName",
+                                                        message="success",
+                                                        category="success",
+                                                        language=session["language"],
+                                                    )  # Display a flash message
                                                     return redirect(
                                                         f"/user/{newUserName.lower()}"
                                                     )
                                         case False:
                                             # Username already taken
-                                            flash(
-                                                "This username is already taken.",
-                                                "error",
-                                            )
+                                            flashMessage(
+                                                page="changeUserName",
+                                                message="taken",
+                                                category="error",
+                                                language=session["language"],
+                                            )  # Display a flash message
                         case False:
-                            # Username contains non-ASCII characters
-                            flash("Username contains non-ASCII characters.", "error")
+                            flashMessage(
+                                page="changeUserName",
+                                message="ascii",
+                                category="error",
+                                language=session["language"],
+                            )  # Display a flash message
             # Render the change username template
             return render_template(
                 "changeUserName.html.jinja",

@@ -25,7 +25,7 @@ The functions in this module use the following helper functions:
 
 from modules import (
     Log,  # A class for logging messages
-    flash,  # A function for displaying flash messages
+    flashMessage,  # A function for displaying flash messages
     sqlite3,  # A module for working with SQLite databases
     session,  # A dictionary for storing session data
     redirect,  # A function for returning redirect responses
@@ -90,9 +90,12 @@ class Delete:
             [(commentCount)],  # Use a parameterized query to avoid SQL injection
         )
         connection.commit()  # Commit the changes to the database
-        flash(
-            f"Post: {postID} deleted.", "error"
-        )  # Display a flash message with the text "post deleted" and the category "error"
+        flashMessage(
+            page="delete",
+            message="post",
+            category="error",
+            language=session["language"],
+        )  # Display a flash message
         Log.success(
             f'Post: "{postID}" deleted'
         )  # Log a message with level 2 indicating the post was deleted
@@ -138,9 +141,12 @@ class Delete:
             "update sqlite_sequence set seq = seq-1"
         )  # Update the sqlite_sequence table to decrement the sequence value by 1
         connection.commit()  # Commit the changes to the database
-        flash(
-            f"User: {userName} deleted.", "error"
-        )  # Display a flash message with the text "user: {userName} deleted" and the category "error"
+        flashMessage(
+            page="delete",
+            message="user",
+            category="error",
+            language=session["language"],
+        )  # Display a flash message
         Log.success(
             f'User: "{userName}" deleted'
         )  # Log a message with level 2 indicating the user was deleted
@@ -184,9 +190,12 @@ class Delete:
             "update sqlite_sequence set seq = seq-1"
         )  # Update the sqlite_sequence table to decrement the sequence value by 1
         connection.commit()  # Commit the changes to the database
-        flash(
-            f"Comment: {commentID} deleted.", "error"
-        )  # Display a flash message with the text "comment deleted" and the category "error"
+        flashMessage(
+            page="delete",
+            message="comment",
+            category="error",
+            language=session["language"],
+        )  # Display a flash message
         Log.success(
             f'Comment: "{commentID}" deleted'
         )  # Log a message with level 2 indicating the comment was deleted
