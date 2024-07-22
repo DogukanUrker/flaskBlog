@@ -291,5 +291,30 @@
   "roles": {
     "user": "Kullanıcı",
     "admin": "Yönetici"
+  },
+  "privacyPolicy": {
+    "title": "Gizlilik Politikası",
+    "intro": "Bu Gizlilik Politikası, Doğukan Ürker'in Flask Blog'u ('biz', 'bizi' veya 'bizim') mobil uygulamamızı ('Uygulama') kullanırken bilgilerinizi nasıl topladığını, kullandığını ve açıkladığını açıklar.",
+    "information": "Bilgi Toplama ve Kullanım",
+    "informationText": "Uygulamamızı kullandığınızda, kullanıcı etkinlik verileri de dahil olmak üzere çeşitli türlerde veri toplar ve kaydederiz. Bunlar şunları içerir ancak bunlarla sınırlı değildir:",
+    "informationUser": "Kullanıcı giriş verileri: Kimlik doğrulama ve güvenlik amaçları için kullanıcı giriş faaliyetlerine ilişkin bilgileri toplarız.",
+    "informationPost": "Gönderi ve yorum verileri: Uygulama içinde yapılan gönderi ve yorumlar hakkında bilgi toplarız ve bu bilgiler işlevsellik ve kullanıcı etkileşimi amaçlarıyla kullanılır.",
+    "informationGeneral": "Genel kullanıcı etkinliği: Kullanıcı deneyimini iyileştirmek, teknik sorunları gidermek ve kullanım modellerini analiz etmek için uygulama içindeki çeşitli kullanıcı etkinliklerini kaydederiz.",
+    "cookies": "Çerezler",
+    "cookiesText": "Uygulamamız kullanıcı deneyimini geliştirmek için çerezler kullanır. Kullandığımız çerezler şunları içerir:",
+    "cookiesTheme": "Kullanıcı arayüzü teması çerezi: Uygulamanın görünümünü kişiselleştirmek için kullanıcının seçtiği kullanıcı arayüzü tema tercihini depolarız.",
+    "cookiesLanguage": "Tarayıcı varsayılan dili: Yerelleştirilmiş içerik sağlamak için kullanıcının tarayıcı varsayılan dil tercihini depolarız.",
+    "serviceProviders": "Hizmet Sağlayıcıları",
+    "serviceProvidersText": "Uygulamamızı kolaylaştırmak veya adımıza hizmet sağlamak için üçüncü taraf şirketler veya bireyler kullanabiliriz. Bu üçüncü taraflar, analiz, barındırma ve teknik destek gibi görevleri yerine getirmek için bilgilerinize erişebilirler. Ancak, bu bilgileri açıklamamaları veya başka amaçlar için kullanmamaları gerekmektedir.",
+    "otherLinks": "Diğer Sitelere Bağlantılar",
+    "otherLinksText": "Uygulamamız, X ve Doğukan Ürker'in kişisel sitesi de dahil olmak üzere harici sitelere bağlantılar içerebilir. Bu harici sitelerin içerikleri veya gizlilik uygulamalarından sorumlu değiliz. Kullanıcılara herhangi bir kişisel bilgi sağlamadan önce bu sitelerin gizlilik politikalarını gözden geçirmelerini öneririz.",
+    "security": "Güvenlik",
+    "securityText": "Uygulamamız aracılığıyla toplanan bilgileri korumak için makul önlemler alırız. Ancak, internet üzerinden iletimin veya elektronik depolama yönteminin %100 güvenli olmadığını ve mutlak güvenliği garanti edemediğimizi lütfen unutmayın.",
+    "children": "Çocukların Gizliliği",
+    "childrenText": "Uygulamamız, 13 yaşın altındaki bireyler tarafından kullanılmak üzere tasarlanmamıştır. 13 yaşın altındaki çocuklardan bilerek kişisel olarak tanımlanabilir bilgi toplamıyoruz. Ebeveyn veya veli iseniz ve çocuğunuzun bize kişisel bilgi sağladığını biliyorsanız, gerekli önlemleri alabilmemiz için lütfen bizimle iletişime geçin.",
+    "changes": "Bu Gizlilik Politikasındaki Değişiklikler",
+    "changesText": "Gizlilik Politikamızı zaman zaman güncelleyebiliriz. Bu nedenle, bu sayfayı periyodik olarak gözden geçirmeniz önerilir. Herhangi bir değişiklik olduğunda sizi bu sayfada yeni Gizlilik Politikası'nı yayınlayarak bilgilendireceğiz. Bu değişiklikler, bu sayfada yayınlandıktan hemen sonra yürürlüğe girer.",
+    "contact": "Bize Ulaşın",
+    "contactText": "Gizlilik Politikamız hakkında herhangi bir sorunuz veya öneriniz varsa, bizimle iletişime geçmekten çekinmeyin. E-posta:"
   }
 }

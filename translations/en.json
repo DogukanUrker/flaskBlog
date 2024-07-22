@@ -291,5 +291,30 @@
   "roles": {
     "user": "User",
     "admin": "Admin"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "This Privacy Policy describes how Doğukan Ürker's Flask Blog ('we', 'us', or 'our') collects, uses, and discloses your information when you use our mobile application (the 'App').",
+    "information": "Information Collection and Use",
+    "informationText": "When you use our App, we collect and log various types of user activity data, including but not limited to:",
+    "informationUser": "User login data: We collect information related to user login activities for authentication and security purposes.",
+    "informationPost": "Post and comment data: We collect information about posts and comments made within the App for functionality and user engagement purposes.",
+    "informationGeneral": "General user activity: We log various user activities within the App to improve user experience, troubleshoot technical issues, and analyze usage patterns.",
+    "cookies": "Cookies",
+    "cookiesText": "Our App uses cookies to enhance the user experience. The cookies we use include:",
+    "cookiesTheme": "UI theme cookie: We store the user's selected UI theme preference to personalize the appearance of the App.",
+    "cookiesLanguage": "Browser default language: We store the user's browser default language preference to provide localized content.",
+    "serviceProviders": "Service Providers",
+    "serviceProvidersText": "We may employ third-party companies or individuals to facilitate our App or provide services on our behalf. These third parties may have access to your information to perform tasks such as analytics, hosting, and technical support. However, they are obligated not to disclose or use it for any other purpose.",
+    "otherLinks": "Links to Other Sites",
+    "otherLinksText": "Our App may contain links to external sites, including X and Doğukan Ürker's personal site. We are not responsible for the content or privacy practices of such external sites. We encourage users to review the privacy policies of these sites before providing any personal information.",
+    "security": "Security",
+    "securityText": "We take reasonable precautions to protect the information collected through our App. However, lease be aware that no method of transmission over the internet or method of electronic storage is 100% secure, and we cannot guarantee absolute security.",
+    "children": "Children's Privacy",
+    "childrenText": "Our App is not intended for use by individuals under the age of 13. We do not knowingly collect personal identifiable information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to take necessary actions.",
+    "changes": "Changes to This Privacy Policy",
+    "changesText": "We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.",
+    "contact": "Contact Us",
+    "contactText": "If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us. Mail:"
   }
 }

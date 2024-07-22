@@ -291,5 +291,30 @@
   "roles": {
     "user": "Benutzer",
     "admin": "Administrator"
+  },
+  "privacyPolicy": {
+    "title": "Datenschutzrichtlinie",
+    "intro": "Diese Datenschutzrichtlinie beschreibt, wie Doğukan Ürkers Flask Blog ('wir', 'uns' oder 'unser') Ihre Informationen sammelt, verwendet und offenlegt, wenn Sie unsere mobile Anwendung (die 'App') nutzen.",
+    "information": "Informationserhebung und -nutzung",
+    "informationText": "Wenn Sie unsere App nutzen, sammeln und protokollieren wir verschiedene Arten von Benutzerdaten, einschließlich, aber nicht beschränkt auf:",
+    "informationUser": "Benutzeranmeldedaten: Wir sammeln Informationen im Zusammenhang mit Benutzeranmeldeaktivitäten zu Authentifizierungs- und Sicherheitszwecken.",
+    "informationPost": "Beitrags- und Kommentardaten: Wir sammeln Informationen über Beiträge und Kommentare, die innerhalb der App erstellt wurden, um Funktionen bereitzustellen und die Benutzerbindung zu fördern.",
+    "informationGeneral": "Allgemeine Benutzeraktivitäten: Wir protokollieren verschiedene Benutzeraktivitäten innerhalb der App, um die Benutzererfahrung zu verbessern, technische Probleme zu beheben und Nutzungsmuster zu analysieren.",
+    "cookies": "Cookies",
+    "cookiesText": "Unsere App verwendet Cookies, um die Benutzererfahrung zu verbessern. Die von uns verwendeten Cookies umfassen:",
+    "cookiesTheme": "UI-Theme-Cookie: Wir speichern die vom Benutzer ausgewählte UI-Theme-Voreinstellung, um das Erscheinungsbild der App zu personalisieren.",
+    "cookiesLanguage": "Browser-Standardsprache: Wir speichern die Standardspracheinstellung des Browsers des Benutzers, um lokalisierte Inhalte bereitzustellen.",
+    "serviceProviders": "Dienstanbieter",
+    "serviceProvidersText": "Wir können Drittunternehmen oder Einzelpersonen beauftragen, unsere App zu erleichtern oder Dienstleistungen in unserem Auftrag zu erbringen. Diese Dritten können Zugriff auf Ihre Informationen haben, um Aufgaben wie Analysen, Hosting und technischen Support durchzuführen. Sie sind jedoch verpflichtet, diese Informationen nicht offenzulegen oder für andere Zwecke zu verwenden.",
+    "otherLinks": "Links zu anderen Seiten",
+    "otherLinksText": "Unsere App kann Links zu externen Websites enthalten, einschließlich X und Doğukan Ürkers persönlicher Website. Wir sind nicht verantwortlich für die Inhalte oder Datenschutzpraktiken dieser externen Websites. Wir empfehlen den Benutzern, die Datenschutzrichtlinien dieser Websites zu überprüfen, bevor sie persönliche Informationen angeben.",
+    "security": "Sicherheit",
+    "securityText": "Wir ergreifen angemessene Vorsichtsmaßnahmen, um die über unsere App gesammelten Informationen zu schützen. Bitte beachten Sie jedoch, dass keine Methode der Übertragung über das Internet oder der elektronischen Speicherung 100% sicher ist und wir keine absolute Sicherheit garantieren können.",
+    "children": "Datenschutz von Kindern",
+    "childrenText": "Unsere App ist nicht zur Nutzung durch Personen unter 13 Jahren vorgesehen. Wir sammeln wissentlich keine persönlich identifizierbaren Informationen von Kindern unter 13 Jahren. Wenn Sie ein Elternteil oder Erziehungsberechtigter sind und wissen, dass Ihr Kind uns persönliche Informationen zur Verfügung gestellt hat, kontaktieren Sie uns bitte, damit wir die erforderlichen Maßnahmen ergreifen können.",
+    "changes": "Änderungen dieser Datenschutzrichtlinie",
+    "changesText": "Wir können unsere Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Daher wird empfohlen, diese Seite regelmäßig auf Änderungen zu überprüfen. Wir werden Sie über Änderungen informieren, indem wir die neue Datenschutzrichtlinie auf dieser Seite veröffentlichen. Diese Änderungen treten sofort nach ihrer Veröffentlichung auf dieser Seite in Kraft.",
+    "contact": "Kontaktieren Sie uns",
+    "contactText": "Wenn Sie Fragen oder Vorschläge zu unserer Datenschutzrichtlinie haben, zögern Sie nicht, uns zu kontaktieren. E-Mail:"
   }
 }
