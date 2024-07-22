@@ -102,14 +102,14 @@ def category(category, by="timeStamp", sort="desc"):
 
     # Logging the sorting criteria used for the request
     Log.info(f"Sorting posts on category/{category} page by: {sortName}")
-    
-    language = session.get("language") # Get the language from the session
+
+    language = session.get("language")  # Get the language from the session
     translationFile = (
         f"./translations/{language}.json"  # Define the path to the translation file
     )
     with open(translationFile, "r") as file:  # Open the translation file in read mode
         translations = load(file)  # Load the JSON data from the file
-        
+
     # Rendering the HTML template with posts and category context
     return render_template(
         "category.html.jinja",
