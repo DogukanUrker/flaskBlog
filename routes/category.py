@@ -8,9 +8,11 @@ It also provides an interface for sorting the posts by various criteria.
 # Import necessary modules and functions from other files or libraries
 from modules import (
     Log,  # Importing the Log class for logging messages
+    load,  # Importing the load function for loading JSON data from files
     abort,  # Importing the abort function for handling errors and aborting requests
     sqlite3,  # Importing the sqlite3 module to interact with SQLite databases
-    redirect,  # Importing the redirect function for redirecting requests
+    redirect,  # Importing the redirect function for redirecting requests,
+    session,  # Importing the session object to store user session data
     Blueprint,  # Importing the Blueprint class to create modular routes for the application
     DB_POSTS_ROOT,  # Importing the constant that stores the path to the database file
     render_template,  # Importing the render_template function to render HTML templates with context
@@ -100,12 +102,19 @@ def category(category, by="timeStamp", sort="desc"):
 
     # Logging the sorting criteria used for the request
     Log.info(f"Sorting posts on category/{category} page by: {sortName}")
-
+    
+    language = session.get("language") # Get the language from the session
+    translationFile = (
+        f"./translations/{language}.json"  # Define the path to the translation file
+    )
+    with open(translationFile, "r") as file:  # Open the translation file in read mode
+        translations = load(file)  # Load the JSON data from the file
+        
     # Rendering the HTML template with posts and category context
     return render_template(
         "category.html.jinja",
         posts=posts,
-        category=category,
+        category=translations["categories"][category.lower()],
         sortName=sortName,
         source=f"/category/{category}",
     )
