@@ -1,0 +1,320 @@
+{
+  "about": {
+    "title": "O aplikacji",
+    "version": "Wersja",
+    "description": "Prosta aplikacja blogowa stworzona za pomocą Flask, SQLite3, WTForms, Passlib, reCAPTCHA, Requests, TailwindCSS, Tabler Icons",
+    "moreInfo": "Kliknij, aby uzyskać więcej informacji o",
+    "sourceRepo": "kodzie źródłowym",
+    "credits": "Stworzone z <i class='ti ti-heart-filled text-rose-500'></i> przez <a href='https://dogukanurker.com/' target='_blank' class='text-rose-500 font-medium'>Doğukan Ürker</a>"
+  },
+  "accountSettings": {
+    "title": "Ustawienia konta",
+    "username": "zmień nazwę użytkownika",
+    "password": "zmień hasło",
+    "delete": "usuń konto",
+    "language": "zmień język",
+    "profilePicture": "zmień zdjęcie profilowe"
+  },
+  "adminPanel": {
+    "title": "Panel administracyjny",
+    "users": "Użytkownicy",
+    "posts": "Posty",
+    "comments": "Komentarze"
+  },
+  "adminPanelComments": {
+    "title": "Panel administracyjny - Komentarze",
+    "comments": "Komentarze",
+    "postID": "ID posta",
+    "creationTime": "Czas utworzenia",
+    "creationDate": "Data utworzenia",
+    "author": "Autor"
+  },
+  "adminPanelUsers": {
+    "title": "Panel administracyjny - Użytkownicy",
+    "id": "ID",
+    "users": "Użytkownicy",
+    "email": "E-mail",
+    "joinTime": "Czas dołączenia",
+    "joinDate": "Data dołączenia",
+    "role": "Rola",
+    "points": "Punkty",
+    "delete": "usuń użytkownika",
+    "setUser": "ustaw rolę użytkownika na użytkownika",
+    "setAdmin": "ustaw rolę użytkownika na administratora"
+  },
+  "categories": {
+    "all": "Wszystkie",
+    "apps": "Aplikacje",
+    "art": "Sztuka",
+    "books": "Książki",
+    "business": "Biznes",
+    "code": "Kod",
+    "education": "Edukacja",
+    "finance": "Finanse",
+    "foods": "Jedzenie",
+    "games": "Gry",
+    "health": "Zdrowie",
+    "history": "Historia",
+    "movies": "Filmy",
+    "music": "Muzyka",
+    "nature": "Przyroda",
+    "science": "Nauka",
+    "series": "Seriale",
+    "sports": "Sport",
+    "technology": "Technologia",
+    "travel": "Podróże",
+    "web": "Web",
+    "other": "Inne"
+  },
+  "changeLanguage": {
+    "title": "Wybierz język"
+  },
+  "changePassword": {
+    "title": "Zmień hasło",
+    "currentPassword": "Aktualne hasło",
+    "newPassword": "Nowe hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "change": "Zmień hasło"
+  },
+  "changeProfilePicture": {
+    "title": "Zmień zdjęcie profilowe",
+    "default": "domyślny seed to Twoja nazwa użytkownika",
+    "info": "kliknij, aby uzyskać więcej informacji o seedach zdjęć profilowych",
+    "set": "Ustaw zdjęcie profilowe",
+    "placeholder": "Wprowadź seed dla zdjęcia profilowego"
+  },
+  "changeUserName": {
+    "title": "Zmień nazwę użytkownika",
+    "placeholder": "Nowa nazwa użytkownika",
+    "change": "Zmień nazwę użytkownika"
+  },
+  "createPost": {
+    "title": "Stwórz post",
+    "titlePlaceholder": "tytuł posta",
+    "category": "Wybierz kategorię",
+    "content": "Treść",
+    "banner": "Prześlij baner",
+    "bannerPlaceholder": "baner posta",
+    "tags": "tagi",
+    "post": "Opublikuj",
+    "separate": "(Oddziel tagi przecinkami)"
+  },
+  "csrfError": {
+    "reason": "Powód",
+    "description": "Wypełnij ten sam formularz ponownie."
+  },
+  "dashboard": {
+    "title": "Pulpit",
+    "titleAdmin": "Panel administracyjny - Posty",
+    "posts": "Posty",
+    "comments": "Komentarze",
+    "tags": "Tagi",
+    "views": "Wyświetlenia",
+    "creationTime": "Czas utworzenia",
+    "creationDate": "Data utworzenia",
+    "editTime": "Ostatnia edycja",
+    "editDate": "Data ostatniej edycji",
+    "author": "Autor",
+    "category": "Kategoria",
+    "noPosts": "Ten użytkownik jeszcze nie stworzył żadnych postów.",
+    "noPost": "Brak postu,",
+    "create": "stwórz jeden",
+    "go": "przejdź do postu"
+  },
+  "editPost": {
+    "title": "Edytuj post",
+    "titlePlaceholder": "tytuł posta",
+    "category": "Wybierz kategorię",
+    "current": "Aktualny baner",
+    "new": "Nowy baner",
+    "tags": "tagi",
+    "separate": "(Oddziel tagi przecinkami)",
+    "save": "Zapisz zmiany",
+    "bannerPlaceholder": "baner posta"
+  },
+  "login": {
+    "title": "Logowanie",
+    "username": "nazwa użytkownika",
+    "password": "hasło",
+    "forgot": "Zapomniałeś hasła?"
+  },
+  "notFound": {
+    "text": "Nie wiem co to jest",
+    "sorry": "przepraszam",
+    "home": "przejdź do strony głównej"
+  },
+  "passwordReset": {
+    "title": "Resetowanie hasła",
+    "email": "e-mail",
+    "username": "nazwa użytkownika",
+    "send": "Wyślij e-mail z linkiem do resetowania hasła",
+    "reset": "Zresetuj hasło",
+    "code": "Wyślij kod",
+    "codePlaceholder": "Wprowadź kod, który otrzymałeś",
+    "newPassword": "Nowe hasło",
+    "confirmPassword": "Potwierdź hasło"
+  },
+  "post": {
+    "placeholder": "Co myślisz?"
+  },
+  "sortMenu": {
+    "asc": "Rosnąco",
+    "desc": "Malejąco",
+    "create": "Data utworzenia",
+    "title": "Tytuł",
+    "views": "Wyświetlenia",
+    "category": "Kategoria",
+    "edit": "Data ostatniej edycji"
+  },
+  "search": {
+    "title": "Szukaj",
+    "noResults": "Brak wyników",
+    "users": "Użytkownicy",
+    "posts": "Posty",
+    "results": "Wyniki"
+  },
+  "searchBar": {
+    "title": "Szukaj",
+    "placeholder": "szukaj"
+  },
+  "signup": {
+    "title": "Rejestracja",
+    "username": "nazwa użytkownika",
+    "email": "e-mail",
+    "password": "hasło",
+    "confirm": "potwierdź hasło",
+    "policy": "Polityka prywatności",
+    "by": "Rejestrując się, akceptujesz"
+  },
+  "unauthorized": {
+    "title": "Błąd reCAPTCHA",
+    "request": "Proszę wysłać formularz ponownie.",
+    "info": "Weryfikacja reCAPTCHA nie powiodła się."
+  },
+  "user": {
+    "posts": "Posty",
+    "comments": "Komentarze",
+    "points": "Punkty",
+    "joinDate": "Data dołączenia",
+    "createDate": "Data utworzenia",
+    "createTime": "Czas utworzenia",
+    "dashboard": "pulpit",
+    "role": "Rola",
+    "user": "Użytkownik",
+    "admin": "administrator",
+    "settings": "ustawienia",
+    "views": "Wyświetlenia",
+    "go": "przejdź do postu"
+  },
+  "verifyUser": {
+    "title": "Weryfikacja konta",
+    "placeholder": "Wprowadź kod, który otrzymałeś",
+    "send": "Kliknij, aby wysłać kod weryfikacyjny"
+  },
+  "flash": {
+    "changePassword": {
+      "same": "Nowe hasło nie może być takie samo jak stare hasło.",
+      "match": "Hasła nie pasują do siebie.",
+      "success": "Hasło zostało zmienione.",
+      "old": "Stare hasło jest niepoprawne.",
+      "login": "Musisz się zalogować, aby zmienić hasło."
+    },
+    "changeProfilePicture": {
+      "success": "Zdjęcie profilowe zostało zmienione."
+    },
+    "changeUserName": {
+      "same": "To jest już twoja nazwa użytkownika.",
+      "success": "Nazwa użytkownika została zmieniona.",
+      "taken": "Ta nazwa użytkownika jest już zajęta.",
+      "ascii": "Nazwa użytkownika może zawierać tylko znaki ASCII."
+    },
+    "createPost": {
+      "success": "Otrzymałeś 20 punktów za stworzenie posta.",
+      "login": "Musisz się zalogować, aby stworzyć posta.",
+      "empty": "Nie możesz pozostawić tytułu ani treści pustych."
+    },
+    "dashboard": {
+      "login": "Musisz się zalogować, aby zobaczyć swój pulpit."
+    },
+    "editPost": {
+      "success": "Post został edytowany.",
+      "login": "Musisz się zalogować, aby edytować post.",
+      "empty": "Nie możesz pozostawić tytułu ani treści pustych.",
+      "author": "Nie możesz edytować postu innej osoby."
+    },
+    "login": {
+      "success": "Zalogowano pomyślnie.",
+      "password": "Niepoprawne hasło",
+      "notFound": "Użytkownik nie został znaleziony"
+    },
+    "logout": {
+      "success": "Wylogowano pomyślnie."
+    },
+    "passwordReset": {
+      "success": "Hasło zostało zresetowane. Możesz zalogować się za pomocą nowego hasła.",
+      "email": "E-mail został wysłany.",
+      "code": "Kod został wysłany.",
+      "same": "Nowe hasło nie może być takie samo jak stare hasło.",
+      "match": "Hasła nie pasują do siebie.",
+      "notFound": "Użytkownik nie został znaleziony.",
+      "wrong": "Kod jest niepoprawny."
+    },
+    "delete": {
+      "user": "Użytkownik został usunięty.",
+      "post": "Post został usunięty.",
+      "comment": "Komentarz został usunięty."
+    },
+    "setLanguage": {
+      "success": "Język został zmieniony."
+    },
+    "post": {
+      "success": "Otrzymałeś 5 punktów za skomentowanie."
+    },
+    "signup": {
+      "success": "Rejestracja zakończona sukcesem.",
+      "ascii": "Nazwa użytkownika może zawierać tylko znaki ASCII.",
+      "username": "Ta nazwa użytkownika jest już zajęta.",
+      "email": "Ten e-mail jest już zajęty.",
+      "password": "Hasła nie pasują do siebie.",
+      "taken": "Ta nazwa użytkownika i e-mail są już zajęte."
+    },
+    "verifyUser": {
+      "success": "Twoje konto zostało zweryfikowane.",
+      "code": "Kod został wysłany.",
+      "notFound": "Użytkownik nie został znaleziony.",
+      "wrong": "Kod jest niepoprawny."
+    },
+    "error": {
+      "wrongCall": "Dokonano błędnego wywołania komunikatu flash po stronie serwera."
+    }
+  },
+  "roles": {
+    "user": "Użytkownik",
+    "admin": "Administrator"
+  },
+  "privacyPolicy": {
+    "title": "Polityka prywatności",
+    "intro": "Niniejsza Polityka prywatności opisuje, w jaki sposób Flask Blog Doğukana Ürkera ('my', 'nas', lub 'nasze') gromadzi, wykorzystuje i ujawnia Twoje informacje podczas korzystania z naszej aplikacji mobilnej (zwana dalej 'Aplikacją').",
+    "information": "Gromadzenie i wykorzystanie informacji",
+    "informationText": "Kiedy korzystasz z naszej Aplikacji, zbieramy i rejestrujemy różne rodzaje danych o aktywności użytkowników, w tym między innymi:",
+    "informationUser": "Dane logowania użytkownika: Zbieramy informacje związane z aktywnością logowania użytkownika w celach uwierzytelniania i bezpieczeństwa.",
+    "informationPost": "Dane o postach i komentarzach: Zbieramy informacje na temat postów i komentarzy zamieszczonych w Aplikacji w celu zapewnienia funkcjonalności i zaangażowania użytkowników.",
+    "informationGeneral": "Ogólna aktywność użytkowników: Rejestrujemy różne aktywności użytkowników w Aplikacji w celu poprawy doświadczeń użytkowników, rozwiązywania problemów technicznych i analizowania wzorców użytkowania.",
+    "cookies": "Ciasteczka",
+    "cookiesText": "Nasza Aplikacja używa ciasteczek, aby poprawić doświadczenia użytkownika. Ciasteczka, które używamy, obejmują:",
+    "cookiesTheme": "Ciasteczko z motywem UI: Przechowujemy preferencje dotyczące motywu UI użytkownika, aby spersonalizować wygląd Aplikacji.",
+    "cookiesLanguage": "Domyślny język przeglądarki: Przechowujemy preferencje dotyczące domyślnego języka przeglądarki użytkownika, aby dostarczyć zlokalizowane treści.",
+    "serviceProviders": "Dostawcy usług",
+    "serviceProvidersText": "Możemy zatrudniać firmy zewnętrzne lub osoby, aby ułatwiły działanie naszej Aplikacji lub świadczyły usługi w naszym imieniu. Ci zewnętrzni dostawcy mogą mieć dostęp do Twoich informacji, aby wykonywać zadania takie jak analizy, hosting i wsparcie techniczne. Jednakże są zobowiązani do niewykorzystywania tych informacji do innych celów ani do ujawniania ich osobom trzecim.",
+    "otherLinks": "Linki do innych stron",
+    "otherLinksText": "Nasza Aplikacja może zawierać linki do stron zewnętrznych, w tym do X i osobistej strony Doğukana Ürkera. Nie ponosimy odpowiedzialności za treści ani praktyki prywatności takich stron zewnętrznych. Zachęcamy użytkowników do zapoznania się z politykami prywatności tych stron przed podaniem jakichkolwiek informacji osobistych.",
+    "security": "Bezpieczeństwo",
+    "securityText": "Podejmujemy rozsądne środki ostrożności, aby chronić informacje zbierane za pośrednictwem naszej Aplikacji. Należy jednak pamiętać, że żadna metoda transmisji przez internet ani metoda przechowywania elektronicznego nie jest w 100% bezpieczna, i nie możemy zagwarantować absolutnego bezpieczeństwa.",
+    "children": "Prywatność dzieci",
+    "childrenText": "Nasza Aplikacja nie jest przeznaczona dla osób poniżej 13 roku życia. Nie zbieramy świadomie informacji umożliwiających identyfikację osobistą od dzieci poniżej 13 roku życia. Jeśli jesteś rodzicem lub opiekunem i wiesz, że Twoje dziecko podało nam informacje osobiste, prosimy o kontakt, abyśmy mogli podjąć odpowiednie kroki.",
+    "changes": "Zmiany w tej Polityce prywatności",
+    "changesText": "Możemy od czasu do czasu aktualizować naszą Politykę prywatności. Dlatego zaleca się regularne przeglądanie tej strony w celu sprawdzenia wszelkich zmian. Powiadomimy Cię o wszelkich zmianach, publikując nową Politykę prywatności na tej stronie. Zmiany te wchodzą w życie natychmiast po ich opublikowaniu na tej stronie.",
+    "contact": "Kontakt",
+    "contactText": "Jeśli masz jakiekolwiek pytania lub sugestie dotyczące naszej Polityki prywatności, nie wahaj się z nami skontaktować. E-mail:"
+  }
+}
