@@ -7,8 +7,6 @@
         <select
             class="block w-full pl-3 pr-10 py-2 rounded-md text-base sm:text-sm outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-transparent block shadow-md select-none"
             onchange="location =  this.value;">
-            <!-- Placeholder option displaying the current sorting selection -->
-            <option disabled selected hidden>{{sortName}}</option>
             <!-- Group for ascending sorting options -->
             <optgroup label="{{ translations.sortMenu.desc }}" class="font-bold">
                 <!-- Option for sorting by creation date in descending order -->
