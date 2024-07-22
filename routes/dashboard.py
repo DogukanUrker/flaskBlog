@@ -1,6 +1,7 @@
 # Import necessary modules and functions
 from modules import (
     Log,  # Custom logging module
+    load,  # Function for loading JSON data from files
     flashMessage,  # Flash messaging module
     Delete,  # Function for deleting data
     url_for,  # URL building function
@@ -86,6 +87,26 @@ def dashboard(userName):
                             showComments = False
                         case _:
                             showComments = True
+                    # Convert the main tuple to a list
+                    posts = list(posts)
+
+                    # Convert each tuple inside the post list to a list
+                    for i in range(len(posts)):
+                        posts[i] = list(posts[i])
+
+                    language = session.get(
+                        "language"
+                    )  # Get the language from the session
+                    translationFile = f"./translations/{language}.json"  # Define the path to the translation file
+
+                    with open(
+                        translationFile, "r"
+                    ) as file:  # Open the translation file in read mode
+                        translations = load(file)  # Load the JSON data from the file
+
+                    for post in posts:
+                        post[9] = translations["categories"][post[9].lower()]
+
                     # Render the dashboard template with the posts, comments, showPosts and showComments data
                     return render_template(
                         "/dashboard.html.jinja",
