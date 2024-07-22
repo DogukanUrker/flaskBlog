@@ -18,7 +18,11 @@
       <div class="flex items-center">
         <i class="ti ti-user mr-1 text-xl"></i>
         <p class="hidden md:block">{{translations.user.role}}:</p>
-        <p class="ml-1 font-medium">{{user[5]}}</p>
+        {% if user[5] == "admin"%}
+        <p class="ml-1 font-medium">{{translations.roles.admin}}</p>
+        {% elif user[5] == "user"%}
+        <p class="ml-1 font-medium">{{translations.roles.user}}</p>
+        {% endif %}
       </div>
       <!-- Views information -->
       <div class="flex items-center">

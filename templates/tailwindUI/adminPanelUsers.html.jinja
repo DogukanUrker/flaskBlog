@@ -32,7 +32,11 @@
       <div class="flex items-center">
         <i class="ti ti-user mr-1 text-xl"></i>
         <p class="hidden md:block mr-1">{{translations.adminPanelUsers.role}}:</p>
-        <p class="font-medium">{{ user[5] }}</p>
+        {% if user[5] == "admin"%}
+        <p class="font-medium">{{translations.roles.admin}}</p>
+        {% elif user[5] == "user"%}
+        <p class="font-medium">{{translations.roles.user}}</p>
+        {% endif %}
       </div>
     </section>
 

@@ -287,5 +287,9 @@
     "error": {
       "wrongCall": "You made a wrong flash message call on server side."
     }
+  },
+  "roles": {
+    "user": "User",
+    "admin": "Admin"
   }
 }

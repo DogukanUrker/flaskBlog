@@ -287,5 +287,9 @@
     "error": {
       "wrongCall": "Sunucu tarafında yanlış bir flash mesaj çağrısı yaptınız."
     }
+  },
+  "roles": {
+    "user": "Kullanıcı",
+    "admin": "Yönetici"
   }
 }

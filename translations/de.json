@@ -287,5 +287,9 @@
     "error": {
       "wrongCall": "Sie haben einen falschen Flash-Nachrichtenaufruf auf der Serverseite gemacht."
     }
+  },
+  "roles": {
+    "user": "Benutzer",
+    "admin": "Administrator"
   }
 }
