@@ -92,16 +92,12 @@ def category(category, by="timeStamp", sort="desc"):
     )
     posts = cursor.fetchall()
 
-    # Human-readable name for the sorting parameter
+    # Modify the sorting name for better readability
     match by:
         case "timeStamp":
-            by = "Creation Date"
+            by = "create"
         case "lastEditTimeStamp":
-            by = "Last Edit Date"
-    sortName = f"{by} {sort}".title()
-
-    # Logging the sorting criteria used for the request
-    Log.info(f"Sorting posts on category/{category} page by: {sortName}")
+            by = "edit"
 
     language = session.get("language")  # Get the language from the session
     translationFile = (
@@ -109,6 +105,13 @@ def category(category, by="timeStamp", sort="desc"):
     )
     with open(translationFile, "r") as file:  # Open the translation file in read mode
         translations = load(file)  # Load the JSON data from the file
+
+    sortName = (
+        translations["sortMenu"][by] + " - " + translations["sortMenu"][sort]
+    )  # Get the sorting name from the translations
+
+    # Logging the sorting criteria used for the request
+    Log.info(f"Sorting posts on category/{category} page by: {sortName}")
 
     # Rendering the HTML template with posts and category context
     return render_template(

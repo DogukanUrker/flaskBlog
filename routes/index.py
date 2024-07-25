@@ -13,6 +13,8 @@ The index.html.jinja template displays the title and content of each post.
 
 from modules import (
     Log,  # A class for logging messages
+    session,  # A session object for storing user session data
+    load,  # A function for loading JSON data from files
     sqlite3,  # Importing the SQLite module for working with SQLite databases
     redirect,  # Importing the redirect function for redirecting requests
     Blueprint,  # Importing the Blueprint class for creating Flask blueprints
@@ -74,10 +76,20 @@ def index(by="timeStamp", sort="desc"):
     # Modify the sorting name for better readability
     match by:
         case "timeStamp":
-            by = "Creation Date"
+            by = "create"
         case "lastEditTimeStamp":
-            by = "Last Edit Date"
-    sortName = f"{by} {sort}".title()
+            by = "edit"
+
+    language = session.get("language")  # Get the language from the session
+    translationFile = (
+        f"./translations/{language}.json"  # Define the path to the translation file
+    )
+    with open(translationFile, "r") as file:  # Open the translation file in read mode
+        translations = load(file)  # Load the JSON data from the file
+
+    translations = translations["sortMenu"]  # Get the translation for the sort menu
+
+    sortName = translations[by] + " - " + translations[sort]
 
     # Log a info message that posts sorted by the specified field
     Log.info(f"Sorting posts on index page by: {sortName}")
