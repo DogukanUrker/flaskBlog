@@ -184,7 +184,7 @@ def editPost(postID):
                                                                 f'Post: "{postTitle}" edited',
                                                             )
                                                             flashMessage(
-                                                                page="postEdit",
+                                                                page="editPost",
                                                                 message="success",
                                                                 category="success",
                                                                 language=session[
@@ -241,7 +241,7 @@ def editPost(postID):
                                                         f'Post: "{postTitle}" edited',
                                                     )
                                                     flashMessage(
-                                                        page="postEdit",
+                                                        page="editPost",
                                                         message="success",
                                                         category="success",
                                                         language=session["language"],
@@ -261,7 +261,7 @@ def editPost(postID):
                         case False:
                             # User is not authorized to edit the post
                             flashMessage(
-                                page="postEdit",
+                                page="editPost",
                                 message="author",
                                 category="error",
                                 language=session["language"],
@@ -278,7 +278,7 @@ def editPost(postID):
             # User is not logged in
             Log.danger(f"{request.remote_addr} tried to edit post without login")
             flashMessage(
-                page="postEdit",
+                page="editPost",
                 message="login",
                 category="error",
                 language=session["language"],
