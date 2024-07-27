@@ -3,7 +3,6 @@ from modules import (
     Log,  # Logging module
     ssl,  # SSL/TLS module
     abort,  # Function for aborting requests
-    flashMessage,  # Flash messaging module
     smtplib,  # SMTP client module
     randint,  # Function for generating random integers
     sqlite3,  # SQLite database module
@@ -18,6 +17,7 @@ from modules import (
     SMTP_SERVER,  # SMTP server address
     EmailMessage,  # Class for creating email messages
     requestsPost,  # Module for making HTTP POST requests
+    flashMessage,  # Flash messaging module
     SMTP_PASSWORD,  # SMTP password
     DB_USERS_ROOT,  # Path to the users database
     VerifyUserForm,  # Form for verifying user

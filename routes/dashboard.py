@@ -2,7 +2,6 @@
 from modules import (
     Log,  # Custom logging module
     load,  # Function for loading JSON data from files
-    flashMessage,  # Flash messaging module
     Delete,  # Function for deleting data
     url_for,  # URL building function
     request,  # Request handling module
@@ -10,6 +9,7 @@ from modules import (
     sqlite3,  # SQLite database module
     redirect,  # Redirect function
     Blueprint,  # Blueprint for defining routes
+    flashMessage,  # Flash messaging module
     DB_POSTS_ROOT,  # Path to the posts database
     DB_COMMENTS_ROOT,  # Path to the comments database
     render_template,  # Template rendering function

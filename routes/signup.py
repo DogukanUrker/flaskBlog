@@ -3,7 +3,6 @@ from modules import (
     Log,  # Logging module
     ssl,  # SSL/TLS module
     abort,  # Function for aborting requests
-    flashMessage,  # Flash messaging module
     session,  # Session management module
     sqlite3,  # SQLite database module
     request,  # Module for handling HTTP requests
@@ -18,6 +17,7 @@ from modules import (
     encryption,  # Encryption module
     SignUpForm,  # Form for user sign-up
     SMTP_SERVER,  # SMTP server address
+    flashMessage,  # Flash messaging module
     EmailMessage,  # Class for creating email messages
     requestsPost,  # Module for making HTTP POST requests
     REGISTRATION,  # Flag for enabling/disabling user registration

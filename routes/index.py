@@ -13,8 +13,8 @@ The index.html.jinja template displays the title and content of each post.
 
 from modules import (
     Log,  # A class for logging messages
-    session,  # A session object for storing user session data
     load,  # A function for loading JSON data from files
+    session,  # A session object for storing user session data
     sqlite3,  # Importing the SQLite module for working with SQLite databases
     redirect,  # Importing the redirect function for redirecting requests
     Blueprint,  # Importing the Blueprint class for creating Flask blueprints

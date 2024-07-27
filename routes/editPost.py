@@ -1,7 +1,6 @@
 # Import necessary modules and functions
 from modules import (
     Log,  # Logging module
-    flashMessage,  # Flash messaging module
     abort,  # Function for aborting requests
     session,  # Session management module
     sqlite3,  # SQLite database module
@@ -9,6 +8,7 @@ from modules import (
     redirect,  # Function for redirecting requests
     Blueprint,  # Blueprint class for creating modular applications
     RECAPTCHA,  # Recaptcha module
+    flashMessage,  # Flash messaging module
     requestsPost,  # Module for making HTTP POST requests
     DB_POSTS_ROOT,  # Path to the posts database
     DB_USERS_ROOT,  # Path to the users database

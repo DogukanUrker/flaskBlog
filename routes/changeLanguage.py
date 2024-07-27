@@ -1,6 +1,6 @@
 from modules import (
-    render_template,
     Blueprint,
+    render_template,
 )  # Import the render_template and Blueprint modules
 
 changeLanguageBlueprint = Blueprint(

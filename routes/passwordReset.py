@@ -2,7 +2,6 @@
 from modules import (
     Log,  # Custom logging module
     ssl,  # SSL/TLS support module
-    flashMessage,  # Flash messaging module
     abort,  # Function to abort request processing
     smtplib,  # SMTP protocol client module
     randint,  # Function to generate random integers
@@ -17,6 +16,7 @@ from modules import (
     RECAPTCHA,  # Flag for enabling reCAPTCHA
     encryption,  # Encryption utility module
     SMTP_SERVER,  # SMTP server address
+    flashMessage,  # Flash messaging module
     EmailMessage,  # Class for creating email messages
     requestsPost,  # Function for making POST requests
     SMTP_PASSWORD,  # SMTP server password

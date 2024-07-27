@@ -2,7 +2,6 @@
 from modules import (
     Log,  # Custom logging module
     abort,  # Function to abort request processing
-    flashMessage,  # Flash messaging module
     LOG_IN,  # Flag indicating if login is enabled
     session,  # Session handling module
     request,  # Request handling module
@@ -13,6 +12,7 @@ from modules import (
     Blueprint,  # Blueprint for defining routes
     LoginForm,  # Form class for login
     encryption,  # Encryption utility module
+    flashMessage,  # Flash messaging module
     requestsPost,  # Function for making POST requests
     DB_USERS_ROOT,  # Path to the users database
     render_template,  # Template rendering function

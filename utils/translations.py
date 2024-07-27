@@ -1,7 +1,7 @@
 from modules import (
-    load,
-    exists,
-    Log,
+    Log,  # Importing the Log class from the modules module
+    load,  # Importing the load function from the modules module
+    exists,  # Importing the exists function from the modules module
 )  # Importing the load, exists and Log functions from the modules module
 
 

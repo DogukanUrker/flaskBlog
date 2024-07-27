@@ -6,11 +6,11 @@ The functions and methods used in this blueprint are imported from the modules m
 
 from modules import (
     Log,  # A function for logging messages
-    flashMessage,  # A function for displaying flash messages
     session,  # A dictionary for storing session data
     request,  # Module for handling HTTP requests
     redirect,  # A function for returning redirect responses
     Blueprint,  # A class for creating Flask blueprints
+    flashMessage,  # Flash messaging module
 )
 
 

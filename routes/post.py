@@ -1,7 +1,6 @@
 # Import necessary modules and functions
 from modules import (
     Log,  # Custom logging module
-    flashMessage,  # Flash messaging module
     Delete,  # Module for deleting posts and comments
     session,  # Session management module
     sqlite3,  # SQLite database module
@@ -12,6 +11,7 @@ from modules import (
     addPoints,  # Function to add points to user's score
     Blueprint,  # Blueprint for defining routes
     CommentForm,  # Form class for comments
+    flashMessage,  # Flash messaging module
     DB_POSTS_ROOT,  # Path to the posts database
     currentTimeStamp,  # Function to get current timestamp
     DB_COMMENTS_ROOT,  # Path to the comments database

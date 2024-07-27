@@ -1,7 +1,6 @@
 # Import the necessary modules and functions
 from modules import (
     Log,  # Importing log class for logging messages
-    flashMessage,  # Importing flash function for displaying messages
     abort,  # Importing abort function for aborting requests
     session,  # Importing session for managing user sessions
     sqlite3,  # Importing sqlite3 for working with SQLite databases
@@ -10,6 +9,7 @@ from modules import (
     Blueprint,  # Importing Blueprint for creating modular applications
     RECAPTCHA,  # Importing RECAPTCHA constant
     encryption,  # Importing encryption functions for password hashing and verification
+    flashMessage,  # Flash messaging module
     requestsPost,  # Importing requestsPost function for making HTTP POST requests
     DB_USERS_ROOT,  # Importing constant for database path
     render_template,  # Importing render_template for rendering HTML templates
