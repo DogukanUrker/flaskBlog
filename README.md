@@ -51,6 +51,7 @@
 - Docker
 - Google reCAPTCHA v3
 - Logging
+- Multi Language Support
 - Password
   - Password Change
   - Password Reset
