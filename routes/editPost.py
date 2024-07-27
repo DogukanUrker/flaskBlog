@@ -166,10 +166,21 @@ def editPost(postID):
                                                                 """update posts set category = ? where id = ? """,
                                                                 (postCategory, post[0]),
                                                             )
-                                                            cursor.execute(
-                                                                """update posts set banner = ? where id = ? """,
-                                                                (postBanner, post[0]),
-                                                            )
+                                                            match postBanner == b"":  # Check if post banner is empty
+                                                                case (
+                                                                    True
+                                                                ):  # Do nothing if post banner is empty
+                                                                    pass
+                                                                case (
+                                                                    False
+                                                                ):  # Update post banner if not empty
+                                                                    cursor.execute(
+                                                                        """update posts set banner = ? where id = ? """,
+                                                                        (
+                                                                            postBanner,
+                                                                            post[0],
+                                                                        ),
+                                                                    )
                                                             cursor.execute(
                                                                 """update posts set lastEditTimeStamp = ? where id = ? """,
                                                                 [
@@ -225,10 +236,19 @@ def editPost(postID):
                                                         """update posts set category = ? where id = ? """,
                                                         (postCategory, post[0]),
                                                     )
-                                                    cursor.execute(
-                                                        """update posts set banner = ? where id = ? """,
-                                                        (postBanner, post[0]),
-                                                    )
+                                                    print(postBanner)
+                                                    match postBanner == b"":  # Check if post banner is empty
+                                                        case (
+                                                            True
+                                                        ):  # Do nothing if post banner is empty
+                                                            pass
+                                                        case (
+                                                            False
+                                                        ):  # Update post banner if not empty
+                                                            cursor.execute(
+                                                                """update posts set banner = ? where id = ? """,
+                                                                (postBanner, post[0]),
+                                                            )
                                                     cursor.execute(
                                                         """update posts set lastEditTimeStamp = ? where id = ? """,
                                                         [
