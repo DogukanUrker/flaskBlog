@@ -41,6 +41,7 @@ class CreatePostForm(Form):
     )
     # FileField for post banner with input requirement validator
     postBanner = FileField("Post Banner", [validators.InputRequired()])
+    """
     # SelectField for post category with input requirement validator and choices
     postCategory = SelectField(
         "Post Category",
@@ -70,3 +71,4 @@ class CreatePostForm(Form):
         ],
         render_kw={"class": inputStyle() + " text-rose-500"},
     )
+    """  # Commented out for multi language support. We create select category form in the frontend.

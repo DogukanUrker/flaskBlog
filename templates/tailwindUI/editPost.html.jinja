@@ -31,10 +31,34 @@
       {{ form.postBanner(placeholder=translations.editPost.bannerPlaceholder) }}
     </div>
 
-    <!-- Select a Category dropdown -->
+    <!-- Category Selection Section -->
     <div class="mx-auto w-fit">
-      <label class="block my-1 text-center">{{translations.editPost.category}}</label>
-      {{ form.postCategory() }}
+      <label class="block my-1 text-center">{{ translations.createPost.category }}</label>
+      <select
+        class="w-72 h-12 mb-4 mx-auto p-2 rounded-md text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-0 block shadow-md select-none text-rose-500"
+        id="postCategory" name="postCategory" required="">
+        <option value="Apps">{{translations.categories.apps}}</option>
+        <option value="Art">{{ translations.categories.art }}</option>
+        <option value="Books">{{ translations.categories.books }}</option>
+        <option value="Business">{{ translations.categories.business }}</option>
+        <option value="Code">{{ translations.categories.code }}</option>
+        <option value="Education">{{ translations.categories.education }}</option>
+        <option value="Finance">{{ translations.categories.finance }}</option>
+        <option value="Foods">{{ translations.categories.foods }}</option>
+        <option value="Games">{{ translations.categories.games }}</option>
+        <option value="Health">{{ translations.categories.health }}</option>
+        <option value="History">{{ translations.categories.history }}</option>
+        <option value="Movies">{{ translations.categories.movies }}</option>
+        <option value="Music">{{ translations.categories.music }}</option>
+        <option value="Nature">{{ translations.categories.nature }}</option>
+        <option value="Science">{{ translations.categories.science }}</option>
+        <option value="Series">{{ translations.categories.series }}</option>
+        <option value="Sports">{{ translations.categories.sports }}</option>
+        <option value="Technology">{{ translations.categories.technology }}</option>
+        <option value="Travel">{{ translations.categories.travel }}</option>
+        <option value="Web">{{ translations.categories.web }}</option>
+        <option value="Other">{{ translations.categories.other }}</option>
+      </select>
     </div>
 
     <!-- Post content editor -->
@@ -69,10 +93,34 @@
       {{ form.postBanner(placeholder=translations.editPost.bannerPlaceholder) }}
     </div>
 
-    <!-- Select a Category dropdown -->
+    <!-- Category Selection Section -->
     <div class="mx-auto w-fit">
-      <label class="block my-1 text-center">{{translations.editPost.category}}</label>
-      {{ form.postCategory() }}
+      <label class="block my-1 text-center">{{ translations.createPost.category }}</label>
+      <select
+        class="w-72 h-12 mb-4 mx-auto p-2 rounded-md text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-0 block shadow-md select-none text-rose-500"
+        id="postCategory" name="postCategory" required="">
+        <option value="Apps">{{translations.categories.apps}}</option>
+        <option value="Art">{{ translations.categories.art }}</option>
+        <option value="Books">{{ translations.categories.books }}</option>
+        <option value="Business">{{ translations.categories.business }}</option>
+        <option value="Code">{{ translations.categories.code }}</option>
+        <option value="Education">{{ translations.categories.education }}</option>
+        <option value="Finance">{{ translations.categories.finance }}</option>
+        <option value="Foods">{{ translations.categories.foods }}</option>
+        <option value="Games">{{ translations.categories.games }}</option>
+        <option value="Health">{{ translations.categories.health }}</option>
+        <option value="History">{{ translations.categories.history }}</option>
+        <option value="Movies">{{ translations.categories.movies }}</option>
+        <option value="Music">{{ translations.categories.music }}</option>
+        <option value="Nature">{{ translations.categories.nature }}</option>
+        <option value="Science">{{ translations.categories.science }}</option>
+        <option value="Series">{{ translations.categories.series }}</option>
+        <option value="Sports">{{ translations.categories.sports }}</option>
+        <option value="Technology">{{ translations.categories.technology }}</option>
+        <option value="Travel">{{ translations.categories.travel }}</option>
+        <option value="Web">{{ translations.categories.web }}</option>
+        <option value="Other">{{ translations.categories.other }}</option>
+      </select>
     </div>
 
     <!-- Post content editor -->
