@@ -10,7 +10,7 @@ passlib = "==1.7.4"
 playwright = "==1.48.0"
 requests = "==2.32.3"
 wtforms = "==3.2.1"
-pipenv = "==2024.1.0"
+pipenv = "==2024.2.0"
 
 [dev-packages]
 
