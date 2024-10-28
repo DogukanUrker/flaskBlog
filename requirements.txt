@@ -1,5 +1,5 @@
 Flask==3.0.3
-flask_wtf==1.2.1
+flask_wtf==1.2.2
 passlib==1.7.4
 playwright==1.48.0
 Requests==2.32.3
