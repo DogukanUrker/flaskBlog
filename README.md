@@ -204,7 +204,13 @@ Embarking on the FlaskBlog project has been immensely rewarding, not only in ter
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date)](https://star-history.com/#dogukanurker/flaskblog&Date)
+<a href="https://star-history.com/#dogukanurker/flaskblog&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date" />
+ </picture>
+</a>)
 
 ## ⚠️ Warning
 
