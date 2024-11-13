@@ -210,7 +210,7 @@ Embarking on the FlaskBlog project has been immensely rewarding, not only in ter
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date" />
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date" />
  </picture>
-</a>)
+</a>
 
 ## ⚠️ Warning
 
