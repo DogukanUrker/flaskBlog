@@ -17,6 +17,7 @@ from os.path import exists  # Importing exists function from os.path module
 from datetime import datetime, timedelta  # Date and time handling
 from requests import post as requestsPost  # HTTP library for sending POST requests
 from json import load  # Importing load function from json module
+import uuid  # UUID (Universally Unique Identifier) generation
 
 # Importing constants
 from constants import *
