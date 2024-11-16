@@ -19,6 +19,7 @@ from modules import (
     RECAPTCHA_POST_EDIT,  # # Flag for enabling/disabling Recaptcha for post editing
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
     RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
+    generateUrlId # urlId generator from post title
 )
 
 # Create a blueprint for the edit post route
@@ -26,8 +27,8 @@ editPostBlueprint = Blueprint("editPost", __name__)
 
 
 # Define a route for editing a post
-@editPostBlueprint.route("/editpost/<int:postID>", methods=["GET", "POST"])
-def editPost(postID):
+@editPostBlueprint.route("/editpost/<urlID>", methods=["GET", "POST"])
+def editPost(urlID):
     """
     This function handles the edit post route.
 
@@ -41,6 +42,8 @@ def editPost(postID):
         abort(404): if the post does not exist
         abort(401): if the user is not authorized to edit the post
     """
+    newUrlId = None # if user rename post title
+
     # Check if "userName" exists in session
     match "userName" in session:
         case True:
@@ -53,10 +56,10 @@ def editPost(postID):
                 Log.sql
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
-            cursor.execute("select id from posts")
+            cursor.execute("select urlId from posts where urlId = ?", (urlID,))
             posts = str(cursor.fetchall())
             # Check if postID exists in posts
-            match str(postID) in posts:
+            match str(urlID) in posts:
                 case True:
                     Log.sql(
                         f"Connecting to '{DB_POSTS_ROOT}' database"
@@ -68,11 +71,12 @@ def editPost(postID):
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
-                        """select * from posts where id = ? """,
-                        [(postID)],
+                        """select * from posts where urlId = ? """,
+                        [(urlID)],
                     )
                     post = cursor.fetchone()
-                    Log.success(f'POST: "{postID}" FOUND')
+
+                    Log.success(f'POST: "{urlID}" FOUND')
                     Log.sql(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
@@ -87,6 +91,7 @@ def editPost(postID):
                         [(session["userName"])],
                     )
                     # Check if the user is authorized to edit the post
+                    print(post[5])
                     match post[5] == session["userName"] or session[
                         "userRole"
                     ] == "admin":
@@ -212,6 +217,9 @@ def editPost(postID):
                                                             )
                                                             abort(401)
                                                 case False:
+                                                    # generating new url id for post title
+                                                    newUrlId = generateUrlId(postTitle)
+                                                    
                                                     # Recaptcha not enabled
                                                     connection = sqlite3.connect(
                                                         DB_POSTS_ROOT
@@ -256,6 +264,13 @@ def editPost(postID):
                                                             (post[0]),
                                                         ],
                                                     )
+                                                    cursor.execute(
+                                                        """update posts set urlId = ? where id = ?""",
+                                                        [
+                                                            (newUrlId),
+                                                            (post[0])
+                                                        ]
+                                                    )
                                                     connection.commit()
                                                     Log.success(
                                                         f'Post: "{postTitle}" edited',
@@ -266,7 +281,7 @@ def editPost(postID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    return redirect(f"/post/{post[0]}")
+                                                    return redirect(f"/post/{newUrlId}")
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",
@@ -292,7 +307,7 @@ def editPost(postID):
                             return redirect("/")
                 case False:
                     # Post with postID does not exist
-                    Log.danger(f'Post: "{postID}" not found')
+                    Log.danger(f'Post: "{urlID}" not found')
                     return render_template("notFound.html.jinja")
         case False:
             # User is not logged in
@@ -303,4 +318,4 @@ def editPost(postID):
                 category="error",
                 language=session["language"],
             )  # Display a flash message
-            return redirect(f"/login/redirect=&editpost&{postID}")
+            return redirect(f"/login/redirect=&editpost&{urlID}")
