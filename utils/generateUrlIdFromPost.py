@@ -3,10 +3,11 @@ This modules contains code of post title to url id generator
 """
 
 from modules import (
-    DB_POSTS_ROOT, # Root directory path for the posts database
+    DB_POSTS_ROOT,  # Root directory path for the posts database
     Log,
-    sqlite3 
+    sqlite3,
 )
+
 
 # function to check url id exist or not in database
 def checkIfUrlIdExistPostDb(urlId):
@@ -16,44 +17,51 @@ def checkIfUrlIdExistPostDb(urlId):
         s = cursor.execute("""SELECT urlId from posts WHERE urlId = ? """, (urlId,))
         result = s.fetchall()
         if result:
-            return True # urlId already exist in db
+            return True  # urlId already exist in db
         else:
-            return False # urlId does not exist in db
+            return False  # urlId does not exist in db
 
-# characters to remove for post title that causes issue 
+
+# characters to remove for post title that causes issue
 avoid_characters = [
-    ' ',  # Space
-    '<', '>',  # Angle brackets
-    '#',  # Hash
-    '%',  # Percent
-    '{', '}',  # Curly braces
-    '|',  # Pipe
-    '\\',  # Backslash
-    '^',  # Caret
-    '~',  # Tilde
-    '[', ']',  # Square brackets
-    '`',  # Backtick
+    " ",  # Space
+    "<",
+    ">",  # Angle brackets
+    "#",  # Hash
+    "%",  # Percent
+    "{",
+    "}",  # Curly braces
+    "|",  # Pipe
+    "\\",  # Backslash
+    "^",  # Caret
+    "~",  # Tilde
+    "[",
+    "]",  # Square brackets
+    "`",  # Backtick
     '"',  # Double quote
     "'",  # Single quote
-    ':',  # Colon
-    ';',  # Semicolon
-    '/',  # Slash
-    '?',  # Question mark
-    '=',  # Equals
-    '&',  # Ampersand
-    '@',  # At symbol
-    '+',  # Plus sign
-    '.',   # full stop
-    ','   # comma
+    ":",  # Colon
+    ";",  # Semicolon
+    "/",  # Slash
+    "?",  # Question mark
+    "=",  # Equals
+    "&",  # Ampersand
+    "@",  # At symbol
+    "+",  # Plus sign
+    ".",  # full stop
+    ",",  # comma
 ]
 
 # sample text
 text = " 'Hello, world!' said the coder. <Can you solve this?> {It's 50% complete.} Use |pipe|, \\, ^caret^, ~tilde~, [brackets], `backtick`, 'single quote', :colon:, ;semicolon;, /slash/, ?question?, =equals=, &ampersand&, @at@, +plus+."
 
+
 def getNewUid():
     import uuid
+
     uniqueID = str(uuid.uuid4())[24:]
     return uniqueID
+
 
 def convertPostTitleInUrlId(postTitle):
     cleanedTitle = postTitle
@@ -77,11 +85,12 @@ def convertPostTitleInUrlId(postTitle):
 
     return url_id
 
+
 def generateUrlId(postTitle):
     baseUrlId = convertPostTitleInUrlId(postTitle)
     newUrlId = baseUrlId
     counter = 1
-    
+
     # Check if the ID exists and modify it if necessary
     while checkIfUrlIdExistPostDb(newUrlId):
         newUrlId = f"{baseUrlId}-{counter}"
@@ -90,5 +99,5 @@ def generateUrlId(postTitle):
     return newUrlId
 
 
-if __name__== "__main__":
+if __name__ == "__main__":
     convertPostTitleInUrlId(text)

@@ -19,7 +19,7 @@ from modules import (
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
     RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post creation
-    generateUrlId # url id generator for blog title
+    generateUrlId,  # url id generator for blog title
 )
 
 # Create a blueprint for the create post route
@@ -109,7 +109,7 @@ def createPost():
                                                     currentTimeStamp(),
                                                     currentTimeStamp(),
                                                     postCategory,
-                                                    getUrlId(postTitle)
+                                                    getUrlId(postTitle),
                                                 ),
                                             )
                                             connection.commit()
@@ -154,7 +154,7 @@ def createPost():
                                             currentTimeStamp(),
                                             currentTimeStamp(),
                                             postCategory,
-                                            generateUrlId(postTitle)
+                                            generateUrlId(postTitle),
                                         ),
                                     )
                                     connection.commit()

@@ -161,7 +161,7 @@ def post(urlID):
                 views=post[6],
                 timeStamp=post[7],
                 lastEditTimeStamp=post[8],
-                urlId = post[10],
+                urlId=post[10],
                 form=form,
                 comments=comments,
                 appName=APP_NAME,
