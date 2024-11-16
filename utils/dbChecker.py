@@ -187,6 +187,7 @@ def postsTable():
             "timeStamp" integer,
             "lastEditTimeStamp" integer,
             "category"  text not null,
+            "urlId" TEXT NOT NULL,
             primary key("id" autoincrement)
         );"""
         # Execute the SQL statement to create the table

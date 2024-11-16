@@ -19,6 +19,7 @@ from modules import (
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
     RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post creation
+    generateUrlId # url id generator for blog title
 )
 
 # Create a blueprint for the create post route
@@ -96,8 +97,8 @@ def createPost():
                                             )  # Set the trace callback for the connection
                                             cursor = connection.cursor()
                                             cursor.execute(
-                                                "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category) \
-                                                    values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                                                "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category, urlId) \
+                                                    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                                 (
                                                     postTitle,
                                                     postTags,
@@ -108,6 +109,7 @@ def createPost():
                                                     currentTimeStamp(),
                                                     currentTimeStamp(),
                                                     postCategory,
+                                                    getUrlId(postTitle)
                                                 ),
                                             )
                                             connection.commit()
@@ -140,8 +142,8 @@ def createPost():
                                     )  # Set the trace callback for the connection
                                     cursor = connection.cursor()
                                     cursor.execute(
-                                        "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category) \
-                                                    values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                                        "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category,urlId) \
+                                                    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                         (
                                             postTitle,
                                             postTags,
@@ -152,6 +154,7 @@ def createPost():
                                             currentTimeStamp(),
                                             currentTimeStamp(),
                                             postCategory,
+                                            generateUrlId(postTitle)
                                         ),
                                     )
                                     connection.commit()

@@ -23,8 +23,8 @@ postBlueprint = Blueprint("post", __name__)
 
 
 # Define the route handler for individual posts
-@postBlueprint.route("/post/<int:postID>", methods=["GET", "POST"])
-def post(postID):
+@postBlueprint.route("/post/<urlID>", methods=["GET", "POST"])
+def post(urlID):
     # Create a comment form object from the request form
     form = CommentForm(request.form)
 
@@ -36,15 +36,15 @@ def post(postID):
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()
 
-    # Query the posts database for all post IDs
-    cursor.execute("select id from posts")
+    # Query the posts database for all post url IDs
+    cursor.execute("select urlId from posts")
     posts = str(cursor.fetchall())
 
     # Check if the requested post ID exists in the posts database
-    match str(postID) in posts:
+    match str(urlID) in posts:
         case True:
             # Log a message indicating that the post is found
-            Log.success(f'post: "{postID}" loaded')
+            Log.success(f'post: "{urlID}" loaded')
 
             Log.sql(
                 f"Connecting to '{DB_POSTS_ROOT}' database"
@@ -56,17 +56,17 @@ def post(postID):
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
 
-            # Query the posts database for the post with the matching ID
+            # Query the posts database for the post with the matching url ID
             cursor.execute(
-                """select * from posts where id = ? """,
-                [(postID)],
+                """select * from posts where urlId = ? """,
+                [(urlID)],
             )
             post = cursor.fetchone()
 
             # Increment the views of the post by 1 in the posts database
             cursor.execute(
                 """update posts set views = views+1 where id = ? """,
-                [(postID)],
+                [(post[0])],
             )
             connection.commit()
 
@@ -77,7 +77,7 @@ def post(postID):
                     match "postDeleteButton" in request.form:
                         case True:
                             # Delete the post from the database
-                            Delete.post(postID)
+                            Delete.post(post[0])
                             # Redirect to the home page
                             return redirect(f"/")
 
@@ -87,7 +87,7 @@ def post(postID):
                             # Delete the comment from the database
                             Delete.comment(request.form["commentID"])
                             # Redirect to the same route with a 301 status code
-                            return redirect(url_for("post.post", postID=postID)), 301
+                            return redirect(url_for("post.post", urlID=urlID)), 301
 
                     # Get the comment from the form
                     comment = request.form["comment"]
@@ -107,7 +107,7 @@ def post(postID):
                         "insert into comments(post,comment,user,timeStamp) \
                         values(?, ?, ?, ?)",
                         (
-                            postID,
+                            post[0],
                             comment,
                             session["userName"],
                             currentTimeStamp(),
@@ -117,7 +117,7 @@ def post(postID):
 
                     # Log a message indicating that the user commented on the post
                     Log.success(
-                        f'User: "{session["userName"]}" commented to post: "{postID}"',
+                        f'User: "{session["userName"]}" commented to post: "{urlID}"',
                     )
 
                     # Add 5 points to the user's score
@@ -131,7 +131,7 @@ def post(postID):
                     )  # Display a flash message
 
                     # Redirect to the same route with a 301 status code
-                    return redirect(url_for("post.post", postID=postID)), 301
+                    return redirect(url_for("post.post", urlID=urlID)), 301
 
             Log.sql(
                 f"Connecting to '{DB_COMMENTS_ROOT}' database"
@@ -146,7 +146,7 @@ def post(postID):
             # Query the comments database for the comments related to the post ID
             cursor.execute(
                 """select * from comments where post = ? order by timeStamp desc""",
-                [(postID)],
+                [(post[0])],
             )
             comments = cursor.fetchall()
 
@@ -161,6 +161,7 @@ def post(postID):
                 views=post[6],
                 timeStamp=post[7],
                 lastEditTimeStamp=post[8],
+                urlId = post[10],
                 form=form,
                 comments=comments,
                 appName=APP_NAME,
