@@ -2,11 +2,11 @@ from modules import DB_POSTS_ROOT, Log, sqlite3, uuid
 
 
 # Function to check if URL ID exists in the database
-def checkIfUrlIdExistsInPostDb(urlId):
+def checkIfurlIDExistsInPostDb(urlID):
     with sqlite3.connect(DB_POSTS_ROOT) as connection:
         connection.set_trace_callback(Log.sql)
         cursor = connection.cursor()
-        cursor.execute("SELECT urlId FROM posts WHERE urlId = ?", (urlId,))
+        cursor.execute("SELECT urlID FROM posts WHERE urlID = ?", (urlID,))
         return bool(cursor.fetchall())
 
 
@@ -47,7 +47,7 @@ def getNewUid():
 
 
 # Function to convert post title to URL ID
-def convertPostTitleToUrlId(postTitle):
+def convertPostTitleTourlID(postTitle):
     cleanedTitle = "".join(
         ["-" if char in AVOID_CHARACTERS else char for char in postTitle]
     )
@@ -57,19 +57,19 @@ def convertPostTitleToUrlId(postTitle):
 
 
 # Function to generate a unique URL ID
-def generateUrlId(postTitle):
-    baseUrlId = convertPostTitleToUrlId(postTitle)
-    newUrlId = baseUrlId
+def generateurlID(postTitle):
+    baseurlID = convertPostTitleTourlID(postTitle)
+    newurlID = baseurlID
     counter = 1
 
-    while checkIfUrlIdExistsInPostDb(newUrlId):
-        newUrlId = f"{baseUrlId}-{counter}"
+    while checkIfurlIDExistsInPostDb(newurlID):
+        newurlID = f"{baseurlID}-{counter}"
         counter += 1
 
-    return newUrlId
+    return newurlID
 
 
 # Test the function.
 if __name__ == "__main__":
     sampleText = " 'Hello, world!' said the coder. <Can you solve this?> {It's 50% complete.} Use |pipe|, \\, ^caret^, ~tilde~, [brackets], `backtick`, 'single quote', :colon:, ;semicolon;, /slash/, ?question?, =equals=, &ampersand&, @at@, +plus+."
-    print(convertPostTitleToUrlId(sampleText))
+    print(convertPostTitleTourlID(sampleText))

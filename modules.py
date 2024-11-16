@@ -106,5 +106,5 @@ from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePic
 # Importing the 'Delete' class from the 'utils.delete' module for handling delete operations.
 from utils.delete import Delete
 
-# Importing the urlId generator for posts
-from utils.generateUrlIdFromPost import generateUrlId
+# Importing the urlID generator for posts
+from utils.generateUrlIdFromPost import generateurlID

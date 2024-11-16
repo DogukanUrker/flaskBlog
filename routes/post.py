@@ -37,7 +37,7 @@ def post(urlID):
     cursor = connection.cursor()
 
     # Query the posts database for all post url IDs
-    cursor.execute("select urlId from posts")
+    cursor.execute("select urlID from posts")
     posts = str(cursor.fetchall())
 
     # Check if the requested post ID exists in the posts database
@@ -58,7 +58,7 @@ def post(urlID):
 
             # Query the posts database for the post with the matching url ID
             cursor.execute(
-                """select * from posts where urlId = ? """,
+                """select * from posts where urlID = ? """,
                 [(urlID)],
             )
             post = cursor.fetchone()
@@ -161,7 +161,7 @@ def post(urlID):
                 views=post[6],
                 timeStamp=post[7],
                 lastEditTimeStamp=post[8],
-                urlId=post[10],
+                urlID=post[10],
                 form=form,
                 comments=comments,
                 appName=APP_NAME,

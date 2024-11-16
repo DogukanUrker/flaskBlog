@@ -19,7 +19,7 @@ from modules import (
     RECAPTCHA_POST_EDIT,  # # Flag for enabling/disabling Recaptcha for post editing
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
     RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    generateUrlId,  # urlId generator from post title
+    generateurlID,  # urlID generator from post title
 )
 
 # Create a blueprint for the edit post route
@@ -42,7 +42,7 @@ def editPost(urlID):
         abort(404): if the post does not exist
         abort(401): if the user is not authorized to edit the post
     """
-    newUrlId = None  # if user rename post title
+    newurlID = None  # if user rename post title
 
     # Check if "userName" exists in session
     match "userName" in session:
@@ -56,7 +56,7 @@ def editPost(urlID):
                 Log.sql
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
-            cursor.execute("select urlId from posts where urlId = ?", (urlID,))
+            cursor.execute("select urlID from posts where urlID = ?", (urlID,))
             posts = str(cursor.fetchall())
             # Check if postID exists in posts
             match str(urlID) in posts:
@@ -71,7 +71,7 @@ def editPost(urlID):
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
-                        """select * from posts where urlId = ? """,
+                        """select * from posts where urlID = ? """,
                         [(urlID)],
                     )
                     post = cursor.fetchone()
@@ -218,7 +218,7 @@ def editPost(urlID):
                                                             abort(401)
                                                 case False:
                                                     # generating new url id for post title
-                                                    newUrlId = generateUrlId(postTitle)
+                                                    newurlID = generateurlID(postTitle)
 
                                                     # Recaptcha not enabled
                                                     connection = sqlite3.connect(
@@ -265,8 +265,8 @@ def editPost(urlID):
                                                         ],
                                                     )
                                                     cursor.execute(
-                                                        """update posts set urlId = ? where id = ?""",
-                                                        [(newUrlId), (post[0])],
+                                                        """update posts set urlID = ? where id = ?""",
+                                                        [(newurlID), (post[0])],
                                                     )
                                                     connection.commit()
                                                     Log.success(
@@ -278,7 +278,7 @@ def editPost(urlID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    return redirect(f"/post/{newUrlId}")
+                                                    return redirect(f"/post/{newurlID}")
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",
