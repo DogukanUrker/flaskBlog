@@ -33,7 +33,7 @@ def editPost(urlID):
     This function handles the edit post route.
 
     Args:
-        postID (int): the ID of the post to edit
+        postID (string): the ID of the post to edit
 
     Returns:
         The rendered edit post template or a redirect to the homepage if the user is not authorized to edit the post
@@ -42,7 +42,7 @@ def editPost(urlID):
         abort(404): if the post does not exist
         abort(401): if the user is not authorized to edit the post
     """
-    newurlID = None  # if user rename post title
+    sessionUrlId = None  # if user rename post title
 
     # Check if "userName" exists in session
     match "userName" in session:
@@ -91,7 +91,6 @@ def editPost(urlID):
                         [(session["userName"])],
                     )
                     # Check if the user is authorized to edit the post
-                    print(post[5])
                     match post[5] == session["userName"] or session[
                         "userRole"
                     ] == "admin":
@@ -124,6 +123,13 @@ def editPost(urlID):
                                                 f'User: "{session["userName"]}" tried to edit a post with empty content',
                                             )
                                         case False:
+                                            # check if user edited post title
+                                            match postTitle == post[1]:
+                                                case True:
+                                                    sessionUrlId = urlID # assign existing url id   
+                                                case False:
+                                                    sessionUrlId = generateurlID(postTitle) # assign new url id if modified 
+
                                             # Check Recaptcha if enabled
                                             match RECAPTCHA and RECAPTCHA_POST_EDIT:
                                                 case True:
@@ -195,6 +201,10 @@ def editPost(urlID):
                                                                     (post[0]),
                                                                 ],
                                                             )
+                                                            cursor.execute(
+                                                                """update posts set urlID = ? where id = ?""",
+                                                                [(sessionUrlId), (post[0])],
+                                                            )
                                                             connection.commit()
                                                             Log.success(
                                                                 f'Post: "{postTitle}" edited',
@@ -208,7 +218,7 @@ def editPost(urlID):
                                                                 ],
                                                             )  # Display a flash message
                                                             return redirect(
-                                                                f"/post/{post[0]}"
+                                                                f"/post/{sessionUrlId}"
                                                             )
                                                         case False:
                                                             # Recaptcha verification failed
@@ -217,9 +227,6 @@ def editPost(urlID):
                                                             )
                                                             abort(401)
                                                 case False:
-                                                    # generating new url id for post title
-                                                    newurlID = generateurlID(postTitle)
-
                                                     # Recaptcha not enabled
                                                     connection = sqlite3.connect(
                                                         DB_POSTS_ROOT
@@ -266,7 +273,7 @@ def editPost(urlID):
                                                     )
                                                     cursor.execute(
                                                         """update posts set urlID = ? where id = ?""",
-                                                        [(newurlID), (post[0])],
+                                                        [(sessionUrlId), (post[0])],
                                                     )
                                                     connection.commit()
                                                     Log.success(
@@ -278,7 +285,7 @@ def editPost(urlID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    return redirect(f"/post/{newurlID}")
+                                                    return redirect(f"/post/{sessionUrlId}")
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",
