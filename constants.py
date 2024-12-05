@@ -10,7 +10,7 @@ from modules import secrets, socket
 APP_NAME = "flaskBlog"  # (str)
 
 # Version of the Flask application
-APP_VERSION = "2.2.1"  # (str)
+APP_VERSION = "2.3.0"  # (str)
 
 # Path to the root of the application files
 APP_ROOT_PATH = "."  # (str)
