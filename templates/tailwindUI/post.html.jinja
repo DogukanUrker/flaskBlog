@@ -1,6 +1,16 @@
 {% extends 'layout.html.jinja' %} {% block head %}
 <!-- Set the title dynamically based on the variable 'title' -->
 <title>{{ title }}</title>
+
+<!-- open graph tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content= "{{ title }}" />
+<meta property="og:image" content="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}" />
+<meta name="keywords" content="{{ tags }}">
+<meta name="author" content="{{ author }}">
+<meta property="og:url" content="{{ blogPostUrl }}" />
+<meta property="og:site_name" content="{{ appName }}">
+
 {% endblock head %} {% block body %}
 <!-- Main Content Section -->
 <div
