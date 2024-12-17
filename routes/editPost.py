@@ -22,10 +22,15 @@ from modules import (
     generateurlID,  # urlID generator from post title
 )
 import re
+from urllib.parse import urlparse
 
 # Create a blueprint for the edit post route
 editPostBlueprint = Blueprint("editPost", __name__)
 
+VALID_URL_IDS = ["validUrlId1", "validUrlId2", "validUrlId3"]  # Example list of valid urlIDs
+
+def is_valid_url_id(url_id):
+    return url_id in VALID_URL_IDS
 
 # Define a route for editing a post
 @editPostBlueprint.route("/editpost/<urlID>", methods=["GET", "POST"])
@@ -286,7 +291,10 @@ def editPost(urlID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    return redirect(f"/post/{sessionUrlId}")
+                                                    if is_valid_url_id(sessionUrlId):
+                                                        return redirect(f"/post/{sessionUrlId}")
+                                                    else:
+                                                        return redirect('/')
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",
