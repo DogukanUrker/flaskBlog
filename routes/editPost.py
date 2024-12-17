@@ -21,6 +21,7 @@ from modules import (
     RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     generateurlID,  # urlID generator from post title
 )
+import re
 
 # Create a blueprint for the edit post route
 editPostBlueprint = Blueprint("editPost", __name__)
@@ -322,4 +323,7 @@ def editPost(urlID):
                 category="error",
                 language=session["language"],
             )  # Display a flash message
-            return redirect(f"/login/redirect=&editpost&{urlID}")
+            if re.match(r'^[a-zA-Z0-9\-]+$', urlID):
+                return redirect(f"/login/redirect=&editpost&{urlID}")
+            else:
+                return redirect('/login')
