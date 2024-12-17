@@ -86,10 +86,8 @@ def category(category, by="timeStamp", sort="desc"):
     cursor = connection.cursor()
 
     # Executing SQL query to retrieve posts of the requested category and sorting them accordingly
-    cursor.execute(
-        f"""select * from posts where lower(category) = ? order by {by} {sort}""",
-        [(category.lower())],
-    )
+    query = "SELECT * FROM posts WHERE lower(category) = ? ORDER BY ? ?"
+    cursor.execute(query, (category.lower(), by, sort))
     posts = cursor.fetchall()
 
     # Modify the sorting name for better readability
