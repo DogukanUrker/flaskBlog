@@ -30,7 +30,7 @@ indexBlueprint = Blueprint("index", __name__)
 @indexBlueprint.route("/")
 # Define a route for the home page with sorting parameters
 @indexBlueprint.route("/by=<by>/sort=<sort>")
-def index(by="timeStamp", sort="desc"):
+def index(by="hot", sort="desc"):
     """
     This function maps the home page route ("/") to the index function.
 
@@ -41,7 +41,7 @@ def index(by="timeStamp", sort="desc"):
     The index.html.jinja template displays the title and content of each post.
 
     Parameters:
-    by (str): The field to sort by. Options are "timeStamp", "title", "views", "category", "lastEditTimeStamp".
+    by (str): The field to sort by. Options are "timeStamp", "title", "views", "category", "lastEditTimeStamp", "hot".
     sort (str): The order to sort in. Options are "asc" or "desc".
 
     Returns:
@@ -49,7 +49,7 @@ def index(by="timeStamp", sort="desc"):
     """
 
     # Define valid options for sorting and filtering
-    byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp"]
+    byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp", "hot"]
     sortOptions = ["asc", "desc"]
 
     # Check if the provided sorting options are valid, if not, redirect to the default route
@@ -69,7 +69,15 @@ def index(by="timeStamp", sort="desc"):
     # Create a cursor object for executing queries
     cursor = connection.cursor()
     # Select all the columns from the posts table and order them by the specified field and sorting order
-    cursor.execute(f"select * from posts order by {by} {sort}")
+    match by:
+        case "hot": # If the sorting field is "hot"
+            cursor.execute(
+                f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort}"
+            ) # Execute the query to sort by hotness
+            pass
+        case _: # For all other sorting fields
+            cursor.execute(f"select * from posts order by {by} {sort}") # Execute the query to sort by the specified field
+
     # Fetch all the results as a list of tuples
     posts = cursor.fetchall()
 

@@ -164,7 +164,8 @@
     "title": "Başlık",
     "views": "Görüntülenme",
     "category": "Kategori",
-    "edit": "Son Düzenleme Tarihi"
+    "edit": "Son Düzenleme Tarihi",
+    "hot": "Popülerlik"
   },
   "search": {
     "title": "Arama",

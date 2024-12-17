@@ -163,7 +163,8 @@
     "title": "标题",
     "views": "浏览量",
     "category": "分类",
-    "edit": "最后编辑日期"
+    "edit": "最后编辑日期",
+    "hot": "热门"
   },
   "search": {
     "title": "搜索",

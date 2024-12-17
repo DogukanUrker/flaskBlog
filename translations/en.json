@@ -164,7 +164,8 @@
     "title": "Title",
     "views": "Views",
     "category": "Category",
-    "edit": "Last Edit Date"
+    "edit": "Last Edit Date",
+    "hot": "Hot"
   },
   "search": {
     "title": "Search",

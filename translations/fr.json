@@ -164,7 +164,8 @@
     "title": "Titre",
     "views": "Vues",
     "category": "Catégorie",
-    "edit": "Dernière date de modification"
+    "edit": "Dernière date de modification",
+    "hot": "Chaud"
   },
   "search": {
     "title": "Recherche",

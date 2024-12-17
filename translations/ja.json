@@ -165,7 +165,8 @@
     "title": "タイトル",
     "views": "ビュー",
     "category": "カテゴリ",
-    "edit": "最終編集日"
+    "edit": "最終編集日",
+    "hot": "ホット"
   },
   "search": {
     "title": "検索",
