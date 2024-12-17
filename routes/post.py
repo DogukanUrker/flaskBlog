@@ -165,7 +165,7 @@ def post(urlID):
                 form=form,
                 comments=comments,
                 appName=APP_NAME,
-                blogPostUrl = request.root_url
+                blogPostUrl=request.root_url,
             )
 
         case False:

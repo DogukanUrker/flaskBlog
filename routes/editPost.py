@@ -126,9 +126,13 @@ def editPost(urlID):
                                             # check if user edited post title
                                             match postTitle == post[1]:
                                                 case True:
-                                                    sessionUrlId = urlID # assign existing url id   
+                                                    sessionUrlId = (
+                                                        urlID  # assign existing url id
+                                                    )
                                                 case False:
-                                                    sessionUrlId = generateurlID(postTitle) # assign new url id if modified 
+                                                    sessionUrlId = generateurlID(
+                                                        postTitle
+                                                    )  # assign new url id if modified
 
                                             # Check Recaptcha if enabled
                                             match RECAPTCHA and RECAPTCHA_POST_EDIT:
@@ -203,7 +207,10 @@ def editPost(urlID):
                                                             )
                                                             cursor.execute(
                                                                 """update posts set urlID = ? where id = ?""",
-                                                                [(sessionUrlId), (post[0])],
+                                                                [
+                                                                    (sessionUrlId),
+                                                                    (post[0]),
+                                                                ],
                                                             )
                                                             connection.commit()
                                                             Log.success(
@@ -285,7 +292,9 @@ def editPost(urlID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    return redirect(f"/post/{sessionUrlId}")
+                                                    return redirect(
+                                                        f"/post/{sessionUrlId}"
+                                                    )
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",
