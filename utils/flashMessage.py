@@ -1,4 +1,3 @@
-import os
 from modules import (
     load,  # Import the load function from the modules module
     flash,  # Import the flash function from the modules module
@@ -22,10 +21,9 @@ def flashMessage(
         None
     """
     text = None  # Initialize the text variable
-    base_path = "./translations"
-    translationFile = os.path.normpath(os.path.join(base_path, f"{language}.json"))  # Define the path to the translation file
-    if not translationFile.startswith(base_path):
-        raise Exception("Invalid language path")
+    translationFile = (
+        f"./translations/{language}.json"  # Define the path to the translation file
+    )
     match exists(translationFile):  # Check if the translation file exists
         case True:
             # If the translation file exists, open and load the JSON data

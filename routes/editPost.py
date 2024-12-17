@@ -21,16 +21,10 @@ from modules import (
     RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     generateurlID,  # urlID generator from post title
 )
-import re
-from urllib.parse import urlparse
 
 # Create a blueprint for the edit post route
 editPostBlueprint = Blueprint("editPost", __name__)
 
-VALID_URL_IDS = ["validUrlId1", "validUrlId2", "validUrlId3"]  # Example list of valid urlIDs
-
-def is_valid_url_id(url_id):
-    return url_id in VALID_URL_IDS
 
 # Define a route for editing a post
 @editPostBlueprint.route("/editpost/<urlID>", methods=["GET", "POST"])
@@ -291,10 +285,7 @@ def editPost(urlID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    if is_valid_url_id(sessionUrlId):
-                                                        return redirect(f"/post/{sessionUrlId}")
-                                                    else:
-                                                        return redirect('/')
+                                                    return redirect(f"/post/{sessionUrlId}")
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",
@@ -331,7 +322,4 @@ def editPost(urlID):
                 category="error",
                 language=session["language"],
             )  # Display a flash message
-            if re.match(r'^[a-zA-Z0-9\-]+$', urlID):
-                return redirect(f"/login/redirect=&editpost&{urlID}")
-            else:
-                return redirect('/login')
+            return redirect(f"/login/redirect=&editpost&{urlID}")

@@ -55,21 +55,9 @@ def changeUserName():
                 case True:
                     # Retrieve new username from the form
                     newUserName = request.form["newUserName"]
-                    newUserName = newUserName.replace(" ", "")  # Remove spaces from username
-                    import re
-                    if not re.match(r'^\w+$', newUserName):
-                        flashMessage(
-                            page="changeUserName",
-                            message="invalid",
-                            category="error",
-                            language=session["language"],
-                        )
-                        return render_template(
-                            "changeUserName.html.jinja",
-                            form=form,
-                            siteKey=RECAPTCHA_SITE_KEY,
-                            recaptcha=RECAPTCHA,
-                        )
+                    newUserName = newUserName.replace(
+                        " ", ""
+                    )  # Remove spaces from username
                     Log.sql(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started

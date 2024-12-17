@@ -69,16 +69,14 @@ def index(by="hot", sort="desc"):
     # Create a cursor object for executing queries
     cursor = connection.cursor()
     # Select all the columns from the posts table and order them by the specified field and sorting order
-    query = ""
-    params = ()
     match by:
         case "hot": # If the sorting field is "hot"
-            query = "SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore ?"
-            params = (sort,)
+            cursor.execute(
+                f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort}"
+            ) # Execute the query to sort by hotness
+            pass
         case _: # For all other sorting fields
-            query = "SELECT * FROM posts ORDER BY ? ?"
-            params = (by, sort)
-    cursor.execute(query, params) # Execute the parameterized query
+            cursor.execute(f"select * from posts order by {by} {sort}") # Execute the query to sort by the specified field
 
     # Fetch all the results as a list of tuples
     posts = cursor.fetchall()

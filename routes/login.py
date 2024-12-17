@@ -41,11 +41,7 @@ def login(direct):
     Raises:
         401: If the login is unsuccessful.
     """
-    direct = direct.replace("&", "/").replace('\\', '')  # Convert direct link parameter and handle backslashes
-    from urllib.parse import urlparse  # Import urlparse for URL validation
-    if urlparse(direct).netloc or urlparse(direct).scheme:
-        # If the direct URL contains a host name or scheme, redirect to home page
-        direct = '/'
+    direct = direct.replace("&", "/")  # Convert direct link parameter
     match LOG_IN:
         case True:
             match "userName" in session:
@@ -53,7 +49,7 @@ def login(direct):
                     # If user is already logged in, redirect
                     Log.danger(f'User: "{session["userName"]}" already logged in')
                     return (
-                        redirect(direct),  # Safe redirect after validation
+                        redirect(direct),
                         301,
                     )
                 case False:
@@ -182,6 +178,6 @@ def login(direct):
                     )
         case False:
             return (
-                redirect(direct),  # Safe redirect after validation
+                redirect(direct),
                 301,
             )
