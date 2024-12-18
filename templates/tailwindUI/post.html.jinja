@@ -2,13 +2,18 @@
 <!-- Set the title dynamically based on the variable 'title' -->
 <title>{{ title }}</title>
 
-<!-- open graph tags -->
+<!-- Open Graph tags for social media sharing -->
 <meta property="og:type" content="article" />
 <meta property="og:title" content= "{{ title }}" />
-<meta property="og:image" content="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}" />
+<meta property="og:image" content="{{ blogPostUrl }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}" />
 <meta name="keywords" content="{{ tags }}">
 <meta name="author" content="{{ author }}">
 <meta property="og:url" content="{{ blogPostUrl }}" />
+<meta property="og:description" content="{{ content[:100] | striptags + '...' | safe }}">
+<meta name="twitter:site" content="{{ appName }}">
+<meta name="twitter:title" content="{{ title }}">
+<meta name="twitter:description" content="{{ content[:100] | striptags + '...' | safe }}">
+<meta name="twitter:image" content="{{ blogPostUrl }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}">
 <meta property="og:site_name" content="{{ appName }}">
 
 {% endblock head %} {% block body %}

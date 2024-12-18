@@ -1,6 +1,16 @@
 {% extends 'layout.html.jinja'%} {%block head%}
 <!-- Set the title of the page to the username -->
 <title>{{user[1]}}</title>
+<!-- Open Graph tags for social media sharing -->
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="{{user[1]}}" />
+<meta property="og:image" content="{{user[4]}}" />
+<meta property="og:url" content="{{request.base_url}}" />
+<meta property="og:site_name" content="{{appName}}" />
+<meta property="og:description" content="{{ user[1] }}'s Profile" />
+<meta name="twitter:image" content="{{user[4]}}" />
+<meta name="twitter:description" content="{{ user[1] }}'s Profile" />
+<meta name="twitter:title" content="{{user[1]}}" />
 {% endblock head %} {%block body%}
 <!-- Main content of the user profile page -->
 <div>

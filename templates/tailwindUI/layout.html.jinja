@@ -18,6 +18,18 @@
   <!-- External stylesheet link for Tabler Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css" />
 
+    <!-- Open Graph tags for social media sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="flaskBlog" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" />
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:description" content="{{ translations.about.description }}" />
+    <meta property="og:site_name" content="flaskBlog" />
+    <meta name="twitter:site" content="@dogukanurker" />
+    <meta name="twitter:title" content="flaskBlog" />
+    <meta name="twitter:description" content="{{ translations.about.description }}" />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" />
+
   <!-- Custom block for additional head content -->
   {% block head %} {% endblock head %}
 </head>
