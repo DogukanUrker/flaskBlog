@@ -145,7 +145,8 @@ Password: admin
 <a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="dogukanurker" width="80" height="80"></a>
 <a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="adindrabkin" width="80" height="80"></a>
 <a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="codehwang" width="80" height="80"></a>
-<a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/67013355" title="dkashkarev" width="80" height="80"></a>
+<a href="https://github.com/wishrohitv"><img src="https://avatars.githubusercontent.com/u/126248971?v=4" title="wishrohitv" width="80" height="80"></a>
+<a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/2644169" title="barmar" width="80" height="80"></a>
 
 ### Звезды ⭐
 
