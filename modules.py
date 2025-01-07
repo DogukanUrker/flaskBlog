@@ -18,6 +18,7 @@ from datetime import datetime, timedelta  # Date and time handling
 from requests import post as requestsPost  # HTTP library for sending POST requests
 from json import load  # Importing load function from json module
 import uuid  # UUID (Universally Unique Identifier) generation
+from re import sub  # Importing sub function from re module
 
 # Importing constants
 from constants import *
@@ -108,3 +109,6 @@ from utils.delete import Delete
 
 # Importing the urlID generator for posts
 from utils.generateUrlIdFromPost import generateurlID
+
+# Importing the 'calculateReadTime' function from the 'utils.calculateReadTime' module for calculating reading time.
+from utils.calculateReadTime import calculateReadTime

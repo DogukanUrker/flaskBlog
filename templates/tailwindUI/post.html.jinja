@@ -4,17 +4,33 @@
 
 <!-- Open Graph tags for social media sharing -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content= "{{ title }}" />
-<meta property="og:image" content="{{ blogPostUrl }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}" />
-<meta name="keywords" content="{{ tags }}">
-<meta name="author" content="{{ author }}">
+<meta property="og:title" content="{{ title }}" />
+<meta
+  property="og:image"
+  content="{{
+    blogPostUrl
+  }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+/>
+<meta name="keywords" content="{{ tags }}" />
+<meta name="author" content="{{ author }}" />
 <meta property="og:url" content="{{ blogPostUrl }}" />
-<meta property="og:description" content="{{ content[:100] | striptags + '...' | safe }}">
-<meta name="twitter:site" content="{{ appName }}">
-<meta name="twitter:title" content="{{ title }}">
-<meta name="twitter:description" content="{{ content[:100] | striptags + '...' | safe }}">
-<meta name="twitter:image" content="{{ blogPostUrl }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}">
-<meta property="og:site_name" content="{{ appName }}">
+<meta
+  property="og:description"
+  content="{{ content[:100] | striptags + '...' | safe }}"
+/>
+<meta name="twitter:site" content="{{ appName }}" />
+<meta name="twitter:title" content="{{ title }}" />
+<meta
+  name="twitter:description"
+  content="{{ content[:100] | striptags + '...' | safe }}"
+/>
+<meta
+  name="twitter:image"
+  content="{{
+    blogPostUrl
+  }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+/>
+<meta property="og:site_name" content="{{ appName }}" />
 
 {% endblock head %} {% block body %}
 <!-- Main Content Section -->
@@ -29,10 +45,19 @@
 
   <!-- Post Title -->
   <h1
-    class="text-2xl md:text-3xl mb-5 mt-3 text-rose-500 w-full text-center font-bold"
+    class="text-2xl md:text-3xl mt-3 text-rose-500 w-full text-center font-bold"
   >
     {{ title }}
   </h1>
+
+  <!-- Post Reading Time -->
+  <div
+    class="flex items-center justify-center gap-2 my-4 select-none opacity-75"
+  >
+    <p class="text-sm font-medium">
+      {{ readingTime|string + ' min read' }}
+    </p>
+  </div>
 
   <!-- Post Content -->
   <p>{{ content | safe }} <br /></p>

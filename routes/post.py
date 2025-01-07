@@ -13,9 +13,10 @@ from modules import (
     CommentForm,  # Form class for comments
     flashMessage,  # Flash messaging module
     DB_POSTS_ROOT,  # Path to the posts database
+    render_template,  # Template rendering function
     currentTimeStamp,  # Function to get current timestamp
     DB_COMMENTS_ROOT,  # Path to the comments database
-    render_template,  # Template rendering function
+    calculateReadTime,  # Function to calculate reading time
 )
 
 # Create a blueprint for the post route
@@ -166,6 +167,7 @@ def post(urlID):
                 comments=comments,
                 appName=APP_NAME,
                 blogPostUrl=request.root_url,
+                readingTime=calculateReadTime(post[3]),
             )
 
         case False:
