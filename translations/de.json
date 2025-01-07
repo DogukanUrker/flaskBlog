@@ -155,6 +155,7 @@
     "confirmPassword": "Passwort bestätigen"
   },
   "post": {
+    "minRead": "Minuten Lesezeit",
     "placeholder": "Was sind Ihre Gedanken?"
   },
   "sortMenu": {

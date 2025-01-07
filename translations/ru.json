@@ -155,6 +155,7 @@
     "confirmPassword": "Подтвердите пароль"
   },
   "post": {
+    "minRead": "минут на чтение",
     "placeholder": "Что вы думаете?"
   },
   "sortMenu": {

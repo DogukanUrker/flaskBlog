@@ -155,6 +155,7 @@
     "confirmPassword": "Confirmar Senha"
   },
   "post": {
+    "minRead": "min para ler",
     "placeholder": "Quais são seus pensamentos?"
   },
   "sortMenu": {

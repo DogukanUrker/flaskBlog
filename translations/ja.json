@@ -156,6 +156,7 @@
     "confirmPassword": "パスワードの確認"
   },
   "post": {
+    "minRead": "分で読む",
     "placeholder": "あなたの考えは何ですか？"
   },
   "sortMenu": {

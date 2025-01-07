@@ -155,6 +155,7 @@
     "confirmPassword": "Підтвердіть пароль"
   },
   "post": {
+    "minRead": "хвилин на читання",
     "placeholder": "Що ви думаєте?"
   },
   "sortMenu": {

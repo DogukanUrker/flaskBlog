@@ -155,6 +155,7 @@
     "confirmPassword": "Confirm Password"
   },
   "post": {
+    "minRead": "min read",
     "placeholder": "What are your thoughts?"
   },
   "sortMenu": {

@@ -154,6 +154,7 @@
     "confirmPassword": "确认密码"
   },
   "post": {
+    "minRead": "分钟阅读",
     "placeholder": "你有什么想法？"
   },
   "sortMenu": {

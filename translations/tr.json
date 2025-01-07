@@ -155,6 +155,7 @@
     "confirmPassword": "Şifreyi Onayla"
   },
   "post": {
+    "minRead": "dakika okuma",
     "placeholder": "Düşünceleriniz nedir?"
   },
   "sortMenu": {
