@@ -56,24 +56,6 @@ LOG_FOLDER_ROOT = "log/"  # (str)
 # Root path of the log file
 LOG_FILE_ROOT = LOG_FOLDER_ROOT + "log.log"  # (str)
 
-# Root path of the danger log file
-LOG_DANGER_FILE_ROOT = LOG_FOLDER_ROOT + "logDanger.log"  # (str)
-
-# Root path of the success log file
-LOG_SUCCESS_FILE_ROOT = LOG_FOLDER_ROOT + "logSuccess.log"  # (str)
-
-# Root path of the warning log file
-LOG_WARNING_FILE_ROOT = LOG_FOLDER_ROOT + "logWarning.log"  # (str)
-
-# Root path of the info log file
-LOG_INFO_FILE_ROOT = LOG_FOLDER_ROOT + "logInfo.log"  # (str)
-
-# Root path of the app log file
-LOG_APP_FILE_ROOT = LOG_FOLDER_ROOT + "logApp.log"  # (str)
-
-# Root path of the sql log file
-LOG_SQL_FILE_ROOT = LOG_FOLDER_ROOT + "logSQL.log"  # (str)
-
 
 # Secret key for Flask sessions
 APP_SECRET_KEY = secrets.token_urlsafe(32)  # (str)

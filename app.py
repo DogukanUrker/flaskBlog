@@ -137,14 +137,9 @@ from modules import (
     TEMPLATE_FOLDER,  # Importing the template folder configuration
     LOG_FOLDER_ROOT,  # Importing the log folder root configuration
     WERKZEUG_LOGGER,  # Importing the werkzeug logger configuration
-    LOG_APP_FILE_ROOT,  # Importing the app log file root configuration
     SESSION_PERMANENT,  # Importing the session permanence configuration
-    LOG_INFO_FILE_ROOT,  # Importing the info log file root configuration
     DEFAULT_ADMIN_POINT,  # Importing the default admin point configuration
     DEFAULT_ADMIN_EMAIL,  # Importing the default admin email configuration
-    LOG_DANGER_FILE_ROOT,  # Importing the danger log file root configuration
-    LOG_SUCCESS_FILE_ROOT,  # Importing the success log file root configuration
-    LOG_WARNING_FILE_ROOT,  # Importing the warning log file root configuration
     DEFAULT_ADMIN_USERNAME,  # Importing the default admin username configuration
     DEFAULT_ADMIN_PASSWORD,  # Importing the default admin password configuration
     DEFAULT_ADMIN_PROFILE_PICTURE,  # Importing the default admin profile picture configuration
@@ -276,11 +271,6 @@ Log.app(f"Session permanent: {SESSION_PERMANENT}")
 Log.app(f"Root path: {APP_ROOT_PATH}")
 Log.app(f"Log folder root: {LOG_FOLDER_ROOT}")
 Log.app(f"Log file root: {LOG_FILE_ROOT}")
-Log.app(f"Log app file root: {LOG_APP_FILE_ROOT}")
-Log.app(f"Log danger file root: {LOG_DANGER_FILE_ROOT}")
-Log.app(f"Log success file root: {LOG_SUCCESS_FILE_ROOT}")
-Log.app(f"Log info file root: {LOG_INFO_FILE_ROOT}")
-Log.app(f"Log warning file root: {LOG_WARNING_FILE_ROOT}")
 Log.app(f"Log in: {LOG_IN}")
 Log.app(f"Registration: {REGISTRATION}")
 # Log the UI name, template folder and the static folder

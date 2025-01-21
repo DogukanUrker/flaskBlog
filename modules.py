@@ -2,6 +2,8 @@
 This module contains all the necessary functions and classes to run the application.
 """
 
+from tamga import Tamga  # Importing Tamga Logger
+
 # Importing necessary modules and libraries
 import os  # Operating system interfaces
 import ssl  # Secure Sockets Layer (SSL) and Transport Layer Security (TLS) cryptographic protocols
