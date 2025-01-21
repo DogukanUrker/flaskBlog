@@ -100,7 +100,7 @@ def dashboard(userName):
                     translationFile = f"./translations/{language}.json"  # Define the path to the translation file
 
                     with open(
-                        translationFile, "r"
+                        translationFile, "r", encoding="utf-8"
                     ) as file:  # Open the translation file in read mode
                         translations = load(file)  # Load the JSON data from the file
 

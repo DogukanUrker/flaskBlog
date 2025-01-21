@@ -94,7 +94,9 @@ def index(by="hot", sort="desc"):
     translationFile = (
         f"./translations/{language}.json"  # Define the path to the translation file
     )
-    with open(translationFile, "r") as file:  # Open the translation file in read mode
+    with open(
+        translationFile, "r", encoding="utf-8"
+    ) as file:  # Open the translation file in read mode
         translations = load(file)  # Load the JSON data from the file
 
     translations = translations["sortMenu"]  # Get the translation for the sort menu

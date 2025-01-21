@@ -23,7 +23,7 @@ def loadTranslations(language):
         case True:
             # If the translation file exists, open and load the JSON data
             with open(
-                translationFile, "r"
+                translationFile, "r", encoding="utf-8"
             ) as file:  # Open the translation file in read mode
                 translations = load(file)  # Load the JSON data from the file
                 Log.info(
