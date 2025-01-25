@@ -22,7 +22,7 @@ APP_HOST = socket.gethostbyname(socket.gethostname())  # (str)
 APP_PORT = 5000  # (int)
 
 # Toggle debug mode for the Flask application
-DEBUG_MODE = True  # (bool)
+DEBUG_MODE = False  # (bool)
 
 # Name of the UI framework being used
 UI_NAME = "tailwindUI"  # (str)
