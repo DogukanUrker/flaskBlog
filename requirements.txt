@@ -6,4 +6,4 @@ Requests==2.32.3
 pipenv==2024.4.0
 WTForms==3.2.1
 gunicorn==23.0.0
-tamga==0.1.7
+tamga
