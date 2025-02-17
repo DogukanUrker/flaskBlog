@@ -192,6 +192,7 @@ from modules import (
     browserLanguage,  # A function that sets the app language based on the browser's preferred language
     injectTranslations,  # A function that injects translations into the context of the application
     returnUserProfilePicture,  # A function that returns the user's profile picture
+    returnPostUrlID # A function that returns the post's URL id
 )
 
 # Create a Flask app object with the app name, root path, static folder and template folder
@@ -225,6 +226,9 @@ app.context_processor(
 app.context_processor(
     returnUserProfilePicture
 )  # A context processor that adds the getProfilePicture variable to the template context
+app.context_processor(
+    returnPostUrlID
+) # A context processor that adds the getPostUrlIdFromPost variable to template context
 app.context_processor(
     injectTranslations
 )  # A context processor that adds the translations variable to the template context
