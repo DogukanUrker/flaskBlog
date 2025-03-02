@@ -105,13 +105,15 @@ from routes.changeProfilePicture import (
     changeProfilePictureBlueprint,
 )  # Importing the blueprint for changing profile picture route
 
+from routes.analytics import (analyticsBlueprint)
+
 from flask_wtf.csrf import (
     CSRFProtect,
     CSRFError,
 )  # Importing CSRF protection for Flask forms
 
 # Importing database related utilities
-from utils.dbChecker import dbFolder, usersTable, postsTable, commentsTable
+from utils.dbChecker import dbFolder, usersTable, postsTable, commentsTable, analyticsTable
 
 # Importing various configuration variables from the modules
 from modules import (
@@ -340,11 +342,12 @@ match DEFAULT_ADMIN:
         # Log a danger message that admin is off
         Log.app(f"Default admin is off")
 
-# Call the dbFolder, usersTable, postsTable and commentsTable functions to check the database status
+# Call the dbFolder, usersTable, postsTable , commentsTable and analyticsTable functions to check the database status
 dbFolder()
 usersTable()
 postsTable()
 commentsTable()
+analyticsTable()
 
 
 # Use the app.errorhandler decorator to register error handler functions for app
@@ -452,6 +455,9 @@ app.register_blueprint(
     changeProfilePictureBlueprint
 )  # Registering the blueprint for the change profile picture route
 
+app.register_blueprint(
+    analyticsBlueprint
+)
 
 # Check if the name of the module is the main module
 match __name__:

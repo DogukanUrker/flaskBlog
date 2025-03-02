@@ -17,6 +17,8 @@ from modules import (
     currentTimeStamp,  # Function to get current timestamp
     DB_COMMENTS_ROOT,  # Path to the comments database
     calculateReadTime,  # Function to calculate reading time
+    DB_ANALYTICS_ROOT, # Path to the analytics database
+    getDataFromUserIP # user ip data
 )
 
 # Create a blueprint for the post route
@@ -150,6 +152,43 @@ def post(urlID):
                 [(post[0])],
             )
             comments = cursor.fetchall()
+
+
+            # analytics implemetation
+            userIPData = getDataFromUserIP(str(request.headers.get('User-Agent')))
+
+            match "userName" in session:
+                case True:
+                    match userIPData["status"] == 200:
+                        case True:
+                                connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+                                connection.set_trace_callback(Log.sql)
+                                cursor = connection.cursor()
+                                # update databse
+                                cursor.execute(
+                                    """insert into postsAnalytics (post, visitorUserName, country, os, continent, timeSpentDuration, timeStamp) values (?,?,?,?,?,?,?)""",
+                                    (post[0], session["userName"], userIPData["payload"]["country"], userIPData["payload"]["os"], userIPData["payload"]["continent"], currentTimeStamp(),currentTimeStamp())
+                                )
+                                connection.commit()
+                                connection.close()
+                        case False:
+                                Log.danger(f"Aborting postsAnalytics data, {userIPData["massege"]}")
+                case False:
+                    match userIPData["status"] == 200:
+                        case True:
+                                connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+                                connection.set_trace_callback(Log.sql)
+                                cursor = connection.cursor()
+                                # update databse
+                                cursor.execute(
+                                    """insert into postsAnalytics (post, visitorUserName, country, os, continent, timeSpentDuration, timeStamp) values (?,?,?,?,?,?,?)""",
+                                    (post[0], "unsignedUser", userIPData["payload"]["country"], userIPData["payload"]["os"], userIPData["payload"]["continent"], currentTimeStamp(),currentTimeStamp())
+                                )
+                                connection.commit()
+                                connection.close()
+                        case False:
+                                Log.danger(f"Aborting postsAnalytics, {userIPData["message"]}")
+                      
 
             # Render the post template with the post and comments data, the form object, and the app name
             return render_template(

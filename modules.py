@@ -114,3 +114,6 @@ from utils.generateUrlIdFromPost import generateurlID
 
 # Importing the 'calculateReadTime' function from the 'utils.calculateReadTime' module for calculating reading time.
 from utils.calculateReadTime import calculateReadTime
+
+# Importing the getDataFromUserIp for analytics
+from utils.getAnalyticsInfo import getDataFromUserIP
