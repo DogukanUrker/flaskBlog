@@ -32,6 +32,7 @@ from modules import (
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     DB_USERS_ROOT,  # A constant for the path to the users database
     DB_COMMENTS_ROOT,  # A constant for the path to the comments database
+    DB_ANALYTICS_ROOT,  # A constant for the path to the analytics database
 )
 
 
@@ -90,6 +91,25 @@ class Delete:
             [(commentCount)],  # Use a parameterized query to avoid SQL injection
         )
         connection.commit()  # Commit the changes to the database
+
+        # delete post's analytics data
+        connection = sqlite3.connect(
+        DB_ANALYTICS_ROOT
+        )  # Connect to the comments database
+        connection.set_trace_callback(
+            Log.sql
+        )  # Set the trace callback for the connection
+        cursor = connection.cursor()  # Create a cursor object for executing queries
+        cursor.execute(
+            """select postID from postsAnalytics where postID = ? """,  # Select the postID column from the postsAnalytcs table where the id matches the given postID
+            [(postID)],  # Use a parameterized query to avoid SQL injection
+        )
+        cursor.execute(
+            """delete from postsAnalytics where postID = ? """,  # Delete the row from the postsAnalytcs table where the id matches the given postID
+            [(postID)],  # Use a parameterized query to avoid SQL injection
+        )
+        connection.commit() # Commit the changes to the database
+
         flashMessage(
             page="delete",
             message="post",

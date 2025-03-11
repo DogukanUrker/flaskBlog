@@ -32,6 +32,37 @@
 />
 <meta property="og:site_name" content="{{ appName }}" />
 
+
+<script>
+  // function to count visitors time spend time on post
+  // store in seconds in database
+  let visiorID = {{ idForRandomVisitor | safe}};
+  let initailSpendTime = 0;
+
+  // check visitorID is not null then perform fetch operation and increment
+  if(visiorID!=null){
+    
+    setInterval(() => {
+      // increase initial spend time on every interval with 5 
+      initailSpendTime += 5;
+
+      const data = {
+        visitorID: visiorID,
+        spendTime: initailSpendTime,
+      };
+      // send data on every 5 second to store on database of visitor
+    
+    // send post request to server and update visitors time spend duration 
+    fetch("{{ url_for('returnPostTrafficGraphData.storeTimeSpendsDuraton') }}", {
+      method: "POST",
+      headers: {'X-CSRFToken': '{{ csrf_token() }}', "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+      keepalive: true
+    });
+    }, 5000);
+  };
+</script>
+
 {% endblock head %} {% block body %}
 <!-- Main Content Section -->
 <div
@@ -57,6 +88,10 @@
     <p class="text-sm font-medium">
       {{ readingTime|string + " " + translations.post.minRead }}
     </p>
+    <!-- view page performance for admin or post author -->
+    {% if author == session["userName"] or "admin" == session["userName"] %}
+      <a href="/analytics/posts/{{ urlID }}" class="shadow-lg hover:text-rose-500 duration-150">{{ translations.post.viewPerformance }}</a>
+    {% endif %}
   </div>
 
   <!-- Post Content -->
@@ -116,11 +151,7 @@
   <div class="flex justify-between px-2">
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <button
-        type="submit"
-        name="postDeleteButton"
-        class="text-rose-500 hover:text-rose-500/75 duration-150"
-      >
+      <button type="submit" name="postDeleteButton" class="text-rose-500 hover:text-rose-500/75 duration-150">
         <i class="ti ti-trash-x mr-1 text-2xl"></i>
       </button>
     </form>

@@ -16,6 +16,7 @@ from modules import (
     DEFAULT_ADMIN,  # Boolean indicating whether a default admin account should be created
     DB_FOLDER_ROOT,  # Root directory path for the database folder
     DB_COMMENTS_ROOT,  # Root directory path for the comments database
+    DB_ANALYTICS_ROOT,  # Root directory path for the analytics database
     DEFAULT_ADMIN_POINT,  # Default points assigned to the admin user
     DEFAULT_ADMIN_EMAIL,  # Default email for the admin user
     DEFAULT_ADMIN_USERNAME,  # Default username for the admin user
@@ -255,3 +256,63 @@ def commentsTable():
         connection.close()
         # Print a message with the level 2 (success) and the table name
         Log.success(f'Table: "comments" created in "{DB_COMMENTS_ROOT}"')
+
+# This function checks if the analytics table exists in the database, and creates it if it does not.
+def analyticsTable():
+    """
+    Checks if the analytics table exists in the database, and creates it if it does not.
+
+    Returns:
+        None
+    """
+    # Use the exists function to check if the DB_ANALYTICS_ROOT constant is a valid path
+    match exists(DB_ANALYTICS_ROOT):
+        # If the path exists, print a message with the level 6 (informational) and the database name
+        case True:
+            Log.app(f'Analytics database: "{DB_ANALYTICS_ROOT}" found')
+        # If the path does not exist, print a message with the level 1 (alert) and the database name
+        case False:
+            Log.danger(f'Analytics database: "{DB_ANALYTICS_ROOT}" not found')
+            # Use the open function with the "x" mode to create a new file for the database
+            open(DB_ANALYTICS_ROOT, "x")
+            # Print a message with the level 2 (success) and the database name
+            Log.success(f'Analytics database: "{DB_ANALYTICS_ROOT}" created')
+    Log.sql(
+        f"Connecting to '{DB_ANALYTICS_ROOT}' database"
+    )  # Log the database connection is started
+
+    # Use the sqlite3 module to connect to the database and get a cursor object
+    connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    cursor = connection.cursor()
+    try:
+        # Try to execute a SQL query to select id records from the postAnalytics table
+        cursor.execute("""select id from postsAnalytics; """).fetchall()
+        # If the query succeeds, print a message with the level 6 (informational) and the table name
+        Log.app(f'Table: "postsAnalytics" found in "{DB_ANALYTICS_ROOT}"')
+        # Close the connection to the database
+        connection.close()
+    except:
+        # If the query fails, print a message with the level 1 (alert) and the table name
+        Log.danger(f'Table: "postsAnalytics" not found in "{DB_ANALYTICS_ROOT}"')
+        # Define a SQL statement to create the postAnalytics table with the specified columns and constraints
+        analyticsTable = """
+        create table if not exists postsAnalytics(
+            "id"    integer not null,
+            "postID"  integer,
+            "visitorUserName"  text,
+            "country" text,
+            "os" text,
+            "continent" text,
+            "timeSpendDuration" int default 0,
+            "timeStamp" integer,
+            primary key("id" autoincrement)
+        );"""
+        # Execute the SQL statement to create the table
+        cursor.execute(analyticsTable)
+        # Commit the changes to the database
+        connection.commit()
+        # Close the connection to the database
+        connection.close()
+        # Print a message with the level 2 (success) and the table name
+        Log.success(f'Table: "postsAnalytics" created in "{DB_ANALYTICS_ROOT}"')
