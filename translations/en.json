@@ -156,7 +156,8 @@
   },
   "post": {
     "minRead": "min read",
-    "placeholder": "What are your thoughts?"
+    "placeholder": "What are your thoughts?",
+    "viewPerformance": "View Performance"
   },
   "sortMenu": {
     "asc": "Ascending",
@@ -320,6 +321,22 @@
     "contactText": "If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us. Mail:"
   },
   "analytics":{
-    "title": "Analytics"
+    "title": "Analytics",
+    "goToPage" : "Go to page",
+    "totalVisitor": "Total Visitor",
+    "todaysVisitor": "Today's Visitor",
+    "category": "Category",
+    "onPosted": "On Posted",
+    "trafficCount": "Traffic Count",
+    "sincePosted": "Since Posted",
+    "last1month": "Last 1m",
+    "last7days": "Last 7d",
+    "last24hours": "Last 24h",
+    "last48hours": "Last 48h",
+    "traffic": "Traffic",
+    "visitorCounts": "Visitor Counts",
+    "computerOS": "Computer OS",
+    "topCountries": "Top Countries",
+    "visitor": "Visitor"
   }
 }

@@ -260,12 +260,12 @@ def commentsTable():
 # This function checks if the analytics table exists in the database, and creates it if it does not.
 def analyticsTable():
     """
-    Checks if the comments table exists in the database, and creates it if it does not.
+    Checks if the analytics table exists in the database, and creates it if it does not.
 
     Returns:
         None
     """
-    # Use the exists function to check if the DB_COMMENTS_ROOT constant is a valid path
+    # Use the exists function to check if the DB_ANALYTICS_ROOT constant is a valid path
     match exists(DB_ANALYTICS_ROOT):
         # If the path exists, print a message with the level 6 (informational) and the database name
         case True:
@@ -294,17 +294,17 @@ def analyticsTable():
         connection.close()
     except:
         # If the query fails, print a message with the level 1 (alert) and the table name
-        Log.danger(f'Table: "analytics" not found in "{DB_ANALYTICS_ROOT}"')
+        Log.danger(f'Table: "postsAnalytics" not found in "{DB_ANALYTICS_ROOT}"')
         # Define a SQL statement to create the postAnalytics table with the specified columns and constraints
         analyticsTable = """
         create table if not exists postsAnalytics(
             "id"    integer not null,
-            "post"  integer,
+            "postID"  integer,
             "visitorUserName"  text,
             "country" text,
             "os" text,
             "continent" text,
-            "timeSpentDuration" int,
+            "timeSpendDuration" int default 0,
             "timeStamp" integer,
             primary key("id" autoincrement)
         );"""
@@ -315,4 +315,4 @@ def analyticsTable():
         # Close the connection to the database
         connection.close()
         # Print a message with the level 2 (success) and the table name
-        Log.success(f'Table: "analytics" created in "{DB_ANALYTICS_ROOT}"')
+        Log.success(f'Table: "postsAnalytics" created in "{DB_ANALYTICS_ROOT}"')

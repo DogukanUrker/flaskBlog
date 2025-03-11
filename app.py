@@ -104,8 +104,12 @@ from routes.adminPanelComments import (
 from routes.changeProfilePicture import (
     changeProfilePictureBlueprint,
 )  # Importing the blueprint for changing profile picture route
-
-from routes.analytics import (analyticsBlueprint)
+from routes.analytics import (
+    analyticsBlueprint,
+)  # Importing the blueprint for analytics page route
+from routes.returnPostAnalyticsData import (
+    returnPostAnalyticsDataBlueprint,
+)  # Importing the blueprint for postAnalyticsData endpoint route
 
 from flask_wtf.csrf import (
     CSRFProtect,
@@ -454,10 +458,12 @@ app.register_blueprint(
 app.register_blueprint(
     changeProfilePictureBlueprint
 )  # Registering the blueprint for the change profile picture route
-
 app.register_blueprint(
     analyticsBlueprint
-)
+)   # Registering the blueprint for the analytics page route
+app.register_blueprint(
+    returnPostAnalyticsDataBlueprint
+)   # Registering the blueprint for the postAnalyticsData endpoint route
 
 # Check if the name of the module is the main module
 match __name__:

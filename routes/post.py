@@ -18,7 +18,7 @@ from modules import (
     DB_COMMENTS_ROOT,  # Path to the comments database
     calculateReadTime,  # Function to calculate reading time
     DB_ANALYTICS_ROOT, # Path to the analytics database
-    getDataFromUserIP # user ip data
+    getDataFromUserIP # Function to get data visitors IP Address
 )
 
 # Create a blueprint for the post route
@@ -154,41 +154,39 @@ def post(urlID):
             comments = cursor.fetchall()
 
 
-            # analytics implemetation
+            # posts analytics implemetation starts here
+            # get user agent string to fectch visitor's computer os and call funtion to get visitor's ip address find visitor's country, continent
             userIPData = getDataFromUserIP(str(request.headers.get('User-Agent')))
-
+            idForRandomVisitor = None # assign row id for visitors activity data initially None
             match "userName" in session:
                 case True:
-                    match userIPData["status"] == 200:
-                        case True:
-                                connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-                                connection.set_trace_callback(Log.sql)
-                                cursor = connection.cursor()
-                                # update databse
-                                cursor.execute(
-                                    """insert into postsAnalytics (post, visitorUserName, country, os, continent, timeSpentDuration, timeStamp) values (?,?,?,?,?,?,?)""",
-                                    (post[0], session["userName"], userIPData["payload"]["country"], userIPData["payload"]["os"], userIPData["payload"]["continent"], currentTimeStamp(),currentTimeStamp())
-                                )
-                                connection.commit()
-                                connection.close()
-                        case False:
-                                Log.danger(f"Aborting postsAnalytics data, {userIPData["massege"]}")
+                    sessionUser = session["userName"] 
                 case False:
-                    match userIPData["status"] == 200:
-                        case True:
-                                connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-                                connection.set_trace_callback(Log.sql)
-                                cursor = connection.cursor()
-                                # update databse
-                                cursor.execute(
-                                    """insert into postsAnalytics (post, visitorUserName, country, os, continent, timeSpentDuration, timeStamp) values (?,?,?,?,?,?,?)""",
-                                    (post[0], "unsignedUser", userIPData["payload"]["country"], userIPData["payload"]["os"], userIPData["payload"]["continent"], currentTimeStamp(),currentTimeStamp())
-                                )
-                                connection.commit()
-                                connection.close()
-                        case False:
-                                Log.danger(f"Aborting postsAnalytics, {userIPData["message"]}")
-                      
+                    sessionUser = "unsignedUser"
+            match userIPData["status"] == 0:
+                case True:
+                    Log.sql(
+                        f"Connecting to '{DB_ANALYTICS_ROOT}' database"
+                    )  # Log the database connection is started
+                    # Connect to the analytics database
+                    connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+                    connection.set_trace_callback(
+                        Log.sql
+                    ) # Set the trace callback for the connection
+                    cursor = connection.cursor()
+
+                    # add visitor's data in databse
+                    cursor.execute(
+                        """insert into postsAnalytics (postID, visitorUserName, country, os, continent, timeStamp) values (?,?,?,?,?,?) RETURNING id""",
+                        (post[0], sessionUser, userIPData["payload"]["country"], userIPData["payload"]["os"], userIPData["payload"]["continent"],currentTimeStamp())
+                    )
+                    idForRandomVisitor = cursor.fetchone()[0] # assign row id for random visitors
+                    connection.commit()
+                    connection.close()
+                case False:
+                    Log.danger(f"Aborting postsAnalytics, {userIPData["message"]}")
+                    # Log a message with level 1 indicating the visitor IP is not found
+            # posts analytics implemetation ends here          
 
             # Render the post template with the post and comments data, the form object, and the app name
             return render_template(
@@ -207,6 +205,7 @@ def post(urlID):
                 appName=APP_NAME,
                 blogPostUrl=request.root_url,
                 readingTime=calculateReadTime(post[3]),
+                idForRandomVisitor = idForRandomVisitor,
             )
 
         case False:

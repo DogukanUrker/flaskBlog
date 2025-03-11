@@ -21,6 +21,10 @@ from requests import post as requestsPost  # HTTP library for sending POST reque
 from json import load  # Importing load function from json module
 import uuid  # UUID (Universally Unique Identifier) generation
 from re import sub  # Importing sub function from re module
+import requests # Importing requests module for http requests
+from user_agents import parse # Importing parse function to parsing user agent string
+import geoip2 # Importing geoip2.databse
+from geoip2 import database # Importing geoip2.databse
 
 # Importing constants
 from constants import *
@@ -64,6 +68,7 @@ from flask import (
     send_file,  # Sends a file to the client
     render_template,  # Renders HTML templates
     send_from_directory,  # Sends a file from a directory to the client
+    make_response, # Sends a response to client
 )
 
 # Importing the 'flashMessage' function from the 'utils.flashMessage' module for displaying flash messages.
@@ -86,7 +91,6 @@ from utils.getProfilePicture import getProfilePicture
 
 # Importing the 'terminalASCII' function from the 'utils.terminalASCII' module for displaying ASCII art in the terminal.
 from utils.terminalASCII import terminalASCII
-
 
 # Importing the 'isLogin' context processor from the 'utils.contextProcessor.isLogin' module
 from utils.contextProcessor.isLogin import isLogin
@@ -115,5 +119,8 @@ from utils.generateUrlIdFromPost import generateurlID
 # Importing the 'calculateReadTime' function from the 'utils.calculateReadTime' module for calculating reading time.
 from utils.calculateReadTime import calculateReadTime
 
-# Importing the getDataFromUserIp for analytics
-from utils.getAnalyticsInfo import getDataFromUserIP
+# Importing the getDataFromUserIP for analytics
+from utils.getDataFromUserIP import getDataFromUserIP
+
+# Importing the getAnalyticsPageCountryGraphData, getAnalyticsPageOSGraphData, getAnalyticsPageTrafficGraphData for analytics
+from utils.getAnalyticsPageData import getAnalyticsPageCountryGraphData, getAnalyticsPageOSGraphData, getAnalyticsPageTrafficGraphData

@@ -157,7 +157,8 @@
   },
   "post": {
     "minRead": "分で読む",
-    "placeholder": "あなたの考えは何ですか？"
+    "placeholder": "あなたの考えは何ですか？",
+    "viewPerformance": "パフォーマンスを表示"
   },
   "sortMenu": {
     "asc": "昇順",
@@ -319,5 +320,24 @@
     "changesText": "プライバシーポリシーは随時更新される場合があります。従って、このページを定期的に確認して変更点を確認することをお勧めします。変更があった場合は、新しいプライバシーポリシーをこのページに掲載します。これらの変更は、掲載後すぐに有効になります。",
     "contact": "お問い合わせ",
     "contactText": "プライバシーポリシーについて質問や提案がある場合は、お気軽にご連絡ください。メール："
+  },
+  "analytics": {
+    "title": "分析",
+    "goToPage": "ページへ移動",
+    "totalVisitor": "総訪問者",
+    "todaysVisitor": "今日の訪問者",
+    "category": "カテゴリ",
+    "onPosted": "投稿日",
+    "trafficCount": "トラフィック数",
+    "sincePosted": "投稿以来",
+    "last1month": "過去1ヶ月",
+    "last7days": "過去7日",
+    "last24hours": "過去24時間",
+    "last48hours": "過去48時間",
+    "traffic": "トラフィック",
+    "visitorCounts": "訪問者数",
+    "computerOS": "コンピューターOS",
+    "topCountries": "トップの国々",
+    "visitor": "訪問者"
   }
 }

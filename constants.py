@@ -42,7 +42,7 @@ REGISTRATION = True  # (bool)
 # Supported languages for the application
 LANGUAGES = ["en", "tr", "es", "de", "zh", "fr", "uk", "ru", "pt", "ja", "pl"]  # (list)
 
-# Enable or Disable analytics
+# Enable or Disable analytics feature for posts
 ANALYTICS = True # (bool)
 
 ### LOGGER SETTINGS ###

@@ -155,7 +155,8 @@
   },
   "post": {
     "minRead": "分钟阅读",
-    "placeholder": "你有什么想法？"
+    "placeholder": "你有什么想法？",
+    "viewPerformance": "查看性能"
   },
   "sortMenu": {
     "asc": "升序",
@@ -317,5 +318,24 @@
     "changesText": "我们可能会不时更新我们的隐私政策。因此，建议您定期查看此页面的任何更改。我们将在此页面上发布新的隐私政策，通知您任何更改。这些更改在发布到此页面后立即生效。",
     "contact": "联系我们",
     "contactText": "如果您对我们的隐私政策有任何疑问或建议，请随时联系我们。电子邮件："
+  },
+  "analytics": {
+    "title": "分析",
+    "goToPage": "转到页面",
+    "totalVisitor": "总访问者",
+    "todaysVisitor": "今日访问者",
+    "category": "类别",
+    "onPosted": "发布于",
+    "trafficCount": "流量统计",
+    "sincePosted": "自发布以来",
+    "last1month": "最近 1 个月",
+    "last7days": "最近 7 天",
+    "last24hours": "最近 24 小时",
+    "last48hours": "最近 48 小时",
+    "traffic": "流量",
+    "visitorCounts": "访问计数",
+    "computerOS": "计算机操作系统",
+    "topCountries": "热门国家",
+    "visitor": "访客"
   }
 }
