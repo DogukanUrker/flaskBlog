@@ -22,7 +22,7 @@ APP_HOST = socket.gethostbyname(socket.gethostname())  # (str)
 APP_PORT = 5000  # (int)
 
 # Toggle debug mode for the Flask application
-DEBUG_MODE = True  # (bool)
+DEBUG_MODE = False  # (bool)
 
 # Name of the UI framework being used
 UI_NAME = "tailwindUI"  # (str)
@@ -83,7 +83,7 @@ DB_POSTS_ROOT = DB_FOLDER_ROOT + "posts.db"  # (str)
 # Root path of the comments database
 DB_COMMENTS_ROOT = DB_FOLDER_ROOT + "comments.db"  # (str)
 
-# Root path of the post database
+# Root path of the analytics database
 DB_ANALYTICS_ROOT = DB_FOLDER_ROOT + "analytics.db" # (str)
 
 

@@ -1,10 +1,10 @@
 # Import the modules module that contains constants and functions for the app
 from modules import (
-    getPostUrlIdFromPost,  # A function that returns the user's profile picture URL
+    getPostUrlIdFromPost,  # A function that returns the post's urlID
 )
 
 
-# Define a function that returns a dictionary with the post's URL id
+# Define a function that returns a dictionary with the post's urlID
 def returnPostUrlID():
     """
     Returns a dictionary with the post's URL id.

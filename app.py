@@ -104,7 +104,7 @@ from routes.adminPanelComments import (
 from routes.changeProfilePicture import (
     changeProfilePictureBlueprint,
 )  # Importing the blueprint for changing profile picture route
-from routes.analytics import (
+from routes.postsAnalytics import (
     analyticsBlueprint,
 )  # Importing the blueprint for analytics page route
 from routes.returnPostAnalyticsData import (

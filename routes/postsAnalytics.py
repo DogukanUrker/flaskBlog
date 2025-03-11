@@ -79,7 +79,7 @@ def analyticsPost(urlID):
                             # country data
                             counryGraphData = getAnalyticsPageCountryGraphData(post[0])
 
-                            return render_template("analytics.html.jinja", post=post, todaysVisitor=todaysVisitor, postGraphData=postGraphData, osGraphData=osGraphData, counryGraphData=counryGraphData)
+                            return render_template("postsAnalytics.html.jinja", post=post, todaysVisitor=todaysVisitor, postGraphData=postGraphData, osGraphData=osGraphData, counryGraphData=counryGraphData)
                         
                         case False:
                             Log.danger(
