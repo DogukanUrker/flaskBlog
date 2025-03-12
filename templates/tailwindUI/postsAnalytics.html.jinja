@@ -1,0 +1,468 @@
+{% extends 'layout.html.jinja' %}
+{% block head %}
+<!-- Set the title of the About page with the post tittle -->
+<title>{{ translations.analytics.title}} : {{ post[1] }}</title>
+
+<!-- Apex charts cdn link for rendering charts -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+  window.Promise ||
+    document.write(
+      '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+    )
+  window.Promise ||
+    document.write(
+      '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+    )
+  window.Promise ||
+    document.write(
+      '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+    )
+</script>
+<!-- Apex charts cdn link for rendering charts ends here -->
+
+<!-- postAnalyticsDataUrl -->
+<script>
+  // api endpoint url for fetching graph data on button events
+  let postAnalyticsDataLineGraphUrl = "/api/v1/postTrafficGraphData?postID={{ post[0] }}&";  // pass postID
+  let postAnalyticsDataCountryGraphUrl = "/api/v1/postCountryGraphData?postID={{ post[0] }}&"; // pass postID
+</script>
+{% endblock head %}
+
+{% block body %}
+
+<div class="mx-auto mt-6 md:mt-10 md:max-w-[868px] break-words px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+
+  <div class="mx-auto max-w-screen-xl">
+    <div class="mx-auto max-w-3xl text-center">
+
+      <!-- post title -->
+      <h2 class="text-3xl font-bold sm:text-4xl">{{ post[1] }}</h2>
+
+      <div class="mt-4 text-gray-500 sm:text-sm flex justify-center gap-2">
+        <a href="/user/{{ post[5] | lower }}" class="hover:text-rose-500/75 duration-150">
+          <h5 class="m-1 flex">
+            <img class="w-7 mr-2 select-none" src="{{ getProfilePicture( post[5]) }}" alt="{{ post[5] }}" />
+            {{ post[5] }}
+          </h5>
+        </a>
+        <div class="w-[2px] bg-slate-500 rounded mx-[4px] h-[28px] mt-[4px]"></div>
+        <a class="hover:text-rose-500/75 mt-[5px]" href="/post/{{ post[10] }}">{{ translations.analytics.goToPage }}</a>
+      </div>
+    </div>
+
+    <dl class="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="flex flex-col rounded-lg bg-rose-50 px-4 py-8 text-center">
+        <dt class="order-last text-lg font-medium text-gray-500">{{ translations.analytics.totalVisitor }}</dt>
+
+        <dd class="text-4xl font-extrabold text-rose-500/75 md:text-5xl">{{ post[6] }}</dd>
+      </div>
+
+      <div class="flex flex-col rounded-lg bg-rose-50 px-4 py-8 text-center">
+        <dt class="order-last text-lg font-medium text-gray-500">{{ translations.analytics.todaysVisitor }}</dt>
+
+        <dd class="text-4xl font-extrabold text-rose-500/75 md:text-5xl">{{ todaysVisitor }}</dd>
+      </div>
+
+      <div class="flex flex-col rounded-lg bg-rose-50 px-4 py-8 text-center">
+        <dt class="order-last text-lg font-medium text-gray-500">{{ translations.analytics.category }}</dt>
+
+        <dd class="text-4xl font-extrabold text-rose-500/75 md:text-4xl">{{ post[9] }}</dd>
+      </div>
+
+      <div class="flex flex-col rounded-lg bg-rose-50 px-4 py-8 text-center">
+        <dt class="order-last text-lg font-medium text-gray-500">{{ translations.analytics.onPosted }}</dt>
+
+        <dd class="text-4xl font-extrabold text-rose-500/75 md:text-4xl date">{{ post[7] }}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <br><br>
+
+  <h2 class="text-2xl text-black-900 m-2 font-bold">{{ translations.analytics.trafficCount }}</h2>
+
+  <!-- datettime duration rage picker starts here  -->
+  <!-- date duration tab for mobile screens -->
+  <div class="flex flex-row justify-end m-4">
+    <div class="sm:hidden flex gap-1">
+      <label for="durationRangetab" class="sr-only"></label>
+      <select id="durationRangetab" class="w-full rounded-md border-gray-200" id="choiceSelect">
+        <option onclick="changeTabState('sincePosted')" value="sincePosted">{{ translations.analytics.sincePosted }}
+        </option>
+        <option onclick="changeTabState('last1m')" value="last1m">{{ translations.analytics.last1month }}</option>
+        <option onclick="changeTabState('last7d')" value="last7d">{{ translations.analytics.last7days }}</option>
+        <option onclick="changeTabState('last24h')" value="last24h">{{ translations.analytics.last24hours }}</option>
+        <option onclick="changeTabState('last48h')" value="last48h" selected>{{ translations.analytics.last48hours }}
+        </option>
+      </select>
+      <div class="border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="spinnerCircle"></div>
+    </div>
+    <script>
+      function start() {
+        document.getElementById("durationRangetab").addEventListener("change", durationRangeCallback, false);
+      }
+
+      //  Function to fetch trafiic data for mobile screens
+      function durationRangeCallback() {
+        // Get the selected option
+        let selectedDurationRange = document.getElementById("durationRangetab").value
+        // Get spinner id
+        let spinnerCircle = document.getElementById("spinnerCircle")
+
+        // Match the currently selected duration
+        // And call the fetch function to get data from backend
+        if (selectedDurationRange === "sincePosted") {
+          // call function for new duration range data
+          fetchTrafficGraphData(spinnerCircle, "sincePosted=True");
+        } else if (selectedDurationRange === "last1m") {
+          // call function for new duration range data
+          fetchTrafficGraphData(spinnerCircle, "weeks=4");
+        } else if (selectedDurationRange === "last7d") {
+          // call function for new duration range data
+          fetchTrafficGraphData(spinnerCircle, "days=7");
+        } else if (selectedDurationRange === "last24h") {
+          // call function for new duration range data
+          fetchTrafficGraphData(spinnerCircle, "hours=24");
+        } else {
+          // call function for new duration range data
+          fetchTrafficGraphData(spinnerCircle, "hours=48");
+        }
+      }
+
+      window.addEventListener("load", start, false);
+    </script>
+    <!-- tabs for mobile screens ends here -->
+
+    <!-- spinner circle starts here -->
+    <style>
+      .spinner-circle {
+        border-top-color: transparent;
+        animation: spin 1s linear infinite;
+        display: none;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <!-- spinner circle ends here-->
+
+
+    <!-- tabs starts here-->
+    <!-- tabs for big screens -->
+    <div class="hidden sm:block">
+      <nav class="flex gap-6" aria-label="Tabs">
+
+        <div class="button-container flex items-center gap-1">
+          <div id="sincePosted" onclick="changeTabState('sincePosted')"
+            class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
+            {{ translations.analytics.sincePosted }}
+          </div>
+          <div class="border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="sincePosted1"></div>
+        </div>
+
+        <div class="button-container flex items-center gap-1">
+          <div id="last1m" onclick="changeTabState('last1m')"
+            class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
+            {{ translations.analytics.last1month }}
+          </div>
+          <div class="border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last1m1"></div>
+        </div>
+
+        <div class="button-container flex items-center gap-1">
+          <div id="last7d" onclick="changeTabState('last7d')"
+            class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
+            {{ translations.analytics.last7days }}
+          </div>
+          <div class="border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last7d1"></div>
+        </div>
+
+        <div class="button-container flex items-center gap-1">
+          <div id="last24h" onclick="changeTabState('last24h')"
+            class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
+            {{ translations.analytics.last24hours }}
+          </div>
+          <div class="border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last24h1"></div>
+        </div>
+
+
+        <div class="button-container flex items-center gap-1">
+          <div id="last48h" onclick="changeTabState('last48h')"
+            class="shrink-0 rounded-lg p-2 text-sm font-medium bg-rose-500/75 text-black hover:cursor-pointer">
+            {{ translations.analytics.last48hours }}
+          </div>
+          <div class="border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last48h1"></div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <script>
+    var initialStateTabId = "last48h"; // initial tab id
+    function changeTabState(tabID) {
+      document.getElementById(initialStateTabId).classList.remove("bg-rose-500/75", "text-black"); // remove existing classes
+      document.getElementById(initialStateTabId).classList.add("text-gray-500", "hover:text-rose-500/75", "hover:text-gray-700"); // classes neccessory class
+      document.getElementById(tabID).classList.remove("text-gray-500", "hover:text-rose-500/75", "hover:text-gray-700");
+      document.getElementById(tabID).classList.add("bg-rose-500/75", "text-black");
+
+      // update the initial tabs to cureent selected tab
+      initialStateTabId = tabID;
+
+      // spinner id to activate and deactivate animation
+      let spinnerID = document.getElementById(tabID + 1); // Match spinner ID
+
+      // check which buttons are pressed and fetch data accordingly
+      if (tabID === "sincePosted") {
+        // call function for new duration range data
+        fetchTrafficGraphData(spinnerID, "sincePosted=True");
+      } else if (tabID === "last1m") {
+        // call function for new duration range data
+        fetchTrafficGraphData(spinnerID, "weeks=4");
+      } else if (tabID === "last7d") {
+        // call function for new duration range data
+        fetchTrafficGraphData(spinnerID, "days=7");
+      } else if (tabID === "last24h") {
+        // call function for new duration range data
+        fetchTrafficGraphData(spinnerID, "hours=24");
+      } else {
+        // call function for new duration range data
+        fetchTrafficGraphData(spinnerID, "hours=48");
+      }
+    }
+
+    // function for fetching selected duration line graph data
+    async function fetchTrafficGraphData(spinnerID, durationRangeQuery) {
+
+      try {
+        spinnerID.style.display = "block"; // Show spinner
+        let response = await fetch(postAnalyticsDataLineGraphUrl + durationRangeQuery)
+        let responsedData = await response.json()
+
+        if (response.ok) {
+          refreshedLineGraphData = responsedData.payload
+
+          // calling updateLineChart funtion to update line chart
+          updateLineChart()
+        } else {
+          alert(responsedData.message)
+        }
+        spinnerID.style.display = "none"; // Hide spinner
+        // console.log(responsedData.payload)
+      } catch (error) {
+        alert("Failed to fetch data");
+        console.error(error);
+        spinnerID.style.display = "none"; // Hide spinner
+      }
+    }
+  </script>
+  <!-- date rage picker ends here -->
+
+  <!-- line chart starts here -->
+  <!-- https://apexcharts.com/docs/chart-types/line-chart/ -->
+  <div id="line_chart"></div>
+  <script>
+    var postGraphData = {{ postGraphData | safe }}
+    var options = {
+      series: [{
+        name: '{{ translations.analytics.visitorCounts }}',// 'Visitor Counts'
+        data: postGraphData
+      }],
+      chart: {
+        type: 'area',
+        stacked: false,
+        height: 350,
+        zoom: {
+          type: 'x',
+          enabled: true,
+          autoScaleYaxis: true
+        },
+        toolbar: {
+          autoSelected: 'zoom'
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      markers: {
+        size: 0,
+      },
+      title: {
+        text: '{{ translations.analytics.traffic }}', // 'Traffic'
+        align: 'left'
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shadeIntensity: 1,
+          inverseColors: false,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [0, 90, 100]
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            // Convert to millions with 2 decimal places
+            // Keep whole numbers for smaller values
+            return val >= 1000000 ? (val / 1000000).toFixed(2) + "M" : val.toFixed(0);
+          },
+        },
+        title: {
+          text: 'Visits'
+        },
+      },
+      xaxis: {
+        type: 'datetime'
+      },
+      tooltip: {
+        shared: false,
+        y: {
+          formatter: function (val) {
+            // Convert to millions with 2 decimal places
+            // Keep whole numbers for smaller values
+            return val >= 1000000 ? (val / 1000000).toFixed(2) + "M" : val.toFixed(0);
+          }
+        }
+      },
+      colors: ['#f43f5e'],
+      theme: {
+        mode: "light" // todo: impement dart and light mode adjust dynamically
+      }
+    };
+
+    var line_chart = new ApexCharts(document.querySelector("#line_chart"), options);
+    line_chart.render();
+    // update/refresh method for graph
+    function updateLineChart() {
+      line_chart.updateSeries([{
+        data: refreshedLineGraphData
+      }])
+    }
+  </script>
+  <!-- line chart ends here -->
+
+  <br>
+  <!-- pie chart -->
+  <h2 class="text-xl m-2 font-bold">{{ translations.analytics.computerOS }}</h2>
+  <!-- docs https://apexcharts.com/docs/chart-types/pie-donut/ -->
+  <div id="pie_chart" class="flex justify-center"></div>
+
+  <script>
+    var osGraphData = {{ osGraphData | safe }}
+    var options = {
+      series: osGraphData["osCountList"], // visitor's computer os count
+      chart: {
+        width: 380,
+        type: 'pie',
+      },
+      labels: osGraphData["osNameList"], // visitor's computers os
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }],
+      theme: {
+        palette: 'palette6' // upto palette10
+      }
+    };
+
+    var pie_chart = new ApexCharts(document.querySelector("#pie_chart"), options);
+    pie_chart.render();
+  </script>
+
+
+  <!-- basic bar chart for country -->
+  <!-- docs https://apexcharts.com/docs/chart-types/bar-chart/ -->
+  <div>
+    <h2 class="text-2xl font-bold m-2">{{ translations.analytics.topCountries }}</h2>
+    <div id="bar_chart"></div>
+    <div class="flex justify-center item-center">
+      <button onclick="fetchCountryGraphData()" id="viewAll" type="button"
+        class="flex whitespace-nowrap items-center h-6 px-5 font-medium rounded-lg outline-none hover:text-rose-500/75 focus:text-rose-500">
+        View All
+      </button>
+      <div class="border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="spinnerViewAll"></div>
+    </div>
+  </div>
+  <script>
+    var counryGraphData = {{ counryGraphData | safe}}
+    var options = {
+      series: [{
+        name: "{{ translations.analytics.visitor }}",
+        data: counryGraphData["countryCountList"] // e.g. data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+      }],
+      chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          borderRadiusApplication: 'end',
+          horizontal: true,
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: counryGraphData["countryNameList"] // e.g. categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan','United States', 'China', 'Germany']
+      },
+      theme: {
+        mode: "light", // todo: impement dart and light mode adjust dynamically
+        palette: 'palette7' // upto palette10
+      }
+    };
+
+    var bar_chart = new ApexCharts(document.querySelector("#bar_chart"), options);
+    bar_chart.render();
+
+  </script>
+
+  <script>
+    // function for to fetch country all data
+    async function fetchCountryGraphData() {
+      let spinnerViewAll = document.getElementById("spinnerViewAll");
+      spinnerViewAll.style.display = "block"; // Show spinner
+      try {
+        let response = await fetch(postAnalyticsDataCountryGraphUrl + "viewAll=True");
+        let responseData = await response.json();
+
+        if (response.ok) {
+          refreshedCountryData = responseData.payload;
+          // update bar chart
+          bar_chart.updateOptions({
+            series: [{
+              name: "visitor",
+              data: refreshedCountryData["countryCountList"],
+            }],
+            xaxis: {
+              categories: refreshedCountryData["countryNameList"],
+            },
+          })
+        } else {
+          alert(responseData.message)
+        }
+        spinnerViewAll.style.display = "none"; // Hide spinner
+        document.getElementById("viewAll").classList.add("hidden") // Hide button after data is fetch successfully
+      } catch (error) {
+        alert("Failed to fetch data");
+        console.error(error);
+        spinnerViewAll.style.display = "none"; // Hide spinner
+      }
+    }
+  </script>
+
+</div>
+
+{% endblock body %}

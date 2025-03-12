@@ -42,6 +42,8 @@ REGISTRATION = True  # (bool)
 # Supported languages for the application
 LANGUAGES = ["en", "tr", "es", "de", "zh", "fr", "uk", "ru", "pt", "ja", "pl"]  # (list)
 
+# Enable or Disable analytics feature for posts
+ANALYTICS = True # (bool)
 
 ### LOGGER SETTINGS ###
 # Toggle custom logging feature
@@ -80,6 +82,9 @@ DB_POSTS_ROOT = DB_FOLDER_ROOT + "posts.db"  # (str)
 
 # Root path of the comments database
 DB_COMMENTS_ROOT = DB_FOLDER_ROOT + "comments.db"  # (str)
+
+# Root path of the analytics database
+DB_ANALYTICS_ROOT = DB_FOLDER_ROOT + "analytics.db" # (str)
 
 
 ### SMTP MAIL SETTINGS ###

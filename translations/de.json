@@ -156,7 +156,8 @@
   },
   "post": {
     "minRead": "Minuten Lesezeit",
-    "placeholder": "Was sind Ihre Gedanken?"
+    "placeholder": "Was sind Ihre Gedanken?",
+    "viewPerformance": "Leistung Anzeigen"
   },
   "sortMenu": {
     "asc": "Aufsteigend",
@@ -318,5 +319,24 @@
     "changesText": "Wir können unsere Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Daher wird empfohlen, diese Seite regelmäßig auf Änderungen zu überprüfen. Wir werden Sie über Änderungen informieren, indem wir die neue Datenschutzrichtlinie auf dieser Seite veröffentlichen. Diese Änderungen treten sofort nach ihrer Veröffentlichung auf dieser Seite in Kraft.",
     "contact": "Kontaktieren Sie uns",
     "contactText": "Wenn Sie Fragen oder Vorschläge zu unserer Datenschutzrichtlinie haben, zögern Sie nicht, uns zu kontaktieren. E-Mail:"
+  },
+  "analytics": {
+    "title": "Analyse",
+    "goToPage": "Gehe zur Seite",
+    "totalVisitor": "Gesamtbesucher",
+    "todaysVisitor": "Heutiger Besucher",
+    "category": "Kategorie",
+    "onPosted": "Veröffentlicht am",
+    "trafficCount": "Verkehrszählung",
+    "sincePosted": "Seit Veröffentlichung",
+    "last1month": "Letzter 1m",
+    "last7days": "Letzte 7d",
+    "last24hours": "Letzte 24h",
+    "last48hours": "Letzte 48h",
+    "traffic": "Verkehr",
+    "visitorCounts": "Besucherzahlen",
+    "computerOS": "Computer-Betriebssystem",
+    "topCountries": "Top Länder",
+    "visitor": "Besucher"
   }
 }

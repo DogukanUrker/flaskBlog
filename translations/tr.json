@@ -156,7 +156,8 @@
   },
   "post": {
     "minRead": "dakika okuma",
-    "placeholder": "Düşünceleriniz nedir?"
+    "placeholder": "Düşünceleriniz nedir?",
+    "viewPerformance": "Performansı Görüntüle"
   },
   "sortMenu": {
     "asc": "Artan",
@@ -318,5 +319,24 @@
     "changesText": "Gizlilik Politikamızı zaman zaman güncelleyebiliriz. Bu nedenle, bu sayfayı periyodik olarak gözden geçirmeniz önerilir. Herhangi bir değişiklik olduğunda sizi bu sayfada yeni Gizlilik Politikası'nı yayınlayarak bilgilendireceğiz. Bu değişiklikler, bu sayfada yayınlandıktan hemen sonra yürürlüğe girer.",
     "contact": "Bize Ulaşın",
     "contactText": "Gizlilik Politikamız hakkında herhangi bir sorunuz veya öneriniz varsa, bizimle iletişime geçmekten çekinmeyin. E-posta:"
+  },
+  "analytics": {
+    "title": "Analitik",
+    "goToPage": "Sayfaya git",
+    "totalVisitor": "Toplam Ziyaretçi",
+    "todaysVisitor": "Bugünün Ziyaretçisi",
+    "category": "Kategori",
+    "onPosted": "Yayınlandığı Tarih",
+    "trafficCount": "Trafik Sayısı",
+    "sincePosted": "Yayınlandığından beri",
+    "last1month": "Son 1 ay",
+    "last7days": "Son 7 gün",
+    "last24hours": "Son 24 saat",
+    "last48hours": "Son 48 saat",
+    "traffic": "Trafik",
+    "visitorCounts": "Ziyaretçi Sayıları",
+    "computerOS": "Bilgisayar İşletim Sistemi",
+    "topCountries": "En Çok Ziyaretçi Ülkeler",
+    "visitor": "Ziyaretçi"
   }
 }

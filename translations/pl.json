@@ -156,7 +156,8 @@
   },
   "post": {
     "minRead": "minut czytania",
-    "placeholder": "Co myślisz?"
+    "placeholder": "Co myślisz?",
+    "viewPerformance": "Zobacz Wydajność"
   },
   "sortMenu": {
     "asc": "Rosnąco",
@@ -318,5 +319,24 @@
     "changesText": "Możemy od czasu do czasu aktualizować naszą Politykę prywatności. Dlatego zaleca się regularne przeglądanie tej strony w celu sprawdzenia wszelkich zmian. Powiadomimy Cię o wszelkich zmianach, publikując nową Politykę prywatności na tej stronie. Zmiany te wchodzą w życie natychmiast po ich opublikowaniu na tej stronie.",
     "contact": "Kontakt",
     "contactText": "Jeśli masz jakiekolwiek pytania lub sugestie dotyczące naszej Polityki prywatności, nie wahaj się z nami skontaktować. E-mail:"
+  },
+  "analytics": {
+    "title": "Analiza",
+    "goToPage": "Przejdź do strony",
+    "totalVisitor": "Łączna liczba odwiedzających",
+    "todaysVisitor": "Dzisiejsi odwiedzający",
+    "category": "Kategoria",
+    "onPosted": "Opublikowano",
+    "trafficCount": "Liczba Ruchu",
+    "sincePosted": "Od publikacji",
+    "last1month": "Ostatni 1m",
+    "last7days": "Ostatnie 7d",
+    "last24hours": "Ostatnie 24h",
+    "last48hours": "Ostatnie 48h",
+    "traffic": "Ruch",
+    "visitorCounts": "Liczba odwiedzających",
+    "computerOS": "System Operacyjny",
+    "topCountries": "Najlepsze Kraje",
+    "visitor": "Gość"
   }
 }
