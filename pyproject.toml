@@ -13,3 +13,6 @@ dependencies = [
     "user-agents>=2.2.0",
     "wtforms>=3.2.1",
 ]
+
+[tool.ruff.lint]
+ignore = ["F401"]
