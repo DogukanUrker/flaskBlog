@@ -64,7 +64,6 @@
 - TailwindCSS ile Duyarlı Tasarım
 - Arama Çubuğu
 - Yaz Notları Editörü
-- PlayWright ile Test
 - Zaman Dilimi Farkındalığı
 - Kullanıcı
   - Kullanıcı Silme
@@ -86,7 +85,6 @@
 - WTForms
 - Requests
 - Flask-WTF
-- Playwright
 - Python 3.10 veya daha yeni sürüm
 
 ## 🧑🏻‍💻 Diller
@@ -106,7 +104,6 @@
 - WTForms
 - Requests
 - Flask_WTF
-- PlayWright
 
 ### 🔮 Ön Uç
 
@@ -161,7 +158,6 @@ FlaskBlog, geliştirme kariyerimde önemli bir kilometre taşını işaret eden 
 ### 🔥 Keşfedilen Yeni Teknolojiler
 
 - Docker: Konteynerleştirmeyi benimsemek, dağıtımı kolaylaştırdı ve ölçeklenebilirliği artırdı.
-- Playwright: Tarayıcı etkileşimlerinin otomatikleştirilmesi, daha sorunsuz test ve doğrulama süreçlerini güçlendirdi.
 - Summer Note Editor: Bu çok yönlü düzenleyicinin entegre edilmesi daha zengin bir içerik oluşturma deneyimini kolaylaştırdı.
 - Tabler Simgeleri: Bu simgelerden yararlanmak görsel çekicilik kattı ve kullanıcı deneyimini geliştirdi.
 - Google reCAPTCHA v3: Gelişmiş güvenlik önlemlerinin uygulanması, uygulamayı botlara ve kötü niyetli faaliyetlere karşı güçlendirdi.
