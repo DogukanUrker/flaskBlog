@@ -257,6 +257,7 @@ def commentsTable():
         # Print a message with the level 2 (success) and the table name
         Log.success(f'Table: "comments" created in "{DB_COMMENTS_ROOT}"')
 
+
 # This function checks if the analytics table exists in the database, and creates it if it does not.
 def analyticsTable():
     """

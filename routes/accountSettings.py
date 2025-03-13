@@ -55,9 +55,10 @@ def accountSettings():
                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                             ).json()
                             # Check if the reCAPTCHA verification is successful or has a high score
-                            match verifyResponse["success"] == True or verifyResponse[
-                                "score"
-                            ] > 0.5:
+                            match (
+                                verifyResponse["success"] == True
+                                or verifyResponse["score"] > 0.5
+                            ):
                                 case True:
                                     # Log the reCAPTCHA verification result
                                     Log.success(

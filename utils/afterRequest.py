@@ -17,7 +17,6 @@ def afterRequestLogger(response):
     """
     # Using a match statement to handle different response statuses
     match response.status:
-
         # If the response status is "200 OK", log as a success message
         case "200 OK":
             Log.success(

@@ -117,7 +117,13 @@ from flask_wtf.csrf import (
 )  # Importing CSRF protection for Flask forms
 
 # Importing database related utilities
-from utils.dbChecker import dbFolder, usersTable, postsTable, commentsTable, analyticsTable
+from utils.dbChecker import (
+    dbFolder,
+    usersTable,
+    postsTable,
+    commentsTable,
+    analyticsTable,
+)
 
 # Importing various configuration variables from the modules
 from modules import (
@@ -198,7 +204,7 @@ from modules import (
     browserLanguage,  # A function that sets the app language based on the browser's preferred language
     injectTranslations,  # A function that injects translations into the context of the application
     returnUserProfilePicture,  # A function that returns the user's profile picture
-    returnPostUrlID # A function that returns the post's URL id
+    returnPostUrlID,  # A function that returns the post's URL id
 )
 
 # Create a Flask app object with the app name, root path, static folder and template folder
@@ -234,7 +240,7 @@ app.context_processor(
 )  # A context processor that adds the getProfilePicture variable to the template context
 app.context_processor(
     returnPostUrlID
-) # A context processor that adds the getPostUrlIdFromPost variable to template context
+)  # A context processor that adds the getPostUrlIdFromPost variable to template context
 app.context_processor(
     injectTranslations
 )  # A context processor that adds the translations variable to the template context
@@ -315,9 +321,9 @@ match RECAPTCHA:
                 Log.app(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
                 # Log the recaptcha settings for different actions
                 Log.app(f"reCAPTCHA login: {RECAPTCHA_LOGIN}")
-                Log.app(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP }")
+                Log.app(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP}")
                 Log.app(f"reCAPTCHA post create: {RECAPTCHA_POST_CREATE}")
-                Log.app(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT }")
+                Log.app(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT}")
                 Log.app(f"reCAPTCHA post delete: {RECAPTCHA_POST_DELETE}")
                 Log.app(f"reCAPTCHA comment: {RECAPTCHA_COMMENT}")
                 Log.app(f"reCAPTCHA comment delete: {RECAPTCHA_COMMENT_DELETE}")
@@ -464,10 +470,10 @@ app.register_blueprint(
 )  # Registering the blueprint for the change profile picture route
 app.register_blueprint(
     analyticsBlueprint
-)   # Registering the blueprint for the analytics page route
+)  # Registering the blueprint for the analytics page route
 app.register_blueprint(
     returnPostAnalyticsDataBlueprint
-)   # Registering the blueprint for the postAnalyticsData endpoint route
+)  # Registering the blueprint for the postAnalyticsData endpoint route
 
 # Check if the name of the module is the main module
 match __name__:

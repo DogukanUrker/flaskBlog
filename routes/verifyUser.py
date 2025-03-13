@@ -100,11 +100,11 @@ def verifyUser(codeSent):
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
                                                     # Check Recaptcha verification result
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        == True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Recaptcha verification successful
                                                             Log.success(
@@ -255,11 +255,11 @@ def verifyUser(codeSent):
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
                                                     # Check Recaptcha verification result
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        == True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Recaptcha verification successful, send verification email
                                                             Log.success(

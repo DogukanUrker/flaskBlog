@@ -37,9 +37,8 @@ def adminPanel():
             # Check if the user role is admin
             match role == "admin":
                 case True:
-
                     # Log info message that the admin reached to the admin panel
-                    Log.info(f'Admin: {session["userName"]} reached to the admin panel')
+                    Log.info(f"Admin: {session['userName']} reached to the admin panel")
                     # Log a message that admin panel loaded
                     Log.info(f"Rendering adminPanel.html.jinja: params: None")
                     # Render the admin panel template

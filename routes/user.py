@@ -43,9 +43,9 @@ def user(userName):
     If the username exists, the function fetches the user details and the number of views their posts have received.
     It also fetches all the posts made by the user and all the comments made by the user.
     """
-    match userName in str(
-        users
-    ).lower():  # Use a match statement to compare the username with the list of usernames
+    match (
+        userName in str(users).lower()
+    ):  # Use a match statement to compare the username with the list of usernames
         case True:  # If the username exists
             Log.success(
                 f'User: "{userName}" found'
@@ -103,12 +103,16 @@ def user(userName):
             If the user has any posts, the variable showPosts is set to True.
             If the user has any comments, the variable showComments is set to True.
             """
-            match posts:  # Use a match statement to compare the posts list with an empty list
+            match (
+                posts
+            ):  # Use a match statement to compare the posts list with an empty list
                 case []:  # If the posts list is empty
                     showPosts = False  # Set the showPosts variable to False
                 case _:  # If the posts list is not empty
                     showPosts = True  # Set the showPosts variable to True
-            match comments:  # Use a match statement to compare the comments list with an empty list
+            match (
+                comments
+            ):  # Use a match statement to compare the comments list with an empty list
                 case []:  # If the comments list is empty
                     showComments = False  # Set the showComments variable to False
                 case _:  # If the comments list is not empty

@@ -121,7 +121,7 @@ def dashboard(userName):
                         f'User: "{session["userName"]}" tried to login to another users dashboard',
                     )
                     # Redirect to the dashboard of the session user name
-                    return redirect(f'/dashboard/{session["userName"].lower()}')
+                    return redirect(f"/dashboard/{session['userName'].lower()}")
         case False:
             # Log a message that the dashboard cannot be accessed without user login
             Log.danger(

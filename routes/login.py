@@ -95,11 +95,11 @@ def login(direct):
                                                     verifyResponse = requestsPost(
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        == True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Logs the user in if the reCAPTCHA verification is successful
                                                             Log.success(

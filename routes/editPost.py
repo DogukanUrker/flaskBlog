@@ -91,9 +91,9 @@ def editPost(urlID):
                         [(session["userName"])],
                     )
                     # Check if the user is authorized to edit the post
-                    match post[5] == session["userName"] or session[
-                        "userRole"
-                    ] == "admin":
+                    match (
+                        post[5] == session["userName"] or session["userRole"] == "admin"
+                    ):
                         case True:
                             # Populate the form with post data
                             form = CreatePostForm(request.form)
@@ -145,11 +145,11 @@ def editPost(urlID):
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
                                                     # Check Recaptcha verification result
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        == True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Log the reCAPTCHA verification result
                                                             Log.success(
@@ -181,14 +181,12 @@ def editPost(urlID):
                                                                 """update posts set category = ? where id = ? """,
                                                                 (postCategory, post[0]),
                                                             )
-                                                            match postBanner == b"":  # Check if post banner is empty
-                                                                case (
-                                                                    True
-                                                                ):  # Do nothing if post banner is empty
+                                                            match (
+                                                                postBanner == b""
+                                                            ):  # Check if post banner is empty
+                                                                case True:  # Do nothing if post banner is empty
                                                                     pass
-                                                                case (
-                                                                    False
-                                                                ):  # Update post banner if not empty
+                                                                case False:  # Update post banner if not empty
                                                                     cursor.execute(
                                                                         """update posts set banner = ? where id = ? """,
                                                                         (
@@ -259,14 +257,12 @@ def editPost(urlID):
                                                         (postCategory, post[0]),
                                                     )
                                                     print(postBanner)
-                                                    match postBanner == b"":  # Check if post banner is empty
-                                                        case (
-                                                            True
-                                                        ):  # Do nothing if post banner is empty
+                                                    match (
+                                                        postBanner == b""
+                                                    ):  # Check if post banner is empty
+                                                        case True:  # Do nothing if post banner is empty
                                                             pass
-                                                        case (
-                                                            False
-                                                        ):  # Update post banner if not empty
+                                                        case False:  # Update post banner if not empty
                                                             cursor.execute(
                                                                 """update posts set banner = ? where id = ? """,
                                                                 (postBanner, post[0]),

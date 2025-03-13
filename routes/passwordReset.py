@@ -97,7 +97,9 @@ def passwordReset(codeSent):
                                         case False:
                                             # Hash new password and update in the database
                                             password = encryption.hash(password)
-                                            match RECAPTCHA and RECAPTCHA_PASSWORD_RESET:
+                                            match (
+                                                RECAPTCHA and RECAPTCHA_PASSWORD_RESET
+                                            ):
                                                 case True:
                                                     # Perform reCAPTCHA verification
                                                     secretResponse = request.form[
@@ -106,11 +108,11 @@ def passwordReset(codeSent):
                                                     verifyResponse = requestsPost(
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        == True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Successful reCAPTCHA verification, update password
                                                             Log.success(
@@ -260,9 +262,10 @@ def passwordReset(codeSent):
                                     verifyResponse = requestsPost(
                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                     ).json()
-                                    match verifyResponse[
-                                        "success"
-                                    ] == True or verifyResponse["score"] > 0.5:
+                                    match (
+                                        verifyResponse["success"] == True
+                                        or verifyResponse["score"] > 0.5
+                                    ):
                                         case True:
                                             # Successful reCAPTCHA verification, send email
                                             Log.success(

@@ -30,7 +30,9 @@ def logout():
     If the user is not logged in, a message is displayed indicating that they are not logged in.
     The user is then redirected to the homepage.
     """
-    match "userName" in session:  # Use a match statement to check if the "userName" key is present in the session dictionary
+    match (
+        "userName" in session
+    ):  # Use a match statement to check if the "userName" key is present in the session dictionary
         case True:  # If the user is logged in
             Log.success(
                 f"User: {session['userName']} logged out"

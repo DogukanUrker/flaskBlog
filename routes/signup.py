@@ -109,7 +109,9 @@ def signup():
                                                         Log.sql
                                                     )  # Set the trace callback for the connection
                                                     # Check if reCAPTCHA is enabled for sign up
-                                                    match RECAPTCHA and RECAPTCHA_SIGN_UP:
+                                                    match (
+                                                        RECAPTCHA and RECAPTCHA_SIGN_UP
+                                                    ):
                                                         # If reCAPTCHA is enabled
                                                         case True:
                                                             # Verify reCAPTCHA response
@@ -120,20 +122,23 @@ def signup():
                                                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                             ).json()
                                                             # If reCAPTCHA verification is successful
-                                                            match verifyResponse[
-                                                                "success"
-                                                            ] == True or verifyResponse[
-                                                                "score"
-                                                            ] > 0.5:
+                                                            match (
+                                                                verifyResponse[
+                                                                    "success"
+                                                                ]
+                                                                == True
+                                                                or verifyResponse[
+                                                                    "score"
+                                                                ]
+                                                                > 0.5
+                                                            ):
                                                                 # If reCAPTCHA verification is successful
                                                                 case True:
                                                                     Log.success(
                                                                         f"Sign up reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                                     )
                                                                     # Insert user data into the database
-                                                                    cursor = (
-                                                                        connection.cursor()
-                                                                    )
+                                                                    cursor = connection.cursor()
                                                                     cursor.execute(
                                                                         f"""
                                                                         insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
@@ -180,9 +185,7 @@ def signup():
                                                                         ],
                                                                     )  # Display a flash message
                                                                     # Set up email server connection
-                                                                    context = (
-                                                                        ssl.create_default_context()
-                                                                    )
+                                                                    context = ssl.create_default_context()
                                                                     server = (
                                                                         smtplib.SMTP(
                                                                             SMTP_SERVER,
@@ -295,9 +298,7 @@ def signup():
                                                                 ],
                                                             )  # Display a flash message
                                                             # Set up email server connection
-                                                            context = (
-                                                                ssl.create_default_context()
-                                                            )
+                                                            context = ssl.create_default_context()
                                                             server = smtplib.SMTP(
                                                                 SMTP_SERVER, SMTP_PORT
                                                             )

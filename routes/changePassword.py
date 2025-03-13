@@ -88,7 +88,9 @@ def changePassword():
                                         language=session["language"],
                                     )  # Display a flash message
                             # Check if old password is different from new password and passwords match
-                            match oldPassword != password and password == passwordConfirm:
+                            match (
+                                oldPassword != password and password == passwordConfirm
+                            ):
                                 case True:
                                     # Hash the new password
                                     newPassword = encryption.hash(password)
@@ -112,9 +114,10 @@ def changePassword():
                                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                             ).json()
                                             # Check if reCAPTCHA verification is successful
-                                            match verifyResponse[
-                                                "success"
-                                            ] == True or verifyResponse["score"] > 0.5:
+                                            match (
+                                                verifyResponse["success"] == True
+                                                or verifyResponse["score"] > 0.5
+                                            ):
                                                 case True:
                                                     # Log reCAPTCHA verification
                                                     Log.success(

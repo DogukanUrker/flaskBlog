@@ -79,7 +79,11 @@ class Delete:
             """select count(*) from comments where post = ? """,  # Select the count of rows from the comments table where the post column matches the given postID
             [(postID)],  # Use a parameterized query to avoid SQL injection
         )
-        commentCount = list(cursor)[0][
+        commentCount = list(
+            cursor
+        )[
+            0
+        ][
             0
         ]  # Convert the result to a list and get the first element of the first tuple (the count value)
         cursor.execute(
@@ -94,7 +98,7 @@ class Delete:
 
         # delete post's analytics data
         connection = sqlite3.connect(
-        DB_ANALYTICS_ROOT
+            DB_ANALYTICS_ROOT
         )  # Connect to the comments database
         connection.set_trace_callback(
             Log.sql
@@ -108,7 +112,7 @@ class Delete:
             """delete from postsAnalytics where postID = ? """,  # Delete the row from the postsAnalytcs table where the id matches the given postID
             [(postID)],  # Use a parameterized query to avoid SQL injection
         )
-        connection.commit() # Commit the changes to the database
+        connection.commit()  # Commit the changes to the database
 
         flashMessage(
             page="delete",
@@ -170,9 +174,9 @@ class Delete:
         Log.success(
             f'User: "{userName}" deleted'
         )  # Log a message with level 2 indicating the user was deleted
-        match perpetrator[
-            0
-        ] == "admin":  # Use a match statement to compare the first element of the perpetrator tuple (the role) with the string "admin"
+        match (
+            perpetrator[0] == "admin"
+        ):  # Use a match statement to compare the first element of the perpetrator tuple (the role) with the string "admin"
             case True:  # If the perpetrator is an admin
                 return redirect(
                     f"/admin/users"
