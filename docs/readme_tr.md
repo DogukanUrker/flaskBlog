@@ -121,7 +121,7 @@
 - Pipnv
 - Docker
 - VSCode kod düzenleyicisi
-- Black kod biçimlendiricisi
+- Ruff kod biçimlendiricisi
 - Prettier kod biçimlendiricisi
 
 ## 🚦 Projeyi Çalıştırma

@@ -118,7 +118,7 @@
 
 ### 🔨 Tools
 
-- Black formatter
+- Ruff formatter
 - Prettier formatter
 - VSCode editor
 - Docker
