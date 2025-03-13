@@ -3,13 +3,13 @@ This module contains the code for the user page.
 """
 
 from modules import (
-    Log,  # A class for logging messages
-    sqlite3,  # A module for working with SQLite databases
-    Blueprint,  # A class for creating Flask blueprints
+    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     DB_USERS_ROOT,  # A constant for the path to the users database
+    Blueprint,  # A class for creating Flask blueprints
+    Log,  # A class for logging messages
     render_template,  # A function for rendering Jinja templates
-    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
+    sqlite3,  # A module for working with SQLite databases
 )
 
 userBlueprint = Blueprint("user", __name__)  # Create a blueprint for the user page

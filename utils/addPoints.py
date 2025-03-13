@@ -1,4 +1,4 @@
-from modules import sqlite3, DB_USERS_ROOT, Log
+from modules import DB_USERS_ROOT, Log, sqlite3
 
 
 # Function to add points to a user

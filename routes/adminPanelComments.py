@@ -1,15 +1,15 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # A class for logging messages
-    Delete,  # Function for deleting comments
-    request,  # Request handling module
-    sqlite3,  # SQLite database module
-    session,  # Session handling module
-    redirect,  # Redirect function
-    Blueprint,  # Blueprint for defining routes
-    DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
     DB_COMMENTS_ROOT,  # Path to the comments database
+    DB_USERS_ROOT,  # Path to the users database
+    Blueprint,  # Blueprint for defining routes
+    Delete,  # Function for deleting comments
+    Log,  # A class for logging messages
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the admin panel comments route

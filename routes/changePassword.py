@@ -1,23 +1,23 @@
 # Import the necessary modules and functions
 from modules import (
-    Log,  # Importing log class for logging messages
-    abort,  # Importing abort function for aborting requests
-    session,  # Importing session for managing user sessions
-    sqlite3,  # Importing sqlite3 for working with SQLite databases
-    request,  # Importing request for handling HTTP requests
-    redirect,  # Importing redirect for redirecting requests
-    Blueprint,  # Importing Blueprint for creating modular applications
-    RECAPTCHA,  # Importing RECAPTCHA constant
-    encryption,  # Importing encryption functions for password hashing and verification
-    flashMessage,  # Flash messaging module
-    requestsPost,  # Importing requestsPost function for making HTTP POST requests
     DB_USERS_ROOT,  # Importing constant for database path
-    render_template,  # Importing render_template for rendering HTML templates
-    ChangePasswordForm,  # Importing form class for change password form
+    RECAPTCHA,  # Importing RECAPTCHA constant
+    RECAPTCHA_PASSWORD_CHANGE,  # Importing RECAPTCHA flag for password change verification
+    RECAPTCHA_SECRET_KEY,  # Importing RECAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # Importing RECAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # Importing RECAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # Importing RECAPTCHA secret key
-    RECAPTCHA_PASSWORD_CHANGE,  # Importing RECAPTCHA flag for password change verification
+    Blueprint,  # Importing Blueprint for creating modular applications
+    ChangePasswordForm,  # Importing form class for change password form
+    Log,  # Importing log class for logging messages
+    abort,  # Importing abort function for aborting requests
+    encryption,  # Importing encryption functions for password hashing and verification
+    flashMessage,  # Flash messaging module
+    redirect,  # Importing redirect for redirecting requests
+    render_template,  # Importing render_template for rendering HTML templates
+    request,  # Importing request for handling HTTP requests
+    requestsPost,  # Importing requestsPost function for making HTTP POST requests
+    session,  # Importing session for managing user sessions
+    sqlite3,  # Importing sqlite3 for working with SQLite databases
 )
 
 # Create a blueprint for the change password route

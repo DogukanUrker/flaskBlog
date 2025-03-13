@@ -4,12 +4,12 @@ This file contains class that are used to create CreatePostForm for the applicat
 
 # Importing necessary modules from WTForms library
 from wtforms import (
-    Form,  # Importing the base class for forms
     FileField,  # Importing the field class for file uploads
-    validators,  # Importing validators for form fields
+    Form,  # Importing the base class for forms
     SelectField,  # Importing the field class for dropdown/select inputs
     StringField,  # Importing the field class for string/text inputs
     TextAreaField,  # Importing the field class for multi-line text inputs
+    validators,  # Importing validators for form fields
 )
 
 # Import default form style

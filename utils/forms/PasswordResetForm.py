@@ -4,13 +4,12 @@ This file contains class that are used to create PasswordResetForm for the appli
 
 # Importing necessary modules from WTForms library
 from wtforms import (
-    Form,  # Importing the base class for forms
-    validators,  # Importing validators for form fields
     EmailField,  # Importing the field class for email inputs
-    StringField,  # Importing the field class for string/text inputs
+    Form,  # Importing the base class for forms
     PasswordField,  # Importing the field class for password inputs
+    StringField,  # Importing the field class for string/text inputs
+    validators,  # Importing validators for form fields
 )
-
 
 # Import default form style
 from .FormInputStyle import inputStyle

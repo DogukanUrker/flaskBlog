@@ -5,14 +5,13 @@ The functions and methods used in this blueprint are imported from the modules m
 """
 
 from modules import (
-    Log,  # A function for logging messages
-    session,  # A dictionary for storing session data
-    request,  # Module for handling HTTP requests
-    redirect,  # A function for returning redirect responses
     Blueprint,  # A class for creating Flask blueprints
+    Log,  # A function for logging messages
     flashMessage,  # Flash messaging module
+    redirect,  # A function for returning redirect responses
+    request,  # Module for handling HTTP requests
+    session,  # A dictionary for storing session data
 )
-
 
 logoutBlueprint = Blueprint(
     "logout", __name__

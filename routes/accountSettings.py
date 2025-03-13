@@ -1,21 +1,21 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # A class for logging messages
-    abort,  # Function to abort the request
-    Delete,  # Function to delete user from the database
-    request,  # Module for handling HTTP requests
-    sqlite3,  # SQLite database module
-    session,  # Session handling module
-    redirect,  # Function to redirect
-    Blueprint,  # Blueprint for defining routes
-    RECAPTCHA,  # Flag indicating whether reCAPTCHA is enabled
-    requestsPost,  # Function to make POST requests
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Function to render HTML templates
+    RECAPTCHA,  # Flag indicating whether reCAPTCHA is enabled
+    RECAPTCHA_DELETE_USER,  # Flag indicating whether reCAPTCHA is required for deleting user
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
-    RECAPTCHA_DELETE_USER,  # Flag indicating whether reCAPTCHA is required for deleting user
+    Blueprint,  # Blueprint for defining routes
+    Delete,  # Function to delete user from the database
+    Log,  # A class for logging messages
+    abort,  # Function to abort the request
+    redirect,  # Function to redirect
+    render_template,  # Function to render HTML templates
+    request,  # Module for handling HTTP requests
+    requestsPost,  # Function to make POST requests
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the account settings route

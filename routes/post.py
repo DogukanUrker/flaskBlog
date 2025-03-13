@@ -1,24 +1,24 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    Delete,  # Module for deleting posts and comments
-    session,  # Session management module
-    sqlite3,  # SQLite database module
-    request,  # Request handling module
-    url_for,  # URL generation module
     APP_NAME,  # Application name
-    redirect,  # Redirect function
-    addPoints,  # Function to add points to user's score
+    DB_ANALYTICS_ROOT,  # Path to the analytics database
+    DB_COMMENTS_ROOT,  # Path to the comments database
+    DB_POSTS_ROOT,  # Path to the posts database
     Blueprint,  # Blueprint for defining routes
     CommentForm,  # Form class for comments
-    flashMessage,  # Flash messaging module
-    DB_POSTS_ROOT,  # Path to the posts database
-    render_template,  # Template rendering function
-    currentTimeStamp,  # Function to get current timestamp
-    DB_COMMENTS_ROOT,  # Path to the comments database
+    Delete,  # Module for deleting posts and comments
+    Log,  # Custom logging module
+    addPoints,  # Function to add points to user's score
     calculateReadTime,  # Function to calculate reading time
-    DB_ANALYTICS_ROOT,  # Path to the analytics database
+    currentTimeStamp,  # Function to get current timestamp
+    flashMessage,  # Flash messaging module
     getDataFromUserIP,  # Function to get data visitors IP Address
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    session,  # Session management module
+    sqlite3,  # SQLite database module
+    url_for,  # URL generation module
 )
 
 # Create a blueprint for the post route

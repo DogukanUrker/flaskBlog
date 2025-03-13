@@ -12,14 +12,14 @@ The index.html.jinja template displays the title and content of each post.
 """
 
 from modules import (
+    DB_POSTS_ROOT,  # Importing the constant for the path to the posts database
+    Blueprint,  # Importing the Blueprint class for creating Flask blueprints
     Log,  # A class for logging messages
     load,  # A function for loading JSON data from files
+    redirect,  # Importing the redirect function for redirecting requests
+    render_template,  # Importing the render_template function for rendering Jinja templates
     session,  # A session object for storing user session data
     sqlite3,  # Importing the SQLite module for working with SQLite databases
-    redirect,  # Importing the redirect function for redirecting requests
-    Blueprint,  # Importing the Blueprint class for creating Flask blueprints
-    DB_POSTS_ROOT,  # Importing the constant for the path to the posts database
-    render_template,  # Importing the render_template function for rendering Jinja templates
 )
 
 # Create a blueprint for the home page with the name "index" and the current module name

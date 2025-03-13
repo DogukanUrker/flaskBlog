@@ -1,11 +1,11 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Logging module
-    sqlite3,  # Module for interacting with SQLite databases
-    Blueprint,  # Class for defining Flask blueprints, which are sets of routes
     DB_POSTS_ROOT,  # Variable containing the path to the posts database
     DB_USERS_ROOT,  # Variable containing the path to the users database
+    Blueprint,  # Class for defining Flask blueprints, which are sets of routes
+    Log,  # Logging module
     render_template,  # Function for rendering HTML templates
+    sqlite3,  # Module for interacting with SQLite databases
 )
 
 # Create a blueprint for the search route

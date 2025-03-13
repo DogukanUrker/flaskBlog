@@ -2,10 +2,10 @@
 
 # Import the necessary modules from the modules file
 from modules import (
-    Log,  # A class for logging messages
     APP_NAME,  # A constant that stores the name of the application
-    Blueprint,  # A class that represents a Flask blueprint
     APP_VERSION,  # A constant that stores the version of the application
+    Blueprint,  # A class that represents a Flask blueprint
+    Log,  # A class for logging messages
     render_template,  # A function that renders a template file
 )
 

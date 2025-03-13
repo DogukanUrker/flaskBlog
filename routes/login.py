@@ -1,25 +1,25 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    abort,  # Function to abort request processing
-    LOG_IN,  # Flag indicating if login is enabled
-    session,  # Session handling module
-    request,  # Request handling module
-    sqlite3,  # SQLite database module
-    redirect,  # Redirect function
-    RECAPTCHA,  # Flag for enabling reCAPTCHA
-    addPoints,  # Function to add points to user's score
-    Blueprint,  # Blueprint for defining routes
-    LoginForm,  # Form class for login
-    encryption,  # Encryption utility module
-    flashMessage,  # Flash messaging module
-    requestsPost,  # Function for making POST requests
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
+    LOG_IN,  # Flag indicating if login is enabled
+    RECAPTCHA,  # Flag for enabling reCAPTCHA
     RECAPTCHA_LOGIN,  # Flag for enabling reCAPTCHA for login
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
+    Blueprint,  # Blueprint for defining routes
+    Log,  # Custom logging module
+    LoginForm,  # Form class for login
+    abort,  # Function to abort request processing
+    addPoints,  # Function to add points to user's score
+    encryption,  # Encryption utility module
+    flashMessage,  # Flash messaging module
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    requestsPost,  # Function for making POST requests
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the login route

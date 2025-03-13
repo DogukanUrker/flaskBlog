@@ -1,25 +1,25 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Logging module
-    abort,  # Function for aborting requests
-    session,  # Session management module
-    sqlite3,  # SQLite database module
-    request,  # Module for handling HTTP requests
-    redirect,  # Function for redirecting requests
-    addPoints,  # Function for adding points to a user
-    Blueprint,  # Blueprint class for creating modular applications
-    RECAPTCHA,  # Recaptcha module
-    requestsPost,  # Module for making HTTP POST requests
-    flashMessage,  # Flash messaging module
     DB_POSTS_ROOT,  # Path to the posts database
-    CreatePostForm,  # Form for creating a post
-    render_template,  # Function for rendering templates
-    currentTimeStamp,  # Function for getting current timestamp
+    RECAPTCHA,  # Recaptcha module
+    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post creation
+    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_SITE_KEY,  # Recaptcha site key
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post creation
+    Blueprint,  # Blueprint class for creating modular applications
+    CreatePostForm,  # Form for creating a post
+    Log,  # Logging module
+    abort,  # Function for aborting requests
+    addPoints,  # Function for adding points to a user
+    currentTimeStamp,  # Function for getting current timestamp
+    flashMessage,  # Flash messaging module
     generateurlID,  # url id generator for blog title
+    redirect,  # Function for redirecting requests
+    render_template,  # Function for rendering templates
+    request,  # Module for handling HTTP requests
+    requestsPost,  # Module for making HTTP POST requests
+    session,  # Session management module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the create post route

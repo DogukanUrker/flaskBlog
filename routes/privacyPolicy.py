@@ -2,8 +2,8 @@
 
 # Import the necessary modules from the modules file
 from modules import (
-    Log,  # A class for logging messages
     Blueprint,  # A class that represents a Flask blueprint
+    Log,  # A class for logging messages
     render_template,  # A function that renders a template file
 )
 

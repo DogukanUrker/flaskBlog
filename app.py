@@ -4,11 +4,10 @@ This file contains the main function
 
 from modules import (
     Log,  # Importing the Log class for logging
-    timedelta,  # Importing the timedelta class for working with time differences
-    terminalASCII,  # Importing the terminalASCII function for displaying ASCII art in the terminal
     currentTimeStamp,  # Importing the currentTimeStamp function for getting the current timestamp
+    terminalASCII,  # Importing the terminalASCII function for displaying ASCII art in the terminal
+    timedelta,  # Importing the timedelta class for working with time differences
 )
-
 
 # Get the start time of the app
 startTime = currentTimeStamp()
@@ -22,190 +21,175 @@ Log.app("Starting...")
 
 
 # Importing necessary modules and classes
-from modules import (
-    Flask,
-)  # Importing Flask class for creating the Flask application instance
+from flask_wtf.csrf import (
+    CSRFError,
+    CSRFProtect,
+)  # Importing CSRF protection for Flask forms
 
-# Importing blueprints for different routes
-from routes.post import postBlueprint  # Importing the blueprint for post route
-from routes.user import userBlueprint  # Importing the blueprint for user route
+# Importing various configuration variables from the modules
+# Importing reCAPTCHA configurations
+# Import the contextProcessor module that contains custom functions for the app
+from modules import (
+    APP_HOST,  # Importing the application host configuration
+    APP_NAME,  # Importing the application name configuration
+    APP_PORT,  # Importing the application port configuration
+    APP_ROOT_PATH,  # Importing the application root path configuration
+    APP_SECRET_KEY,  # Importing the application secret key configuration
+    APP_VERSION,  # Importing the application version configuration
+    CUSTOM_LOGGER,  # Importing the custom logger configuration
+    DEBUG_MODE,  # Importing the debug mode configuration
+    DEFAULT_ADMIN,  # Importing the default admin configuration
+    DEFAULT_ADMIN_EMAIL,  # Importing the default admin email configuration
+    DEFAULT_ADMIN_PASSWORD,  # Importing the default admin password configuration
+    DEFAULT_ADMIN_POINT,  # Importing the default admin point configuration
+    DEFAULT_ADMIN_PROFILE_PICTURE,  # Importing the default admin profile picture configuration
+    DEFAULT_ADMIN_USERNAME,  # Importing the default admin username configuration
+    LOG_FILE_ROOT,  # Importing the log file root configuration
+    LOG_FOLDER_ROOT,  # Importing the log folder root configuration
+    LOG_IN,  # Importing the log-in configuration
+    RECAPTCHA,  # Flag for enabling/disabling reCAPTCHA
+    RECAPTCHA_BADGE,  # Flag for enabling/disabling reCAPTCHA for badge configuration
+    RECAPTCHA_COMMENT,  # Flag for enabling/disabling reCAPTCHA for comment
+    RECAPTCHA_COMMENT_DELETE,  # Flag for enabling/disabling reCAPTCHA for comment delete
+    RECAPTCHA_DELETE_USER,  # Flag for enabling/disabling reCAPTCHA for delete user
+    RECAPTCHA_LOGIN,  # Flag for enabling/disabling reCAPTCHA for login
+    RECAPTCHA_PASSWORD_CHANGE,  # Flag for enabling/disabling reCAPTCHA for password change
+    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling/disabling reCAPTCHA for password reset
+    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling reCAPTCHA for post create
+    RECAPTCHA_POST_DELETE,  # Flag for enabling/disabling reCAPTCHA for post delete
+    RECAPTCHA_POST_EDIT,  # Flag for enabling/disabling reCAPTCHA for post edit
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag for enabling/disabling reCAPTCHA for profile picture change
+    RECAPTCHA_SECRET_KEY,  # Flag for enabling/disabling reCAPTCHA for secret key
+    RECAPTCHA_SIGN_UP,  # Flag for enabling/disabling reCAPTCHA for sign-up
+    RECAPTCHA_SITE_KEY,  # Flag for enabling/disabling reCAPTCHA for site key
+    RECAPTCHA_USERNAME_CHANGE,  # Flag for enabling/disabling reCAPTCHA for username change
+    RECAPTCHA_VERIFY_URL,  # Flag for enabling/disabling reCAPTCHA for verify URL
+    RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling reCAPTCHA for verify user
+    REGISTRATION,  # Importing the registration configuration
+    SESSION_PERMANENT,  # Importing the session permanence configuration
+    SMTP_MAIL,  # Importing the SMTP mail configuration
+    SMTP_PASSWORD,  # Importing the SMTP password configuration
+    SMTP_PORT,  # Importing the SMTP port configuration
+    SMTP_SERVER,  # Importing the SMTP server configuration
+    STATIC_FOLDER,  # Importing the static folder configuration
+    TEMPLATE_FOLDER,  # Importing the template folder configuration
+    UI_NAME,  # Importing the UI name configuration
+    WERKZEUG_LOGGER,  # Importing the werkzeug logger configuration
+    Flask,
+    browserLanguage,  # A function that sets the app language based on the browser's preferred language
+    injectTranslations,  # A function that injects translations into the context of the application
+    isLogin,  # A function that checks LOG_IN constant
+    isRegistration,  # A function that checks REGISTRATION constant
+    recaptchaBadge,  # A function that checks RECAPTCHA_BADGE constant
+    returnPostUrlID,  # A function that returns the post's URL id
+    returnUserProfilePicture,  # A function that returns the user's profile picture
+)  # Importing Flask class for creating the Flask application instance
+from routes.about import (
+    aboutBlueprint,
+)  # Importing the blueprint for about route
+from routes.accountSettings import (
+    accountSettingsBlueprint,
+)  # Importing the blueprint for account settings route
+from routes.adminPanel import (
+    adminPanelBlueprint,
+)  # Importing the blueprint for admin panel route
+from routes.adminPanelComments import (
+    adminPanelCommentsBlueprint,
+)  # Importing the blueprint for admin panel comments route
+from routes.adminPanelPosts import (
+    adminPanelPostsBlueprint,
+)  # Importing the blueprint for admin panel posts route
+from routes.adminPanelUsers import (
+    adminPanelUsersBlueprint,
+)  # Importing the blueprint for admin panel users route
+from routes.category import (
+    categoryBlueprint,
+)  # Importing the blueprint for category route
+from routes.changeLanguage import (
+    changeLanguageBlueprint,
+)  # Importing the blueprint for changing language route
+from routes.changePassword import (
+    changePasswordBlueprint,
+)  # Importing the blueprint for changing password route
+from routes.changeProfilePicture import (
+    changeProfilePictureBlueprint,
+)  # Importing the blueprint for changing profile picture route
+from routes.changeUserName import (
+    changeUserNameBlueprint,
+)  # Importing the blueprint for changing username route
+from routes.createPost import (
+    createPostBlueprint,
+)  # Importing the blueprint for creating post route
+from routes.dashboard import (
+    dashboardBlueprint,
+)  # Importing the blueprint for dashboard route
+from routes.editPost import (
+    editPostBlueprint,
+)  # Importing the blueprint for post editing route
 from routes.index import (
     indexBlueprint,
 )  # Importing the blueprint for index route
 from routes.login import (
     loginBlueprint,
 )  # Importing the blueprint for login route
-from routes.about import (
-    aboutBlueprint,
-)  # Importing the blueprint for about route
-from routes.signup import (
-    signUpBlueprint,
-)  # Importing the blueprint for signup route
 from routes.logout import (
     logoutBlueprint,
 )  # Importing the blueprint for logout route
-from routes.search import (
-    searchBlueprint,
-)  # Importing the blueprint for search route
-from routes.category import (
-    categoryBlueprint,
-)  # Importing the blueprint for category route
-from routes.editPost import (
-    editPostBlueprint,
-)  # Importing the blueprint for post editing route
-from routes.searchBar import (
-    searchBarBlueprint,
-)  # Importing the blueprint for search bar route
-from routes.dashboard import (
-    dashboardBlueprint,
-)  # Importing the blueprint for dashboard route
-from routes.verifyUser import (
-    verifyUserBlueprint,
-)  # Importing the blueprint for user verification route
-from routes.adminPanel import (
-    adminPanelBlueprint,
-)  # Importing the blueprint for admin panel route
-from routes.createPost import (
-    createPostBlueprint,
-)  # Importing the blueprint for creating post route
-from routes.setLanguage import (
-    setLanguageBlueprint,
-)  # Importing the blueprint for setting language route
-from routes.privacyPolicy import (
-    privacyPolicyBlueprint,
-)  # Importing the blueprint for privacy policy route
 from routes.passwordReset import (
     passwordResetBlueprint,
 )  # Importing the blueprint for password reset route
-from routes.changeUserName import (
-    changeUserNameBlueprint,
-)  # Importing the blueprint for changing username route
-from routes.changePassword import (
-    changePasswordBlueprint,
-)  # Importing the blueprint for changing password route
-from routes.changeLanguage import (
-    changeLanguageBlueprint,
-)  # Importing the blueprint for changing language route
-from routes.adminPanelUsers import (
-    adminPanelUsersBlueprint,
-)  # Importing the blueprint for admin panel users route
-from routes.adminPanelPosts import (
-    adminPanelPostsBlueprint,
-)  # Importing the blueprint for admin panel posts route
-from routes.accountSettings import (
-    accountSettingsBlueprint,
-)  # Importing the blueprint for account settings route
-from routes.returnPostBanner import (
-    returnPostBannerBlueprint,
-)  # Importing the blueprint for returning post banners
-from routes.adminPanelComments import (
-    adminPanelCommentsBlueprint,
-)  # Importing the blueprint for admin panel comments route
-from routes.changeProfilePicture import (
-    changeProfilePictureBlueprint,
-)  # Importing the blueprint for changing profile picture route
+
+# Importing blueprints for different routes
+from routes.post import postBlueprint  # Importing the blueprint for post route
 from routes.postsAnalytics import (
     analyticsBlueprint,
 )  # Importing the blueprint for analytics page route
+from routes.privacyPolicy import (
+    privacyPolicyBlueprint,
+)  # Importing the blueprint for privacy policy route
 from routes.returnPostAnalyticsData import (
     returnPostAnalyticsDataBlueprint,
 )  # Importing the blueprint for postAnalyticsData endpoint route
-
-from flask_wtf.csrf import (
-    CSRFProtect,
-    CSRFError,
-)  # Importing CSRF protection for Flask forms
-
-# Importing database related utilities
-from utils.dbChecker import (
-    dbFolder,
-    usersTable,
-    postsTable,
-    commentsTable,
-    analyticsTable,
-)
-
-# Importing various configuration variables from the modules
-from modules import (
-    LOG_IN,  # Importing the log-in configuration
-    UI_NAME,  # Importing the UI name configuration
-    APP_HOST,  # Importing the application host configuration
-    APP_NAME,  # Importing the application name configuration
-    APP_PORT,  # Importing the application port configuration
-    SMTP_MAIL,  # Importing the SMTP mail configuration
-    SMTP_PORT,  # Importing the SMTP port configuration
-    DEBUG_MODE,  # Importing the debug mode configuration
-    APP_VERSION,  # Importing the application version configuration
-    SMTP_SERVER,  # Importing the SMTP server configuration
-    REGISTRATION,  # Importing the registration configuration
-    SMTP_PASSWORD,  # Importing the SMTP password configuration
-    DEFAULT_ADMIN,  # Importing the default admin configuration
-    LOG_FILE_ROOT,  # Importing the log file root configuration
-    APP_ROOT_PATH,  # Importing the application root path configuration
-    STATIC_FOLDER,  # Importing the static folder configuration
-    CUSTOM_LOGGER,  # Importing the custom logger configuration
-    APP_SECRET_KEY,  # Importing the application secret key configuration
-    RECAPTCHA_BADGE,  # Flag for enabling/disabling reCAPTCHA for badge configuration
-    TEMPLATE_FOLDER,  # Importing the template folder configuration
-    LOG_FOLDER_ROOT,  # Importing the log folder root configuration
-    WERKZEUG_LOGGER,  # Importing the werkzeug logger configuration
-    SESSION_PERMANENT,  # Importing the session permanence configuration
-    DEFAULT_ADMIN_POINT,  # Importing the default admin point configuration
-    DEFAULT_ADMIN_EMAIL,  # Importing the default admin email configuration
-    DEFAULT_ADMIN_USERNAME,  # Importing the default admin username configuration
-    DEFAULT_ADMIN_PASSWORD,  # Importing the default admin password configuration
-    DEFAULT_ADMIN_PROFILE_PICTURE,  # Importing the default admin profile picture configuration
-)
-
-# Importing reCAPTCHA configurations
-from modules import (
-    RECAPTCHA,  # Flag for enabling/disabling reCAPTCHA
-    RECAPTCHA_LOGIN,  # Flag for enabling/disabling reCAPTCHA for login
-    RECAPTCHA_COMMENT,  # Flag for enabling/disabling reCAPTCHA for comment
-    RECAPTCHA_SIGN_UP,  # Flag for enabling/disabling reCAPTCHA for sign-up
-    RECAPTCHA_SITE_KEY,  # Flag for enabling/disabling reCAPTCHA for site key
-    RECAPTCHA_POST_EDIT,  # Flag for enabling/disabling reCAPTCHA for post edit
-    RECAPTCHA_SECRET_KEY,  # Flag for enabling/disabling reCAPTCHA for secret key
-    RECAPTCHA_VERIFY_URL,  # Flag for enabling/disabling reCAPTCHA for verify URL
-    RECAPTCHA_DELETE_USER,  # Flag for enabling/disabling reCAPTCHA for delete user
-    RECAPTCHA_POST_DELETE,  # Flag for enabling/disabling reCAPTCHA for post delete
-    RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling reCAPTCHA for verify user
-    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling reCAPTCHA for post create
-    RECAPTCHA_COMMENT_DELETE,  # Flag for enabling/disabling reCAPTCHA for comment delete
-    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling/disabling reCAPTCHA for password reset
-    RECAPTCHA_PASSWORD_CHANGE,  # Flag for enabling/disabling reCAPTCHA for password change
-    RECAPTCHA_USERNAME_CHANGE,  # Flag for enabling/disabling reCAPTCHA for username change
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag for enabling/disabling reCAPTCHA for profile picture change
-)
-
-from utils.errorHandlers.notFoundErrorHandler import (
-    notFoundErrorHandler,
-)  # This function handles 404 errors
-
-from utils.errorHandlers.csrfErrorHandler import (
-    csrfErrorHandler,
-)  # This function handles CSRF errors
-
-from utils.errorHandlers.unauthorizedErrorHandler import (
-    unauthorizedErrorHandler,
-)  # This function handles unauthorized access errors
-
-
+from routes.returnPostBanner import (
+    returnPostBannerBlueprint,
+)  # Importing the blueprint for returning post banners
+from routes.search import (
+    searchBlueprint,
+)  # Importing the blueprint for search route
+from routes.searchBar import (
+    searchBarBlueprint,
+)  # Importing the blueprint for search bar route
+from routes.setLanguage import (
+    setLanguageBlueprint,
+)  # Importing the blueprint for setting language route
+from routes.signup import (
+    signUpBlueprint,
+)  # Importing the blueprint for signup route
+from routes.user import userBlueprint  # Importing the blueprint for user route
+from routes.verifyUser import (
+    verifyUserBlueprint,
+)  # Importing the blueprint for user verification route
 from utils.afterRequest import (
     afterRequestLogger,
 )  # This function handles loggins of every request
 
-
-# Import the contextProcessor module that contains custom functions for the app
-from modules import (
-    isLogin,  # A function that checks LOG_IN constant
-    recaptchaBadge,  # A function that checks RECAPTCHA_BADGE constant
-    isRegistration,  # A function that checks REGISTRATION constant
-    browserLanguage,  # A function that sets the app language based on the browser's preferred language
-    injectTranslations,  # A function that injects translations into the context of the application
-    returnUserProfilePicture,  # A function that returns the user's profile picture
-    returnPostUrlID,  # A function that returns the post's URL id
+# Importing database related utilities
+from utils.dbChecker import (
+    analyticsTable,
+    commentsTable,
+    dbFolder,
+    postsTable,
+    usersTable,
 )
+from utils.errorHandlers.csrfErrorHandler import (
+    csrfErrorHandler,
+)  # This function handles CSRF errors
+from utils.errorHandlers.notFoundErrorHandler import (
+    notFoundErrorHandler,
+)  # This function handles 404 errors
+from utils.errorHandlers.unauthorizedErrorHandler import (
+    unauthorizedErrorHandler,
+)  # This function handles unauthorized access errors
 
 # Create a Flask app object with the app name, root path, static folder and template folder
 app = Flask(

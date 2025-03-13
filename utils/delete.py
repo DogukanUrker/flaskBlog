@@ -24,15 +24,15 @@ The functions in this module use the following helper functions:
 """
 
 from modules import (
-    Log,  # A class for logging messages
-    sqlite3,  # A module for working with SQLite databases
-    session,  # A dictionary for storing session data
-    redirect,  # A function for returning redirect responses
-    flashMessage,  # A function for displaying flash messages
+    DB_ANALYTICS_ROOT,  # A constant for the path to the analytics database
+    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     DB_USERS_ROOT,  # A constant for the path to the users database
-    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
-    DB_ANALYTICS_ROOT,  # A constant for the path to the analytics database
+    Log,  # A class for logging messages
+    flashMessage,  # A function for displaying flash messages
+    redirect,  # A function for returning redirect responses
+    session,  # A dictionary for storing session data
+    sqlite3,  # A module for working with SQLite databases
 )
 
 

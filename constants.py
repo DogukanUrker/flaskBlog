@@ -5,7 +5,6 @@ This module contains all the general application settings.
 # Import necessary modules from the modules module
 from modules import secrets, socket
 
-
 # Name of the Flask application
 APP_NAME = "flaskBlog"  # (str)
 

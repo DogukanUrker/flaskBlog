@@ -1,4 +1,4 @@
-from modules import geoip2, database, parse, requests
+from modules import database, geoip2, parse, requests
 
 """
 This function will collect user ip using api.ipify.org to fetch user's country, continents
@@ -12,8 +12,8 @@ reader = database.Reader(
 )  # path to mmdb file
 """
 Free IP geolocation databases
-The DB-IP Lite databases are subsets of the commercial databases with reduced 
-coverage and accuracy. Lite downloads are updated monthly and distributed under 
+The DB-IP Lite databases are subsets of the commercial databases with reduced
+coverage and accuracy. Lite downloads are updated monthly and distributed under
 the Creative Commons Attribution License.
 
 Licensing terms

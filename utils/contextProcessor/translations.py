@@ -1,4 +1,5 @@
-from modules import session, Log  # Import the session and Log from the modules file
+from modules import Log, session  # Import the session and Log from the modules file
+
 from ..translations import (
     loadTranslations,
 )  # Load translations for the current language

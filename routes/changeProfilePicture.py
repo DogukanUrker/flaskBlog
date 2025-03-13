@@ -1,22 +1,22 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    abort,  # Function to abort request
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
-    request,  # Request handling module
-    redirect,  # Redirect function
-    Blueprint,  # Blueprint for defining routes
-    RECAPTCHA,  # Flag indicating if reCAPTCHA is enabled
-    flashMessage,  # Flash messaging module
-    requestsPost,  # Function for making HTTP POST requests
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
+    RECAPTCHA,  # Flag indicating if reCAPTCHA is enabled
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag indicating if reCAPTCHA is required for changing profile picture
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
+    Blueprint,  # Blueprint for defining routes
     ChangeProfilePictureForm,  # Form for changing profile picture
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag indicating if reCAPTCHA is required for changing profile picture
+    Log,  # Custom logging module
+    abort,  # Function to abort request
+    flashMessage,  # Flash messaging module
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    requestsPost,  # Function for making HTTP POST requests
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the change profile picture route

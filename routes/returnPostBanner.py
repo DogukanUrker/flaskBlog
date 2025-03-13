@@ -1,5 +1,5 @@
 # Import the necessary modules and functions
-from modules import sqlite3, BytesIO, Blueprint, send_file, DB_POSTS_ROOT, Log, request
+from modules import DB_POSTS_ROOT, Blueprint, BytesIO, Log, request, send_file, sqlite3
 
 # Create a blueprint for the return post banner route
 returnPostBannerBlueprint = Blueprint("returnPostBanner", __name__)

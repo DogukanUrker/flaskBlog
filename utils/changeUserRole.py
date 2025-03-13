@@ -1,4 +1,4 @@
-from modules import sqlite3, DB_USERS_ROOT, Log, session, redirect
+from modules import DB_USERS_ROOT, Log, redirect, session, sqlite3
 
 
 # Function to change the role of a user

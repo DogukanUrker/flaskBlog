@@ -3,17 +3,17 @@ This module contains the code for the posts analytics page.
 """
 
 from modules import (
+    ANALYTICS,  # A constant variable to check anaylytcs True or False
+    DB_POSTS_ROOT,  # A constant for the path to the posts database
+    Blueprint,  # A class for creating Flask blueprints
     Log,  # A class for logging messages
+    getAnalyticsPageCountryGraphData,
+    getAnalyticsPageOSGraphData,
+    getAnalyticsPageTrafficGraphData,
+    render_template,  # A function for rendering Jinja templates
     request,  # A Request handling module
     session,  # Session management module
     sqlite3,  # A module for working with SQLite databases
-    Blueprint,  # A class for creating Flask blueprints
-    ANALYTICS,  # A constant variable to check anaylytcs True or False
-    render_template,  # A function for rendering Jinja templates
-    DB_POSTS_ROOT,  # A constant for the path to the posts database
-    getAnalyticsPageTrafficGraphData,
-    getAnalyticsPageOSGraphData,
-    getAnalyticsPageCountryGraphData,
 )
 
 analyticsBlueprint = Blueprint(

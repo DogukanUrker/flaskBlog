@@ -1,31 +1,31 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Logging module
-    ssl,  # SSL/TLS module
-    abort,  # Function for aborting requests
-    smtplib,  # SMTP client module
-    randint,  # Function for generating random integers
-    sqlite3,  # SQLite database module
-    request,  # Module for handling HTTP requests
-    session,  # Session management module
-    redirect,  # Function for redirecting requests
     APP_NAME,  # Constant for application name
-    Blueprint,  # Blueprint class for creating modular applications
-    SMTP_PORT,  # SMTP port number
-    SMTP_MAIL,  # SMTP email address
-    RECAPTCHA,  # Recaptcha module
-    SMTP_SERVER,  # SMTP server address
-    EmailMessage,  # Class for creating email messages
-    requestsPost,  # Module for making HTTP POST requests
-    flashMessage,  # Flash messaging module
-    SMTP_PASSWORD,  # SMTP password
     DB_USERS_ROOT,  # Path to the users database
-    VerifyUserForm,  # Form for verifying user
-    render_template,  # Function for rendering templates
+    RECAPTCHA,  # Recaptcha module
+    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_SITE_KEY,  # Recaptcha site key
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling Recaptcha for verify user
+    SMTP_MAIL,  # SMTP email address
+    SMTP_PASSWORD,  # SMTP password
+    SMTP_PORT,  # SMTP port number
+    SMTP_SERVER,  # SMTP server address
+    Blueprint,  # Blueprint class for creating modular applications
+    EmailMessage,  # Class for creating email messages
+    Log,  # Logging module
+    VerifyUserForm,  # Form for verifying user
+    abort,  # Function for aborting requests
+    flashMessage,  # Flash messaging module
+    randint,  # Function for generating random integers
+    redirect,  # Function for redirecting requests
+    render_template,  # Function for rendering templates
+    request,  # Module for handling HTTP requests
+    requestsPost,  # Module for making HTTP POST requests
+    session,  # Session management module
+    smtplib,  # SMTP client module
+    sqlite3,  # SQLite database module
+    ssl,  # SSL/TLS module
 )
 
 # Create a blueprint for the verify user route

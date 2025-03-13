@@ -1,32 +1,32 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    ssl,  # SSL/TLS support module
-    abort,  # Function to abort request processing
-    smtplib,  # SMTP protocol client module
-    randint,  # Function to generate random integers
-    sqlite3,  # SQLite database module
-    request,  # Request handling module
-    redirect,  # Redirect function
-    session,  # Session module
     APP_NAME,  # Application name
-    Blueprint,  # Blueprint for defining routes
-    SMTP_PORT,  # SMTP server port
-    SMTP_MAIL,  # SMTP server email
-    RECAPTCHA,  # Flag for enabling reCAPTCHA
-    encryption,  # Encryption utility module
-    SMTP_SERVER,  # SMTP server address
-    flashMessage,  # Flash messaging module
-    EmailMessage,  # Class for creating email messages
-    requestsPost,  # Function for making POST requests
-    SMTP_PASSWORD,  # SMTP server password
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
-    PasswordResetForm,  # Form class for password reset
+    RECAPTCHA,  # Flag for enabling reCAPTCHA
+    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling reCAPTCHA for password reset
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
-    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling reCAPTCHA for password reset
+    SMTP_MAIL,  # SMTP server email
+    SMTP_PASSWORD,  # SMTP server password
+    SMTP_PORT,  # SMTP server port
+    SMTP_SERVER,  # SMTP server address
+    Blueprint,  # Blueprint for defining routes
+    EmailMessage,  # Class for creating email messages
+    Log,  # Custom logging module
+    PasswordResetForm,  # Form class for password reset
+    abort,  # Function to abort request processing
+    encryption,  # Encryption utility module
+    flashMessage,  # Flash messaging module
+    randint,  # Function to generate random integers
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    requestsPost,  # Function for making POST requests
+    session,  # Session module
+    smtplib,  # SMTP protocol client module
+    sqlite3,  # SQLite database module
+    ssl,  # SSL/TLS support module
 )
 
 # Create a blueprint for the password reset route
