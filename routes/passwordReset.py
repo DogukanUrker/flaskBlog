@@ -33,6 +33,10 @@ from modules import (
 passwordResetBlueprint = Blueprint("passwordReset", __name__)
 
 
+# Create a dict to store password reset codes with usernames as index
+passwordResetCodesStorage = {}
+
+
 # Define a route for password reset
 @passwordResetBlueprint.route(
     "/passwordreset/codesent=<codeSent>", methods=["GET", "POST"]
@@ -50,9 +54,6 @@ def passwordReset(codeSent):
     Raises:
         401: If the reCAPTCHA verification fails.
     """
-    # Define global variables
-    global userName
-    global passwordResetCode
 
     # Initialize password reset form
     form = PasswordResetForm(request.form)
@@ -72,10 +73,12 @@ def passwordReset(codeSent):
             match request.method == "POST":
                 case True:
                     # Retrieve form data
+                    userName = request.form["userName"]
+                    userName = userName.replace(" ", "")
                     code = request.form["code"]
                     password = request.form["password"]
                     passwordConfirm = request.form["passwordConfirm"]
-                    match code == passwordResetCode:
+                    match code == passwordResetCodesStorage.get(userName, ""):
                         case True:
                             # Check if passwords match
                             cursor.execute(
@@ -95,6 +98,8 @@ def passwordReset(codeSent):
                                                 language=session["language"],
                                             )  # Display a flash message
                                         case False:
+                                            # remove reset code in storage to prevent reuse
+                                            passwordResetCodesStorage.pop(userName)
                                             # Hash new password and update in the database
                                             password = encryption.hash(password)
                                             match (
@@ -207,16 +212,11 @@ def passwordReset(codeSent):
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
-                        """select * from users where lower(userName) = ? """,
-                        [(userName.lower())],
+                        """select * from users where lower(userName) = ? and lower(email) = ? """,
+                        [userName.lower(), email.lower()],
                     )
-                    userNameDB = cursor.fetchone()
-                    cursor.execute(
-                        """select * from users where lower(email) = ? """,
-                        [(email.lower())],
-                    )
-                    emailDB = cursor.fetchone()
-                    match not userNameDB or not emailDB:
+                    userDB = cursor.fetchone()
+                    match not userDB:
                         case False:
                             # User and email found, send password reset code
                             context = ssl.create_default_context()
@@ -226,6 +226,7 @@ def passwordReset(codeSent):
                             server.ehlo()
                             server.login(SMTP_MAIL, SMTP_PASSWORD)
                             passwordResetCode = str(randint(1000, 9999))
+                            passwordResetCodesStorage[userName] = passwordResetCode
                             message = EmailMessage()
                             message.set_content(
                                 f"Hi {userName}👋,\nForgot your password😶‍🌫️? No problem👌.\nHere is your password reset code🔢:\n{passwordResetCode}"
