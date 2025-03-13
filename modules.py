@@ -27,7 +27,7 @@ import geoip2  # Importing geoip2.databse
 from geoip2 import database  # Importing geoip2.databse
 
 # Importing constants
-from constants import * # noqa: F403
+from constants import *  # noqa: F403
 
 from email.message import EmailMessage  # Email handling
 
