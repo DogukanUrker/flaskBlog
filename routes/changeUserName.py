@@ -88,7 +88,7 @@ def changeUserName():
                                     )  # Display a flash message
                                 case False:
                                     # Check if new username is available
-                                    match userNameCheck == None:
+                                    match userNameCheck is None:
                                         case True:
                                             # Check Recaptcha if enabled
                                             match (
@@ -105,7 +105,7 @@ def changeUserName():
                                                     # Check Recaptcha verification result
                                                     match (
                                                         verifyResponse["success"]
-                                                        == True
+                                                        is True
                                                         or verifyResponse["score"] > 0.5
                                                     ):
                                                         case True:

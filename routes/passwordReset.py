@@ -110,7 +110,7 @@ def passwordReset(codeSent):
                                                     ).json()
                                                     match (
                                                         verifyResponse["success"]
-                                                        == True
+                                                        is True
                                                         or verifyResponse["score"] > 0.5
                                                     ):
                                                         case True:
@@ -263,7 +263,7 @@ def passwordReset(codeSent):
                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                     ).json()
                                     match (
-                                        verifyResponse["success"] == True
+                                        verifyResponse["success"] is True
                                         or verifyResponse["score"] > 0.5
                                     ):
                                         case True:

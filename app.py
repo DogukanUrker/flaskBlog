@@ -307,10 +307,10 @@ match RECAPTCHA:
             case True:
                 # Log a warning message that the recaptcha keys are invalid and may cause the app to crash
                 Log.danger(
-                    f"reCAPTCHA keys is unvalid this may cause the application to crash",
+                    "reCAPTCHA keys is unvalid this may cause the application to crash",
                 )
                 Log.danger(
-                    f"Please check your recaptcha keys or set recaptcha to false from true in 'constants.py'",
+                    "Please check your recaptcha keys or set recaptcha to false from true in 'constants.py'",
                 )
             case False:
                 # Log a success message that recaptcha is on and print the recaptcha keys, url and badge status
@@ -340,13 +340,13 @@ match RECAPTCHA:
                 )
     case False:
         # Log a warning message that recaptcha is off
-        Log.app(f"reCAPTCHA is off")
+        Log.app("reCAPTCHA is off")
 
 # Check if default admin is enabled
 match DEFAULT_ADMIN:
     case True:
         # Log a success message that admin is on and print the default admin settings
-        Log.app(f"Default admin is on")
+        Log.app("Default admin is on")
         Log.app(f"Default admin username: {DEFAULT_ADMIN_USERNAME}")
         Log.app(f"Default admin email: {DEFAULT_ADMIN_EMAIL}")
         Log.app(f"Default admin password: {DEFAULT_ADMIN_PASSWORD}")
@@ -354,7 +354,7 @@ match DEFAULT_ADMIN:
         Log.app(f"Default admin profile picture: {DEFAULT_ADMIN_PROFILE_PICTURE}")
     case False:
         # Log a danger message that admin is off
-        Log.app(f"Default admin is off")
+        Log.app("Default admin is off")
 
 # Call the dbFolder, usersTable, postsTable , commentsTable and analyticsTable functions to check the database status
 dbFolder()

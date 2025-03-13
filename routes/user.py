@@ -35,7 +35,7 @@ def user(userName):
     connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object for executing queries
     cursor.execute(
-        f"select userName from users"
+        "select userName from users"
     )  # Select all the usernames from the users table
     users = cursor.fetchall()  # Fetch all the results as a list of tuples
     """

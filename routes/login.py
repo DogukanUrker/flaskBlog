@@ -97,7 +97,7 @@ def login(direct):
                                                     ).json()
                                                     match (
                                                         verifyResponse["success"]
-                                                        == True
+                                                        is True
                                                         or verifyResponse["score"] > 0.5
                                                     ):
                                                         case True:

@@ -61,7 +61,7 @@ def changeProfilePicture():
                             ).json()
                             # Check if the reCAPTCHA verification is successful or has a high score
                             match (
-                                verifyResponse["success"] == True
+                                verifyResponse["success"] is True
                                 or verifyResponse["score"] > 0.5
                             ):
                                 case True:
@@ -86,7 +86,7 @@ def changeProfilePicture():
                                         language=session["language"],
                                     )  # Display a flash message
                                     # Redirect to the same route
-                                    return redirect(f"/changeprofilepicture")
+                                    return redirect("/changeprofilepicture")
                                 case False:
                                     # Log the reCAPTCHA verification result
                                     Log.danger(
@@ -112,7 +112,7 @@ def changeProfilePicture():
                                 language=session["language"],
                             )  # Display a flash message
                             # Redirect to the same route
-                            return redirect(f"/changeprofilepicture")
+                            return redirect("/changeprofilepicture")
             # Render the change profile picture template with the form object, the site key, and the reCAPTCHA flag
             return render_template(
                 "changeProfilePicture.html.jinja",

@@ -40,7 +40,7 @@ def adminPanel():
                     # Log info message that the admin reached to the admin panel
                     Log.info(f"Admin: {session['userName']} reached to the admin panel")
                     # Log a message that admin panel loaded
-                    Log.info(f"Rendering adminPanel.html.jinja: params: None")
+                    Log.info("Rendering adminPanel.html.jinja: params: None")
                     # Render the admin panel template
                     return render_template("adminPanel.html.jinja")
                 case False:

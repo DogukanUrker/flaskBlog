@@ -88,7 +88,7 @@ def signup():
                             cursor.execute("select email from users")
                             mails = str(cursor.fetchall())
                             # Check if username and email are available
-                            match not userName in users and not email in mails:
+                            match userName not in users and email not in mails:
                                 # If username and email are available
                                 case True:
                                     # Check if passwords match
@@ -126,7 +126,7 @@ def signup():
                                                                 verifyResponse[
                                                                     "success"
                                                                 ]
-                                                                == True
+                                                                is True
                                                                 or verifyResponse[
                                                                     "score"
                                                                 ]
@@ -140,7 +140,7 @@ def signup():
                                                                     # Insert user data into the database
                                                                     cursor = connection.cursor()
                                                                     cursor.execute(
-                                                                        f"""
+                                                                        """
                                                                         insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
                                                                         values(?, ?, ?, ?, ?, ?, ?, ?)
                                                                         """,
@@ -257,7 +257,7 @@ def signup():
                                                             # Insert user data into the database
                                                             cursor = connection.cursor()
                                                             cursor.execute(
-                                                                f"""
+                                                                """
                                                                         insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
                                                                         values(?, ?, ?, ?, ?, ?, ?, ?)
                                                                         """,
@@ -382,7 +382,7 @@ def signup():
                                         category="error",
                                         language=session["language"],
                                     )  # Display a flash message
-                            match not userName in users and email in mails:
+                            match userName not in users and email in mails:
                                 case True:
                                     Log.danger(f'This email "{email}" is unavailable')
                                     # Flash error message
@@ -392,7 +392,7 @@ def signup():
                                         category="error",
                                         language=session["language"],
                                     )  # Display a flash message
-                            match userName in users and not email in mails:
+                            match userName in users and email not in mails:
                                 case True:
                                     Log.danger(
                                         f'This username "{userName}" is unavailable',

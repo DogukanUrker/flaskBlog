@@ -52,7 +52,7 @@ def adminPanelComments():
                             # Delete the comment from the database
                             Delete.comment(request.form["commentID"])
                     # Redirect to the same route
-                    return redirect(f"/admin/comments")
+                    return redirect("/admin/comments")
             # Check if the user role is admin
             match role == "admin":
                 case True:

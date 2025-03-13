@@ -20,7 +20,7 @@ def getAnalyticsPageTrafficGraphData(
     """
 
     # Check if none of kwargs are given
-    if sincePosted != True:
+    if sincePosted is not True:
         if weeks == 0 and days == 0 and hours == 0:
             # assign defaultt to last 48 hours of data
             hours = 48

@@ -179,11 +179,11 @@ class Delete:
         ):  # Use a match statement to compare the first element of the perpetrator tuple (the role) with the string "admin"
             case True:  # If the perpetrator is an admin
                 return redirect(
-                    f"/admin/users"
+                    "/admin/users"
                 )  # Return a redirect response to the admin users page
             case False:  # If the perpetrator is not an admin
                 session.clear()  # Clear the session dictionary
-                return redirect(f"/")  # Return a redirect response to the home page
+                return redirect("/")  # Return a redirect response to the home page
 
     def comment(commentID):
         """

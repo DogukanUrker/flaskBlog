@@ -115,7 +115,7 @@ def changePassword():
                                             ).json()
                                             # Check if reCAPTCHA verification is successful
                                             match (
-                                                verifyResponse["success"] == True
+                                                verifyResponse["success"] is True
                                                 or verifyResponse["score"] > 0.5
                                             ):
                                                 case True:

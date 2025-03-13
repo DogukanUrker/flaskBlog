@@ -56,7 +56,7 @@ def accountSettings():
                             ).json()
                             # Check if the reCAPTCHA verification is successful or has a high score
                             match (
-                                verifyResponse["success"] == True
+                                verifyResponse["success"] is True
                                 or verifyResponse["score"] > 0.5
                             ):
                                 case True:
@@ -67,7 +67,7 @@ def accountSettings():
                                     # Delete the user from the database
                                     Delete.user(user[0][0])
                                     # Redirect to the home page
-                                    return redirect(f"/")
+                                    return redirect("/")
                                 case False:
                                     # Log the reCAPTCHA verification result
                                     Log.danger(
@@ -79,7 +79,7 @@ def accountSettings():
                             # Delete the user from the database
                             Delete.user(user[0][0])
                             # Redirect to the home page
-                            return redirect(f"/")
+                            return redirect("/")
             # Render the account settings template with the user and reCAPTCHA data
             return render_template(
                 "accountSettings.html.jinja",

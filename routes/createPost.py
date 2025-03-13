@@ -80,7 +80,7 @@ def createPost():
                                     ).json()
                                     # Check Recaptcha verification result
                                     match (
-                                        verifyResponse["success"] == True
+                                        verifyResponse["success"] is True
                                         or verifyResponse["score"] > 0.5
                                     ):
                                         case True:

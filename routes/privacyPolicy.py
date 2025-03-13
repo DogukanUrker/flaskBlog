@@ -22,7 +22,7 @@ def privacyPolicy():
     """
 
     # Use the Log module to log information to the console
-    Log.info(f"Rendering privacyPolicy.html.jinja")
+    Log.info("Rendering privacyPolicy.html.jinja")
 
     # Use the render_template function to render the privacyPolicy.html.jinja file
     return render_template("privacyPolicy.html.jinja")

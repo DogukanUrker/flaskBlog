@@ -82,7 +82,7 @@ def post(urlID):
                             # Delete the post from the database
                             Delete.post(post[0])
                             # Redirect to the home page
-                            return redirect(f"/")
+                            return redirect("/")
 
                     # Check if the comment delete button is clicked
                     match "commentDeleteButton" in request.form:
