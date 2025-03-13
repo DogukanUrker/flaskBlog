@@ -110,7 +110,7 @@ def createPost():
                                                     currentTimeStamp(),
                                                     currentTimeStamp(),
                                                     postCategory,
-                                                    geturlID(postTitle),
+                                                    generateurlID(postTitle),
                                                 ),
                                             )
                                             connection.commit()
