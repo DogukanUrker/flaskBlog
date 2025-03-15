@@ -337,6 +337,7 @@
     "visitorCounts": "Nombre de Visiteurs",
     "computerOS": "Système d'Exploitation",
     "topCountries": "Pays Principaux",
-    "visitor": "Visiteur"
+    "visitor": "Visiteur",
+    "viewAll": "Voir Tout"
   }
 }

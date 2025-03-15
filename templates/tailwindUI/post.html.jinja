@@ -33,37 +33,14 @@
 <meta property="og:site_name" content="{{ appName }}" />
 
 
+{% endblock head %} {% block body %}
+
+<!-- pass variable to js file -->
 <script>
-  // function to count visitors time spend time on post
-  // store in seconds in database
   let visiorID = {{ idForRandomVisitor | safe}};
-  let initailSpendTime = 0;
-
-  // check visitorID is not null then perform fetch operation and increment
-  if(visiorID!=null){
-    
-    setInterval(() => {
-      // increase initial spend time on every interval with 5 
-      initailSpendTime += 5;
-
-      const data = {
-        visitorID: visiorID,
-        spendTime: initailSpendTime,
-      };
-      // send data on every 5 second to store on database of visitor
-    
-    // send post request to server and update visitors time spend duration 
-    fetch("{{ url_for('returnPostTrafficGraphData.storeTimeSpendsDuraton') }}", {
-      method: "POST",
-      headers: {'X-CSRFToken': '{{ csrf_token() }}', "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-      keepalive: true
-    });
-    }, 5000);
-  };
+  const csrfToken = '{{ csrf_token() }}';
 </script>
 
-{% endblock head %} {% block body %}
 <!-- Main Content Section -->
 <div
   class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 mx-auto mt-6 md:mt-10 break-words"
@@ -224,5 +201,9 @@
   </form>
   {% endif %}
 </div>
+
+
+  <!-- Include the JavaScript file for post visitor activity functionality -->
+  <script src="{{ url_for('static', filename='js/post.js') }}"></script>
 <!-- End of Main Content Section -->
 {% endblock body %}

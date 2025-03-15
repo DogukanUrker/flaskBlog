@@ -337,6 +337,7 @@
     "visitorCounts": "Besucherzahlen",
     "computerOS": "Computer-Betriebssystem",
     "topCountries": "Top Länder",
-    "visitor": "Besucher"
+    "visitor": "Besucher",
+    "viewAll": "Alle Anzeigen"
   }
 }

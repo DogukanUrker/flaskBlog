@@ -5,11 +5,10 @@ This module contains the code for the posts analytics page.
 from modules import (
     ANALYTICS,  # A constant variable to check anaylytcs True or False
     DB_POSTS_ROOT,  # A constant for the path to the posts database
+    getAnalyticsPageTrafficGraphData, # Function to get post traffic graph data
+    getAnalyticsPageOSGraphData, # Function to get post os graph data
     Blueprint,  # A class for creating Flask blueprints
     Log,  # A class for logging messages
-    getAnalyticsPageCountryGraphData,
-    getAnalyticsPageOSGraphData,
-    getAnalyticsPageTrafficGraphData,
     render_template,  # A function for rendering Jinja templates
     request,  # A Request handling module
     session,  # Session management module
@@ -82,24 +81,11 @@ def analyticsPost(urlID):
                                     views[1]
                                 )  # Add the second element of the list (the view count) to the total visitor
 
-                            # traffic data
-                            postGraphData = getAnalyticsPageTrafficGraphData(post[0])
-
-                            # os data
+                            # os graph data
                             osGraphData = getAnalyticsPageOSGraphData(post[0])
 
-                            # country data
-                            counryGraphData = getAnalyticsPageCountryGraphData(post[0])
-
-                            return render_template(
-                                "postsAnalytics.html.jinja",
-                                post=post,
-                                todaysVisitor=todaysVisitor,
-                                postGraphData=postGraphData,
-                                osGraphData=osGraphData,
-                                counryGraphData=counryGraphData,
-                            )
-
+                            return render_template("postsAnalytics.html.jinja", post=post, todaysVisitor=todaysVisitor, osGraphData=osGraphData)
+                        
                         case False:
                             Log.error(
                                 f"{request.remote_addr} tried to reach unknown post"

@@ -38,13 +38,18 @@ def returnPostTrafficGraphData() -> dict:
         - `404 Not Found`: If `postID` is missing.
         - `410 Gone`: If analytics is disabled by the admin.
     """
+    # Accept postID type integer
     postID = request.args.get("postID", type=int)
-    sincePosted = request.args.get("sincePosted", type=bool, default=False)
+    # Accept True or False and convert into boolean, default to False
+    sincePosted = str(request.args.get("sincePosted", default=False)).lower()=="true"
+    # Accept weeks type float
     weeks = request.args.get("weeks", type=float, default=0)
+    # Accept days type float
     days = request.args.get("days", type=float, default=0)
+    # Accept hours type float
     hours = request.args.get("hours", type=float, default=0)
 
-    # check if analytics is true or false by admin for flaskblog
+    # Check if analytics is true or false by admin for flaskblog
     match ANALYTICS:
         case True:
             # Ensure the user is authenticated
@@ -107,10 +112,12 @@ def returnPostCountryGraphData() -> dict:
         `404 Not Found`: If `postID` is missing.
         `410 Gone`: If analytics is disabled by the admin.
     """
+    # Accept postID
     postID = request.args.get("postID", type=int)
-    viewAll = request.args.get("viewAll", type=bool, default=False)
+    # Accept True or False and convert into boolean, default to False
+    viewAll = str(request.args.get("viewAll", default=False)).lower()=="true"
 
-    # check if analytics is true or false by admin for flaskblog
+    # Check if analytics is true or false by admin for flaskblog
     match ANALYTICS:
         case True:
             match "userName" in session:
@@ -127,14 +134,8 @@ def returnPostCountryGraphData() -> dict:
                         )
                     else:
                         # Return error if postID is missing
-                        return make_response(
-                            {
-                                "message": "missing postID thats data to be retrieved",
-                                "error": "postID (type: int) is required.",
-                            },
-                            404,
-                        )
-
+                        return make_response({"message" : "Missing postID; unable to retrieve data.", "error" : "postID (type: int) is required."}, 404)
+                        
                 case False:
                     # Return forbidden error if the user is not authenticated
                     return make_response(
