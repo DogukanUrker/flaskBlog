@@ -11,9 +11,8 @@ from modules import (
     ANALYTICS, # A constant variable to check anaylytcs True or False
     render_template,  # A function for rendering Jinja templates
     DB_POSTS_ROOT,  # A constant for the path to the posts database
-    getAnalyticsPageTrafficGraphData,
-    getAnalyticsPageOSGraphData,
-    getAnalyticsPageCountryGraphData
+    getAnalyticsPageTrafficGraphData, # Function to get post traffic graph data
+    getAnalyticsPageOSGraphData, # Function to get post os graph data
 )
 
 analyticsBlueprint = Blueprint("analytics", __name__)  # Create a blueprint for the analytics page
@@ -70,16 +69,10 @@ def analyticsPost(urlID):
                                 todaysVisitor += int(views[1]) # Add the second element of the list (the view count) to the total visitor
 
 
-                            # traffic data
-                            postGraphData = getAnalyticsPageTrafficGraphData(post[0])
-
-                            # os data
+                            # os graph data
                             osGraphData = getAnalyticsPageOSGraphData(post[0])
 
-                            # country data
-                            counryGraphData = getAnalyticsPageCountryGraphData(post[0])
-
-                            return render_template("postsAnalytics.html.jinja", post=post, todaysVisitor=todaysVisitor, postGraphData=postGraphData, osGraphData=osGraphData, counryGraphData=counryGraphData)
+                            return render_template("postsAnalytics.html.jinja", post=post, todaysVisitor=todaysVisitor, osGraphData=osGraphData)
                         
                         case False:
                             Log.danger(
