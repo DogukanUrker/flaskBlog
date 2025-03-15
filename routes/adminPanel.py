@@ -20,13 +20,13 @@ def adminPanel():
     # Check if the user is logged in
     match "userName" in session:
         case True:
-            Log.sql(
+            Log.success(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
@@ -44,13 +44,13 @@ def adminPanel():
                     # Render the admin panel template
                     return render_template("adminPanel.html.jinja")
                 case False:
-                    Log.danger(
+                    Log.error(
                         f"{request.remote_addr} tried to reach admin panel without being admin"
                     )  # Log a message that the user tried to reach admin panel without being admin
                     # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach admin panel being logged in"
             )  # Log a message that the user tried to reach admin panel without being logged in
             # Redirect to the login page if the user is not logged in

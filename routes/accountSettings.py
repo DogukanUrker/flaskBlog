@@ -28,13 +28,13 @@ def accountSettings():
     # Check if the user is logged in
     match "userName" in session:
         case True:
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the database and get the user name
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
@@ -70,7 +70,7 @@ def accountSettings():
                                     return redirect("/")
                                 case False:
                                     # Log the reCAPTCHA verification result
-                                    Log.danger(
+                                    Log.error(
                                         f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Abort the request with a 401 error
@@ -88,7 +88,7 @@ def accountSettings():
                 recaptcha=RECAPTCHA,
             )
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach account settings without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             # Redirect to the login page with the account settings as the next destination

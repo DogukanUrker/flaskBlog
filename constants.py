@@ -51,6 +51,9 @@ CUSTOM_LOGGER = True  # (bool)
 # Toggle werkzeug logging feature
 WERKZEUG_LOGGER = False  # (bool)
 
+# Toggle logging to file feature
+LOG_TO_FILE = True  # (bool)
+
 # Root path of the log folder
 LOG_FOLDER_ROOT = "log/"  # (str)
 

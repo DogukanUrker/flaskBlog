@@ -46,7 +46,7 @@ def logout():
             session.pop("userRole")  # Clear the userRole data from session
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to logout without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Return a redirect response to the homepage

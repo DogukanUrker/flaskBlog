@@ -52,13 +52,13 @@ def changePassword():
                     oldPassword = request.form["oldPassword"]
                     password = request.form["password"]
                     passwordConfirm = request.form["passwordConfirm"]
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Retrieve hashed password from database
@@ -94,13 +94,13 @@ def changePassword():
                                 case True:
                                     # Hash the new password
                                     newPassword = encryption.hash(password)
-                                    Log.sql(
+                                    Log.database(
                                         f"Connecting to '{DB_USERS_ROOT}' database"
                                     )  # Log the database connection is started
                                     # Connect to the database
                                     connection = sqlite3.connect(DB_USERS_ROOT)
                                     connection.set_trace_callback(
-                                        Log.sql
+                                        Log.database
                                     )  # Set the trace callback for the connection
                                     # Check if RECAPTCHA is enabled for password change
                                     match RECAPTCHA and RECAPTCHA_PASSWORD_CHANGE:
@@ -150,7 +150,7 @@ def changePassword():
                                                     return redirect("/login/redirect=&")
                                                 case False:
                                                     # Log reCAPTCHA failure
-                                                    Log.danger(
+                                                    Log.error(
                                                         f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                     )
                                                     # Abort the request
@@ -197,7 +197,7 @@ def changePassword():
             )
         case False:
             # Log user not logged in
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to change his password without logging in"
             )
             flashMessage(

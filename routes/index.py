@@ -60,12 +60,14 @@ def index(by="hot", sort="desc"):
             )
             return redirect("/")
 
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     # Create a cursor object for executing queries
     cursor = connection.cursor()
     # Select all the columns from the posts table and order them by the specified field and sorting order

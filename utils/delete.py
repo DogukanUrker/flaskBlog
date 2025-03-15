@@ -47,12 +47,12 @@ class Delete:
         Returns:
         None
         """
-        Log.sql(
+        Log.database(
             f"Connecting to '{DB_POSTS_ROOT}' database"
         )  # Log the database connection is started
         connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
@@ -72,7 +72,7 @@ class Delete:
             DB_COMMENTS_ROOT
         )  # Connect to the comments database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a new cursor object for executing queries
         cursor.execute(
@@ -101,7 +101,7 @@ class Delete:
             DB_ANALYTICS_ROOT
         )  # Connect to the comments database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
@@ -134,12 +134,12 @@ class Delete:
         Returns:
         None
         """
-        Log.sql(
+        Log.database(
             f"Connecting to '{DB_USERS_ROOT}' database"
         )  # Log the database connection is started
         connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
@@ -199,7 +199,7 @@ class Delete:
             DB_COMMENTS_ROOT
         )  # Connect to the comments database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(

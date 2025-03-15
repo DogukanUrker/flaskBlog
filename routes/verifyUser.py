@@ -50,16 +50,16 @@ def verifyUser(codeSent):
         case True:
             # Get the username from session
             userName = session["userName"]
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the users database
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             # Check if the user is already verified
@@ -130,7 +130,7 @@ def verifyUser(codeSent):
                                                             return redirect("/")
                                                         case False:
                                                             # Recaptcha verification failed
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"User Verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -268,7 +268,7 @@ def verifyUser(codeSent):
                                                             server.send_message(message)
                                                         case False:
                                                             # Recaptcha verification failed
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"User verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -289,7 +289,7 @@ def verifyUser(codeSent):
                                             return redirect("/verifyUser/codesent=true")
                                         case True:
                                             # User not found in the database
-                                            Log.danger(f'User: "{userName}" not found')
+                                            Log.error(f'User: "{userName}" not found')
                                             flashMessage(
                                                 page="verifyUser",
                                                 message="notFound",
@@ -305,7 +305,7 @@ def verifyUser(codeSent):
                                 recaptcha=RECAPTCHA,
                             )
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to verify his account without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Redirect to homepage if user is not logged in

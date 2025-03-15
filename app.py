@@ -13,11 +13,10 @@ from modules import (
 startTime = currentTimeStamp()
 
 # Print a line breaker and a ASCII art
-Log.breaker()
 print(terminalASCII())
 
 # Print a line breaker and a message that the app is starting
-Log.app("Starting...")
+Log.info("Starting...")
 
 
 # Importing necessary modules and classes
@@ -237,14 +236,14 @@ match WERKZEUG_LOGGER:
     # If Werkzeug default logger is enabled
     case True:
         # Log that Werkzeug default logger is enabled
-        Log.app("Werkzeug default logger is enabled")
+        Log.warning("Werkzeug default logger is enabled")
     # If Werkzeug default logger is disabled
     case False:
         # Import getLogger from logging module
         from logging import getLogger
 
         # Log that Werkzeug default logger is disabled
-        Log.app("Werkzeug default logger is disabled")
+        Log.info("Werkzeug default logger is disabled")
         # Disable the Werkzeug default logger
         getLogger("werkzeug").disabled = True
 
@@ -253,35 +252,35 @@ match CUSTOM_LOGGER:
     # If Custom logger is enabled
     case True:
         # Log that Custom logger is enabled
-        Log.app("Custom logger is enabled")
+        Log.info("Custom logger is enabled")
     # If Custom logger is disabled
     case False:
         # Log that Custom logger is disabled
-        Log.app("Custom logger is disabled")
+        Log.info("Custom logger is disabled")
 
 
 # Log app settings
-Log.app(f"Debug mode: {DEBUG_MODE}")
-Log.app(f"Name: {APP_NAME}")
-Log.app(f"Version: {APP_VERSION}")
-Log.app(f"Host: {APP_HOST}")
-Log.app(f"Port: {APP_PORT}")
-Log.app(f"Secret key: {APP_SECRET_KEY}")
-Log.app(f"Session permanent: {SESSION_PERMANENT}")
-Log.app(f"Root path: {APP_ROOT_PATH}")
-Log.app(f"Log folder root: {LOG_FOLDER_ROOT}")
-Log.app(f"Log file root: {LOG_FILE_ROOT}")
-Log.app(f"Log in: {LOG_IN}")
-Log.app(f"Registration: {REGISTRATION}")
+Log.info(f"Debug mode: {DEBUG_MODE}")
+Log.info(f"Name: {APP_NAME}")
+Log.info(f"Version: {APP_VERSION}")
+Log.info(f"Host: {APP_HOST}")
+Log.info(f"Port: {APP_PORT}")
+Log.info(f"Secret key: {APP_SECRET_KEY}")
+Log.info(f"Session permanent: {SESSION_PERMANENT}")
+Log.info(f"Root path: {APP_ROOT_PATH}")
+Log.info(f"Log folder root: {LOG_FOLDER_ROOT}")
+Log.info(f"Log file root: {LOG_FILE_ROOT}")
+Log.info(f"Log in: {LOG_IN}")
+Log.info(f"Registration: {REGISTRATION}")
 # Log the UI name, template folder and the static folder
-Log.app(f"UI: {UI_NAME}")
-Log.app(f"Template folder: {TEMPLATE_FOLDER}")
-Log.app(f"Static folder: {STATIC_FOLDER}")
+Log.info(f"UI: {UI_NAME}")
+Log.info(f"Template folder: {TEMPLATE_FOLDER}")
+Log.info(f"Static folder: {STATIC_FOLDER}")
 # Log the SMTP server settings
-Log.app(f"SMTP server: {SMTP_SERVER}")
-Log.app(f"SMTP port: {SMTP_PORT}")
-Log.app(f"SMTP mail: {SMTP_MAIL}")
-Log.app(f"SMTP password: {SMTP_PASSWORD}")
+Log.info(f"SMTP server: {SMTP_SERVER}")
+Log.info(f"SMTP port: {SMTP_PORT}")
+Log.info(f"SMTP mail: {SMTP_MAIL}")
+Log.info(f"SMTP password: {SMTP_PASSWORD}")
 
 # Check if recaptcha is enabled
 match RECAPTCHA:
@@ -290,55 +289,55 @@ match RECAPTCHA:
         match RECAPTCHA_SITE_KEY == "" or RECAPTCHA_SECRET_KEY == "":
             case True:
                 # Log a warning message that the recaptcha keys are invalid and may cause the app to crash
-                Log.danger(
+                Log.error(
                     "reCAPTCHA keys is unvalid this may cause the application to crash",
                 )
-                Log.danger(
+                Log.error(
                     "Please check your recaptcha keys or set recaptcha to false from true in 'constants.py'",
                 )
             case False:
                 # Log a success message that recaptcha is on and print the recaptcha keys, url and badge status
-                Log.app("reCAPTCHA is on")
-                Log.app(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
-                Log.app(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
-                Log.app(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
-                Log.app(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
+                Log.info("reCAPTCHA is on")
+                Log.info(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
+                Log.info(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
+                Log.info(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
+                Log.info(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
                 # Log the recaptcha settings for different actions
-                Log.app(f"reCAPTCHA login: {RECAPTCHA_LOGIN}")
-                Log.app(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP}")
-                Log.app(f"reCAPTCHA post create: {RECAPTCHA_POST_CREATE}")
-                Log.app(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT}")
-                Log.app(f"reCAPTCHA post delete: {RECAPTCHA_POST_DELETE}")
-                Log.app(f"reCAPTCHA comment: {RECAPTCHA_COMMENT}")
-                Log.app(f"reCAPTCHA comment delete: {RECAPTCHA_COMMENT_DELETE}")
-                Log.app(f"reCAPTCHA password reset: {RECAPTCHA_PASSWORD_RESET}")
-                Log.app(f"reCAPTCHA password change: {RECAPTCHA_PASSWORD_CHANGE}")
-                Log.app(f"reCAPTCHA username change: {RECAPTCHA_USERNAME_CHANGE}")
-                Log.app(f"reCAPTCHA verify user: {RECAPTCHA_VERIFY_USER}")
-                Log.app(f"reCAPTCHA delete user: {RECAPTCHA_DELETE_USER}")
-                Log.app(
+                Log.info(f"reCAPTCHA login: {RECAPTCHA_LOGIN}")
+                Log.info(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP}")
+                Log.info(f"reCAPTCHA post create: {RECAPTCHA_POST_CREATE}")
+                Log.info(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT}")
+                Log.info(f"reCAPTCHA post delete: {RECAPTCHA_POST_DELETE}")
+                Log.info(f"reCAPTCHA comment: {RECAPTCHA_COMMENT}")
+                Log.info(f"reCAPTCHA comment delete: {RECAPTCHA_COMMENT_DELETE}")
+                Log.info(f"reCAPTCHA password reset: {RECAPTCHA_PASSWORD_RESET}")
+                Log.info(f"reCAPTCHA password change: {RECAPTCHA_PASSWORD_CHANGE}")
+                Log.info(f"reCAPTCHA username change: {RECAPTCHA_USERNAME_CHANGE}")
+                Log.info(f"reCAPTCHA verify user: {RECAPTCHA_VERIFY_USER}")
+                Log.info(f"reCAPTCHA delete user: {RECAPTCHA_DELETE_USER}")
+                Log.info(
                     f"reCAPTCHA user profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
                 )
-                Log.app(
+                Log.info(
                     f"reCAPTCHA profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
                 )
     case False:
         # Log a warning message that recaptcha is off
-        Log.app("reCAPTCHA is off")
+        Log.info("reCAPTCHA is off")
 
 # Check if default admin is enabled
 match DEFAULT_ADMIN:
     case True:
         # Log a success message that admin is on and print the default admin settings
-        Log.app("Default admin is on")
-        Log.app(f"Default admin username: {DEFAULT_ADMIN_USERNAME}")
-        Log.app(f"Default admin email: {DEFAULT_ADMIN_EMAIL}")
-        Log.app(f"Default admin password: {DEFAULT_ADMIN_PASSWORD}")
-        Log.app(f"Default admin point: {DEFAULT_ADMIN_POINT}")
-        Log.app(f"Default admin profile picture: {DEFAULT_ADMIN_PROFILE_PICTURE}")
+        Log.info("Default admin is on")
+        Log.info(f"Default admin username: {DEFAULT_ADMIN_USERNAME}")
+        Log.info(f"Default admin email: {DEFAULT_ADMIN_EMAIL}")
+        Log.info(f"Default admin password: {DEFAULT_ADMIN_PASSWORD}")
+        Log.info(f"Default admin point: {DEFAULT_ADMIN_POINT}")
+        Log.info(f"Default admin profile picture: {DEFAULT_ADMIN_PROFILE_PICTURE}")
     case False:
         # Log a danger message that admin is off
-        Log.app("Default admin is off")
+        Log.info("Default admin is off")
 
 # Call the dbFolder, usersTable, postsTable , commentsTable and analyticsTable functions to check the database status
 dbFolder()
@@ -463,7 +462,7 @@ app.register_blueprint(
 match __name__:
     case "__main__":
         # Log the host and port
-        Log.app(f"Running on http://{APP_HOST}:{APP_PORT}")
+        Log.info(f"Running on http://{APP_HOST}:{APP_PORT}")
 
         # Log a message that the app started successfully
         Log.success("App started")
@@ -484,16 +483,13 @@ match __name__:
         runTime = str(timedelta(seconds=runTime))
 
         # Log a message that shows the run time of the app
-        Log.app(f"Run time: {runTime} ")
+        Log.info(f"Run time: {runTime} ")
 
         # Log a message that the app shut down
-        Log.app("Shut down")
+        Log.info("Shut down")
 
         # Log a warning message that the app shut down
         Log.warning("App shut down")
 
         # Print a ASCII art
         print(terminalASCII())
-
-        # Print a line breaker
-        Log.breaker()

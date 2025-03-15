@@ -45,13 +45,13 @@ def dashboard(userName):
                                         ),
                                         301,
                                     )
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_POSTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the posts database
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Query the posts database for the posts authored by the session user name
@@ -60,13 +60,13 @@ def dashboard(userName):
                         [(session["userName"])],
                     )
                     posts = cursor.fetchall()
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_COMMENTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Query the comments database for the comments made by the route user name
@@ -117,14 +117,14 @@ def dashboard(userName):
                     )
                 case False:
                     # Log a message that the dashboard does not belong to the session user name
-                    Log.danger(
+                    Log.error(
                         f'User: "{session["userName"]}" tried to login to another users dashboard',
                     )
                     # Redirect to the dashboard of the session user name
                     return redirect(f"/dashboard/{session['userName'].lower()}")
         case False:
             # Log a message that the dashboard cannot be accessed without user login
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to access the dashboard without login"
             )
             flashMessage(

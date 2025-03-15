@@ -38,16 +38,16 @@ def changeProfilePicture():
                     newProfilePictureSeed = request.form["newProfilePictureSeed"]
                     # Generate the new profile picture URL from the seed
                     newProfilePicture = f"https://api.dicebear.com/7.x/identicon/svg?seed={newProfilePictureSeed}&radius=10"
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Check if reCAPTCHA is enabled and required for changing profile picture
@@ -89,7 +89,7 @@ def changeProfilePicture():
                                     return redirect("/changeprofilepicture")
                                 case False:
                                     # Log the reCAPTCHA verification result
-                                    Log.danger(
+                                    Log.error(
                                         f"Change profile picture reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Abort the request with a 401 error
@@ -121,7 +121,7 @@ def changeProfilePicture():
                 recaptcha=RECAPTCHA,
             )
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to change his profile picture without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             # Redirect to the home page if the user is not logged in

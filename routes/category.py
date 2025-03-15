@@ -76,13 +76,15 @@ def category(category, by="timeStamp", sort="desc"):
         case False:
             abort(404)
 
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
 
     # Establishing a connection to the SQLite database
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Executing SQL query to retrieve posts of the requested category and sorting them accordingly

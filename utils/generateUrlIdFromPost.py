@@ -4,7 +4,7 @@ from modules import DB_POSTS_ROOT, Log, sqlite3, uuid
 # Function to check if URL ID exists in the database
 def checkIfurlIDExistsInPostDb(urlID):
     with sqlite3.connect(DB_POSTS_ROOT) as connection:
-        connection.set_trace_callback(Log.sql)
+        connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute("SELECT urlID FROM posts WHERE urlID = ?", (urlID,))
         return bool(cursor.fetchall())

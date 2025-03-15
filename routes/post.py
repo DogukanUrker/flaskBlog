@@ -31,12 +31,14 @@ def post(urlID):
     # Create a comment form object from the request form
     form = CommentForm(request.form)
 
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Query the posts database for all post url IDs
@@ -49,13 +51,13 @@ def post(urlID):
             # Log a message indicating that the post is found
             Log.success(f'post: "{urlID}" loaded')
 
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_POSTS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
 
@@ -95,13 +97,13 @@ def post(urlID):
                     # Get the comment from the form
                     comment = request.form["comment"]
 
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_COMMENTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
 
@@ -136,13 +138,13 @@ def post(urlID):
                     # Redirect to the same route with a 301 status code
                     return redirect(url_for("post.post", urlID=urlID)), 301
 
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_COMMENTS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the comments database
             connection = sqlite3.connect(DB_COMMENTS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
 
@@ -166,13 +168,13 @@ def post(urlID):
                     sessionUser = "unsignedUser"
             match userIPData["status"] == 0:
                 case True:
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_ANALYTICS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the analytics database
                     connection = sqlite3.connect(DB_ANALYTICS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
 
@@ -194,7 +196,7 @@ def post(urlID):
                     connection.commit()
                     connection.close()
                 case False:
-                    Log.danger(f"Aborting postsAnalytics, {userIPData['message']}")
+                    Log.error(f"Aborting postsAnalytics, {userIPData['message']}")
                     # Log a message with level 1 indicating the visitor IP is not found
             # posts analytics implemetation ends here
 
@@ -219,7 +221,7 @@ def post(urlID):
             )
 
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach unknown post"
             )  # Log a message with level 1 indicating the post is not found
             # Render the 404 template if the post ID does not exist

@@ -56,7 +56,7 @@ def signup():
             match "userName" in session:
                 # If user is already logged in, redirect to homepage
                 case True:
-                    Log.danger(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
+                    Log.error(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
                     return redirect("/")
                 # If user is not logged in
                 case False:
@@ -73,13 +73,13 @@ def signup():
                             passwordConfirm = request.form["passwordConfirm"]
                             # Remove spaces from username
                             userName = userName.replace(" ", "")
-                            Log.sql(
+                            Log.database(
                                 f"Connecting to '{DB_USERS_ROOT}' database"
                             )  # Log the database connection is started
                             # Connect to the database
                             connection = sqlite3.connect(DB_USERS_ROOT)
                             connection.set_trace_callback(
-                                Log.sql
+                                Log.database
                             )  # Set the trace callback for the connection
                             cursor = connection.cursor()
                             # Fetch existing usernames and emails from the database
@@ -106,7 +106,7 @@ def signup():
                                                         DB_USERS_ROOT
                                                     )
                                                     connection.set_trace_callback(
-                                                        Log.sql
+                                                        Log.database
                                                     )  # Set the trace callback for the connection
                                                     # Check if reCAPTCHA is enabled for sign up
                                                     match (
@@ -248,7 +248,7 @@ def signup():
                                                                     )
                                                                 # If reCAPTCHA verification fails
                                                                 case False:
-                                                                    Log.danger(
+                                                                    Log.error(
                                                                         f"Sign up reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                                     )
                                                                     abort(401)
@@ -351,7 +351,7 @@ def signup():
                                                             )
                                                 # If username contains non-ASCII characters
                                                 case False:
-                                                    Log.danger(
+                                                    Log.error(
                                                         f'Username: "{userName}" do not fits to ascii characters',
                                                     )
                                                     flashMessage(
@@ -362,7 +362,7 @@ def signup():
                                                     )  # Display a flash message
                                         # If passwords do not match
                                         case False:
-                                            Log.danger("Passwords do not match")
+                                            Log.error("Passwords do not match")
                                             # Flash error message
                                             flashMessage(
                                                 page="signup",
@@ -373,7 +373,7 @@ def signup():
                             # If username or email is not available
                             match userName in users and email in mails:
                                 case True:
-                                    Log.danger(
+                                    Log.error(
                                         f'"{userName}" & "{email}" is unavailable '
                                     )
                                     flashMessage(
@@ -384,7 +384,7 @@ def signup():
                                     )  # Display a flash message
                             match userName not in users and email in mails:
                                 case True:
-                                    Log.danger(f'This email "{email}" is unavailable')
+                                    Log.error(f'This email "{email}" is unavailable')
                                     # Flash error message
                                     flashMessage(
                                         page="signup",
@@ -394,7 +394,7 @@ def signup():
                                     )  # Display a flash message
                             match userName in users and email not in mails:
                                 case True:
-                                    Log.danger(
+                                    Log.error(
                                         f'This username "{userName}" is unavailable',
                                     )
                                     # Flash error message

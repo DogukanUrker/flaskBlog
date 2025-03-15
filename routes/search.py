@@ -23,13 +23,15 @@ def search(query):
     # Log the query
     Log.info(f"Searching for query: {query}")
 
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_USERS_ROOT}' database"
     )  # Log the database connection is started
 
     # Connect to the users database
     connection = sqlite3.connect(DB_USERS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Search for users whose user name contains the query
@@ -47,12 +49,14 @@ def search(query):
             ("%" + queryNoWhiteSpace + "%"),
         ],
     ).fetchall()
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Search for posts whose tags contain the query

@@ -64,7 +64,7 @@ def createPost():
                                 category="error",
                                 language=session["language"],
                             )  # Display a flash message
-                            Log.danger(
+                            Log.error(
                                 f'User: "{session["userName"]}" tried to create a post with empty content',
                             )
                         case False:
@@ -88,13 +88,13 @@ def createPost():
                                             Log.success(
                                                 f"Post create reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
-                                            Log.sql(
+                                            Log.database(
                                                 f"Connecting to '{DB_POSTS_ROOT}' database"
                                             )  # Log the database connection is started
                                             # Insert new post into the database
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
                                             connection.set_trace_callback(
-                                                Log.sql
+                                                Log.database
                                             )  # Set the trace callback for the connection
                                             cursor = connection.cursor()
                                             cursor.execute(
@@ -128,18 +128,18 @@ def createPost():
                                             return redirect("/")
                                         case False:
                                             # Recaptcha verification failed
-                                            Log.danger(
+                                            Log.error(
                                                 f"Post create reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
                                             abort(401)
                                 case False:
                                     # Recaptcha not enabled
-                                    Log.sql(
+                                    Log.database(
                                         f"Connecting to '{DB_POSTS_ROOT}' database"
                                     )  # Log the database connection is started
                                     connection = sqlite3.connect(DB_POSTS_ROOT)
                                     connection.set_trace_callback(
-                                        Log.sql
+                                        Log.database
                                     )  # Set the trace callback for the connection
                                     cursor = connection.cursor()
                                     cursor.execute(
@@ -180,9 +180,7 @@ def createPost():
             )
         case False:
             # User is not logged in
-            Log.danger(
-                f"{request.remote_addr} tried to create a new post without login"
-            )
+            Log.error(f"{request.remote_addr} tried to create a new post without login")
             flashMessage(
                 page="createPost",
                 message="login",

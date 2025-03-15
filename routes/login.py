@@ -47,7 +47,7 @@ def login(direct):
             match "userName" in session:
                 case True:
                     # If user is already logged in, redirect
-                    Log.danger(f'User: "{session["userName"]}" already logged in')
+                    Log.error(f'User: "{session["userName"]}" already logged in')
                     return (
                         redirect(direct),
                         301,
@@ -60,12 +60,12 @@ def login(direct):
                             userName = request.form["userName"]
                             password = request.form["password"]
                             userName = userName.replace(" ", "")
-                            Log.sql(
+                            Log.database(
                                 f"Connecting to '{DB_USERS_ROOT}' database"
                             )  # Log the database connection is started
                             connection = sqlite3.connect(DB_USERS_ROOT)
                             connection.set_trace_callback(
-                                Log.sql
+                                Log.database
                             )  # Set the trace callback for the connection
                             cursor = connection.cursor()
                             cursor.execute(
@@ -76,7 +76,7 @@ def login(direct):
                             match not user:
                                 case True:
                                     # If user not found, show error message
-                                    Log.danger(f'User: "{userName}" not found')
+                                    Log.error(f'User: "{userName}" not found')
                                     flashMessage(
                                         page="login",
                                         message="notFound",
@@ -133,7 +133,7 @@ def login(direct):
 
                                                         case False:
                                                             # Returns an unauthorized error if the reCAPTCHA verification is unsuccessful
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"Login reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -161,7 +161,7 @@ def login(direct):
 
                                         case _:
                                             # Returns an incorrect password error if the password is incorrect
-                                            Log.danger("Wrong password")
+                                            Log.error("Wrong password")
                                             flashMessage(
                                                 page="login",
                                                 message="password",

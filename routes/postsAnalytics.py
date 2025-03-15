@@ -40,7 +40,7 @@ def analyticsPost(urlID):
                     # Use the sqlite3 module to connect to the database and get a cursor object
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Query the posts database for all post url IDs
@@ -53,13 +53,13 @@ def analyticsPost(urlID):
                             # Log a message indicating that the post is found
                             Log.success(f'post: "{urlID}" loaded')
 
-                            Log.sql(
+                            Log.database(
                                 f"Connecting to '{DB_POSTS_ROOT}' database"
                             )  # Log the database connection is started
                             # Connect to the posts database
                             connection = sqlite3.connect(DB_POSTS_ROOT)
                             connection.set_trace_callback(
-                                Log.sql
+                                Log.database
                             )  # Set the trace callback for the connection
                             cursor = connection.cursor()
 
@@ -101,21 +101,21 @@ def analyticsPost(urlID):
                             )
 
                         case False:
-                            Log.danger(
+                            Log.error(
                                 f"{request.remote_addr} tried to reach unknown post"
                             )  # Log a message with level 1 indicating the post is not found
                             # Render the 404 template if the post ID does not exist
                             return render_template("notFound.html.jinja")
 
                 case False:
-                    Log.danger(
+                    Log.error(
                         f"{request.remote_addr} tried to reach unknown post"
                     )  # Log a message with level 1 indicating the post is not found
                     # Render the 404 template if the post ID does not exist
                     return render_template("notFound.html.jinja")
 
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach unknown post"
             )  # Log a message with level 1 indicating the post is not found
             # Render the 404 template if the post ID does not exist

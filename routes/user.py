@@ -28,11 +28,13 @@ def user(userName):
     :rtype: flask.Response
     """
     userName = userName.lower()  # Convert the username to lowercase for consistency
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_USERS_ROOT}' database"
     )  # Log the database connection is started
     connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object for executing queries
     cursor.execute(
         "select userName from users"
@@ -55,12 +57,12 @@ def user(userName):
                 [(userName)],  # Use a parameterized query to avoid SQL injection
             )
             user = cursor.fetchone()  # Fetch the first result as a tuple
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_POSTS_ROOT}' database"
             )  # Log the database connection is started
             connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = (
                 connection.cursor()
@@ -88,7 +90,7 @@ def user(userName):
                 DB_COMMENTS_ROOT
             )  # Connect to the comments database
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = (
                 connection.cursor()
@@ -130,7 +132,7 @@ def user(userName):
                 showComments=showComments,  # Pass the showComments variable as a keyword argument
             )
         case _:  # If the username does not exist
-            Log.danger(
+            Log.error(
                 f'User: "{userName}" not found'
             )  # Log an error message the user was not found
             return render_template(

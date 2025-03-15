@@ -182,7 +182,7 @@ def storeTimeSpendsDuraton() -> dict:
                         # Connect to the posts database
                         connection = sqlite3.connect(DB_ANALYTICS_ROOT)
                         connection.set_trace_callback(
-                            Log.sql
+                            Log.database
                         )  # Set the trace callback for the connection
                         cursor = connection.cursor()
 

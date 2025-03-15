@@ -26,13 +26,13 @@ def adminPanelPosts():
             Log.info(
                 f"Admin: {session['userName']} reached to posts admin panel"
             )  # Log a message that the admin reached to posts admin panel
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
@@ -54,13 +54,13 @@ def adminPanelPosts():
             # Check if the user role is admin
             match role == "admin":
                 case True:
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_POSTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the posts database and get all the posts
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute("select * from posts order by timeStamp desc")
@@ -74,13 +74,13 @@ def adminPanelPosts():
                         "dashboard.html.jinja", posts=posts, showPosts=True
                     )
                 case False:
-                    Log.danger(
+                    Log.error(
                         f"{request.remote_addr} tried to reach post admin panel without being admin"
                     )  # Log a message that the user tried to reach admin panel without being admin
                     # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach post admin panel being logged in"
             )  # Log a message that the user tried to reach admin panel without being logged in
             # Redirect to the login page if the user is not logged in

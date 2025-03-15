@@ -47,13 +47,13 @@ def editPost(urlID):
     # Check if "userName" exists in session
     match "userName" in session:
         case True:
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_POSTS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute("select urlID from posts where urlID = ?", (urlID,))
@@ -61,13 +61,13 @@ def editPost(urlID):
             # Check if postID exists in posts
             match str(urlID) in posts:
                 case True:
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_POSTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the posts database
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
@@ -77,13 +77,13 @@ def editPost(urlID):
                     post = cursor.fetchone()
 
                     Log.success(f'POST: "{urlID}" FOUND')
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
@@ -119,7 +119,7 @@ def editPost(urlID):
                                                 category="error",
                                                 language=session["language"],
                                             )  # Display a flash message
-                                            Log.danger(
+                                            Log.error(
                                                 f'User: "{session["userName"]}" tried to edit a post with empty content',
                                             )
                                         case False:
@@ -162,7 +162,7 @@ def editPost(urlID):
                                                                 )
                                                             )
                                                             connection.set_trace_callback(
-                                                                Log.sql
+                                                                Log.database
                                                             )  # Set the trace callback for the connection
                                                             cursor = connection.cursor()
                                                             cursor.execute(
@@ -227,7 +227,7 @@ def editPost(urlID):
                                                             )
                                                         case False:
                                                             # Recaptcha verification failed
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"Post edit reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -237,7 +237,7 @@ def editPost(urlID):
                                                         DB_POSTS_ROOT
                                                     )
                                                     connection.set_trace_callback(
-                                                        Log.sql
+                                                        Log.database
                                                     )  # Set the trace callback for the connection
                                                     cursor = connection.cursor()
                                                     cursor.execute(
@@ -310,17 +310,17 @@ def editPost(urlID):
                                 category="error",
                                 language=session["language"],
                             )  # Display a flash message
-                            Log.danger(
+                            Log.error(
                                 f'User: "{session["userName"]}" tried to edit another authors post',
                             )
                             return redirect("/")
                 case False:
                     # Post with postID does not exist
-                    Log.danger(f'Post: "{urlID}" not found')
+                    Log.error(f'Post: "{urlID}" not found')
                     return render_template("notFound.html.jinja")
         case False:
             # User is not logged in
-            Log.danger(f"{request.remote_addr} tried to edit post without login")
+            Log.error(f"{request.remote_addr} tried to edit post without login")
             flashMessage(
                 page="editPost",
                 message="login",
