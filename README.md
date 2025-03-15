@@ -65,7 +65,6 @@
 - Responsive Design w/TailwindCSS
 - Search Bar
 - Summer Note Editor
-- Testing w/PlayWright
 - Time Zone Awareness
 - User
   - User Delete
@@ -86,7 +85,6 @@
 - WTForms
 - Requests
 - Flask-WTF
-- Playwright
 - Pipenv
 - Python 3.10 or newer
 
@@ -107,7 +105,6 @@
 - WTForms
 - Flask_WTF
 - Requests
-- Playwright
 
 ### 🔮 Frontend
 
@@ -118,7 +115,7 @@
 
 ### 🔨 Tools
 
-- Black formatter
+- Ruff formatter
 - Prettier formatter
 - VSCode editor
 - Docker
@@ -162,7 +159,6 @@ FlaskBlog has been an enriching journey, marking a significant milestone in my d
 ### 🔥 New Technologies Explored
 
 - Docker: Embracing containerization streamlined deployment and enhanced scalability.
-- Playwright: Automating browser interactions empowered smoother testing and validation processes.
 - Summer Note Editor: Integrating this versatile editor facilitated a richer content creation experience.
 - Tabler Icons: Leveraging these icons added visual appeal and improved user experience.
 - Google reCAPTCHA v3: Implementing advanced security measures fortified the application against bots and malicious activities.

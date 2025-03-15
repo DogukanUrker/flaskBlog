@@ -1,15 +1,15 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # A class for logging messages
-    Delete,  # Function for deleting comments
-    request,  # Request handling module
-    sqlite3,  # SQLite database module
-    session,  # Session handling module
-    redirect,  # Redirect function
-    Blueprint,  # Blueprint for defining routes
-    DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
     DB_COMMENTS_ROOT,  # Path to the comments database
+    DB_USERS_ROOT,  # Path to the users database
+    Blueprint,  # Blueprint for defining routes
+    Delete,  # Function for deleting comments
+    Log,  # A class for logging messages
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the admin panel comments route
@@ -26,13 +26,13 @@ def adminPanelComments():
             Log.info(
                 f"Admin: {session['userName']} reached to comments admin panel"
             )  # Log a message that the admin reached to comments admin panel
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
@@ -52,17 +52,17 @@ def adminPanelComments():
                             # Delete the comment from the database
                             Delete.comment(request.form["commentID"])
                     # Redirect to the same route
-                    return redirect(f"/admin/comments")
+                    return redirect("/admin/comments")
             # Check if the user role is admin
             match role == "admin":
                 case True:
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_COMMENTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the comments database and get all the comments
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute("select * from comments order by timeStamp desc")
@@ -76,13 +76,13 @@ def adminPanelComments():
                         "adminPanelComments.html.jinja", comments=comments
                     )
                 case False:
-                    Log.danger(
+                    Log.error(
                         f"{request.remote_addr} tried to reach comment admin panel without being admin"
                     )  # Log a message that the user tried to reach admin panel without being admin
                     # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach comment admin panel being logged in"
             )  # Log a message that the user tried to reach admin panel without being logged in
             # Redirect to the login page if the user is not logged in

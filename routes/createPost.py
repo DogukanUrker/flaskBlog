@@ -1,25 +1,25 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Logging module
-    abort,  # Function for aborting requests
-    session,  # Session management module
-    sqlite3,  # SQLite database module
-    request,  # Module for handling HTTP requests
-    redirect,  # Function for redirecting requests
-    addPoints,  # Function for adding points to a user
-    Blueprint,  # Blueprint class for creating modular applications
-    RECAPTCHA,  # Recaptcha module
-    requestsPost,  # Module for making HTTP POST requests
-    flashMessage,  # Flash messaging module
     DB_POSTS_ROOT,  # Path to the posts database
-    CreatePostForm,  # Form for creating a post
-    render_template,  # Function for rendering templates
-    currentTimeStamp,  # Function for getting current timestamp
+    RECAPTCHA,  # Recaptcha module
+    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post creation
+    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_SITE_KEY,  # Recaptcha site key
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post creation
+    Blueprint,  # Blueprint class for creating modular applications
+    CreatePostForm,  # Form for creating a post
+    Log,  # Logging module
+    abort,  # Function for aborting requests
+    addPoints,  # Function for adding points to a user
+    currentTimeStamp,  # Function for getting current timestamp
+    flashMessage,  # Flash messaging module
     generateurlID,  # url id generator for blog title
+    redirect,  # Function for redirecting requests
+    render_template,  # Function for rendering templates
+    request,  # Module for handling HTTP requests
+    requestsPost,  # Module for making HTTP POST requests
+    session,  # Session management module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the create post route
@@ -64,7 +64,7 @@ def createPost():
                                 category="error",
                                 language=session["language"],
                             )  # Display a flash message
-                            Log.danger(
+                            Log.error(
                                 f'User: "{session["userName"]}" tried to create a post with empty content',
                             )
                         case False:
@@ -79,21 +79,22 @@ def createPost():
                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                     ).json()
                                     # Check Recaptcha verification result
-                                    match verifyResponse[
-                                        "success"
-                                    ] == True or verifyResponse["score"] > 0.5:
+                                    match (
+                                        verifyResponse["success"] is True
+                                        or verifyResponse["score"] > 0.5
+                                    ):
                                         case True:
                                             # Log the reCAPTCHA verification result
                                             Log.success(
                                                 f"Post create reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
-                                            Log.sql(
+                                            Log.database(
                                                 f"Connecting to '{DB_POSTS_ROOT}' database"
                                             )  # Log the database connection is started
                                             # Insert new post into the database
                                             connection = sqlite3.connect(DB_POSTS_ROOT)
                                             connection.set_trace_callback(
-                                                Log.sql
+                                                Log.database
                                             )  # Set the trace callback for the connection
                                             cursor = connection.cursor()
                                             cursor.execute(
@@ -109,7 +110,7 @@ def createPost():
                                                     currentTimeStamp(),
                                                     currentTimeStamp(),
                                                     postCategory,
-                                                    geturlID(postTitle),
+                                                    generateurlID(postTitle),
                                                 ),
                                             )
                                             connection.commit()
@@ -127,18 +128,18 @@ def createPost():
                                             return redirect("/")
                                         case False:
                                             # Recaptcha verification failed
-                                            Log.danger(
+                                            Log.error(
                                                 f"Post create reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
                                             abort(401)
                                 case False:
                                     # Recaptcha not enabled
-                                    Log.sql(
+                                    Log.database(
                                         f"Connecting to '{DB_POSTS_ROOT}' database"
                                     )  # Log the database connection is started
                                     connection = sqlite3.connect(DB_POSTS_ROOT)
                                     connection.set_trace_callback(
-                                        Log.sql
+                                        Log.database
                                     )  # Set the trace callback for the connection
                                     cursor = connection.cursor()
                                     cursor.execute(
@@ -179,9 +180,7 @@ def createPost():
             )
         case False:
             # User is not logged in
-            Log.danger(
-                f"{request.remote_addr} tried to create a new post without login"
-            )
+            Log.error(f"{request.remote_addr} tried to create a new post without login")
             flashMessage(
                 page="createPost",
                 message="login",

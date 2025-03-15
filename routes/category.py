@@ -7,15 +7,15 @@ It also provides an interface for sorting the posts by various criteria.
 
 # Import necessary modules and functions from other files or libraries
 from modules import (
+    DB_POSTS_ROOT,  # Importing the constant that stores the path to the database file
+    Blueprint,  # Importing the Blueprint class to create modular routes for the application
     Log,  # Importing the Log class for logging messages
-    load,  # Importing the load function for loading JSON data from files
     abort,  # Importing the abort function for handling errors and aborting requests
+    load,  # Importing the load function for loading JSON data from files
+    redirect,  # Importing the redirect function for redirecting requests,
+    render_template,  # Importing the render_template function to render HTML templates with context
     session,  # Importing the session object to store user session data
     sqlite3,  # Importing the sqlite3 module to interact with SQLite databases
-    redirect,  # Importing the redirect function for redirecting requests,
-    Blueprint,  # Importing the Blueprint class to create modular routes for the application
-    DB_POSTS_ROOT,  # Importing the constant that stores the path to the database file
-    render_template,  # Importing the render_template function to render HTML templates with context
 )
 
 # Creating a Blueprint object named 'categoryBlueprint' for this route
@@ -76,13 +76,15 @@ def category(category, by="timeStamp", sort="desc"):
         case False:
             abort(404)
 
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
 
     # Establishing a connection to the SQLite database
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Executing SQL query to retrieve posts of the requested category and sorting them accordingly

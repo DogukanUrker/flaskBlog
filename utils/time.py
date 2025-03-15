@@ -2,7 +2,7 @@
 Importing necessary modules.
 """
 
-from modules import tzname, datetime
+from modules import datetime, tzname
 
 
 # Function to get the current system time zone

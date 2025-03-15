@@ -4,11 +4,10 @@ This file contains class that are used to create LoginForm for the application.
 
 from wtforms import (
     Form,  # Importing the base class for forms
-    validators,  # Importing validators for form fields
-    StringField,  # Importing the field class for string/text inputs
     PasswordField,  # Importing the field class for password inputs
+    StringField,  # Importing the field class for string/text inputs
+    validators,  # Importing validators for form fields
 )
-
 
 # Import default form style
 from .FormInputStyle import inputStyle

@@ -1,36 +1,40 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    ssl,  # SSL/TLS support module
-    abort,  # Function to abort request processing
-    smtplib,  # SMTP protocol client module
-    randint,  # Function to generate random integers
-    sqlite3,  # SQLite database module
-    request,  # Request handling module
-    redirect,  # Redirect function
-    session,  # Session module
     APP_NAME,  # Application name
-    Blueprint,  # Blueprint for defining routes
-    SMTP_PORT,  # SMTP server port
-    SMTP_MAIL,  # SMTP server email
-    RECAPTCHA,  # Flag for enabling reCAPTCHA
-    encryption,  # Encryption utility module
-    SMTP_SERVER,  # SMTP server address
-    flashMessage,  # Flash messaging module
-    EmailMessage,  # Class for creating email messages
-    requestsPost,  # Function for making POST requests
-    SMTP_PASSWORD,  # SMTP server password
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
-    PasswordResetForm,  # Form class for password reset
+    RECAPTCHA,  # Flag for enabling reCAPTCHA
+    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling reCAPTCHA for password reset
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
-    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling reCAPTCHA for password reset
+    SMTP_MAIL,  # SMTP server email
+    SMTP_PASSWORD,  # SMTP server password
+    SMTP_PORT,  # SMTP server port
+    SMTP_SERVER,  # SMTP server address
+    Blueprint,  # Blueprint for defining routes
+    EmailMessage,  # Class for creating email messages
+    Log,  # Custom logging module
+    PasswordResetForm,  # Form class for password reset
+    abort,  # Function to abort request processing
+    encryption,  # Encryption utility module
+    flashMessage,  # Flash messaging module
+    randint,  # Function to generate random integers
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    requestsPost,  # Function for making POST requests
+    session,  # Session module
+    smtplib,  # SMTP protocol client module
+    sqlite3,  # SQLite database module
+    ssl,  # SSL/TLS support module
 )
 
 # Create a blueprint for the password reset route
 passwordResetBlueprint = Blueprint("passwordReset", __name__)
+
+
+# Create a dict to store password reset codes with usernames as index
+passwordResetCodesStorage = {}
 
 
 # Define a route for password reset
@@ -50,9 +54,6 @@ def passwordReset(codeSent):
     Raises:
         401: If the reCAPTCHA verification fails.
     """
-    # Define global variables
-    global userName
-    global passwordResetCode
 
     # Initialize password reset form
     form = PasswordResetForm(request.form)
@@ -60,22 +61,24 @@ def passwordReset(codeSent):
     # Check if code has been sent
     match codeSent:
         case "true":
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Code has been sent, handle form submission
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             match request.method == "POST":
                 case True:
                     # Retrieve form data
+                    userName = request.form["userName"]
+                    userName = userName.replace(" ", "")
                     code = request.form["code"]
                     password = request.form["password"]
                     passwordConfirm = request.form["passwordConfirm"]
-                    match code == passwordResetCode:
+                    match code == passwordResetCodesStorage.get(userName, ""):
                         case True:
                             # Check if passwords match
                             cursor.execute(
@@ -95,9 +98,13 @@ def passwordReset(codeSent):
                                                 language=session["language"],
                                             )  # Display a flash message
                                         case False:
+                                            # remove reset code in storage to prevent reuse
+                                            passwordResetCodesStorage.pop(userName)
                                             # Hash new password and update in the database
                                             password = encryption.hash(password)
-                                            match RECAPTCHA and RECAPTCHA_PASSWORD_RESET:
+                                            match (
+                                                RECAPTCHA and RECAPTCHA_PASSWORD_RESET
+                                            ):
                                                 case True:
                                                     # Perform reCAPTCHA verification
                                                     secretResponse = request.form[
@@ -106,11 +113,11 @@ def passwordReset(codeSent):
                                                     verifyResponse = requestsPost(
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        is True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Successful reCAPTCHA verification, update password
                                                             Log.success(
@@ -140,7 +147,7 @@ def passwordReset(codeSent):
                                                             )
                                                         case False:
                                                             # Failed reCAPTCHA verification
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"Password reset reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -196,25 +203,20 @@ def passwordReset(codeSent):
                     userName = request.form["userName"]
                     email = request.form["email"]
                     userName = userName.replace(" ", "")
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
-                        """select * from users where lower(userName) = ? """,
-                        [(userName.lower())],
+                        """select * from users where lower(userName) = ? and lower(email) = ? """,
+                        [userName.lower(), email.lower()],
                     )
-                    userNameDB = cursor.fetchone()
-                    cursor.execute(
-                        """select * from users where lower(email) = ? """,
-                        [(email.lower())],
-                    )
-                    emailDB = cursor.fetchone()
-                    match not userNameDB or not emailDB:
+                    userDB = cursor.fetchone()
+                    match not userDB:
                         case False:
                             # User and email found, send password reset code
                             context = ssl.create_default_context()
@@ -224,6 +226,7 @@ def passwordReset(codeSent):
                             server.ehlo()
                             server.login(SMTP_MAIL, SMTP_PASSWORD)
                             passwordResetCode = str(randint(1000, 9999))
+                            passwordResetCodesStorage[userName] = passwordResetCode
                             message = EmailMessage()
                             message.set_content(
                                 f"Hi {userName}👋,\nForgot your password😶‍🌫️? No problem👌.\nHere is your password reset code🔢:\n{passwordResetCode}"
@@ -260,9 +263,10 @@ def passwordReset(codeSent):
                                     verifyResponse = requestsPost(
                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                     ).json()
-                                    match verifyResponse[
-                                        "success"
-                                    ] == True or verifyResponse["score"] > 0.5:
+                                    match (
+                                        verifyResponse["success"] is True
+                                        or verifyResponse["score"] > 0.5
+                                    ):
                                         case True:
                                             # Successful reCAPTCHA verification, send email
                                             Log.success(
@@ -271,7 +275,7 @@ def passwordReset(codeSent):
                                             server.send_message(message)
                                         case False:
                                             # Failed reCAPTCHA verification
-                                            Log.danger(
+                                            Log.error(
                                                 f"Password reset reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                             )
                                             abort(401)
@@ -291,7 +295,7 @@ def passwordReset(codeSent):
                             return redirect("/passwordreset/codesent=true")
                         case True:
                             # User or email not found
-                            Log.danger(f'User: "{userName}" not found')
+                            Log.error(f'User: "{userName}" not found')
                             flashMessage(
                                 page="passwordReset",
                                 message="notFound",

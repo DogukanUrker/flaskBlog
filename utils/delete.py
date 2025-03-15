@@ -24,15 +24,15 @@ The functions in this module use the following helper functions:
 """
 
 from modules import (
-    Log,  # A class for logging messages
-    sqlite3,  # A module for working with SQLite databases
-    session,  # A dictionary for storing session data
-    redirect,  # A function for returning redirect responses
-    flashMessage,  # A function for displaying flash messages
+    DB_ANALYTICS_ROOT,  # A constant for the path to the analytics database
+    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     DB_USERS_ROOT,  # A constant for the path to the users database
-    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
-    DB_ANALYTICS_ROOT,  # A constant for the path to the analytics database
+    Log,  # A class for logging messages
+    flashMessage,  # A function for displaying flash messages
+    redirect,  # A function for returning redirect responses
+    session,  # A dictionary for storing session data
+    sqlite3,  # A module for working with SQLite databases
 )
 
 
@@ -47,12 +47,12 @@ class Delete:
         Returns:
         None
         """
-        Log.sql(
+        Log.database(
             f"Connecting to '{DB_POSTS_ROOT}' database"
         )  # Log the database connection is started
         connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
@@ -72,14 +72,18 @@ class Delete:
             DB_COMMENTS_ROOT
         )  # Connect to the comments database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a new cursor object for executing queries
         cursor.execute(
             """select count(*) from comments where post = ? """,  # Select the count of rows from the comments table where the post column matches the given postID
             [(postID)],  # Use a parameterized query to avoid SQL injection
         )
-        commentCount = list(cursor)[0][
+        commentCount = list(
+            cursor
+        )[
+            0
+        ][
             0
         ]  # Convert the result to a list and get the first element of the first tuple (the count value)
         cursor.execute(
@@ -94,10 +98,10 @@ class Delete:
 
         # delete post's analytics data
         connection = sqlite3.connect(
-        DB_ANALYTICS_ROOT
+            DB_ANALYTICS_ROOT
         )  # Connect to the comments database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
@@ -108,7 +112,7 @@ class Delete:
             """delete from postsAnalytics where postID = ? """,  # Delete the row from the postsAnalytcs table where the id matches the given postID
             [(postID)],  # Use a parameterized query to avoid SQL injection
         )
-        connection.commit() # Commit the changes to the database
+        connection.commit()  # Commit the changes to the database
 
         flashMessage(
             page="delete",
@@ -130,12 +134,12 @@ class Delete:
         Returns:
         None
         """
-        Log.sql(
+        Log.database(
             f"Connecting to '{DB_USERS_ROOT}' database"
         )  # Log the database connection is started
         connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(
@@ -170,16 +174,16 @@ class Delete:
         Log.success(
             f'User: "{userName}" deleted'
         )  # Log a message with level 2 indicating the user was deleted
-        match perpetrator[
-            0
-        ] == "admin":  # Use a match statement to compare the first element of the perpetrator tuple (the role) with the string "admin"
+        match (
+            perpetrator[0] == "admin"
+        ):  # Use a match statement to compare the first element of the perpetrator tuple (the role) with the string "admin"
             case True:  # If the perpetrator is an admin
                 return redirect(
-                    f"/admin/users"
+                    "/admin/users"
                 )  # Return a redirect response to the admin users page
             case False:  # If the perpetrator is not an admin
                 session.clear()  # Clear the session dictionary
-                return redirect(f"/")  # Return a redirect response to the home page
+                return redirect("/")  # Return a redirect response to the home page
 
     def comment(commentID):
         """
@@ -195,7 +199,7 @@ class Delete:
             DB_COMMENTS_ROOT
         )  # Connect to the comments database
         connection.set_trace_callback(
-            Log.sql
+            Log.database
         )  # Set the trace callback for the connection
         cursor = connection.cursor()  # Create a cursor object for executing queries
         cursor.execute(

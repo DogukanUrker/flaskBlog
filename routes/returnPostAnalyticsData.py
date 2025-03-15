@@ -1,16 +1,15 @@
 # Import the necessary modules and functions
-from modules import  (
-    Log, # Custom logging module
-    session, # Session management module
-    request, # Request handling module
-    sqlite3, # SQLite database module
-    Blueprint, # Blueprint for defining routes
-    ANALYTICS, # Constants to check analytics feature
-    make_response, # Function to make http response
-    DB_ANALYTICS_ROOT, # Path to the analytics database
-    getAnalyticsPageTrafficGraphData, # Function to get post traffic graph data
-    getAnalyticsPageCountryGraphData, # Function to get post country graph data
-                      
+from modules import (
+    ANALYTICS,  # Constants to check analytics feature
+    DB_ANALYTICS_ROOT,  # Path to the analytics database
+    Blueprint,  # Blueprint for defining routes
+    Log,  # Custom logging module
+    getAnalyticsPageCountryGraphData,  # Function to get post country graph data
+    getAnalyticsPageTrafficGraphData,  # Function to get post traffic graph data
+    make_response,  # Function to make http response
+    request,  # Request handling module
+    session,  # Session management module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the return posts analytics graph data route
@@ -22,7 +21,7 @@ def returnPostTrafficGraphData() -> dict:
     """
     Retrieves traffic graph data for a given post.
 
-    This API fetches traffic analytics for a specific post, allowing filtering based on 
+    This API fetches traffic analytics for a specific post, allowing filtering based on
     the time since the post was published.
 
     Args (Query Parameters):
@@ -58,18 +57,40 @@ def returnPostTrafficGraphData() -> dict:
                 case True:
                     if postID:
                         # Fetch and return traffic graph data for the post
-                        return make_response({"payload" : getAnalyticsPageTrafficGraphData(postID=postID, sincePosted=sincePosted, weeks=weeks, days=days, hours=hours)}, 200)
+                        return make_response(
+                            {
+                                "payload": getAnalyticsPageTrafficGraphData(
+                                    postID=postID,
+                                    sincePosted=sincePosted,
+                                    weeks=weeks,
+                                    days=days,
+                                    hours=hours,
+                                )
+                            },
+                            200,
+                        )
                     else:
                         # Return error if postID is missing
-                        return make_response({"message" : "Missing postID; unable to retrieve data.", "error" : "postID (type: int) is required."}, 404)
-                        
+                        return make_response(
+                            {
+                                "message": "Missing postID; unable to retrieve data.",
+                                "error": "postID (type: int) is required.",
+                            },
+                            404,
+                        )
+
                 case False:
                     # Return forbidden error if the user is not authenticated
-                    return make_response({"message" : "client don't have permission", "error":"request denied"}, 403)
+                    return make_response(
+                        {
+                            "message": "client don't have permission",
+                            "error": "request denied",
+                        },
+                        403,
+                    )
         case False:
             # Return error if analytics is disabled
-            return ({"message" : "analytics is disabled by admin"}, 410)
-
+            return ({"message": "analytics is disabled by admin"}, 410)
 
 
 # api end point for country graph data
@@ -78,7 +99,7 @@ def returnPostCountryGraphData() -> dict:
     """
     Retrieves country-based graph data for a given post.
 
-    This API returns country-wise analytics data for a specific post ID, 
+    This API returns country-wise analytics data for a specific post ID,
     providing insights into the geographical distribution of viewers.
 
     Args (Query Parameters):
@@ -103,17 +124,30 @@ def returnPostCountryGraphData() -> dict:
                 case True:
                     if postID:
                         # Fetch and return country graph data for the post
-                        return make_response({"payload" : getAnalyticsPageCountryGraphData(postID=postID, viewAll=viewAll)}, 200)
+                        return make_response(
+                            {
+                                "payload": getAnalyticsPageCountryGraphData(
+                                    postID=postID, viewAll=viewAll
+                                )
+                            },
+                            200,
+                        )
                     else:
                         # Return error if postID is missing
                         return make_response({"message" : "Missing postID; unable to retrieve data.", "error" : "postID (type: int) is required."}, 404)
                         
                 case False:
                     # Return forbidden error if the user is not authenticated
-                    return make_response({"message" : "client don't have permission", "error":"request denied"}, 403)
+                    return make_response(
+                        {
+                            "message": "client don't have permission",
+                            "error": "request denied",
+                        },
+                        403,
+                    )
         case False:
             # Return error if analytics is disabled
-            return make_response({"message" : "analytics is disabled by admin"}, 410)
+            return make_response({"message": "analytics is disabled by admin"}, 410)
 
 
 # api for storing visitors time spend duration
@@ -122,7 +156,7 @@ def storeTimeSpendsDuraton() -> dict:
     """
     This function stores the time spent by a visitor on a post.
 
-    This API updates the `timeSpendDuration` field in the `postsAnalytics` table 
+    This API updates the `timeSpendDuration` field in the `postsAnalytics` table
     for a given visitor.
 
     Request Data (JSON):
@@ -149,25 +183,27 @@ def storeTimeSpendsDuraton() -> dict:
                         # Connect to the posts database
                         connection = sqlite3.connect(DB_ANALYTICS_ROOT)
                         connection.set_trace_callback(
-                        Log.sql
+                            Log.database
                         )  # Set the trace callback for the connection
                         cursor = connection.cursor()
 
-                        # Update the time spend duration with the new data 
+                        # Update the time spend duration with the new data
                         cursor.execute(
-                        """update postsAnalytics set timeSpendDuration = ? where id = ? """,
-                        (spendTime, visitorID),
+                            """update postsAnalytics set timeSpendDuration = ? where id = ? """,
+                            (spendTime, visitorID),
                         )
                         connection.commit()
                         return make_response({"message": "Successfully upadated"}, 200)
                     except:
                         # Return internal server error
-                        return make_response({"message": "Unexpected error occured"}, 500)
+                        return make_response(
+                            {"message": "Unexpected error occured"}, 500
+                        )
 
                 case False:
                     # Return method not allowed
                     return make_response({"message": "Method not allowed"}, 405)
-        
+
         case False:
             # Return error if analytics is disabled
-            return ({"message" : "analytics is disabled by admin"}, 410)
+            return ({"message": "analytics is disabled by admin"}, 410)

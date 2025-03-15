@@ -5,8 +5,8 @@ This file contains class that are used to create ChangeProfilePictureForm for th
 # Importing necessary modules from WTForms library
 from wtforms import (
     Form,  # Importing the base class for forms
-    validators,  # Importing validators for form fields
     StringField,  # Importing the field class for string/text inputs
+    validators,  # Importing validators for form fields
 )
 
 # Import default form style

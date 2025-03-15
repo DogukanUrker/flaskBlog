@@ -21,13 +21,13 @@ from requests import post as requestsPost  # HTTP library for sending POST reque
 from json import load  # Importing load function from json module
 import uuid  # UUID (Universally Unique Identifier) generation
 from re import sub  # Importing sub function from re module
-import requests # Importing requests module for http requests
-from user_agents import parse # Importing parse function to parsing user agent string
-import geoip2 # Importing geoip2.databse
-from geoip2 import database # Importing geoip2.databse
+import requests  # Importing requests module for http requests
+from user_agents import parse  # Importing parse function to parsing user agent string
+import geoip2  # Importing geoip2.databse
+from geoip2 import database  # Importing geoip2.databse
 
 # Importing constants
-from constants import *
+from constants import *  # noqa: F403
 
 from email.message import EmailMessage  # Email handling
 
@@ -68,7 +68,7 @@ from flask import (
     send_file,  # Sends a file to the client
     render_template,  # Renders HTML templates
     send_from_directory,  # Sends a file from a directory to the client
-    make_response, # Sends a response to client
+    make_response,  # Sends a response to client
 )
 
 # Importing the 'flashMessage' function from the 'utils.flashMessage' module for displaying flash messages.
@@ -114,7 +114,7 @@ from utils.beforeRequest.browserLanguage import browserLanguage
 from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture
 
 # importing the 'returnPostUrlID' context processor from the 'utils.contextProcessor.returnPostUrlID' module
-from  utils.contextProcessor.returnPostUrlID import returnPostUrlID
+from utils.contextProcessor.returnPostUrlID import returnPostUrlID
 
 # Importing the 'Delete' class from the 'utils.delete' module for handling delete operations.
 from utils.delete import Delete
@@ -129,4 +129,8 @@ from utils.calculateReadTime import calculateReadTime
 from utils.getDataFromUserIP import getDataFromUserIP
 
 # Importing the getAnalyticsPageCountryGraphData, getAnalyticsPageOSGraphData, getAnalyticsPageTrafficGraphData for analytics
-from utils.getAnalyticsPageData import getAnalyticsPageCountryGraphData, getAnalyticsPageOSGraphData, getAnalyticsPageTrafficGraphData
+from utils.getAnalyticsPageData import (
+    getAnalyticsPageCountryGraphData,
+    getAnalyticsPageOSGraphData,
+    getAnalyticsPageTrafficGraphData,
+)

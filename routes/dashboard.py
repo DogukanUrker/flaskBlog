@@ -1,18 +1,18 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    load,  # Function for loading JSON data from files
+    DB_COMMENTS_ROOT,  # Path to the comments database
+    DB_POSTS_ROOT,  # Path to the posts database
+    Blueprint,  # Blueprint for defining routes
     Delete,  # Function for deleting data
-    url_for,  # URL building function
+    Log,  # Custom logging module
+    flashMessage,  # Flash messaging module
+    load,  # Function for loading JSON data from files
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
     request,  # Request handling module
     session,  # Session handling module
     sqlite3,  # SQLite database module
-    redirect,  # Redirect function
-    Blueprint,  # Blueprint for defining routes
-    flashMessage,  # Flash messaging module
-    DB_POSTS_ROOT,  # Path to the posts database
-    DB_COMMENTS_ROOT,  # Path to the comments database
-    render_template,  # Template rendering function
+    url_for,  # URL building function
 )
 
 # Create a blueprint for the dashboard route
@@ -45,13 +45,13 @@ def dashboard(userName):
                                         ),
                                         301,
                                     )
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_POSTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the posts database
                     connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Query the posts database for the posts authored by the session user name
@@ -60,13 +60,13 @@ def dashboard(userName):
                         [(session["userName"])],
                     )
                     posts = cursor.fetchall()
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_COMMENTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Query the comments database for the comments made by the route user name
@@ -117,14 +117,14 @@ def dashboard(userName):
                     )
                 case False:
                     # Log a message that the dashboard does not belong to the session user name
-                    Log.danger(
+                    Log.error(
                         f'User: "{session["userName"]}" tried to login to another users dashboard',
                     )
                     # Redirect to the dashboard of the session user name
-                    return redirect(f'/dashboard/{session["userName"].lower()}')
+                    return redirect(f"/dashboard/{session['userName'].lower()}")
         case False:
             # Log a message that the dashboard cannot be accessed without user login
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to access the dashboard without login"
             )
             flashMessage(

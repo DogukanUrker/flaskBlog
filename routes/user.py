@@ -3,13 +3,13 @@ This module contains the code for the user page.
 """
 
 from modules import (
-    Log,  # A class for logging messages
-    sqlite3,  # A module for working with SQLite databases
-    Blueprint,  # A class for creating Flask blueprints
+    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     DB_USERS_ROOT,  # A constant for the path to the users database
+    Blueprint,  # A class for creating Flask blueprints
+    Log,  # A class for logging messages
     render_template,  # A function for rendering Jinja templates
-    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
+    sqlite3,  # A module for working with SQLite databases
 )
 
 userBlueprint = Blueprint("user", __name__)  # Create a blueprint for the user page
@@ -28,14 +28,16 @@ def user(userName):
     :rtype: flask.Response
     """
     userName = userName.lower()  # Convert the username to lowercase for consistency
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_USERS_ROOT}' database"
     )  # Log the database connection is started
     connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object for executing queries
     cursor.execute(
-        f"select userName from users"
+        "select userName from users"
     )  # Select all the usernames from the users table
     users = cursor.fetchall()  # Fetch all the results as a list of tuples
     """
@@ -43,9 +45,9 @@ def user(userName):
     If the username exists, the function fetches the user details and the number of views their posts have received.
     It also fetches all the posts made by the user and all the comments made by the user.
     """
-    match userName in str(
-        users
-    ).lower():  # Use a match statement to compare the username with the list of usernames
+    match (
+        userName in str(users).lower()
+    ):  # Use a match statement to compare the username with the list of usernames
         case True:  # If the username exists
             Log.success(
                 f'User: "{userName}" found'
@@ -55,12 +57,12 @@ def user(userName):
                 [(userName)],  # Use a parameterized query to avoid SQL injection
             )
             user = cursor.fetchone()  # Fetch the first result as a tuple
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_POSTS_ROOT}' database"
             )  # Log the database connection is started
             connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = (
                 connection.cursor()
@@ -88,7 +90,7 @@ def user(userName):
                 DB_COMMENTS_ROOT
             )  # Connect to the comments database
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = (
                 connection.cursor()
@@ -103,12 +105,16 @@ def user(userName):
             If the user has any posts, the variable showPosts is set to True.
             If the user has any comments, the variable showComments is set to True.
             """
-            match posts:  # Use a match statement to compare the posts list with an empty list
+            match (
+                posts
+            ):  # Use a match statement to compare the posts list with an empty list
                 case []:  # If the posts list is empty
                     showPosts = False  # Set the showPosts variable to False
                 case _:  # If the posts list is not empty
                     showPosts = True  # Set the showPosts variable to True
-            match comments:  # Use a match statement to compare the comments list with an empty list
+            match (
+                comments
+            ):  # Use a match statement to compare the comments list with an empty list
                 case []:  # If the comments list is empty
                     showComments = False  # Set the showComments variable to False
                 case _:  # If the comments list is not empty
@@ -126,7 +132,7 @@ def user(userName):
                 showComments=showComments,  # Pass the showComments variable as a keyword argument
             )
         case _:  # If the username does not exist
-            Log.danger(
+            Log.error(
                 f'User: "{userName}" not found'
             )  # Log an error message the user was not found
             return render_template(

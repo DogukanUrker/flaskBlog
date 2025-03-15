@@ -1,23 +1,23 @@
 # Import the necessary modules and functions
 from modules import (
-    Log,  # Importing log class for logging messages
-    abort,  # Importing abort function for aborting requests
-    session,  # Importing session for managing user sessions
-    sqlite3,  # Importing sqlite3 for working with SQLite databases
-    request,  # Importing request for handling HTTP requests
-    redirect,  # Importing redirect for redirecting requests
-    Blueprint,  # Importing Blueprint for creating modular applications
-    RECAPTCHA,  # Importing RECAPTCHA constant
-    encryption,  # Importing encryption functions for password hashing and verification
-    flashMessage,  # Flash messaging module
-    requestsPost,  # Importing requestsPost function for making HTTP POST requests
     DB_USERS_ROOT,  # Importing constant for database path
-    render_template,  # Importing render_template for rendering HTML templates
-    ChangePasswordForm,  # Importing form class for change password form
+    RECAPTCHA,  # Importing RECAPTCHA constant
+    RECAPTCHA_PASSWORD_CHANGE,  # Importing RECAPTCHA flag for password change verification
+    RECAPTCHA_SECRET_KEY,  # Importing RECAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # Importing RECAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # Importing RECAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # Importing RECAPTCHA secret key
-    RECAPTCHA_PASSWORD_CHANGE,  # Importing RECAPTCHA flag for password change verification
+    Blueprint,  # Importing Blueprint for creating modular applications
+    ChangePasswordForm,  # Importing form class for change password form
+    Log,  # Importing log class for logging messages
+    abort,  # Importing abort function for aborting requests
+    encryption,  # Importing encryption functions for password hashing and verification
+    flashMessage,  # Flash messaging module
+    redirect,  # Importing redirect for redirecting requests
+    render_template,  # Importing render_template for rendering HTML templates
+    request,  # Importing request for handling HTTP requests
+    requestsPost,  # Importing requestsPost function for making HTTP POST requests
+    session,  # Importing session for managing user sessions
+    sqlite3,  # Importing sqlite3 for working with SQLite databases
 )
 
 # Create a blueprint for the change password route
@@ -52,13 +52,13 @@ def changePassword():
                     oldPassword = request.form["oldPassword"]
                     password = request.form["password"]
                     passwordConfirm = request.form["passwordConfirm"]
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Retrieve hashed password from database
@@ -88,17 +88,19 @@ def changePassword():
                                         language=session["language"],
                                     )  # Display a flash message
                             # Check if old password is different from new password and passwords match
-                            match oldPassword != password and password == passwordConfirm:
+                            match (
+                                oldPassword != password and password == passwordConfirm
+                            ):
                                 case True:
                                     # Hash the new password
                                     newPassword = encryption.hash(password)
-                                    Log.sql(
+                                    Log.database(
                                         f"Connecting to '{DB_USERS_ROOT}' database"
                                     )  # Log the database connection is started
                                     # Connect to the database
                                     connection = sqlite3.connect(DB_USERS_ROOT)
                                     connection.set_trace_callback(
-                                        Log.sql
+                                        Log.database
                                     )  # Set the trace callback for the connection
                                     # Check if RECAPTCHA is enabled for password change
                                     match RECAPTCHA and RECAPTCHA_PASSWORD_CHANGE:
@@ -112,9 +114,10 @@ def changePassword():
                                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                             ).json()
                                             # Check if reCAPTCHA verification is successful
-                                            match verifyResponse[
-                                                "success"
-                                            ] == True or verifyResponse["score"] > 0.5:
+                                            match (
+                                                verifyResponse["success"] is True
+                                                or verifyResponse["score"] > 0.5
+                                            ):
                                                 case True:
                                                     # Log reCAPTCHA verification
                                                     Log.success(
@@ -147,7 +150,7 @@ def changePassword():
                                                     return redirect("/login/redirect=&")
                                                 case False:
                                                     # Log reCAPTCHA failure
-                                                    Log.danger(
+                                                    Log.error(
                                                         f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                     )
                                                     # Abort the request
@@ -194,7 +197,7 @@ def changePassword():
             )
         case False:
             # Log user not logged in
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to change his password without logging in"
             )
             flashMessage(

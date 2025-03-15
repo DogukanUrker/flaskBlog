@@ -1,5 +1,5 @@
 # Import the necessary modules and functions
-from modules import sqlite3, BytesIO, Blueprint, send_file, DB_POSTS_ROOT, Log, request
+from modules import DB_POSTS_ROOT, Blueprint, BytesIO, Log, request, send_file, sqlite3
 
 # Create a blueprint for the return post banner route
 returnPostBannerBlueprint = Blueprint("returnPostBanner", __name__)
@@ -17,12 +17,14 @@ def returnPostBanner(postID):
         The banner image for the given post ID as a Flask Response object.
 
     """
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
     # Connect to the SQLite database that stores the posts information
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     # Create a cursor object to execute SQL queries
     cursor = connection.cursor()
     # Execute a SQL query to select the banner column from the posts table where the id matches the given post ID

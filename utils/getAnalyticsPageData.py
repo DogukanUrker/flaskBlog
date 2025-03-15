@@ -1,7 +1,9 @@
-from modules import sqlite3, Log, DB_ANALYTICS_ROOT, datetime, timedelta
+from modules import DB_ANALYTICS_ROOT, Log, datetime, sqlite3, timedelta
 
 
-def getAnalyticsPageTrafficGraphData(postID : int, sincePosted=False, weeks : float = 0, days : float= 0, hours : float =  0) -> list[list[int]]:
+def getAnalyticsPageTrafficGraphData(
+    postID: int, sincePosted=False, weeks: float = 0, days: float = 0, hours: float = 0
+) -> list[list[int]]:
     """
     Returns the post's visitors traffic data list inside list.
     If None of below kwargs are given then default will be last 48 hours data
@@ -18,8 +20,8 @@ def getAnalyticsPageTrafficGraphData(postID : int, sincePosted=False, weeks : fl
     """
 
     # Check if none of kwargs are given
-    if (sincePosted!=True):
-        if(weeks == 0 and days == 0 and hours == 0):
+    if sincePosted is not True:
+        if weeks == 0 and days == 0 and hours == 0:
             # assign defaultt to last 48 hours of data
             hours = 48
 
@@ -35,7 +37,9 @@ def getAnalyticsPageTrafficGraphData(postID : int, sincePosted=False, weeks : fl
 
             # Calculate the timestamp limit by subtracting the time delta from the current time
             # This converts the adjusted datetime to a Unix timestamp (integer format)
-            userQueryLimit = int((datetime.now() - timedelta(**timeDeltaArgs)).timestamp())
+            userQueryLimit = int(
+                (datetime.now() - timedelta(**timeDeltaArgs)).timestamp()
+            )
 
             # Query the only selected duration data
             sqlQuery = """select strftime('%Y-%m-%d %H:%M', timeStamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? and timeStamp > ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
@@ -43,12 +47,14 @@ def getAnalyticsPageTrafficGraphData(postID : int, sincePosted=False, weeks : fl
             # Striping seconds to create rise and fall in line, minute can be stripped too if websites traffic is super high
 
     try:
-        Log.sql(
+        Log.database(
             f"Connecting to '{DB_ANALYTICS_ROOT}' database"
         )  # Log the database connection is started
         # Use the sqlite3 module to connect to the database and get a cursor object
         connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-        connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+        connection.set_trace_callback(
+            Log.database
+        )  # Set the trace callback for the connection
         cursor = connection.cursor()
 
         # Execute the query with parameter
@@ -56,15 +62,22 @@ def getAnalyticsPageTrafficGraphData(postID : int, sincePosted=False, weeks : fl
         postTrafficData = cursor.fetchall()
 
         # Convert datetime string to javascript millisecond timestamp for apex line chart with views
-        jSTimeStampAndCount = [[int((datetime.strptime(entry[0], '%Y-%m-%d %H:%M')).timestamp() * 1000), entry[1]] for entry in postTrafficData]
+        jSTimeStampAndCount = [
+            [
+                int((datetime.strptime(entry[0], "%Y-%m-%d %H:%M")).timestamp() * 1000),
+                entry[1],
+            ]
+            for entry in postTrafficData
+        ]
 
         connection.close()
         # Return proceesed data
         return jSTimeStampAndCount
     except:
         # If traffic data retrieval fails, set empty list and log danger message
-        Log.danger(f"Failed to retrieve traffic data for post analytics: {postID}")
-        return [] #  return empty list
+        Log.error(f"Failed to retrieve traffic data for post analytics: {postID}")
+        return []  #  return empty list
+
 
 def getAnalyticsPageOSGraphData(postID: int) -> dict:
     """
@@ -75,23 +88,28 @@ def getAnalyticsPageOSGraphData(postID: int) -> dict:
     Returns:
         `dict`: osNameList: e.g. ["Windows", "Mac", "Android"...]. , osCountList: e.g. [3445, 6756, 53453, ...]
     """
-    
+
     try:
-        Log.sql(
+        Log.database(
             f"Connecting to '{DB_ANALYTICS_ROOT}' database"
         )  # Log the database connection is started
         # Use the sqlite3 module to connect to the database and get a cursor object
         connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-        connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+        connection.set_trace_callback(
+            Log.database
+        )  # Set the trace callback for the connection
         cursor = connection.cursor()
         # Query the os and its counts
-        cursor.execute("""select os as osName, count(*) as osCount from postsAnalytics where postID = ? GROUP BY os""", (postID,))
+        cursor.execute(
+            """select os as osName, count(*) as osCount from postsAnalytics where postID = ? GROUP BY os""",
+            (postID,),
+        )
         postGraphOSData = cursor.fetchall() or []
 
         # Extract data as osNameList and osCountList
         osGraphData = {
-            "osNameList" : [os[0] for os in postGraphOSData],
-            "osCountList" : [counts[1] for counts in postGraphOSData]
+            "osNameList": [os[0] for os in postGraphOSData],
+            "osCountList": [counts[1] for counts in postGraphOSData],
         }
         connection.close()
 
@@ -99,18 +117,16 @@ def getAnalyticsPageOSGraphData(postID: int) -> dict:
         return osGraphData
     except:
         # If os data retrieval fails, set empty list and log danger message
-        Log.danger(f"Failed to retrieve os data for post analytics: {postID}")
-        return {
-            "osNameList" : [],
-            "osCountList" : []
-        } # return dict with empty data
+        Log.error(f"Failed to retrieve os data for post analytics: {postID}")
+        return {"osNameList": [], "osCountList": []}  # return dict with empty data
+
 
 def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
     """
     Returns the post's visitors traffic data list of tuples.
     Args:
         `postID` (int): The post's primary key/id whose visiors country data to be retrived.
-        `viewAll` (bool): 
+        `viewAll` (bool):
             - True: Returns all data since the post was created.
             - False: Returns only the latest 25 data entries.
 
@@ -129,20 +145,22 @@ def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
             sqlQuery = """select country as countryName, count(*) as countryCount from postsAnalytics where postID = ? GROUP BY country ORDER BY countryCount DESC limit 25"""
 
     try:
-        Log.sql(
+        Log.database(
             f"Connecting to '{DB_ANALYTICS_ROOT}' database"
         )  # Log the database connection is started
         # Use the sqlite3 module to connect to the database and get a cursor object
         connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-        connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+        connection.set_trace_callback(
+            Log.database
+        )  # Set the trace callback for the connection
         cursor = connection.cursor()
         # Execute the query with parameter
         cursor.execute(sqlQuery, (postID,))
         postCountryData = cursor.fetchall()
         # Extract data as countryNameList and countryCountList
         countryGraphData = {
-            "countryNameList" : [country[0] for country in postCountryData],
-            "countryCountList" : [counts[1] for counts in postCountryData]
+            "countryNameList": [country[0] for country in postCountryData],
+            "countryCountList": [counts[1] for counts in postCountryData],
         }
 
         connection.close()
@@ -150,8 +168,8 @@ def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
         return countryGraphData
     except:
         # If country data retrieval fails, set empty list and log danger message
-        Log.danger(f"Failed to retrieve country data for post analytics: {postID}")
+        Log.error(f"Failed to retrieve country data for post analytics: {postID}")
         return {
-            "countryNameList" : [],
-            "countryCountList" : []
-        } # return dict whih empty list
+            "countryNameList": [],
+            "countryCountList": [],
+        }  # return dict whih empty list

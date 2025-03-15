@@ -17,7 +17,6 @@ def afterRequestLogger(response):
     """
     # Using a match statement to handle different response statuses
     match response.status:
-
         # If the response status is "200 OK", log as a success message
         case "200 OK":
             Log.success(
@@ -26,7 +25,7 @@ def afterRequestLogger(response):
 
         # If the response status is "404 NOT FOUND", log as a danger message
         case "404 NOT FOUND":
-            Log.danger(
+            Log.error(
                 f"Adress: {request.remote_addr} | Method: {request.method} | Path: {request.path} | Scheme: {request.scheme} | Status: {response.status} | Content Length: {response.content_length} | Referrer: {request.referrer} | User Agent: {request.user_agent}",
             )
 

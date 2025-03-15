@@ -1,11 +1,11 @@
 # Import necessary modules
 from modules import (
-    Log,  # Logging module for logging messages
-    session,  # Session module for managing user sessions
-    redirect,  # Redirect module for redirecting to routes
-    Blueprint,  # Blueprint module for creating route blueprints
     LANGUAGES,  # List of supported languages
+    Blueprint,  # Blueprint module for creating route blueprints
+    Log,  # Logging module for logging messages
     flashMessage,  # Flash module for flashing messages to the user
+    redirect,  # Redirect module for redirecting to routes
+    session,  # Session module for managing user sessions
 )
 from utils.translations import loadTranslations  # Load translations for the application
 

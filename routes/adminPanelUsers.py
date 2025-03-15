@@ -1,15 +1,15 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # A class for logging messages
-    Delete,  # Function for deleting users
-    sqlite3,  # SQLite database module
-    session,  # Session handling module
-    request,  # Request handling module
-    redirect,  # Redirect function
-    Blueprint,  # Blueprint for defining routes
     DB_USERS_ROOT,  # Path to the users database
+    Blueprint,  # Blueprint for defining routes
+    Delete,  # Function for deleting users
+    Log,  # A class for logging messages
     changeUserRole,  # Function for changing user roles
+    redirect,  # Redirect function
     render_template,  # Template rendering function
+    request,  # Request handling module
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the admin panel users route
@@ -26,13 +26,13 @@ def adminPanelUsers():
             Log.info(
                 f"Admin: {session['userName']} reached to users admin panel"
             )  # Log a message that the admin reached to users admin panel
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the users database and get the user role
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             cursor.execute(
@@ -62,13 +62,13 @@ def adminPanelUsers():
             # Check if the user role is admin
             match role == "admin":
                 case True:
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the users database and get all the users
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute("select * from users")
@@ -83,13 +83,13 @@ def adminPanelUsers():
                         users=users,
                     )
                 case False:
-                    Log.danger(
+                    Log.error(
                         f"{request.remote_addr} tried to reach user admin panel without being admin"
                     )  # Log a message that the user tried to reach admin panel without being admin
                     # Redirect to the home page if the user is not an admin
                     return redirect("/")
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach user admin panel being logged in"
             )  # Log a message that the user tried to reach admin panel without being logged in
             # Redirect to the login page if the user is not logged in

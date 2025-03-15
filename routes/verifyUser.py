@@ -1,31 +1,31 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Logging module
-    ssl,  # SSL/TLS module
-    abort,  # Function for aborting requests
-    smtplib,  # SMTP client module
-    randint,  # Function for generating random integers
-    sqlite3,  # SQLite database module
-    request,  # Module for handling HTTP requests
-    session,  # Session management module
-    redirect,  # Function for redirecting requests
     APP_NAME,  # Constant for application name
-    Blueprint,  # Blueprint class for creating modular applications
-    SMTP_PORT,  # SMTP port number
-    SMTP_MAIL,  # SMTP email address
-    RECAPTCHA,  # Recaptcha module
-    SMTP_SERVER,  # SMTP server address
-    EmailMessage,  # Class for creating email messages
-    requestsPost,  # Module for making HTTP POST requests
-    flashMessage,  # Flash messaging module
-    SMTP_PASSWORD,  # SMTP password
     DB_USERS_ROOT,  # Path to the users database
-    VerifyUserForm,  # Form for verifying user
-    render_template,  # Function for rendering templates
+    RECAPTCHA,  # Recaptcha module
+    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_SITE_KEY,  # Recaptcha site key
     RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
     RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling Recaptcha for verify user
+    SMTP_MAIL,  # SMTP email address
+    SMTP_PASSWORD,  # SMTP password
+    SMTP_PORT,  # SMTP port number
+    SMTP_SERVER,  # SMTP server address
+    Blueprint,  # Blueprint class for creating modular applications
+    EmailMessage,  # Class for creating email messages
+    Log,  # Logging module
+    VerifyUserForm,  # Form for verifying user
+    abort,  # Function for aborting requests
+    flashMessage,  # Flash messaging module
+    randint,  # Function for generating random integers
+    redirect,  # Function for redirecting requests
+    render_template,  # Function for rendering templates
+    request,  # Module for handling HTTP requests
+    requestsPost,  # Module for making HTTP POST requests
+    session,  # Session management module
+    smtplib,  # SMTP client module
+    sqlite3,  # SQLite database module
+    ssl,  # SSL/TLS module
 )
 
 # Create a blueprint for the verify user route
@@ -50,16 +50,16 @@ def verifyUser(codeSent):
         case True:
             # Get the username from session
             userName = session["userName"]
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_USERS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the users database
             connection = sqlite3.connect(DB_USERS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
             # Check if the user is already verified
@@ -100,11 +100,11 @@ def verifyUser(codeSent):
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
                                                     # Check Recaptcha verification result
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        is True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Recaptcha verification successful
                                                             Log.success(
@@ -130,7 +130,7 @@ def verifyUser(codeSent):
                                                             return redirect("/")
                                                         case False:
                                                             # Recaptcha verification failed
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"User Verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -255,11 +255,11 @@ def verifyUser(codeSent):
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
                                                     # Check Recaptcha verification result
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        is True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Recaptcha verification successful, send verification email
                                                             Log.success(
@@ -268,7 +268,7 @@ def verifyUser(codeSent):
                                                             server.send_message(message)
                                                         case False:
                                                             # Recaptcha verification failed
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"User verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -289,7 +289,7 @@ def verifyUser(codeSent):
                                             return redirect("/verifyUser/codesent=true")
                                         case True:
                                             # User not found in the database
-                                            Log.danger(f'User: "{userName}" not found')
+                                            Log.error(f'User: "{userName}" not found')
                                             flashMessage(
                                                 page="verifyUser",
                                                 message="notFound",
@@ -305,7 +305,7 @@ def verifyUser(codeSent):
                                 recaptcha=RECAPTCHA,
                             )
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to verify his account without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Redirect to homepage if user is not logged in

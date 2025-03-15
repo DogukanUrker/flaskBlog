@@ -12,14 +12,14 @@ The index.html.jinja template displays the title and content of each post.
 """
 
 from modules import (
+    DB_POSTS_ROOT,  # Importing the constant for the path to the posts database
+    Blueprint,  # Importing the Blueprint class for creating Flask blueprints
     Log,  # A class for logging messages
     load,  # A function for loading JSON data from files
+    redirect,  # Importing the redirect function for redirecting requests
+    render_template,  # Importing the render_template function for rendering Jinja templates
     session,  # A session object for storing user session data
     sqlite3,  # Importing the SQLite module for working with SQLite databases
-    redirect,  # Importing the redirect function for redirecting requests
-    Blueprint,  # Importing the Blueprint class for creating Flask blueprints
-    DB_POSTS_ROOT,  # Importing the constant for the path to the posts database
-    render_template,  # Importing the render_template function for rendering Jinja templates
 )
 
 # Create a blueprint for the home page with the name "index" and the current module name
@@ -60,12 +60,14 @@ def index(by="hot", sort="desc"):
             )
             return redirect("/")
 
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     # Create a cursor object for executing queries
     cursor = connection.cursor()
     # Select all the columns from the posts table and order them by the specified field and sorting order

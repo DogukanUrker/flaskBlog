@@ -1,24 +1,24 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Logging module
-    abort,  # Function for aborting requests
-    session,  # Session management module
-    sqlite3,  # SQLite database module
-    request,  # Module for handling HTTP requests
-    redirect,  # Function for redirecting requests
-    Blueprint,  # Blueprint class for creating modular applications
-    RECAPTCHA,  # Recaptcha module
-    requestsPost,  # Module for making HTTP POST requests
-    flashMessage,  # Flash messaging module
+    DB_COMMENTS_ROOT,  # Path to the comments database
     DB_POSTS_ROOT,  # Path to the posts database
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Function for rendering templates
-    DB_COMMENTS_ROOT,  # Path to the comments database
-    ChangeUserNameForm,  # Form for changing user name
-    RECAPTCHA_SITE_KEY,  # Recaptcha site key
-    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
+    RECAPTCHA,  # Recaptcha module
     RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
+    RECAPTCHA_SITE_KEY,  # Recaptcha site key
     RECAPTCHA_USERNAME_CHANGE,  # Flag for enabling/disabling Recaptcha for username change
+    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
+    Blueprint,  # Blueprint class for creating modular applications
+    ChangeUserNameForm,  # Form for changing user name
+    Log,  # Logging module
+    abort,  # Function for aborting requests
+    flashMessage,  # Flash messaging module
+    redirect,  # Function for redirecting requests
+    render_template,  # Function for rendering templates
+    request,  # Module for handling HTTP requests
+    requestsPost,  # Module for making HTTP POST requests
+    session,  # Session management module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the change username route
@@ -58,13 +58,13 @@ def changeUserName():
                     newUserName = newUserName.replace(
                         " ", ""
                     )  # Remove spaces from username
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     cursor.execute(
@@ -88,10 +88,12 @@ def changeUserName():
                                     )  # Display a flash message
                                 case False:
                                     # Check if new username is available
-                                    match userNameCheck == None:
+                                    match userNameCheck is None:
                                         case True:
                                             # Check Recaptcha if enabled
-                                            match RECAPTCHA and RECAPTCHA_USERNAME_CHANGE:
+                                            match (
+                                                RECAPTCHA and RECAPTCHA_USERNAME_CHANGE
+                                            ):
                                                 case True:
                                                     # Verify Recaptcha response
                                                     secretResponse = request.form[
@@ -101,11 +103,11 @@ def changeUserName():
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
                                                     # Check Recaptcha verification result
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        is True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Log the reCAPTCHA verification result
                                                             Log.success(
@@ -131,7 +133,7 @@ def changeUserName():
                                                                 )
                                                             )
                                                             connection.set_trace_callback(
-                                                                Log.sql
+                                                                Log.database
                                                             )  # Set the trace callback for the connection
                                                             cursor = connection.cursor()
                                                             cursor.execute(
@@ -153,7 +155,7 @@ def changeUserName():
                                                                 )
                                                             )
                                                             connection.set_trace_callback(
-                                                                Log.sql
+                                                                Log.database
                                                             )  # Set the trace callback for the connection
                                                             cursor = connection.cursor()
                                                             cursor.execute(
@@ -188,7 +190,7 @@ def changeUserName():
                                                             )
                                                         case False:
                                                             # Recaptcha verification failed
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"Username change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}"
                                                             )
                                                             abort(401)
@@ -207,7 +209,7 @@ def changeUserName():
                                                         DB_POSTS_ROOT
                                                     )
                                                     connection.set_trace_callback(
-                                                        Log.sql
+                                                        Log.database
                                                     )  # Set the trace callback for the connection
                                                     cursor = connection.cursor()
                                                     cursor.execute(
@@ -223,7 +225,7 @@ def changeUserName():
                                                         DB_COMMENTS_ROOT
                                                     )
                                                     connection.set_trace_callback(
-                                                        Log.sql
+                                                        Log.database
                                                     )  # Set the trace callback for the connection
                                                     cursor = connection.cursor()
                                                     cursor.execute(
@@ -270,7 +272,7 @@ def changeUserName():
                 recaptcha=RECAPTCHA,
             )
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to change his username without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             # User is not logged in, redirect to homepage

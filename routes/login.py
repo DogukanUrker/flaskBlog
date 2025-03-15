@@ -1,25 +1,25 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    abort,  # Function to abort request processing
-    LOG_IN,  # Flag indicating if login is enabled
-    session,  # Session handling module
-    request,  # Request handling module
-    sqlite3,  # SQLite database module
-    redirect,  # Redirect function
-    RECAPTCHA,  # Flag for enabling reCAPTCHA
-    addPoints,  # Function to add points to user's score
-    Blueprint,  # Blueprint for defining routes
-    LoginForm,  # Form class for login
-    encryption,  # Encryption utility module
-    flashMessage,  # Flash messaging module
-    requestsPost,  # Function for making POST requests
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
+    LOG_IN,  # Flag indicating if login is enabled
+    RECAPTCHA,  # Flag for enabling reCAPTCHA
     RECAPTCHA_LOGIN,  # Flag for enabling reCAPTCHA for login
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
+    Blueprint,  # Blueprint for defining routes
+    Log,  # Custom logging module
+    LoginForm,  # Form class for login
+    abort,  # Function to abort request processing
+    addPoints,  # Function to add points to user's score
+    encryption,  # Encryption utility module
+    flashMessage,  # Flash messaging module
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    requestsPost,  # Function for making POST requests
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the login route
@@ -47,7 +47,7 @@ def login(direct):
             match "userName" in session:
                 case True:
                     # If user is already logged in, redirect
-                    Log.danger(f'User: "{session["userName"]}" already logged in')
+                    Log.error(f'User: "{session["userName"]}" already logged in')
                     return (
                         redirect(direct),
                         301,
@@ -60,12 +60,12 @@ def login(direct):
                             userName = request.form["userName"]
                             password = request.form["password"]
                             userName = userName.replace(" ", "")
-                            Log.sql(
+                            Log.database(
                                 f"Connecting to '{DB_USERS_ROOT}' database"
                             )  # Log the database connection is started
                             connection = sqlite3.connect(DB_USERS_ROOT)
                             connection.set_trace_callback(
-                                Log.sql
+                                Log.database
                             )  # Set the trace callback for the connection
                             cursor = connection.cursor()
                             cursor.execute(
@@ -76,7 +76,7 @@ def login(direct):
                             match not user:
                                 case True:
                                     # If user not found, show error message
-                                    Log.danger(f'User: "{userName}" not found')
+                                    Log.error(f'User: "{userName}" not found')
                                     flashMessage(
                                         page="login",
                                         message="notFound",
@@ -95,11 +95,11 @@ def login(direct):
                                                     verifyResponse = requestsPost(
                                                         url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                                     ).json()
-                                                    match verifyResponse[
-                                                        "success"
-                                                    ] == True or verifyResponse[
-                                                        "score"
-                                                    ] > 0.5:
+                                                    match (
+                                                        verifyResponse["success"]
+                                                        is True
+                                                        or verifyResponse["score"] > 0.5
+                                                    ):
                                                         case True:
                                                             # Logs the user in if the reCAPTCHA verification is successful
                                                             Log.success(
@@ -133,7 +133,7 @@ def login(direct):
 
                                                         case False:
                                                             # Returns an unauthorized error if the reCAPTCHA verification is unsuccessful
-                                                            Log.danger(
+                                                            Log.error(
                                                                 f"Login reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                             )
                                                             abort(401)
@@ -161,7 +161,7 @@ def login(direct):
 
                                         case _:
                                             # Returns an incorrect password error if the password is incorrect
-                                            Log.danger("Wrong password")
+                                            Log.error("Wrong password")
                                             flashMessage(
                                                 page="login",
                                                 message="password",

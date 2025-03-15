@@ -5,12 +5,11 @@ This module contains all the general application settings.
 # Import necessary modules from the modules module
 from modules import secrets, socket
 
-
 # Name of the Flask application
 APP_NAME = "flaskBlog"  # (str)
 
 # Version of the Flask application
-APP_VERSION = "2.5.0"  # (str)
+APP_VERSION = "3.0.0-dev"  # (str)
 
 # Path to the root of the application files
 APP_ROOT_PATH = "."  # (str)
@@ -43,7 +42,7 @@ REGISTRATION = True  # (bool)
 LANGUAGES = ["en", "tr", "es", "de", "zh", "fr", "uk", "ru", "pt", "ja", "pl"]  # (list)
 
 # Enable or Disable analytics feature for posts
-ANALYTICS = True # (bool)
+ANALYTICS = True  # (bool)
 
 ### LOGGER SETTINGS ###
 # Toggle custom logging feature
@@ -51,6 +50,9 @@ CUSTOM_LOGGER = True  # (bool)
 
 # Toggle werkzeug logging feature
 WERKZEUG_LOGGER = False  # (bool)
+
+# Toggle logging to file feature
+LOG_TO_FILE = True  # (bool)
 
 # Root path of the log folder
 LOG_FOLDER_ROOT = "log/"  # (str)
@@ -84,7 +86,7 @@ DB_POSTS_ROOT = DB_FOLDER_ROOT + "posts.db"  # (str)
 DB_COMMENTS_ROOT = DB_FOLDER_ROOT + "comments.db"  # (str)
 
 # Root path of the analytics database
-DB_ANALYTICS_ROOT = DB_FOLDER_ROOT + "analytics.db" # (str)
+DB_ANALYTICS_ROOT = DB_FOLDER_ROOT + "analytics.db"  # (str)
 
 
 ### SMTP MAIL SETTINGS ###

@@ -1,4 +1,4 @@
-from modules import sqlite3, DB_USERS_ROOT, Log, session, redirect
+from modules import DB_USERS_ROOT, Log, redirect, session, sqlite3
 
 
 # Function to change the role of a user
@@ -7,11 +7,13 @@ def changeUserRole(userName):
     Changes the role of the user with the specified username.
     """
     userName = userName.lower()  # Convert username to lowercase
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_USERS_ROOT}' database"
     )  # Log the database connection is started
     connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the SQLite database
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()  # Create a cursor object
     cursor.execute(  # Execute SQL query to retrieve user role
         """select role from users where lower(userName) = ? """,

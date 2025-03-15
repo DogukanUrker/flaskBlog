@@ -1,25 +1,25 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    Delete,  # Module for deleting posts and comments
-    session,  # Session management module
-    sqlite3,  # SQLite database module
-    request,  # Request handling module
-    url_for,  # URL generation module
     APP_NAME,  # Application name
-    redirect,  # Redirect function
-    addPoints,  # Function to add points to user's score
+    DB_ANALYTICS_ROOT,  # Path to the analytics database
+    DB_COMMENTS_ROOT,  # Path to the comments database
+    DB_POSTS_ROOT,  # Path to the posts database
     Blueprint,  # Blueprint for defining routes
     ANALYTICS, #  # Constants to check analytics feature
     CommentForm,  # Form class for comments
-    flashMessage,  # Flash messaging module
-    DB_POSTS_ROOT,  # Path to the posts database
-    render_template,  # Template rendering function
-    currentTimeStamp,  # Function to get current timestamp
-    DB_COMMENTS_ROOT,  # Path to the comments database
+    Delete,  # Module for deleting posts and comments
+    Log,  # Custom logging module
+    addPoints,  # Function to add points to user's score
     calculateReadTime,  # Function to calculate reading time
-    DB_ANALYTICS_ROOT, # Path to the analytics database
-    getDataFromUserIP # Function to get data visitors IP Address
+    currentTimeStamp,  # Function to get current timestamp
+    flashMessage,  # Flash messaging module
+    getDataFromUserIP,  # Function to get data visitors IP Address
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    session,  # Session management module
+    sqlite3,  # SQLite database module
+    url_for,  # URL generation module
 )
 
 # Create a blueprint for the post route
@@ -32,12 +32,14 @@ def post(urlID):
     # Create a comment form object from the request form
     form = CommentForm(request.form)
 
-    Log.sql(
+    Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"
     )  # Log the database connection is started
     # Connect to the posts database
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.sql)  # Set the trace callback for the connection
+    connection.set_trace_callback(
+        Log.database
+    )  # Set the trace callback for the connection
     cursor = connection.cursor()
 
     # Query the posts database for all post url IDs
@@ -50,13 +52,13 @@ def post(urlID):
             # Log a message indicating that the post is found
             Log.success(f'post: "{urlID}" loaded')
 
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_POSTS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the posts database
             connection = sqlite3.connect(DB_POSTS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
 
@@ -83,7 +85,7 @@ def post(urlID):
                             # Delete the post from the database
                             Delete.post(post[0])
                             # Redirect to the home page
-                            return redirect(f"/")
+                            return redirect("/")
 
                     # Check if the comment delete button is clicked
                     match "commentDeleteButton" in request.form:
@@ -96,13 +98,13 @@ def post(urlID):
                     # Get the comment from the form
                     comment = request.form["comment"]
 
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_COMMENTS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the comments database
                     connection = sqlite3.connect(DB_COMMENTS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
 
@@ -137,13 +139,13 @@ def post(urlID):
                     # Redirect to the same route with a 301 status code
                     return redirect(url_for("post.post", urlID=urlID)), 301
 
-            Log.sql(
+            Log.database(
                 f"Connecting to '{DB_COMMENTS_ROOT}' database"
             )  # Log the database connection is started
             # Connect to the comments database
             connection = sqlite3.connect(DB_COMMENTS_ROOT)
             connection.set_trace_callback(
-                Log.sql
+                Log.database
             )  # Set the trace callback for the connection
             cursor = connection.cursor()
 
@@ -213,11 +215,11 @@ def post(urlID):
                 appName=APP_NAME,
                 blogPostUrl=request.root_url,
                 readingTime=calculateReadTime(post[3]),
-                idForRandomVisitor = idForRandomVisitor,
+                idForRandomVisitor=idForRandomVisitor,
             )
 
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to reach unknown post"
             )  # Log a message with level 1 indicating the post is not found
             # Render the 404 template if the post ID does not exist

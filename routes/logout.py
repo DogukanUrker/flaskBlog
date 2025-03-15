@@ -5,14 +5,13 @@ The functions and methods used in this blueprint are imported from the modules m
 """
 
 from modules import (
-    Log,  # A function for logging messages
-    session,  # A dictionary for storing session data
-    request,  # Module for handling HTTP requests
-    redirect,  # A function for returning redirect responses
     Blueprint,  # A class for creating Flask blueprints
+    Log,  # A function for logging messages
     flashMessage,  # Flash messaging module
+    redirect,  # A function for returning redirect responses
+    request,  # Module for handling HTTP requests
+    session,  # A dictionary for storing session data
 )
-
 
 logoutBlueprint = Blueprint(
     "logout", __name__
@@ -30,7 +29,9 @@ def logout():
     If the user is not logged in, a message is displayed indicating that they are not logged in.
     The user is then redirected to the homepage.
     """
-    match "userName" in session:  # Use a match statement to check if the "userName" key is present in the session dictionary
+    match (
+        "userName" in session
+    ):  # Use a match statement to check if the "userName" key is present in the session dictionary
         case True:  # If the user is logged in
             Log.success(
                 f"User: {session['userName']} logged out"
@@ -45,7 +46,7 @@ def logout():
             session.pop("userRole")  # Clear the userRole data from session
             return redirect("/")  # Return a redirect response to the homepage
         case False:  # If the user is not logged in
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to logout without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             return redirect("/")  # Return a redirect response to the homepage

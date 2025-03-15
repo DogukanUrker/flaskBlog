@@ -1,22 +1,22 @@
 # Import necessary modules and functions
 from modules import (
-    Log,  # Custom logging module
-    abort,  # Function to abort request
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
-    request,  # Request handling module
-    redirect,  # Redirect function
-    Blueprint,  # Blueprint for defining routes
-    RECAPTCHA,  # Flag indicating if reCAPTCHA is enabled
-    flashMessage,  # Flash messaging module
-    requestsPost,  # Function for making HTTP POST requests
     DB_USERS_ROOT,  # Path to the users database
-    render_template,  # Template rendering function
+    RECAPTCHA,  # Flag indicating if reCAPTCHA is enabled
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag indicating if reCAPTCHA is required for changing profile picture
+    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
+    Blueprint,  # Blueprint for defining routes
     ChangeProfilePictureForm,  # Form for changing profile picture
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag indicating if reCAPTCHA is required for changing profile picture
+    Log,  # Custom logging module
+    abort,  # Function to abort request
+    flashMessage,  # Flash messaging module
+    redirect,  # Redirect function
+    render_template,  # Template rendering function
+    request,  # Request handling module
+    requestsPost,  # Function for making HTTP POST requests
+    session,  # Session handling module
+    sqlite3,  # SQLite database module
 )
 
 # Create a blueprint for the change profile picture route
@@ -38,16 +38,16 @@ def changeProfilePicture():
                     newProfilePictureSeed = request.form["newProfilePictureSeed"]
                     # Generate the new profile picture URL from the seed
                     newProfilePicture = f"https://api.dicebear.com/7.x/identicon/svg?seed={newProfilePictureSeed}&radius=10"
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
-                    Log.sql(
+                    Log.database(
                         f"Connecting to '{DB_USERS_ROOT}' database"
                     )  # Log the database connection is started
                     # Connect to the users database
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(
-                        Log.sql
+                        Log.database
                     )  # Set the trace callback for the connection
                     cursor = connection.cursor()
                     # Check if reCAPTCHA is enabled and required for changing profile picture
@@ -60,9 +60,10 @@ def changeProfilePicture():
                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                             ).json()
                             # Check if the reCAPTCHA verification is successful or has a high score
-                            match verifyResponse["success"] == True or verifyResponse[
-                                "score"
-                            ] > 0.5:
+                            match (
+                                verifyResponse["success"] is True
+                                or verifyResponse["score"] > 0.5
+                            ):
                                 case True:
                                     # Log the reCAPTCHA verification result
                                     Log.success(
@@ -85,10 +86,10 @@ def changeProfilePicture():
                                         language=session["language"],
                                     )  # Display a flash message
                                     # Redirect to the same route
-                                    return redirect(f"/changeprofilepicture")
+                                    return redirect("/changeprofilepicture")
                                 case False:
                                     # Log the reCAPTCHA verification result
-                                    Log.danger(
+                                    Log.error(
                                         f"Change profile picture reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                     )
                                     # Abort the request with a 401 error
@@ -111,7 +112,7 @@ def changeProfilePicture():
                                 language=session["language"],
                             )  # Display a flash message
                             # Redirect to the same route
-                            return redirect(f"/changeprofilepicture")
+                            return redirect("/changeprofilepicture")
             # Render the change profile picture template with the form object, the site key, and the reCAPTCHA flag
             return render_template(
                 "changeProfilePicture.html.jinja",
@@ -120,7 +121,7 @@ def changeProfilePicture():
                 recaptcha=RECAPTCHA,
             )
         case False:
-            Log.danger(
+            Log.error(
                 f"{request.remote_addr} tried to change his profile picture without being logged in"
             )  # Log a message with level 1 indicating the user is not logged in
             # Redirect to the home page if the user is not logged in

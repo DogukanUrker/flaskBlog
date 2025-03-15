@@ -1,4 +1,4 @@
-from modules import LANGUAGES, session, request, Log  # Import necessary modules
+from modules import LANGUAGES, Log, request, session  # Import necessary modules
 
 
 def browserLanguage():
