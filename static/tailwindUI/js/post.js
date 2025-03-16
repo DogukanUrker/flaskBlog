@@ -19,7 +19,7 @@ if (visiorID != null) {
         // send post request to server and update visitors time spend duration 
         fetch("/api/v1/timeSpendsDuration", {
             method: "POST",
-            headers: { 'X-CSRFToken': document.getElementsByName, "Content-Type": "application/json" },
+            headers: { 'X-CSRFToken': csrfToken, "Content-Type": "application/json" },
             body: JSON.stringify(data),
             keepalive: true
         });
