@@ -171,13 +171,13 @@ def post(urlID):
                             sessionUser = "unsignedUser"
                     match userIPData["status"] == 0:
                         case True:
-                            Log.sql(
+                            Log.database(
                                 f"Connecting to '{DB_ANALYTICS_ROOT}' database"
                             )  # Log the database connection is started
                             # Connect to the analytics database
                             connection = sqlite3.connect(DB_ANALYTICS_ROOT)
                             connection.set_trace_callback(
-                                Log.sql
+                                Log.database
                             ) # Set the trace callback for the connection
                             cursor = connection.cursor()
 
@@ -190,7 +190,7 @@ def post(urlID):
                             connection.commit()
                             connection.close()
                         case False:
-                            Log.danger(f"Aborting postsAnalytics, {userIPData["message"]}")
+                            Log.error(f"Aborting postsAnalytics, {userIPData["message"]}")
                             # Log a message with level 1 indicating the visitor IP is not found
 
                 case False:
