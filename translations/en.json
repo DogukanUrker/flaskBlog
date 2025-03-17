@@ -337,6 +337,7 @@
     "visitorCounts": "Visitor Counts",
     "computerOS": "Computer OS",
     "topCountries": "Top Countries",
-    "visitor": "Visitor"
+    "visitor": "Visitor",
+    "viewAll": "View All"
   }
 }

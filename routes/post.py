@@ -5,6 +5,7 @@ from modules import (
     DB_COMMENTS_ROOT,  # Path to the comments database
     DB_POSTS_ROOT,  # Path to the posts database
     Blueprint,  # Blueprint for defining routes
+    ANALYTICS, #  # Constants to check analytics feature
     CommentForm,  # Form class for comments
     Delete,  # Module for deleting posts and comments
     Log,  # Custom logging module
@@ -155,50 +156,47 @@ def post(urlID):
             )
             comments = cursor.fetchall()
 
-            # posts analytics implemetation starts here
-            # get user agent string to fectch visitor's computer os and call funtion to get visitor's ip address find visitor's country, continent
-            userIPData = getDataFromUserIP(str(request.headers.get("User-Agent")))
-            idForRandomVisitor = (
-                None  # assign row id for visitors activity data initially None
-            )
-            match "userName" in session:
-                case True:
-                    sessionUser = session["userName"]
-                case False:
-                    sessionUser = "unsignedUser"
-            match userIPData["status"] == 0:
-                case True:
-                    Log.database(
-                        f"Connecting to '{DB_ANALYTICS_ROOT}' database"
-                    )  # Log the database connection is started
-                    # Connect to the analytics database
-                    connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-                    connection.set_trace_callback(
-                        Log.database
-                    )  # Set the trace callback for the connection
-                    cursor = connection.cursor()
 
-                    # add visitor's data in databse
-                    cursor.execute(
-                        """insert into postsAnalytics (postID, visitorUserName, country, os, continent, timeStamp) values (?,?,?,?,?,?) RETURNING id""",
-                        (
-                            post[0],
-                            sessionUser,
-                            userIPData["payload"]["country"],
-                            userIPData["payload"]["os"],
-                            userIPData["payload"]["continent"],
-                            currentTimeStamp(),
-                        ),
-                    )
-                    idForRandomVisitor = cursor.fetchone()[
-                        0
-                    ]  # assign row id for random visitors
-                    connection.commit()
-                    connection.close()
+            # Posts analytics implemetation starts here
+            # Check if analytics is true or false by admin for flaskblog
+            match ANALYTICS:
+                case True:
+                    # Get user agent string to fectch visitor's computer os and call function to get visitor's ip address find visitor's country, continent
+                    userIPData = getDataFromUserIP(str(request.headers.get('User-Agent')))
+                    idForRandomVisitor = None # assign row id for visitors activity data, initially None
+                    match "userName" in session:
+                        case True:
+                            sessionUser = session["userName"] 
+                        case False:
+                            sessionUser = "unsignedUser"
+                    match userIPData["status"] == 0:
+                        case True:
+                            Log.database(
+                                f"Connecting to '{DB_ANALYTICS_ROOT}' database"
+                            )  # Log the database connection is started
+                            # Connect to the analytics database
+                            connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+                            connection.set_trace_callback(
+                                Log.database
+                            ) # Set the trace callback for the connection
+                            cursor = connection.cursor()
+
+                            # add visitor's data in databse
+                            cursor.execute(
+                                """insert into postsAnalytics (postID, visitorUserName, country, os, continent, timeStamp) values (?,?,?,?,?,?) RETURNING id""",
+                                (post[0], sessionUser, userIPData["payload"]["country"], userIPData["payload"]["os"], userIPData["payload"]["continent"],currentTimeStamp())
+                            )
+                            idForRandomVisitor = cursor.fetchone()[0] # assign row id for random visitors
+                            connection.commit()
+                            connection.close()
+                        case False:
+                            Log.error(f"Aborting postsAnalytics, {userIPData["message"]}")
+                            # Log a message with level 1 indicating the visitor IP is not found
+
                 case False:
-                    Log.error(f"Aborting postsAnalytics, {userIPData['message']}")
-                    # Log a message with level 1 indicating the visitor IP is not found
-            # posts analytics implemetation ends here
+                    # Do nothing
+                    pass
+                    # posts analytics implemetation ends here          
 
             # Render the post template with the post and comments data, the form object, and the app name
             return render_template(
