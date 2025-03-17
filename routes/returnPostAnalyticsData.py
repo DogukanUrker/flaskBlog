@@ -41,7 +41,7 @@ def returnPostTrafficGraphData() -> dict:
     # Accept postID type integer
     postID = request.args.get("postID", type=int)
     # Accept True or False and convert into boolean, default to False
-    sincePosted = str(request.args.get("sincePosted", default=False)).lower()=="true"
+    sincePosted = str(request.args.get("sincePosted", default=False)).lower() == "true"
     # Accept weeks type float
     weeks = request.args.get("weeks", type=float, default=0)
     # Accept days type float
@@ -115,7 +115,7 @@ def returnPostCountryGraphData() -> dict:
     # Accept postID
     postID = request.args.get("postID", type=int)
     # Accept True or False and convert into boolean, default to False
-    viewAll = str(request.args.get("viewAll", default=False)).lower()=="true"
+    viewAll = str(request.args.get("viewAll", default=False)).lower() == "true"
 
     # Check if analytics is true or false by admin for flaskblog
     match ANALYTICS:
@@ -134,8 +134,14 @@ def returnPostCountryGraphData() -> dict:
                         )
                     else:
                         # Return error if postID is missing
-                        return make_response({"message" : "Missing postID; unable to retrieve data.", "error" : "postID (type: int) is required."}, 404)
-                        
+                        return make_response(
+                            {
+                                "message": "Missing postID; unable to retrieve data.",
+                                "error": "postID (type: int) is required.",
+                            },
+                            404,
+                        )
+
                 case False:
                     # Return forbidden error if the user is not authenticated
                     return make_response(

@@ -5,8 +5,8 @@ This module contains the code for the posts analytics page.
 from modules import (
     ANALYTICS,  # A constant variable to check anaylytcs True or False
     DB_POSTS_ROOT,  # A constant for the path to the posts database
-    getAnalyticsPageTrafficGraphData, # Function to get post traffic graph data
-    getAnalyticsPageOSGraphData, # Function to get post os graph data
+    getAnalyticsPageTrafficGraphData,  # Function to get post traffic graph data
+    getAnalyticsPageOSGraphData,  # Function to get post os graph data
     Blueprint,  # A class for creating Flask blueprints
     Log,  # A class for logging messages
     render_template,  # A function for rendering Jinja templates
@@ -84,8 +84,13 @@ def analyticsPost(urlID):
                             # os graph data
                             osGraphData = getAnalyticsPageOSGraphData(post[0])
 
-                            return render_template("postsAnalytics.html.jinja", post=post, todaysVisitor=todaysVisitor, osGraphData=osGraphData)
-                        
+                            return render_template(
+                                "postsAnalytics.html.jinja",
+                                post=post,
+                                todaysVisitor=todaysVisitor,
+                                osGraphData=osGraphData,
+                            )
+
                         case False:
                             Log.error(
                                 f"{request.remote_addr} tried to reach unknown post"
