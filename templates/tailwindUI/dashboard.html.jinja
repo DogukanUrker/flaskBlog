@@ -24,7 +24,7 @@
   <img src="{{ url_for('returnPostBanner.returnPostBanner', postID = post[0]) }}" class="w-96 rounded mx-auto" />
 
   <!-- Post Title with Link -->
-  <a href="/post/{{ post[0] }}"
+  <a href="/post/{{ post[10] }}"
     class="text-rose-500 h-64 pb-8 text-2xl hover:text-rose-500/75 duration-150 select-none break-words">{{ post[1]
     }}</a>
 
@@ -35,7 +35,7 @@
 
   <!-- Section: Edit/Delete Post -->
   <section class="flex items-center justify-between my-2">
-    <a href="/editpost/{{ post[0] }}" class="hover:text-rose-500 duration-150 font-medium">
+    <a href="/editpost/{{ post[10] }}" class="hover:text-rose-500 duration-150 font-medium">
       <i class="ti ti-edit mr-1 text-2xl"></i>
     </a>
     <form method="post">
@@ -147,7 +147,7 @@
   </section>
 
   <!-- Link to Go to Post -->
-  <a href="/post/{{ comment[1] }}"
+  <a href="/post/{{ getPostUrlIdFromPost(comment[1]) }}"
     class="hover:text-rose-500 duration-150 font-medium">{{translations.dashboard.go}}</a>
 
 </div>

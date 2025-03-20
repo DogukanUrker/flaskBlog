@@ -17,7 +17,7 @@
   <div class="flex items-center justify-between mb-2">
     <div class="flex items-center">
       <i class="ti ti-id mr-1 text-xl"></i> {{translations.adminPanelComments.postID}}:
-      <a href="/post/{{ comment[0] }}" class="ml-1 font-medium">{{ comment[1] }}</a>
+      <a href="/post/{{ getPostUrlIdFromPost(comment[1]) }}" class="ml-1 font-medium">{{ getPostUrlIdFromPost(comment[1]) }}</a>
     </div>
   </div>
   <!-- Display comment content -->
