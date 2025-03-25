@@ -155,7 +155,7 @@ def createPost():
                                             currentTimeStamp(),
                                             currentTimeStamp(),
                                             postCategory,
-                                            generateurlID(postTitle),
+                                            generateurlID(),
                                         ),
                                     )
                                     connection.commit()

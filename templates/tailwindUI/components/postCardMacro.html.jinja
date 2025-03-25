@@ -11,7 +11,7 @@
 
   <!-- Post Title -->
   <div class="px-2 mt-1">
-    <a href="/post/{{ post[10] }}"
+    <a href="{{ url_for('post.post', slug=getSlugFromPostTitle(post[1]), urlID=post[10]) }}"
       class="text-rose-500 text-lg hover:text-rose-500/75 duration-150 break-words font-medium">{{ post[1] }}</a>
   </div>
 
