@@ -47,7 +47,7 @@ def getNewUid():
 
 
 # Function to convert post title to URL SLUG
-def  getSlugFromPostTitle(postTitle):
+def getSlugFromPostTitle(postTitle):
     cleanedTitle = "".join(
         ["-" if char in AVOID_CHARACTERS else char for char in postTitle]
     )
@@ -71,4 +71,4 @@ def generateurlID():
 # Test the function.
 if __name__ == "__main__":
     sampleText = " 'Hello, world!' said the coder. <Can you solve this?> {It's 50% complete.} Use |pipe|, \\, ^caret^, ~tilde~, [brackets], `backtick`, 'single quote', :colon:, ;semicolon;, /slash/, ?question?, =equals=, &ampersand&, @at@, +plus+."
-    print( getSlugFromPostTitle(sampleText))
+    print(getSlugFromPostTitle(sampleText))

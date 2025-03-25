@@ -267,9 +267,7 @@ def editPost(urlID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    return redirect(
-                                                        f"/post/{post[10]}"
-                                                    )
+                                                    return redirect(f"/post/{post[10]}")
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",

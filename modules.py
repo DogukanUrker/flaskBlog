@@ -93,7 +93,7 @@ from utils.getProfilePicture import getProfilePicture
 from utils.getPostUrlIdFromPost import getPostUrlIdFromPost
 
 # Importing the urlID generator and postUrlSlug for posts
-from utils.generateUrlIdFromPost import generateurlID,  getSlugFromPostTitle
+from utils.generateUrlIdFromPost import generateurlID, getSlugFromPostTitle
 
 # Importing the 'terminalASCII' function from the 'utils.terminalASCII' module for displaying ASCII art in the terminal.
 from utils.terminalASCII import terminalASCII

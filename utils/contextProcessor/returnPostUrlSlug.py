@@ -1,6 +1,6 @@
 # Import the modules module that contains constants and functions for the app
 from modules import (
-     getSlugFromPostTitle,  # A function that returns the post's urlSlug
+    getSlugFromPostTitle,  # A function that returns the post's urlSlug
 )
 
 
