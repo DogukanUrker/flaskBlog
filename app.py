@@ -82,6 +82,7 @@ from modules import (
     recaptchaBadge,  # A function that checks RECAPTCHA_BADGE constant
     returnPostUrlID,  # A function that returns the post's URL id
     returnUserProfilePicture,  # A function that returns the user's profile picture
+    returnPostUrlSlug,  # A function that returns the post's URL slug
 )  # Importing Flask class for creating the Flask application instance
 from routes.about import (
     aboutBlueprint,
@@ -224,6 +225,9 @@ app.context_processor(
 app.context_processor(
     returnPostUrlID
 )  # A context processor that adds the getPostUrlIdFromPost variable to template context
+app.context_processor(
+    returnPostUrlSlug
+)  # A context processor that adds the A function that returns the post's urlSlug variable to template context
 app.context_processor(
     injectTranslations
 )  # A context processor that adds the translations variable to the template context

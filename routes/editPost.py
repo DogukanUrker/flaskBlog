@@ -42,7 +42,6 @@ def editPost(urlID):
         abort(404): if the post does not exist
         abort(401): if the user is not authorized to edit the post
     """
-    sessionUrlId = None  # if user rename post title
 
     # Check if "userName" exists in session
     match "userName" in session:
@@ -123,17 +122,6 @@ def editPost(urlID):
                                                 f'User: "{session["userName"]}" tried to edit a post with empty content',
                                             )
                                         case False:
-                                            # check if user edited post title
-                                            match postTitle == post[1]:
-                                                case True:
-                                                    sessionUrlId = (
-                                                        urlID  # assign existing url id
-                                                    )
-                                                case False:
-                                                    sessionUrlId = generateurlID(
-                                                        postTitle
-                                                    )  # assign new url id if modified
-
                                             # Check Recaptcha if enabled
                                             match RECAPTCHA and RECAPTCHA_POST_EDIT:
                                                 case True:
@@ -203,13 +191,7 @@ def editPost(urlID):
                                                                     (post[0]),
                                                                 ],
                                                             )
-                                                            cursor.execute(
-                                                                """update posts set urlID = ? where id = ?""",
-                                                                [
-                                                                    (sessionUrlId),
-                                                                    (post[0]),
-                                                                ],
-                                                            )
+
                                                             connection.commit()
                                                             Log.success(
                                                                 f'Post: "{postTitle}" edited',
@@ -223,7 +205,7 @@ def editPost(urlID):
                                                                 ],
                                                             )  # Display a flash message
                                                             return redirect(
-                                                                f"/post/{sessionUrlId}"
+                                                                f"/post/{post[10]}"
                                                             )
                                                         case False:
                                                             # Recaptcha verification failed
@@ -274,10 +256,7 @@ def editPost(urlID):
                                                             (post[0]),
                                                         ],
                                                     )
-                                                    cursor.execute(
-                                                        """update posts set urlID = ? where id = ?""",
-                                                        [(sessionUrlId), (post[0])],
-                                                    )
+
                                                     connection.commit()
                                                     Log.success(
                                                         f'Post: "{postTitle}" edited',
@@ -288,9 +267,7 @@ def editPost(urlID):
                                                         category="success",
                                                         language=session["language"],
                                                     )  # Display a flash message
-                                                    return redirect(
-                                                        f"/post/{sessionUrlId}"
-                                                    )
+                                                    return redirect(f"/post/{post[10]}")
                             # Render the edit post template
                             return render_template(
                                 "/editPost.html.jinja",
