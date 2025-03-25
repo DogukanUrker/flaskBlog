@@ -19,7 +19,8 @@ from modules import (
     request,  # Request handling module
     session,  # Session management module
     sqlite3,  # SQLite database module
-    url_for,  # URL generation module
+    url_for,  # URL generation module,
+    getSlugFromPostTitle,  # Function to convert post title into slug
 )
 
 # Create a blueprint for the post route
@@ -28,7 +29,8 @@ postBlueprint = Blueprint("post", __name__)
 
 # Define the route handler for individual posts
 @postBlueprint.route("/post/<urlID>", methods=["GET", "POST"])
-def post(urlID):
+@postBlueprint.route("/post/<slug>-<urlID>", methods=["GET", "POST"])
+def post(urlID=None, slug=None):
     # Create a comment form object from the request form
     form = CommentForm(request.form)
 
@@ -42,13 +44,24 @@ def post(urlID):
     )  # Set the trace callback for the connection
     cursor = connection.cursor()
 
-    # Query the posts database for all post url IDs
-    cursor.execute("select urlID from posts")
-    posts = str(cursor.fetchall())
+    # Query the posts database for post url IDs and title
+    cursor.execute("select urlID, title from posts where urlID = ?", (urlID,))
+    posts = cursor.fetchone()
 
     # Check if the requested post ID exists in the posts database
     match str(urlID) in posts:
         case True:
+            # Convert title into slug
+            postSlug = getSlugFromPostTitle(posts[1])
+            # Match url's slug to postSlug
+            match slug == postSlug:
+                case True:
+                    pass  # Do nothing
+
+                case False:
+                    # Redirect post with corrected slug
+                    return redirect(url_for("post.post", urlID=urlID, slug=postSlug))
+
             # Log a message indicating that the post is found
             Log.success(f'post: "{urlID}" loaded')
 

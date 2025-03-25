@@ -92,6 +92,9 @@ from utils.getProfilePicture import getProfilePicture
 # Importing the 'getPostUrlIDFromPost' function from 'utils.getPostUrlIdFromPost' module for retrieving post urlID from postID
 from utils.getPostUrlIdFromPost import getPostUrlIdFromPost
 
+# Importing the urlID generator and postUrlSlug for posts
+from utils.generateUrlIdFromPost import generateurlID, getSlugFromPostTitle
+
 # Importing the 'terminalASCII' function from the 'utils.terminalASCII' module for displaying ASCII art in the terminal.
 from utils.terminalASCII import terminalASCII
 
@@ -116,11 +119,11 @@ from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePic
 # importing the 'returnPostUrlID' context processor from the 'utils.contextProcessor.returnPostUrlID' module
 from utils.contextProcessor.returnPostUrlID import returnPostUrlID
 
+# importing the 'returnPostUrlSlug' context processor from the 'utils.contextProcessor.returnPostUrlSlug' module
+from utils.contextProcessor.returnPostUrlSlug import returnPostUrlSlug
+
 # Importing the 'Delete' class from the 'utils.delete' module for handling delete operations.
 from utils.delete import Delete
-
-# Importing the urlID generator for posts
-from utils.generateUrlIdFromPost import generateurlID
 
 # Importing the 'calculateReadTime' function from the 'utils.calculateReadTime' module for calculating reading time.
 from utils.calculateReadTime import calculateReadTime

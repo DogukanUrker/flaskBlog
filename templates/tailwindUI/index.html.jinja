@@ -30,7 +30,7 @@
   class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">
   {% for post in posts %}
   <!-- Include the post card component for each post -->
-  {% from "components/postCardMacro.html.jinja" import postCard %}
+  {% from "components/postCardMacro.html.jinja" import postCard with context %}
   {{ postCard(post=post, authorProfilePicture=getProfilePicture(post[5])) }}
   {% endfor %}
 </div>
