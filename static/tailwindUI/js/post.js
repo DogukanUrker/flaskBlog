@@ -4,14 +4,14 @@
 let initialSpendTime = 0;
 
 // check visitorID is not null then perform fetch operation and increment
-if (visiorID != null) {
+if (visitorID != null) {
 
     setInterval(() => {
         // increase initial spend time on every interval with 5 
         initialSpendTime += 5;
 
         const data = {
-            visitorID: visiorID,
+            visitorID: visitorID,
             spendTime: initialSpendTime,
         };
         // send data on every 5 second to store on database of visitor

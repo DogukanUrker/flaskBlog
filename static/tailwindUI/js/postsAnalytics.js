@@ -29,7 +29,7 @@ let lineChartErrorContainer = document.getElementById("lineChartErrorContainer")
 
 // Load dropdown menu duration range selector
 function startDropDownMenu() {
-    document.getElementById("durationRangetab").addEventListener("change", durationRangeCallback, false);
+    document.getElementById("durationRangeTab").addEventListener("change", durationRangeCallback, false);
 }
 
 window.addEventListener("load", startDropDownMenu, false);
@@ -43,10 +43,10 @@ let durationRangeMap = {
     last48: "hours=48"
 }
 
-// Function to fetch trafiic data for mobile screens
+// Function to fetch traffic data for mobile screens
 function durationRangeCallback() {
     // Get the selected option
-    let selectedDurationRange = document.getElementById("durationRangetab").value;
+    let selectedDurationRange = document.getElementById("durationRangeTab").value;
     // Get dropDownMenu spinner id
     let dropDownMenuSpinner = document.getElementById("dropDownMenuSpinner");
 
@@ -57,7 +57,7 @@ function durationRangeCallback() {
 
 // Initial tab id
 let initialStateTabId = "last48h";
-// Function to check active tab and upate inactive and call fetch data
+// Function to check active tab and update inactive and call fetch data
 function changeTabState(tabID) {
     document.getElementById(initialStateTabId).classList.remove("bg-rose-500/75", "text-black"); // Remove existing classes
     document.getElementById(initialStateTabId).classList.add("text-gray-500", "hover:text-rose-500/75", "hover:text-gray-700"); // Add classes 
@@ -68,7 +68,7 @@ function changeTabState(tabID) {
     initialStateTabId = tabID;
 
     // Spinner id to activate and deactivate circle animation
-    let spinnerID = document.getElementById(tabID + 1); // Match spinner ID with assosiated tab button
+    let spinnerID = document.getElementById(tabID + 1); // Match spinner ID with associated tab button
 
     // Check which buttons are pressed and fetch data accordingly
 
@@ -103,15 +103,15 @@ async function fetchTrafficGraphData(durationRangeQuery) {
         // Fetch data
         let response = await fetch(postAnalyticsDataTrafficGraphUrl + durationRangeQuery);
         // Parse data into json
-        let responsedData = await response.json();
+        let responseData = await response.json();
 
         // Check response status
         if (response.ok) {
             // Return data
-            return responsedData.payload;
+            return responseData.payload;
         } else {
             // Print error on console
-            console.error(responsedData.message);
+            console.error(responseData.message);
             // Return null
             return null;
         }
@@ -199,7 +199,7 @@ async function loadLineChart(durationRangeQuery) {
             },
             colors: ['#f43f5e'],
             theme: {
-                mode: "light" // todo: impement dart and light mode adjust dynamically
+                mode: "light" // todo: implement dart and light mode adjust dynamically
             }
         };
 
@@ -335,7 +335,7 @@ async function loadBarChart(dataLimit) {
                 categories: countryGraphData["countryNameList"] // e.g. categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan','United States', 'China', 'Germany']
             },
             theme: {
-                mode: "light", // todo: impement dart and light mode adjust dynamically
+                mode: "light", // todo: implement dart and light mode adjust dynamically
                 palette: 'palette7' // upto palette10
             }
         };
