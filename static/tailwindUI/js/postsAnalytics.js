@@ -288,8 +288,26 @@ async function fetchCountryGraphData(dataLimit) {
 // Load barChart when page loads
 async function loadBarChart(dataLimit) {
     // Fetch graph data
-    const counryGraphData = await fetchCountryGraphData(dataLimit);
-    if (counryGraphData) {
+    const countryGraphData = await fetchCountryGraphData(dataLimit);
+    let lengthOfCountryList = countryGraphData["countryCountList"].length
+
+    // Calculate line graph height
+    let _height = 110
+    if(lengthOfCountryList>50){
+        _height = lengthOfCountryList*28;
+    }else if(lengthOfCountryList>20){
+        _height = lengthOfCountryList*32;
+    }else if(lengthOfCountryList>15){
+        _height = lengthOfCountryList*35;
+    }else if(lengthOfCountryList>10){
+        _height = lengthOfCountryList*40;
+    }else if(lengthOfCountryList>5){
+        _height = lengthOfCountryList* 50;
+    }else if(lengthOfCountryList>=2){
+            _height = lengthOfCountryList * 60;
+    }
+    
+    if (countryGraphData) {
         //  // Hide Bar Chart spinner
         barChartSpinner.classList.add("hidden");
 
@@ -297,11 +315,11 @@ async function loadBarChart(dataLimit) {
         var options = {
             series: [{
                 name: visitor, // 'Visitor'
-                data: counryGraphData["countryCountList"] // e.g. data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+                data: countryGraphData["countryCountList"] // e.g. data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
             }],
             chart: {
                 type: 'bar',
-                height: 350
+                height: _height
             },
             plotOptions: {
                 bar: {
@@ -314,7 +332,7 @@ async function loadBarChart(dataLimit) {
                 enabled: false
             },
             xaxis: {
-                categories: counryGraphData["countryNameList"] // e.g. categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan','United States', 'China', 'Germany']
+                categories: countryGraphData["countryNameList"] // e.g. categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan','United States', 'China', 'Germany']
             },
             theme: {
                 mode: "light", // todo: impement dart and light mode adjust dynamically
