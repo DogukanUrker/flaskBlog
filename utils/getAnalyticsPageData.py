@@ -125,7 +125,7 @@ def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
     """
     Returns the post's visitors traffic data list of tuples.
     Args:
-        `postID` (int): The post's primary key/id whose visitors country data to be retrived.
+        `postID` (int): The post's primary key/id whose visitors country data to be retrieved.
         `viewAll` (bool):
             - True: Returns all data since the post was created.
             - False: Returns only the latest 25 data entries.
