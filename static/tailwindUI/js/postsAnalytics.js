@@ -199,7 +199,7 @@ async function loadLineChart(durationRangeQuery) {
             },
             colors: ['#f43f5e'],
             theme: {
-                mode: "light" // todo: implement dart and light mode adjust dynamically
+                mode: "light" // todo: implement dark and light mode adjust dynamically
             }
         };
 
@@ -335,7 +335,7 @@ async function loadBarChart(dataLimit) {
                 categories: countryGraphData["countryNameList"] // e.g. categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan','United States', 'China', 'Germany']
             },
             theme: {
-                mode: "light", // todo: implement dart and light mode adjust dynamically
+                mode: "light", // todo: implement dark and light mode adjust dynamically
                 palette: 'palette7' // upto palette10
             }
         };

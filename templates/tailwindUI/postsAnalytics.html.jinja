@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <!-- Total vistior -->
+    <!-- Total visitor -->
     <dl class="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
       <div class="flex flex-col rounded-lg bg-rose-50 px-4 py-8 text-center">
         <dt class="order-last text-lg font-medium text-gray-500">{{ translations.analytics.totalVisitor }}</dt>
@@ -96,7 +96,7 @@
     <!-- Duration tab for mobile screens ends here -->
 
 
-    <!-- Duration tab for wide srceens starts here-->
+    <!-- Duration tab for wide screens starts here-->
     <div class="hidden sm:block">
       <nav class="flex gap-6" aria-label="Tabs">
         
@@ -155,7 +155,7 @@
     <!-- LineCart graph container -->
     <div id="lineChart"></div>
 
-    <!-- Show approriate message on progress/error -->
+    <!-- Show appropriate message on progress/error -->
     <div class="flex justify-center item-center">
       <!-- LineChart spinner -->
       <div class="hidden w-16 h-16 mt-4 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="lineChartSpinner"></div>
@@ -181,7 +181,7 @@
   <div id="pieChart" class="flex justify-center"></div>
 
   <script>
-    // Initialize veriables to accessin js file
+    // Initialize variables to access in js file
     let postID = '{{ post[0] }}';
     let visitorCounts = '{{ translations.analytics.visitorCounts }}';
     let traffic = '{{ translations.analytics.traffic }}';
@@ -198,7 +198,7 @@
       <!-- barChart graph container -->
       <div id="barChart"></div>
 
-      <!-- Show approriate message on progress/error -->
+      <!-- Show appropriate message on progress/error -->
       <div class="flex justify-center item-center">
         <!-- barChart spinner -->
         <div class="hidden w-16 h-16 mt-4 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="barChartSpinner"></div>
