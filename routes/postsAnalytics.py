@@ -3,7 +3,7 @@ This module contains the code for the posts analytics page.
 """
 
 from modules import (
-    ANALYTICS,  # A constant variable to check anaylytcs True or False
+    ANALYTICS,  # A constant variable to check analytics True or False
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     getAnalyticsPageTrafficGraphData,  # Function to get post traffic graph data
     getAnalyticsPageOSGraphData,  # Function to get post os graph data
@@ -73,7 +73,7 @@ def analyticsPost(urlID):
                             todaysVisitorData = getAnalyticsPageTrafficGraphData(
                                 postID=post[0], hours=24
                             )  # if no params are passed except postID function will return last 48 hours of data
-                            todaysVisitor = 0  # Initialize a variable for storing the todays total number of views
+                            todaysVisitor = 0  # Initialize a variable for storing the today's total number of views
                             for views in (
                                 todaysVisitorData
                             ):  # Loop through each list in the list

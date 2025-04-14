@@ -2,10 +2,10 @@ from modules import database, geoip2, parse, requests
 
 """
 This function will collect user ip using api.ipify.org to fetch user's country, continents
-and user Agent string to fetch user oparating system to store post analytics
+and user Agent string to fetch user operating system to store post analytics
 """
 
-# geoIP2dabase file needs to be up to date with latests version
+# geoIP2database file needs to be up to date with latest version
 # Connect to the geoip2 database
 reader = database.Reader(
     "static/geoIP2database/dbip-country-lite-2025-02.mmdb"

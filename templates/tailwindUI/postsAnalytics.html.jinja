@@ -3,9 +3,6 @@
 <!-- Set the title of the About page with the post tittle -->
 <title>{{ translations.analytics.title}} : {{ post[1] }}</title>
 
-<!-- External stylesheet link for css style -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}" />
-
 <!-- Apex charts cdn link for rendering charts -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
@@ -37,7 +34,7 @@
       </div>
     </div>
 
-    <!-- Total vistior -->
+    <!-- Total visitor -->
     <dl class="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
       <div class="flex flex-col rounded-lg bg-rose-50 px-4 py-8 text-center">
         <dt class="order-last text-lg font-medium text-gray-500">{{ translations.analytics.totalVisitor }}</dt>
@@ -77,30 +74,29 @@
   <!-- Duration tab for mobile screens -->
   <div class="flex flex-row justify-end m-4">
     <div class="sm:hidden flex gap-1">
-      <label for="durationRangetab" class="sr-only"></label>
-      <select id="durationRangetab" class="w-full rounded-md border-gray-200" id="choiceSelect">
+      <label for="durationRangeTab" class="sr-only"></label>
+      <select id="durationRangeTab" class="w-full rounded-md border-gray-200" id="choiceSelect">
         <!-- Since Posted Tab button -->
-        <option onclick="changeTabState('sincePosted')" value="sincePosted">{{ translations.analytics.sincePosted }}</option>
+        <option value="sincePosted">{{ translations.analytics.sincePosted }}</option>
 
         <!-- Last 1 Month Tab button -->
-        <option onclick="changeTabState('last1m')" value="last1m">{{ translations.analytics.last1month }}</option>
+        <option value="last1m">{{ translations.analytics.last1month }}</option>
 
         <!-- Last 7 days Tab button -->
-        <option onclick="changeTabState('last7d')" value="last7d">{{ translations.analytics.last7days }}</option>
+        <option value="last7d">{{ translations.analytics.last7days }}</option>
 
         <!-- Last 24 hours Tab button -->
-        <option onclick="changeTabState('last24h')" value="last24h">{{ translations.analytics.last24hours }}</option>
+        <option value="last24h">{{ translations.analytics.last24hours }}</option>
 
         <!-- Last 48 hours Tab button -->
-        <option onclick="changeTabState('last48h')" value="last48h" selected>{{ translations.analytics.last48hours }}
-        </option>
+        <option value="last48h" selected>{{ translations.analytics.last48hours }}</option>
       </select>
-      <div class="hidden border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="dropDownMenuSpinner"></div>
+      <div class="hidden w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="dropDownMenuSpinner"></div>
     </div>
     <!-- Duration tab for mobile screens ends here -->
 
 
-    <!-- Duration tab for wide srceens starts here-->
+    <!-- Duration tab for wide screens starts here-->
     <div class="hidden sm:block">
       <nav class="flex gap-6" aria-label="Tabs">
         
@@ -110,7 +106,7 @@
             class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
             {{ translations.analytics.sincePosted }}
           </div>
-          <div class="hidden border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="sincePosted1"></div>
+          <div class="hidden w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="sincePosted1"></div>
         </div>
 
         <!-- Last 1 Month Tab button -->
@@ -119,7 +115,7 @@
             class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
             {{ translations.analytics.last1month }}
           </div>
-          <div class="hidden border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last1m1"></div>
+          <div class="hidden w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="last1m1"></div>
         </div>
 
         <!-- Last 7 days Tab button -->
@@ -128,7 +124,7 @@
             class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
             {{ translations.analytics.last7days }}
           </div>
-          <div class="hidden border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last7d1"></div>
+          <div class="hidden w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="last7d1"></div>
         </div>
 
         <!-- Last 24 hours Tab button -->
@@ -137,7 +133,7 @@
             class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:text-rose-500/75 hover:text-gray-700 hover:cursor-pointer">
             {{ translations.analytics.last24hours }}
           </div>
-          <div class="hidden border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last24h1"></div>
+          <div class="hidden w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="last24h1"></div>
         </div>
 
         <!-- Last 48 hours Tab button -->
@@ -146,7 +142,7 @@
             class="shrink-0 rounded-lg p-2 text-sm font-medium bg-rose-500/75 text-black hover:cursor-pointer">
             {{ translations.analytics.last48hours }}
           </div>
-          <div class="hidden border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="last48h1"></div>
+          <div class="hidden w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="last48h1"></div>
         </div>
       </nav>
     </div>
@@ -159,10 +155,10 @@
     <!-- LineCart graph container -->
     <div id="lineChart"></div>
 
-    <!-- Show approriate message on progress/error -->
+    <!-- Show appropriate message on progress/error -->
     <div class="flex justify-center item-center">
       <!-- LineChart spinner -->
-      <div class="hidden border-4 border-blue-500 rounded-full w-16 h-16 mt-4 spinner-circle" id="lineChartSpinner"></div>
+      <div class="hidden w-16 h-16 mt-4 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="lineChartSpinner"></div>
 
       <!-- Display error -->
       <div class="hidden my-4" id="lineChartErrorContainer">
@@ -179,13 +175,13 @@
   <!-- line chart ends here -->
 
   <br>
-  <!-- pie chart -->
+  <!-- Pie chart -->
   <h2 class="text-xl m-2 font-bold">{{ translations.analytics.computerOS }}</h2>
-  <!-- docs https://apexcharts.com/docs/chart-types/pie-donut/ -->
+  <!-- Docs https://apexcharts.com/docs/chart-types/pie-donut/ -->
   <div id="pieChart" class="flex justify-center"></div>
 
   <script>
-    // Initialize veriables to accessin js file
+    // Initialize variables to access in js file
     let postID = '{{ post[0] }}';
     let visitorCounts = '{{ translations.analytics.visitorCounts }}';
     let traffic = '{{ translations.analytics.traffic }}';
@@ -194,18 +190,18 @@
   </script>
 
 
-  <!-- basic bar chart for country -->
-  <!-- docs https://apexcharts.com/docs/chart-types/bar-chart/ -->
+  <!-- Basic bar chart for country -->
+  <!-- Docs https://apexcharts.com/docs/chart-types/bar-chart/ -->
   <div>
     <h2 class="text-2xl font-bold m-2">{{ translations.analytics.topCountries }}</h2>
     <div class="flex flex-col justify-center">
       <!-- barChart graph container -->
       <div id="barChart"></div>
 
-      <!-- Show approriate message on progress/error -->
+      <!-- Show appropriate message on progress/error -->
       <div class="flex justify-center item-center">
         <!-- barChart spinner -->
-        <div class="hidden border-4 border-blue-500 rounded-full w-16 h-16 mt-4 spinner-circle" id="barChartSpinner"></div>
+        <div class="hidden w-16 h-16 mt-4 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="barChartSpinner"></div>
 
         <!-- Display error -->
         <div class="hidden my-4" id="barChartErrorContainer">
@@ -226,7 +222,7 @@
         {{ translations.analytics.viewAll }}
       </button>
       <!-- View All spinner -->
-      <div class="hidden border-4 border-blue-500 rounded-full w-5 h-5 spinner-circle" id="viewAllSpinner"></div>
+      <div class="hidden w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" id="viewAllSpinner"></div>
     </div>
   </div>
 

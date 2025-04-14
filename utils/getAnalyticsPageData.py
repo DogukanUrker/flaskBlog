@@ -16,7 +16,7 @@ def getAnalyticsPageTrafficGraphData(
 
 
     Returns:
-        `list[list[int]]`: if none of params passed except postID function will return last 48 hours data, line grpah data post traffic.
+        `list[list[int]]`: if none of params passed except postID function will return last 48 hours data, line graph data post traffic.
     """
 
     # Check if none of kwargs are given
@@ -125,7 +125,7 @@ def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
     """
     Returns the post's visitors traffic data list of tuples.
     Args:
-        `postID` (int): The post's primary key/id whose visiors country data to be retrived.
+        `postID` (int): The post's primary key/id whose visitors country data to be retrieved.
         `viewAll` (bool):
             - True: Returns all data since the post was created.
             - False: Returns only the latest 25 data entries.
@@ -172,4 +172,4 @@ def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
         return {
             "countryNameList": [],
             "countryCountList": [],
-        }  # return dict whih empty list
+        }  # return dict with empty list
