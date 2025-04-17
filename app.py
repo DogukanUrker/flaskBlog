@@ -18,7 +18,6 @@ print(terminalASCII())
 # Print a line breaker and a message that the app is starting
 Log.info("Starting...")
 
-
 # Importing necessary modules and classes
 from flask_wtf.csrf import (
     CSRFError,
@@ -198,6 +197,9 @@ app = Flask(
     static_folder=STATIC_FOLDER,  # The folder where the static files(*.js/*.css) are stored
     template_folder=TEMPLATE_FOLDER,  # The folder where the Jinja(*.html.jinja) templates are stored
 )
+
+# Enable autoescape for all rendered jinja pages irrespective of file extension.
+app.jinja_options["autoescape"] = True
 
 # Set the secret key and the session permanent flag for the app
 app.secret_key = APP_SECRET_KEY  # The secret key for the app
