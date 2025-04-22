@@ -37,7 +37,7 @@
   <div class="mx-auto text-xs absolute bottom-2 left-0 right-0 select-none">
     <a href="https://github.com/DogukanUrker/flaskBlog" target="_blank" class="text-rose-500 font-medium block">
       {{ translations.about.sourceRepo }}</a>
-    {{ translations.about.credits }}
+    {{ translations.about.credits | safe }}
   </div>
 </div>
 {% endblock body %}
