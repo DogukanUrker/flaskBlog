@@ -137,3 +137,6 @@ from utils.getAnalyticsPageData import (
     getAnalyticsPageOSGraphData,
     getAnalyticsPageTrafficGraphData,
 )
+
+# Importing the getHomeFeedData for home pag
+from utils.getHomeFeedData import getHomeFeedData

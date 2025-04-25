@@ -34,6 +34,10 @@ def category(category, by="timeStamp", sort="desc"):
     :param sort: The sorting order of the posts
     :return: A rendered template with the posts and the category as context
     """
+
+    # Original copy of by
+    _by = by
+
     # List of available categories
     categories = [
         "games",
@@ -76,23 +80,6 @@ def category(category, by="timeStamp", sort="desc"):
         case False:
             abort(404)
 
-    Log.database(
-        f"Connecting to '{DB_POSTS_ROOT}' database"
-    )  # Log the database connection is started
-
-    # Establishing a connection to the SQLite database
-    connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(
-        Log.database
-    )  # Set the trace callback for the connection
-    cursor = connection.cursor()
-
-    # Executing SQL query to retrieve posts of the requested category and sorting them accordingly
-    cursor.execute(
-        f"""select * from posts where lower(category) = ? order by {by} {sort}""",
-        [(category.lower())],
-    )
-    posts = cursor.fetchall()
 
     # Modify the sorting name for better readability
     match by:
@@ -120,8 +107,10 @@ def category(category, by="timeStamp", sort="desc"):
     # Rendering the HTML template with posts and category context
     return render_template(
         "category.html.jinja",
-        posts=posts,
         category=translations["categories"][category.lower()],
         sortName=sortName,
         source=f"/category/{category}",
+        sortBy=_by, 
+        orderBy=sort,
+        categoryBy = category
     )

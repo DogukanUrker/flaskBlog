@@ -17,17 +17,24 @@
 
 <!-- Include the sort dropdown component -->
 {% from "components/sortMenu.html.jinja" import sortMenu %}
-{{ sortMenu(sortName,source,translations) }}
+{{ sortMenu(sortName,source,translations, sortBy, orderBy) }}
 
 <!-- Flex container for displaying posts -->
-<div
-  class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">
-  {% for post in posts %}
-  <!-- Include the post card component for each post -->
-  {% from "components/postCardMacro.html.jinja" import postCard with context %}
-  {{ postCard(post=post, authorProfilePicture=getProfilePicture(post[5])) }}
-  {% endfor %}
+<div id="postCardContainer"
+  class="flex items-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6">
+  <div class="hidden size-16 border-4 border-rose-500 border-t-transparent rounded-full animate-spin" id="homeSpinner">
+  </div>
 </div>
+
+<!-- Load more button -->
+<div id="loadMoreButton" class="my-6 flex items-center justify-center text-rose-500 hover:text-rose-500/75 gap-2">
+  <input id="currentCategoryText" type="hidden" value="{{ categoryBy }}">
+  <button onclick="loadMoreButton()">Load more</button>
+  <!-- View All spinner -->
+  <div class="hidden w-5 h-5 border-4 border-rose-500 border-t-transparent rounded-full animate-spin"
+    id="lodeMoreSpinner"></div>
+</div>
+
 
 <!-- Footer section with about link and credit information -->
 <div class="text-center mt-4 mb-2 text-xs font-medium">
@@ -41,4 +48,11 @@
   {{ translations.about.credits | safe }}
   <br />
 </div>
+
+<script>
+  // Initialize postCardMacroPath to access in js file
+  const postCardMacroPath = "{{ url_for('static', filename='pureHtmlMacro/postCardMacro.html') }}"
+</script>
+<!-- Include the JavaScript file for homeFeed functionality -->
+<script src="{{ url_for('static', filename='js/homeFeed.js') }}"></script>
 {% endblock body %}

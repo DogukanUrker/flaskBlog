@@ -1,6 +1,9 @@
-{% macro sortMenu(sortName,source,translations) %}
+{% macro sortMenu(sortName,source,translations, sortBy, orderBy) %}
 <!-- Macro to generate sort dropdown menu -->
 <div class="mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6 flex justify-end font-medium">
+    <!-- Assign the default selected sorting type -->
+    <input id="currentSortText" type="hidden" value="{{ sortBy }}">
+    <input id="currentOrderText" type="hidden" value="{{ orderBy }}">
     <!-- Container for the dropdown menu -->
     <div class="relative inline-block text-left text-rose-500/75 w-full md:w-fit">
         <!-- Dropdown select element -->

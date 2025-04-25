@@ -168,6 +168,9 @@ from routes.user import userBlueprint  # Importing the blueprint for user route
 from routes.verifyUser import (
     verifyUserBlueprint,
 )  # Importing the blueprint for user verification route
+from routes.returnHomeFeedData import (
+    returnHomeFeedDataBlueprint,
+)  # Importing the blueprint for home page feed data endpoint route
 from utils.afterRequest import (
     afterRequestLogger,
 )  # This function handles loggins of every request
@@ -463,6 +466,9 @@ app.register_blueprint(
 app.register_blueprint(
     returnPostAnalyticsDataBlueprint
 )  # Registering the blueprint for the postAnalyticsData endpoint route
+app.register_blueprint(
+    returnHomeFeedDataBlueprint
+)  # Registering the blueprint for the homeFeddData endpoint route
 
 # Check if the name of the module is the main module
 match __name__:
