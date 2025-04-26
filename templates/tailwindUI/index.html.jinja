@@ -34,11 +34,12 @@
 
 <!-- Load more button -->
 <div id="loadMoreButton" class="my-6 flex items-center justify-center text-rose-500 hover:text-rose-500/75 gap-2">
+  <!-- Current selected category -->
   <input id="currentCategoryText" type="hidden" value="{{ categoryBy }}">
   <button onclick="loadMoreButton()">Load more</button>
   <!-- View All spinner -->
   <div class="hidden w-5 h-5 border-4 border-rose-500 border-t-transparent rounded-full animate-spin"
-    id="lodeMoreSpinner"></div>
+    id="loadMoreSpinner"></div>
 </div>
 
 <!-- Footer section with About link and attribution -->

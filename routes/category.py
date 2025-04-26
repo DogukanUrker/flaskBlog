@@ -80,7 +80,6 @@ def category(category, by="timeStamp", sort="desc"):
         case False:
             abort(404)
 
-
     # Modify the sorting name for better readability
     match by:
         case "timeStamp":
@@ -110,7 +109,7 @@ def category(category, by="timeStamp", sort="desc"):
         category=translations["categories"][category.lower()],
         sortName=sortName,
         source=f"/category/{category}",
-        sortBy=_by, 
+        sortBy=_by,
         orderBy=sort,
-        categoryBy = category
+        categoryBy=category,
     )

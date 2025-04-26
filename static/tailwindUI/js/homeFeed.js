@@ -1,20 +1,21 @@
 // Initialize variable for postCardMacro and postContainer
-let postCardMacro
-let postContainer
+let postCardMacro;
+let postContainer;
 
 // Limit
-let limit = 4
+let limit = 6;
 // Offset
-let offset = 0
+let offset = 0;
 
-// Id 
-let homeSpinner = document.getElementById("homeSpinner")
-let loadMoreSpinner = document.getElementById("lodeMoreSpinner")
-let currentCategory = document.getElementById("currentCategoryText")
-let loadMoreButtonDiv = document.getElementById("loadMoreButton")
-const sortBy = document.getElementById("currentSortText")
-const orderby = document.getElementById("currentOrderText")
+// Id of div elements and hidden input values
+let homeSpinner = document.getElementById("homeSpinner");
+let loadMoreSpinner = document.getElementById("loadMoreSpinner");
+let currentCategory = document.getElementById("currentCategoryText");
+let loadMoreButtonDiv = document.getElementById("loadMoreButton");
+const sortBy = document.getElementById("currentSortText");
+const orderby = document.getElementById("currentOrderText");
 
+// Categories and associated icons
 const categoryList = {
     'Games': '<a href="/category/Games"><i class="ti ti-device-gamepad text-rose-500 hover:text-rose-600 duration-150"></i></a>',
     'History': '<a href="/category/History"><i class="ti ti-books text-sky-500 hover:text-sky-600 duration-150"></i></a>',
@@ -40,7 +41,7 @@ const categoryList = {
     'Default': '<a href="/"><i class="ti ti-stack-2 text-neutral-500 hover:text-neutral-600 duration-150"></i></a>'
 };
 
-
+// Function to inject html post macro in document body
 async function intializePostCard() {
     fetch(postCardMacroPath)
         .then(res => res.text())
@@ -52,61 +53,70 @@ async function intializePostCard() {
             // Register macro in dome
             document.body.appendChild(tempContainer); // or keep it detached
 
-            /// Assign html id of content to variable
+            /// Assign html element's id of content to variable
             postCardMacro = document.getElementById("postCardMacro");
             postContainer = document.getElementById("postCardContainer");
         });
 }
+// Call initialize post card function to inject post macro
+intializePostCard();
 
-intializePostCard()
-
+// Function to fetch homeFeedData from backend
 async function fetchHomeFeedData() {
     try {
-        let connection = await fetch(`/api/v1/homeFeedData?category=${currentCategory.value}&by=${sortBy.value}&sort=${orderby.value}&limit=${limit}&offset=${offset}`)
-        let res = await connection.json()
+        let connection = await fetch(`/api/v1/homeFeedData?category=${currentCategory.value}&by=${sortBy.value}&sort=${orderby.value}&limit=${limit}&offset=${offset}`);
+        let res = await connection.json();
 
         if (connection.ok) {
-            posts = res.payload;
-
-            // Check if posts length is not less than limit
+            let posts = res.payload;
 
             posts.forEach(post => {
-                const clone = postCardMacro.content.cloneNode(true)
-                clone.querySelector(".postTitle").innerText = post.title
-                clone.querySelector(".postTitle").href = post.postLink
-                clone.querySelector(".postContent").innerHTML = post.content
-                clone.querySelector(".postBanner").src = post.bannerImgSrc
-                clone.querySelector(".postAuthorPicture").src = post.authorProfile
-                clone.querySelector(".postAuthor").innerText = post.author
-                clone.querySelector(".postAuthor").href = `/user/${post.author}`
-                clone.querySelector(".postCategory").innerHTML = categoryList[post.category] || categoryList["Default"]
-                clone.querySelector(".postTimeStamp").innerText = post.timeStamp
-                postContainer.appendChild(clone)
+                const clone = postCardMacro.content.cloneNode(true);
+                clone.querySelector(".postTitle").innerText = post.title;
+                clone.querySelector(".postTitle").href = post.postLink;
+                clone.querySelector(".postContent").innerHTML = post.content;
+                clone.querySelector(".postBanner").src = post.bannerImgSrc;
+                clone.querySelector(".postAuthorPicture").src = post.authorProfile;
+                clone.querySelector(".postAuthor").innerText = post.author;
+                clone.querySelector(".postAuthor").href = `/user/${post.author}`;
+                clone.querySelector(".postCategory").innerHTML = categoryList[post.category] || categoryList["Default"];
+                clone.querySelector(".postTimeStamp").innerText = post.timeStamp;
+                postContainer.appendChild(clone);
             });
-            offset += 4
+
+            // Increase the offset with the value of limit
+            offset += limit;
+            
+            // Check if posts length is not less than limit
             if (posts.length < limit) {
                 // Hide button
-                loadMoreButtonDiv.classList.add("hidden")
+                loadMoreButtonDiv.classList.add("hidden");
             }
         } else {
-            console.error(connection.status)
+            // Print error on console
+            console.error(connection.status);
         }
     } catch (error) {
-        console.error(error)
+        // Print error on console
+        console.error(error);
     }
 }
 
 async function loadMoreButton() {
     // Show spinner
-    loadMoreSpinner.classList.remove("hidden")
-    await fetchHomeFeedData()
+    loadMoreSpinner.classList.remove("hidden");
+    // Fetch homeFeed
+    await fetchHomeFeedData();
     // Hide spinner
-    loadMoreSpinner.classList.add("hidden")
+    loadMoreSpinner.classList.add("hidden");
 }
 
 // Call the function to load data
 window.onload = async function () {
-    homeSpinner.classList.remove("hidden")
-    await fetchHomeFeedData()
-    homeSpinner.classList.add("hidden")
+    // Show spinner
+    homeSpinner.classList.remove("hidden");
+    // Fetch initial homeFeed
+    await fetchHomeFeedData();
+    // Hide spinner
+    homeSpinner.classList.add("hidden");
 }
