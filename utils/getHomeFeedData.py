@@ -6,7 +6,11 @@ from modules import (
 
 
 def getHomeFeedData(
-    by="hot", sort="desc", category: str = "all", offset: int = 0, limit: int = 3
+    by: str = "hot",
+    sort: str = "desc",
+    category: str = "all",
+    offset: int = 0,
+    limit: int = 6,
 ) -> list:
     Log.database(
         f"Connecting to '{DB_POSTS_ROOT}' database"

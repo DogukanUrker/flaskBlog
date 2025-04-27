@@ -23,8 +23,8 @@ def homeFeedData():
     category = request.args.get("category", type=str, default="all")
     by = request.args.get("by", type=str, default="hot")
     sort = request.args.get("sort", type=str, default="desc")
-    limit = request.args.get("limit", type=int, default="4")
-    offset = request.args.get("offset", type=int, default="0")
+    limit = request.args.get("limit", type=int, default=6)
+    offset = request.args.get("offset", type=int, default=0)
 
     try:
         # Fetch raw home feed data based on parameters

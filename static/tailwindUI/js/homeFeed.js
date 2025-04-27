@@ -50,7 +50,7 @@ async function intializePostCard() {
             const tempContainer = document.createElement('div');
             tempContainer.innerHTML = postCardHtml;
 
-            // Register macro in dome
+            // Register macro in DOM
             document.body.appendChild(tempContainer); // or keep it detached
 
             /// Assign html element's id of content to variable
