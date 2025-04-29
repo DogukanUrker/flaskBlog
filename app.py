@@ -468,7 +468,7 @@ app.register_blueprint(
 )  # Registering the blueprint for the postAnalyticsData endpoint route
 app.register_blueprint(
     returnHomeFeedDataBlueprint
-)  # Registering the blueprint for the homeFeddData endpoint route
+)  # Registering the blueprint for the homeFeedData endpoint route
 
 # Check if the name of the module is the main module
 match __name__:

@@ -42,7 +42,7 @@ const categoryList = {
 };
 
 // Function to inject html post macro in document body
-async function intializePostCard() {
+function initializePostCard() {
     fetch(postCardMacroPath)
         .then(res => res.text())
         .then(postCardHtml => {
@@ -58,8 +58,7 @@ async function intializePostCard() {
             postContainer = document.getElementById("postCardContainer");
         });
 }
-// Call initialize post card function to inject post macro
-intializePostCard();
+
 
 // Function to fetch homeFeedData from backend
 async function fetchHomeFeedData() {
@@ -115,7 +114,10 @@ async function loadMoreButton() {
 window.onload = async function () {
     // Show spinner
     homeSpinner.classList.remove("hidden");
-    // Fetch initial homeFeed
+    // Call initialize post card function to inject post macro in DOM
+    initializePostCard();
+
+    // Fetch initial homeFeed posts
     await fetchHomeFeedData();
     // Hide spinner
     homeSpinner.classList.add("hidden");
