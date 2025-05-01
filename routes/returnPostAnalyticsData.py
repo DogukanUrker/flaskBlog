@@ -212,4 +212,4 @@ def storeTimeSpendsDuraton() -> dict:
 
         case False:
             # Return error if analytics is disabled
-            return ({"message": "analytics is disabled by admin"}, 410)
+            return make_response({"message": "analytics is disabled by admin"}, 410)

@@ -48,6 +48,9 @@ def index(by="hot", sort="desc"):
     The rendered template of the home page with sorted posts according to the provided sorting options.
     """
 
+    # Original copy of by
+    _by = by
+
     # Define valid options for sorting and filtering
     byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp", "hot"]
     sortOptions = ["asc", "desc"]
@@ -59,31 +62,6 @@ def index(by="hot", sort="desc"):
                 f"The provided sorting options are not valid: By: {by} Sort: {sort}"
             )
             return redirect("/")
-
-    Log.database(
-        f"Connecting to '{DB_POSTS_ROOT}' database"
-    )  # Log the database connection is started
-    # Connect to the posts database
-    connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(
-        Log.database
-    )  # Set the trace callback for the connection
-    # Create a cursor object for executing queries
-    cursor = connection.cursor()
-    # Select all the columns from the posts table and order them by the specified field and sorting order
-    match by:
-        case "hot":  # If the sorting field is "hot"
-            cursor.execute(
-                f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort}"
-            )  # Execute the query to sort by hotness
-            pass
-        case _:  # For all other sorting fields
-            cursor.execute(
-                f"select * from posts order by {by} {sort}"
-            )  # Execute the query to sort by the specified field
-
-    # Fetch all the results as a list of tuples
-    posts = cursor.fetchall()
 
     # Modify the sorting name for better readability
     match by:
@@ -110,5 +88,10 @@ def index(by="hot", sort="desc"):
 
     # Return the rendered template of the home page and pass the posts list and sorting name as keyword arguments
     return render_template(
-        "index.html.jinja", posts=posts, sortName=sortName, source=""
+        "index.html.jinja",
+        sortName=sortName,
+        source="",
+        sortBy=_by,
+        orderBy=sort,
+        categoryBy="all",
     )
