@@ -43,7 +43,7 @@ def homeFeedData():
             homeFeedObj["content"] = data[2]  # Post Content
             homeFeedObj["author"] = data[3]  # Author Name
             homeFeedObj["timeStamp"] = datetime.fromtimestamp(data[4]).strftime(
-                "%d.%m.%y"
+                "%d.%m.%Y"
             )  # Timestamp
             homeFeedObj["category"] = data[5]  # Post Category
             homeFeedObj["urlID"] = data[6]  # URL ID
