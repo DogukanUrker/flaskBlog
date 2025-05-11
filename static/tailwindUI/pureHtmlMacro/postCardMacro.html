@@ -1,0 +1,39 @@
+<template id="postCardMacro">
+    <!-- Macro to generate a post card with details from the given 'post' and 'authorProfilePicture' -->
+    <div
+        class="w-[17rem] group flex flex-col justify-between h-min-max mx-auto rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-150">
+        <!-- Post Image -->
+        <div class="overflow-hidden">
+            <img
+                class="postBanner h-48 group-hover:scale-110 transition duration-150 object-cover w-max rounded-t-md mx-auto select-none" />
+        </div>
+
+        <!-- Post Title -->
+        <div class="px-2 mt-1">
+            <a class="postTitle text-rose-500 text-lg hover:text-rose-500/75 duration-150 break-words font-medium"> </a>
+        </div>
+
+        <!-- Post Content -->
+        <div class="postContent text-base px-2 overflow-y-hidden h-[7.5rem]">
+        </div>
+
+        <!-- Post Author and Category -->
+        <div class="flex justify-between text-sm font-medium px-2 select-none">
+            <!-- Author Section -->
+            <div class="my-2 flex items-center w-fit gap-2">
+                <img class="postAuthorPicture block w-8 h-8"/>
+                <a class="postAuthor"></a>
+            </div>
+
+            <!-- Category Section -->
+            <div class="flex items-center">
+                <div class="postCategory mr-1 text-base">
+
+                </div>
+
+                <!-- Date -->
+                <p class="postTimeStamp date"></p>
+            </div>
+        </div>
+    </div>
+</template>
