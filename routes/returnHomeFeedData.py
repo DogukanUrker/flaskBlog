@@ -7,7 +7,6 @@ from modules import (
     url_for,
     getProfilePicture,
     request,
-    datetime
 )
 
 returnHomeFeedDataBlueprint = Blueprint("returnHomeFeedData", __name__)
@@ -42,7 +41,7 @@ def homeFeedData():
             homeFeedObj["title"] = data[1]  # Post Title
             homeFeedObj["content"] = data[2]  # Post Content
             homeFeedObj["author"] = data[3]  # Author Name
-            homeFeedObj["timeStamp"] = datetime.fromtimestamp(data[4]).strftime("%d.%m.%Y")  # Timestamp
+            homeFeedObj["timeStamp"] = data[4]  # Timestamp
             homeFeedObj["category"] = data[5]  # Post Category
             homeFeedObj["urlID"] = data[6]  # URL ID
 
