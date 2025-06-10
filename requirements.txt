@@ -1,7 +1,7 @@
 Flask==3.1.0
 flask_wtf==1.2.2
 passlib==1.7.4
-Requests==2.32.3
+Requests==2.32.4
 pipenv==2024.4.1
 WTForms==3.2.1
 gunicorn==23.0.0
