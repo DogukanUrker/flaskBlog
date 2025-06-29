@@ -1,13 +1,10 @@
-from modules import (
-    exists,  # Import the exists function from the modules module
-    flash,  # Import the flash function from the modules module
-    load,  # Import the load function from the modules module
-)  # Import the required functions from the modules module
+from json import load
+from os.path import exists
+
+from flask import flash
 
 
-def flashMessage(
-    page="error", message="wrongCall", category="error", language="en"
-):  # Define the flashMessage function
+def flashMessage(page="error", message="wrongCall", category="error", language="en"):
     """
     Displays a flash message on the page.
 
@@ -20,17 +17,12 @@ def flashMessage(
     Returns:
         None
     """
-    text = None  # Initialize the text variable
-    translationFile = (
-        f"./translations/{language}.json"  # Define the path to the translation file
-    )
-    match exists(translationFile):  # Check if the translation file exists
+    text = None
+    translationFile = f"./translations/{language}.json"
+    match exists(translationFile):
         case True:
-            # If the translation file exists, open and load the JSON data
-            with open(
-                translationFile, "r", encoding="utf-8"
-            ) as file:  # Open the translation file in read mode
-                translations = load(file)  # Load the JSON data from the file
-                text = translations["flash"]  # Return the translations as a dictionary
-    flash(text[page][message], category)  # Display the flash message on the page
-    return None  # Return None
+            with open(translationFile, "r", encoding="utf-8") as file:
+                translations = load(file)
+                text = translations["flash"]
+    flash(text[page][message], category)
+    return None

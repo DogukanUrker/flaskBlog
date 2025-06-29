@@ -1,24 +1,17 @@
 """
 This file contains the blueprint for the logout page.
 
-The functions and methods used in this blueprint are imported from the modules module.
+The functions and methods used in this blueprint are imported from their actual sources.
 """
 
-from modules import (
-    Blueprint,  # A class for creating Flask blueprints
-    Log,  # A function for logging messages
-    flashMessage,  # Flash messaging module
-    redirect,  # A function for returning redirect responses
-    request,  # Module for handling HTTP requests
-    session,  # A dictionary for storing session data
-)
+from flask import Blueprint, redirect, request, session
+from utils.flashMessage import flashMessage
+from utils.log import Log
 
-logoutBlueprint = Blueprint(
-    "logout", __name__
-)  # Create a blueprint for the logout route with the name "logout" and the current module name
+logoutBlueprint = Blueprint("logout", __name__)
 
 
-@logoutBlueprint.route("/logout")  # Define a route for the logout page
+@logoutBlueprint.route("/logout")
 def logout():
     """
     This function handles the logout process.
@@ -29,24 +22,18 @@ def logout():
     If the user is not logged in, a message is displayed indicating that they are not logged in.
     The user is then redirected to the homepage.
     """
-    match (
-        "userName" in session
-    ):  # Use a match statement to check if the "userName" key is present in the session dictionary
-        case True:  # If the user is logged in
-            Log.success(
-                f"User: {session['userName']} logged out"
-            )  # Log a message with level 2 indicating the user has logged out
+    match "userName" in session:
+        case True:
+            Log.success(f"User: {session['userName']} logged out")
             flashMessage(
                 page="logout",
                 message="success",
                 category="success",
                 language=session["language"],
-            )  # Display a flash message indicating the user has logged out
-            session.pop("userName")  # Clear the userName data from session
-            session.pop("userRole")  # Clear the userRole data from session
-            return redirect("/")  # Return a redirect response to the homepage
-        case False:  # If the user is not logged in
-            Log.error(
-                f"{request.remote_addr} tried to logout without being logged in"
-            )  # Log a message with level 1 indicating the user is not logged in
-            return redirect("/")  # Return a redirect response to the homepage
+            )
+            session.pop("userName")
+            session.pop("userRole")
+            return redirect("/")
+        case False:
+            Log.error(f"{request.remote_addr} tried to logout without being logged in")
+            return redirect("/")

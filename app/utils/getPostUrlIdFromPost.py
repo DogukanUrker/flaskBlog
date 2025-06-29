@@ -1,8 +1,9 @@
-# Importing necessary modules
-from modules import DB_POSTS_ROOT, Log, sqlite3
+import sqlite3
+
+from settings import DB_POSTS_ROOT
+from utils.log import Log
 
 
-# Function to get the urlID of posts using postID
 def getPostUrlIdFromPost(postID: int):
     """
     Returns the post's urlID from post's id.
@@ -12,28 +13,22 @@ def getPostUrlIdFromPost(postID: int):
     Returns:
         str or None: The post's urlID of the post, or None if not found.
     """
-    Log.database(
-        f"Connecting to '{DB_POSTS_ROOT}' database"
-    )  # Log the database connection is started
-    # Connect to the SQLite databse
+    Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+
     connection = sqlite3.connect(DB_POSTS_ROOT)
-    connection.set_trace_callback(
-        Log.database
-    )  # Set the trace callback for the connection
-    # Create a cursor object
+    connection.set_trace_callback(Log.database)
+
     cursor = connection.cursor()
-    # Execute SQL query to retrieve user profile picture
+
     cursor.execute("""select urlID from posts where id = ?""", (postID,))
     try:
-        # Fetch the post's urlID
         urlID = cursor.fetchone()[0]
         Log.info(f"Returning post's id {postID} and post's urlID: {urlID}")
-    except:
-        # If post's urlID retrieval fails, set urlID to None and log danger message
+    except Exception:
         urlID = None
         Log.error(f"Failed to retrieve post's urlID for post id : {postID}")
 
-    cursor.close()  # Close the database cursor
-    connection.close()  # Close the database connection
+    cursor.close()
+    connection.close()
 
-    return urlID  # Return the post's urlID
+    return urlID

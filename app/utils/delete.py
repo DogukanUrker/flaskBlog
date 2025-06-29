@@ -23,17 +23,17 @@ The functions in this module use the following helper functions:
 - DB_COMMENTS_ROOT: This variable stores the path to the comments database.
 """
 
-from modules import (
-    DB_ANALYTICS_ROOT,  # A constant for the path to the analytics database
-    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
-    DB_POSTS_ROOT,  # A constant for the path to the posts database
-    DB_USERS_ROOT,  # A constant for the path to the users database
-    Log,  # A class for logging messages
-    flashMessage,  # A function for displaying flash messages
-    redirect,  # A function for returning redirect responses
-    session,  # A dictionary for storing session data
-    sqlite3,  # A module for working with SQLite databases
+import sqlite3
+
+from flask import redirect, session
+from settings import (
+    DB_ANALYTICS_ROOT,
+    DB_COMMENTS_ROOT,
+    DB_POSTS_ROOT,
+    DB_USERS_ROOT,
 )
+from utils.flashMessage import flashMessage
+from utils.log import Log
 
 
 class Delete:
@@ -47,82 +47,59 @@ class Delete:
         Returns:
         None
         """
-        Log.database(
-            f"Connecting to '{DB_POSTS_ROOT}' database"
-        )  # Log the database connection is started
-        connection = sqlite3.connect(DB_POSTS_ROOT)  # Connect to the posts database
-        connection.set_trace_callback(
-            Log.database
-        )  # Set the trace callback for the connection
-        cursor = connection.cursor()  # Create a cursor object for executing queries
+        Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+        connection = sqlite3.connect(DB_POSTS_ROOT)
+        connection.set_trace_callback(Log.database)
+        cursor = connection.cursor()
         cursor.execute(
-            """select author from posts where id = ? """,  # Select the author column from the posts table where the id matches the given postID
-            [(postID)],  # Use a parameterized query to avoid SQL injection
+            """select author from posts where id = ? """,
+            [(postID)],
         )
         cursor.execute(
-            """delete from posts where id = ? """,  # Delete the row from the posts table where the id matches the given postID
-            [(postID)],  # Use a parameterized query to avoid SQL injection
+            """delete from posts where id = ? """,
+            [(postID)],
+        )
+        cursor.execute("update sqlite_sequence set seq = seq-1")
+        connection.commit()
+        connection.close()
+        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+        connection.set_trace_callback(Log.database)
+        cursor = connection.cursor()
+        cursor.execute(
+            """select count(*) from comments where post = ? """,
+            [(postID)],
+        )
+        commentCount = list(cursor)[0][0]
+        cursor.execute(
+            """delete from comments where post = ? """,
+            [(postID)],
         )
         cursor.execute(
-            "update sqlite_sequence set seq = seq-1"
-        )  # Update the sqlite_sequence table to decrement the sequence value by 1
-        connection.commit()  # Commit the changes to the database
-        connection.close()  # Close the connection to the database
-        connection = sqlite3.connect(
-            DB_COMMENTS_ROOT
-        )  # Connect to the comments database
-        connection.set_trace_callback(
-            Log.database
-        )  # Set the trace callback for the connection
-        cursor = connection.cursor()  # Create a new cursor object for executing queries
-        cursor.execute(
-            """select count(*) from comments where post = ? """,  # Select the count of rows from the comments table where the post column matches the given postID
-            [(postID)],  # Use a parameterized query to avoid SQL injection
+            """update sqlite_sequence set seq = seq - ? """,
+            [(commentCount)],
         )
-        commentCount = list(
-            cursor
-        )[
-            0
-        ][
-            0
-        ]  # Convert the result to a list and get the first element of the first tuple (the count value)
-        cursor.execute(
-            """delete from comments where post = ? """,  # Delete the rows from the comments table where the post column matches the given postID
-            [(postID)],  # Use a parameterized query to avoid SQL injection
-        )
-        cursor.execute(
-            """update sqlite_sequence set seq = seq - ? """,  # Update the sqlite_sequence table to decrement the sequence value by the commentCount
-            [(commentCount)],  # Use a parameterized query to avoid SQL injection
-        )
-        connection.commit()  # Commit the changes to the database
+        connection.commit()
 
-        # delete post's analytics data
-        connection = sqlite3.connect(
-            DB_ANALYTICS_ROOT
-        )  # Connect to the comments database
-        connection.set_trace_callback(
-            Log.database
-        )  # Set the trace callback for the connection
-        cursor = connection.cursor()  # Create a cursor object for executing queries
+        connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+        connection.set_trace_callback(Log.database)
+        cursor = connection.cursor()
         cursor.execute(
-            """select postID from postsAnalytics where postID = ? """,  # Select the postID column from the postsAnalytcs table where the id matches the given postID
-            [(postID)],  # Use a parameterized query to avoid SQL injection
+            """select postID from postsAnalytics where postID = ? """,
+            [(postID)],
         )
         cursor.execute(
-            """delete from postsAnalytics where postID = ? """,  # Delete the row from the postsAnalytcs table where the id matches the given postID
-            [(postID)],  # Use a parameterized query to avoid SQL injection
+            """delete from postsAnalytics where postID = ? """,
+            [(postID)],
         )
-        connection.commit()  # Commit the changes to the database
+        connection.commit()
 
         flashMessage(
             page="delete",
             message="post",
             category="error",
             language=session["language"],
-        )  # Display a flash message
-        Log.success(
-            f'Post: "{postID}" deleted'
-        )  # Log a message with level 2 indicating the post was deleted
+        )
+        Log.success(f'Post: "{postID}" deleted')
 
     def user(userName):
         """
@@ -134,56 +111,38 @@ class Delete:
         Returns:
         None
         """
-        Log.database(
-            f"Connecting to '{DB_USERS_ROOT}' database"
-        )  # Log the database connection is started
-        connection = sqlite3.connect(DB_USERS_ROOT)  # Connect to the users database
-        connection.set_trace_callback(
-            Log.database
-        )  # Set the trace callback for the connection
-        cursor = connection.cursor()  # Create a cursor object for executing queries
+        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+        connection = sqlite3.connect(DB_USERS_ROOT)
+        connection.set_trace_callback(Log.database)
+        cursor = connection.cursor()
         cursor.execute(
-            """select * from users where lower(userName) = ? """,  # Select all the columns from the users table where the lowercased userName column matches the lowercased given userName
-            [
-                (userName.lower())
-            ],  # Use the lowercased version of the userName and a parameterized query to avoid SQL injection
+            """select * from users where lower(userName) = ? """,
+            [(userName.lower())],
         )
         cursor.execute(
-            """select role from users where userName = ? """,  # Select the role column from the users table where the userName column matches the userName stored in the session dictionary
-            [
-                (session["userName"])
-            ],  # Use the userName from the session dictionary and a parameterized query to avoid SQL injection
+            """select role from users where userName = ? """,
+            [(session["userName"])],
         )
-        perpetrator = cursor.fetchone()  # Fetch the first result as a tuple
+        perpetrator = cursor.fetchone()
         cursor.execute(
-            """delete from users where lower(userName) = ? """,  # Delete the row from the users table where the lowercased userName column matches the lowercased given userName
-            [
-                (userName.lower())
-            ],  # Use the lowercased version of the userName and a parameterized query to avoid SQL injection
+            """delete from users where lower(userName) = ? """,
+            [(userName.lower())],
         )
-        cursor.execute(
-            "update sqlite_sequence set seq = seq-1"
-        )  # Update the sqlite_sequence table to decrement the sequence value by 1
-        connection.commit()  # Commit the changes to the database
+        cursor.execute("update sqlite_sequence set seq = seq-1")
+        connection.commit()
         flashMessage(
             page="delete",
             message="user",
             category="error",
             language=session["language"],
-        )  # Display a flash message
-        Log.success(
-            f'User: "{userName}" deleted'
-        )  # Log a message with level 2 indicating the user was deleted
-        match (
-            perpetrator[0] == "admin"
-        ):  # Use a match statement to compare the first element of the perpetrator tuple (the role) with the string "admin"
-            case True:  # If the perpetrator is an admin
-                return redirect(
-                    "/admin/users"
-                )  # Return a redirect response to the admin users page
-            case False:  # If the perpetrator is not an admin
-                session.clear()  # Clear the session dictionary
-                return redirect("/")  # Return a redirect response to the home page
+        )
+        Log.success(f'User: "{userName}" deleted')
+        match perpetrator[0] == "admin":
+            case True:
+                return redirect("/admin/users")
+            case False:
+                session.clear()
+                return redirect("/")
 
     def comment(commentID):
         """
@@ -195,31 +154,23 @@ class Delete:
         Returns:
         None
         """
-        connection = sqlite3.connect(
-            DB_COMMENTS_ROOT
-        )  # Connect to the comments database
-        connection.set_trace_callback(
-            Log.database
-        )  # Set the trace callback for the connection
-        cursor = connection.cursor()  # Create a cursor object for executing queries
+        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+        connection.set_trace_callback(Log.database)
+        cursor = connection.cursor()
         cursor.execute(
-            """select user from comments where id = ? """,  # Select the user column from the comments table where the id matches the given commentID
-            [(commentID)],  # Use a parameterized query to avoid SQL injection
+            """select user from comments where id = ? """,
+            [(commentID)],
         )
         cursor.execute(
-            """delete from comments where id = ? """,  # Delete the row from the comments table where the id matches the given commentID
-            [(commentID)],  # Use a parameterized query to avoid SQL injection
+            """delete from comments where id = ? """,
+            [(commentID)],
         )
-        cursor.execute(
-            "update sqlite_sequence set seq = seq-1"
-        )  # Update the sqlite_sequence table to decrement the sequence value by 1
-        connection.commit()  # Commit the changes to the database
+        cursor.execute("update sqlite_sequence set seq = seq-1")
+        connection.commit()
         flashMessage(
             page="delete",
             message="comment",
             category="error",
             language=session["language"],
-        )  # Display a flash message
-        Log.success(
-            f'Comment: "{commentID}" deleted'
-        )  # Log a message with level 2 indicating the comment was deleted
+        )
+        Log.success(f'Comment: "{commentID}" deleted')

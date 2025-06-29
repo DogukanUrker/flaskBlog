@@ -1,4 +1,3 @@
-# Function to return the terminal ASCII art
 def terminalASCII():
     """
     This function returns a string containing the terminal ASCII art.

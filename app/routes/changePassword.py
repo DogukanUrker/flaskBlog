@@ -1,30 +1,30 @@
-# Import the necessary modules and functions
-from modules import (
-    DB_USERS_ROOT,  # Importing constant for database path
-    RECAPTCHA,  # Importing RECAPTCHA constant
-    RECAPTCHA_PASSWORD_CHANGE,  # Importing RECAPTCHA flag for password change verification
-    RECAPTCHA_SECRET_KEY,  # Importing RECAPTCHA secret key
-    RECAPTCHA_SITE_KEY,  # Importing RECAPTCHA site key
-    RECAPTCHA_VERIFY_URL,  # Importing RECAPTCHA verification URL
-    Blueprint,  # Importing Blueprint for creating modular applications
-    ChangePasswordForm,  # Importing form class for change password form
-    Log,  # Importing log class for logging messages
-    abort,  # Importing abort function for aborting requests
-    encryption,  # Importing encryption functions for password hashing and verification
-    flashMessage,  # Flash messaging module
-    redirect,  # Importing redirect for redirecting requests
-    render_template,  # Importing render_template for rendering HTML templates
-    request,  # Importing request for handling HTTP requests
-    requestsPost,  # Importing requestsPost function for making HTTP POST requests
-    session,  # Importing session for managing user sessions
-    sqlite3,  # Importing sqlite3 for working with SQLite databases
-)
+import sqlite3
 
-# Create a blueprint for the change password route
+from flask import (
+    Blueprint,
+    abort,
+    redirect,
+    render_template,
+    request,
+    session,
+)
+from passlib.hash import sha512_crypt as encryption
+from requests import post as requestsPost
+from settings import (
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_PASSWORD_CHANGE,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+)
+from utils.flashMessage import flashMessage
+from utils.forms.ChangePasswordForm import ChangePasswordForm
+from utils.log import Log
+
 changePasswordBlueprint = Blueprint("changePassword", __name__)
 
 
-# Define the route for changing password
 @changePasswordBlueprint.route("/changepassword", methods=["GET", "POST"])
 def changePassword():
     """
@@ -40,36 +40,29 @@ def changePassword():
     Raises:
         401: if the reCAPTCHA is not passed
     """
-    # Check if user is logged in
+
     match "userName" in session:
         case True:
-            # Initialize the change password form
             form = ChangePasswordForm(request.form)
-            # Check if request method is POST
+
             match request.method == "POST":
                 case True:
-                    # Retrieve form data
                     oldPassword = request.form["oldPassword"]
                     password = request.form["password"]
                     passwordConfirm = request.form["passwordConfirm"]
-                    Log.database(
-                        f"Connecting to '{DB_USERS_ROOT}' database"
-                    )  # Log the database connection is started
-                    # Connect to the database
+                    Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+
                     connection = sqlite3.connect(DB_USERS_ROOT)
-                    connection.set_trace_callback(
-                        Log.database
-                    )  # Set the trace callback for the connection
+                    connection.set_trace_callback(Log.database)
                     cursor = connection.cursor()
-                    # Retrieve hashed password from database
+
                     cursor.execute(
                         """select password from users where userName = ? """,
                         [(session["userName"])],
                     )
-                    # Verify old password
+
                     match encryption.verify(oldPassword, cursor.fetchone()[0]):
                         case True:
-                            # Check if new password is same as old password
                             match oldPassword == password:
                                 case True:
                                     flashMessage(
@@ -77,8 +70,8 @@ def changePassword():
                                         message="same",
                                         category="error",
                                         language=session["language"],
-                                    )  # Display a flash message
-                            # Check if passwords match
+                                    )
+
                             match password != passwordConfirm:
                                 case True:
                                     flashMessage(
@@ -86,44 +79,39 @@ def changePassword():
                                         message="match",
                                         category="error",
                                         language=session["language"],
-                                    )  # Display a flash message
-                            # Check if old password is different from new password and passwords match
+                                    )
+
                             match (
                                 oldPassword != password and password == passwordConfirm
                             ):
                                 case True:
-                                    # Hash the new password
                                     newPassword = encryption.hash(password)
                                     Log.database(
                                         f"Connecting to '{DB_USERS_ROOT}' database"
-                                    )  # Log the database connection is started
-                                    # Connect to the database
+                                    )
+
                                     connection = sqlite3.connect(DB_USERS_ROOT)
-                                    connection.set_trace_callback(
-                                        Log.database
-                                    )  # Set the trace callback for the connection
-                                    # Check if RECAPTCHA is enabled for password change
+                                    connection.set_trace_callback(Log.database)
+
                                     match RECAPTCHA and RECAPTCHA_PASSWORD_CHANGE:
                                         case True:
-                                            # Get the reCAPTCHA response
                                             secretResponse = request.form[
                                                 "g-recaptcha-response"
                                             ]
-                                            # Verify the reCAPTCHA response
+
                                             verifyResponse = requestsPost(
                                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                             ).json()
-                                            # Check if reCAPTCHA verification is successful
+
                                             match (
                                                 verifyResponse["success"] is True
                                                 or verifyResponse["score"] > 0.5
                                             ):
                                                 case True:
-                                                    # Log reCAPTCHA verification
                                                     Log.success(
                                                         f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                     )
-                                                    # Update password in the database
+
                                                     cursor = connection.cursor()
                                                     cursor.execute(
                                                         """update users set password = ? where userName = ? """,
@@ -132,31 +120,29 @@ def changePassword():
                                                             (session["userName"]),
                                                         ],
                                                     )
-                                                    # Commit the transaction
+
                                                     connection.commit()
-                                                    # Log password change
+
                                                     Log.success(
                                                         f'User: "{session["userName"]}" changed his password',
                                                     )
-                                                    # Clear session
+
                                                     session.clear()
                                                     flashMessage(
                                                         page="changePassword",
                                                         message="success",
                                                         category="success",
                                                         language=session["language"],
-                                                    )  # Display a flash message
-                                                    # Redirect to login page
+                                                    )
+
                                                     return redirect("/login/redirect=&")
                                                 case False:
-                                                    # Log reCAPTCHA failure
                                                     Log.error(
                                                         f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
                                                     )
-                                                    # Abort the request
+
                                                     abort(401)
                                         case False:
-                                            # Update password in the database
                                             cursor = connection.cursor()
                                             cursor.execute(
                                                 """update users set password = ? where userName = ? """,
@@ -165,21 +151,21 @@ def changePassword():
                                                     (session["userName"]),
                                                 ],
                                             )
-                                            # Commit the transaction
+
                                             connection.commit()
-                                            # Log password change
+
                                             Log.success(
                                                 f'User: "{session["userName"]}" changed his password',
                                             )
-                                            # Clear session
+
                                             session.clear()
                                             flashMessage(
                                                 page="changePassword",
                                                 message="success",
                                                 category="success",
                                                 language=session["language"],
-                                            )  # Display a flash message
-                                            # Redirect to login page
+                                            )
+
                                             return redirect("/login/redirect=&")
                         case _:
                             flashMessage(
@@ -187,8 +173,8 @@ def changePassword():
                                 message="old",
                                 category="error",
                                 language=session["language"],
-                            )  # Display a flash message
-            # Render the change password form template
+                            )
+
             return render_template(
                 "changePassword.html.jinja",
                 form=form,
@@ -196,7 +182,6 @@ def changePassword():
                 recaptcha=RECAPTCHA,
             )
         case False:
-            # Log user not logged in
             Log.error(
                 f"{request.remote_addr} tried to change his password without logging in"
             )
@@ -205,6 +190,6 @@ def changePassword():
                 message="login",
                 category="error",
                 language=session["language"],
-            )  # Display a flash message
-            # Redirect to login page
+            )
+
             return redirect("/login/redirect=changepassword")
