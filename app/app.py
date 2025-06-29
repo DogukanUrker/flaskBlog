@@ -112,22 +112,9 @@ from settings import (
     LOG_IN,
     RECAPTCHA,
     RECAPTCHA_BADGE,
-    RECAPTCHA_COMMENT,
-    RECAPTCHA_COMMENT_DELETE,
-    RECAPTCHA_DELETE_USER,
-    RECAPTCHA_LOGIN,
-    RECAPTCHA_PASSWORD_CHANGE,
-    RECAPTCHA_PASSWORD_RESET,
-    RECAPTCHA_POST_CREATE,
-    RECAPTCHA_POST_DELETE,
-    RECAPTCHA_POST_EDIT,
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,
     RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SIGN_UP,
     RECAPTCHA_SITE_KEY,
-    RECAPTCHA_USERNAME_CHANGE,
     RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_VERIFY_USER,
     REGISTRATION,
     SESSION_PERMANENT,
     SMTP_MAIL,
@@ -253,33 +240,14 @@ if RECAPTCHA:
             "reCAPTCHA keys is unvalid this may cause the application to crash",
         )
         Log.error(
-            "Please check your recaptcha keys or set recaptcha to false from true in 'constants.py'",
+            "Please check your recaptcha keys or set recaptcha to false from true in 'settings.py'",
         )
     else:
-        Log.info("reCAPTCHA is on")
+        Log.info("reCAPTCHA is on for login and signup pages")
         Log.info(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
         Log.info(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
         Log.info(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
         Log.info(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
-
-        Log.info(f"reCAPTCHA login: {RECAPTCHA_LOGIN}")
-        Log.info(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP}")
-        Log.info(f"reCAPTCHA post create: {RECAPTCHA_POST_CREATE}")
-        Log.info(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT}")
-        Log.info(f"reCAPTCHA post delete: {RECAPTCHA_POST_DELETE}")
-        Log.info(f"reCAPTCHA comment: {RECAPTCHA_COMMENT}")
-        Log.info(f"reCAPTCHA comment delete: {RECAPTCHA_COMMENT_DELETE}")
-        Log.info(f"reCAPTCHA password reset: {RECAPTCHA_PASSWORD_RESET}")
-        Log.info(f"reCAPTCHA password change: {RECAPTCHA_PASSWORD_CHANGE}")
-        Log.info(f"reCAPTCHA username change: {RECAPTCHA_USERNAME_CHANGE}")
-        Log.info(f"reCAPTCHA verify user: {RECAPTCHA_VERIFY_USER}")
-        Log.info(f"reCAPTCHA delete user: {RECAPTCHA_DELETE_USER}")
-        Log.info(
-            f"reCAPTCHA user profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
-        )
-        Log.info(
-            f"reCAPTCHA profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
-        )
 else:
     Log.info("reCAPTCHA is off")
 

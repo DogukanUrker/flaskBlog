@@ -2,22 +2,15 @@ import sqlite3
 
 from flask import (
     Blueprint,
-    abort,
     redirect,
     render_template,
     request,
     session,
 )
-from requests import post as requestsPost
 from settings import (
     DB_COMMENTS_ROOT,
     DB_POSTS_ROOT,
     DB_USERS_ROOT,
-    RECAPTCHA,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_USERNAME_CHANGE,
-    RECAPTCHA_VERIFY_URL,
 )
 from utils.flashMessage import flashMessage
 from utils.forms.ChangeUserNameForm import ChangeUserNameForm
@@ -43,7 +36,7 @@ def changeUserName():
     An error message is displayed.
 
     Returns:
-    The change username template with the form and reCAPTCHA.
+    The change username template with the form.
     """
 
     if "userName" in session:
@@ -73,95 +66,40 @@ def changeUserName():
                     )
                 else:
                     if userNameCheck is None:
-                        if RECAPTCHA and RECAPTCHA_USERNAME_CHANGE:
-                            secretResponse = request.form["g-recaptcha-response"]
-                            verifyResponse = requestsPost(
-                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                            ).json()
+                        cursor.execute(
+                            """update users set userName = ? where userName = ? """,
+                            [(newUserName), (session["userName"])],
+                        )
+                        connection.commit()
 
-                            if (
-                                verifyResponse["success"] is True
-                                or verifyResponse["score"] > 0.5
-                            ):
-                                Log.success(
-                                    f"Change username reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
+                        connection = sqlite3.connect(DB_POSTS_ROOT)
+                        connection.set_trace_callback(Log.database)
+                        cursor = connection.cursor()
+                        cursor.execute(
+                            """update posts set Author = ? where author = ? """,
+                            [(newUserName), (session["userName"])],
+                        )
+                        connection.commit()
 
-                                cursor.execute(
-                                    """update users set userName = ? where userName = ? """,
-                                    [(newUserName), (session["userName"])],
-                                )
-                                connection.commit()
-
-                                connection = sqlite3.connect(DB_POSTS_ROOT)
-                                connection.set_trace_callback(Log.database)
-                                cursor = connection.cursor()
-                                cursor.execute(
-                                    """update posts set Author = ? where author = ? """,
-                                    [(newUserName), (session["userName"])],
-                                )
-                                connection.commit()
-
-                                connection = sqlite3.connect(DB_COMMENTS_ROOT)
-                                connection.set_trace_callback(Log.database)
-                                cursor = connection.cursor()
-                                cursor.execute(
-                                    """update comments set user = ? where user = ? """,
-                                    [(newUserName), (session["userName"])],
-                                )
-                                connection.commit()
-
-                                session["userName"] = newUserName
-                                Log.success(
-                                    f'User: "{session["userName"]}" changed his username to "{newUserName}"'
-                                )
-                                flashMessage(
-                                    page="changeUserName",
-                                    message="success",
-                                    category="success",
-                                    language=session["language"],
-                                )
-                                return redirect(f"/user/{newUserName.lower()}")
-                            else:
-                                Log.error(
-                                    f"Username change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}"
-                                )
-                                abort(401)
-                        else:
-                            cursor.execute(
-                                """update users set userName = ? where userName = ? """,
-                                [(newUserName), (session["userName"])],
-                            )
-                            connection.commit()
-
-                            connection = sqlite3.connect(DB_POSTS_ROOT)
-                            connection.set_trace_callback(Log.database)
-                            cursor = connection.cursor()
-                            cursor.execute(
-                                """update posts set Author = ? where author = ? """,
-                                [(newUserName), (session["userName"])],
-                            )
-                            connection.commit()
-
-                            connection = sqlite3.connect(DB_COMMENTS_ROOT)
-                            connection.set_trace_callback(Log.database)
-                            cursor = connection.cursor()
-                            cursor.execute(
-                                """update comments set user = ? where user = ? """,
-                                [(newUserName), (session["userName"])],
-                            )
-                            connection.commit()
-                            Log.success(
-                                f'User: "{session["userName"]}" changed his username to "{newUserName}"'
-                            )
-                            session["userName"] = newUserName
-                            flashMessage(
-                                page="changeUserName",
-                                message="success",
-                                category="success",
-                                language=session["language"],
-                            )
-                            return redirect(f"/user/{newUserName.lower()}")
+                        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+                        connection.set_trace_callback(Log.database)
+                        cursor = connection.cursor()
+                        cursor.execute(
+                            """update comments set user = ? where user = ? """,
+                            [(newUserName), (session["userName"])],
+                        )
+                        connection.commit()
+                        Log.success(
+                            f'User: "{session["userName"]}" changed his username to "{newUserName}"'
+                        )
+                        session["userName"] = newUserName
+                        flashMessage(
+                            page="changeUserName",
+                            message="success",
+                            category="success",
+                            language=session["language"],
+                        )
+                        return redirect(f"/user/{newUserName.lower()}")
                     else:
                         flashMessage(
                             page="changeUserName",
@@ -180,8 +118,6 @@ def changeUserName():
         return render_template(
             "changeUserName.html.jinja",
             form=form,
-            siteKey=RECAPTCHA_SITE_KEY,
-            recaptcha=RECAPTCHA,
         )
     else:
         Log.error(

@@ -18,7 +18,6 @@ from settings import (
     DB_USERS_ROOT,
     RECAPTCHA,
     RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SIGN_UP,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
     REGISTRATION,
@@ -82,7 +81,7 @@ def signup():
                             connection = sqlite3.connect(DB_USERS_ROOT)
                             connection.set_trace_callback(Log.database)
 
-                            if RECAPTCHA and RECAPTCHA_SIGN_UP:
+                            if RECAPTCHA:
                                 secretResponse = request.form["g-recaptcha-response"]
                                 verifyResponse = requestsPost(
                                     url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"

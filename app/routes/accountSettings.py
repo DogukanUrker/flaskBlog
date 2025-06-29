@@ -1,14 +1,8 @@
 import sqlite3
 
-from flask import Blueprint, abort, redirect, render_template, request, session
-from requests import post as requestsPost
+from flask import Blueprint, redirect, render_template, request, session
 from settings import (
     DB_USERS_ROOT,
-    RECAPTCHA,
-    RECAPTCHA_DELETE_USER,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
 )
 from utils.delete import Delete
 from utils.log import Log
@@ -31,37 +25,12 @@ def accountSettings():
         user = cursor.fetchall()
 
         if request.method == "POST":
-            if RECAPTCHA and RECAPTCHA_DELETE_USER:
-                secretResponse = request.form["g-recaptcha-response"]
-
-                verifyResponse = requestsPost(
-                    url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                ).json()
-
-                if verifyResponse["success"] is True or verifyResponse["score"] > 0.5:
-                    Log.success(
-                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                    )
-
-                    Delete.user(user[0][0])
-
-                    return redirect("/")
-                else:
-                    Log.error(
-                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                    )
-
-                    abort(401)
-            else:
-                Delete.user(user[0][0])
-
-                return redirect("/")
+            Delete.user(user[0][0])
+            return redirect("/")
 
         return render_template(
             "accountSettings.html.jinja",
             user=user,
-            siteKey=RECAPTCHA_SITE_KEY,
-            recaptcha=RECAPTCHA,
         )
     else:
         Log.error(

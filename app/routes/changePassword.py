@@ -2,21 +2,14 @@ import sqlite3
 
 from flask import (
     Blueprint,
-    abort,
     redirect,
     render_template,
     request,
     session,
 )
 from passlib.hash import sha512_crypt as encryption
-from requests import post as requestsPost
 from settings import (
     DB_USERS_ROOT,
-    RECAPTCHA,
-    RECAPTCHA_PASSWORD_CHANGE,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
 )
 from utils.flashMessage import flashMessage
 from utils.forms.ChangePasswordForm import ChangePasswordForm
@@ -35,10 +28,7 @@ def changePassword():
         request.form (dict): the form data from the request
 
     Returns:
-        render_template: a rendered template with the form and reCAPTCHA
-
-    Raises:
-        401: if the reCAPTCHA is not passed
+        render_template: a rendered template with the form
     """
 
     if "userName" in session:
@@ -82,71 +72,27 @@ def changePassword():
 
                     connection = sqlite3.connect(DB_USERS_ROOT)
                     connection.set_trace_callback(Log.database)
+                    cursor = connection.cursor()
+                    cursor.execute(
+                        """update users set password = ? where userName = ? """,
+                        [(newPassword), (session["userName"])],
+                    )
 
-                    if RECAPTCHA and RECAPTCHA_PASSWORD_CHANGE:
-                        secretResponse = request.form["g-recaptcha-response"]
+                    connection.commit()
 
-                        verifyResponse = requestsPost(
-                            url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                        ).json()
+                    Log.success(
+                        f'User: "{session["userName"]}" changed his password',
+                    )
 
-                        if (
-                            verifyResponse["success"] is True
-                            or verifyResponse["score"] > 0.5
-                        ):
-                            Log.success(
-                                f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                            )
+                    session.clear()
+                    flashMessage(
+                        page="changePassword",
+                        message="success",
+                        category="success",
+                        language=session["language"],
+                    )
 
-                            cursor = connection.cursor()
-                            cursor.execute(
-                                """update users set password = ? where userName = ? """,
-                                [(newPassword), (session["userName"])],
-                            )
-
-                            connection.commit()
-
-                            Log.success(
-                                f'User: "{session["userName"]}" changed his password',
-                            )
-
-                            session.clear()
-                            flashMessage(
-                                page="changePassword",
-                                message="success",
-                                category="success",
-                                language=session["language"],
-                            )
-
-                            return redirect("/login/redirect=&")
-                        else:
-                            Log.error(
-                                f"Password change reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                            )
-
-                            abort(401)
-                    else:
-                        cursor = connection.cursor()
-                        cursor.execute(
-                            """update users set password = ? where userName = ? """,
-                            [(newPassword), (session["userName"])],
-                        )
-
-                        connection.commit()
-
-                        Log.success(
-                            f'User: "{session["userName"]}" changed his password',
-                        )
-
-                        session.clear()
-                        flashMessage(
-                            page="changePassword",
-                            message="success",
-                            category="success",
-                            language=session["language"],
-                        )
-
-                        return redirect("/login/redirect=&")
+                    return redirect("/login/redirect=&")
             else:
                 flashMessage(
                     page="changePassword",
@@ -158,8 +104,6 @@ def changePassword():
         return render_template(
             "changePassword.html.jinja",
             form=form,
-            siteKey=RECAPTCHA_SITE_KEY,
-            recaptcha=RECAPTCHA,
         )
     else:
         Log.error(

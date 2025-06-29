@@ -14,7 +14,6 @@ from settings import (
     DB_USERS_ROOT,
     LOG_IN,
     RECAPTCHA,
-    RECAPTCHA_LOGIN,
     RECAPTCHA_SECRET_KEY,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
@@ -74,7 +73,7 @@ def login(direct):
                     )
                 else:
                     if encryption.verify(password, user[3]):
-                        if RECAPTCHA and RECAPTCHA_LOGIN:
+                        if RECAPTCHA:
                             secretResponse = request.form["g-recaptcha-response"]
                             verifyResponse = requestsPost(
                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
