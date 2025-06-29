@@ -208,24 +208,20 @@ app.context_processor(injectTranslations)
 app.before_request(browserLanguage)
 app.jinja_env.globals.update(getSlugFromPostTitle=getSlugFromPostTitle)
 
-match WERKZEUG_LOGGER:
-    case True:
-        Log.warning("Werkzeug default logger is enabled")
+if WERKZEUG_LOGGER:
+    Log.warning("Werkzeug default logger is enabled")
+else:
+    from logging import getLogger
 
-    case False:
-        from logging import getLogger
+    Log.info("Werkzeug default logger is disabled")
 
-        Log.info("Werkzeug default logger is disabled")
-
-        getLogger("werkzeug").disabled = True
+    getLogger("werkzeug").disabled = True
 
 
-match CUSTOM_LOGGER:
-    case True:
-        Log.info("Custom logger is enabled")
-
-    case False:
-        Log.info("Custom logger is disabled")
+if CUSTOM_LOGGER:
+    Log.info("Custom logger is enabled")
+else:
+    Log.info("Custom logger is disabled")
 
 
 Log.info(f"Debug mode: {DEBUG_MODE}")
@@ -251,55 +247,52 @@ Log.info(f"SMTP mail: {SMTP_MAIL}")
 Log.info(f"SMTP password: {SMTP_PASSWORD}")
 
 
-match RECAPTCHA:
-    case True:
-        match RECAPTCHA_SITE_KEY == "" or RECAPTCHA_SECRET_KEY == "":
-            case True:
-                Log.error(
-                    "reCAPTCHA keys is unvalid this may cause the application to crash",
-                )
-                Log.error(
-                    "Please check your recaptcha keys or set recaptcha to false from true in 'constants.py'",
-                )
-            case False:
-                Log.info("reCAPTCHA is on")
-                Log.info(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
-                Log.info(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
-                Log.info(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
-                Log.info(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
+if RECAPTCHA:
+    if RECAPTCHA_SITE_KEY == "" or RECAPTCHA_SECRET_KEY == "":
+        Log.error(
+            "reCAPTCHA keys is unvalid this may cause the application to crash",
+        )
+        Log.error(
+            "Please check your recaptcha keys or set recaptcha to false from true in 'constants.py'",
+        )
+    else:
+        Log.info("reCAPTCHA is on")
+        Log.info(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
+        Log.info(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
+        Log.info(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
+        Log.info(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
 
-                Log.info(f"reCAPTCHA login: {RECAPTCHA_LOGIN}")
-                Log.info(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP}")
-                Log.info(f"reCAPTCHA post create: {RECAPTCHA_POST_CREATE}")
-                Log.info(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT}")
-                Log.info(f"reCAPTCHA post delete: {RECAPTCHA_POST_DELETE}")
-                Log.info(f"reCAPTCHA comment: {RECAPTCHA_COMMENT}")
-                Log.info(f"reCAPTCHA comment delete: {RECAPTCHA_COMMENT_DELETE}")
-                Log.info(f"reCAPTCHA password reset: {RECAPTCHA_PASSWORD_RESET}")
-                Log.info(f"reCAPTCHA password change: {RECAPTCHA_PASSWORD_CHANGE}")
-                Log.info(f"reCAPTCHA username change: {RECAPTCHA_USERNAME_CHANGE}")
-                Log.info(f"reCAPTCHA verify user: {RECAPTCHA_VERIFY_USER}")
-                Log.info(f"reCAPTCHA delete user: {RECAPTCHA_DELETE_USER}")
-                Log.info(
-                    f"reCAPTCHA user profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
-                )
-                Log.info(
-                    f"reCAPTCHA profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
-                )
-    case False:
-        Log.info("reCAPTCHA is off")
+        Log.info(f"reCAPTCHA login: {RECAPTCHA_LOGIN}")
+        Log.info(f"reCAPTCHA sign up: {RECAPTCHA_SIGN_UP}")
+        Log.info(f"reCAPTCHA post create: {RECAPTCHA_POST_CREATE}")
+        Log.info(f"reCAPTCHA post edit: {RECAPTCHA_POST_EDIT}")
+        Log.info(f"reCAPTCHA post delete: {RECAPTCHA_POST_DELETE}")
+        Log.info(f"reCAPTCHA comment: {RECAPTCHA_COMMENT}")
+        Log.info(f"reCAPTCHA comment delete: {RECAPTCHA_COMMENT_DELETE}")
+        Log.info(f"reCAPTCHA password reset: {RECAPTCHA_PASSWORD_RESET}")
+        Log.info(f"reCAPTCHA password change: {RECAPTCHA_PASSWORD_CHANGE}")
+        Log.info(f"reCAPTCHA username change: {RECAPTCHA_USERNAME_CHANGE}")
+        Log.info(f"reCAPTCHA verify user: {RECAPTCHA_VERIFY_USER}")
+        Log.info(f"reCAPTCHA delete user: {RECAPTCHA_DELETE_USER}")
+        Log.info(
+            f"reCAPTCHA user profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
+        )
+        Log.info(
+            f"reCAPTCHA profile picture change: {RECAPTCHA_PROFILE_PICTURE_CHANGE}",
+        )
+else:
+    Log.info("reCAPTCHA is off")
 
 
-match DEFAULT_ADMIN:
-    case True:
-        Log.info("Default admin is on")
-        Log.info(f"Default admin username: {DEFAULT_ADMIN_USERNAME}")
-        Log.info(f"Default admin email: {DEFAULT_ADMIN_EMAIL}")
-        Log.info(f"Default admin password: {DEFAULT_ADMIN_PASSWORD}")
-        Log.info(f"Default admin point: {DEFAULT_ADMIN_POINT}")
-        Log.info(f"Default admin profile picture: {DEFAULT_ADMIN_PROFILE_PICTURE}")
-    case False:
-        Log.info("Default admin is off")
+if DEFAULT_ADMIN:
+    Log.info("Default admin is on")
+    Log.info(f"Default admin username: {DEFAULT_ADMIN_USERNAME}")
+    Log.info(f"Default admin email: {DEFAULT_ADMIN_EMAIL}")
+    Log.info(f"Default admin password: {DEFAULT_ADMIN_PASSWORD}")
+    Log.info(f"Default admin point: {DEFAULT_ADMIN_POINT}")
+    Log.info(f"Default admin profile picture: {DEFAULT_ADMIN_PROFILE_PICTURE}")
+else:
+    Log.info("Default admin is off")
 
 
 dbFolder()
@@ -360,26 +353,19 @@ app.register_blueprint(analyticsBlueprint)
 app.register_blueprint(returnPostAnalyticsDataBlueprint)
 
 
-match __name__:
-    case "__main__":
-        Log.info(f"Running on http://{APP_HOST}:{APP_PORT}")
+if __name__ == "__main__":
+    Log.info(f"Running on http://{APP_HOST}:{APP_PORT}")
+    Log.success("App started")
 
-        Log.success("App started")
+    print(terminalASCII())
+    app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
 
-        print(terminalASCII())
+    endTime = currentTimeStamp()
+    runTime = endTime - startTime
+    runTime = str(timedelta(seconds=runTime))
 
-        app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
+    Log.info(f"Run time: {runTime} ")
+    Log.info("Shut down")
+    Log.warning("App shut down")
 
-        endTime = currentTimeStamp()
-
-        runTime = endTime - startTime
-
-        runTime = str(timedelta(seconds=runTime))
-
-        Log.info(f"Run time: {runTime} ")
-
-        Log.info("Shut down")
-
-        Log.warning("App shut down")
-
-        print(terminalASCII())
+    print(terminalASCII())

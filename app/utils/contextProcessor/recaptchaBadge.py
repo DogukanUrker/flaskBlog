@@ -13,10 +13,9 @@ def recaptchaBadge():
     """
 
     def recaptchaBadge():
-        match RECAPTCHA and RECAPTCHA_BADGE:
-            case True:
-                return True
-            case False:
-                return False
+        if RECAPTCHA and RECAPTCHA_BADGE:
+            return True
+        else:
+            return False
 
     return dict(recaptchaBadge=recaptchaBadge())

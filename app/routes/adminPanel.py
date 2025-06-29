@@ -9,35 +9,31 @@ adminPanelBlueprint = Blueprint("adminPanel", __name__)
 
 @adminPanelBlueprint.route("/admin")
 def adminPanel():
-    match "userName" in session:
-        case True:
-            Log.success(f"Connecting to '{DB_USERS_ROOT}' database")
+    if "userName" in session:
+        Log.success(f"Connecting to '{DB_USERS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_USERS_ROOT)
-            connection.set_trace_callback(Log.database)
-            cursor = connection.cursor()
-            cursor.execute(
-                """select role from users where userName = ? """,
-                [(session["userName"])],
-            )
-            role = cursor.fetchone()[0]
+        connection = sqlite3.connect(DB_USERS_ROOT)
+        connection.set_trace_callback(Log.database)
+        cursor = connection.cursor()
+        cursor.execute(
+            """select role from users where userName = ? """,
+            [(session["userName"])],
+        )
+        role = cursor.fetchone()[0]
 
-            match role == "admin":
-                case True:
-                    Log.info(f"Admin: {session['userName']} reached to the admin panel")
+        if role == "admin":
+            Log.info(f"Admin: {session['userName']} reached to the admin panel")
 
-                    Log.info("Rendering adminPanel.html.jinja: params: None")
+            Log.info("Rendering adminPanel.html.jinja: params: None")
 
-                    return render_template("adminPanel.html.jinja")
-                case False:
-                    Log.error(
-                        f"{request.remote_addr} tried to reach admin panel without being admin"
-                    )
-
-                    return redirect("/")
-        case False:
+            return render_template("adminPanel.html.jinja")
+        else:
             Log.error(
-                f"{request.remote_addr} tried to reach admin panel being logged in"
+                f"{request.remote_addr} tried to reach admin panel without being admin"
             )
 
             return redirect("/")
+    else:
+        Log.error(f"{request.remote_addr} tried to reach admin panel being logged in")
+
+        return redirect("/")

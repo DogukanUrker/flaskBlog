@@ -16,16 +16,15 @@ def setLanguage(language):
 
     Returns:
         str: The selected language code."""
-    match language:
-        case lang if lang in LANGUAGES:
-            session["language"] = language
-            Log.info(f"Language set to: {language}")
-            flashMessage(
-                page="setLanguage",
-                message="success",
-                category="success",
-                language=session["language"],
-            )
-        case _:
-            Log.warning(f"Language not supported: {language}")
+    if language in LANGUAGES:
+        session["language"] = language
+        Log.info(f"Language set to: {language}")
+        flashMessage(
+            page="setLanguage",
+            message="success",
+            category="success",
+            language=session["language"],
+        )
+    else:
+        Log.warning(f"Language not supported: {language}")
     return redirect("/changeLanguage")

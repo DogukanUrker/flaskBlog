@@ -27,19 +27,16 @@ def getAnalyticsPageTrafficGraphData(
         if weeks == 0 and days == 0 and hours == 0:
             hours = 48
 
-    match sincePosted:
-        case True:
-            sqlQuery = """select strftime('%Y-%m-%d %H:%M', timeStamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
-            parameter = (postID,)
-        case False:
-            timeDeltaArgs = {"weeks": weeks or 0, "days": days or 0, "hours": hours}
+    if sincePosted:
+        sqlQuery = """select strftime('%Y-%m-%d %H:%M', timeStamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
+        parameter = (postID,)
+    else:
+        timeDeltaArgs = {"weeks": weeks or 0, "days": days or 0, "hours": hours}
 
-            userQueryLimit = int(
-                (datetime.now() - timedelta(**timeDeltaArgs)).timestamp()
-            )
+        userQueryLimit = int((datetime.now() - timedelta(**timeDeltaArgs)).timestamp())
 
-            sqlQuery = """select strftime('%Y-%m-%d %H:%M', timeStamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? and timeStamp > ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
-            parameter = (postID, userQueryLimit)
+        sqlQuery = """select strftime('%Y-%m-%d %H:%M', timeStamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? and timeStamp > ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
+        parameter = (postID, userQueryLimit)
 
     try:
         Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")
@@ -115,12 +112,10 @@ def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
         `dict`: osNameList: e.g. ["Russia", "Germany"...]. , osCountList: e.g. [3445, 6756, ...]
     """
 
-    match viewAll:
-        case True:
-            sqlQuery = """select country as countryName, count(*) as countryCount from postsAnalytics where postID = ? GROUP BY country ORDER BY countryCount DESC"""
-
-        case False:
-            sqlQuery = """select country as countryName, count(*) as countryCount from postsAnalytics where postID = ? GROUP BY country ORDER BY countryCount DESC limit 25"""
+    if viewAll:
+        sqlQuery = """select country as countryName, count(*) as countryCount from postsAnalytics where postID = ? GROUP BY country ORDER BY countryCount DESC"""
+    else:
+        sqlQuery = """select country as countryName, count(*) as countryCount from postsAnalytics where postID = ? GROUP BY country ORDER BY countryCount DESC limit 25"""
 
     try:
         Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")

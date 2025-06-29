@@ -24,15 +24,13 @@ def currentTime(seconds=False, microSeconds=False):
     """
     Returns the current time as a string in the format "HH:MM" or "HH:MM:SS" depending on the value of the seconds parameter. If the microSeconds parameter is set to True, the time will include microseconds as well.
     """
-    match seconds:
-        case False:
-            return datetime.now().strftime("%H:%M")
-        case True:
-            match microSeconds:
-                case True:
-                    return datetime.now().strftime("%H:%M:%S.%f")
-                case False:
-                    return datetime.now().strftime("%H:%M:%S")
+    if not seconds:
+        return datetime.now().strftime("%H:%M")
+    else:
+        if microSeconds:
+            return datetime.now().strftime("%H:%M:%S.%f")
+        else:
+            return datetime.now().strftime("%H:%M:%S")
 
 
 def currentTimeStamp():

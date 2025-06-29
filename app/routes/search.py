@@ -88,33 +88,27 @@ def search(query):
 
     empty = False
 
-    match queryTags == []:
-        case False:
-            posts.append(queryTags)
+    if queryTags != []:
+        posts.append(queryTags)
 
-    match queryTitles == []:
-        case False:
-            posts.append(queryTitles)
+    if queryTitles != []:
+        posts.append(queryTitles)
 
-    match queryAuthors == []:
-        case False:
-            posts.append(queryAuthors)
+    if queryAuthors != []:
+        posts.append(queryAuthors)
 
-    match queryUsers == []:
-        case False:
-            users.append(queryUsers)
+    if queryUsers != []:
+        users.append(queryUsers)
 
-    match not posts and not users:
-        case True:
-            empty = True
+    if not posts and not users:
+        empty = True
 
     resultsID = []
 
     for post in posts:
         for post in post:
-            match post[0] not in resultsID:
-                case True:
-                    resultsID.append(post[0])
+            if post[0] not in resultsID:
+                resultsID.append(post[0])
 
     posts = []
 

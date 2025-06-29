@@ -19,10 +19,9 @@ def flashMessage(page="error", message="wrongCall", category="error", language="
     """
     text = None
     translationFile = f"./translations/{language}.json"
-    match exists(translationFile):
-        case True:
-            with open(translationFile, "r", encoding="utf-8") as file:
-                translations = load(file)
-                text = translations["flash"]
+    if exists(translationFile):
+        with open(translationFile, "r", encoding="utf-8") as file:
+            translations = load(file)
+            text = translations["flash"]
     flash(text[page][message], category)
     return None

@@ -49,12 +49,11 @@ def index(by="hot", sort="desc"):
     byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp", "hot"]
     sortOptions = ["asc", "desc"]
 
-    match by not in byOptions or sort not in sortOptions:
-        case True:
-            Log.warning(
-                f"The provided sorting options are not valid: By: {by} Sort: {sort}"
-            )
-            return redirect("/")
+    if by not in byOptions or sort not in sortOptions:
+        Log.warning(
+            f"The provided sorting options are not valid: By: {by} Sort: {sort}"
+        )
+        return redirect("/")
 
     Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
 
@@ -63,22 +62,20 @@ def index(by="hot", sort="desc"):
 
     cursor = connection.cursor()
 
-    match by:
-        case "hot":
-            cursor.execute(
-                f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort}"
-            )
-            pass
-        case _:
-            cursor.execute(f"select * from posts order by {by} {sort}")
+    if by == "hot":
+        cursor.execute(
+            f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort}"
+        )
+        pass
+    else:
+        cursor.execute(f"select * from posts order by {by} {sort}")
 
     posts = cursor.fetchall()
 
-    match by:
-        case "timeStamp":
-            by = "create"
-        case "lastEditTimeStamp":
-            by = "edit"
+    if by == "timeStamp":
+        by = "create"
+    elif by == "lastEditTimeStamp":
+        by = "edit"
 
     language = session.get("language")
     translationFile = f"./translations/{language}.json"
