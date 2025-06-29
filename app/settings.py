@@ -21,7 +21,7 @@ APP_HOST = "localhost"  # (str)
 APP_PORT = 2306  # (int)
 
 # Toggle debug mode for the Flask application
-DEBUG_MODE = False  # (bool)
+DEBUG_MODE = True  # (bool)
 
 # Name of the UI framework being used
 UI_NAME = "tailwindUI"  # (str)
