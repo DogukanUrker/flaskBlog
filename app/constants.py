@@ -3,7 +3,7 @@ This module contains all the general application settings.
 """
 
 # Import necessary modules from the modules module
-from modules import secrets, socket
+from modules import secrets
 
 # Name of the Flask application
 APP_NAME = "flaskBlog"  # (str)
@@ -15,10 +15,10 @@ APP_VERSION = "3.0.0-dev"  # (str)
 APP_ROOT_PATH = "."  # (str)
 
 # Hostname or IP address for the Flask application
-APP_HOST = socket.gethostbyname(socket.gethostname())  # (str)
+APP_HOST = "localhost"  # (str)
 
 # Port number for the Flask application
-APP_PORT = 5000  # (int)
+APP_PORT = 2306  # (int)
 
 # Toggle debug mode for the Flask application
 DEBUG_MODE = False  # (bool)
