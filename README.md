@@ -128,13 +128,10 @@ download source code from Github 💾
 `git clone https://github.com/DogukanUrker/flaskBlog.git`
 
 go to directory 📁
-`cd flaskBlog`
+`cd flaskBlog/app`
 
-install requirements.txt 🔽
-`pip install -r requirements.txt`
-
-it's ready to run 🎉
-`python app.py`
+just run it with [uv](https://docs.astral.sh/uv/) 🎉
+`uv run app.py`
 
 ### 🧑🏻‍💼 Default Admin Account
 
