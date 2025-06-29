@@ -3,6 +3,7 @@
 A modern blog application built with Flask, featuring a clean UI and powerful admin tools.
 
 ![FlaskBlog Light Theme](/images/Light.png)
+[Watch demo on YouTube](https://youtu.be/WyIpAlSp2RM)
 
 ## ✨ Features
 
@@ -56,6 +57,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Doğukan Ürker**
+
 [Website](https://dogukanurker.com) | [Email](mailto:dogukanurker@icloud.com)
 
 ---
