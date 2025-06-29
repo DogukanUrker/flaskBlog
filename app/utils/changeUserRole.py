@@ -19,11 +19,10 @@ def changeUserRole(userName):
         [(userName)],
     )
     role = cursor.fetchone()[0]
-    match role:
-        case "admin":
-            newRole = "user"
-        case "user":
-            newRole = "admin"
+    if role == "admin":
+        newRole = "user"
+    elif role == "user":
+        newRole = "admin"
     cursor.execute(
         """update users set role = ? where lower(userName) = ? """,
         [(newRole), (userName)],
@@ -32,7 +31,6 @@ def changeUserRole(userName):
         f'Admin: "{session["userName"]}" changed user: "{userName}"s role to "{newRole}" ',
     )
     connection.commit()
-    match session["userName"].lower() == userName:
-        case True:
-            Log.success(f'Admin: "{session["userName"]}" changed his role to "user"')
-            return redirect("/")
+    if session["userName"].lower() == userName:
+        Log.success(f'Admin: "{session["userName"]}" changed his role to "user"')
+        return redirect("/")

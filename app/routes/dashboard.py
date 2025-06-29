@@ -19,95 +19,83 @@ dashboardBlueprint = Blueprint("dashboard", __name__)
 
 @dashboardBlueprint.route("/dashboard/<userName>", methods=["GET", "POST"])
 def dashboard(userName):
-    match "userName" in session:
-        case True:
-            match session["userName"].lower() == userName.lower():
-                case True:
-                    match request.method == "POST":
-                        case True:
-                            match "postDeleteButton" in request.form:
-                                case True:
-                                    Delete.post(request.form["postID"])
+    if "userName" in session:
+        if session["userName"].lower() == userName.lower():
+            if request.method == "POST":
+                if "postDeleteButton" in request.form:
+                    Delete.post(request.form["postID"])
 
-                                    return (
-                                        redirect(
-                                            url_for(
-                                                "dashboard.dashboard", userName=userName
-                                            )
-                                        ),
-                                        301,
-                                    )
-                    Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
-
-                    connection = sqlite3.connect(DB_POSTS_ROOT)
-                    connection.set_trace_callback(Log.database)
-                    cursor = connection.cursor()
-
-                    cursor.execute(
-                        """select * from posts where author = ? order by timeStamp desc""",
-                        [(session["userName"])],
+                    return (
+                        redirect(url_for("dashboard.dashboard", userName=userName)),
+                        301,
                     )
-                    posts = cursor.fetchall()
-                    Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
+            Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
 
-                    connection = sqlite3.connect(DB_COMMENTS_ROOT)
-                    connection.set_trace_callback(Log.database)
-                    cursor = connection.cursor()
+            connection = sqlite3.connect(DB_POSTS_ROOT)
+            connection.set_trace_callback(Log.database)
+            cursor = connection.cursor()
 
-                    cursor.execute(
-                        """select * from comments where lower(user) = ? order by timeStamp desc""",
-                        [(userName.lower())],
-                    )
-                    comments = cursor.fetchall()
+            cursor.execute(
+                """select * from posts where author = ? order by timeStamp desc""",
+                [(session["userName"])],
+            )
+            posts = cursor.fetchall()
+            Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
 
-                    match posts:
-                        case []:
-                            showPosts = False
-                        case _:
-                            showPosts = True
+            connection = sqlite3.connect(DB_COMMENTS_ROOT)
+            connection.set_trace_callback(Log.database)
+            cursor = connection.cursor()
 
-                    match comments:
-                        case []:
-                            showComments = False
-                        case _:
-                            showComments = True
+            cursor.execute(
+                """select * from comments where lower(user) = ? order by timeStamp desc""",
+                [(userName.lower())],
+            )
+            comments = cursor.fetchall()
 
-                    posts = list(posts)
+            if posts == []:
+                showPosts = False
+            else:
+                showPosts = True
 
-                    for i in range(len(posts)):
-                        posts[i] = list(posts[i])
+            if comments == []:
+                showComments = False
+            else:
+                showComments = True
 
-                    language = session.get("language")
-                    translationFile = f"./translations/{language}.json"
+            posts = list(posts)
 
-                    with open(translationFile, "r", encoding="utf-8") as file:
-                        translations = load(file)
+            for i in range(len(posts)):
+                posts[i] = list(posts[i])
 
-                    for post in posts:
-                        post[9] = translations["categories"][post[9].lower()]
+            language = session.get("language")
+            translationFile = f"./translations/{language}.json"
 
-                    return render_template(
-                        "/dashboard.html.jinja",
-                        posts=posts,
-                        comments=comments,
-                        showPosts=showPosts,
-                        showComments=showComments,
-                    )
-                case False:
-                    Log.error(
-                        f'User: "{session["userName"]}" tried to login to another users dashboard',
-                    )
+            with open(translationFile, "r", encoding="utf-8") as file:
+                translations = load(file)
 
-                    return redirect(f"/dashboard/{session['userName'].lower()}")
-        case False:
+            for post in posts:
+                post[9] = translations["categories"][post[9].lower()]
+
+            return render_template(
+                "/dashboard.html.jinja",
+                posts=posts,
+                comments=comments,
+                showPosts=showPosts,
+                showComments=showComments,
+            )
+        else:
             Log.error(
-                f"{request.remote_addr} tried to access the dashboard without login"
-            )
-            flashMessage(
-                page="dashboard",
-                message="login",
-                category="error",
-                language=session["language"],
+                f'User: "{session["userName"]}" tried to login to another users dashboard',
             )
 
-            return redirect("/login/redirect=&dashboard&user")
+            return redirect(f"/dashboard/{session['userName'].lower()}")
+    else:
+        Log.error(f"{request.remote_addr} tried to access the dashboard without login")
+        flashMessage(
+            page="dashboard",
+            message="login",
+            category="error",
+            language=session["language"],
+        )
+
+        return redirect("/login/redirect=&dashboard&user")

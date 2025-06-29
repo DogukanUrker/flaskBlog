@@ -44,42 +44,39 @@ def returnPostTrafficGraphData() -> dict:
 
     hours = request.args.get("hours", type=float, default=0)
 
-    match ANALYTICS:
-        case True:
-            match "userName" in session:
-                case True:
-                    if postID:
-                        return make_response(
-                            {
-                                "payload": getAnalyticsPageTrafficGraphData(
-                                    postID=postID,
-                                    sincePosted=sincePosted,
-                                    weeks=weeks,
-                                    days=days,
-                                    hours=hours,
-                                )
-                            },
-                            200,
+    if ANALYTICS:
+        if "userName" in session:
+            if postID:
+                return make_response(
+                    {
+                        "payload": getAnalyticsPageTrafficGraphData(
+                            postID=postID,
+                            sincePosted=sincePosted,
+                            weeks=weeks,
+                            days=days,
+                            hours=hours,
                         )
-                    else:
-                        return make_response(
-                            {
-                                "message": "Missing postID; unable to retrieve data.",
-                                "error": "postID (type: int) is required.",
-                            },
-                            404,
-                        )
-
-                case False:
-                    return make_response(
-                        {
-                            "message": "client don't have permission",
-                            "error": "request denied",
-                        },
-                        403,
-                    )
-        case False:
-            return ({"message": "analytics is disabled by admin"}, 410)
+                    },
+                    200,
+                )
+            else:
+                return make_response(
+                    {
+                        "message": "Missing postID; unable to retrieve data.",
+                        "error": "postID (type: int) is required.",
+                    },
+                    404,
+                )
+        else:
+            return make_response(
+                {
+                    "message": "client don't have permission",
+                    "error": "request denied",
+                },
+                403,
+            )
+    else:
+        return ({"message": "analytics is disabled by admin"}, 410)
 
 
 @returnPostAnalyticsDataBlueprint.route("/api/v1/postCountryGraphData")
@@ -105,38 +102,35 @@ def returnPostCountryGraphData() -> dict:
 
     viewAll = str(request.args.get("viewAll", default=False)).lower() == "true"
 
-    match ANALYTICS:
-        case True:
-            match "userName" in session:
-                case True:
-                    if postID:
-                        return make_response(
-                            {
-                                "payload": getAnalyticsPageCountryGraphData(
-                                    postID=postID, viewAll=viewAll
-                                )
-                            },
-                            200,
+    if ANALYTICS:
+        if "userName" in session:
+            if postID:
+                return make_response(
+                    {
+                        "payload": getAnalyticsPageCountryGraphData(
+                            postID=postID, viewAll=viewAll
                         )
-                    else:
-                        return make_response(
-                            {
-                                "message": "Missing postID; unable to retrieve data.",
-                                "error": "postID (type: int) is required.",
-                            },
-                            404,
-                        )
-
-                case False:
-                    return make_response(
-                        {
-                            "message": "client don't have permission",
-                            "error": "request denied",
-                        },
-                        403,
-                    )
-        case False:
-            return make_response({"message": "analytics is disabled by admin"}, 410)
+                    },
+                    200,
+                )
+            else:
+                return make_response(
+                    {
+                        "message": "Missing postID; unable to retrieve data.",
+                        "error": "postID (type: int) is required.",
+                    },
+                    404,
+                )
+        else:
+            return make_response(
+                {
+                    "message": "client don't have permission",
+                    "error": "request denied",
+                },
+                403,
+            )
+    else:
+        return make_response({"message": "analytics is disabled by admin"}, 410)
 
 
 @returnPostAnalyticsDataBlueprint.route("/api/v1/timeSpendsDuration", methods={"POST"})
@@ -157,32 +151,26 @@ def storeTimeSpendsDuraton() -> dict:
         `405 Method Not Allowed`: If an unsupported HTTP method is used.
     """
 
-    match ANALYTICS:
-        case True:
-            match request.method == "POST":
-                case True:
-                    visitorData = request.json
-                    visitorID = visitorData.get("visitorID")
-                    spendTime = visitorData.get("spendTime")
+    if ANALYTICS:
+        if request.method == "POST":
+            visitorData = request.json
+            visitorID = visitorData.get("visitorID")
+            spendTime = visitorData.get("spendTime")
 
-                    try:
-                        connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-                        connection.set_trace_callback(Log.database)
-                        cursor = connection.cursor()
+            try:
+                connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+                connection.set_trace_callback(Log.database)
+                cursor = connection.cursor()
 
-                        cursor.execute(
-                            """update postsAnalytics set timeSpendDuration = ? where id = ? """,
-                            (spendTime, visitorID),
-                        )
-                        connection.commit()
-                        return make_response({"message": "Successfully upadated"}, 200)
-                    except Exception:
-                        return make_response(
-                            {"message": "Unexpected error occured"}, 500
-                        )
-
-                case False:
-                    return make_response({"message": "Method not allowed"}, 405)
-
-        case False:
-            return ({"message": "analytics is disabled by admin"}, 410)
+                cursor.execute(
+                    """update postsAnalytics set timeSpendDuration = ? where id = ? """,
+                    (spendTime, visitorID),
+                )
+                connection.commit()
+                return make_response({"message": "Successfully upadated"}, 200)
+            except Exception:
+                return make_response({"message": "Unexpected error occured"}, 500)
+        else:
+            return make_response({"message": "Method not allowed"}, 405)
+    else:
+        return ({"message": "analytics is disabled by admin"}, 410)

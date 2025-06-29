@@ -56,16 +56,14 @@ def category(category, by="timeStamp", sort="desc"):
     byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp"]
     sortOptions = ["asc", "desc"]
 
-    match by not in byOptions or sort not in sortOptions:
-        case True:
-            Log.warning(
-                f"The provided sorting options are not valid: By: {by} Sort: {sort}"
-            )
-            return redirect(f"/category/{category}")
+    if by not in byOptions or sort not in sortOptions:
+        Log.warning(
+            f"The provided sorting options are not valid: By: {by} Sort: {sort}"
+        )
+        return redirect(f"/category/{category}")
 
-    match category.lower() in categories:
-        case False:
-            abort(404)
+    if category.lower() not in categories:
+        abort(404)
 
     Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
 
@@ -79,11 +77,10 @@ def category(category, by="timeStamp", sort="desc"):
     )
     posts = cursor.fetchall()
 
-    match by:
-        case "timeStamp":
-            by = "create"
-        case "lastEditTimeStamp":
-            by = "edit"
+    if by == "timeStamp":
+        by = "create"
+    elif by == "lastEditTimeStamp":
+        by = "edit"
 
     language = session.get("language")
     translationFile = f"./translations/{language}.json"

@@ -18,61 +18,54 @@ accountSettingsBlueprint = Blueprint("accountSettings", __name__)
 
 @accountSettingsBlueprint.route("/accountsettings", methods=["GET", "POST"])
 def accountSettings():
-    match "userName" in session:
-        case True:
-            Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+    if "userName" in session:
+        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_USERS_ROOT)
-            connection.set_trace_callback(Log.database)
-            cursor = connection.cursor()
-            cursor.execute(
-                """select userName from users where userName = ? """,
-                [(session["userName"])],
-            )
-            user = cursor.fetchall()
+        connection = sqlite3.connect(DB_USERS_ROOT)
+        connection.set_trace_callback(Log.database)
+        cursor = connection.cursor()
+        cursor.execute(
+            """select userName from users where userName = ? """,
+            [(session["userName"])],
+        )
+        user = cursor.fetchall()
 
-            match request.method == "POST":
-                case True:
-                    match RECAPTCHA and RECAPTCHA_DELETE_USER:
-                        case True:
-                            secretResponse = request.form["g-recaptcha-response"]
+        if request.method == "POST":
+            if RECAPTCHA and RECAPTCHA_DELETE_USER:
+                secretResponse = request.form["g-recaptcha-response"]
 
-                            verifyResponse = requestsPost(
-                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                            ).json()
+                verifyResponse = requestsPost(
+                    url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                ).json()
 
-                            match (
-                                verifyResponse["success"] is True
-                                or verifyResponse["score"] > 0.5
-                            ):
-                                case True:
-                                    Log.success(
-                                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                    )
+                if verifyResponse["success"] is True or verifyResponse["score"] > 0.5:
+                    Log.success(
+                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                    )
 
-                                    Delete.user(user[0][0])
+                    Delete.user(user[0][0])
 
-                                    return redirect("/")
-                                case False:
-                                    Log.error(
-                                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                    )
+                    return redirect("/")
+                else:
+                    Log.error(
+                        f"User delete reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                    )
 
-                                    abort(401)
-                        case False:
-                            Delete.user(user[0][0])
+                    abort(401)
+            else:
+                Delete.user(user[0][0])
 
-                            return redirect("/")
+                return redirect("/")
 
-            return render_template(
-                "accountSettings.html.jinja",
-                user=user,
-                siteKey=RECAPTCHA_SITE_KEY,
-                recaptcha=RECAPTCHA,
-            )
-        case False:
-            Log.error(
-                f"{request.remote_addr} tried to reach account settings without being logged in"
-            )
+        return render_template(
+            "accountSettings.html.jinja",
+            user=user,
+            siteKey=RECAPTCHA_SITE_KEY,
+            recaptcha=RECAPTCHA,
+        )
+    else:
+        Log.error(
+            f"{request.remote_addr} tried to reach account settings without being logged in"
+        )
 
-            return redirect("/login/redirect=&accountsettings")
+        return redirect("/login/redirect=&accountsettings")

@@ -13,8 +13,7 @@ from settings import (
 )
 from tamga import Tamga
 
-match exists(LOG_FOLDER_ROOT):
-    case False:
-        mkdir(LOG_FOLDER_ROOT)
+if not exists(LOG_FOLDER_ROOT):
+    mkdir(LOG_FOLDER_ROOT)
 
 Log = Tamga(logToFile=LOG_TO_FILE, logToConsole=CUSTOM_LOGGER, logFile=LOG_FILE_ROOT)

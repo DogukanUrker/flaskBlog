@@ -17,15 +17,14 @@ def browserLanguage():
         browserLanguage = request.headers.get("Accept-Language")
         if browserLanguage:
             browserLanguage = browserLanguage.split(",")[0].split("-")[0]
-            match browserLanguage:
-                case lang if lang in LANGUAGES:
-                    session["language"] = lang
-                    Log.info(f"Browser language detected and set to: {lang}")
-                case _:
-                    session["language"] = "en"
-                    Log.warning(
-                        f"Browser language '{browserLanguage}' not supported. Defaulting to English."
-                    )
+            if browserLanguage in LANGUAGES:
+                session["language"] = browserLanguage
+                Log.info(f"Browser language detected and set to: {browserLanguage}")
+            else:
+                session["language"] = "en"
+                Log.warning(
+                    f"Browser language '{browserLanguage}' not supported. Defaulting to English."
+                )
         else:
             session["language"] = "en"
             Log.warning("No browser language detected. Defaulting to English.")

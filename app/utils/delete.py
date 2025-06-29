@@ -137,12 +137,11 @@ class Delete:
             language=session["language"],
         )
         Log.success(f'User: "{userName}" deleted')
-        match perpetrator[0] == "admin":
-            case True:
-                return redirect("/admin/users")
-            case False:
-                session.clear()
-                return redirect("/")
+        if perpetrator[0] == "admin":
+            return redirect("/admin/users")
+        else:
+            session.clear()
+            return redirect("/")
 
     def comment(commentID):
         """

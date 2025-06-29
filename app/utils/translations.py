@@ -16,11 +16,10 @@ def loadTranslations(language):
     """
 
     translationFile = f"./translations/{language}.json"
-    match exists(translationFile):
-        case True:
-            with open(translationFile, "r", encoding="utf-8") as file:
-                translations = load(file)
-                Log.info(f"Loaded translations for language: {language}")
-                return translations
+    if exists(translationFile):
+        with open(translationFile, "r", encoding="utf-8") as file:
+            translations = load(file)
+            Log.info(f"Loaded translations for language: {language}")
+            return translations
     Log.warning(f"Translation file not found: {language}")
     return {}

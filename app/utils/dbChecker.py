@@ -39,16 +39,14 @@ def dbFolder():
         None
     """
 
-    match exists(DB_FOLDER_ROOT):
-        case True:
-            Log.info(f'Database folder: "/{DB_FOLDER_ROOT}" found')
+    if exists(DB_FOLDER_ROOT):
+        Log.info(f'Database folder: "/{DB_FOLDER_ROOT}" found')
+    else:
+        Log.error(f'Database folder: "/{DB_FOLDER_ROOT}" not found')
 
-        case False:
-            Log.error(f'Database folder: "/{DB_FOLDER_ROOT}" not found')
+        mkdir(DB_FOLDER_ROOT)
 
-            mkdir(DB_FOLDER_ROOT)
-
-            Log.success(f'Database folder: "/{DB_FOLDER_ROOT}" created')
+        Log.success(f'Database folder: "/{DB_FOLDER_ROOT}" created')
 
 
 def usersTable():
@@ -60,16 +58,14 @@ def usersTable():
         None
     """
 
-    match exists(DB_USERS_ROOT):
-        case True:
-            Log.info(f'Users database: "{DB_USERS_ROOT}" found')
+    if exists(DB_USERS_ROOT):
+        Log.info(f'Users database: "{DB_USERS_ROOT}" found')
+    else:
+        Log.error(f'Users database: "{DB_USERS_ROOT}" not found')
 
-        case False:
-            Log.error(f'Users database: "{DB_USERS_ROOT}" not found')
+        open(DB_USERS_ROOT, "x")
 
-            open(DB_USERS_ROOT, "x")
-
-            Log.success(f'Users database: "{DB_USERS_ROOT}" created')
+        Log.success(f'Users database: "{DB_USERS_ROOT}" created')
     Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
 
     connection = sqlite3.connect(DB_USERS_ROOT)
@@ -100,32 +96,31 @@ def usersTable():
 
         cursor.execute(usersTable)
 
-        match DEFAULT_ADMIN:
-            case True:
-                password = encryption.hash(DEFAULT_ADMIN_PASSWORD)
+        if DEFAULT_ADMIN:
+            password = encryption.hash(DEFAULT_ADMIN_PASSWORD)
 
-                cursor.execute(
-                    """
-                    insert into Users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
-                    values(?,?,?,?,?,?,?,?)
-                    """,
-                    (
-                        DEFAULT_ADMIN_USERNAME,
-                        DEFAULT_ADMIN_EMAIL,
-                        password,
-                        DEFAULT_ADMIN_PROFILE_PICTURE,
-                        "admin",
-                        DEFAULT_ADMIN_POINT,
-                        currentTimeStamp(),
-                        "True",
-                    ),
-                )
+            cursor.execute(
+                """
+                insert into Users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
+                values(?,?,?,?,?,?,?,?)
+                """,
+                (
+                    DEFAULT_ADMIN_USERNAME,
+                    DEFAULT_ADMIN_EMAIL,
+                    password,
+                    DEFAULT_ADMIN_PROFILE_PICTURE,
+                    "admin",
+                    DEFAULT_ADMIN_POINT,
+                    currentTimeStamp(),
+                    "True",
+                ),
+            )
 
-                connection.commit()
+            connection.commit()
 
-                Log.success(
-                    f'Admin: "{DEFAULT_ADMIN_USERNAME}" added to database as initial admin',
-                )
+            Log.success(
+                f'Admin: "{DEFAULT_ADMIN_USERNAME}" added to database as initial admin',
+            )
 
         connection.commit()
 
@@ -142,16 +137,14 @@ def postsTable():
         None
     """
 
-    match exists(DB_POSTS_ROOT):
-        case True:
-            Log.info(f'Posts database: "{DB_POSTS_ROOT}" found')
+    if exists(DB_POSTS_ROOT):
+        Log.info(f'Posts database: "{DB_POSTS_ROOT}" found')
+    else:
+        Log.error(f'Posts database: "{DB_POSTS_ROOT}" not found')
 
-        case False:
-            Log.error(f'Posts database: "{DB_POSTS_ROOT}" not found')
+        open(DB_POSTS_ROOT, "x")
 
-            open(DB_POSTS_ROOT, "x")
-
-            Log.success(f'Posts database: "{DB_POSTS_ROOT}" created')
+        Log.success(f'Posts database: "{DB_POSTS_ROOT}" created')
     Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
 
     connection = sqlite3.connect(DB_POSTS_ROOT)
@@ -199,16 +192,14 @@ def commentsTable():
         None
     """
 
-    match exists(DB_COMMENTS_ROOT):
-        case True:
-            Log.info(f'Comments database: "{DB_COMMENTS_ROOT}" found')
+    if exists(DB_COMMENTS_ROOT):
+        Log.info(f'Comments database: "{DB_COMMENTS_ROOT}" found')
+    else:
+        Log.error(f'Comments database: "{DB_COMMENTS_ROOT}" not found')
 
-        case False:
-            Log.error(f'Comments database: "{DB_COMMENTS_ROOT}" not found')
+        open(DB_COMMENTS_ROOT, "x")
 
-            open(DB_COMMENTS_ROOT, "x")
-
-            Log.success(f'Comments database: "{DB_COMMENTS_ROOT}" created')
+        Log.success(f'Comments database: "{DB_COMMENTS_ROOT}" created')
     Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
 
     connection = sqlite3.connect(DB_COMMENTS_ROOT)
@@ -250,16 +241,14 @@ def analyticsTable():
         None
     """
 
-    match exists(DB_ANALYTICS_ROOT):
-        case True:
-            Log.info(f'Analytics database: "{DB_ANALYTICS_ROOT}" found')
+    if exists(DB_ANALYTICS_ROOT):
+        Log.info(f'Analytics database: "{DB_ANALYTICS_ROOT}" found')
+    else:
+        Log.error(f'Analytics database: "{DB_ANALYTICS_ROOT}" not found')
 
-        case False:
-            Log.error(f'Analytics database: "{DB_ANALYTICS_ROOT}" not found')
+        open(DB_ANALYTICS_ROOT, "x")
 
-            open(DB_ANALYTICS_ROOT, "x")
-
-            Log.success(f'Analytics database: "{DB_ANALYTICS_ROOT}" created')
+        Log.success(f'Analytics database: "{DB_ANALYTICS_ROOT}" created')
     Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")
 
     connection = sqlite3.connect(DB_ANALYTICS_ROOT)
