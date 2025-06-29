@@ -166,6 +166,7 @@ from utils.errorHandlers.notFoundErrorHandler import (
 from utils.errorHandlers.unauthorizedErrorHandler import (
     unauthorizedErrorHandler,
 )
+from utils.generateUrlIdFromPost import getSlugFromPostTitle
 from utils.log import Log
 from utils.terminalASCII import terminalASCII
 from utils.time import currentTimeStamp
@@ -205,7 +206,7 @@ app.context_processor(returnPostUrlID)
 app.context_processor(returnPostUrlSlug)
 app.context_processor(injectTranslations)
 app.before_request(browserLanguage)
-
+app.jinja_env.globals.update(getSlugFromPostTitle=getSlugFromPostTitle)
 
 match WERKZEUG_LOGGER:
     case True:
