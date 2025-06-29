@@ -130,9 +130,6 @@ DEFAULT_ADMIN_PROFILE_PICTURE = f"https://api.dicebear.com/7.x/identicon/svg?see
 # Toggle reCAPTCHA verification
 RECAPTCHA = False  # (bool)
 
-# Toggle display of reCAPTCHA badge
-RECAPTCHA_BADGE = False  # (bool)
-
 # reCAPTCHA site key
 RECAPTCHA_SITE_KEY = ""  # (str)
 

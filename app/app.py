@@ -111,7 +111,6 @@ from settings import (
     LOG_FOLDER_ROOT,
     LOG_IN,
     RECAPTCHA,
-    RECAPTCHA_BADGE,
     RECAPTCHA_SECRET_KEY,
     RECAPTCHA_SITE_KEY,
     RECAPTCHA_VERIFY_URL,
@@ -132,7 +131,6 @@ from utils.afterRequest import (
 from utils.beforeRequest.browserLanguage import browserLanguage
 from utils.contextProcessor.isLogin import isLogin
 from utils.contextProcessor.isRegistration import isRegistration
-from utils.contextProcessor.recaptchaBadge import recaptchaBadge
 from utils.contextProcessor.returnPostUrlID import returnPostUrlID
 from utils.contextProcessor.returnPostUrlSlug import returnPostUrlSlug
 from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture
@@ -186,7 +184,7 @@ csrf = CSRFProtect(app)
 
 
 app.context_processor(isLogin)
-app.context_processor(recaptchaBadge)
+
 app.context_processor(isRegistration)
 app.context_processor(returnUserProfilePicture)
 app.context_processor(returnPostUrlID)
@@ -247,7 +245,7 @@ if RECAPTCHA:
         Log.info(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
         Log.info(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
         Log.info(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
-        Log.info(f"reCAPTCHA badge: {RECAPTCHA_BADGE}")
+
 else:
     Log.info("reCAPTCHA is off")
 
