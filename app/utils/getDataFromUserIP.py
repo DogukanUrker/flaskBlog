@@ -1,17 +1,19 @@
-from geoip2 import database
-import geoip2
-from user_agents import parse
-import requests
 import os
+
+import geoip2
+import requests
+from geoip2 import database
+from user_agents import parse
 
 """
 This function will collect user ip using api.ipify.org to fetch user's country, continents
 and user Agent string to fetch user operating system to store post analytics
 """
 
-# Global variable to hold the reader instance
+
 _reader = None
 _reader_initialized = False
+
 
 def _get_geoip_reader():
     """
@@ -19,13 +21,13 @@ def _get_geoip_reader():
     Returns None if the database file doesn't exist.
     """
     global _reader, _reader_initialized
-    
+
     if _reader_initialized:
         return _reader
-    
+
     _reader_initialized = True
     db_path = "static/geoIP2database/dbip-country-lite-2025-02.mmdb"
-    
+
     if os.path.exists(db_path):
         try:
             _reader = database.Reader(db_path)
@@ -34,10 +36,13 @@ def _get_geoip_reader():
             print(f"Failed to load GeoIP database: {e}")
             _reader = None
     else:
-        print(f"GeoIP database not found at {db_path}. Geographic analytics will be disabled.")
+        print(
+            f"GeoIP database not found at {db_path}. Geographic analytics will be disabled."
+        )
         _reader = None
-    
+
     return _reader
+
 
 """
 Free IP geolocation databases
@@ -66,15 +71,12 @@ def getDataFromUserIP(userAgentString: str) -> dict:
         Note: If GeoIP database is not available, country and continent will be "Unknown"
     """
     try:
-        # Parse user agent to get OS (this doesn't require GeoIP database)
         user_agent = parse(userAgentString)
         os_name = user_agent.os.family
-        
-        # Try to get GeoIP reader
+
         reader = _get_geoip_reader()
-        
+
         if reader is None:
-            # GeoIP database is not available, return OS info only
             return {
                 "status": 0,
                 "payload": {
@@ -83,14 +85,11 @@ def getDataFromUserIP(userAgentString: str) -> dict:
                     "continent": "Unknown",
                 },
             }
-        
-        # Get visitor's IP address
+
         userIPAddr = requests.get("https://api.ipify.org", timeout=5)
-        
-        # Query GeoIP database using visitor's IP address
+
         response = reader.country(userIPAddr.text.strip())
-        
-        # Return IP and OS data
+
         return {
             "status": 0,
             "payload": {
@@ -99,10 +98,8 @@ def getDataFromUserIP(userAgentString: str) -> dict:
                 "continent": response.continent.name or "Unknown",
             },
         }
-    
-    # Handle various error cases
+
     except requests.exceptions.RequestException:
-        # If IP fetch fails, still return OS info
         try:
             user_agent = parse(userAgentString)
             return {
@@ -113,11 +110,10 @@ def getDataFromUserIP(userAgentString: str) -> dict:
                     "continent": "Unknown",
                 },
             }
-        except:
+        except Exception:
             return {"status": 1, "message": "Failed to fetch IP and parse user agent"}
-    
+
     except geoip2.errors.AddressNotFoundError:
-        # IP not found in database, but still return OS info
         try:
             user_agent = parse(userAgentString)
             return {
@@ -128,11 +124,10 @@ def getDataFromUserIP(userAgentString: str) -> dict:
                     "continent": "Unknown",
                 },
             }
-        except:
+        except Exception:
             return {"status": 1, "message": "Invalid IP address"}
-    
+
     except Exception as e:
-        # For any other error, try to at least return OS info
         try:
             user_agent = parse(userAgentString)
             return {
@@ -143,5 +138,5 @@ def getDataFromUserIP(userAgentString: str) -> dict:
                     "continent": "Unknown",
                 },
             }
-        except:
+        except Exception:
             return {"status": 1, "message": f"Unexpected error: {str(e)}"}

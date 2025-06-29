@@ -1,10 +1,10 @@
 import sqlite3
 import uuid
-from constants import DB_POSTS_ROOT
+
+from settings import DB_POSTS_ROOT
 from utils.log import Log
 
 
-# Function to check if URL ID exists in the database
 def checkIfurlIDExistsInPostDb(urlID):
     with sqlite3.connect(DB_POSTS_ROOT) as connection:
         connection.set_trace_callback(Log.database)
@@ -13,16 +13,15 @@ def checkIfurlIDExistsInPostDb(urlID):
         return bool(cursor.fetchall())
 
 
-# Characters to remove for post title that causes issues
 AVOID_CHARACTERS = [
-    " ",  # Space
-    "<",  # Less than
-    ">",  # Greater than
-    "#",  # Hash
-    "%",  # Percent
-    "{",  # Curly braces
-    "}",  # Curly braces
-    "|",  # Pipe
+    " ",
+    "<",
+    ">",
+    "#",
+    "%",
+    "{",
+    "}",
+    "|",
     "\\",  # Backslash
     "^",  # Caret
     "~",  # Tilde

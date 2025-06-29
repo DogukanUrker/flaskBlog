@@ -1,15 +1,9 @@
-from flask import Blueprint, redirect, render_template, session
-from constants import LANGUAGES
-from utils.log import Log
+from flask import Blueprint, render_template
 
-changeLanguageBlueprint = Blueprint(
-    "changeLanguage", __name__
-)  # Create a blueprint for the changeLanguage route
+changeLanguageBlueprint = Blueprint("changeLanguage", __name__)
 
 
-@changeLanguageBlueprint.route(
-    "/changeLanguage"
-)  # Create a route for the changeLanguage route
+@changeLanguageBlueprint.route("/changeLanguage")
 def changeLanguage():
     """
     Show the user's current language preference.
@@ -21,6 +15,4 @@ def changeLanguage():
         html: The changeLanguage.html.jinja file.
 
     """
-    return render_template(
-        "changeLanguage.html.jinja"
-    )  # Render the changeLanguage template
+    return render_template("changeLanguage.html.jinja")

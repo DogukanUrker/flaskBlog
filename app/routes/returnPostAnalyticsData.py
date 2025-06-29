@@ -1,15 +1,13 @@
-# Import the necessary modules and functions
 import sqlite3
-from flask import Blueprint, jsonify, session
-from constants import ANALYTICS, DB_ANALYTICS_ROOT, DB_POSTS_ROOT
-from utils.log import Log
+
+from flask import Blueprint, make_response, request, session
+from settings import ANALYTICS, DB_ANALYTICS_ROOT
 from utils.getAnalyticsPageData import (
     getAnalyticsPageCountryGraphData,
-    getAnalyticsPageOSGraphData,
     getAnalyticsPageTrafficGraphData,
 )
+from utils.log import Log
 
-# Create a blueprint for the return posts analytics graph data route
 returnPostAnalyticsDataBlueprint = Blueprint("returnPostTrafficGraphData", __name__)
 
 
@@ -35,25 +33,22 @@ def returnPostTrafficGraphData() -> dict:
         - `404 Not Found`: If `postID` is missing.
         - `410 Gone`: If analytics is disabled by the admin.
     """
-    # Accept postID type integer
+
     postID = request.args.get("postID", type=int)
-    # Accept True or False and convert into boolean, default to False
+
     sincePosted = str(request.args.get("sincePosted", default=False)).lower() == "true"
-    # Accept weeks type float
+
     weeks = request.args.get("weeks", type=float, default=0)
-    # Accept days type float
+
     days = request.args.get("days", type=float, default=0)
-    # Accept hours type float
+
     hours = request.args.get("hours", type=float, default=0)
 
-    # Check if analytics is true or false by admin for flaskblog
     match ANALYTICS:
         case True:
-            # Ensure the user is authenticated
             match "userName" in session:
                 case True:
                     if postID:
-                        # Fetch and return traffic graph data for the post
                         return make_response(
                             {
                                 "payload": getAnalyticsPageTrafficGraphData(
@@ -67,7 +62,6 @@ def returnPostTrafficGraphData() -> dict:
                             200,
                         )
                     else:
-                        # Return error if postID is missing
                         return make_response(
                             {
                                 "message": "Missing postID; unable to retrieve data.",
@@ -77,7 +71,6 @@ def returnPostTrafficGraphData() -> dict:
                         )
 
                 case False:
-                    # Return forbidden error if the user is not authenticated
                     return make_response(
                         {
                             "message": "client don't have permission",
@@ -86,11 +79,9 @@ def returnPostTrafficGraphData() -> dict:
                         403,
                     )
         case False:
-            # Return error if analytics is disabled
             return ({"message": "analytics is disabled by admin"}, 410)
 
 
-# api end point for country graph data
 @returnPostAnalyticsDataBlueprint.route("/api/v1/postCountryGraphData")
 def returnPostCountryGraphData() -> dict:
     """
@@ -109,18 +100,16 @@ def returnPostCountryGraphData() -> dict:
         `404 Not Found`: If `postID` is missing.
         `410 Gone`: If analytics is disabled by the admin.
     """
-    # Accept postID
+
     postID = request.args.get("postID", type=int)
-    # Accept True or False and convert into boolean, default to False
+
     viewAll = str(request.args.get("viewAll", default=False)).lower() == "true"
 
-    # Check if analytics is true or false by admin for flaskblog
     match ANALYTICS:
         case True:
             match "userName" in session:
                 case True:
                     if postID:
-                        # Fetch and return country graph data for the post
                         return make_response(
                             {
                                 "payload": getAnalyticsPageCountryGraphData(
@@ -130,7 +119,6 @@ def returnPostCountryGraphData() -> dict:
                             200,
                         )
                     else:
-                        # Return error if postID is missing
                         return make_response(
                             {
                                 "message": "Missing postID; unable to retrieve data.",
@@ -140,7 +128,6 @@ def returnPostCountryGraphData() -> dict:
                         )
 
                 case False:
-                    # Return forbidden error if the user is not authenticated
                     return make_response(
                         {
                             "message": "client don't have permission",
@@ -149,11 +136,9 @@ def returnPostCountryGraphData() -> dict:
                         403,
                     )
         case False:
-            # Return error if analytics is disabled
             return make_response({"message": "analytics is disabled by admin"}, 410)
 
 
-# api for storing visitors time spend duration
 @returnPostAnalyticsDataBlueprint.route("/api/v1/timeSpendsDuration", methods={"POST"})
 def storeTimeSpendsDuraton() -> dict:
     """
@@ -172,10 +157,8 @@ def storeTimeSpendsDuraton() -> dict:
         `405 Method Not Allowed`: If an unsupported HTTP method is used.
     """
 
-    # Check if analytics is true or false by admin for flaskblog
     match ANALYTICS:
         case True:
-            # Handle POST requests
             match request.method == "POST":
                 case True:
                     visitorData = request.json
@@ -183,30 +166,23 @@ def storeTimeSpendsDuraton() -> dict:
                     spendTime = visitorData.get("spendTime")
 
                     try:
-                        # Connect to the posts database
                         connection = sqlite3.connect(DB_ANALYTICS_ROOT)
-                        connection.set_trace_callback(
-                            Log.database
-                        )  # Set the trace callback for the connection
+                        connection.set_trace_callback(Log.database)
                         cursor = connection.cursor()
 
-                        # Update the time spend duration with the new data
                         cursor.execute(
                             """update postsAnalytics set timeSpendDuration = ? where id = ? """,
                             (spendTime, visitorID),
                         )
                         connection.commit()
                         return make_response({"message": "Successfully upadated"}, 200)
-                    except:
-                        # Return internal server error
+                    except Exception:
                         return make_response(
                             {"message": "Unexpected error occured"}, 500
                         )
 
                 case False:
-                    # Return method not allowed
                     return make_response({"message": "Method not allowed"}, 405)
 
         case False:
-            # Return error if analytics is disabled
             return ({"message": "analytics is disabled by admin"}, 410)

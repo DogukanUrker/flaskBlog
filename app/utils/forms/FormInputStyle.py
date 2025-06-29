@@ -3,7 +3,6 @@ This function is used to style the wtforms input box.
 """
 
 
-# Function to define the style for input fields
 def inputStyle():
     """
     This function creates a style for the input fields.

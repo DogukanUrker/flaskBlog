@@ -1,6 +1,7 @@
-from os.path import exists  # Importing the exists function
-from json import load  # Importing the load function
-from utils.log import Log  # Importing the Log class
+from json import load
+from os.path import exists
+
+from utils.log import Log
 
 
 def loadTranslations(language):
@@ -14,21 +15,12 @@ def loadTranslations(language):
         dict: A dictionary containing the translations for the specified language.
     """
 
-    translationFile = (
-        f"./translations/{language}.json"  # Define the path to the translation file
-    )
-    match exists(translationFile):  # Check if the translation file exists
+    translationFile = f"./translations/{language}.json"
+    match exists(translationFile):
         case True:
-            # If the translation file exists, open and load the JSON data
-            with open(
-                translationFile, "r", encoding="utf-8"
-            ) as file:  # Open the translation file in read mode
-                translations = load(file)  # Load the JSON data from the file
-                Log.info(
-                    f"Loaded translations for language: {language}"
-                )  # Log a message indicating that the translations have been loaded
-                return translations  # Return the translations as a dictionary
-    Log.warning(
-        f"Translation file not found: {language}"
-    )  # Log a warning message if the translation file does not exist
-    return {}  # Return an empty dictionary if the translation file does not exist
+            with open(translationFile, "r", encoding="utf-8") as file:
+                translations = load(file)
+                Log.info(f"Loaded translations for language: {language}")
+                return translations
+    Log.warning(f"Translation file not found: {language}")
+    return {}

@@ -1,12 +1,9 @@
-# Import necessary modules
-from flask import Blueprint, redirect, request, session
+from flask import Blueprint, redirect, session
+from settings import LANGUAGES
+from utils.flashMessage import flashMessage
 from utils.log import Log
-from utils.translations import loadTranslations  # Load translations for the application
 
-# Create a blueprint for the search bar route
-setLanguageBlueprint = Blueprint(
-    "setLanguage", __name__
-)  # Pass the name of the blueprint and the current module name as arguments
+setLanguageBlueprint = Blueprint("setLanguage", __name__)
 
 
 @setLanguageBlueprint.route("/setLanguage/<language>")
@@ -21,16 +18,14 @@ def setLanguage(language):
         str: The selected language code."""
     match language:
         case lang if lang in LANGUAGES:
-            session["language"] = (
-                language  # Set the session language to the selected language
-            )
+            session["language"] = language
             Log.info(f"Language set to: {language}")
             flashMessage(
                 page="setLanguage",
                 message="success",
                 category="success",
                 language=session["language"],
-            )  # Display a flash message
+            )
         case _:
             Log.warning(f"Language not supported: {language}")
-    return redirect("/changeLanguage")  # Redirect to the changeLanguage route
+    return redirect("/changeLanguage")

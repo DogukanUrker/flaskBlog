@@ -1,9 +1,9 @@
 from flask import session
-from utils.log import Log  # Import the session and Log
+from utils.log import Log
 
 from ..translations import (
     loadTranslations,
-)  # Load translations for the current language
+)
 
 
 def injectTranslations():
@@ -16,11 +16,7 @@ def injectTranslations():
     Returns:
         dict: A dictionary containing the translations for the current language.
     """
-    language = session.get(
-        "language", "en"
-    )  # Get the current language from the session
-    translations = loadTranslations(
-        language
-    )  # Load the translations for the current language
+    language = session.get("language", "en")
+    translations = loadTranslations(language)
     Log.info(f"Injecting translations for language: {language}")
-    return dict(translations=translations)  # Return the translations as a dictionary
+    return dict(translations=translations)
