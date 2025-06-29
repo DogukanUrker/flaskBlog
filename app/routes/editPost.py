@@ -2,20 +2,13 @@ import sqlite3
 
 from flask import (
     Blueprint,
-    abort,
     redirect,
     render_template,
     request,
     session,
 )
-from requests import post as requestsPost
 from settings import (
     DB_POSTS_ROOT,
-    RECAPTCHA,
-    RECAPTCHA_POST_EDIT,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
 )
 from utils.flashMessage import flashMessage
 from utils.forms.CreatePostForm import CreatePostForm
@@ -98,102 +91,44 @@ def editPost(urlID):
                             f'User: "{session["userName"]}" tried to edit a post with empty content',
                         )
                     else:
-                        if RECAPTCHA and RECAPTCHA_POST_EDIT:
-                            secretResponse = request.form["g-recaptcha-response"]
-                            verifyResponse = requestsPost(
-                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                            ).json()
+                        connection = sqlite3.connect(DB_POSTS_ROOT)
+                        connection.set_trace_callback(Log.database)
+                        cursor = connection.cursor()
+                        cursor.execute(
+                            """update posts set title = ? where id = ? """,
+                            (postTitle, post[0]),
+                        )
+                        cursor.execute(
+                            """update posts set tags = ? where id = ? """,
+                            (postTags, post[0]),
+                        )
+                        cursor.execute(
+                            """update posts set content = ? where id = ? """,
+                            (postContent, post[0]),
+                        )
+                        cursor.execute(
+                            """update posts set category = ? where id = ? """,
+                            (postCategory, post[0]),
+                        )
+                        if postBanner != b"":
+                            cursor.execute(
+                                """update posts set banner = ? where id = ? """,
+                                (postBanner, post[0]),
+                            )
+                        cursor.execute(
+                            """update posts set lastEditTimeStamp = ? where id = ? """,
+                            [(currentTimeStamp()), (post[0])],
+                        )
 
-                            if (
-                                verifyResponse["success"] is True
-                                or verifyResponse["score"] > 0.5
-                            ):
-                                Log.success(
-                                    f"Post edit reCAPTCHA| verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
-
-                                connection = sqlite3.connect(DB_POSTS_ROOT)
-                                connection.set_trace_callback(Log.database)
-                                cursor = connection.cursor()
-                                cursor.execute(
-                                    """update posts set title = ? where id = ? """,
-                                    (postTitle, post[0]),
-                                )
-                                cursor.execute(
-                                    """update posts set tags = ? where id = ? """,
-                                    (postTags, post[0]),
-                                )
-                                cursor.execute(
-                                    """update posts set content = ? where id = ? """,
-                                    (postContent, post[0]),
-                                )
-                                cursor.execute(
-                                    """update posts set category = ? where id = ? """,
-                                    (postCategory, post[0]),
-                                )
-                                if postBanner != b"":
-                                    cursor.execute(
-                                        """update posts set banner = ? where id = ? """,
-                                        (postBanner, post[0]),
-                                    )
-                                cursor.execute(
-                                    """update posts set lastEditTimeStamp = ? where id = ? """,
-                                    [(currentTimeStamp()), (post[0])],
-                                )
-
-                                connection.commit()
-                                Log.success(f'Post: "{postTitle}" edited')
-                                flashMessage(
-                                    page="editPost",
-                                    message="success",
-                                    category="success",
-                                    language=session["language"],
-                                )
-                                return redirect(f"/post/{post[10]}")
-                            else:
-                                Log.error(
-                                    f"Post edit reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
-                                abort(401)
-                        else:
-                            connection = sqlite3.connect(DB_POSTS_ROOT)
-                            connection.set_trace_callback(Log.database)
-                            cursor = connection.cursor()
-                            cursor.execute(
-                                """update posts set title = ? where id = ? """,
-                                (postTitle, post[0]),
-                            )
-                            cursor.execute(
-                                """update posts set tags = ? where id = ? """,
-                                (postTags, post[0]),
-                            )
-                            cursor.execute(
-                                """update posts set content = ? where id = ? """,
-                                (postContent, post[0]),
-                            )
-                            cursor.execute(
-                                """update posts set category = ? where id = ? """,
-                                (postCategory, post[0]),
-                            )
-                            if postBanner != b"":
-                                cursor.execute(
-                                    """update posts set banner = ? where id = ? """,
-                                    (postBanner, post[0]),
-                                )
-                            cursor.execute(
-                                """update posts set lastEditTimeStamp = ? where id = ? """,
-                                [(currentTimeStamp()), (post[0])],
-                            )
-
-                            connection.commit()
-                            Log.success(f'Post: "{postTitle}" edited')
-                            flashMessage(
-                                page="editPost",
-                                message="success",
-                                category="success",
-                                language=session["language"],
-                            )
-                            return redirect(f"/post/{post[10]}")
+                        connection.commit()
+                        Log.success(f'Post: "{postTitle}" edited')
+                        flashMessage(
+                            page="editPost",
+                            message="success",
+                            category="success",
+                            language=session["language"],
+                        )
+                        return redirect(f"/post/{post[10]}")
 
                 return render_template(
                     "/editPost.html.jinja",
@@ -202,8 +137,6 @@ def editPost(urlID):
                     tags=post[2],
                     content=post[3],
                     form=form,
-                    siteKey=RECAPTCHA_SITE_KEY,
-                    recaptcha=RECAPTCHA,
                 )
             else:
                 flashMessage(

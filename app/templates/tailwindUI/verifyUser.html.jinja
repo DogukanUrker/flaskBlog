@@ -6,25 +6,6 @@
 
 {% block body %}
 <div class="w-fit mx-auto mt-32 select-none">
-  {% if recaptcha %}
-  <script src="https://www.google.com/recaptcha/api.js"></script>
-  <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
-  <form method="post" id="recaptchaForm">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    {% if mailSent %}
-    {{ form.code(autocomplete="off", placeholder=translations.verifyUser.placeholder) }}
-    <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
-      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      {{translations.verifyUser.title}}
-    </button>
-    {% else %}
-    <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
-      class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
-      {{ translations.verifyUser.send }}
-    </button>
-    {% endif %}
-  </form>
-  {% else %}
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if mailSent %}
@@ -38,6 +19,5 @@
     </button>
     {% endif %}
   </form>
-  {% endif %}
 </div>
 {% endblock body %}

@@ -1,49 +1,36 @@
 {% extends 'layout.html.jinja' %}
+
 {% block head %}
-<title>{{ translations.accountSettings.title }}</title>
+<title>{{translations.accountSettings.title}}</title>
 {% endblock head %}
 
 {% block body %}
-<div class="w-fit mx-auto mt-32 text-center text-2xl font-medium">
-
-  <h2 class="my-4">
-    <a href="/changeusername" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-      <i class="ti ti-user mr-1 text-2xl"></i> {{ translations.accountSettings.username }}
+<div class="w-fit mx-auto mt-4 text-center">
+  <h1>{{translations.accountSettings.title}}</h1>
+  <div class="flex flex-col justify-center mt-8">
+    <a href="/changeusername"
+      class="my-2 hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
+      <i class="ti ti-user-edit mr-1 text-2xl"></i>
+      {{translations.accountSettings.changeUserName}}
     </a>
-  </h2>
-
-  <h2 class="my-4">
-    <a href="/changepassword" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-      <i class="ti ti-password mr-1 text-2xl"></i> {{ translations.accountSettings.password }}
+    <a href="/changepassword"
+      class="my-2 hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
+      <i class="ti ti-key mr-1 text-2xl"></i>
+      {{translations.accountSettings.changePassword}}
     </a>
-  </h2>
-
-  <h2 class="my-4">
-    <a href="/changeprofilepicture" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-      <i class="ti ti-photo mr-1 text-2xl"></i> {{ translations.accountSettings.profilePicture }}
+    <a href="/changeprofilepicture"
+      class="my-2 hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
+      <i class="ti ti-user-circle mr-1 text-2xl"></i>
+      {{translations.accountSettings.changeProfilePicture}}
     </a>
-  </h2>
-
-  <h2 class="my-4">
-    <a href="/changeLanguage" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-      <i class="ti ti-language mr-1 text-2xl"></i> {{ translations.accountSettings.language }}
+    <a href="/changelanguage"
+      class="my-2 hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
+      <i class="ti ti-language mr-1 text-2xl"></i>
+      {{translations.accountSettings.changeLanguage}}
     </a>
-  </h2>
+  </div>
 
   <h2 class="my-4">
-    {% if recaptcha %}
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
-
-    <form method="post" id="recaptchaForm">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
-        class="g-recaptcha hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
-        <i class="ti ti-user-x mr-1 text-2xl"></i>
-        {{ translations.accountSettings.delete }}
-      </button>
-    </form>
-    {% else %}
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <button type="submit" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
@@ -51,7 +38,6 @@
         {{ translations.accountSettings.delete }}
       </button>
     </form>
-    {% endif %}
   </h2>
 </div>
 {% endblock body %}

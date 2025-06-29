@@ -141,18 +141,3 @@ RECAPTCHA_SECRET_KEY = ""  # (str)
 
 # reCAPTCHA verify URL
 RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"  # (str)
-
-# Toggle reCAPTCHA verification for different actions
-RECAPTCHA_LOGIN = True  # (bool)
-RECAPTCHA_SIGN_UP = True  # (bool)
-RECAPTCHA_POST_CREATE = True  # (bool)
-RECAPTCHA_POST_EDIT = True  # (bool)
-RECAPTCHA_POST_DELETE = True  # (bool)
-RECAPTCHA_COMMENT = True  # (bool)
-RECAPTCHA_COMMENT_DELETE = True  # (bool)
-RECAPTCHA_PASSWORD_RESET = True  # (bool)
-RECAPTCHA_PASSWORD_CHANGE = True  # (bool)
-RECAPTCHA_USERNAME_CHANGE = True  # (bool)
-RECAPTCHA_VERIFY_USER = True  # (bool)
-RECAPTCHA_DELETE_USER = True  # (bool)
-RECAPTCHA_PROFILE_PICTURE_CHANGE = True  # (bool)

@@ -6,21 +6,14 @@ from random import randint
 
 from flask import (
     Blueprint,
-    abort,
     redirect,
     render_template,
     request,
     session,
 )
-from requests import post as requestsPost
 from settings import (
     APP_NAME,
     DB_USERS_ROOT,
-    RECAPTCHA,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    RECAPTCHA_VERIFY_USER,
     SMTP_MAIL,
     SMTP_PASSWORD,
     SMTP_PORT,
@@ -73,52 +66,19 @@ def verifyUser(codeSent):
                     code = request.form["code"]
 
                     if code == verificationCode:
-                        if RECAPTCHA and RECAPTCHA_VERIFY_USER:
-                            secretResponse = request.form["g-recaptcha-response"]
-                            verifyResponse = requestsPost(
-                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                            ).json()
-
-                            if (
-                                verifyResponse["success"] is True
-                                or verifyResponse["score"] > 0.5
-                            ):
-                                Log.success(
-                                    f"User verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
-
-                                cursor.execute(
-                                    """update users set isVerified = "True" where lower(userName) = ? """,
-                                    [(userName.lower())],
-                                )
-                                connection.commit()
-                                Log.success(f'User: "{userName}" has been verified')
-                                flashMessage(
-                                    page="verifyUser",
-                                    message="success",
-                                    category="success",
-                                    language=session["language"],
-                                )
-                                return redirect("/")
-                            else:
-                                Log.error(
-                                    f"User Verify reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
-                                abort(401)
-                        else:
-                            cursor.execute(
-                                """update users set isVerified = "True" where lower(userName) = ? """,
-                                [(userName.lower())],
-                            )
-                            connection.commit()
-                            Log.success(f'User: "{userName}" has been verified')
-                            flashMessage(
-                                page="verifyUser",
-                                message="success",
-                                category="success",
-                                language=session["language"],
-                            )
-                            return redirect("/")
+                        cursor.execute(
+                            """update users set isVerified = "True" where lower(userName) = ? """,
+                            [(userName.lower())],
+                        )
+                        connection.commit()
+                        Log.success(f'User: "{userName}" has been verified')
+                        flashMessage(
+                            page="verifyUser",
+                            message="success",
+                            category="success",
+                            language=session["language"],
+                        )
+                        return redirect("/")
                     else:
                         flashMessage(
                             page="verifyUser",
@@ -131,8 +91,6 @@ def verifyUser(codeSent):
                     "verifyUser.html.jinja",
                     form=form,
                     mailSent=True,
-                    siteKey=RECAPTCHA_SITE_KEY,
-                    recaptcha=RECAPTCHA,
                 )
             elif codeSent == "false":
                 if request.method == "POST":
@@ -198,47 +156,18 @@ def verifyUser(codeSent):
                         message["From"] = SMTP_MAIL
                         message["To"] = email[0]
 
-                        if RECAPTCHA and RECAPTCHA_VERIFY_USER:
-                            secretResponse = request.form["g-recaptcha-response"]
-                            verifyResponse = requestsPost(
-                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
-                            ).json()
+                        server.send_message(message)
+                        server.quit()
+                        Log.success(
+                            f'Verification code sent to "{email[0]}" for user: "{userName}"'
+                        )
 
-                            if (
-                                verifyResponse["success"] is True
-                                or verifyResponse["score"] > 0.5
-                            ):
-                                Log.success(
-                                    f"Send verification code reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
-
-                                server.send_message(message)
-                                server.quit()
-                                Log.success(
-                                    f'Verification code sent to "{email[0]}" for user: "{userName}"'
-                                )
-
-                                return redirect("/verifyUser/codesent=true")
-                            else:
-                                Log.error(
-                                    f"Send verification code reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
-                                abort(401)
-                        else:
-                            server.send_message(message)
-                            server.quit()
-                            Log.success(
-                                f'Verification code sent to "{email[0]}" for user: "{userName}"'
-                            )
-
-                            return redirect("/verifyUser/codesent=true")
+                        return redirect("/verifyUser/codesent=true")
 
                 return render_template(
                     "verifyUser.html.jinja",
                     form=form,
                     mailSent=False,
-                    siteKey=RECAPTCHA_SITE_KEY,
-                    recaptcha=RECAPTCHA,
                 )
     else:
         Log.error(f"{request.remote_addr} tried to verify user without being logged in")
