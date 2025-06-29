@@ -19,7 +19,7 @@ A modern blog application built with Flask, featuring a clean UI and powerful ad
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.10+
+- Python 3.13+
 - [uv](https://docs.astral.sh/uv/) (Python package manager)
 
 ### Installation
