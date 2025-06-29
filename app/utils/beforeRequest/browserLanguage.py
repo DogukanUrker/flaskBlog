@@ -1,4 +1,6 @@
-from modules import LANGUAGES, Log, request, session  # Import necessary modules
+from flask import request, session
+from constants import LANGUAGES
+from utils.log import Log  # Import necessary modules
 
 
 def browserLanguage():

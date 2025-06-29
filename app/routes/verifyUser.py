@@ -1,32 +1,25 @@
 # Import necessary modules and functions
-from modules import (
-    APP_NAME,  # Constant for application name
-    DB_USERS_ROOT,  # Path to the users database
-    RECAPTCHA,  # Recaptcha module
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    RECAPTCHA_SITE_KEY,  # Recaptcha site key
-    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    RECAPTCHA_VERIFY_USER,  # Flag for enabling/disabling Recaptcha for verify user
-    SMTP_MAIL,  # SMTP email address
-    SMTP_PASSWORD,  # SMTP password
-    SMTP_PORT,  # SMTP port number
-    SMTP_SERVER,  # SMTP server address
-    Blueprint,  # Blueprint class for creating modular applications
-    EmailMessage,  # Class for creating email messages
-    Log,  # Logging module
-    VerifyUserForm,  # Form for verifying user
-    abort,  # Function for aborting requests
-    flashMessage,  # Flash messaging module
-    randint,  # Function for generating random integers
-    redirect,  # Function for redirecting requests
-    render_template,  # Function for rendering templates
-    request,  # Module for handling HTTP requests
-    requestsPost,  # Module for making HTTP POST requests
-    session,  # Session management module
-    smtplib,  # SMTP client module
-    sqlite3,  # SQLite database module
-    ssl,  # SSL/TLS module
+import sqlite3
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from constants import (
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+    RECAPTCHA_VERIFY_USER,
+)
+from utils.log import Log
+from utils.forms.VerifyUserForm import VerifyUserForm
+from utils.flashMessage import flashMessage
+from utils.addPoints import addPoints
 
 # Create a blueprint for the verify user route
 verifyUserBlueprint = Blueprint("verifyUser", __name__)

@@ -1,26 +1,27 @@
 # Import necessary modules and functions
-from modules import (
-    DB_POSTS_ROOT,  # Path to the posts database
-    DB_USERS_ROOT,  # Path to the users database
-    RECAPTCHA,  # Recaptcha module
-    RECAPTCHA_POST_EDIT,  # # Flag for enabling/disabling Recaptcha for post editing
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    RECAPTCHA_SITE_KEY,  # Recaptcha site key
-    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    Blueprint,  # Blueprint class for creating modular applications
-    CreatePostForm,  # Form for creating a post
-    Log,  # Logging module
-    abort,  # Function for aborting requests
-    currentTimeStamp,  # Function for getting current timestamp
-    flashMessage,  # Flash messaging module
-    generateurlID,  # urlID generator from post title
-    redirect,  # Function for redirecting requests
-    render_template,  # Function for rendering templates
-    request,  # Module for handling HTTP requests
-    requestsPost,  # Module for making HTTP POST requests
-    session,  # Session management module
-    sqlite3,  # SQLite database module
+import sqlite3
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from constants import (
+    DB_POSTS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_POST_EDIT,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+)
+from utils.log import Log
+from utils.forms.CreatePostForm import CreatePostForm
+from utils.flashMessage import flashMessage
+from utils.addPoints import addPoints
+from utils.time import currentTimeStamp
+from utils.calculateReadTime import calculateReadTime
 
 # Create a blueprint for the edit post route
 editPostBlueprint = Blueprint("editPost", __name__)
@@ -77,10 +78,10 @@ def editPost(urlID):
 
                     Log.success(f'POST: "{urlID}" FOUND')
                     Log.database(
-                        f"Connecting to '{DB_USERS_ROOT}' database"
+                        f"Connecting to '{DB_POSTS_ROOT}' database"
                     )  # Log the database connection is started
-                    # Connect to the users database
-                    connection = sqlite3.connect(DB_USERS_ROOT)
+                    # Connect to the posts database
+                    connection = sqlite3.connect(DB_POSTS_ROOT)
                     connection.set_trace_callback(
                         Log.database
                     )  # Set the trace callback for the connection

@@ -2,12 +2,16 @@
 This file contains the main function
 """
 
-from modules import (
-    Log,  # Importing the Log class for logging
-    currentTimeStamp,  # Importing the currentTimeStamp function for getting the current timestamp
-    terminalASCII,  # Importing the terminalASCII function for displaying ASCII art in the terminal
-    timedelta,  # Importing the timedelta class for working with time differences
-)
+# Importing necessary modules and libraries
+from tamga import Tamga  # Importing Tamga Logger
+from datetime import timedelta  # Date and time handling
+
+# Importing the Log class from the utils.log module for logging messages.
+from utils.log import Log
+# Importing functions from the utils.time module for handling date and time-related operations.
+from utils.time import currentTimeStamp
+# Importing the terminalASCII function from the utils.terminalASCII module for displaying ASCII art in the terminal.
+from utils.terminalASCII import terminalASCII
 
 # Get the start time of the app
 startTime = currentTimeStamp()
@@ -24,10 +28,8 @@ from flask_wtf.csrf import (
     CSRFProtect,
 )  # Importing CSRF protection for Flask forms
 
-# Importing various configuration variables from the modules
-# Importing reCAPTCHA configurations
-# Import the contextProcessor module that contains custom functions for the app
-from modules import (
+# Importing various configuration variables from constants
+from constants import (
     APP_HOST,  # Importing the application host configuration
     APP_NAME,  # Importing the application name configuration
     APP_PORT,  # Importing the application port configuration
@@ -73,16 +75,21 @@ from modules import (
     TEMPLATE_FOLDER,  # Importing the template folder configuration
     UI_NAME,  # Importing the UI name configuration
     WERKZEUG_LOGGER,  # Importing the werkzeug logger configuration
-    Flask,
-    browserLanguage,  # A function that sets the app language based on the browser's preferred language
-    injectTranslations,  # A function that injects translations into the context of the application
-    isLogin,  # A function that checks LOG_IN constant
-    isRegistration,  # A function that checks REGISTRATION constant
-    recaptchaBadge,  # A function that checks RECAPTCHA_BADGE constant
-    returnPostUrlID,  # A function that returns the post's URL id
-    returnUserProfilePicture,  # A function that returns the user's profile picture
-    returnPostUrlSlug,  # A function that returns the post's URL slug
-)  # Importing Flask class for creating the Flask application instance
+)
+
+from flask import Flask
+
+# Import context processors and before request functions
+from utils.beforeRequest.browserLanguage import browserLanguage  # A function that sets the app language based on the browser's preferred language
+from utils.contextProcessor.translations import injectTranslations  # A function that injects translations into the context of the application
+from utils.contextProcessor.isLogin import isLogin  # A function that checks LOG_IN constant
+from utils.contextProcessor.isRegistration import isRegistration  # A function that checks REGISTRATION constant
+from utils.contextProcessor.recaptchaBadge import recaptchaBadge  # A function that checks RECAPTCHA_BADGE constant
+from utils.contextProcessor.returnPostUrlID import returnPostUrlID  # A function that returns the post's URL id
+from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture  # A function that returns the user's profile picture
+from utils.contextProcessor.returnPostUrlSlug import returnPostUrlSlug  # A function that returns the post's URL slug
+
+# Importing necessary modules and classes
 from routes.about import (
     aboutBlueprint,
 )  # Importing the blueprint for about route

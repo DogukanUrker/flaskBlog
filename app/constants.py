@@ -2,8 +2,8 @@
 This module contains all the general application settings.
 """
 
-# Import necessary modules from the modules module
-from modules import secrets
+# Import necessary modules
+import secrets
 
 # Name of the Flask application
 APP_NAME = "flaskBlog"  # (str)

@@ -1,8 +1,6 @@
-# Import the Log and request functions from the modules module
-from modules import (
-    Log,  # Importing the Log class for logging
-    request,  # Module for handling HTTP requests
-)
+# Import the Log and request functions from their actual sources
+from flask import request  # Module for handling HTTP requests
+from utils.log import Log  # Importing the Log class for logging
 
 
 def afterRequestLogger(response):

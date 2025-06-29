@@ -3,14 +3,14 @@ This module contains the code for the Log variable.
 """
 
 # Import necessary modules
-from modules import (
+from tamga import Tamga  # Importing Tamga Logger
+from os.path import exists  # Importing the exists function
+from os import mkdir  # Importing the mkdir function
+from constants import (
     CUSTOM_LOGGER,  # Importing the custom logger configuration
-    LOG_FILE_ROOT,  # Importing the LOG_FILE_ROOT variable from modules
-    LOG_FOLDER_ROOT,  # Importing the LOG_FOLDER_ROOT variable from modules
-    LOG_TO_FILE,  # Importing the LOG_TO_FILE variable from modules
-    Tamga,  # Importing Tamga Logger
-    exists,  # Importing the exists function from modules
-    mkdir,  # Importing the mkdir function from modules
+    LOG_FILE_ROOT,  # Importing the LOG_FILE_ROOT variable
+    LOG_FOLDER_ROOT,  # Importing the LOG_FOLDER_ROOT variable
+    LOG_TO_FILE,  # Importing the LOG_TO_FILE variable
 )
 
 # Checking if LOG_FOLDER_ROOT directory exists

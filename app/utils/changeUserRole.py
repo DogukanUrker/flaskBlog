@@ -1,4 +1,7 @@
-from modules import DB_USERS_ROOT, Log, redirect, session, sqlite3
+import sqlite3
+from flask import redirect, session
+from constants import DB_USERS_ROOT
+from utils.log import Log
 
 
 # Function to change the role of a user

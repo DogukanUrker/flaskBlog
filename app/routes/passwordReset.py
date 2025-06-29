@@ -1,33 +1,33 @@
 # Import necessary modules and functions
-from modules import (
-    APP_NAME,  # Application name
-    DB_USERS_ROOT,  # Path to the users database
-    RECAPTCHA,  # Flag for enabling reCAPTCHA
-    RECAPTCHA_PASSWORD_RESET,  # Flag for enabling reCAPTCHA for password reset
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
-    RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
-    RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    SMTP_MAIL,  # SMTP server email
-    SMTP_PASSWORD,  # SMTP server password
-    SMTP_PORT,  # SMTP server port
-    SMTP_SERVER,  # SMTP server address
-    Blueprint,  # Blueprint for defining routes
-    EmailMessage,  # Class for creating email messages
-    Log,  # Custom logging module
-    PasswordResetForm,  # Form class for password reset
-    abort,  # Function to abort request processing
-    encryption,  # Encryption utility module
-    flashMessage,  # Flash messaging module
-    randint,  # Function to generate random integers
-    redirect,  # Redirect function
-    render_template,  # Template rendering function
-    request,  # Request handling module
-    requestsPost,  # Function for making POST requests
-    session,  # Session module
-    smtplib,  # SMTP protocol client module
-    sqlite3,  # SQLite database module
-    ssl,  # SSL/TLS support module
+import sqlite3
+import smtplib
+from email.message import EmailMessage
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from passlib.hash import sha512_crypt as encryption
+from constants import (
+    APP_NAME,
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_PASSWORD_RESET,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+    SMTP_MAIL,
+    SMTP_PASSWORD,
+    SMTP_PORT,
+    SMTP_SERVER,
+)
+from utils.log import Log
+from utils.forms.PasswordResetForm import PasswordResetForm
+from utils.flashMessage import flashMessage
+from utils.addPoints import addPoints
 
 # Create a blueprint for the password reset route
 passwordResetBlueprint = Blueprint("passwordReset", __name__)

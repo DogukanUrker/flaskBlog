@@ -1,16 +1,26 @@
 # Import necessary modules and functions
-from modules import (
-    DB_USERS_ROOT,  # Path to the users database
-    Blueprint,  # Blueprint for defining routes
-    Delete,  # Function for deleting users
-    Log,  # A class for logging messages
-    changeUserRole,  # Function for changing user roles
-    redirect,  # Redirect function
-    render_template,  # Template rendering function
-    request,  # Request handling module
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
+import sqlite3
+from flask import (
+    Blueprint,
+    abort,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from constants import (
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_DELETE_USER,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+)
+from utils.log import Log
+from utils.delete import Delete
+from utils.flashMessage import flashMessage
+from utils.changeUserRole import changeUserRole
 
 # Create a blueprint for the admin panel users route
 adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)

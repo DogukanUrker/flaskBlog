@@ -1,7 +1,5 @@
-# Import the modules module that contains constants and functions for the app
-from modules import (
-    getPostUrlIdFromPost,  # A function that returns the post's urlID
-)
+# Import the function from utils module
+from utils.getPostUrlIdFromPost import getPostUrlIdFromPost  # A function that returns the post's urlID
 
 
 # Define a function that returns a dictionary with the post's urlID

@@ -1,19 +1,18 @@
 # Import necessary modules and functions
-from modules import (
-    DB_COMMENTS_ROOT,  # Path to the comments database
-    DB_POSTS_ROOT,  # Path to the posts database
-    Blueprint,  # Blueprint for defining routes
-    Delete,  # Function for deleting data
-    Log,  # Custom logging module
-    flashMessage,  # Flash messaging module
-    load,  # Function for loading JSON data from files
-    redirect,  # Redirect function
-    render_template,  # Template rendering function
-    request,  # Request handling module
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
-    url_for,  # URL building function
+import sqlite3
+from json import load  # Function for loading JSON data from files
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
 )
+from constants import DB_COMMENTS_ROOT, DB_POSTS_ROOT  # Database paths
+from utils.log import Log  # Custom logging module
+from utils.flashMessage import flashMessage  # Flash messaging module
+from utils.delete import Delete  # Function for deleting data
 
 # Create a blueprint for the dashboard route
 dashboardBlueprint = Blueprint("dashboard", __name__)

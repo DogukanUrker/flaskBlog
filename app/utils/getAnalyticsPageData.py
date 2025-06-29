@@ -1,4 +1,7 @@
-from modules import DB_ANALYTICS_ROOT, Log, datetime, sqlite3, timedelta
+import sqlite3
+from datetime import datetime, timedelta
+from constants import DB_ANALYTICS_ROOT
+from utils.log import Log
 
 
 def getAnalyticsPageTrafficGraphData(

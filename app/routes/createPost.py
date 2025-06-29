@@ -1,26 +1,28 @@
 # Import necessary modules and functions
-from modules import (
-    DB_POSTS_ROOT,  # Path to the posts database
-    RECAPTCHA,  # Recaptcha module
-    RECAPTCHA_POST_CREATE,  # Flag for enabling/disabling Recaptcha for post creation
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    RECAPTCHA_SITE_KEY,  # Recaptcha site key
-    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    Blueprint,  # Blueprint class for creating modular applications
-    CreatePostForm,  # Form for creating a post
-    Log,  # Logging module
-    abort,  # Function for aborting requests
-    addPoints,  # Function for adding points to a user
-    currentTimeStamp,  # Function for getting current timestamp
-    flashMessage,  # Flash messaging module
-    generateurlID,  # url id generator for blog title
-    redirect,  # Function for redirecting requests
-    render_template,  # Function for rendering templates
-    request,  # Module for handling HTTP requests
-    requestsPost,  # Module for making HTTP POST requests
-    session,  # Session management module
-    sqlite3,  # SQLite database module
+import sqlite3
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from constants import (
+    DB_POSTS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_POST_CREATE,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+)
+from utils.log import Log
+from utils.forms.CreatePostForm import CreatePostForm
+from utils.flashMessage import flashMessage
+from utils.addPoints import addPoints
+from utils.time import currentTimeStamp
+from utils.calculateReadTime import calculateReadTime
+from utils.generateUrlIdFromPost import generateurlID
 
 # Create a blueprint for the create post route
 createPostBlueprint = Blueprint("createPost", __name__)

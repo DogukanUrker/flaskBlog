@@ -1,7 +1,5 @@
-# Import the modules module that contains constants and functions for the app
-from modules import (
-    LOG_IN,  # A constant that apps are allowed to user login
-)
+# Import the constants module that contains constants for the app
+from constants import LOG_IN  # A constant that apps are allowed to user login
 
 
 # Define a function that returns a dictionary with the login enabled

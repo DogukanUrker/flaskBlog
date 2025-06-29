@@ -1,7 +1,6 @@
-from modules import (
-    Blueprint,
-    render_template,
-)  # Import the render_template and Blueprint modules
+from flask import Blueprint, redirect, render_template, session
+from constants import LANGUAGES
+from utils.log import Log
 
 changeLanguageBlueprint = Blueprint(
     "changeLanguage", __name__

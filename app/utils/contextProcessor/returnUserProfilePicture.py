@@ -1,7 +1,5 @@
-# Import the modules module that contains constants and functions for the app
-from modules import (
-    getProfilePicture,  # A function that returns the user's profile picture URL
-)
+# Import the function from utils module
+from utils.getProfilePicture import getProfilePicture  # A function that returns the user's profile picture URL
 
 
 # Define a function that returns a dictionary with the user's profile picture URL

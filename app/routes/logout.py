@@ -1,17 +1,12 @@
 """
 This file contains the blueprint for the logout page.
 
-The functions and methods used in this blueprint are imported from the modules module.
+The functions and methods used in this blueprint are imported from their actual sources.
 """
 
-from modules import (
-    Blueprint,  # A class for creating Flask blueprints
-    Log,  # A function for logging messages
-    flashMessage,  # Flash messaging module
-    redirect,  # A function for returning redirect responses
-    request,  # Module for handling HTTP requests
-    session,  # A dictionary for storing session data
-)
+from flask import Blueprint, redirect, request, session
+from utils.log import Log  # A function for logging messages
+from utils.flashMessage import flashMessage  # Flash messaging module
 
 logoutBlueprint = Blueprint(
     "logout", __name__

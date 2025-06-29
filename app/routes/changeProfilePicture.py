@@ -1,23 +1,25 @@
 # Import necessary modules and functions
-from modules import (
-    DB_USERS_ROOT,  # Path to the users database
-    RECAPTCHA,  # Flag indicating if reCAPTCHA is enabled
-    RECAPTCHA_PROFILE_PICTURE_CHANGE,  # Flag indicating if reCAPTCHA is required for changing profile picture
-    RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
-    RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
-    RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    Blueprint,  # Blueprint for defining routes
-    ChangeProfilePictureForm,  # Form for changing profile picture
-    Log,  # Custom logging module
-    abort,  # Function to abort request
-    flashMessage,  # Flash messaging module
-    redirect,  # Redirect function
-    render_template,  # Template rendering function
-    request,  # Request handling module
-    requestsPost,  # Function for making HTTP POST requests
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
+import sqlite3
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from constants import (
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_PROFILE_PICTURE_CHANGE,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+)
+from utils.log import Log
+from utils.forms.ChangeProfilePictureForm import ChangeProfilePictureForm
+from utils.flashMessage import flashMessage
+from utils.addPoints import addPoints
 
 # Create a blueprint for the change profile picture route
 changeProfilePictureBlueprint = Blueprint("changeProfilePicture", __name__)

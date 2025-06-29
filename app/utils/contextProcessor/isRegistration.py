@@ -1,7 +1,5 @@
-# Import the modules module that contains constants and functions for the app
-from modules import (
-    REGISTRATION,  # A constant that apps are allowed to user register
-)
+# Import the constants module that contains constants for the app
+from constants import REGISTRATION  # A constant that apps are allowed to user register
 
 
 # Define a function that returns a dictionary with the registration enabled

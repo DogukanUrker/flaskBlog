@@ -2,7 +2,7 @@
 This module contains the function to calculate the estimated reading time in minutes for a given post content.
 """
 
-from modules import sub  # Importing sub function from modules
+from re import sub  # Importing sub function from re module
 
 
 # Calculate the estimated reading time in minutes for a given post content.

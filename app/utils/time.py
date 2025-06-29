@@ -1,8 +1,10 @@
 """
-Importing necessary modules.
+This module contains the current time variables.
 """
 
-from modules import datetime, tzname
+# Import necessary modules
+from datetime import datetime
+from time import tzname
 
 
 # Function to get the current system time zone

@@ -1,15 +1,12 @@
 # Import the necessary modules and functions
-from modules import (
-    ANALYTICS,  # Constants to check analytics feature
-    DB_ANALYTICS_ROOT,  # Path to the analytics database
-    Blueprint,  # Blueprint for defining routes
-    Log,  # Custom logging module
-    getAnalyticsPageCountryGraphData,  # Function to get post country graph data
-    getAnalyticsPageTrafficGraphData,  # Function to get post traffic graph data
-    make_response,  # Function to make http response
-    request,  # Request handling module
-    session,  # Session management module
-    sqlite3,  # SQLite database module
+import sqlite3
+from flask import Blueprint, jsonify, session
+from constants import ANALYTICS, DB_ANALYTICS_ROOT, DB_POSTS_ROOT
+from utils.log import Log
+from utils.getAnalyticsPageData import (
+    getAnalyticsPageCountryGraphData,
+    getAnalyticsPageOSGraphData,
+    getAnalyticsPageTrafficGraphData,
 )
 
 # Create a blueprint for the return posts analytics graph data route

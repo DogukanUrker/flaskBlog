@@ -23,17 +23,23 @@ The functions in this module use the following helper functions:
 - DB_COMMENTS_ROOT: This variable stores the path to the comments database.
 """
 
-from modules import (
+# Project informations
+# Project name: flaskBlog
+# Project author: dogukanurker
+# Project mail: dgrknrkr@gmail.com
+
+
+# Import necessary modules
+import sqlite3
+from flask import redirect, session
+from constants import (
     DB_ANALYTICS_ROOT,  # A constant for the path to the analytics database
     DB_COMMENTS_ROOT,  # A constant for the path to the comments database
     DB_POSTS_ROOT,  # A constant for the path to the posts database
     DB_USERS_ROOT,  # A constant for the path to the users database
-    Log,  # A class for logging messages
-    flashMessage,  # A function for displaying flash messages
-    redirect,  # A function for returning redirect responses
-    session,  # A dictionary for storing session data
-    sqlite3,  # A module for working with SQLite databases
 )
+from utils.log import Log  # A class for logging messages
+from utils.flashMessage import flashMessage  # A function for displaying flash messages
 
 
 class Delete:

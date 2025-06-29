@@ -1,8 +1,6 @@
-from modules import (
-    Log,  # Importing the Log class from the modules module
-    exists,  # Importing the exists function from the modules module
-    load,  # Importing the load function from the modules module
-)  # Importing the load, exists and Log functions from the modules module
+from os.path import exists  # Importing the exists function
+from json import load  # Importing the load function
+from utils.log import Log  # Importing the Log class
 
 
 def loadTranslations(language):

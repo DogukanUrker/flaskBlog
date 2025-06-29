@@ -1,4 +1,5 @@
-from modules import Log, session  # Import the session and Log from the modules file
+from flask import session
+from utils.log import Log  # Import the session and Log
 
 from ..translations import (
     loadTranslations,

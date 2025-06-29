@@ -1,22 +1,19 @@
 """
-This module contains the code for the category route.
-
-The category route is responsible for handling requests to view posts by category.
-It also provides an interface for sorting the posts by various criteria.
+This module contains the route for category pages.
 """
 
-# Import necessary modules and functions from other files or libraries
-from modules import (
-    DB_POSTS_ROOT,  # Importing the constant that stores the path to the database file
-    Blueprint,  # Importing the Blueprint class to create modular routes for the application
-    Log,  # Importing the Log class for logging messages
-    abort,  # Importing the abort function for handling errors and aborting requests
-    load,  # Importing the load function for loading JSON data from files
-    redirect,  # Importing the redirect function for redirecting requests,
-    render_template,  # Importing the render_template function to render HTML templates with context
-    session,  # Importing the session object to store user session data
-    sqlite3,  # Importing the sqlite3 module to interact with SQLite databases
-)
+"""
+DISCLAIMER: This code is the property of the repository owner and is not intended for 
+use without explicit permission from the owner. The code is provided as-is and is 
+subject to change without notice. Use of this code for commercial or non-commercial 
+purposes without permission is strictly prohibited.
+"""
+
+import sqlite3
+from json import load  # Importing the load function for loading JSON data from files
+from flask import Blueprint, render_template, request, redirect, session, abort
+from constants import DB_POSTS_ROOT
+from utils.log import Log
 
 # Creating a Blueprint object named 'categoryBlueprint' for this route
 categoryBlueprint = Blueprint("category", __name__)

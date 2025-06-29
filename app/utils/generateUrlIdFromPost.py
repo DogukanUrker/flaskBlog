@@ -1,4 +1,7 @@
-from modules import DB_POSTS_ROOT, Log, sqlite3, uuid
+import sqlite3
+import uuid
+from constants import DB_POSTS_ROOT
+from utils.log import Log
 
 
 # Function to check if URL ID exists in the database

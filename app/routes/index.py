@@ -11,16 +11,18 @@ The posts variable is passed to the index.html.jinja template as a list of dicti
 The index.html.jinja template displays the title and content of each post.
 """
 
-from modules import (
-    DB_POSTS_ROOT,  # Importing the constant for the path to the posts database
-    Blueprint,  # Importing the Blueprint class for creating Flask blueprints
-    Log,  # A class for logging messages
-    load,  # A function for loading JSON data from files
-    redirect,  # Importing the redirect function for redirecting requests
-    render_template,  # Importing the render_template function for rendering Jinja templates
-    session,  # A session object for storing user session data
-    sqlite3,  # Importing the SQLite module for working with SQLite databases
-)
+"""
+DISCLAIMER: This code is the property of the repository owner and is not intended for 
+use without explicit permission from the owner. The code is provided as-is and is 
+subject to change without notice. Use of this code for commercial or non-commercial 
+purposes without permission is strictly prohibited.
+"""
+
+import sqlite3
+from json import load  # A function for loading JSON data from files
+from flask import Blueprint, render_template, request, redirect, session
+from constants import DB_POSTS_ROOT
+from utils.log import Log
 
 # Create a blueprint for the home page with the name "index" and the current module name
 indexBlueprint = Blueprint("index", __name__)

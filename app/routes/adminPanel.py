@@ -1,14 +1,8 @@
 # Import necessary modules and functions
-from modules import (
-    DB_USERS_ROOT,  # Path to the users database
-    Blueprint,  # Blueprint for defining routes
-    Log,  # A class for logging messages
-    redirect,  # Redirect function
-    render_template,  # Template rendering function
-    request,  # Request handling module
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
-)
+import sqlite3
+from flask import Blueprint, redirect, render_template, session
+from constants import DB_COMMENTS_ROOT, DB_POSTS_ROOT, DB_USERS_ROOT
+from utils.log import Log
 
 # Create a blueprint for the admin panel route
 adminPanelBlueprint = Blueprint("adminPanel", __name__)

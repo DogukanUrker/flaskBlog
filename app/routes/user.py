@@ -1,16 +1,11 @@
 """
-This module contains the code for the user page.
+This module contains the route for viewing user profiles.
 """
 
-from modules import (
-    DB_COMMENTS_ROOT,  # A constant for the path to the comments database
-    DB_POSTS_ROOT,  # A constant for the path to the posts database
-    DB_USERS_ROOT,  # A constant for the path to the users database
-    Blueprint,  # A class for creating Flask blueprints
-    Log,  # A class for logging messages
-    render_template,  # A function for rendering Jinja templates
-    sqlite3,  # A module for working with SQLite databases
-)
+import sqlite3
+from flask import Blueprint, render_template, session
+from constants import DB_COMMENTS_ROOT, DB_POSTS_ROOT, DB_USERS_ROOT
+from utils.log import Log
 
 userBlueprint = Blueprint("user", __name__)  # Create a blueprint for the user page
 

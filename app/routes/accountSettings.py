@@ -1,22 +1,17 @@
 # Import necessary modules and functions
-from modules import (
+import sqlite3
+from flask import Blueprint, render_template, abort, redirect, request, session
+from requests import post as requestsPost
+from constants import (
     DB_USERS_ROOT,  # Path to the users database
     RECAPTCHA,  # Flag indicating whether reCAPTCHA is enabled
     RECAPTCHA_DELETE_USER,  # Flag indicating whether reCAPTCHA is required for deleting user
     RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    Blueprint,  # Blueprint for defining routes
-    Delete,  # Function to delete user from the database
-    Log,  # A class for logging messages
-    abort,  # Function to abort the request
-    redirect,  # Function to redirect
-    render_template,  # Function to render HTML templates
-    request,  # Module for handling HTTP requests
-    requestsPost,  # Function to make POST requests
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
 )
+from utils.delete import Delete  # Function to delete user from the database
+from utils.log import Log  # A class for logging messages
 
 # Create a blueprint for the account settings route
 accountSettingsBlueprint = Blueprint("accountSettings", __name__)

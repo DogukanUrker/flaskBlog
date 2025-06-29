@@ -1,11 +1,9 @@
-# This file contains the blueprint and routes for the Privacy Policy page.
+"""
+This module contains the privacy policy page blueprint.
+"""
 
-# Import the necessary modules from the modules file
-from modules import (
-    Blueprint,  # A class that represents a Flask blueprint
-    Log,  # A class for logging messages
-    render_template,  # A function that renders a template file
-)
+from flask import Blueprint, render_template
+from utils.log import Log  # A class for logging messages
 
 # Create a blueprint object for the Privacy Policy page
 privacyPolicyBlueprint = Blueprint("privacyPolicy", __name__)

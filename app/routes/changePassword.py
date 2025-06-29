@@ -1,24 +1,26 @@
 # Import the necessary modules and functions
-from modules import (
-    DB_USERS_ROOT,  # Importing constant for database path
-    RECAPTCHA,  # Importing RECAPTCHA constant
-    RECAPTCHA_PASSWORD_CHANGE,  # Importing RECAPTCHA flag for password change verification
-    RECAPTCHA_SECRET_KEY,  # Importing RECAPTCHA secret key
-    RECAPTCHA_SITE_KEY,  # Importing RECAPTCHA site key
-    RECAPTCHA_VERIFY_URL,  # Importing RECAPTCHA verification URL
-    Blueprint,  # Importing Blueprint for creating modular applications
-    ChangePasswordForm,  # Importing form class for change password form
-    Log,  # Importing log class for logging messages
-    abort,  # Importing abort function for aborting requests
-    encryption,  # Importing encryption functions for password hashing and verification
-    flashMessage,  # Flash messaging module
-    redirect,  # Importing redirect for redirecting requests
-    render_template,  # Importing render_template for rendering HTML templates
-    request,  # Importing request for handling HTTP requests
-    requestsPost,  # Importing requestsPost function for making HTTP POST requests
-    session,  # Importing session for managing user sessions
-    sqlite3,  # Importing sqlite3 for working with SQLite databases
+import sqlite3
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from passlib.hash import sha512_crypt as encryption
+from constants import (
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_PASSWORD_CHANGE,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+)
+from utils.log import Log
+from utils.forms.ChangePasswordForm import ChangePasswordForm
+from utils.flashMessage import flashMessage
+from utils.addPoints import addPoints
 
 # Create a blueprint for the change password route
 changePasswordBlueprint = Blueprint("changePassword", __name__)

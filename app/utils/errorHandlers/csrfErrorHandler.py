@@ -1,5 +1,5 @@
-# Import the Log and render_template functions from the modules module
-from modules import Log, render_template
+from flask import render_template
+from utils.log import Log
 
 
 # Define a function to handle CSRF errors

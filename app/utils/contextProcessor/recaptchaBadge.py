@@ -1,5 +1,5 @@
-# Import the modules module that contains constants and functions for the app
-from modules import (
+# Import the constants module that contains constants for the app
+from constants import (
     RECAPTCHA,  # A constant that indicates if the recaptcha is enabled
     RECAPTCHA_BADGE,  # A constant indicating whether the recaptcha badge should be visible or not
 )

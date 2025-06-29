@@ -1,35 +1,35 @@
 # Import necessary modules and functions
-from modules import (
-    APP_NAME,  # Constant for application name
-    DB_USERS_ROOT,  # Path to the users database
-    RECAPTCHA,  # Recaptcha module
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    RECAPTCHA_SIGN_UP,  # Flag for enabling/disabling Recaptcha for sign-up
-    RECAPTCHA_SITE_KEY,  # Recaptcha site key
-    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    REGISTRATION,  # Flag for enabling/disabling user registration
-    SMTP_MAIL,  # SMTP email address
-    SMTP_PASSWORD,  # SMTP password
-    SMTP_PORT,  # SMTP port number
-    SMTP_SERVER,  # SMTP server address
-    Blueprint,  # Blueprint class for creating modular applications
-    EmailMessage,  # Class for creating email messages
-    Log,  # Logging module
-    SignUpForm,  # Form for user sign-up
-    abort,  # Function for aborting requests
-    addPoints,  # Function for adding points to user
-    currentTimeStamp,  # Function for getting current timestamp
-    encryption,  # Encryption module
-    flashMessage,  # Flash messaging module
-    redirect,  # Function for redirecting requests
-    render_template,  # Function for rendering templates
-    request,  # Module for handling HTTP requests
-    requestsPost,  # Module for making HTTP POST requests
-    session,  # Session management module
-    smtplib,  # SMTP client module
-    sqlite3,  # SQLite database module
-    ssl,  # SSL/TLS module
+import sqlite3
+import secrets
+import smtplib
+import uuid
+from email.message import EmailMessage
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from passlib.hash import sha512_crypt as encryption
+from constants import (
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SIGN_UP,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_VERIFY_URL,
+    REGISTRATION,
+    SMTP_MAIL,
+    SMTP_PASSWORD,
+    SMTP_PORT,
+    SMTP_SERVER,
+)
+from utils.log import Log
+from utils.forms.SignUpForm import SignUpForm
+from utils.flashMessage import flashMessage
+from utils.time import currentTimeStamp
 
 # Create a blueprint for the signup route
 signUpBlueprint = Blueprint("signup", __name__)

@@ -1,27 +1,29 @@
 # Import necessary modules and functions
-from modules import (
-    APP_NAME,  # Application name
-    DB_ANALYTICS_ROOT,  # Path to the analytics database
-    DB_COMMENTS_ROOT,  # Path to the comments database
-    DB_POSTS_ROOT,  # Path to the posts database
-    Blueprint,  # Blueprint for defining routes
-    ANALYTICS,  #  # Constants to check analytics feature
-    CommentForm,  # Form class for comments
-    Delete,  # Module for deleting posts and comments
-    Log,  # Custom logging module
-    addPoints,  # Function to add points to user's score
-    calculateReadTime,  # Function to calculate reading time
-    currentTimeStamp,  # Function to get current timestamp
-    flashMessage,  # Flash messaging module
-    getDataFromUserIP,  # Function to get data visitors IP Address
-    redirect,  # Redirect function
-    render_template,  # Template rendering function
-    request,  # Request handling module
-    session,  # Session management module
-    sqlite3,  # SQLite database module
-    url_for,  # URL generation module,
-    getSlugFromPostTitle,  # Function to convert post title into slug
+import sqlite3
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
 )
+from constants import (
+    APP_NAME,
+    ANALYTICS,
+    DB_ANALYTICS_ROOT,
+    DB_COMMENTS_ROOT,
+    DB_POSTS_ROOT,
+)
+from utils.log import Log  # Custom logging module
+from utils.forms.CommentForm import CommentForm  # Form class for comments
+from utils.delete import Delete  # Module for deleting posts and comments
+from utils.addPoints import addPoints  # Function to add points to user's score
+from utils.calculateReadTime import calculateReadTime  # Function to calculate reading time
+from utils.time import currentTimeStamp  # Function to get current timestamp
+from utils.flashMessage import flashMessage  # Flash messaging module
+from utils.getDataFromUserIP import getDataFromUserIP  # Function to get data visitors IP Address
+from utils.generateUrlIdFromPost import getSlugFromPostTitle  # Function to convert post title into slug
 
 # Create a blueprint for the post route
 postBlueprint = Blueprint("post", __name__)

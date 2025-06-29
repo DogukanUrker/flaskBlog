@@ -1,5 +1,7 @@
 # Importing necessary modules
-from modules import DB_POSTS_ROOT, Log, sqlite3
+import sqlite3
+from constants import DB_POSTS_ROOT
+from utils.log import Log
 
 
 # Function to get the urlID of posts using postID

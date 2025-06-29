@@ -1,5 +1,16 @@
 # Import necessary modules and functions
-from modules import (
+import sqlite3
+from flask import (
+    Blueprint,
+    abort,
+    redirect,
+    render_template,
+    request,
+    session,
+)
+from requests import post as requestsPost
+from passlib.hash import sha512_crypt as encryption
+from constants import (
     DB_USERS_ROOT,  # Path to the users database
     LOG_IN,  # Flag indicating if login is enabled
     RECAPTCHA,  # Flag for enabling reCAPTCHA
@@ -7,20 +18,11 @@ from modules import (
     RECAPTCHA_SECRET_KEY,  # reCAPTCHA secret key
     RECAPTCHA_SITE_KEY,  # reCAPTCHA site key
     RECAPTCHA_VERIFY_URL,  # reCAPTCHA verification URL
-    Blueprint,  # Blueprint for defining routes
-    Log,  # Custom logging module
-    LoginForm,  # Form class for login
-    abort,  # Function to abort request processing
-    addPoints,  # Function to add points to user's score
-    encryption,  # Encryption utility module
-    flashMessage,  # Flash messaging module
-    redirect,  # Redirect function
-    render_template,  # Template rendering function
-    request,  # Request handling module
-    requestsPost,  # Function for making POST requests
-    session,  # Session handling module
-    sqlite3,  # SQLite database module
 )
+from utils.log import Log  # Custom logging module
+from utils.forms.LoginForm import LoginForm  # Form class for login
+from utils.flashMessage import flashMessage  # Flash messaging module
+from utils.addPoints import addPoints  # Function to add points to user's score
 
 # Create a blueprint for the login route
 loginBlueprint = Blueprint("login", __name__)

@@ -9,7 +9,11 @@ The database consists of three tables:
 This file contains functions to create the tables if they do not already exist, and to ensure that they have the correct structure.
 """
 
-from modules import (
+import sqlite3
+from os.path import exists
+from os import mkdir
+from passlib.hash import sha512_crypt as encryption
+from constants import (
     DB_ANALYTICS_ROOT,  # Root directory path for the analytics database
     DB_COMMENTS_ROOT,  # Root directory path for the comments database
     DB_FOLDER_ROOT,  # Root directory path for the database folder
@@ -21,13 +25,9 @@ from modules import (
     DEFAULT_ADMIN_POINT,  # Default points assigned to the admin user
     DEFAULT_ADMIN_PROFILE_PICTURE,  # Default profile picture for the admin user
     DEFAULT_ADMIN_USERNAME,  # Default username for the admin user
-    Log,
-    currentTimeStamp,
-    encryption,
-    exists,
-    mkdir,
-    sqlite3,
 )
+from utils.log import Log
+from utils.time import currentTimeStamp
 
 
 # This function checks if the database folder exists, and creates it if it does not.

@@ -1,9 +1,6 @@
 # Import the necessary modules and functions
-from modules import (
-    Blueprint,  # A class for creating Flask blueprints
-    Log,  # A class for logging messages
-    render_template,  # A function for rendering Jinja templates
-)
+from flask import Blueprint, render_template
+from utils.log import Log  # A class for logging messages
 
 # Create a blueprint for the search bar route
 searchBarBlueprint = Blueprint(

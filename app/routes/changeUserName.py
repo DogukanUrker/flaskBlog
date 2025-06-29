@@ -1,25 +1,25 @@
 # Import necessary modules and functions
-from modules import (
-    DB_COMMENTS_ROOT,  # Path to the comments database
-    DB_POSTS_ROOT,  # Path to the posts database
-    DB_USERS_ROOT,  # Path to the users database
-    RECAPTCHA,  # Recaptcha module
-    RECAPTCHA_SECRET_KEY,  # Recaptcha secret key
-    RECAPTCHA_SITE_KEY,  # Recaptcha site key
-    RECAPTCHA_USERNAME_CHANGE,  # Flag for enabling/disabling Recaptcha for username change
-    RECAPTCHA_VERIFY_URL,  # Recaptcha verification URL
-    Blueprint,  # Blueprint class for creating modular applications
-    ChangeUserNameForm,  # Form for changing user name
-    Log,  # Logging module
-    abort,  # Function for aborting requests
-    flashMessage,  # Flash messaging module
-    redirect,  # Function for redirecting requests
-    render_template,  # Function for rendering templates
-    request,  # Module for handling HTTP requests
-    requestsPost,  # Module for making HTTP POST requests
-    session,  # Session management module
-    sqlite3,  # SQLite database module
+import sqlite3
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
 )
+from requests import post as requestsPost
+from constants import (
+    DB_USERS_ROOT,
+    RECAPTCHA,
+    RECAPTCHA_SECRET_KEY,
+    RECAPTCHA_SITE_KEY,
+    RECAPTCHA_USERNAME_CHANGE,
+    RECAPTCHA_VERIFY_URL,
+)
+from utils.log import Log
+from utils.forms.ChangeUserNameForm import ChangeUserNameForm
+from utils.flashMessage import flashMessage
+from utils.addPoints import addPoints
 
 # Create a blueprint for the change username route
 changeUserNameBlueprint = Blueprint("changeUserName", __name__)
