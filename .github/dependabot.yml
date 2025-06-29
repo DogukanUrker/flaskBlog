@@ -1,7 +1,7 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
-    directory: "/"
+  - package-ecosystem: "uv"
+    directory: "/app"
     schedule:
       interval: "daily"
       time: "00:00"
