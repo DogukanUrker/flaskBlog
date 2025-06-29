@@ -1,6 +1,6 @@
 [project]
 name = "flaskBlog"
-version = "3.0.0dev"
+version = "2.7.0"
 description = "Blog application built with Flask"
 readme = "README.md"
 requires-python = ">=3.13"

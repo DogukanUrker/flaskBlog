@@ -9,7 +9,7 @@ from modules import secrets
 APP_NAME = "flaskBlog"  # (str)
 
 # Version of the Flask application
-APP_VERSION = "3.0.0-dev"  # (str)
+APP_VERSION = "2.7.0"  # (str)
 
 # Path to the root of the application files
 APP_ROOT_PATH = "."  # (str)
