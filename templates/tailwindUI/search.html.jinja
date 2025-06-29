@@ -30,12 +30,13 @@
   <div>
     {% if posts %}
     <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">{{translations.search.posts}}</div>
+    <!-- Import post card macro with context -->
+    {% from "components/postCardMacro.html.jinja" import postCard with context %}
     <div
       class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12">
       {% for post in posts %}
       {% for post_data in post %}
       <!-- Post card component -->
-      {% from "components/postCardMacro.html.jinja" import postCard %}
       {{ postCard(post=post_data, authorProfilePicture=getProfilePicture(post_data[5])) }}
       {% endfor %}
       {% endfor %}
