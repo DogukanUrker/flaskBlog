@@ -78,178 +78,101 @@ def signup():
                         if userName.isascii():
                             password = encryption.hash(password)
 
-                            connection = sqlite3.connect(DB_USERS_ROOT)
-                            connection.set_trace_callback(Log.database)
-
                             if RECAPTCHA:
                                 secretResponse = request.form["g-recaptcha-response"]
                                 verifyResponse = requestsPost(
                                     url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                 ).json()
-
-                                if (
+                                if not (
                                     verifyResponse["success"] is True
-                                    or verifyResponse["score"] > 0.5
+                                    or verifyResponse.get("score", 0) > 0.5
                                 ):
-                                    Log.success(
-                                        f"Sign up reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                    )
-
-                                    cursor = connection.cursor()
-                                    cursor.execute(
-                                        """
-                                        insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
-                                        values(?, ?, ?, ?, ?, ?, ?, ?)
-                                        """,
-                                        (
-                                            userName,
-                                            email,
-                                            password,
-                                            f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                            "user",
-                                            0,
-                                            currentTimeStamp(),
-                                            "False",
-                                        ),
-                                    )
-                                    connection.commit()
-
-                                    Log.success(f'User: "{userName}" added to database')
-
-                                    session["userName"] = userName
-
-                                    addPoints(1, session["userName"])
-
-                                    Log.success(f'User: "{userName}" logged in')
-
-                                    flashMessage(
-                                        page="signup",
-                                        message="success",
-                                        category="success",
-                                        language=session["language"],
-                                    )
-
-                                    context = ssl.create_default_context()
-                                    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-                                    server.ehlo()
-                                    server.starttls(context=context)
-                                    server.ehlo()
-                                    server.login(SMTP_MAIL, SMTP_PASSWORD)
-
-                                    mail = EmailMessage()
-                                    mail.set_content(
-                                        f"Hi {userName}👋,\n Welcome to {APP_NAME}"
-                                    )
-                                    mail.add_alternative(
-                                        f"""\
-                                    <html>
-                                    <body>
-                                        <div
-                                        style="font-family: Arial, sans-serif;  max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;"
-                                        >
-                                        <div style="text-align: center;">
-                                            <h1 style="color: #F43F5E;">
-                                            Hi {userName}, <br />
-                                            Welcome to {APP_NAME}!
-                                            </h1>
-                                            <p style="font-size: 16px;">
-                                            We are glad you joined us.
-                                            </p>
-                                        </div>
-                                        </div>
-                                    </body>
-                                    </html>
-                                    """,
-                                        subtype="html",
-                                    )
-                                    mail["Subject"] = f"Welcome to {APP_NAME}"
-                                    mail["From"] = SMTP_MAIL
-                                    mail["To"] = email
-
-                                    server.send_message(mail)
-                                    server.quit()
-
-                                    return redirect("/verifyUser/codesent=false")
-                                else:
                                     Log.error(
-                                        f"Sign up reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                                        f"Signup reCAPTCHA | verification: {verifyResponse.get('success')} | score: {verifyResponse.get('score')}",
                                     )
                                     abort(401)
-                            else:
-                                cursor = connection.cursor()
-                                cursor.execute(
-                                    """
-                                            insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
-                                            values(?, ?, ?, ?, ?, ?, ?, ?)
-                                            """,
-                                    (
-                                        userName,
-                                        email,
-                                        password,
-                                        f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
-                                        "user",
-                                        0,
-                                        currentTimeStamp(),
-                                        "False",
-                                    ),
-                                )
-                                connection.commit()
 
-                                Log.success(f'User: "{userName}" added to databse')
-
-                                session["userName"] = userName
-
-                                addPoints(1, session["userName"])
-
-                                Log.success(f'User: "{userName}" logged in')
-                                flashMessage(
-                                    page="signup",
-                                    message="success",
-                                    category="success",
-                                    language=session["language"],
+                                Log.success(
+                                    f"Signup reCAPTCHA | verification: {verifyResponse['success']} | score: {verifyResponse.get('score')}",
                                 )
 
-                                context = ssl.create_default_context()
-                                server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-                                server.ehlo()
-                                server.starttls(context=context)
-                                server.ehlo()
-                                server.login(SMTP_MAIL, SMTP_PASSWORD)
-
-                                mail = EmailMessage()
-                                mail.set_content(
-                                    f"Hi {userName}👋,\n Welcome to {APP_NAME}"
-                                )
-                                mail.add_alternative(
-                                    f"""\
-                                    <html>
-                                    <body>
-                                        <div
-                                        style="font-family: Arial, sans-serif;  max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;"
-                                        >
-                                        <div style="text-align: center;">
-                                            <h1 style="color: #F43F5E;">
-                                            Hi {userName}, <br />
-                                            Welcome to {APP_NAME}!
-                                            </h1>
-                                            <p style="font-size: 16px;">
-                                            We are glad you joined us.
-                                            </p>
-                                        </div>
-                                        </div>
-                                    </body>
-                                    </html>
+                            # Create user account
+                            connection = sqlite3.connect(DB_USERS_ROOT)
+                            connection.set_trace_callback(Log.database)
+                            cursor = connection.cursor()
+                            cursor.execute(
+                                """
+                                insert into users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
+                                values(?, ?, ?, ?, ?, ?, ?, ?)
                                 """,
-                                    subtype="html",
-                                )
-                                mail["Subject"] = f"Welcome to {APP_NAME}!👋🏻"
-                                mail["From"] = SMTP_MAIL
-                                mail["To"] = email
+                                (
+                                    userName,
+                                    email,
+                                    password,
+                                    f"https://api.dicebear.com/7.x/identicon/svg?seed={userName}&radius=10",
+                                    "user",
+                                    0,
+                                    currentTimeStamp(),
+                                    "False",
+                                ),
+                            )
+                            connection.commit()
 
-                                server.send_message(mail)
-                                server.quit()
+                            Log.success(f'User: "{userName}" added to database')
 
-                                return redirect("/verifyUser/codesent=false")
+                            session["userName"] = userName
+                            addPoints(1, session["userName"])
+                            Log.success(f'User: "{userName}" logged in')
+
+                            flashMessage(
+                                page="signup",
+                                message="success",
+                                category="success",
+                                language=session["language"],
+                            )
+
+                            # Send welcome email
+                            context = ssl.create_default_context()
+                            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                            server.ehlo()
+                            server.starttls(context=context)
+                            server.ehlo()
+                            server.login(SMTP_MAIL, SMTP_PASSWORD)
+
+                            mail = EmailMessage()
+                            mail.set_content(
+                                f"Hi {userName}👋,\n Welcome to {APP_NAME}"
+                            )
+                            mail.add_alternative(
+                                f"""\
+                            <html>
+                            <body>
+                                <div
+                                style="font-family: Arial, sans-serif;  max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius:0.5rem;"
+                                >
+                                <div style="text-align: center;">
+                                    <h1 style="color: #F43F5E;">
+                                    Hi {userName}, <br />
+                                    Welcome to {APP_NAME}!
+                                    </h1>
+                                    <p style="font-size: 16px;">
+                                    We are glad you joined us.
+                                    </p>
+                                </div>
+                                </div>
+                            </body>
+                            </html>
+                            """,
+                                subtype="html",
+                            )
+                            mail["Subject"] = f"Welcome to {APP_NAME}"
+                            mail["From"] = SMTP_MAIL
+                            mail["To"] = email
+
+                            server.send_message(mail)
+                            server.quit()
+
+                            return redirect("/verifyUser/codesent=false")
                         else:
                             Log.error(
                                 f'Username: "{userName}" do not fits to ascii characters',

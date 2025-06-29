@@ -78,56 +78,34 @@ def login(direct):
                             verifyResponse = requestsPost(
                                 url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                             ).json()
-                            if (
+                            if not (
                                 verifyResponse["success"] is True
-                                or verifyResponse["score"] > 0.5
+                                or verifyResponse.get("score", 0) > 0.5
                             ):
-                                Log.success(
-                                    f"Login reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
-                                )
-                                session["userName"] = user[1]
-                                session["userRole"] = user[5]
-                                addPoints(1, session["userName"])
-                                Log.success(
-                                    f'User: "{user[1]}" logged in',
-                                )
-                                flashMessage(
-                                    page="login",
-                                    message="success",
-                                    category="success",
-                                    language=session["language"],
-                                )
-
-                                return (
-                                    redirect(direct),
-                                    301,
-                                )
-
-                            else:
                                 Log.error(
-                                    f"Login reCAPTCHA | verification: {verifyResponse['success']} | verification score: {verifyResponse['score']}",
+                                    f"Login reCAPTCHA | verification: {verifyResponse.get('success')} | score: {verifyResponse.get('score')}",
                                 )
                                 abort(401)
 
-                        else:
-                            session["userName"] = user[1]
-                            session["userRole"] = user[5]
-
-                            addPoints(1, session["userName"])
                             Log.success(
-                                f'User: "{user[1]}" logged in',
-                            )
-                            flashMessage(
-                                page="login",
-                                message="success",
-                                category="success",
-                                language=session["language"],
+                                f"Login reCAPTCHA | verification: {verifyResponse['success']} | score: {verifyResponse.get('score')}",
                             )
 
-                            return (
-                                redirect(direct),
-                                301,
-                            )
+                        session["userName"] = user[1]
+                        session["userRole"] = user[5]
+                        addPoints(1, session["userName"])
+                        Log.success(f'User: "{user[1]}" logged in')
+                        flashMessage(
+                            page="login",
+                            message="success",
+                            category="success",
+                            language=session["language"],
+                        )
+
+                        return (
+                            redirect(direct),
+                            301,
+                        )
 
                     else:
                         Log.error("Wrong password")
