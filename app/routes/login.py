@@ -117,7 +117,7 @@ def login(direct):
                         )
 
             return render_template(
-                "login.html.jinja",
+                "login.html",
                 form=form,
                 hideLogin=True,
                 siteKey=RECAPTCHA_SITE_KEY,

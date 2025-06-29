@@ -12,7 +12,7 @@ def changeLanguage():
         None
 
     Returns:
-        html: The changeLanguage.html.jinja file.
+        html: The changeLanguage.html file.
 
     """
-    return render_template("changeLanguage.html.jinja")
+    return render_template("changeLanguage.html")

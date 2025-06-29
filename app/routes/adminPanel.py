@@ -24,9 +24,9 @@ def adminPanel():
         if role == "admin":
             Log.info(f"Admin: {session['userName']} reached to the admin panel")
 
-            Log.info("Rendering adminPanel.html.jinja: params: None")
+            Log.info("Rendering adminPanel.html: params: None")
 
-            return render_template("adminPanel.html.jinja")
+            return render_template("adminPanel.html")
         else:
             Log.error(
                 f"{request.remote_addr} tried to reach admin panel without being admin"

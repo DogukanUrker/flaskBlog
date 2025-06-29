@@ -160,7 +160,7 @@ def post(urlID=None, slug=None):
             idForRandomVisitor = None
 
         return render_template(
-            "post.html.jinja",
+            "post.html",
             id=post[0],
             title=post[1],
             tags=post[2],
@@ -181,4 +181,4 @@ def post(urlID=None, slug=None):
     else:
         Log.error(f"{request.remote_addr} tried to reach unknown post")
 
-        return render_template("notFound.html.jinja")
+        return render_template("notFound.html")

@@ -29,7 +29,7 @@ def accountSettings():
             return redirect("/")
 
         return render_template(
-            "accountSettings.html.jinja",
+            "accountSettings.html",
             user=user,
         )
     else:

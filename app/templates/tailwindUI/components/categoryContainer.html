@@ -1,0 +1,199 @@
+{% macro categoryContainer(translations) %}
+
+<div
+    class="flex flex-wrap items-center justify-center mx-auto text-xl md:text-base md:w-11/12 lg:w-8/12 mt-4 select-none"
+>
+    <a
+        href="/"
+        class="flex items-center w-fit hover:scale-105 md:bg-neutral-200 md:border md:border-neutral-300 md:hover:bg-neutral-300 text-neutral-500 hover:text-neutral-600 hover:border-neutral-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-stack-2 md:mr-1"></i>
+        <p class="text-xs hidden md:block">{{ translations.categories.all }}</p>
+    </a>
+    <a
+        href="/category/Apps"
+        class="flex items-center w-fit hover:scale-105 md:bg-pink-200 md:border md:border-pink-300 md:hover:bg-pink-300 text-pink-500 hover:text-pink-600 hover:border-pink-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-apps md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.apps }}
+        </p>
+    </a>
+    <a
+        href="/category/Art"
+        class="flex items-center w-fit hover:scale-105 md:bg-amber-200 md:border md:border-amber-300 md:hover:bg-amber-300 text-amber-500 hover:text-amber-600 hover:border-amber-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-brush md:mr-1"></i>
+        <p class="text-xs hidden md:block">{{ translations.categories.art }}</p>
+    </a>
+    <a
+        href="/category/Books"
+        class="flex items-center w-fit hover:scale-105 md:bg-violet-200 md:border md:border-violet-300 md:hover:bg-violet-300 text-violet-500 hover:text-violet-600 hover:border-violet-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-book md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.books }}
+        </p>
+    </a>
+    <a
+        href="/category/Business"
+        class="flex items-center w-fit hover:scale-105 md:bg-stone-200 md:border md:border-stone-300 md:hover:bg-stone-300 text-stone-500 hover:text-stone-600 hover:border-stone-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-tie md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.business }}
+        </p>
+    </a>
+    <a
+        href="/category/Code"
+        class="flex items-center w-fit hover:scale-105 md:bg-indigo-200 md:border md:border-indigo-300 md:hover:bg-indigo-300 text-indigo-500 hover:text-indigo-600 hover:border-indigo-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-code md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.code }}
+        </p>
+    </a>
+    <a
+        href="/category/Education"
+        class="flex items-center w-fit hover:scale-105 md:bg-blue-200 md:border md:border-blue-300 md:hover:bg-blue-300 text-blue-500 hover:text-blue-600 hover:border-blue-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-school md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.education }}
+        </p>
+    </a>
+    <a
+        href="/category/Finance"
+        class="flex items-center w-fit hover:scale-105 md:bg-green-200 md:border md:border-green-300 md:hover:bg-green-300 text-green-500 hover:text-green-600 hover:border-green-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-coin md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.finance }}
+        </p>
+    </a>
+    <a
+        href="/category/Foods"
+        class="flex items-center w-fit hover:scale-105 md:bg-lime-200 md:border md:border-lime-300 md:hover:bg-lime-300 text-lime-500 hover:text-lime-600 hover:border-lime-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-meat md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.foods }}
+        </p>
+    </a>
+    <a
+        href="/category/Games"
+        class="flex items-center w-fit hover:scale-105 md:bg-rose-200 md:border md:border-rose-300 md:hover:bg-rose-300 text-rose-500 hover:text-rose-600 hover:border-rose-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-device-gamepad md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.games }}
+        </p>
+    </a>
+    <a
+        href="/category/Health"
+        class="flex items-center w-fit hover:scale-105 md:bg-red-200 md:border md:border-red-300 md:hover:bg-red-300 text-red-500 hover:text-red-600 hover:border-red-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-heartbeat md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.health }}
+        </p>
+    </a>
+    <a
+        href="/category/History"
+        class="flex items-center w-fit hover:scale-105 md:bg-sky-200 md:border md:border-sky-300 md:hover:bg-sky-300 text-sky-500 hover:text-sky-600 hover:border-sky-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-books md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.history }}
+        </p>
+    </a>
+    <a
+        href="/category/Movies"
+        class="flex items-center w-fit hover:scale-105 md:bg-teal-200 md:border md:border-teal-300 md:hover:bg-teal-300 text-teal-500 hover:text-teal-600 hover:border-teal-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-movie md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.movies }}
+        </p>
+    </a>
+    <a
+        href="/category/Music"
+        class="flex items-center w-fit hover:scale-105 md:bg-orange-200 md:border md:border-orange-300 md:hover:bg-orange-300 text-orange-500 hover:text-orange-600 hover:border-orange-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-music md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.music }}
+        </p>
+    </a>
+    <a
+        href="/category/Nature"
+        class="flex items-center w-fit hover:scale-105 md:bg-emerald-200 md:border md:border-emerald-300 md:hover:bg-emerald-300 text-emerald-500 hover:text-emerald-600 hover:border-emerald-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-trees md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.nature }}
+        </p>
+    </a>
+    <a
+        href="/category/Science"
+        class="flex items-center w-fit hover:scale-105 md:bg-fuchsia-200 md:border md:border-fuchsia-300 md:hover:bg-fuchsia-300 text-fuchsia-500 hover:text-fuchsia-600 hover:border-fuchsia-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-square-root-2 md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.science }}
+        </p>
+    </a>
+    <a
+        href="/category/Series"
+        class="flex items-center w-fit hover:scale-105 md:bg-yellow-200 md:border md:border-yellow-300 md:hover:bg-yellow-300 text-yellow-500 hover:text-yellow-600 hover:border-yellow-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-player-play md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.series }}
+        </p>
+    </a>
+    <a
+        href="/category/Sports"
+        class="flex items-center w-fit hover:scale-105 md:bg-cyan-200 md:border md:border-cyan-300 md:hover:bg-cyan-300 text-cyan-500 hover:text-cyan-600 hover:border-cyan-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-shirt-sport md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.sports }}
+        </p>
+    </a>
+    <a
+        href="/category/Technology"
+        class="flex items-center w-fit hover:scale-105 md:bg-slate-200 md:border md:border-slate-300 md:hover:bg-slate-300 text-slate-500 hover:text-slate-600 hover:border-slate-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-cpu md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.technology }}
+        </p>
+    </a>
+    <a
+        href="/category/Travel"
+        class="flex items-center w-fit hover:scale-105 md:bg-zinc-200 md:border md:border-zinc-300 md:hover:bg-zinc-300 text-zinc-500 hover:text-zinc-600 hover:border-zinc-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-plane md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.travel }}
+        </p>
+    </a>
+    <a
+        href="/category/Web"
+        class="flex items-center w-fit hover:scale-105 md:bg-purple-200 md:border md:border-purple-300 md:hover:bg-purple-300 text-purple-500 hover:text-purple-600 hover:border-purple-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-world md:mr-1"></i>
+        <p class="text-xs hidden md:block">{{ translations.categories.web }}</p>
+    </a>
+    <a
+        href="/category/Other"
+        class="flex items-center w-fit hover:scale-105 md:bg-gray-200 md:border md:border-gray-300 md:hover:bg-gray-300 text-gray-500 hover:text-gray-600 hover:border-gray-400 duration-150 rounded-md font-bold md:px-1 md:py-2 m-1 md:cursor-pointer md:shadow"
+    >
+        <i class="ti ti-dots md:mr-1"></i>
+        <p class="text-xs hidden md:block">
+            {{ translations.categories.other }}
+        </p>
+    </a>
+</div>
+{% endmacro %}

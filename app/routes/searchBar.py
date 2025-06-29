@@ -13,5 +13,5 @@ def searchBar():
         The search bar HTML page.
     """
 
-    Log.info("Rendering searchBar.html.jinja")
-    return render_template("searchBar.html.jinja")
+    Log.info("Rendering searchBar.html")
+    return render_template("searchBar.html")

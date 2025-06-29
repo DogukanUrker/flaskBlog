@@ -92,7 +92,7 @@ def category(category, by="timeStamp", sort="desc"):
     Log.info(f"Sorting posts on category/{category} page by: {sortName}")
 
     return render_template(
-        "category.html.jinja",
+        "category.html",
         posts=posts,
         category=translations["categories"][category.lower()],
         sortName=sortName,

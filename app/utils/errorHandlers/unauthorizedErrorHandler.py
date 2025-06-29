@@ -12,4 +12,4 @@ def unauthorizedErrorHandler(e):
 
     Log.error(e)
 
-    return render_template("unauthorized.html.jinja"), 401
+    return render_template("unauthorized.html"), 401

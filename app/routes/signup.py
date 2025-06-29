@@ -221,7 +221,7 @@ def signup():
                     )
 
             return render_template(
-                "signup.html.jinja",
+                "signup.html",
                 form=form,
                 hideSignUp=True,
                 siteKey=RECAPTCHA_SITE_KEY,

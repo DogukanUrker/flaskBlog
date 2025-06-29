@@ -116,7 +116,7 @@ def changeUserName():
                 )
 
         return render_template(
-            "changeUserName.html.jinja",
+            "changeUserName.html",
             form=form,
         )
     else:

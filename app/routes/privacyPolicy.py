@@ -17,6 +17,6 @@ def privacyPolicy():
     :rtype: flask.Response
     """
 
-    Log.info("Rendering privacyPolicy.html.jinja")
+    Log.info("Rendering privacyPolicy.html")
 
-    return render_template("privacyPolicy.html.jinja")
+    return render_template("privacyPolicy.html")

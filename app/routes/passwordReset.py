@@ -107,7 +107,7 @@ def passwordReset(codeSent):
                 )
 
         return render_template(
-            "passwordReset.html.jinja",
+            "passwordReset.html",
             form=form,
             mailSent=True,
         )
@@ -183,7 +183,7 @@ def passwordReset(codeSent):
                 )
 
         return render_template(
-            "passwordReset.html.jinja",
+            "passwordReset.html",
             form=form,
             mailSent=False,
         )

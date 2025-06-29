@@ -29,10 +29,10 @@ def adminPanelPosts():
         posts = cursor.fetchall()
 
         Log.info(
-            f"Rendering dashboard.html.jinja: params: posts={len(posts)} and showPosts=True"
+            f"Rendering dashboard.html: params: posts={len(posts)} and showPosts=True"
         )
 
-        return render_template("dashboard.html.jinja", posts=posts, showPosts=True)
+        return render_template("dashboard.html", posts=posts, showPosts=True)
     else:
         Log.error(
             f"{request.remote_addr} tried to reach post admin panel being logged in"

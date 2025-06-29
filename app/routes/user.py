@@ -80,7 +80,7 @@ def user(userName):
             showComments = True
         Log.success(f'User: "{userName}"s data loaded')
         return render_template(
-            "user.html.jinja",
+            "user.html",
             user=user,
             views=views,
             posts=posts,
@@ -90,4 +90,4 @@ def user(userName):
         )
     else:
         Log.error(f'User: "{userName}" not found')
-        return render_template("notFound.html.jinja")
+        return render_template("notFound.html")

@@ -102,7 +102,7 @@ def changePassword():
                 )
 
         return render_template(
-            "changePassword.html.jinja",
+            "changePassword.html",
             form=form,
         )
     else:

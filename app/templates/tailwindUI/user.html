@@ -1,0 +1,138 @@
+{% extends 'layout.html'%} {%block head%}
+<title>{{user[1]}}</title>
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="{{user[1]}}" />
+<meta property="og:image" content="{{user[4]}}" />
+<meta property="og:url" content="{{request.base_url}}" />
+<meta property="og:site_name" content="{{appName}}" />
+<meta property="og:description" content="{{ user[1] }}'s Profile" />
+<meta name="twitter:image" content="{{user[4]}}" />
+<meta name="twitter:description" content="{{ user[1] }}'s Profile" />
+<meta name="twitter:title" content="{{user[1]}}" />
+{% endblock head %} {%block body%}
+<div>
+    <div
+        class="w-11/12 md:w-10/12 lg:w-6/12 xl:w-5/12 mx-auto text-center mt-8 select-none border border-gray-500/25 p-2 rounded shadow"
+    >
+        <section class="mb-4">
+            <img class="w-16 mx-auto" src="{{user[4]}}" alt="{{user[1]}}" />
+            <h2 class="mx-2 font-medium">{{user[1]}}</h2>
+        </section>
+        <section class="flex w-full justify-between my-4">
+            <div class="flex items-center">
+                <i class="ti ti-user mr-1 text-xl"></i>
+                <p class="hidden md:block">{{translations.user.role}}:</p>
+                {% if user[5] == "admin"%}
+                <p class="ml-1 font-medium">{{translations.roles.admin}}</p>
+                {% elif user[5] == "user"%}
+                <p class="ml-1 font-medium">{{translations.roles.user}}</p>
+                {% endif %}
+            </div>
+            <div class="flex items-center">
+                <i class="ti ti-eye mr-1 text-xl"></i>
+                <p class="hidden md:block">{{translations.user.views}}:</p>
+                <p class="ml-1 font-medium">{{views}}</p>
+            </div>
+        </section>
+        <section class="flex w-full justify-between my-4">
+            <div class="flex items-center">
+                <i class="ti ti-calendar mr-1 text-xl"></i>
+                <p class="hidden md:block">{{translations.user.joinDate}}:</p>
+                <p class="ml-1 date font-medium">{{user[7]}}</p>
+            </div>
+            <div class="flex items-center">
+                <i class="ti ti-sparkles mr-1 text-xl"></i>
+                <p class="hidden md:block">{{translations.user.points}}:</p>
+                <p class="ml-1 font-medium">{{user[6]}}</p>
+            </div>
+        </section>
+
+        {% if session["userName"] == user[1] %}
+        <section class="flex w-full items-center justify-between my-4">
+            <div
+                class="flex items-center w-fit hover:text-rose-500 duration-150"
+            >
+                <a href="/accountsettings"
+                    ><i class="ti ti-settings mr-1 text-xl"></i
+                ></a>
+                <a href="/accountsettings" class=""
+                    >{{translations.user.settings}}</a
+                >
+            </div>
+            <div
+                class="flex items-center w-fit hover:text-rose-500 duration-150"
+            >
+                <a href="/dashboard/{{user[1]}}"
+                    ><i class="ti ti-clipboard-text mr-1 text-xl"></i
+                ></a>
+                <a href="/dashboard/{{user[1]}}" class=""
+                    >{{translations.user.dashboard}}</a
+                >
+            </div>
+            {% endif %} {% if user[5] == "admin" and session["userName"] ==
+            user[1] %}
+            <div
+                class="flex items-center w-fit hover:text-rose-500 duration-150"
+            >
+                <a href="/admin"><i class="ti ti-tie mr-1 text-xl"></i></a>
+                <a href="/admin" class="">{{translations.user.admin}}</a>
+            </div>
+        </section>
+        {% endif %} {% if "userName" in session and session['userName'] ==
+        "{{user[1]}}"%}
+        <div class="flex items-center w-fit hover:text-rose-500 duration-150">
+            <a href="/dashboard/{{session['userName']}}"
+                ><i class="ti ti-clipboard-text mr-1 text-xl"></i
+            ></a>
+            <a href="/dashboard/{{session['userName']}}" class=""
+                >{{translations.user.dashboard}}</a
+            >
+        </div>
+        {% endif %}
+    </div>
+    {% if showPosts %}
+    <h1 class="my-4 text-center text-2xl text-rose-500 select-none">
+        {{translations.user.posts}}
+    </h1>
+    <div
+        class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 my-6"
+    >
+        {% for post in posts %} {% from "components/postCardMacro.html" import
+        postCard%} {{
+        postCard(post=post,authorProfilePicture=getProfilePicture(post[5])) }}
+        {% endfor %}
+    </div>
+    {% endif %} {% if showComments %}
+    <h1 class="mb-4 text-center text-2xl text-rose-500 select-none">
+        {{translations.user.comments}}
+    </h1>
+    {% for comment in comments %}
+    <div
+        class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 mx-auto py-4 px-2 mb-8 border-2 rounded-md shadow-md border-gray-500/25"
+    >
+        <div tag="content my-2">{{comment[2]}}</div>
+        <section class="flex items-center w-full justify-between my-2">
+            <div class="flex items-center">
+                <i class="ti ti-clock mr-1 text-xl"></i>
+                <p class="hidden md:block mr-1">
+                    {{translations.user.createTime}}:
+                </p>
+                <p class="time font-medium">{{comment[4]}}</p>
+            </div>
+            <div class="flex items-center">
+                <i class="ti ti-calendar mr-1 text-xl"></i>
+                <p class="hidden md:block mr-1">
+                    {{translations.user.createDate}}:
+                </p>
+                <p class="date font-medium">{{comment[4]}}</p>
+            </div>
+        </section>
+        <a
+            href="/post/{{ getPostUrlIdFromPost(comment[1]) }}"
+            class="text-rose-500 hover:text-rose-500/75 duration-150 select-none my-2"
+            >{{translations.user.go}}</a
+        >
+    </div>
+    {% endfor %} {% endif %}
+</div>
+{% endblock body %}

@@ -21,7 +21,7 @@ def about():
     """
 
     Log.info(
-        f"Rendering about.html.jinja: params: appName={APP_NAME} and appVersion={APP_VERSION}"
+        f"Rendering about.html: params: appName={APP_NAME} and appVersion={APP_VERSION}"
     )
 
-    return render_template("about.html.jinja", appName=APP_NAME, appVersion=APP_VERSION)
+    return render_template("about.html", appName=APP_NAME, appVersion=APP_VERSION)
