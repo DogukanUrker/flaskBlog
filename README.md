@@ -42,8 +42,8 @@ Visit `http://localhost:2306` in your browser.
 
 ## 🛠️ Tech Stack
 
-**Backend:** Flask, SQLite3, WTForms, Passlib
-**Frontend:** TailwindCSS, jQuery, Summer Note Editor
+**Backend:** Flask, SQLite3, WTForms, Passlib \
+**Frontend:** TailwindCSS, jQuery, Summer Note Editor \
 **Icons:** Tabler Icons
 
 ## 🤝 Contributing
@@ -56,8 +56,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Doğukan Ürker**
-
+**Doğukan Ürker** \
 [Website](https://dogukanurker.com) | [Email](mailto:dogukanurker@icloud.com)
 
 ---
