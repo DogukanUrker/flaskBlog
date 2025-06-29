@@ -1,7 +1,6 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title dynamically based on the request path -->
 {% if request.path == "/admin/posts" %}
 <title>{{translations.dashboard.titleAdmin}}</title>
 {% else %}
@@ -10,30 +9,23 @@
 {% endblock head %}
 
 {% block body %}
-<!-- Body Section -->
 {% if showPosts %}
-<!-- Display Posts Section -->
 <h1 class="my-4 text-4xl font-medium select-none text-center">{{translations.dashboard.posts}}</h1>
 
 {% for post in posts %}
-<!-- Individual Post Container -->
 <div
   class="w-11/12 md:w-10/12 lg:w-8/12 xl:w-5/12 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md border-gray-500/25">
 
-  <!-- Post Banner -->
   <img src="{{ url_for('returnPostBanner.returnPostBanner', postID = post[0]) }}" class="w-96 rounded mx-auto" />
 
-  <!-- Post Title with Link -->
   <a href="/post/{{ post[10] }}"
     class="text-rose-500 h-64 pb-8 text-2xl hover:text-rose-500/75 duration-150 select-none break-words">{{ post[1]
     }}</a>
 
-  <!-- Post Content -->
   <div tag="content" class="h-60 overflow-y-hidden mt-6 mb-3 break-words">
     {{ post[3]|safe }}
   </div>
 
-  <!-- Section: Edit/Delete Post -->
   <section class="flex items-center justify-between my-2">
     <a href="/editpost/{{ post[10] }}" class="hover:text-rose-500 duration-150 font-medium">
       <i class="ti ti-edit mr-1 text-2xl"></i>
@@ -47,7 +39,6 @@
     </form>
   </section>
 
-  <!-- Section: Tags, Views, Creation Time, Last Edit Time -->
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-tags mr-1 text-xl"></i>
@@ -61,7 +52,6 @@
     </div>
   </div>
 
-  <!-- Section: Creation Time, Last Edit Time -->
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
@@ -75,7 +65,6 @@
     </div>
   </div>
 
-  <!-- Section: Creation Date, Last Edit Date -->
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
@@ -89,7 +78,6 @@
     </div>
   </div>
 
-  <!-- Section: Author, Category (if in admin/posts) -->
   <div class="flex items-center justify-between my-2">
     {% if request.path == "/admin/posts" %}
     <div class="flex items-center">
@@ -109,7 +97,6 @@
 {% endfor %}
 
 {% elif not showPosts %}
-<!-- Display Message for No Posts -->
 {% if request.path == "/admin/posts" %}
 <h1>{{translations.dashboard.noPosts}}</h1>
 {% else %}
@@ -120,19 +107,15 @@
 {% endif %}
 {% endif %}
 
-<!-- Display Comments Section -->
 {% if showComments and not request.path == "/admin/posts" %}
 <h1 class="my-4 text-4xl font-medium select-none text-center">{{translations.dashboard.comments}}</h1>
 
 {% for comment in comments %}
-<!-- Individual Comment Container -->
 <div
   class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md border-gray-500/25">
 
-  <!-- Comment Content -->
   <div tag="content">{{ comment[2] }}</div>
 
-  <!-- Section: Creation Date, Creation Time -->
   <section class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-calendar mr-1 text-xl"></i>
@@ -146,7 +129,6 @@
     </div>
   </section>
 
-  <!-- Link to Go to Post -->
   <a href="/post/{{ getPostUrlIdFromPost(comment[1]) }}"
     class="hover:text-rose-500 duration-150 font-medium">{{translations.dashboard.go}}</a>
 
@@ -154,7 +136,6 @@
 {% endfor %}
 {% endif %}
 
-<!-- Back Button -->
 {% if request.path == "/admin/posts" %}
 <a href="/admin" class="hidden md:block fixed bottom-0 left-1">
   <i class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"></i>

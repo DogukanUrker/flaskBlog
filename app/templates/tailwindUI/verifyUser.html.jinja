@@ -1,29 +1,23 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title of the page to "Verify Account" -->
 <title>{{translations.verifyUser.title}}</title>
 {% endblock head %}
 
 {% block body %}
 <div class="w-fit mx-auto mt-32 select-none">
   {% if recaptcha %}
-  <!-- Include Google reCAPTCHA scripts -->
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
-  <!-- Create a form for account verification -->
   <form method="post" id="recaptchaForm">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if mailSent %}
-    <!-- Display input for verification code if mail has been sent -->
     {{ form.code(autocomplete="off", placeholder=translations.verifyUser.placeholder) }}
-    <!-- Button to submit the form and verify the account -->
     <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
       {{translations.verifyUser.title}}
     </button>
     {% else %}
-    <!-- Button to initiate sending the verification code -->
     <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
       {{ translations.verifyUser.send }}
@@ -31,17 +25,14 @@
     {% endif %}
   </form>
   {% else %}
-  <!-- Form without reCAPTCHA if it's disabled -->
   <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     {% if mailSent %}
     {{ form.code(autocomplete="off", placeholder=translations.verifyUser.placeholder) }}
-    <!-- Button to submit the form and verify the account -->
     <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
       {{translations.verifyUser.title}}
     </button>
     {% else %}
-    <!-- Button to initiate sending the verification code -->
     <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
       {{ translations.verifyUser.send }}
     </button>

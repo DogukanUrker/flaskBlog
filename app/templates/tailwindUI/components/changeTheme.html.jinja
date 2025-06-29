@@ -1,11 +1,8 @@
 {% macro changeTheme()%}
-<!-- Macro for a section containing a button to change the theme -->
 
 <section>
-  <!-- Button to change the theme -->
   <button class="changeTheme absolute top-2 right-2 text-2xl hover:scale-125 duration-150" onclick="toDark()"></button>
 
-  <!-- Script tag to include the JavaScript file for theme changing -->
   <script src="{{ url_for('static', filename='js/changeTheme.js') }}"></script>
 </section>
 {% endmacro %}

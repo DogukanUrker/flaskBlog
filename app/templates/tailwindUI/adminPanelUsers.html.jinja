@@ -1,20 +1,16 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title of the page to "Admin Panel -> Users" -->
 <title>{{translations.adminPanelUsers.title}}</title>
 {% endblock head %}
 
 {% block body %}
-<!-- Display the heading for the Users section in the Admin Panel -->
 <div class="text-center">
   <h1 class="my-4 text-4xl font-medium select-none">{{translations.adminPanelUsers.users}}</h1>
 
-  <!-- Loop through each user and display user details -->
   {% for user in users %}
   <div
     class="w-12/12 md:w-8/12 lg:w-7/12 xl:w-5/12 h-fit mx-px md:mx-auto py-2 px-2 my-4 border-2 rounded-md shadow-md border-gray-500/25">
-    <!-- Display user's profile picture and username with a link to their profile -->
     <section class="mb-4 text-center">
       <img src="{{ user[4] }}" alt="{{ user[1] }}" class="w-20 m-2 mx-auto select-none" />
       <p class="self-end">
@@ -22,7 +18,6 @@
       </p>
     </section>
 
-    <!-- Display user ID, role, email, points, join date, and join time -->
     <section class="flex w-full justify-between my-4">
       <div class="flex items-center">
         <i class="ti ti-id mr-1 text-xl"></i>
@@ -41,7 +36,6 @@
     </section>
 
     <section class="flex w-full justify-between my-4">
-      <!-- Display user email, points, join date, and join time -->
       <div class="flex items-center text-left text-sm md:text-base">
         <i class="ti ti-mail mr-1 text-xl"></i>
         <p class="hidden md:block mr-1">{{translations.adminPanelUsers.email}}:</p>
@@ -55,7 +49,6 @@
     </section>
 
     <section class="flex w-full justify-between my-4">
-      <!-- Display join date and join time -->
       <div class="flex items-center">
         <i class="ti ti-calendar mr-1 text-xl"></i>
         <p class="hidden md:block mr-1">{{translations.adminPanelUsers.joinDate}}:</p>
@@ -68,9 +61,7 @@
       </div>
     </section>
 
-    <!-- Form to delete a user and change their role -->
     <section class="flex w-full justify-between mt-4">
-      <!-- Form to delete user -->
       <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="userName" value="{{ user[1] }}" />
@@ -81,7 +72,6 @@
         </button>
       </form>
 
-      <!-- Form to change user role -->
       <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="userName" value="{{ user[1] }}" />
@@ -101,7 +91,6 @@
   {% endfor %}
 </div>
 
-<!-- Back button to navigate to the Admin Panel -->
 <a href="/admin" class="hidden md:block fixed bottom-0 left-1">
   <i class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"></i>
 </a>

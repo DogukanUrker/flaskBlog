@@ -1,13 +1,11 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title of the page to "RECAPTCHA ERROR" -->
 <title>{{translations.verifyAccount.title}}</title>
 {% endblock head %}
 
 {% block body %}
 <div class="w-fit mx-auto mt-32 text-2xl text-center font-medium select-none">
-  <!-- Display a message indicating that RECAPTCHA verification has failed -->
   <h1>{{translations.verifyAccount.info}}</h1>
   <h1>{{translations.verifyAccount.request}}</h1>
 </div>

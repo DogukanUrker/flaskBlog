@@ -1,35 +1,28 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title of the page to "Create Post" -->
 <title>{{ translations.createPost.title }}</title>
 {% endblock head %}
 
 {% block body %}
-<!-- Create Post Form Section -->
 <div class="w-fit mx-auto mt-8">
 
   {% if recaptcha %}
-  <!-- Include Google reCAPTCHA scripts -->
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
 
-  <!-- Form with reCAPTCHA enabled and enctype set for handling file uploads -->
   <form method="post" id="recaptchaForm" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-    <!-- Input fields for post title and tags -->
     {{ form.postTitle(autocomplete="off",placeholder=translations.createPost.titlePlaceholder) }} {{
     form.postTags(autocomplete="off",placeholder=translations.createPost.tags) }}
     <p class="text-xs text-center w-fit mx-auto mb-2">{{ translations.createPost.separate }}</p>
 
-    <!-- Banner Upload Section -->
     <div class="w-72 mx-auto text-center mb-4">
       <label class="block mt-2 mb-1">{{ translations.createPost.banner }}</label>
       {{ form.postBanner(placeholder=translations.createPost.bannerPlaceholder) }}
     </div>
 
-    <!-- Category Selection Section -->
     <div class="mx-auto w-fit">
       <label class="block my-1 text-center">{{ translations.createPost.category }}</label>
       <select
@@ -59,12 +52,10 @@
       </select>
     </div>
 
-    <!-- Post Content Section -->
     <div>
       {{ form.postContent(id_="editor", autocomplete="off") }}
     </div>
 
-    <!-- Post Button Section -->
     <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
       class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
       {{ translations.createPost.post }}
@@ -72,22 +63,18 @@
 
   </form>
   {% else %}
-  <!-- Form without reCAPTCHA, enctype set for handling file uploads -->
   <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-    <!-- Input fields for post title and tags -->
     {{ form.postTitle(autocomplete="off",placeholder=translations.createPost.titlePlaceholder) }} {{
     form.postTags(autocomplete="off",placeholder=translations.createPost.tags) }}
     <p class="text-xs text-center w-fit mx-auto mb-2">{{ translations.createPost.separate }}</p>
 
-    <!-- Banner Upload Section -->
     <div class="w-72 mx-auto text-center mb-4">
       <label class="block mt-2 mb-1">{{ translations.createPost.banner }}</label>
       {{ form.postBanner(placeholder=translations.createPost.bannerPlaceholder) }}
     </div>
 
-    <!-- Category Selection Section -->
     <div class="mx-auto w-fit">
       <label class="block my-1 text-center">{{ translations.createPost.category }}</label>
       <select
@@ -117,12 +104,10 @@
       </select>
     </div>
 
-    <!-- Post Content Section -->
     <div>
       {{ form.postContent(id_="editor", autocomplete="off") }}
     </div>
 
-    <!-- Post Button Section -->
     <button type="submit" class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium">
       {{ translations.createPost.post }}
     </button>
@@ -130,5 +115,4 @@
   </form>
   {% endif %}
 </div>
-<!-- End of Create Post Form Section -->
 {% endblock body %}

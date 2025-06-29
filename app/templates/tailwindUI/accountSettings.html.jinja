@@ -1,49 +1,40 @@
 {% extends 'layout.html.jinja' %}
 {% block head %}
-<!-- Set the title of the Account Settings page -->
 <title>{{ translations.accountSettings.title }}</title>
 {% endblock head %}
 
 {% block body %}
-<!-- Container for the Account Settings content -->
 <div class="w-fit mx-auto mt-32 text-center text-2xl font-medium">
 
-  <!-- Link to change username page -->
   <h2 class="my-4">
     <a href="/changeusername" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
       <i class="ti ti-user mr-1 text-2xl"></i> {{ translations.accountSettings.username }}
     </a>
   </h2>
 
-  <!-- Link to change password page -->
   <h2 class="my-4">
     <a href="/changepassword" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
       <i class="ti ti-password mr-1 text-2xl"></i> {{ translations.accountSettings.password }}
     </a>
   </h2>
 
-  <!-- Link to change profile picture page -->
   <h2 class="my-4">
     <a href="/changeprofilepicture" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
       <i class="ti ti-photo mr-1 text-2xl"></i> {{ translations.accountSettings.profilePicture }}
     </a>
   </h2>
 
-  <!-- Link to change language page -->
   <h2 class="my-4">
     <a href="/changeLanguage" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">
       <i class="ti ti-language mr-1 text-2xl"></i> {{ translations.accountSettings.language }}
     </a>
   </h2>
 
-  <!-- Delete account section with reCAPTCHA if enabled -->
   <h2 class="my-4">
     {% if recaptcha %}
-    <!-- Include reCAPTCHA scripts -->
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
 
-    <!-- Form with reCAPTCHA -->
     <form method="post" id="recaptchaForm">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <button type="submit" data-sitekey="{{ siteKey }}" data-callback="onSubmit" data-action="submit"
@@ -53,7 +44,6 @@
       </button>
     </form>
     {% else %}
-    <!-- Form without reCAPTCHA -->
     <form method="post">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <button type="submit" class="hover:text-rose-500 duration-150 flex items-center w-fit mx-auto">

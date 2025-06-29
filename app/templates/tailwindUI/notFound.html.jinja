@@ -1,27 +1,21 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title of the page to the current request path -->
 <title>{{ request.path }} ?</title>
 {% endblock head %}
 
 {% block body %}
 <div class="w-fit mx-auto mt-32 text-2xl text-center">
-  <!-- Display a message indicating uncertainty about the request path -->
   <h1>{{translations.notFound.text}}</h1>
 
-  <!-- Display the request path with a highlighted background -->
   <h1 class="bg-rose-500 w-fit mx-auto p-1 m-1 rounded">{{ request.path }}</h1>
 
-  <!-- Display an apology message -->
   <h1>
     {{translations.notFound.sorry}}
   </h1>
 
-  <!-- Display a sad mood icon -->
   <i class="ti ti-mood-sad my-4 text-4xl"></i>
 
-  <!-- Provide a link to go back to the home page -->
   <a href="/">
     <h3 class="hover:text-rose-500 duration-150">
       {{translations.notFound.home}}

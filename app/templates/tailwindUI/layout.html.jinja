@@ -2,23 +2,18 @@
 <html lang="{{ session.get('language', 'en') }}">
 
 <head>
-  <!-- Meta tags for character set, compatibility, viewport, and theme color -->
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#171717" />
 
-  <!-- Favicon link -->
   <link rel="icon" href="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" />
 
-  <!-- External stylesheet link for Tailwind CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}" />
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- External stylesheet link for Tabler Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css" />
 
-    <!-- Open Graph tags for social media sharing -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="flaskBlog" />
     <meta property="og:image" content="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" />
@@ -30,26 +25,20 @@
     <meta name="twitter:description" content="{{ translations.about.description }}" />
     <meta name="twitter:image" content="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico" />
 
-  <!-- Custom block for additional head content -->
   {% block head %} {% endblock head %}
 </head>
 
 <body id="body">
-  <!-- Include changeTheme component -->
   {% from "components/changeTheme.html.jinja" import changeTheme %}
   {{ changeTheme() }}
 
-  <!-- Include navbar component -->
   {% include 'components/navbar.html.jinja'%}
 
-  <!-- Include flash messages component -->
   {% from "components/flash.html.jinja" import flash %}
   {{ flash() }}
 
-  <!-- Custom block for additional body content -->
   {% block body %} {% endblock body %}
 
-  <!-- External scripts and styles for jQuery, Summernote editor, timestamp, and optional reCAPTCHA badge -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
@@ -59,7 +48,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/editor.css') }}" />
   <script src="{{ url_for('static', filename='js/timeStamp.js') }}"></script>
   {% if not recaptchaBadge %}
-  <!-- Optional stylesheet for reCAPTCHA badge -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/recaptcha.css') }}" />
   {% endif %}
 </body>

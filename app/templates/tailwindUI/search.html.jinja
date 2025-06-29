@@ -1,13 +1,11 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title of the page to include the search query -->
 <title>{{translations.search.title}}: {{ query }}</title>
 {% endblock head %}
 
 {% block body %}
 <div class="mx-auto">
-  <!-- Display search results for users -->
   <h3 class="text-2xl text-center my-4">
     {{translations.search.results}}: "{{ query }}"
   </h3>
@@ -15,7 +13,6 @@
   <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">{{translations.search.users}}</div>
   {% for user in users %}
   {% for user_data in user %}
-  <!-- User result card -->
   <div class="w-fit my-2 mx-auto flex items-end border-2 rounded-md shadow-md border-gray-500/25">
     <img src="{{ user_data[4] }}" class="w-20 m-2" />
     <a href="/user/{{ user_data[1]|lower }}" class="m-2 text-rose-500 hover:text-rose-600 duration-150 font-medium">{{
@@ -26,17 +23,14 @@
   {% endfor %}
   {% endif %}
 
-  <!-- Display search results for posts -->
   <div>
     {% if posts %}
     <div class="mx-auto w-fit text-4xl text-rose-500 font-medium my-6">{{translations.search.posts}}</div>
-    <!-- Import post card macro with context -->
     {% from "components/postCardMacro.html.jinja" import postCard with context %}
     <div
       class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12">
       {% for post in posts %}
       {% for post_data in post %}
-      <!-- Post card component -->
       {{ postCard(post=post_data, authorProfilePicture=getProfilePicture(post_data[5])) }}
       {% endfor %}
       {% endfor %}
@@ -44,7 +38,6 @@
     {% endif %}
   </div>
 
-  <!-- Displayed when no results are found -->
   {% if empty %}
   <h3 class="text-red-500 font-medium text-2xl text-center mt-4 select-none">
     {{translations.search.noResults}}

@@ -1,29 +1,23 @@
 {% extends 'layout.html.jinja' %}
 
 {% block head %}
-<!-- Set the title of the page to "Admin Panel -> Comments" -->
 <title>{{translations.adminPanelComments.title}}</title>
 {% endblock head %}
 
 {% block body %}
-<!-- Display the heading for the comments section -->
 <h1 class="my-4 text-4xl font-medium select-none text-center">{{translations.adminPanelComments.comments}}</h1>
 
-<!-- Loop through each comment and display comment details -->
 {% for comment in comments %}
 <div
   class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md border-gray-500/25">
-  <!-- Display post ID and link to the corresponding post -->
   <div class="flex items-center justify-between mb-2">
     <div class="flex items-center">
       <i class="ti ti-id mr-1 text-xl"></i> {{translations.adminPanelComments.postID}}:
       <a href="/post/{{ getPostUrlIdFromPost(comment[1]) }}" class="ml-1 font-medium">{{ getPostUrlIdFromPost(comment[1]) }}</a>
     </div>
   </div>
-  <!-- Display comment content -->
   <div tag="content" class="w-fit mx-auto my-4">{{ comment[2] }}</div>
 
-  <!-- Display creation time and date of the comment -->
   <div class="flex items-center justify-between my-2">
     <div class="flex items-center">
       <i class="ti ti-clock mr-1 text-xl"></i>
@@ -37,11 +31,9 @@
     </div>
   </div>
 
-  <!-- Check if the path is "/admin/comments" to show additional details -->
   {% if request.path == "/admin/comments" %}
   <div class="flex items-center justify-between mt-2">
     <div class="flex items-center">
-      <!-- Display author details with a link to the author's profile -->
       <i class="ti ti-user mr-1 text-xl"></i>
       <p class="hidden md:block mr-1">{{translations.adminPanelComments.author}}:</p>
       <a href="/user/{{ comment[3].lower() }}" class="hover:text-rose-500 duration-150 font-medium">
@@ -49,7 +41,6 @@
       </a>
     </div>
 
-    <!-- Display delete button within a form for comment deletion -->
     <div class="flex items-center">
       <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -64,7 +55,6 @@
 </div>
 {% endfor %}
 
-<!-- Check if the path is "/admin/comments" to display a back button -->
 {% if request.path == "/admin/comments" %}
 <a href="/admin" class="hidden md:block fixed bottom-0 left-1">
   <i class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"></i>
