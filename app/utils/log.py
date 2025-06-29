@@ -1,7 +1,5 @@
 """
 This module contains the code for the Log variable.
-
-Note: Old built-in logger replaced with Tamga Logger (another open-source project by me).
 """
 
 # Import necessary modules
