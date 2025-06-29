@@ -28,11 +28,9 @@ def adminPanelComments():
         cursor.execute("select * from comments order by timeStamp desc")
         comments = cursor.fetchall()
 
-        Log.info(
-            f"Rendering adminPanelComments.html.jinja: params: comments={comments}"
-        )
+        Log.info(f"Rendering adminPanelComments.html: params: comments={comments}")
 
-        return render_template("adminPanelComments.html.jinja", comments=comments)
+        return render_template("adminPanelComments.html", comments=comments)
     else:
         Log.error(
             f"{request.remote_addr} tried to reach comment admin panel being logged in"

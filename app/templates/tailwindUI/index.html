@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} {% block head %}
+<title>flaskBlog</title>
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="flaskBlog" />
+<meta
+    property="og:image"
+    content="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico"
+/>
+<meta property="og:url" content="{{ request.base_url }}" />
+<meta
+    property="og:description"
+    content="{{ translations.about.description }}"
+/>
+<meta property="og:site_name" content="flaskBlog" />
+<meta name="twitter:site" content="@dogukanurker" />
+<meta name="twitter:title" content="flaskBlog" />
+<meta
+    name="twitter:description"
+    content="{{ translations.about.description }}"
+/>
+<meta
+    name="twitter:image"
+    content="https://raw.githubusercontent.com/DogukanUrker/flaskBlog/main/images/Icon180.ico"
+/>
+{% endblock head %} {% block body %} {% from "components/categoryContainer.html"
+import categoryContainer %} {{ categoryContainer(translations) }} {% from
+"components/sortMenu.html" import sortMenu %} {{
+sortMenu(sortName,source,translations) }}
+
+<div
+    class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6"
+>
+    {% for post in posts %} {% from "components/postCardMacro.html" import
+    postCard with context %} {{ postCard(post=post,
+    authorProfilePicture=getProfilePicture(post[5])) }} {% endfor %}
+</div>
+
+<div class="text-center mt-4 mb-2 text-xs font-medium">
+    <div class="mb-1">
+        <a
+            href="/about"
+            class="text-rose-500 hover:text-rose-600 duration-150"
+            target="_blank"
+            >{{ translations.about.title }}</a
+        >
+    </div>
+    {{ translations.about.credits | safe }}
+    <br />
+</div>
+{% endblock body %}

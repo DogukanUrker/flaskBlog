@@ -12,4 +12,4 @@ def csrfErrorHandler(e):
 
     Log.error(e)
 
-    return render_template("csrfError.html.jinja", reason=e.description), 400
+    return render_template("csrfError.html", reason=e.description), 400

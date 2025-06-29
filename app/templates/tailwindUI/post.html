@@ -1,0 +1,203 @@
+{% extends 'layout.html' %} {% block head %}
+<title>{{ title }}</title>
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ title }}" />
+<meta
+    property="og:image"
+    content="{{
+    blogPostUrl
+  }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+/>
+<meta name="keywords" content="{{ tags }}" />
+<meta name="author" content="{{ author }}" />
+<meta property="og:url" content="{{ blogPostUrl }}" />
+<meta
+    property="og:description"
+    content="{{ content[:100] | striptags + '...' | safe }}"
+/>
+<meta name="twitter:site" content="{{ appName }}" />
+<meta name="twitter:title" content="{{ title }}" />
+<meta
+    name="twitter:description"
+    content="{{ content[:100] | striptags + '...' | safe }}"
+/>
+<meta
+    name="twitter:image"
+    content="{{
+    blogPostUrl
+  }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+/>
+<meta property="og:site_name" content="{{ appName }}" />
+
+{% endblock head %} {% block body %}
+<script>
+    let visitorID = parseInt("{{ idForRandomVisitor | safe }}");
+    const csrfToken = "{{ csrf_token() }}";
+</script>
+<div
+    class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 mx-auto mt-6 md:mt-10 break-words"
+>
+    <img
+        src="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+        class="mx-auto rounded-md shadow-md select-none"
+    />
+
+    <h1
+        class="text-2xl md:text-3xl mt-3 text-rose-500 w-full text-center font-bold"
+    >
+        {{ title }}
+    </h1>
+
+    <div
+        class="flex items-center justify-center gap-2 my-4 select-none opacity-75"
+    >
+        <p class="text-sm font-medium">
+            {{ readingTime|string + " " + translations.post.minRead }}
+        </p>
+        {% if author == session["userName"] or "admin" == session["userName"] %}
+        <a
+            href="/analytics/posts/{{ urlID }}"
+            class="shadow-lg hover:text-rose-500 duration-150"
+            >{{ translations.post.viewPerformance }}</a
+        >
+        {% endif %}
+    </div>
+
+    <p>{{ content | safe }} <br /></p>
+
+    <div class="select-none">
+        <div class="flex w-full justify-between my-1">
+            <div class="flex items-center">
+                <i class="ti ti-tags mr-1 text-2xl"></i>
+                {{ tags.replace(",", ", ") }}
+            </div>
+            <a
+                target="_blank"
+                href="https://x.com/intent/tweet?text={{ title }} by {{ author }} on {{
+          appName
+        }} {{ request.base_url }}"
+            >
+                <i
+                    class="hover:text-rose-500 duration-150 ti ti-brand-x text-2xl"
+                ></i>
+            </a>
+        </div>
+
+        <div class="flex w-full justify-between my-1">
+            <h5>
+                <div class="flex items-center">
+                    <i class="ti ti-eye mr-1 text-2xl"></i>
+                    {{ views }}
+                </div>
+            </h5>
+            <h5 class="time">{{ timeStamp }}</h5>
+        </div>
+
+        <div class="flex w-full justify-between my-1">
+            <a
+                href="/user/{{ author | lower }}"
+                class="hover:text-rose-500 duration-150"
+            >
+                <h5 class="m-1 flex">
+                    <img
+                        class="w-7 mr-2 select-none"
+                        src="{{ getProfilePicture(author) }}"
+                        alt="{{ author }}"
+                    />
+                    {{ author }}
+                </h5>
+            </a>
+            <h5 class="date">{{ timeStamp }}</h5>
+        </div>
+    </div>
+
+    {% if author == session["userName"] %}
+    <div class="flex justify-between px-2">
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <button
+                type="submit"
+                name="postDeleteButton"
+                class="text-rose-500 hover:text-rose-500/75 duration-150"
+            >
+                <i class="ti ti-trash-x mr-1 text-2xl"></i>
+            </button>
+        </form>
+        <a
+            href="/editpost/{{ urlID }}"
+            class="text-rose-500 hover:text-rose-500/75 duration-150"
+        >
+            <i class="ti ti-edit mr-1 text-2xl"></i>
+        </a>
+    </div>
+    {% endif %}
+
+    <div>
+        {% for comment in comments %}
+        <div class="flex flex-col mx-auto mt-8 mb-4 p-2 max-w-lg">
+            <div class="flex w-full justify-between">
+                <div class="mx-2">
+                    <a
+                        href="/user/{{ comment[3] }}"
+                        class="flex items-center hover:text-rose-500 duration-150 select-none"
+                    >
+                        <img
+                            class="w-7 mr-2"
+                            src="{{ getProfilePicture(comment[3]) }}"
+                            alt=""
+                        />
+                        <div>{{ comment[3] }}</div>
+                    </a>
+                </div>
+                {% if session["userName"] == comment[3] %}
+                <form method="post" class="mx-2 my-1">
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="commentID"
+                        value="{{ comment[0] }}"
+                    />
+                    <button
+                        type="submit"
+                        name="commentDeleteButton"
+                        class="hover:text-rose-500 duration-150"
+                    >
+                        <i class="ti ti-trash-x mr-1 text-xl"></i>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+            <p class="break-words ml-8">
+                <i class="ti ti-corner-down-right mr-1 text-xl inline-block"></i
+                >{{ comment[2] }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="mx-auto text-center my-8 w-10/12 md:w-5/12 lg:w-4/12 xl:w-3/12">
+    <form method="post" class="md:w-max">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        {% if session["userName"] %}
+        <div class="border rounded border-rose-500/25">
+            {{ form.comment(class_="bg-transparent focus:outline-none rounded-md
+            p-2 text-center h-20 w-72 resize-none mx-auto
+            mb-0",placeholder=translations.post.placeholder) }}
+            <button
+                type="submit"
+                class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2"
+            >
+                <i class="ti ti-arrow-narrow-up mr-1 text-xl"></i>
+            </button>
+        </div>
+    </form>
+    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='js/post.js') }}"></script>
+{% endblock body %}

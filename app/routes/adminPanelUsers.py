@@ -57,10 +57,10 @@ def adminPanelUsers():
             cursor.execute("select * from users")
             users = cursor.fetchall()
 
-            Log.info(f"Rendering adminPanelUsers.html.jinja: params: users={users}")
+            Log.info(f"Rendering adminPanelUsers.html: params: users={users}")
 
             return render_template(
-                "adminPanelUsers.html.jinja",
+                "adminPanelUsers.html",
                 users=users,
             )
         else:

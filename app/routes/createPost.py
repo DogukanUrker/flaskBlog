@@ -91,7 +91,7 @@ def createPost():
                 return redirect("/")
 
         return render_template(
-            "createPost.html.jinja",
+            "createPost.html",
             form=form,
         )
     else:

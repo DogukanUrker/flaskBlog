@@ -131,7 +131,7 @@ def editPost(urlID):
                         return redirect(f"/post/{post[10]}")
 
                 return render_template(
-                    "/editPost.html.jinja",
+                    "/editPost.html",
                     id=post[0],
                     title=post[1],
                     tags=post[2],
@@ -151,7 +151,7 @@ def editPost(urlID):
                 return redirect("/")
         else:
             Log.error(f'Post: "{urlID}" not found')
-            return render_template("notFound.html.jinja")
+            return render_template("notFound.html")
     else:
         Log.error(f"{request.remote_addr} tried to edit post without login")
         flashMessage(

@@ -12,4 +12,4 @@ def notFoundErrorHandler(e):
 
     Log.error(e)
 
-    return render_template("notFound.html.jinja"), 404
+    return render_template("notFound.html"), 404

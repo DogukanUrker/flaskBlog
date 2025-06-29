@@ -1,0 +1,102 @@
+{% macro sortMenu(sortName,source,translations) %}
+<div
+    class="mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6 flex justify-end font-medium"
+>
+    <div
+        class="relative inline-block text-left text-rose-500/75 w-full md:w-fit"
+    >
+        <select
+            class="block w-full pl-3 pr-10 py-2 rounded-md text-base sm:text-sm outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-transparent block shadow-md select-none"
+            onchange="location =  this.value;"
+        >
+            <option selected disabled>{{sortName}}</option>
+            <optgroup
+                label="{{ translations.sortMenu.desc }}"
+                class="font-bold"
+            >
+                <option
+                    value="{{source}}/by=timeStamp/sort=desc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.create }}
+                </option>
+                <option
+                    value="{{source}}/by=title/sort=desc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.title }}
+                </option>
+                <option
+                    value="{{source}}/by=views/sort=desc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.views }}
+                </option>
+                <option
+                    value="{{source}}/by=category/sort=desc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.category }}
+                </option>
+                <option
+                    value="{{source}}/by=lastEditTimeStamp/sort=desc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.edit }}
+                </option>
+
+                <option
+                    value="{{source}}/by=hot/sort=desc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.hot }}
+                </option>
+            </optgroup>
+            <optgroup label="{{ translations.sortMenu.asc }}" class="font-bold">
+                <option
+                    value="{{source}}/by=timeStamp/sort=asc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.create }}
+                </option>
+                <option
+                    value="{{source}}/by=title/sort=asc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.title }}
+                </option>
+                <option
+                    value="{{source}}/by=views/sort=asc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.views }}
+                </option>
+                <option
+                    value="{{source}}/by=category/sort=asc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.category }}
+                </option>
+                <option
+                    value="{{source}}/by=lastEditTimeStamp/sort=asc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.edit }}
+                </option>
+
+                <option
+                    value="{{source}}/by=hot/sort=asc"
+                    class="block px-4 py-2 font-medium"
+                >
+                    {{ translations.sortMenu.hot }}
+                </option>
+            </optgroup>
+        </select>
+        <div
+            class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+        >
+            <i class="ti ti-arrows-sort mr-2"></i>
+        </div>
+    </div>
+</div>
+{% endmacro %}

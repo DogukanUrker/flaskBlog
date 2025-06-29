@@ -4,11 +4,11 @@ This file contains the routes for the Flask application.
 The Blueprint "index" is used to define the home page of the application.
 The route "/" maps the index function to the home page.
 
-The index function retrieves all posts from the database and passes them to the index.html.jinja template.
+The index function retrieves all posts from the database and passes them to the index.html template.
 
-The posts variable is passed to the index.html.jinja template as a list of dictionaries.
+The posts variable is passed to the index.html template as a list of dictionaries.
 
-The index.html.jinja template displays the title and content of each post.
+The index.html template displays the title and content of each post.
 
 DISCLAIMER: This code is the property of the repository owner and is not intended for
 use without explicit permission from the owner. The code is provided as-is and is
@@ -32,11 +32,11 @@ def index(by="hot", sort="desc"):
     """
     This function maps the home page route ("/") to the index function.
 
-    It retrieves all posts from the database and passes them to the index.html.jinja template.
+    It retrieves all posts from the database and passes them to the index.html template.
 
-    The posts variable is passed to the index.html.jinja template as a list of dictionaries.
+    The posts variable is passed to the index.html template as a list of dictionaries.
 
-    The index.html.jinja template displays the title and content of each post.
+    The index.html template displays the title and content of each post.
 
     Parameters:
     by (str): The field to sort by. Options are "timeStamp", "title", "views", "category", "lastEditTimeStamp", "hot".
@@ -88,6 +88,4 @@ def index(by="hot", sort="desc"):
 
     Log.info(f"Sorting posts on index page by: {sortName}")
 
-    return render_template(
-        "index.html.jinja", posts=posts, sortName=sortName, source=""
-    )
+    return render_template("index.html", posts=posts, sortName=sortName, source="")

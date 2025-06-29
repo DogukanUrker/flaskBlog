@@ -59,7 +59,7 @@ def analyticsPost(urlID):
                 osGraphData = getAnalyticsPageOSGraphData(post[0])
 
                 return render_template(
-                    "postsAnalytics.html.jinja",
+                    "postsAnalytics.html",
                     post=post,
                     todaysVisitor=todaysVisitor,
                     osGraphData=osGraphData,
@@ -68,14 +68,14 @@ def analyticsPost(urlID):
             else:
                 Log.error(f"{request.remote_addr} tried to reach unknown post")
 
-                return render_template("notFound.html.jinja")
+                return render_template("notFound.html")
 
         else:
             Log.error(f"{request.remote_addr} tried to reach unknown post")
 
-            return render_template("notFound.html.jinja")
+            return render_template("notFound.html")
 
     else:
         Log.error(f"{request.remote_addr} tried to reach unknown post")
 
-        return render_template("notFound.html.jinja")
+        return render_template("notFound.html")

@@ -88,7 +88,7 @@ def verifyUser(codeSent):
                         )
 
                 return render_template(
-                    "verifyUser.html.jinja",
+                    "verifyUser.html",
                     form=form,
                     mailSent=True,
                 )
@@ -165,7 +165,7 @@ def verifyUser(codeSent):
                         return redirect("/verifyUser/codesent=true")
 
                 return render_template(
-                    "verifyUser.html.jinja",
+                    "verifyUser.html",
                     form=form,
                     mailSent=False,
                 )

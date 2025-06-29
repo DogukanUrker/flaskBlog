@@ -121,11 +121,11 @@ def search(query):
         posts.append(cursor.fetchall())
 
     Log.info(
-        f"Rendering search.html.jinja: params: query={query} | users={users} | posts={len(posts)} | empty={empty}"
+        f"Rendering search.html: params: query={query} | users={users} | posts={len(posts)} | empty={empty}"
     )
 
     return render_template(
-        "search.html.jinja",
+        "search.html",
         posts=posts,
         users=users,
         query=query,

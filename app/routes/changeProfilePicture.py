@@ -52,7 +52,7 @@ def changeProfilePicture():
             return redirect("/changeprofilepicture")
 
         return render_template(
-            "changeProfilePicture.html.jinja",
+            "changeProfilePicture.html",
             form=form,
         )
     else:

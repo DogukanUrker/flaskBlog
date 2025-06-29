@@ -77,7 +77,7 @@ def dashboard(userName):
                 post[9] = translations["categories"][post[9].lower()]
 
             return render_template(
-                "/dashboard.html.jinja",
+                "/dashboard.html",
                 posts=posts,
                 comments=comments,
                 showPosts=showPosts,
