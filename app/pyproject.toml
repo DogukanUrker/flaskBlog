@@ -3,7 +3,7 @@ name = "flaskBlog"
 version = "2.7.0"
 description = "Blog application built with Flask"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.7"
 dependencies = [
     "flask-wtf>=1.2.2",
     "flask>=3.1.0",
