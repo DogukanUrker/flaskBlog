@@ -7,9 +7,7 @@ from flask import (
     request,
     session,
 )
-from settings import (
-    DB_COMMENTS_ROOT,
-)
+from settings import Settings
 from utils.log import Log
 
 adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
@@ -20,9 +18,9 @@ adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
 def adminPanelComments():
     if "userName" in session:
         Log.info(f"Admin: {session['userName']} reached to comments admin panel")
-        Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute("select * from comments order by timeStamp desc")

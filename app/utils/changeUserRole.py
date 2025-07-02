@@ -1,7 +1,7 @@
 import sqlite3
 
 from flask import redirect, session
-from settings import DB_USERS_ROOT
+from settings import Settings
 from utils.log import Log
 
 
@@ -10,8 +10,8 @@ def changeUserRole(userName):
     Changes the role of the user with the specified username.
     """
     userName = userName.lower()
-    Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
-    connection = sqlite3.connect(DB_USERS_ROOT)
+    Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
+    connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute(

@@ -7,9 +7,7 @@ from flask import (
     request,
     session,
 )
-from settings import (
-    DB_POSTS_ROOT,
-)
+from settings import Settings
 from utils.addPoints import addPoints
 from utils.flashMessage import flashMessage
 from utils.forms.CreatePostForm import CreatePostForm
@@ -56,8 +54,8 @@ def createPost():
                     f'User: "{session["userName"]}" tried to create a post with empty content',
                 )
             else:
-                Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
-                connection = sqlite3.connect(DB_POSTS_ROOT)
+                Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
+                connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(

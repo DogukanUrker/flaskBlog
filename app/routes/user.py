@@ -5,7 +5,7 @@ This module contains the route for viewing user profiles.
 import sqlite3
 
 from flask import Blueprint, render_template
-from settings import DB_COMMENTS_ROOT, DB_POSTS_ROOT, DB_USERS_ROOT
+from settings import Settings
 from utils.log import Log
 
 userBlueprint = Blueprint("user", __name__)
@@ -22,8 +22,8 @@ def user(userName):
     :rtype: flask.Response
     """
     userName = userName.lower()
-    Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
-    connection = sqlite3.connect(DB_USERS_ROOT)
+    Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
+    connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute("select userName from users")
@@ -40,8 +40,8 @@ def user(userName):
             [(userName)],
         )
         user = cursor.fetchone()
-        Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
-        connection = sqlite3.connect(DB_POSTS_ROOT)
+        Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
+        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
@@ -57,7 +57,7 @@ def user(userName):
             [(user[1])],
         )
         posts = cursor.fetchall()
-        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(

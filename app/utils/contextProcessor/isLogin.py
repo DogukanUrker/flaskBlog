@@ -1,4 +1,4 @@
-from settings import LOG_IN
+from settings import Settings
 
 
 def isLogin():
@@ -9,4 +9,4 @@ def isLogin():
         dict: A dictionary with a constant login is enabled or not.
     """
 
-    return dict(isLogin=LOG_IN)
+    return dict(isLogin=Settings.LOG_IN)

@@ -8,13 +8,7 @@ from flask import (
     session,
     url_for,
 )
-from settings import (
-    ANALYTICS,
-    APP_NAME,
-    DB_ANALYTICS_ROOT,
-    DB_COMMENTS_ROOT,
-    DB_POSTS_ROOT,
-)
+from settings import Settings
 from utils.addPoints import addPoints
 from utils.calculateReadTime import calculateReadTime
 from utils.delete import Delete
@@ -33,9 +27,9 @@ postBlueprint = Blueprint("post", __name__)
 def post(urlID=None, slug=None):
     form = CommentForm(request.form)
 
-    Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
 
@@ -50,9 +44,9 @@ def post(urlID=None, slug=None):
 
         Log.success(f'post: "{urlID}" loaded')
 
-        Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_POSTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
 
@@ -81,9 +75,9 @@ def post(urlID=None, slug=None):
 
             comment = request.form["comment"]
 
-            Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_COMMENTS_ROOT)
+            connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
 
@@ -114,9 +108,9 @@ def post(urlID=None, slug=None):
 
             return redirect(url_for("post.post", urlID=urlID)), 301
 
-        Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
 
@@ -126,7 +120,7 @@ def post(urlID=None, slug=None):
         )
         comments = cursor.fetchall()
 
-        if ANALYTICS:
+        if Settings.ANALYTICS:
             userIPData = getDataFromUserIP(str(request.headers.get("User-Agent")))
             idForRandomVisitor = None
             if "userName" in session:
@@ -134,9 +128,9 @@ def post(urlID=None, slug=None):
             else:
                 sessionUser = "unsignedUser"
             if userIPData["status"] == 0:
-                Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")
+                Log.database(f"Connecting to '{Settings.DB_ANALYTICS_ROOT}' database")
 
-                connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+                connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
 
@@ -172,7 +166,7 @@ def post(urlID=None, slug=None):
             urlID=post[10],
             form=form,
             comments=comments,
-            appName=APP_NAME,
+            appName=Settings.APP_NAME,
             blogPostUrl=request.root_url,
             readingTime=calculateReadTime(post[3]),
             idForRandomVisitor=idForRandomVisitor,

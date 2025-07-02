@@ -7,9 +7,7 @@ from flask import (
     request,
     session,
 )
-from settings import (
-    DB_POSTS_ROOT,
-)
+from settings import Settings
 from utils.log import Log
 
 adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
@@ -20,9 +18,9 @@ adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
 def adminPanelPosts():
     if "userName" in session:
         Log.info(f"Admin: {session['userName']} reached to posts admin panel")
-        Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_POSTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute("select * from posts order by timeStamp desc")

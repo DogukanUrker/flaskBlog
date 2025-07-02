@@ -8,9 +8,7 @@ from flask import (
     session,
 )
 from passlib.hash import sha512_crypt as encryption
-from settings import (
-    DB_USERS_ROOT,
-)
+from settings import Settings
 from utils.flashMessage import flashMessage
 from utils.forms.ChangePasswordForm import ChangePasswordForm
 from utils.log import Log
@@ -38,9 +36,9 @@ def changePassword():
             oldPassword = request.form["oldPassword"]
             password = request.form["password"]
             passwordConfirm = request.form["passwordConfirm"]
-            Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_USERS_ROOT)
+            connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
 
@@ -68,9 +66,9 @@ def changePassword():
 
                 if oldPassword != password and password == passwordConfirm:
                     newPassword = encryption.hash(password)
-                    Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+                    Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-                    connection = sqlite3.connect(DB_USERS_ROOT)
+                    connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                     connection.set_trace_callback(Log.database)
                     cursor = connection.cursor()
                     cursor.execute(

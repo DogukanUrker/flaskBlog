@@ -14,19 +14,7 @@ from os import mkdir
 from os.path import exists
 
 from passlib.hash import sha512_crypt as encryption
-from settings import (
-    DB_ANALYTICS_ROOT,
-    DB_COMMENTS_ROOT,
-    DB_FOLDER_ROOT,
-    DB_POSTS_ROOT,
-    DB_USERS_ROOT,
-    DEFAULT_ADMIN,
-    DEFAULT_ADMIN_EMAIL,
-    DEFAULT_ADMIN_PASSWORD,
-    DEFAULT_ADMIN_POINT,
-    DEFAULT_ADMIN_PROFILE_PICTURE,
-    DEFAULT_ADMIN_USERNAME,
-)
+from settings import Settings
 from utils.log import Log
 from utils.time import currentTimeStamp
 
@@ -39,14 +27,14 @@ def dbFolder():
         None
     """
 
-    if exists(DB_FOLDER_ROOT):
-        Log.info(f'Database folder: "/{DB_FOLDER_ROOT}" found')
+    if exists(Settings.DB_FOLDER_ROOT):
+        Log.info(f'Database folder: "/{Settings.DB_FOLDER_ROOT}" found')
     else:
-        Log.error(f'Database folder: "/{DB_FOLDER_ROOT}" not found')
+        Log.error(f'Database folder: "/{Settings.DB_FOLDER_ROOT}" not found')
 
-        mkdir(DB_FOLDER_ROOT)
+        mkdir(Settings.DB_FOLDER_ROOT)
 
-        Log.success(f'Database folder: "/{DB_FOLDER_ROOT}" created')
+        Log.success(f'Database folder: "/{Settings.DB_FOLDER_ROOT}" created')
 
 
 def usersTable():
@@ -58,27 +46,27 @@ def usersTable():
         None
     """
 
-    if exists(DB_USERS_ROOT):
-        Log.info(f'Users database: "{DB_USERS_ROOT}" found')
+    if exists(Settings.DB_USERS_ROOT):
+        Log.info(f'Users database: "{Settings.DB_USERS_ROOT}" found')
     else:
-        Log.error(f'Users database: "{DB_USERS_ROOT}" not found')
+        Log.error(f'Users database: "{Settings.DB_USERS_ROOT}" not found')
 
-        open(DB_USERS_ROOT, "x")
+        open(Settings.DB_USERS_ROOT, "x")
 
-        Log.success(f'Users database: "{DB_USERS_ROOT}" created')
-    Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+        Log.success(f'Users database: "{Settings.DB_USERS_ROOT}" created')
+    Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_USERS_ROOT)
+    connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     try:
         cursor.execute("""select userID from users; """).fetchall()
 
-        Log.info(f'Table: "users" found in "{DB_USERS_ROOT}"')
+        Log.info(f'Table: "users" found in "{Settings.DB_USERS_ROOT}"')
 
         connection.close()
     except Exception:
-        Log.error(f'Table: "users" not found in "{DB_USERS_ROOT}"')
+        Log.error(f'Table: "users" not found in "{Settings.DB_USERS_ROOT}"')
 
         usersTable = """
         create table if not exists Users(
@@ -96,8 +84,8 @@ def usersTable():
 
         cursor.execute(usersTable)
 
-        if DEFAULT_ADMIN:
-            password = encryption.hash(DEFAULT_ADMIN_PASSWORD)
+        if Settings.DEFAULT_ADMIN:
+            password = encryption.hash(Settings.DEFAULT_ADMIN_PASSWORD)
 
             cursor.execute(
                 """
@@ -105,12 +93,12 @@ def usersTable():
                 values(?,?,?,?,?,?,?,?)
                 """,
                 (
-                    DEFAULT_ADMIN_USERNAME,
-                    DEFAULT_ADMIN_EMAIL,
+                    Settings.DEFAULT_ADMIN_USERNAME,
+                    Settings.DEFAULT_ADMIN_EMAIL,
                     password,
-                    DEFAULT_ADMIN_PROFILE_PICTURE,
+                    Settings.DEFAULT_ADMIN_PROFILE_PICTURE,
                     "admin",
-                    DEFAULT_ADMIN_POINT,
+                    Settings.DEFAULT_ADMIN_POINT,
                     currentTimeStamp(),
                     "True",
                 ),
@@ -119,14 +107,14 @@ def usersTable():
             connection.commit()
 
             Log.success(
-                f'Admin: "{DEFAULT_ADMIN_USERNAME}" added to database as initial admin',
+                f'Admin: "{Settings.DEFAULT_ADMIN_USERNAME}" added to database as initial admin',
             )
 
         connection.commit()
 
         connection.close()
 
-        Log.success(f'Table: "users" created in "{DB_USERS_ROOT}"')
+        Log.success(f'Table: "users" created in "{Settings.DB_USERS_ROOT}"')
 
 
 def postsTable():
@@ -137,27 +125,27 @@ def postsTable():
         None
     """
 
-    if exists(DB_POSTS_ROOT):
-        Log.info(f'Posts database: "{DB_POSTS_ROOT}" found')
+    if exists(Settings.DB_POSTS_ROOT):
+        Log.info(f'Posts database: "{Settings.DB_POSTS_ROOT}" found')
     else:
-        Log.error(f'Posts database: "{DB_POSTS_ROOT}" not found')
+        Log.error(f'Posts database: "{Settings.DB_POSTS_ROOT}" not found')
 
-        open(DB_POSTS_ROOT, "x")
+        open(Settings.DB_POSTS_ROOT, "x")
 
-        Log.success(f'Posts database: "{DB_POSTS_ROOT}" created')
-    Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+        Log.success(f'Posts database: "{Settings.DB_POSTS_ROOT}" created')
+    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     try:
         cursor.execute("""select id from posts; """).fetchall()
 
-        Log.info(f'Table: "posts" found in "{DB_POSTS_ROOT}"')
+        Log.info(f'Table: "posts" found in "{Settings.DB_POSTS_ROOT}"')
 
         connection.close()
     except Exception:
-        Log.error(f'Table: "posts" not found in "{DB_POSTS_ROOT}"')
+        Log.error(f'Table: "posts" not found in "{Settings.DB_POSTS_ROOT}"')
 
         postsTable = """
         CREATE TABLE "posts" (
@@ -181,7 +169,7 @@ def postsTable():
 
         connection.close()
 
-        Log.success(f'Table: "posts" created in "{DB_POSTS_ROOT}"')
+        Log.success(f'Table: "posts" created in "{Settings.DB_POSTS_ROOT}"')
 
 
 def commentsTable():
@@ -192,27 +180,27 @@ def commentsTable():
         None
     """
 
-    if exists(DB_COMMENTS_ROOT):
-        Log.info(f'Comments database: "{DB_COMMENTS_ROOT}" found')
+    if exists(Settings.DB_COMMENTS_ROOT):
+        Log.info(f'Comments database: "{Settings.DB_COMMENTS_ROOT}" found')
     else:
-        Log.error(f'Comments database: "{DB_COMMENTS_ROOT}" not found')
+        Log.error(f'Comments database: "{Settings.DB_COMMENTS_ROOT}" not found')
 
-        open(DB_COMMENTS_ROOT, "x")
+        open(Settings.DB_COMMENTS_ROOT, "x")
 
-        Log.success(f'Comments database: "{DB_COMMENTS_ROOT}" created')
-    Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
+        Log.success(f'Comments database: "{Settings.DB_COMMENTS_ROOT}" created')
+    Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_COMMENTS_ROOT)
+    connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     try:
         cursor.execute("""select id from comments; """).fetchall()
 
-        Log.info(f'Table: "comments" found in "{DB_COMMENTS_ROOT}"')
+        Log.info(f'Table: "comments" found in "{Settings.DB_COMMENTS_ROOT}"')
 
         connection.close()
     except Exception:
-        Log.error(f'Table: "comments" not found in "{DB_COMMENTS_ROOT}"')
+        Log.error(f'Table: "comments" not found in "{Settings.DB_COMMENTS_ROOT}"')
 
         commentsTable = """
         create table if not exists comments(
@@ -230,7 +218,7 @@ def commentsTable():
 
         connection.close()
 
-        Log.success(f'Table: "comments" created in "{DB_COMMENTS_ROOT}"')
+        Log.success(f'Table: "comments" created in "{Settings.DB_COMMENTS_ROOT}"')
 
 
 def analyticsTable():
@@ -241,27 +229,29 @@ def analyticsTable():
         None
     """
 
-    if exists(DB_ANALYTICS_ROOT):
-        Log.info(f'Analytics database: "{DB_ANALYTICS_ROOT}" found')
+    if exists(Settings.DB_ANALYTICS_ROOT):
+        Log.info(f'Analytics database: "{Settings.DB_ANALYTICS_ROOT}" found')
     else:
-        Log.error(f'Analytics database: "{DB_ANALYTICS_ROOT}" not found')
+        Log.error(f'Analytics database: "{Settings.DB_ANALYTICS_ROOT}" not found')
 
-        open(DB_ANALYTICS_ROOT, "x")
+        open(Settings.DB_ANALYTICS_ROOT, "x")
 
-        Log.success(f'Analytics database: "{DB_ANALYTICS_ROOT}" created')
-    Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")
+        Log.success(f'Analytics database: "{Settings.DB_ANALYTICS_ROOT}" created')
+    Log.database(f"Connecting to '{Settings.DB_ANALYTICS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+    connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     try:
         cursor.execute("""select id from postsAnalytics; """).fetchall()
 
-        Log.info(f'Table: "postsAnalytics" found in "{DB_ANALYTICS_ROOT}"')
+        Log.info(f'Table: "postsAnalytics" found in "{Settings.DB_ANALYTICS_ROOT}"')
 
         connection.close()
     except Exception:
-        Log.error(f'Table: "postsAnalytics" not found in "{DB_ANALYTICS_ROOT}"')
+        Log.error(
+            f'Table: "postsAnalytics" not found in "{Settings.DB_ANALYTICS_ROOT}"'
+        )
 
         analyticsTable = """
         create table if not exists postsAnalytics(
@@ -282,4 +272,6 @@ def analyticsTable():
 
         connection.close()
 
-        Log.success(f'Table: "postsAnalytics" created in "{DB_ANALYTICS_ROOT}"')
+        Log.success(
+            f'Table: "postsAnalytics" created in "{Settings.DB_ANALYTICS_ROOT}"'
+        )

@@ -26,12 +26,7 @@ The functions in this module use the following helper functions:
 import sqlite3
 
 from flask import redirect, session
-from settings import (
-    DB_ANALYTICS_ROOT,
-    DB_COMMENTS_ROOT,
-    DB_POSTS_ROOT,
-    DB_USERS_ROOT,
-)
+from settings import Settings
 from utils.flashMessage import flashMessage
 from utils.log import Log
 
@@ -47,8 +42,8 @@ class Delete:
         Returns:
         None
         """
-        Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
-        connection = sqlite3.connect(DB_POSTS_ROOT)
+        Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
+        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
@@ -62,7 +57,7 @@ class Delete:
         cursor.execute("update sqlite_sequence set seq = seq-1")
         connection.commit()
         connection.close()
-        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
@@ -80,7 +75,7 @@ class Delete:
         )
         connection.commit()
 
-        connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+        connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
@@ -111,8 +106,8 @@ class Delete:
         Returns:
         None
         """
-        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
-        connection = sqlite3.connect(DB_USERS_ROOT)
+        Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
+        connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
@@ -153,7 +148,7 @@ class Delete:
         Returns:
         None
         """
-        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(

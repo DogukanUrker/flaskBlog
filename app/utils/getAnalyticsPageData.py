@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime, timedelta
 
-from settings import DB_ANALYTICS_ROOT
+from settings import Settings
 from utils.log import Log
 
 
@@ -39,9 +39,9 @@ def getAnalyticsPageTrafficGraphData(
         parameter = (postID, userQueryLimit)
 
     try:
-        Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_ANALYTICS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+        connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
 
@@ -75,9 +75,9 @@ def getAnalyticsPageOSGraphData(postID: int) -> dict:
     """
 
     try:
-        Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_ANALYTICS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+        connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
 
@@ -118,9 +118,9 @@ def getAnalyticsPageCountryGraphData(postID: int, viewAll=False) -> dict:
         sqlQuery = """select country as countryName, count(*) as countryCount from postsAnalytics where postID = ? GROUP BY country ORDER BY countryCount DESC limit 25"""
 
     try:
-        Log.database(f"Connecting to '{DB_ANALYTICS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_ANALYTICS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+        connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
 

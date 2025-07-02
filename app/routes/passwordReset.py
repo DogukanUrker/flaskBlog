@@ -12,14 +12,7 @@ from flask import (
     session,
 )
 from passlib.hash import sha512_crypt as encryption
-from settings import (
-    APP_NAME,
-    DB_USERS_ROOT,
-    SMTP_MAIL,
-    SMTP_PASSWORD,
-    SMTP_PORT,
-    SMTP_SERVER,
-)
+from settings import Settings
 from utils.flashMessage import flashMessage
 from utils.forms.PasswordResetForm import PasswordResetForm
 from utils.log import Log
@@ -49,9 +42,9 @@ def passwordReset(codeSent):
     form = PasswordResetForm(request.form)
 
     if codeSent == "true":
-        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_USERS_ROOT)
+        connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         if request.method == "POST":
@@ -116,8 +109,8 @@ def passwordReset(codeSent):
             userName = request.form["userName"]
             email = request.form["email"]
             userName = userName.replace(" ", "")
-            Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
-            connection = sqlite3.connect(DB_USERS_ROOT)
+            Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
+            connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
@@ -127,11 +120,11 @@ def passwordReset(codeSent):
             userDB = cursor.fetchone()
             if userDB:
                 context = ssl.create_default_context()
-                server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                server = smtplib.SMTP(Settings.SMTP_SERVER, Settings.SMTP_PORT)
                 server.ehlo()
                 server.starttls(context=context)
                 server.ehlo()
-                server.login(SMTP_MAIL, SMTP_PASSWORD)
+                server.login(Settings.SMTP_MAIL, Settings.SMTP_PASSWORD)
                 passwordResetCode = str(randint(1000, 9999))
                 passwordResetCodesStorage[userName] = passwordResetCode
                 message = EmailMessage()
@@ -150,7 +143,7 @@ def passwordReset(codeSent):
                         <p>To reset your password, enter the following code in the app:</p>
                         <span style="display: inline-block; background-color: #e0e0e0; color: #000000;padding: 10px 20px;font-size: 24px;font-weight: bold; border-radius: 0.5rem;">{passwordResetCode}</span>
                         <p style="font-family: Arial, sans-serif; font-size: 16px;">This code will expire when you refresh the page.</p>
-                        <p>Thank you for using {APP_NAME}.</p>
+                        <p>Thank you for using {Settings.APP_NAME}.</p>
                         </div>
                     </div>
                     </body>
@@ -159,7 +152,7 @@ def passwordReset(codeSent):
                     subtype="html",
                 )
                 message["Subject"] = "Forget Password?🔒"
-                message["From"] = SMTP_MAIL
+                message["From"] = Settings.SMTP_MAIL
                 message["To"] = email
                 server.send_message(message)
                 server.quit()

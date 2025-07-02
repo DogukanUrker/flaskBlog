@@ -3,7 +3,7 @@ from flask import Blueprint, render_template
 changeLanguageBlueprint = Blueprint("changeLanguage", __name__)
 
 
-@changeLanguageBlueprint.route("/changeLanguage")
+@changeLanguageBlueprint.route("/changelanguage")
 def changeLanguage():
     """
     Show the user's current language preference.

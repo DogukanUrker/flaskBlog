@@ -92,36 +92,7 @@ from routes.user import userBlueprint
 from routes.verifyUser import (
     verifyUserBlueprint,
 )
-from settings import (
-    APP_HOST,
-    APP_NAME,
-    APP_PORT,
-    APP_ROOT_PATH,
-    APP_SECRET_KEY,
-    APP_VERSION,
-    CUSTOM_LOGGER,
-    DEBUG_MODE,
-    DEFAULT_ADMIN,
-    DEFAULT_ADMIN_EMAIL,
-    DEFAULT_ADMIN_PASSWORD,
-    DEFAULT_ADMIN_POINT,
-    DEFAULT_ADMIN_PROFILE_PICTURE,
-    DEFAULT_ADMIN_USERNAME,
-    LOG_FILE_ROOT,
-    LOG_FOLDER_ROOT,
-    LOG_IN,
-    RECAPTCHA,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    REGISTRATION,
-    SESSION_PERMANENT,
-    SMTP_MAIL,
-    SMTP_PASSWORD,
-    SMTP_PORT,
-    SMTP_SERVER,
-    WERKZEUG_LOGGER,
-)
+from settings import Settings
 from utils.afterRequest import (
     afterRequestLogger,
 )
@@ -163,16 +134,16 @@ Log.info("Starting...")
 
 
 app = Flask(
-    import_name=APP_NAME,
-    root_path=APP_ROOT_PATH,
+    import_name=Settings.APP_NAME,
+    root_path=Settings.APP_ROOT_PATH,
 )
 
 
 app.jinja_options["autoescape"] = True
 
 
-app.secret_key = APP_SECRET_KEY
-app.config["SESSION_PERMANENT"] = SESSION_PERMANENT
+app.secret_key = Settings.APP_SECRET_KEY
+app.config["SESSION_PERMANENT"] = Settings.SESSION_PERMANENT
 
 
 csrf = CSRFProtect(app)
@@ -188,7 +159,7 @@ app.context_processor(injectTranslations)
 app.before_request(browserLanguage)
 app.jinja_env.globals.update(getSlugFromPostTitle=getSlugFromPostTitle)
 
-if WERKZEUG_LOGGER:
+if Settings.WERKZEUG_LOGGER:
     Log.warning("Werkzeug default logger is enabled")
 else:
     from logging import getLogger
@@ -198,33 +169,33 @@ else:
     getLogger("werkzeug").disabled = True
 
 
-if CUSTOM_LOGGER:
+if Settings.TAMGA_LOGGER:
     Log.info("Custom logger is enabled")
 else:
     Log.info("Custom logger is disabled")
 
 
-Log.info(f"Debug mode: {DEBUG_MODE}")
-Log.info(f"Name: {APP_NAME}")
-Log.info(f"Version: {APP_VERSION}")
-Log.info(f"Host: {APP_HOST}")
-Log.info(f"Port: {APP_PORT}")
-Log.info(f"Secret key: {APP_SECRET_KEY}")
-Log.info(f"Session permanent: {SESSION_PERMANENT}")
-Log.info(f"Root path: {APP_ROOT_PATH}")
-Log.info(f"Log folder root: {LOG_FOLDER_ROOT}")
-Log.info(f"Log file root: {LOG_FILE_ROOT}")
-Log.info(f"Log in: {LOG_IN}")
-Log.info(f"Registration: {REGISTRATION}")
+Log.info(f"Debug mode: {Settings.DEBUG_MODE}")
+Log.info(f"Name: {Settings.APP_NAME}")
+Log.info(f"Version: {Settings.APP_VERSION}")
+Log.info(f"Host: {Settings.APP_HOST}")
+Log.info(f"Port: {Settings.APP_PORT}")
+Log.info(f"Secret key: {Settings.APP_SECRET_KEY}")
+Log.info(f"Session permanent: {Settings.SESSION_PERMANENT}")
+Log.info(f"Root path: {Settings.APP_ROOT_PATH}")
+Log.info(f"Log folder root: {Settings.LOG_FOLDER_ROOT}")
+Log.info(f"Log file root: {Settings.LOG_FILE_ROOT}")
+Log.info(f"Log in: {Settings.LOG_IN}")
+Log.info(f"Registration: {Settings.REGISTRATION}")
 
-Log.info(f"SMTP server: {SMTP_SERVER}")
-Log.info(f"SMTP port: {SMTP_PORT}")
-Log.info(f"SMTP mail: {SMTP_MAIL}")
-Log.info(f"SMTP password: {SMTP_PASSWORD}")
+Log.info(f"SMTP server: {Settings.SMTP_SERVER}")
+Log.info(f"SMTP port: {Settings.SMTP_PORT}")
+Log.info(f"SMTP mail: {Settings.SMTP_MAIL}")
+Log.info(f"SMTP password: {Settings.SMTP_PASSWORD}")
 
 
-if RECAPTCHA:
-    if RECAPTCHA_SITE_KEY == "" or RECAPTCHA_SECRET_KEY == "":
+if Settings.RECAPTCHA:
+    if Settings.RECAPTCHA_SITE_KEY == "" or Settings.RECAPTCHA_SECRET_KEY == "":
         Log.error(
             "reCAPTCHA keys is unvalid this may cause the application to crash",
         )
@@ -233,21 +204,21 @@ if RECAPTCHA:
         )
     else:
         Log.info("reCAPTCHA is on for login and signup pages")
-        Log.info(f"reCAPTCHA recaptcha site key: {RECAPTCHA_SITE_KEY}")
-        Log.info(f"reCAPTCHA secret key: {RECAPTCHA_SECRET_KEY}")
-        Log.info(f"reCAPTCHA verify url: {RECAPTCHA_VERIFY_URL}")
+        Log.info(f"reCAPTCHA recaptcha site key: {Settings.RECAPTCHA_SITE_KEY}")
+        Log.info(f"reCAPTCHA secret key: {Settings.RECAPTCHA_SECRET_KEY}")
+        Log.info(f"reCAPTCHA verify url: {Settings.RECAPTCHA_VERIFY_URL}")
 
 else:
     Log.info("reCAPTCHA is off")
 
 
-if DEFAULT_ADMIN:
+if Settings.DEFAULT_ADMIN:
     Log.info("Default admin is on")
-    Log.info(f"Default admin username: {DEFAULT_ADMIN_USERNAME}")
-    Log.info(f"Default admin email: {DEFAULT_ADMIN_EMAIL}")
-    Log.info(f"Default admin password: {DEFAULT_ADMIN_PASSWORD}")
-    Log.info(f"Default admin point: {DEFAULT_ADMIN_POINT}")
-    Log.info(f"Default admin profile picture: {DEFAULT_ADMIN_PROFILE_PICTURE}")
+    Log.info(f"Default admin username: {Settings.DEFAULT_ADMIN_USERNAME}")
+    Log.info(f"Default admin email: {Settings.DEFAULT_ADMIN_EMAIL}")
+    Log.info(f"Default admin password: {Settings.DEFAULT_ADMIN_PASSWORD}")
+    Log.info(f"Default admin point: {Settings.DEFAULT_ADMIN_POINT}")
+    Log.info(f"Default admin profile picture: {Settings.DEFAULT_ADMIN_PROFILE_PICTURE}")
 else:
     Log.info("Default admin is off")
 
@@ -311,11 +282,11 @@ app.register_blueprint(returnPostAnalyticsDataBlueprint)
 
 
 if __name__ == "__main__":
-    Log.info(f"Running on http://{APP_HOST}:{APP_PORT}")
+    Log.info(f"Running on http://{Settings.APP_HOST}:{Settings.APP_PORT}")
     Log.success("App started")
 
     print(terminalASCII())
-    app.run(debug=DEBUG_MODE, host=APP_HOST, port=APP_PORT)
+    app.run(debug=Settings.DEBUG_MODE, host=Settings.APP_HOST, port=Settings.APP_PORT)
 
     endTime = currentTimeStamp()
     runTime = endTime - startTime

@@ -7,11 +7,7 @@ from flask import (
     request,
     session,
 )
-from settings import (
-    DB_COMMENTS_ROOT,
-    DB_POSTS_ROOT,
-    DB_USERS_ROOT,
-)
+from settings import Settings
 from utils.flashMessage import flashMessage
 from utils.forms.ChangeUserNameForm import ChangeUserNameForm
 from utils.log import Log
@@ -45,9 +41,9 @@ def changeUserName():
         if request.method == "POST":
             newUserName = request.form["newUserName"]
             newUserName = newUserName.replace(" ", "")
-            Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_USERS_ROOT)
+            connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
@@ -72,7 +68,7 @@ def changeUserName():
                         )
                         connection.commit()
 
-                        connection = sqlite3.connect(DB_POSTS_ROOT)
+                        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
                         connection.set_trace_callback(Log.database)
                         cursor = connection.cursor()
                         cursor.execute(
@@ -81,7 +77,7 @@ def changeUserName():
                         )
                         connection.commit()
 
-                        connection = sqlite3.connect(DB_COMMENTS_ROOT)
+                        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
                         connection.set_trace_callback(Log.database)
                         cursor = connection.cursor()
                         cursor.execute(

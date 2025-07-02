@@ -1,7 +1,7 @@
 import sqlite3
 
 from flask import Blueprint, render_template
-from settings import DB_POSTS_ROOT, DB_USERS_ROOT
+from settings import Settings
 from utils.log import Log
 
 searchBlueprint = Blueprint("search", __name__)
@@ -15,9 +15,9 @@ def search(query):
 
     Log.info(f"Searching for query: {query}")
 
-    Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+    Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_USERS_ROOT)
+    connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
 
@@ -34,9 +34,9 @@ def search(query):
             ("%" + queryNoWhiteSpace + "%"),
         ],
     ).fetchall()
-    Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
 

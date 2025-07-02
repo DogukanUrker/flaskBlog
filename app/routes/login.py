@@ -10,14 +10,7 @@ from flask import (
 )
 from passlib.hash import sha512_crypt as encryption
 from requests import post as requestsPost
-from settings import (
-    DB_USERS_ROOT,
-    LOG_IN,
-    RECAPTCHA,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-)
+from settings import Settings
 from utils.addPoints import addPoints
 from utils.flashMessage import flashMessage
 from utils.forms.LoginForm import LoginForm
@@ -41,7 +34,7 @@ def login(direct):
         401: If the login is unsuccessful.
     """
     direct = direct.replace("&", "/")
-    if LOG_IN:
+    if Settings.LOG_IN:
         if "userName" in session:
             Log.error(f'User: "{session["userName"]}" already logged in')
             return (
@@ -54,8 +47,8 @@ def login(direct):
                 userName = request.form["userName"]
                 password = request.form["password"]
                 userName = userName.replace(" ", "")
-                Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
-                connection = sqlite3.connect(DB_USERS_ROOT)
+                Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
+                connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
@@ -73,10 +66,10 @@ def login(direct):
                     )
                 else:
                     if encryption.verify(password, user[3]):
-                        if RECAPTCHA:
+                        if Settings.RECAPTCHA:
                             secretResponse = request.form["g-recaptcha-response"]
                             verifyResponse = requestsPost(
-                                url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                url=f"{Settings.RECAPTCHA_VERIFY_URL}?secret={Settings.RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                             ).json()
                             if not (
                                 verifyResponse["success"] is True
@@ -120,8 +113,8 @@ def login(direct):
                 "login.html",
                 form=form,
                 hideLogin=True,
-                siteKey=RECAPTCHA_SITE_KEY,
-                recaptcha=RECAPTCHA,
+                siteKey=Settings.RECAPTCHA_SITE_KEY,
+                recaptcha=Settings.RECAPTCHA,
             )
     else:
         return (

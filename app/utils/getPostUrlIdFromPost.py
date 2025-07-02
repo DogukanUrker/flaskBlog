@@ -1,6 +1,6 @@
 import sqlite3
 
-from settings import DB_POSTS_ROOT
+from settings import Settings
 from utils.log import Log
 
 
@@ -13,9 +13,9 @@ def getPostUrlIdFromPost(postID: int):
     Returns:
         str or None: The post's urlID of the post, or None if not found.
     """
-    Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_POSTS_ROOT)
+    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
     connection.set_trace_callback(Log.database)
 
     cursor = connection.cursor()

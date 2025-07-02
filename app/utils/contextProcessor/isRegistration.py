@@ -1,4 +1,4 @@
-from settings import REGISTRATION
+from settings import Settings
 
 
 def isRegistration():
@@ -9,4 +9,4 @@ def isRegistration():
         dict: A dictionary with a constant registration is enabled or not.
     """
 
-    return dict(isRegistration=REGISTRATION)
+    return dict(isRegistration=Settings.REGISTRATION)
