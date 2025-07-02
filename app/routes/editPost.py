@@ -7,9 +7,7 @@ from flask import (
     request,
     session,
 )
-from settings import (
-    DB_POSTS_ROOT,
-)
+from settings import Settings
 from utils.flashMessage import flashMessage
 from utils.forms.CreatePostForm import CreatePostForm
 from utils.log import Log
@@ -35,18 +33,18 @@ def editPost(urlID):
     """
 
     if "userName" in session:
-        Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_POSTS_ROOT)
+        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute("select urlID from posts where urlID = ?", (urlID,))
         posts = str(cursor.fetchall())
 
         if str(urlID) in posts:
-            Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_POSTS_ROOT)
+            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
@@ -56,9 +54,9 @@ def editPost(urlID):
             post = cursor.fetchone()
 
             Log.success(f'POST: "{urlID}" FOUND')
-            Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_POSTS_ROOT)
+            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
@@ -91,7 +89,7 @@ def editPost(urlID):
                             f'User: "{session["userName"]}" tried to edit a post with empty content',
                         )
                     else:
-                        connection = sqlite3.connect(DB_POSTS_ROOT)
+                        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
                         connection.set_trace_callback(Log.database)
                         cursor = connection.cursor()
                         cursor.execute(

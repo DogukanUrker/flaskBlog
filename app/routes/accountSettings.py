@@ -1,9 +1,7 @@
 import sqlite3
 
 from flask import Blueprint, redirect, render_template, request, session
-from settings import (
-    DB_USERS_ROOT,
-)
+from settings import Settings
 from utils.delete import Delete
 from utils.log import Log
 
@@ -13,9 +11,9 @@ accountSettingsBlueprint = Blueprint("accountSettings", __name__)
 @accountSettingsBlueprint.route("/accountsettings", methods=["GET", "POST"])
 def accountSettings():
     if "userName" in session:
-        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_USERS_ROOT)
+        connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(

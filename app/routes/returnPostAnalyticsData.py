@@ -1,7 +1,7 @@
 import sqlite3
 
 from flask import Blueprint, make_response, request, session
-from settings import ANALYTICS, DB_ANALYTICS_ROOT
+from settings import Settings
 from utils.getAnalyticsPageData import (
     getAnalyticsPageCountryGraphData,
     getAnalyticsPageTrafficGraphData,
@@ -44,7 +44,7 @@ def returnPostTrafficGraphData() -> dict:
 
     hours = request.args.get("hours", type=float, default=0)
 
-    if ANALYTICS:
+    if Settings.ANALYTICS:
         if "userName" in session:
             if postID:
                 return make_response(
@@ -102,7 +102,7 @@ def returnPostCountryGraphData() -> dict:
 
     viewAll = str(request.args.get("viewAll", default=False)).lower() == "true"
 
-    if ANALYTICS:
+    if Settings.ANALYTICS:
         if "userName" in session:
             if postID:
                 return make_response(
@@ -151,14 +151,14 @@ def storeTimeSpendsDuraton() -> dict:
         `405 Method Not Allowed`: If an unsupported HTTP method is used.
     """
 
-    if ANALYTICS:
+    if Settings.ANALYTICS:
         if request.method == "POST":
             visitorData = request.json
             visitorID = visitorData.get("visitorID")
             spendTime = visitorData.get("spendTime")
 
             try:
-                connection = sqlite3.connect(DB_ANALYTICS_ROOT)
+                connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
 

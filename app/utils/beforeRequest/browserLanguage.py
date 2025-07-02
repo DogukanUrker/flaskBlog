@@ -1,5 +1,5 @@
 from flask import request, session
-from settings import LANGUAGES
+from settings import Settings
 from utils.log import Log
 
 
@@ -17,7 +17,7 @@ def browserLanguage():
         browserLanguage = request.headers.get("Accept-Language")
         if browserLanguage:
             browserLanguage = browserLanguage.split(",")[0].split("-")[0]
-            if browserLanguage in LANGUAGES:
+            if browserLanguage in Settings.LANGUAGES:
                 session["language"] = browserLanguage
                 Log.info(f"Browser language detected and set to: {browserLanguage}")
             else:

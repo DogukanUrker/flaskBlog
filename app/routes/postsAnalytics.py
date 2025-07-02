@@ -5,7 +5,7 @@ This module contains the code for the posts analytics page.
 import sqlite3
 
 from flask import Blueprint, render_template, request, session
-from settings import ANALYTICS, DB_POSTS_ROOT
+from settings import Settings
 from utils.getAnalyticsPageData import (
     getAnalyticsPageOSGraphData,
     getAnalyticsPageTrafficGraphData,
@@ -25,9 +25,9 @@ def analyticsPost(urlID):
     :return: The rendered analytics post page.
     :rtype: flask.Response
     """
-    if ANALYTICS:
+    if Settings.ANALYTICS:
         if "userName" in session:
-            connection = sqlite3.connect(DB_POSTS_ROOT)
+            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
 
@@ -37,9 +37,9 @@ def analyticsPost(urlID):
             if urlID in posts:
                 Log.success(f'post: "{urlID}" loaded')
 
-                Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+                Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-                connection = sqlite3.connect(DB_POSTS_ROOT)
+                connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
 

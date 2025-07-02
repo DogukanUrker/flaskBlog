@@ -1,12 +1,12 @@
 import sqlite3
 import uuid
 
-from settings import DB_POSTS_ROOT
+from settings import Settings
 from utils.log import Log
 
 
 def checkIfurlIDExistsInPostDb(urlID):
-    with sqlite3.connect(DB_POSTS_ROOT) as connection:
+    with sqlite3.connect(Settings.DB_POSTS_ROOT) as connection:
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute("SELECT urlID FROM posts WHERE urlID = ?", (urlID,))

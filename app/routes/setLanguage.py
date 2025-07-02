@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, session
-from settings import LANGUAGES
+from settings import Settings
 from utils.flashMessage import flashMessage
 from utils.log import Log
 
@@ -16,7 +16,7 @@ def setLanguage(language):
 
     Returns:
         str: The selected language code."""
-    if language in LANGUAGES:
+    if language in Settings.LANGUAGES:
         session["language"] = language
         Log.info(f"Language set to: {language}")
         flashMessage(
@@ -27,4 +27,4 @@ def setLanguage(language):
         )
     else:
         Log.warning(f"Language not supported: {language}")
-    return redirect("/changeLanguage")
+    return redirect("/changelanguage")

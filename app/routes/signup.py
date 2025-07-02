@@ -13,19 +13,7 @@ from flask import (
 )
 from passlib.hash import sha512_crypt as encryption
 from requests import post as requestsPost
-from settings import (
-    APP_NAME,
-    DB_USERS_ROOT,
-    RECAPTCHA,
-    RECAPTCHA_SECRET_KEY,
-    RECAPTCHA_SITE_KEY,
-    RECAPTCHA_VERIFY_URL,
-    REGISTRATION,
-    SMTP_MAIL,
-    SMTP_PASSWORD,
-    SMTP_PORT,
-    SMTP_SERVER,
-)
+from settings import Settings
 from utils.addPoints import addPoints
 from utils.flashMessage import flashMessage
 from utils.forms.SignUpForm import SignUpForm
@@ -48,7 +36,7 @@ def signup():
     The sign up page with any errors or a confirmation message.
     """
 
-    if REGISTRATION:
+    if Settings.REGISTRATION:
         if "userName" in session:
             Log.error(f'USER: "{session["userName"]}" ALREADY LOGGED IN')
             return redirect("/")
@@ -62,9 +50,9 @@ def signup():
                 passwordConfirm = request.form["passwordConfirm"]
 
                 userName = userName.replace(" ", "")
-                Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+                Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-                connection = sqlite3.connect(DB_USERS_ROOT)
+                connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
 
@@ -78,10 +66,10 @@ def signup():
                         if userName.isascii():
                             password = encryption.hash(password)
 
-                            if RECAPTCHA:
+                            if Settings.RECAPTCHA:
                                 secretResponse = request.form["g-recaptcha-response"]
                                 verifyResponse = requestsPost(
-                                    url=f"{RECAPTCHA_VERIFY_URL}?secret={RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                                    url=f"{Settings.RECAPTCHA_VERIFY_URL}?secret={Settings.RECAPTCHA_SECRET_KEY}&response={secretResponse}"
                                 ).json()
                                 if not (
                                     verifyResponse["success"] is True
@@ -97,7 +85,7 @@ def signup():
                                 )
 
                             # Create user account
-                            connection = sqlite3.connect(DB_USERS_ROOT)
+                            connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                             connection.set_trace_callback(Log.database)
                             cursor = connection.cursor()
                             cursor.execute(
@@ -133,15 +121,17 @@ def signup():
 
                             # Send welcome email
                             context = ssl.create_default_context()
-                            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                            server = smtplib.SMTP(
+                                Settings.SMTP_SERVER, Settings.SMTP_PORT
+                            )
                             server.ehlo()
                             server.starttls(context=context)
                             server.ehlo()
-                            server.login(SMTP_MAIL, SMTP_PASSWORD)
+                            server.login(Settings.SMTP_MAIL, Settings.SMTP_PASSWORD)
 
                             mail = EmailMessage()
                             mail.set_content(
-                                f"Hi {userName}👋,\n Welcome to {APP_NAME}"
+                                f"Hi {userName}👋,\n Welcome to {Settings.APP_NAME}"
                             )
                             mail.add_alternative(
                                 f"""\
@@ -153,7 +143,7 @@ def signup():
                                 <div style="text-align: center;">
                                     <h1 style="color: #F43F5E;">
                                     Hi {userName}, <br />
-                                    Welcome to {APP_NAME}!
+                                    Welcome to {Settings.APP_NAME}!
                                     </h1>
                                     <p style="font-size: 16px;">
                                     We are glad you joined us.
@@ -165,8 +155,8 @@ def signup():
                             """,
                                 subtype="html",
                             )
-                            mail["Subject"] = f"Welcome to {APP_NAME}"
-                            mail["From"] = SMTP_MAIL
+                            mail["Subject"] = f"Welcome to {Settings.APP_NAME}"
+                            mail["From"] = Settings.SMTP_MAIL
                             mail["To"] = email
 
                             server.send_message(mail)
@@ -224,8 +214,8 @@ def signup():
                 "signup.html",
                 form=form,
                 hideSignUp=True,
-                siteKey=RECAPTCHA_SITE_KEY,
-                recaptcha=RECAPTCHA,
+                siteKey=Settings.RECAPTCHA_SITE_KEY,
+                recaptcha=Settings.RECAPTCHA,
             )
     else:
         return redirect("/")

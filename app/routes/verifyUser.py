@@ -11,14 +11,7 @@ from flask import (
     request,
     session,
 )
-from settings import (
-    APP_NAME,
-    DB_USERS_ROOT,
-    SMTP_MAIL,
-    SMTP_PASSWORD,
-    SMTP_PORT,
-    SMTP_SERVER,
-)
+from settings import Settings
 from utils.flashMessage import flashMessage
 from utils.forms.VerifyUserForm import VerifyUserForm
 from utils.log import Log
@@ -41,10 +34,10 @@ def verifyUser(codeSent):
 
     if "userName" in session:
         userName = session["userName"]
-        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
-        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_USERS_ROOT)
+        connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
 
@@ -108,11 +101,11 @@ def verifyUser(codeSent):
 
                     if userNameDB:
                         context = ssl.create_default_context()
-                        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                        server = smtplib.SMTP(Settings.SMTP_SERVER, Settings.SMTP_PORT)
                         server.ehlo()
                         server.starttls(context=context)
                         server.ehlo()
-                        server.login(SMTP_MAIL, SMTP_PASSWORD)
+                        server.login(Settings.SMTP_MAIL, Settings.SMTP_PASSWORD)
 
                         verificationCode = str(randint(1000, 9999))
 
@@ -152,8 +145,8 @@ def verifyUser(codeSent):
                             """,
                             subtype="html",
                         )
-                        message["Subject"] = f"Verify your {APP_NAME} account!"
-                        message["From"] = SMTP_MAIL
+                        message["Subject"] = f"Verify your {Settings.APP_NAME} account!"
+                        message["From"] = Settings.SMTP_MAIL
                         message["To"] = email[0]
 
                         server.send_message(message)

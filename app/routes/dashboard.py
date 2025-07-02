@@ -9,7 +9,7 @@ from flask import (
     session,
     url_for,
 )
-from settings import DB_COMMENTS_ROOT, DB_POSTS_ROOT
+from settings import Settings
 from utils.delete import Delete
 from utils.flashMessage import flashMessage
 from utils.log import Log
@@ -29,9 +29,9 @@ def dashboard(userName):
                         redirect(url_for("dashboard.dashboard", userName=userName)),
                         301,
                     )
-            Log.database(f"Connecting to '{DB_POSTS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_POSTS_ROOT)
+            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
 
@@ -40,9 +40,9 @@ def dashboard(userName):
                 [(session["userName"])],
             )
             posts = cursor.fetchall()
-            Log.database(f"Connecting to '{DB_COMMENTS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_COMMENTS_ROOT)
+            connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
 

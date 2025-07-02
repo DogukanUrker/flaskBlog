@@ -7,9 +7,7 @@ from flask import (
     request,
     session,
 )
-from settings import (
-    DB_USERS_ROOT,
-)
+from settings import Settings
 from utils.changeUserRole import changeUserRole
 from utils.delete import Delete
 from utils.log import Log
@@ -22,9 +20,9 @@ adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)
 def adminPanelUsers():
     if "userName" in session:
         Log.info(f"Admin: {session['userName']} reached to users admin panel")
-        Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+        Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-        connection = sqlite3.connect(DB_USERS_ROOT)
+        connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
@@ -49,9 +47,9 @@ def adminPanelUsers():
                 changeUserRole(request.form["userName"])
 
         if role == "admin":
-            Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+            Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-            connection = sqlite3.connect(DB_USERS_ROOT)
+            connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute("select * from users")

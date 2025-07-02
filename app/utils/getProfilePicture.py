@@ -1,6 +1,6 @@
 import sqlite3
 
-from settings import DB_USERS_ROOT
+from settings import Settings
 from utils.log import Log
 
 
@@ -14,9 +14,9 @@ def getProfilePicture(userName):
     Returns:
         str or None: The profile picture URL of the user, or None if not found.
     """
-    Log.database(f"Connecting to '{DB_USERS_ROOT}' database")
+    Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
-    connection = sqlite3.connect(DB_USERS_ROOT)
+    connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
 
     cursor = connection.cursor()
