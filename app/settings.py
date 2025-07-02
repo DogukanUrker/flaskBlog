@@ -18,7 +18,7 @@ APP_ROOT_PATH = "."  # (str)
 APP_HOST = "localhost"  # (str)
 
 # Port number for the Flask application
-APP_PORT = 2306  # (int)
+APP_PORT = 1283  # (int)
 
 # Toggle debug mode for the Flask application
 DEBUG_MODE = True  # (bool)
