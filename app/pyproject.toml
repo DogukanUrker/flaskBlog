@@ -9,7 +9,7 @@ dependencies = [
     "flask>=3.1.0",
     "geoip2>=5.0.1",
     "passlib>=1.7.4",
-    "tamga>=1.1.1",
+    "tamga>=1.2.0",
     "user-agents>=2.2.0",
     "wtforms>=3.2.1",
 ]
