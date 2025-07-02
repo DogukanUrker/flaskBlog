@@ -120,9 +120,6 @@ from settings import (
     SMTP_PASSWORD,
     SMTP_PORT,
     SMTP_SERVER,
-    STATIC_FOLDER,
-    TEMPLATE_FOLDER,
-    UI_NAME,
     WERKZEUG_LOGGER,
 )
 from utils.afterRequest import (
@@ -168,8 +165,6 @@ Log.info("Starting...")
 app = Flask(
     import_name=APP_NAME,
     root_path=APP_ROOT_PATH,
-    static_folder=STATIC_FOLDER,
-    template_folder=TEMPLATE_FOLDER,
 )
 
 
@@ -221,10 +216,6 @@ Log.info(f"Log folder root: {LOG_FOLDER_ROOT}")
 Log.info(f"Log file root: {LOG_FILE_ROOT}")
 Log.info(f"Log in: {LOG_IN}")
 Log.info(f"Registration: {REGISTRATION}")
-
-Log.info(f"UI: {UI_NAME}")
-Log.info(f"Template folder: {TEMPLATE_FOLDER}")
-Log.info(f"Static folder: {STATIC_FOLDER}")
 
 Log.info(f"SMTP server: {SMTP_SERVER}")
 Log.info(f"SMTP port: {SMTP_PORT}")

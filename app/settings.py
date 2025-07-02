@@ -23,15 +23,6 @@ APP_PORT = 2306  # (int)
 # Toggle debug mode for the Flask application
 DEBUG_MODE = True  # (bool)
 
-# Name of the UI framework being used
-UI_NAME = "tailwindUI"  # (str)
-
-# Path to the templates folder
-TEMPLATE_FOLDER = f"templates/{UI_NAME}"  # (str)
-
-# Path to the static folder
-STATIC_FOLDER = f"static/{UI_NAME}"  # (str)
-
 # Toggle user login feature
 LOG_IN = True  # (bool)
 
