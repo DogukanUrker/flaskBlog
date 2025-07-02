@@ -1,217 +1,65 @@
-###### <sub> This project needs a ⭐️ from you. Don't forget to leave a star ⭐️. <sub/>
+# FlaskBlog
 
-![appLight](/images/Light.png)
+A modern blog application built with Flask, featuring a clean UI and powerful admin tools.
 
-# [FlaskBlog](https://dogukanurker.com/flaskblog)
+![FlaskBlog Light Theme](/images/Light.png)
+[Watch demo on YouTube](https://youtu.be/WyIpAlSp2RM) — [See screenshots (mobile/desktop, dark/light)](https://github.com/DogukanUrker/flaskBlog/tree/main/images)
 
-**English** | [Türkçe](docs/readme_tr.md) | [Russian](docs/readme_ru.md)
+## ✨ Features
 
-📜 **Simple blog app built with Flask.**
+- **User System** - Registration, login, profiles with custom avatars
+- **Rich Editor** - Summer Note editor for creating beautiful posts
+- **Admin Panel** - Full control over users, posts, and comments
+- **Dark/Light Themes** - Automatic theme switching
+- **Categories** - Organize posts by topics
+- **Search** - Find posts quickly
+- **Responsive Design** - Works great on all devices
+- **Analytics** – Tracks post views, visitor countries, and operating systems
+- **Security** - Google reCAPTCHA v3, secure authentication
+- **Advanced Logging** - Powered by [Tamga](https://github.com/dogukanurker/tamga) logger
 
-[📧 Contact](mailto:dogukanurker@icloud.com)<br/>
-[👨🏻‍💻 Doğukan Ürker](https://dogukanurker.com)
+## 🚀 Quick Start
 
-[📸 Images](https://github.com/DogukanUrker/flaskBlog/tree/master/images)<br/>
-[📽️ Preview Video](https://youtu.be/WyIpAlSp2RM)<br/>
+### Prerequisites
+- Python 3.7+
+- [astral/uv](https://docs.astral.sh/uv/)
 
-[🆕 Changelog V2](docs/version2Changelog.md)
+### Installation
 
-## 📄 Table of Contents
+```bash
+# Clone the repository
+git clone https://github.com/DogukanUrker/flaskBlog.git
+cd flaskBlog/app
 
-- [💫 Features](#-features)
-- [📦 Requirements](#-requirements)
-- [🧑🏻‍💻 Languages](#-languages)
-- [📚 Technologies](#-technologies)
-  - [⚙️ Backend](#️-backend)
-  - [🔮 Frontend](#-frontend)
-  - [🔨 Tools](#-tools)
-- [🚦 Running the Project](#-running-the-project)
-  - [🧑🏻‍💼 Default Admin Account](#-default-admin-account)
-- [🎨 Figma Design Files](#-figma-design-files)
-- [🧠 What I Learned](#-what-i-learned)
-  - [🔥 New Technologies Explored](#-new-technologies-explored)
-  - [💪🏻 Enhanced Proficiency in](#-enhanced-proficiency-in)
-- [🫂 Contributors](#-contributors)
-- [✨ Stars](#-stars)
-- [🍴 Forks](#-forks)
-- [💰 Support](#-support)
-- [⭐ Star History](#-star-history)
-- [⚠️ Warning](#%EF%B8%8F-warning)
+# Run with uv
+uv run app.py
+```
 
-## 💫 Features
+Visit `http://localhost:2306` in your browser.
 
-- Admin Panel
-- Comment
-  - Comment Delete
-- Custom Profile Picture
-- Dashboard Page
-- Dark/Light Themes
-- Database Checker
-- Debug Messages
-- Docker
-- Google reCAPTCHA v3
-- Logging
-- Multi Language Support
-- Password
-  - Password Change
-  - Password Reset
-- Post
-  - Post Banner Photos
-  - Post Categories
-  - Post Creation
-  - Post Delete
-  - Post Edit
-  - Post Views
-- Responsive Design w/TailwindCSS
-- Search Bar
-- Summer Note Editor
-- Testing w/PlayWright
-- Time Zone Awareness
-- User
-  - User Delete
-  - User Login
-  - User Log Out
-  - User Name Change
-  - User Page
-  - User Points
-  - User Profile Pictures
-  - User Settings Page
-  - User Sign Up
-  - User Verification
+### Default Admin Account
+- Username: `admin`
+- Password: `admin`
 
-## 📦 Requirements
+## 🛠️ Tech Stack
 
-- Flask
-- Passlib
-- WTForms
-- Requests
-- Flask-WTF
-- Playwright
-- Pipenv
-- Python 3.10 or newer
+**Backend:** Flask, SQLite3, WTForms, Passlib \
+**Frontend:** TailwindCSS, jQuery, Summer Note Editor \
+**Icons:** Tabler Icons
 
-## 🧑🏻‍💻 Languages
+## 🤝 Contributing
 
-- Python
-- HTML | Jinja
-- CSS
-- JavaScript
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📚 Technologies
+## 📄 License
 
-### ⚙️ Backend
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- SQLite3
-- Passlib
-- Flask
-- WTForms
-- Flask_WTF
-- Requests
-- Playwright
+## 👨‍💻 Author
 
-### 🔮 Frontend
+**Doğukan Ürker** \
+[Website](https://dogukanurker.com) | [Email](mailto:dogukanurker@icloud.com)
 
-- jQuery
-- TailwindCSS
-- Tabler Icons
-- Summer Note Editor
+---
 
-### 🔨 Tools
-
-- Black formatter
-- Prettier formatter
-- VSCode editor
-- Docker
-- Pipnv
-- Git
-
-## 🚦 Running the Project
-
-download source code from Github 💾
-`git clone https://github.com/DogukanUrker/flaskBlog.git`
-
-go to directory 📁
-`cd flaskBlog`
-
-install requirements.txt 🔽
-`pip install -r requirements.txt`
-
-it's ready to run 🎉
-`python app.py`
-
-### 🧑🏻‍💼 Default Admin Account
-
-Username: admin
-
-Password: admin
-
-## 🎨 Figma Design Files
-
-- App
-  - [Desktop](https://www.figma.com/file/9HFi36JmzdZbzbjEPio6Om/Flask-Blog-Desktop?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
-  - [Mobile](https://www.figma.com/file/qkgrIl15bdTsra6BNSVdAN/Flask-Blog-Mobile?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
-- [Terminal](https://www.figma.com/file/FWusS9JrbtEIhCX6Dv7efj/Flask-Blog-Terminal?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
-- [Mails](https://www.figma.com/file/6Glzzq1GWIdbZ7xoVOaEEy/Flask-Blog-Mail?type=design&mode=design&t=CuzOm3gLIgfOF0it-1)
-
-[Files in \*.fig format](https://drive.google.com/drive/folders/12lchfmCCkCRzHTQfHk1gDEY10wz7qhxs?usp=drive_link)
-
-## 🧠 What I Learned
-
-FlaskBlog has been an enriching journey, marking a significant milestone in my development career. Through its creation, I delved deep into various facets of web development and programming, expanding my skill set and understanding. Here's an elaboration on some of the key learnings:
-
-### 🔥 New Technologies Explored
-
-- Docker: Embracing containerization streamlined deployment and enhanced scalability.
-- Playwright: Automating browser interactions empowered smoother testing and validation processes.
-- Summer Note Editor: Integrating this versatile editor facilitated a richer content creation experience.
-- Tabler Icons: Leveraging these icons added visual appeal and improved user experience.
-- Google reCAPTCHA v3: Implementing advanced security measures fortified the application against bots and malicious activities.
-- Figma: Utilizing Figma for design provided insights into collaborative design processes and enhanced UI/UX planning.
-- Time Zone Awareness Design: Incorporating time zone awareness ensured a seamless experience for users across different geographical locations.
-- Secure SQL Connections: Implementing secure SQL connections bolstered data integrity and confidentiality.
-
-### 💪🏻 Enhanced Proficiency in
-
-- Python: Mastery over Python deepened, enabling more efficient and robust backend development.
-- JavaScript: Strengthening JavaScript skills facilitated dynamic frontend interactions and enhanced user engagement.
-- TailwindCSS: Proficiency in TailwindCSS led to more streamlined and maintainable CSS code, accelerating frontend development.
-- CSS: Further exploration of CSS enhanced styling capabilities, enabling finer control over the application's visual presentation.
-- WTForms: Deeper understanding and utilization of WTForms facilitated seamless form handling and validation.
-- SQLite3: Familiarity with SQLite3 improved database management and optimization strategies.
-- Jinja: Mastery over Jinja templating engine facilitated more dynamic and efficient content rendering.
-
-Embarking on the FlaskBlog project has been immensely rewarding, not only in terms of skill enhancement but also in personal fulfillment. As a full-stack developer, this endeavor has honed my abilities and deepened my passion for crafting elegant, functional solutions. I take pride in the outcome of this project and sincerely hope it resonates with you as well. 😊
-
-## 🫂 Contributors
-
-<a href="https://github.com/dogukanurker"><img src="https://avatars.githubusercontent.com/u/62756402" title="dogukanurker" width="80" height="80"></a>
-<a href="https://github.com/adindrabkin"><img src="https://avatars.githubusercontent.com/u/47116975" title="adindrabkin" width="80" height="80"></a>
-<a href="https://github.com/codehwang"><img src="https://avatars.githubusercontent.com/u/26578588" title="codehwang" width="80" height="80"></a>
-<a href="https://github.com/wishrohitv"><img src="https://avatars.githubusercontent.com/u/126248971?v=4" title="wishrohitv" width="80" height="80"></a>
-<a href="https://github.com/dkashkarev"><img src="https://avatars.githubusercontent.com/u/2644169" title="barmar" width="80" height="80"></a>
-
-## ✨ Stars
-
-[![Stargazers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/stargazers)
-
-## 🍴 Forks
-
-[![Forkers for @DogukanUrker/flaskBlog](http://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?theme=dark&user=DogukanUrker&repo=flaskBlog)](https://github.com/DogukanUrker/flaskBlog/network/members)
-
-## 💰 Support
-
-<a href="https://dogukanurker.com/donate" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-
-## ⭐ Star History
-
-<a href="https://star-history.com/#dogukanurker/flaskblog&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=dogukanurker/flaskblog&type=Date" />
- </picture>
-</a>
-
-## ⚠️ Warning
-
-The sample data was created using AI(ChatGPT 3.5 and Microsoft Copilot) which means that some sample data may contain incorrect information.
+⭐ If you find this project useful, please consider giving it a star!

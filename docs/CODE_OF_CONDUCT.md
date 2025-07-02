@@ -1,6 +1,5 @@
 # Contributor Covenant Code of Conduct
 
-**English** | [Türkçe](/docs/CODE_OF_CONDUCT_TR.md)
 
 ## Our Pledge
 

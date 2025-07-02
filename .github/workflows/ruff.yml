@@ -1,0 +1,68 @@
+name: 🐍 Code Quality (Ruff)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.py"
+      - "app/pyproject.toml"
+      - ".github/workflows/ruff.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**.py"
+      - "app/pyproject.toml"
+      - ".github/workflows/ruff.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ruff-check:
+    name: 🔍 Lint & Format Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: 💾 Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements*.txt', '**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+            ${{ runner.os }}-pip-
+
+      - name: 📦 Install Ruff
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+
+      - name: ✨ Check code formatting
+        run: |
+          ruff format --check --diff .
+
+      - name: 🔍 Lint code
+        run: |
+          ruff check --output-format=github .
+
+      - name: 📊 Generate Ruff report
+        if: failure()
+        run: |
+          echo "## 🐍 Ruff Issues Found" >> $GITHUB_STEP_SUMMARY
+          echo "The following issues were found by Ruff:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          ruff check --output-format=text . >> $GITHUB_STEP_SUMMARY || true
+          echo '```' >> $GITHUB_STEP_SUMMARY

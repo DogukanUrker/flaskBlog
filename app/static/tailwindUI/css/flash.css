@@ -1,0 +1,41 @@
+#flashContainer {
+    transform: translate(-50%, -50%);
+    top: 15%;
+    left: 50%;
+    -moz-animation: cssAnimation 4s forwards;
+    -webkit-animation: cssAnimation 4s forwards;
+    -o-animation: cssAnimation 4s forwards;
+    animation: cssAnimation 4s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cssAnimation {
+    0% {
+        top: 0%;
+    }
+    10% {
+        top: 15%;
+    }
+    90% {
+        top: 15%;
+    }
+    100% {
+        top: -7%;
+    }
+}
+
+@-webkit-keyframes cssAnimation {
+    0% {
+        top: 0%;
+    }
+    10% {
+        top: 15%;
+    }
+    90% {
+        top: 15%;
+    }
+    100% {
+        top: -7%;
+    }
+}
