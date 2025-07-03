@@ -8,8 +8,6 @@ from wtforms import (
     validators,
 )
 
-from .FormInputStyle import inputStyle
-
 
 class ChangePasswordForm(Form):
     """
@@ -22,7 +20,6 @@ class ChangePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle()},
     )
 
     password = PasswordField(
@@ -31,7 +28,6 @@ class ChangePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle()},
     )
 
     passwordConfirm = PasswordField(
@@ -40,5 +36,4 @@ class ChangePasswordForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle()},
     )

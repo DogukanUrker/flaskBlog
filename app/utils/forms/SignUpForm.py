@@ -10,8 +10,6 @@ from wtforms import (
     validators,
 )
 
-from .FormInputStyle import inputStyle
-
 
 class SignUpForm(Form):
     """
@@ -21,13 +19,11 @@ class SignUpForm(Form):
     userName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"class": inputStyle()},
     )
 
     email = EmailField(
         "Email",
         [validators.Length(min=6, max=50), validators.InputRequired()],
-        render_kw={"class": inputStyle()},
     )
 
     password = PasswordField(
@@ -36,7 +32,6 @@ class SignUpForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle()},
     )
 
     passwordConfirm = PasswordField(
@@ -45,5 +40,4 @@ class SignUpForm(Form):
             validators.Length(min=8),
             validators.InputRequired(),
         ],
-        render_kw={"class": inputStyle()},
     )
