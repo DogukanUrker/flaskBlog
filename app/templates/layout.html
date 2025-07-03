@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ session.get('language', 'en') }}">
+<html lang="{{ session.get('language', 'en') }}" data-theme="light">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,7 +15,19 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='css/general.css') }}"
         />
-        <script src="https://cdn.tailwindcss.com"></script>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@5"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
         <link
             rel="stylesheet"
@@ -49,10 +61,8 @@
     </head>
 
     <body id="body">
-        {% from "components/changeTheme.html" import changeTheme %} {{
-        changeTheme() }} {% include 'components/navbar.html'%} {% from
-        "components/flash.html" import flash %} {{ flash() }} {% block body %}
-        {% endblock body %}
+        {% include 'components/navbar.html'%} {% from "components/flash.html"
+        import flash %} {{ flash() }} {% block body %} {% endblock body %}
 
         <script
             src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
