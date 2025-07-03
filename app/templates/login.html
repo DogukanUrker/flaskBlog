@@ -1,50 +1,64 @@
 {% extends 'layout.html'%} {%block head%}
 <title>{{translations.login.title}}</title>
 {% endblock head %} {%block body%}
-<div class="w-fit mx-auto mt-36 md:mt-52 text-center text-xl">
-    {% if recaptcha %}
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
-    <form method="post" id="recaptchaForm">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        {{form.userName(autocomplete="off",
-        placeholder=translations.login.username)}}{{form.password(autocomplete="off",
-        placeholder=translations.login.password)}}
-        <button
-            type="submit"
-            data-sitekey="{{ siteKey }}"
-            data-callback="onSubmit"
-            data-action="submit"
-            class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
-        >
-            {{translations.login.title}}
-        </button>
-        <a
-            href="/passwordreset/codesent=false"
-            id="passwordReset"
-            class="hover:text-rose-500 duration-150 text-sm font-normal select-none"
-            >{{translations.login.forgot}}</a
-        >
-    </form>
-    {% else %}
-    <form method="post">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        {{form.userName(autocomplete="off",
-        placeholder=translations.login.username)}}{{form.password(autocomplete="off",
-        placeholder=translations.login.password)}}
-        <button
-            type="submit"
-            class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
-        >
-            {{translations.login.title}}
-        </button>
-        <a
-            href="/passwordreset/codesent=false"
-            id="passwordReset"
-            class="hover:text-rose-500 duration-150 text-sm font-normal select-none"
-            >{{translations.login.forgot}}</a
-        >
-    </form>
-    {% endif %}
+<div class="hero min-h-screen max-w-128 mx-auto">
+    <div class="card bg-base-100 w-10/12 max-w-sm shrink-0 shadow-2xl">
+        {% if recaptcha %}
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+        <form method="post" id="recaptchaForm">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="card-body">
+                <h1 class="text-3xl font-bold self-center">
+                    {{translations.login.title}}
+                </h1>
+                <fieldset class="fieldset">
+                    <label class="label">{{translations.login.username}}</label>
+                    {{form.userName(autocomplete="off", class="input")}}
+                    <label class="label">{{translations.login.password}}</label>
+                    {{form.password(autocomplete="off", class="input")}}
+                    <div>
+                        <a
+                            class="link link-hover"
+                            href="/passwordreset/codesent=false"
+                            >{{translations.login.forgot}}</a
+                        >
+                    </div>
+                    <button
+                        class="g-recaptcha btn btn-neutral mt-4"
+                        type="submit"
+                    >
+                        {{translations.login.title}}
+                    </button>
+                </fieldset>
+            </div>
+        </form>
+        {% else %}
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="card-body">
+                <h1 class="text-3xl font-bold self-center">
+                    {{translations.login.title}}
+                </h1>
+                <fieldset class="fieldset">
+                    <label class="label">{{translations.login.username}}</label>
+                    {{form.userName(autocomplete="off", class="input")}}
+                    <label class="label">{{translations.login.password}}</label>
+                    {{form.password(autocomplete="off", class="input")}}
+                    <div>
+                        <a
+                            class="link link-hover"
+                            href="/passwordreset/codesent=false"
+                            >{{translations.login.forgot}}</a
+                        >
+                    </div>
+                    <button class="btn btn-neutral mt-4" type="submit">
+                        {{translations.login.title}}
+                    </button>
+                </fieldset>
+            </div>
+        </form>
+        {% endif %}
+    </div>
 </div>
 {% endblock body %}
