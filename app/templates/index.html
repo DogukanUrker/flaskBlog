@@ -29,7 +29,7 @@ import categoryContainer %} {{ categoryContainer(translations) }} {% from
 sortMenu(sortName,source,translations) }}
 
 <div
-    class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6"
+    class="flex item-center justify-center flex-wrap gap-x-4 gap-y-6 mx-auto w-11/12 md:w-11/12 lg:w-10/12 2xl:w-9/12 mt-6"
 >
     {% for post in posts %} {% from "components/postCardMacro.html" import
     postCard with context %} {{ postCard(post=post,
