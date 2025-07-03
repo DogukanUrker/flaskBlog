@@ -61,8 +61,9 @@
     </head>
 
     <body id="body">
-        {% include 'components/navbar.html'%} {% from "components/flash.html"
-        import flash %} {{ flash() }} {% block body %} {% endblock body %}
+        {% include 'components/changeTheme.html'%} {% include
+        'components/navbar.html'%} {% from "components/flash.html" import flash
+        %} {{ flash() }} {% block body %} {% endblock body %}
 
         <script
             src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
