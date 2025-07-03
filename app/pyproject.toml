@@ -1,6 +1,7 @@
 [project]
 name = "flaskBlog"
 version = "3.0.0dev"
+authors = [{ name = "Doğukan Ürker", email = "dogukanurker@icloud.com" }]
 description = "Blog application built with Flask"
 readme = "README.md"
 requires-python = ">=3.9"
