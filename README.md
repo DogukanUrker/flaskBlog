@@ -35,7 +35,7 @@ cd flaskBlog/app
 uv run app.py
 ```
 
-Visit `http://localhost:2306` in your browser.
+Visit `http://localhost:1283` in your browser.
 
 ### Default Admin Account
 - Username: `admin`
