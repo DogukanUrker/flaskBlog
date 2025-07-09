@@ -180,7 +180,6 @@ Log.info(f"Name: {Settings.APP_NAME}")
 Log.info(f"Version: {Settings.APP_VERSION}")
 Log.info(f"Host: {Settings.APP_HOST}")
 Log.info(f"Port: {Settings.APP_PORT}")
-Log.info(f"Secret key: {Settings.APP_SECRET_KEY}")
 Log.info(f"Session permanent: {Settings.SESSION_PERMANENT}")
 Log.info(f"Root path: {Settings.APP_ROOT_PATH}")
 Log.info(f"Log folder root: {Settings.LOG_FOLDER_ROOT}")
@@ -191,7 +190,6 @@ Log.info(f"Registration: {Settings.REGISTRATION}")
 Log.info(f"SMTP server: {Settings.SMTP_SERVER}")
 Log.info(f"SMTP port: {Settings.SMTP_PORT}")
 Log.info(f"SMTP mail: {Settings.SMTP_MAIL}")
-Log.info(f"SMTP password: {Settings.SMTP_PASSWORD}")
 
 
 if Settings.RECAPTCHA:
@@ -205,7 +203,6 @@ if Settings.RECAPTCHA:
     else:
         Log.info("reCAPTCHA is on for login and signup pages")
         Log.info(f"reCAPTCHA recaptcha site key: {Settings.RECAPTCHA_SITE_KEY}")
-        Log.info(f"reCAPTCHA secret key: {Settings.RECAPTCHA_SECRET_KEY}")
         Log.info(f"reCAPTCHA verify url: {Settings.RECAPTCHA_VERIFY_URL}")
 
 else:
@@ -216,7 +213,6 @@ if Settings.DEFAULT_ADMIN:
     Log.info("Default admin is on")
     Log.info(f"Default admin username: {Settings.DEFAULT_ADMIN_USERNAME}")
     Log.info(f"Default admin email: {Settings.DEFAULT_ADMIN_EMAIL}")
-    Log.info(f"Default admin password: {Settings.DEFAULT_ADMIN_PASSWORD}")
     Log.info(f"Default admin point: {Settings.DEFAULT_ADMIN_POINT}")
     Log.info(f"Default admin profile picture: {Settings.DEFAULT_ADMIN_PROFILE_PICTURE}")
 else:
