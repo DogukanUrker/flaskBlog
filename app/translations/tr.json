@@ -133,8 +133,8 @@
     "separate": "(Etiketleri virgülle ayırın)",
     "save": "Değişiklikleri Kaydet",
     "bannerPlaceholder": "gönderi afişi",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Özet",
+    "abstractPlaceholder": "gönderi özeti"
   },
   "login": {
     "title": "Giriş Yap",

@@ -19,9 +19,9 @@
             >{{ post[1] }}</a
         >
 
-        <div class="overflow-hidden flex-grow markdown-content compact">
-            <span class="text-sm leading-relaxed line-clamp-4">
-                {{ render_markdown(post[11][:200]) }}
+        <div class="overflow-hidden flex-grow">
+            <span class="text-sm leading-relaxed line-clamp-4 break-words">
+                {{ post[11] }}
             </span>
         </div>
 

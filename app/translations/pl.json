@@ -99,7 +99,7 @@
     "post": "Opublikuj",
     "separate": "(Oddziel tagi przecinkami)",
     "abstract": "Abstrakt",
-    "abstractPlaceholder": "post abstract"
+    "abstractPlaceholder": "abstrakt postu"
   },
   "csrfError": {
     "reason": "Powód",
@@ -133,8 +133,8 @@
     "separate": "(Oddziel tagi przecinkami)",
     "save": "Zapisz zmiany",
     "bannerPlaceholder": "baner posta",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Abstrakt",
+    "abstractPlaceholder": "abstrakt postu"
   },
   "login": {
     "title": "Logowanie",

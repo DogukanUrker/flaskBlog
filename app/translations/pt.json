@@ -133,8 +133,8 @@
     "separate": "(Separe as tags com vírgulas)",
     "save": "Salvar Alterações",
     "bannerPlaceholder": "banner do post",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Resumo",
+    "abstractPlaceholder": "resumo do post"
   },
   "login": {
     "title": "Entrar",

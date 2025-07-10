@@ -133,8 +133,8 @@
     "separate": "(タグはカンマで区切ってください)",
     "save": "変更を保存",
     "bannerPlaceholder": "投稿バナー",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "概要",
+    "abstractPlaceholder": "投稿の概要"
   },
   "login": {
     "title": "ログイン",

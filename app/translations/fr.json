@@ -133,8 +133,8 @@
     "separate": "(Séparez les étiquettes par des virgules)",
     "save": "Enregistrer les modifications",
     "bannerPlaceholder": "bannière de l'article",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Résumé",
+    "abstractPlaceholder": "résumé de l'article"
   },
   "login": {
     "title": "Connexion",

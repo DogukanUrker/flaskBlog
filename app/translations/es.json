@@ -99,7 +99,7 @@
     "post": "Publicar",
     "separate": "(Separe las etiquetas con comas)",
     "abstract": "Resumen",
-    "abstractPlaceholder": "post abstract"
+    "abstractPlaceholder": "resumen del post"
   },
   "csrfError": {
     "reason": "Razón",
@@ -133,8 +133,8 @@
     "separate": "(Separe las etiquetas con comas)",
     "save": "Guardar Cambios",
     "bannerPlaceholder": "banner de la publicación",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Resumen",
+    "abstractPlaceholder": "resumen del post"
   },
   "login": {
     "title": "Iniciar Sesión",

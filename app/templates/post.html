@@ -12,16 +12,10 @@
 <meta name="keywords" content="{{ tags }}" />
 <meta name="author" content="{{ author }}" />
 <meta property="og:url" content="{{ blogPostUrl }}" />
-<meta
-    property="og:description"
-    content="{{ abstract[:100] | striptags + '...' }}"
-/>
+<meta property="og:description" content="{{ abstract | striptags + '...' }}" />
 <meta name="twitter:site" content="{{ appName }}" />
 <meta name="twitter:title" content="{{ title }}" />
-<meta
-    name="twitter:description"
-    content="{{ abstract[:100] | striptags + '...' }}"
-/>
+<meta name="twitter:description" content="{{ abstract | striptags + '...' }}" />
 <meta
     name="twitter:image"
     content="{{
@@ -29,8 +23,6 @@
   }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
 />
 <meta property="og:site_name" content="{{ appName }}" />
-
-
 
 {% endblock head %} {% block body %}
 <script>
@@ -66,9 +58,11 @@
         {% endif %}
     </div>
 
-    <div class="markdown-content">
-        {{ render_markdown(content) }}
-    </div>
+    <div class="text-center font-sm max-w-full">{{ abstract }}</div>
+
+    <div class="divider"></div>
+
+    <div class="markdown-content">{{ render_markdown(content) }}</div>
 
     <div class="select-none">
         <div class="flex w-full justify-between my-1">
@@ -177,7 +171,9 @@
                 {% endif %}
             </div>
             <p class="break-words ml-8">
-                <i class="ti ti-corner-down-right mr-1 text-xl inline-block"></i>
+                <i
+                    class="ti ti-corner-down-right mr-1 text-xl inline-block"
+                ></i>
                 {{ comment[2] | e }}
             </p>
         </div>

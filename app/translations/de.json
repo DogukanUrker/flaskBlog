@@ -133,8 +133,8 @@
     "separate": "(Trennen Sie die Tags mit Kommas)",
     "save": "Änderungen speichern",
     "bannerPlaceholder": "Beitragsbanner",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Zusammenfassung",
+    "abstractPlaceholder": "Beitragszusammenfassung"
   },
   "login": {
     "title": "Anmelden",
