@@ -1,7 +1,7 @@
 {% extends 'layout.html'%} {%block head%}
 <title>{{translations.login.title}}</title>
 {% endblock head %} {%block body%}
-<div class="hero min-h-screen max-w-128 mx-auto">
+<div class="hero min-h-[calc(100vh-6rem)] max-w-128 mx-auto">
     <div class="card bg-base-100 w-10/12 max-w-sm shrink-0 shadow-2xl">
         {% if recaptcha %}
         <script src="https://www.google.com/recaptcha/api.js"></script>
