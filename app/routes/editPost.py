@@ -54,15 +54,6 @@ def editPost(urlID):
             post = cursor.fetchone()
 
             Log.success(f'POST: "{urlID}" FOUND')
-            Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-            connection.set_trace_callback(Log.database)
-            cursor = connection.cursor()
-            cursor.execute(
-                """select userName from users where userName = ? """,
-                [(session["userName"])],
-            )
 
             if post[5] == session["userName"] or session["userRole"] == "admin":
                 form = CreatePostForm(request.form)
