@@ -1,18 +1,20 @@
 {% extends 'layout.html' %} {% block head %}
 <title>{{translations.editPost.title}}</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/markdownEditor.css') }}" />
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/markdownEditor.css') }}"
+/>
 {% endblock head %} {% block body %}
 <div class="w-fit mx-auto mt-8">
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-        {{
-        form.postTitle(class_="input input-bordered w-full my-2", autocomplete="off",placeholder=translations.editPost.titlePlaceholder)
-        }} {{
-        form.postTags(class_="input input-bordered w-full my-2", autocomplete="off",placeholder=translations.editPost.tags)
-        }}
-        {{
-        form.postAbstract(class_="textarea textarea-bordered w-full my-2", autocomplete="off",placeholder=translations.editPost.abstractPlaceholder)
+        {{ form.postTitle(class_="input input-bordered w-full my-2",
+        autocomplete="off",placeholder=translations.editPost.titlePlaceholder)
+        }} {{ form.postTags(class_="input input-bordered w-full my-2",
+        autocomplete="off",placeholder=translations.editPost.tags) }} {{
+        form.postAbstract(class_="textarea textarea-bordered w-full my-2",
+        autocomplete="off",placeholder=translations.editPost.abstractPlaceholder)
         }}
         <p class="text-xs text-center w-fit mx-auto mb-2">
             {{translations.editPost.separate}}
@@ -25,9 +27,8 @@
                 class="h-48 w-64 group-hover:scale-110 transition duration-150 object-cover rounded-md mx-auto select-none"
             />
             <p class="mt-2">{{translations.editPost.new}}</p>
-            {{
-            form.postBanner(class_="file-input file-input-bordered w-full", placeholder=translations.editPost.bannerPlaceholder)
-            }}
+            {{ form.postBanner(class_="file-input file-input-bordered w-full",
+            placeholder=translations.editPost.bannerPlaceholder) }}
         </div>
 
         <div class="mx-auto w-fit">
@@ -98,13 +99,13 @@
             </select>
         </div>
 
-        <div>{{ form.postContent(class_="textarea textarea-bordered w-full h-96", id_="markdown-editor", autocomplete="off") }}</div>
+        <div>
+            {{ form.postContent(class_="textarea textarea-bordered w-full h-96",
+            id_="markdown-editor", autocomplete="off") }}
+        </div>
 
-        <button
-            type="submit"
-            class="btn btn-neutral mt-4"
-        >
-            {{translations.editPost.post}}
+        <button type="submit" class="btn btn-neutral btn-block mt-4">
+            {{translations.editPost.save}}
         </button>
     </form>
     <script src="{{ url_for('static', filename='js/markdownEditor.js') }}"></script>
