@@ -1,18 +1,20 @@
 {% extends 'layout.html' %} {% block head %}
 <title>{{ translations.createPost.title }}</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/markdownEditor.css') }}" />
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/markdownEditor.css') }}"
+/>
 {% endblock head %} {% block body %}
 <div class="w-fit mx-auto mt-8">
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-        {{
-        form.postTitle(autocomplete="off",placeholder=translations.createPost.titlePlaceholder)
-        }} {{
-        form.postTags(autocomplete="off",placeholder=translations.createPost.tags)
-        }}
-        {{
-        form.postAbstract(autocomplete="off",placeholder=translations.createPost.abstractPlaceholder)
+        {{ form.postTitle(class_="input input-bordered w-full my-2",
+        autocomplete="off",placeholder=translations.createPost.titlePlaceholder)
+        }} {{ form.postTags(class_="input input-bordered w-full my-2",
+        autocomplete="off",placeholder=translations.createPost.tags) }} {{
+        form.postAbstract(class_="textarea textarea-bordered w-full my-2",
+        autocomplete="off",placeholder=translations.createPost.abstractPlaceholder)
         }}
         <p class="text-xs text-center w-fit mx-auto mb-2">
             {{ translations.createPost.separate }}
@@ -22,9 +24,8 @@
             <label class="block mt-2 mb-1"
                 >{{ translations.createPost.banner }}</label
             >
-            {{
-            form.postBanner(placeholder=translations.createPost.bannerPlaceholder)
-            }}
+            {{ form.postBanner(class_="file-input file-input-bordered w-full",
+            placeholder=translations.createPost.bannerPlaceholder) }}
         </div>
 
         <div class="mx-auto w-fit">
@@ -32,7 +33,7 @@
                 >{{ translations.createPost.category }}</label
             >
             <select
-                class="w-72 h-12 mb-4 mx-auto p-2 rounded-md text-center outline-rose-500 bg-transparent focus:outline-none focus:ring focus:ring-rose-500 duration-100 border-2 border-gray-500/25 focus:border-0 block shadow-md select-none text-rose-500"
+                class="select select-bordered w-72"
                 id="postCategory"
                 name="postCategory"
                 required=""
@@ -95,12 +96,12 @@
             </select>
         </div>
 
-        <div>{{ form.postContent(id_="markdown-editor", autocomplete="off") }}</div>
+        <div>
+            {{ form.postContent(class_="textarea textarea-bordered w-full h-96",
+            id_="markdown-editor", autocomplete="off") }}
+        </div>
 
-        <button
-            type="submit"
-            class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium"
-        >
+        <button type="submit" class="btn btn-neutral btn-block mt-4">
             {{ translations.createPost.post }}
         </button>
     </form>
