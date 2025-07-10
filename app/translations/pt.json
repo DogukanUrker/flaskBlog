@@ -99,7 +99,7 @@
     "post": "Publicar",
     "separate": "(Separe as tags com vírgulas)",
     "abstract": "Resumo",
-    "abstractPlaceholder": "post abstract"
+    "abstractPlaceholder": "resumo do post"
   },
   "csrfError": {
     "reason": "Motivo",
