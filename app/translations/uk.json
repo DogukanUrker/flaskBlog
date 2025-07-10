@@ -98,8 +98,8 @@
     "tags": "теги",
     "post": "Опублікувати",
     "separate": "(Розділяйте теги комами)",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Анотація",
+    "abstractPlaceholder": "Анотація поста"
   },
   "csrfError": {
     "reason": "Причина",
