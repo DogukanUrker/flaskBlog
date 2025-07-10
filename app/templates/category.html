@@ -1,14 +1,19 @@
 {% extends 'layout.html' %} {% block head %}
 <title>flaskBlog</title>
-{% endblock head %} {% block body %} {% from "components/categoryContainer.html"
-import categoryContainer %} {{ categoryContainer(translations) }}
+{% endblock head %} {% block body %}
 
 <h1 class="text-center font-bold text-3xl text-rose-500 mt-4 select-none">
     {{ category }}
 </h1>
 
-{% from "components/sortMenu.html" import sortMenu %} {{
-sortMenu(sortName,source,translations) }}
+<div
+    class="flex justify-between mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-8"
+>
+    {% from "components/categoryContainer.html" import categoryContainer %} {{
+    categoryContainer(translations, category) }} {% from
+    "components/sortMenu.html" import sortMenu %} {{
+    sortMenu(sortName,source,translations) }}
+</div>
 
 <div
     class="flex item-center justify-center flex-wrap gap-x-2 gap-y-6 mx-auto w-11/12 md:w-10/12 lg:w-9/12 2xl:w-8/12 mt-6"
