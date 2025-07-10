@@ -98,7 +98,7 @@
     "tags": "etiquetas",
     "post": "Publicar",
     "separate": "(Separe las etiquetas con comas)",
-    "abstract": "Abstract",
+    "abstract": "Resumen",
     "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
