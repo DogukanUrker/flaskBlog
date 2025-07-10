@@ -8,8 +8,6 @@ from wtforms import (
     validators,
 )
 
-from .FormInputStyle import inputStyle
-
 
 class ChangeProfilePictureForm(Form):
     """
@@ -19,7 +17,4 @@ class ChangeProfilePictureForm(Form):
     newProfilePictureSeed = StringField(
         "ProfilePictureSeed",
         [validators.InputRequired()],
-        render_kw={
-            "class": inputStyle(),
-        },
     )

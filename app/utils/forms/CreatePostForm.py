@@ -11,8 +11,6 @@ from wtforms import (
     validators,
 )
 
-from .FormInputStyle import inputStyle
-
 
 class CreatePostForm(Form):
     """
@@ -22,13 +20,11 @@ class CreatePostForm(Form):
     postTitle = StringField(
         "Post Title",
         [validators.Length(min=4, max=75), validators.InputRequired()],
-        render_kw={"class": inputStyle()},
     )
 
     postTags = StringField(
         "Post Tags",
         [validators.InputRequired()],
-        render_kw={"class": inputStyle()},
     )
 
     postContent = TextAreaField(
@@ -64,5 +60,4 @@ class CreatePostForm(Form):
             ("Web", "Web"),
             ("Other", "Other"),
         ],
-        render_kw={"class": inputStyle() + " text-rose-500"},
     )
