@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request, session
+from flask import Blueprint, redirect, request, session, url_for
 from settings import Settings
 from utils.log import Log
 
@@ -21,6 +21,6 @@ def setTheme(theme):
         Log.info(f"Theme set to: {theme}")
     else:
         Log.warning(f"Theme not supported: {theme}")
-    
+
     # Redirect back to the page the user came from, or home if no referrer
-    return redirect(request.referrer or url_for('index')) 
+    return redirect(request.referrer or url_for("index"))
