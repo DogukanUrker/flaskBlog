@@ -98,7 +98,7 @@
     "tags": "tags",
     "post": "Publicar",
     "separate": "(Separe as tags com vírgulas)",
-    "abstract": "Abstract",
+    "abstract": "Resumo",
     "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
