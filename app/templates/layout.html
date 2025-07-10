@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ session.get('language', 'en') }}">
+<html lang="{{ session.get('language', 'en') }}" data-theme="{{ session.get('theme', 'winter') }}">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,11 +15,27 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='css/general.css') }}"
         />
-        <script src="https://cdn.tailwindcss.com"></script>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@5"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/markdown.css') }}"
         />
 
         <meta property="og:type" content="website" />
@@ -49,26 +65,16 @@
     </head>
 
     <body id="body">
-        {% from "components/changeTheme.html" import changeTheme %} {{
-        changeTheme() }} {% include 'components/navbar.html'%} {% from
-        "components/flash.html" import flash %} {{ flash() }} {% block body %}
-        {% endblock body %}
+        {% include 'components/changeTheme.html'%} {% include
+        'components/navbar.html'%} {% from "components/flash.html" import flash
+        %} {{ flash() }} {% block body %} {% endblock body %}
 
         <script
             src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"
         ></script>
-        <link
-            href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-            rel="stylesheet"
-        />
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-        <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
-        <link
-            rel="stylesheet"
-            href="{{ url_for('static', filename='css/editor.css') }}"
-        />
+        
         <script src="{{ url_for('static', filename='js/timeStamp.js') }}"></script>
         <link
             rel="stylesheet"

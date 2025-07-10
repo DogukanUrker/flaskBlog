@@ -97,7 +97,9 @@
     "bannerPlaceholder": "bannière de l'article",
     "tags": "étiquettes",
     "post": "Publier",
-    "separate": "(Séparez les étiquettes par des virgules)"
+    "separate": "(Séparez les étiquettes par des virgules)",
+    "abstract": "Résumé",
+    "abstractPlaceholder": "résumé de l'article"
   },
   "csrfError": {
     "reason": "Raison",
@@ -130,7 +132,9 @@
     "tags": "étiquettes",
     "separate": "(Séparez les étiquettes par des virgules)",
     "save": "Enregistrer les modifications",
-    "bannerPlaceholder": "bannière de l'article"
+    "bannerPlaceholder": "bannière de l'article",
+    "abstract": "Résumé",
+    "abstractPlaceholder": "résumé de l'article"
   },
   "login": {
     "title": "Connexion",

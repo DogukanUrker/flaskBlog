@@ -96,7 +96,9 @@
     "bannerPlaceholder": "帖子横幅",
     "tags": "标签",
     "post": "发布帖子",
-    "separate": "(用逗号分隔标签)"
+    "separate": "(用逗号分隔标签)",
+    "abstract": "摘要",
+    "abstractPlaceholder": "帖子摘要"
   },
   "csrfError": {
     "reason": "原因",
@@ -129,7 +131,9 @@
     "tags": "标签",
     "separate": "(用逗号分隔标签)",
     "save": "保存更改",
-    "bannerPlaceholder": "帖子横幅"
+    "bannerPlaceholder": "帖子横幅",
+    "abstract": "摘要",
+    "abstractPlaceholder": "帖子摘要"
   },
   "login": {
     "title": "登录",

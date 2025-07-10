@@ -12,16 +12,10 @@
 <meta name="keywords" content="{{ tags }}" />
 <meta name="author" content="{{ author }}" />
 <meta property="og:url" content="{{ blogPostUrl }}" />
-<meta
-    property="og:description"
-    content="{{ content[:100] | striptags + '...' | safe }}"
-/>
+<meta property="og:description" content="{{ abstract | striptags + '...' }}" />
 <meta name="twitter:site" content="{{ appName }}" />
 <meta name="twitter:title" content="{{ title }}" />
-<meta
-    name="twitter:description"
-    content="{{ content[:100] | striptags + '...' | safe }}"
-/>
+<meta name="twitter:description" content="{{ abstract | striptags + '...' }}" />
 <meta
     name="twitter:image"
     content="{{
@@ -64,7 +58,11 @@
         {% endif %}
     </div>
 
-    <p>{{ content | safe }} <br /></p>
+    <div class="text-center font-sm max-w-full">{{ abstract }}</div>
+
+    <div class="divider"></div>
+
+    <div class="markdown-content">{{ render_markdown(content) }}</div>
 
     <div class="select-none">
         <div class="flex w-full justify-between my-1">
@@ -173,8 +171,10 @@
                 {% endif %}
             </div>
             <p class="break-words ml-8">
-                <i class="ti ti-corner-down-right mr-1 text-xl inline-block"></i
-                >{{ comment[2] }}
+                <i
+                    class="ti ti-corner-down-right mr-1 text-xl inline-block"
+                ></i>
+                {{ comment[2] | e }}
             </p>
         </div>
         {% endfor %}
@@ -185,12 +185,10 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         {% if session["userName"] %}
         <div class="border rounded border-rose-500/25">
-            {{ form.comment(class_="bg-transparent focus:outline-none rounded-md
-            p-2 text-center h-20 w-72 resize-none mx-auto
-            mb-0",placeholder=translations.post.placeholder) }}
+            {{ form.comment(class_="textarea textarea-bordered w-full h-24 my-2",placeholder=translations.post.placeholder) }}
             <button
                 type="submit"
-                class="hover:text-rose-500 duration-150 mb-2 text-lg text-right m-2"
+                class="btn btn-neutral mt-2"
             >
                 <i class="ti ti-arrow-narrow-up mr-1 text-xl"></i>
             </button>

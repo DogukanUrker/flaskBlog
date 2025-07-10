@@ -73,7 +73,9 @@ def post(urlID=None, slug=None):
 
                 return redirect(url_for("post.post", urlID=urlID)), 301
 
-            comment = request.form["comment"]
+            from markupsafe import escape
+
+            comment = escape(request.form["comment"])
 
             Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
@@ -158,6 +160,7 @@ def post(urlID=None, slug=None):
             id=post[0],
             title=post[1],
             tags=post[2],
+            abstract=post[11],
             content=post[3],
             author=post[5],
             views=post[6],

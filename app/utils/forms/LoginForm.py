@@ -9,8 +9,6 @@ from wtforms import (
     validators,
 )
 
-from .FormInputStyle import inputStyle
-
 
 class LoginForm(Form):
     """
@@ -20,11 +18,9 @@ class LoginForm(Form):
     userName = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
-        render_kw={"class": inputStyle()},
     )
 
     password = PasswordField(
         "Password",
         [validators.Length(min=5), validators.InputRequired()],
-        render_kw={"class": inputStyle()},
     )

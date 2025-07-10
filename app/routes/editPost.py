@@ -54,20 +54,12 @@ def editPost(urlID):
             post = cursor.fetchone()
 
             Log.success(f'POST: "{urlID}" FOUND')
-            Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-            connection.set_trace_callback(Log.database)
-            cursor = connection.cursor()
-            cursor.execute(
-                """select userName from users where userName = ? """,
-                [(session["userName"])],
-            )
 
             if post[5] == session["userName"] or session["userRole"] == "admin":
                 form = CreatePostForm(request.form)
                 form.postTitle.data = post[1]
                 form.postTags.data = post[2]
+                form.postAbstract.data = post[11]
                 form.postContent.data = post[3]
                 form.postCategory.data = post[9]
 
@@ -75,10 +67,11 @@ def editPost(urlID):
                     postTitle = request.form["postTitle"]
                     postTags = request.form["postTags"]
                     postContent = request.form["postContent"]
+                    postAbstract = request.form["postAbstract"]
                     postCategory = request.form["postCategory"]
                     postBanner = request.files["postBanner"].read()
 
-                    if postContent == "":
+                    if postContent == "" or postAbstract == "":
                         flashMessage(
                             page="editPost",
                             message="empty",
@@ -103,6 +96,10 @@ def editPost(urlID):
                         cursor.execute(
                             """update posts set content = ? where id = ? """,
                             (postContent, post[0]),
+                        )
+                        cursor.execute(
+                            """update posts set abstract = ? where id = ? """,
+                            (postAbstract, post[0]),
                         )
                         cursor.execute(
                             """update posts set category = ? where id = ? """,

@@ -97,7 +97,9 @@
     "bannerPlaceholder": "post banner",
     "tags": "tags",
     "post": "Post",
-    "separate": "(Separate tags with commas)"
+    "separate": "(Separate tags with commas)",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
     "reason": "Reason",
@@ -130,7 +132,9 @@
     "tags": "tags",
     "separate": "(Separate tags with commas)",
     "save": "Save Changes",
-    "bannerPlaceholder": "post banner"
+    "bannerPlaceholder": "post banner",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "login": {
     "title": "Login",
@@ -320,9 +324,9 @@
     "contact": "Contact Us",
     "contactText": "If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us. Mail:"
   },
-  "analytics":{
+  "analytics": {
     "title": "Analytics",
-    "goToPage" : "Go to page",
+    "goToPage": "Go to page",
     "totalVisitor": "Total Visitor",
     "todaysVisitor": "Today's Visitor",
     "category": "Category",

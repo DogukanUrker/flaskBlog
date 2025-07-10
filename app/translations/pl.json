@@ -97,7 +97,9 @@
     "bannerPlaceholder": "baner posta",
     "tags": "tagi",
     "post": "Opublikuj",
-    "separate": "(Oddziel tagi przecinkami)"
+    "separate": "(Oddziel tagi przecinkami)",
+    "abstract": "Abstrakt",
+    "abstractPlaceholder": "abstrakt postu"
   },
   "csrfError": {
     "reason": "Powód",
@@ -130,7 +132,9 @@
     "tags": "tagi",
     "separate": "(Oddziel tagi przecinkami)",
     "save": "Zapisz zmiany",
-    "bannerPlaceholder": "baner posta"
+    "bannerPlaceholder": "baner posta",
+    "abstract": "Abstrakt",
+    "abstractPlaceholder": "abstrakt postu"
   },
   "login": {
     "title": "Logowanie",

@@ -1,17 +1,3 @@
 html {
     font-size: 125%;
 }
-
-*::-webkit-scrollbar {
-    width: 0.4rem;
-}
-
-*::-webkit-scrollbar-thumb {
-    border-radius: 1rem;
-    background: rgb(244 63 94);
-}
-
-*::-webkit-scrollbar-track,
-*::-webkit-scrollbar-button {
-    background: transparent;
-}
