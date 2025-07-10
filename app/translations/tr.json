@@ -98,8 +98,8 @@
     "tags": "etiketler",
     "post": "Gönder",
     "separate": "(Etiketleri virgülle ayırın)",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Özet",
+    "abstractPlaceholder": "gönderi özeti"
   },
   "csrfError": {
     "reason": "Sebep",
