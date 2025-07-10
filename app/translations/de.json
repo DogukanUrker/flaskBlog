@@ -98,8 +98,8 @@
     "tags": "Tags",
     "post": "Beitrag veröffentlichen",
     "separate": "(Trennen Sie die Tags mit Kommas)",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Zusammenfassung",
+    "abstractPlaceholder": "Beitragszusammenfassung"
   },
   "csrfError": {
     "reason": "Grund",
