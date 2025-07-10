@@ -98,8 +98,8 @@
     "tags": "タグ",
     "post": "投稿",
     "separate": "(タグはカンマで区切ってください)",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "概要",
+    "abstractPlaceholder": "投稿の概要"
   },
   "csrfError": {
     "reason": "理由",
