@@ -98,7 +98,7 @@
     "tags": "tagi",
     "post": "Opublikuj",
     "separate": "(Oddziel tagi przecinkami)",
-    "abstract": "Abstract",
+    "abstract": "Abstrakt",
     "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
