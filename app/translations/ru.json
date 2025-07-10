@@ -98,7 +98,7 @@
     "tags": "теги",
     "post": "Опубликовать",
     "separate": "(Разделяйте теги запятыми)",
-    "abstract": "Abstract",
+    "abstract": "Аннотация",
     "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
