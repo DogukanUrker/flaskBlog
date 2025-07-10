@@ -1,58 +1,97 @@
 {% extends 'layout.html' %} {% block head %}
 <title>{{translations.signup.title}}</title>
 {% endblock head %} {% block body %}
-<div class="w-fit mx-auto mt-24 md:mt-44 text-center text-xl">
-    {% if recaptcha %}
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
-
-    <form
-        method="post"
-        id="recaptchaForm"
-        action="{{ url_for('signup.signup') }}"
-    >
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-
-        {{form.userName(autocomplete="off",placeholder=translations.signup.username)}}
-        {{form.email(autocomplete="off",placeholder=translations.signup.email)}}
-        {{form.password(placeholder=translations.signup.password)}}
-        {{form.passwordConfirm(placeholder=translations.signup.confirm)}}
-
-        <button
-            type="submit"
-            data-sitekey="{{ siteKey }}"
-            data-callback="onSubmit"
-            data-action="submit"
-            class="g-recaptcha block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
+<div class="hero min-h-[calc(100vh-6rem)] max-w-128 mx-auto">
+    <div class="card bg-base-100 w-10/12 max-w-sm shrink-0 shadow-2xl">
+        {% if recaptcha %}
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script src="{{ url_for('static', filename='js/recaptcha.js') }}"></script>
+        <form
+            method="post"
+            id="recaptchaForm"
+            action="{{ url_for('signup.signup') }}"
         >
-            {{translations.signup.title}}
-        </button>
-    </form>
-    {% else %}
-    <form method="post">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-
-        {{form.userName(autocomplete="off",placeholder=translations.signup.username)}}
-        {{form.email(autocomplete="off",placeholder=translations.signup.email)}}
-        {{form.password(placeholder=translations.signup.password)}}
-        {{form.passwordConfirm(placeholder=translations.signup.confirm)}}
-
-        <button
-            type="submit"
-            class="block mx-auto m-2 hover:text-rose-500 duration-150 font-medium select-none"
-        >
-            {{translations.signup.title}}
-        </button>
-    </form>
-    {% endif %}
-
-    <div class="text-xs select-none">
-        {{translations.signup.by}}
-        <a
-            href="/privacyPolicy"
-            class="font-medium text-rose-500 hover:text-rose-600 duration-150"
-            >{{translations.signup.policy}}</a
-        >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="card-body text-xl">
+                <h1 class="text-3xl font-bold self-center">
+                    {{translations.signup.title}}
+                </h1>
+                <fieldset class="fieldset">
+                    <label class="label"
+                        >{{translations.signup.username}}</label
+                    >
+                    {{form.userName(class_="input input-bordered w-full",
+                    autocomplete="off",
+                    placeholder=translations.signup.username)}}
+                    <label class="label">{{translations.signup.email}}</label>
+                    {{form.email(class_="input input-bordered w-full",
+                    autocomplete="off", placeholder=translations.signup.email)}}
+                    <label class="label"
+                        >{{translations.signup.password}}</label
+                    >
+                    {{form.password(class_="input input-bordered w-full",
+                    placeholder=translations.signup.password)}}
+                    <label class="label">{{translations.signup.confirm}}</label>
+                    {{form.passwordConfirm(class_="input input-bordered w-full",
+                    placeholder=translations.signup.confirm)}}
+                    <button
+                        type="submit"
+                        data-sitekey="{{ siteKey }}"
+                        data-callback="onSubmit"
+                        data-action="submit"
+                        class="g-recaptcha btn btn-neutral mt-4"
+                    >
+                        {{translations.signup.title}}
+                    </button>
+                    <div class="text-xs select-none mt-2">
+                        {{translations.signup.by}}
+                        <a
+                            href="/privacyPolicy"
+                            class="font-medium text-rose-500 hover:text-rose-600 duration-150"
+                            >{{translations.signup.policy}}</a
+                        >
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+        {% else %}
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="card-body text-xl">
+                <h1 class="text-3xl font-bold self-center">
+                    {{translations.signup.title}}
+                </h1>
+                <fieldset class="fieldset">
+                    <label class="label"
+                        >{{translations.signup.username}}</label
+                    >
+                    {{form.userName(class_="input input-bordered w-full",
+                    autocomplete="off",
+                    placeholder=translations.signup.username)}}
+                    <label class="label">{{translations.signup.email}}</label>
+                    {{form.email(class_="input input-bordered w-full",
+                    autocomplete="off", placeholder=translations.signup.email)}}
+                    <label class="label"
+                        >{{translations.signup.password}}</label
+                    >
+                    {{form.password(class_="input input-bordered w-full",
+                    placeholder=translations.signup.password)}}
+                    <label class="label">{{translations.signup.confirm}}</label>
+                    {{form.passwordConfirm(class_="input input-bordered w-full",
+                    placeholder=translations.signup.confirm)}}
+                    <button type="submit" class="btn btn-neutral mt-4">
+                        {{translations.signup.title}}
+                    </button>
+                    <div class="text-xs select-none mt-2 w-full text-center">
+                        {{translations.signup.by}}
+                        <a href="/privacyPolicy" class="font-medium link"
+                            >{{translations.signup.policy}}</a
+                        >
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+        {% endif %}
     </div>
 </div>
 {% endblock body %}
