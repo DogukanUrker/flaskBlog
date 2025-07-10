@@ -97,7 +97,9 @@
     "bannerPlaceholder": "баннер поста",
     "tags": "теги",
     "post": "Опубликовать",
-    "separate": "(Разделяйте теги запятыми)"
+    "separate": "(Разделяйте теги запятыми)",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
     "reason": "Причина",
@@ -130,7 +132,9 @@
     "tags": "теги",
     "separate": "(Разделяйте теги запятыми)",
     "save": "Сохранить изменения",
-    "bannerPlaceholder": "баннер поста"
+    "bannerPlaceholder": "баннер поста",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "login": {
     "title": "Вход",

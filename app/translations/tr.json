@@ -97,7 +97,9 @@
     "bannerPlaceholder": "gönderi afişi",
     "tags": "etiketler",
     "post": "Gönder",
-    "separate": "(Etiketleri virgülle ayırın)"
+    "separate": "(Etiketleri virgülle ayırın)",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
     "reason": "Sebep",
@@ -130,7 +132,9 @@
     "tags": "etiketler",
     "separate": "(Etiketleri virgülle ayırın)",
     "save": "Değişiklikleri Kaydet",
-    "bannerPlaceholder": "gönderi afişi"
+    "bannerPlaceholder": "gönderi afişi",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "login": {
     "title": "Giriş Yap",

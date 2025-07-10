@@ -97,7 +97,9 @@
     "bannerPlaceholder": "banner de la publicación",
     "tags": "etiquetas",
     "post": "Publicar",
-    "separate": "(Separe las etiquetas con comas)"
+    "separate": "(Separe las etiquetas con comas)",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
     "reason": "Razón",
@@ -130,7 +132,9 @@
     "tags": "etiquetas",
     "separate": "(Separe las etiquetas con comas)",
     "save": "Guardar Cambios",
-    "bannerPlaceholder": "banner de la publicación"
+    "bannerPlaceholder": "banner de la publicación",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "login": {
     "title": "Iniciar Sesión",

@@ -160,6 +160,7 @@ def post(urlID=None, slug=None):
             id=post[0],
             title=post[1],
             tags=post[2],
+            abstract=post[11],
             content=post[3],
             author=post[5],
             views=post[6],

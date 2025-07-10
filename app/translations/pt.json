@@ -97,7 +97,9 @@
     "bannerPlaceholder": "banner do post",
     "tags": "tags",
     "post": "Publicar",
-    "separate": "(Separe as tags com vírgulas)"
+    "separate": "(Separe as tags com vírgulas)",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "csrfError": {
     "reason": "Motivo",
@@ -130,7 +132,9 @@
     "tags": "tags",
     "separate": "(Separe as tags com vírgulas)",
     "save": "Salvar Alterações",
-    "bannerPlaceholder": "banner do post"
+    "bannerPlaceholder": "banner do post",
+    "abstract": "Abstract",
+    "abstractPlaceholder": "post abstract"
   },
   "login": {
     "title": "Entrar",

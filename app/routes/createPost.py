@@ -39,11 +39,12 @@ def createPost():
         if request.method == "POST":
             postTitle = request.form["postTitle"]
             postTags = request.form["postTags"]
+            postAbstract = request.form["postAbstract"]
             postContent = request.form["postContent"]
             postBanner = request.files["postBanner"].read()
             postCategory = request.form["postCategory"]
 
-            if postContent == "":
+            if postContent == "" or postAbstract == "":
                 flashMessage(
                     page="createPost",
                     message="empty",
@@ -59,8 +60,7 @@ def createPost():
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
-                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category,urlID) \
-                                values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category,urlID,abstract) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     (
                         postTitle,
                         postTags,
@@ -72,6 +72,7 @@ def createPost():
                         currentTimeStamp(),
                         postCategory,
                         generateurlID(),
+                        postAbstract,
                     ),
                 )
                 connection.commit()

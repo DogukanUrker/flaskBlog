@@ -14,13 +14,13 @@
 <meta property="og:url" content="{{ blogPostUrl }}" />
 <meta
     property="og:description"
-    content="{{ content[:100] | striptags + '...' | safe }}"
+    content="{{ abstract[:100] | striptags + '...' }}"
 />
 <meta name="twitter:site" content="{{ appName }}" />
 <meta name="twitter:title" content="{{ title }}" />
 <meta
     name="twitter:description"
-    content="{{ content[:100] | striptags + '...' | safe }}"
+    content="{{ abstract[:100] | striptags + '...' }}"
 />
 <meta
     name="twitter:image"

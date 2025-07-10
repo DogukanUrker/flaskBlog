@@ -160,6 +160,7 @@ def postsTable():
             "lastEditTimeStamp" integer,
             "category"  text not null,
             "urlID" TEXT NOT NULL,
+            "abstract" text not null,
             primary key("id" autoincrement)
         );"""
 
