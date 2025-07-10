@@ -98,8 +98,8 @@
     "tags": "étiquettes",
     "post": "Publier",
     "separate": "(Séparez les étiquettes par des virgules)",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "Résumé",
+    "abstractPlaceholder": "résumé de l'article"
   },
   "csrfError": {
     "reason": "Raison",
