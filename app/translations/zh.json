@@ -97,8 +97,8 @@
     "tags": "标签",
     "post": "发布帖子",
     "separate": "(用逗号分隔标签)",
-    "abstract": "Abstract",
-    "abstractPlaceholder": "post abstract"
+    "abstract": "摘要",
+    "abstractPlaceholder": "帖子摘要"
   },
   "csrfError": {
     "reason": "原因",
