@@ -85,6 +85,9 @@ from routes.searchBar import (
 from routes.setLanguage import (
     setLanguageBlueprint,
 )
+from routes.setTheme import (
+    setThemeBlueprint,
+)
 from routes.signup import (
     signUpBlueprint,
 )
@@ -272,6 +275,7 @@ app.register_blueprint(adminPanelBlueprint)
 app.register_blueprint(createPostBlueprint)
 app.register_blueprint(verifyUserBlueprint)
 app.register_blueprint(setLanguageBlueprint)
+app.register_blueprint(setThemeBlueprint)
 app.register_blueprint(privacyPolicyBlueprint)
 app.register_blueprint(passwordResetBlueprint)
 app.register_blueprint(changeUserNameBlueprint)
