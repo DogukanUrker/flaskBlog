@@ -97,9 +97,10 @@
     "bannerPlaceholder": "投稿バナー",
     "tags": "タグ",
     "post": "投稿",
-    "separate": "(タグはカンマで区切ってください)"
+    "separate": "(タグはカンマで区切ってください)",
+    "abstract": "概要",
+    "abstractPlaceholder": "投稿の概要"
   },
-
   "csrfError": {
     "reason": "理由",
     "description": "同じフォームを再度記入してください。"
@@ -131,7 +132,9 @@
     "tags": "タグ",
     "separate": "(タグはカンマで区切ってください)",
     "save": "変更を保存",
-    "bannerPlaceholder": "投稿バナー"
+    "bannerPlaceholder": "投稿バナー",
+    "abstract": "概要",
+    "abstractPlaceholder": "投稿の概要"
   },
   "login": {
     "title": "ログイン",

@@ -97,7 +97,9 @@
     "bannerPlaceholder": "Beitragsbanner",
     "tags": "Tags",
     "post": "Beitrag veröffentlichen",
-    "separate": "(Trennen Sie die Tags mit Kommas)"
+    "separate": "(Trennen Sie die Tags mit Kommas)",
+    "abstract": "Zusammenfassung",
+    "abstractPlaceholder": "Beitragszusammenfassung"
   },
   "csrfError": {
     "reason": "Grund",
@@ -130,7 +132,9 @@
     "tags": "Tags",
     "separate": "(Trennen Sie die Tags mit Kommas)",
     "save": "Änderungen speichern",
-    "bannerPlaceholder": "Beitragsbanner"
+    "bannerPlaceholder": "Beitragsbanner",
+    "abstract": "Zusammenfassung",
+    "abstractPlaceholder": "Beitragszusammenfassung"
   },
   "login": {
     "title": "Anmelden",
