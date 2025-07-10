@@ -103,6 +103,7 @@ from utils.contextProcessor.returnPostUrlID import returnPostUrlID
 from utils.contextProcessor.returnPostUrlSlug import returnPostUrlSlug
 from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture
 from utils.contextProcessor.translations import injectTranslations
+from utils.contextProcessor.markdown import markdown_processor
 from utils.dbChecker import (
     analyticsTable,
     commentsTable,
@@ -156,6 +157,7 @@ app.context_processor(returnUserProfilePicture)
 app.context_processor(returnPostUrlID)
 app.context_processor(returnPostUrlSlug)
 app.context_processor(injectTranslations)
+app.context_processor(markdown_processor)
 app.before_request(browserLanguage)
 app.jinja_env.globals.update(getSlugFromPostTitle=getSlugFromPostTitle)
 
@@ -180,7 +182,6 @@ Log.info(f"Name: {Settings.APP_NAME}")
 Log.info(f"Version: {Settings.APP_VERSION}")
 Log.info(f"Host: {Settings.APP_HOST}")
 Log.info(f"Port: {Settings.APP_PORT}")
-Log.info(f"Secret key: {Settings.APP_SECRET_KEY}")
 Log.info(f"Session permanent: {Settings.SESSION_PERMANENT}")
 Log.info(f"Root path: {Settings.APP_ROOT_PATH}")
 Log.info(f"Log folder root: {Settings.LOG_FOLDER_ROOT}")
@@ -191,7 +192,6 @@ Log.info(f"Registration: {Settings.REGISTRATION}")
 Log.info(f"SMTP server: {Settings.SMTP_SERVER}")
 Log.info(f"SMTP port: {Settings.SMTP_PORT}")
 Log.info(f"SMTP mail: {Settings.SMTP_MAIL}")
-Log.info(f"SMTP password: {Settings.SMTP_PASSWORD}")
 
 
 if Settings.RECAPTCHA:
@@ -205,7 +205,6 @@ if Settings.RECAPTCHA:
     else:
         Log.info("reCAPTCHA is on for login and signup pages")
         Log.info(f"reCAPTCHA recaptcha site key: {Settings.RECAPTCHA_SITE_KEY}")
-        Log.info(f"reCAPTCHA secret key: {Settings.RECAPTCHA_SECRET_KEY}")
         Log.info(f"reCAPTCHA verify url: {Settings.RECAPTCHA_VERIFY_URL}")
 
 else:
@@ -216,7 +215,6 @@ if Settings.DEFAULT_ADMIN:
     Log.info("Default admin is on")
     Log.info(f"Default admin username: {Settings.DEFAULT_ADMIN_USERNAME}")
     Log.info(f"Default admin email: {Settings.DEFAULT_ADMIN_EMAIL}")
-    Log.info(f"Default admin password: {Settings.DEFAULT_ADMIN_PASSWORD}")
     Log.info(f"Default admin point: {Settings.DEFAULT_ADMIN_POINT}")
     Log.info(f"Default admin profile picture: {Settings.DEFAULT_ADMIN_PROFILE_PICTURE}")
 else:
@@ -247,7 +245,15 @@ def csrfError(e):
 
 @app.after_request
 def afterRequest(response):
-    return afterRequestLogger(response)
+    response = afterRequestLogger(response)
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com https://cdn.tailwindcss.com; "
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tailwindcss.com; "
+        "img-src 'self' data: https: blob:; "
+        "font-src 'self' https://cdn.jsdelivr.net;"
+    )
+    return response
 
 
 app.register_blueprint(postBlueprint)

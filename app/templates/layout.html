@@ -33,6 +33,10 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css"
         />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/markdown.css') }}"
+        />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="flaskBlog" />
@@ -70,16 +74,7 @@
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"
         ></script>
-        <link
-            href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-            rel="stylesheet"
-        />
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-        <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
-        <link
-            rel="stylesheet"
-            href="{{ url_for('static', filename='css/editor.css') }}"
-        />
+        
         <script src="{{ url_for('static', filename='js/timeStamp.js') }}"></script>
         <link
             rel="stylesheet"

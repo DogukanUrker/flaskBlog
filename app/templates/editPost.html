@@ -1,5 +1,6 @@
 {% extends 'layout.html' %} {% block head %}
 <title>{{translations.editPost.title}}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/markdownEditor.css') }}" />
 {% endblock head %} {% block body %}
 <div class="w-fit mx-auto mt-8">
     <form method="post" enctype="multipart/form-data">
@@ -94,7 +95,7 @@
             </select>
         </div>
 
-        <div>{{ form.postContent(id_="editor", autocomplete="off") }}</div>
+        <div>{{ form.postContent(id_="markdown-editor", autocomplete="off") }}</div>
 
         <button
             type="submit"
@@ -103,5 +104,6 @@
             {{translations.editPost.post}}
         </button>
     </form>
+    <script src="{{ url_for('static', filename='js/markdownEditor.js') }}"></script>
 </div>
 {% endblock body %}

@@ -30,6 +30,8 @@
 />
 <meta property="og:site_name" content="{{ appName }}" />
 
+
+
 {% endblock head %} {% block body %}
 <script>
     let visitorID = parseInt("{{ idForRandomVisitor | safe }}");
@@ -64,7 +66,9 @@
         {% endif %}
     </div>
 
-    <p>{{ content | safe }} <br /></p>
+    <div class="markdown-content">
+        {{ render_markdown(content) }}
+    </div>
 
     <div class="select-none">
         <div class="flex w-full justify-between my-1">
@@ -173,8 +177,8 @@
                 {% endif %}
             </div>
             <p class="break-words ml-8">
-                <i class="ti ti-corner-down-right mr-1 text-xl inline-block"></i
-                >{{ comment[2] }}
+                <i class="ti ti-corner-down-right mr-1 text-xl inline-block"></i>
+                {{ comment[2] | e }}
             </p>
         </div>
         {% endfor %}

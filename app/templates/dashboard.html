@@ -23,8 +23,8 @@
         >{{ post[1] }}</a
     >
 
-    <div tag="content" class="h-60 overflow-y-hidden mt-6 mb-3 break-words">
-        {{ post[3]|safe }}
+    <div tag="content" class="h-60 overflow-y-hidden mt-6 mb-3 break-words markdown-content compact">
+        {{ render_markdown(post[3]) }}
     </div>
 
     <section class="flex items-center justify-between my-2">
@@ -138,7 +138,7 @@
 <div
     class="w-11/12 md:w-10/12 lg:w-3/4 xl:w-1/2 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md border-gray-500/25"
 >
-    <div tag="content">{{ comment[2] }}</div>
+    <div tag="content">{{ comment[2] | e }}</div>
 
     <section class="flex items-center justify-between my-2">
         <div class="flex items-center">

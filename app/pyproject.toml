@@ -1,6 +1,7 @@
 [project]
 name = "flaskBlog"
 version = "3.0.0dev"
+authors = [{ name = "Doğukan Ürker", email = "dogukanurker@icloud.com" }]
 description = "Blog application built with Flask"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -12,4 +13,7 @@ dependencies = [
     "tamga>=1.2.0",
     "user-agents>=2.2.0",
     "wtforms>=3.2.1",
+    "markdown2",
+    "bleach",
+    "html2text",
 ]

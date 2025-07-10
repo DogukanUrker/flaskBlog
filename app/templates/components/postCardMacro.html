@@ -18,9 +18,10 @@
             class="link link-hover text-xl font-bold line-clamp-2 leading-tight"
             >{{ post[1] }}</a
         >
-        <div class="overflow-hidden flex-grow">
+
+        <div class="overflow-hidden flex-grow markdown-content compact">
             <span class="text-sm leading-relaxed line-clamp-4">
-                {{ post[3]|safe }}
+                {{ render_markdown(post[3][:200]) }}
             </span>
         </div>
 
