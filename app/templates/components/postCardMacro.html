@@ -19,7 +19,7 @@
     </div>
 
     <div class="text-base px-2 overflow-y-hidden h-[7.5rem]">
-        {{ post[3]|safe }}
+        {{ render_markdown(post[3][:200]) }}
     </div>
 
     <div class="flex justify-between text-sm font-medium px-2 select-none">

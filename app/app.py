@@ -103,6 +103,7 @@ from utils.contextProcessor.returnPostUrlID import returnPostUrlID
 from utils.contextProcessor.returnPostUrlSlug import returnPostUrlSlug
 from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture
 from utils.contextProcessor.translations import injectTranslations
+from utils.contextProcessor.markdown import markdown_processor
 from utils.dbChecker import (
     analyticsTable,
     commentsTable,
@@ -156,6 +157,7 @@ app.context_processor(returnUserProfilePicture)
 app.context_processor(returnPostUrlID)
 app.context_processor(returnPostUrlSlug)
 app.context_processor(injectTranslations)
+app.context_processor(markdown_processor)
 app.before_request(browserLanguage)
 app.jinja_env.globals.update(getSlugFromPostTitle=getSlugFromPostTitle)
 
@@ -243,7 +245,15 @@ def csrfError(e):
 
 @app.after_request
 def afterRequest(response):
-    return afterRequestLogger(response)
+    response = afterRequestLogger(response)
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com https://cdn.tailwindcss.com; "
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tailwindcss.com; "
+        "img-src 'self' data: https: blob:; "
+        "font-src 'self' https://cdn.jsdelivr.net;"
+    )
+    return response
 
 
 app.register_blueprint(postBlueprint)
