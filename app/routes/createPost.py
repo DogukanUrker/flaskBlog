@@ -60,7 +60,23 @@ def createPost():
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
-                    "insert into posts(title,tags,content,banner,author,views,timeStamp,lastEditTimeStamp,category,urlID,abstract) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    """
+                    INSERT INTO posts (
+                        title,
+                        tags,
+                        content,
+                        banner,
+                        author,
+                        views,
+                        timeStamp,
+                        lastEditTimeStamp,
+                        category,
+                        urlID,
+                        abstract
+                    ) VALUES (
+                        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    )
+                    """,
                     (
                         postTitle,
                         postTags,
