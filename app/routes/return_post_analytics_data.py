@@ -36,7 +36,7 @@ def return_post_traffic_graph_data() -> dict:
         - `410 Gone`: If analytics is disabled by the admin.
     """
 
-    post_id = request.args.get("post_id", type=int)
+    post_id = request.args.get("id", type=int)
 
     since_posted = str(request.args.get("sincePosted", default=False)).lower() == "true"
 
