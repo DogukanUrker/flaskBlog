@@ -6,7 +6,7 @@ from ..translations import (
 )
 
 
-def injectTranslations():
+def inject_translations():
     """
     Inject translations into the context of the application.
 

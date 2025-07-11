@@ -3,7 +3,7 @@ from settings import Settings
 from utils.log import Log
 
 
-def browserLanguage():
+def browser_language():
     """
     Set the user's language based on the browser's preferred language.
 
@@ -14,16 +14,16 @@ def browserLanguage():
         None
     """
     if "language" not in session:
-        browserLanguage = request.headers.get("Accept-Language")
-        if browserLanguage:
-            browserLanguage = browserLanguage.split(",")[0].split("-")[0]
-            if browserLanguage in Settings.LANGUAGES:
-                session["language"] = browserLanguage
-                Log.info(f"Browser language detected and set to: {browserLanguage}")
+        browser_language = request.headers.get("Accept-Language")
+        if browser_language:
+            browser_language = browser_language.split(",")[0].split("-")[0]
+            if browser_language in Settings.LANGUAGES:
+                session["language"] = browser_language
+                Log.info(f"Browser language detected and set to: {browser_language}")
             else:
                 session["language"] = "en"
                 Log.warning(
-                    f"Browser language '{browserLanguage}' not supported. Defaulting to English."
+                    f"Browser language '{browser_language}' not supported. Defaulting to English."
                 )
         else:
             session["language"] = "en"

@@ -8,21 +8,21 @@ from flask import (
     session,
 )
 from settings import Settings
-from utils.flashMessage import flashMessage
+from utils.flashMessage import flash_message
 from utils.forms.CreatePostForm import CreatePostForm
 from utils.log import Log
-from utils.time import currentTimeStamp
+from utils.time import current_time_stamp
 
-editPostBlueprint = Blueprint("editPost", __name__)
+edit_post_blueprint = Blueprint("editPost", __name__)
 
 
-@editPostBlueprint.route("/editpost/<urlID>", methods=["GET", "POST"])
-def editPost(urlID):
+@edit_post_blueprint.route("/editpost/<url_id>", methods=["GET", "POST"])
+def edit_post(url_id):
     """
     This function handles the edit post route.
 
     Args:
-        postID (string): the ID of the post to edit
+        url_id (string): the ID of the post to edit
 
     Returns:
         The rendered edit post template or a redirect to the homepage if the user is not authorized to edit the post
@@ -32,54 +32,54 @@ def editPost(urlID):
         abort(401): if the user is not authorized to edit the post
     """
 
-    if "userName" in session:
+    if "user_name" in session:
         Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
         connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
-        cursor.execute("select urlID from posts where urlID = ?", (urlID,))
+        cursor.execute("select url_id from posts where url_id = ?", (url_id,))
         posts = str(cursor.fetchall())
 
-        if str(urlID) in posts:
+        if str(url_id) in posts:
             Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
             connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
-                """select * from posts where urlID = ? """,
-                [(urlID)],
+                """select * from posts where url_id = ? """,
+                [(url_id)],
             )
             post = cursor.fetchone()
 
-            Log.success(f'POST: "{urlID}" FOUND')
+            Log.success(f'POST: "{url_id}" FOUND')
 
-            if post[5] == session["userName"] or session["userRole"] == "admin":
+            if post[5] == session["user_name"] or session["user_role"] == "admin":
                 form = CreatePostForm(request.form)
-                form.postTitle.data = post[1]
-                form.postTags.data = post[2]
-                form.postAbstract.data = post[11]
-                form.postContent.data = post[3]
-                form.postCategory.data = post[9]
+                form.post_title.data = post[1]
+                form.post_tags.data = post[2]
+                form.post_abstract.data = post[11]
+                form.post_content.data = post[3]
+                form.post_category.data = post[9]
 
                 if request.method == "POST":
-                    postTitle = request.form["postTitle"]
-                    postTags = request.form["postTags"]
-                    postContent = request.form["postContent"]
-                    postAbstract = request.form["postAbstract"]
-                    postCategory = request.form["postCategory"]
-                    postBanner = request.files["postBanner"].read()
+                    post_title = request.form["post_title"]
+                    post_tags = request.form["post_tags"]
+                    post_content = request.form["post_content"]
+                    post_abstract = request.form["post_abstract"]
+                    post_category = request.form["post_category"]
+                    post_banner = request.files["post_banner"].read()
 
-                    if postContent == "" or postAbstract == "":
-                        flashMessage(
+                    if post_content == "" or post_abstract == "":
+                        flash_message(
                             page="editPost",
                             message="empty",
                             category="error",
                             language=session["language"],
                         )
                         Log.error(
-                            f'User: "{session["userName"]}" tried to edit a post with empty content',
+                            f'User: "{session["user_name"]}" tried to edit a post with empty content',
                         )
                     else:
                         connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
@@ -87,37 +87,37 @@ def editPost(urlID):
                         cursor = connection.cursor()
                         cursor.execute(
                             """update posts set title = ? where id = ? """,
-                            (postTitle, post[0]),
+                            (post_title, post[0]),
                         )
                         cursor.execute(
                             """update posts set tags = ? where id = ? """,
-                            (postTags, post[0]),
+                            (post_tags, post[0]),
                         )
                         cursor.execute(
                             """update posts set content = ? where id = ? """,
-                            (postContent, post[0]),
+                            (post_content, post[0]),
                         )
                         cursor.execute(
                             """update posts set abstract = ? where id = ? """,
-                            (postAbstract, post[0]),
+                            (post_abstract, post[0]),
                         )
                         cursor.execute(
                             """update posts set category = ? where id = ? """,
-                            (postCategory, post[0]),
+                            (post_category, post[0]),
                         )
-                        if postBanner != b"":
+                        if post_banner != b"":
                             cursor.execute(
                                 """update posts set banner = ? where id = ? """,
-                                (postBanner, post[0]),
+                                (post_banner, post[0]),
                             )
                         cursor.execute(
-                            """update posts set lastEditTimeStamp = ? where id = ? """,
-                            [(currentTimeStamp()), (post[0])],
+                            """update posts set last_edit_time_stamp = ? where id = ? """,
+                            [(current_time_stamp()), (post[0])],
                         )
 
                         connection.commit()
-                        Log.success(f'Post: "{postTitle}" edited')
-                        flashMessage(
+                        Log.success(f'Post: "{post_title}" edited')
+                        flash_message(
                             page="editPost",
                             message="success",
                             category="success",
@@ -134,25 +134,25 @@ def editPost(urlID):
                     form=form,
                 )
             else:
-                flashMessage(
+                flash_message(
                     page="editPost",
                     message="author",
                     category="error",
                     language=session["language"],
                 )
                 Log.error(
-                    f'User: "{session["userName"]}" tried to edit another authors post',
+                    f'User: "{session["user_name"]}" tried to edit another authors post',
                 )
                 return redirect("/")
         else:
-            Log.error(f'Post: "{urlID}" not found')
+            Log.error(f'Post: "{url_id}" not found')
             return render_template("notFound.html")
     else:
         Log.error(f"{request.remote_addr} tried to edit post without login")
-        flashMessage(
+        flash_message(
             page="editPost",
             message="login",
             category="error",
             language=session["language"],
         )
-        return redirect(f"/login/redirect=&editpost&{urlID}")
+        return redirect(f"/login/redirect=&editpost&{url_id}")

@@ -1,4 +1,4 @@
-from utils.generateUrlIdFromPost import getSlugFromPostTitle
+from utils.generateUrlIdFromPost import get_slug_from_post_title
 
 
 def returnPostUrlSlug():
@@ -9,4 +9,4 @@ def returnPostUrlSlug():
         dict: A dictionary containing the post's urlSlug.
     """
 
-    return dict(getSlugFromPostTitle=getSlugFromPostTitle)
+    return dict(get_slug_from_post_title=get_slug_from_post_title)

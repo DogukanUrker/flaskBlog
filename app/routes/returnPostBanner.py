@@ -5,16 +5,16 @@ from flask import Blueprint, request, send_file
 from settings import Settings
 from utils.log import Log
 
-returnPostBannerBlueprint = Blueprint("returnPostBanner", __name__)
+return_post_banner_blueprint = Blueprint("returnPostBanner", __name__)
 
 
-@returnPostBannerBlueprint.route("/postImage/<int:postID>")
-def returnPostBanner(postID):
+@return_post_banner_blueprint.route("/postImage/<int:post_id>")
+def return_post_banner(post_id):
     """
     This function returns the banner image for a given post ID.
 
     Args:
-        postID (int): The ID of the post for which the banner image is requested.
+        post_id (int): The ID of the post for which the banner image is requested.
 
     Returns:
         The banner image for the given post ID as a Flask Response object.
@@ -29,11 +29,11 @@ def returnPostBanner(postID):
 
     cursor.execute(
         """select banner from posts where id = ? """,
-        [(postID)],
+        [(post_id)],
     )
 
     image = BytesIO(cursor.fetchone()[0])
 
-    Log.info(f"Post: {postID} | Image: {request.base_url} loaded")
+    Log.info(f"Post: {post_id} | Image: {request.base_url} loaded")
 
     return send_file(image, mimetype="image/png")

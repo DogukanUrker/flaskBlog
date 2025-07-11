@@ -9,20 +9,20 @@ from settings import Settings
 from utils.log import Log
 from utils.paginate import paginate_query
 
-adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
+admin_panel_comments_blueprint = Blueprint("adminPanelComments", __name__)
 
 
-@adminPanelCommentsBlueprint.route("/admin/comments", methods=["GET", "POST"])
-@adminPanelCommentsBlueprint.route("/adminpanel/comments", methods=["GET", "POST"])
-def adminPanelComments():
-    if "userName" in session:
-        Log.info(f"Admin: {session['userName']} reached to comments admin panel")
+@admin_panel_comments_blueprint.route("/admin/comments", methods=["GET", "POST"])
+@admin_panel_comments_blueprint.route("/adminpanel/comments", methods=["GET", "POST"])
+def admin_panel_comments():
+    if "user_name" in session:
+        Log.info(f"Admin: {session['user_name']} reached to comments admin panel")
         Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
         comments, page, total_pages = paginate_query(
             Settings.DB_COMMENTS_ROOT,
             "select count(*) from comments",
-            "select * from comments order by timeStamp desc",
+            "select * from comments order by time_stamp desc",
         )
 
         Log.info(f"Rendering adminPanelComments.html: params: comments={comments}")

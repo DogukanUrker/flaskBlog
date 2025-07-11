@@ -16,7 +16,7 @@ from os.path import exists
 from passlib.hash import sha512_crypt as encryption
 from settings import Settings
 from utils.log import Log
-from utils.time import currentTimeStamp
+from utils.time import current_time_stamp
 
 
 def dbFolder():
@@ -99,7 +99,7 @@ def usersTable():
                     Settings.DEFAULT_ADMIN_PROFILE_PICTURE,
                     "admin",
                     Settings.DEFAULT_ADMIN_POINT,
-                    currentTimeStamp(),
+                    current_time_stamp(),
                     "True",
                 ),
             )

@@ -26,12 +26,12 @@
             <a href="/searchbar"><i class="ti ti-search text-2xl"></i></a>
         </div>
 
-        {% if session["userName"] %}
-        <a href="/user/{{ session['userName'].lower() }}">
+        {% if session["user_name"] %}
+        <a href="/user/{{ session['user_name'].lower() }}">
             <div>
                 <img
                     class="block w-7 h-7"
-                    src="{{ getProfilePicture(session['userName']) }}"
+                                            src="{{ getProfilePicture(session['user_name']) }}"
                 />
             </div>
         </a>
@@ -50,25 +50,25 @@
             <i class="ti ti-logout text-2xl"></i>
         </a>
 
-        {% elif hideLogin %} {% if isRegistration %}
+        {% elif hideLogin %} {% if is_registration %}
         <a href="/signup">
             <button class="hover:text-rose-500 duration-150">
                 <i class="ti ti-user-plus text-2xl"></i>
             </button>
         </a>
-        {% endif %} {% elif hideSignUp %} {% if isLogin %}
+        {% endif %} {% elif hideSignUp %} {% if is_login %}
         <a href="/login/redirect=&">
             <button class="hover:text-rose-500 duration-150">
                 <i class="ti ti-login text-2xl"></i>
             </button>
         </a>
-        {% endif %} {% else %} {% if isLogin %}
+        {% endif %} {% else %} {% if is_login %}
         <a href="/login/redirect=&">
             <button class="hover:text-rose-500 duration-150">
                 <i class="ti ti-login text-2xl"></i>
             </button>
         </a>
-        {% endif %} {% if isRegistration %}
+        {% endif %} {% if is_registration %}
         <a href="/signup">
             <button class="hover:text-rose-500 duration-150">
                 <i class="ti ti-user-plus text-2xl"></i>

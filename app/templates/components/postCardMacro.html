@@ -4,7 +4,7 @@
 >
     <div class="overflow-hidden flex-shrink-0">
         <img
-            src="{{ url_for('returnPostBanner.returnPostBanner', postID=post[0]) }}"
+            src="{{ url_for('returnPostBanner.return_post_banner', post_id=post[0]) }}"
             class="h-48 w-full group-hover:scale-110 transition duration-150 object-cover rounded-t-md select-none"
         />
     </div>
@@ -14,7 +14,7 @@
         </h3>
 
         <a
-            href="{{ url_for('post.post', slug=getSlugFromPostTitle(post[1]), urlID=post[10]) }}"
+                            href="{{ url_for('post.post', slug=get_slug_from_post_title(post[1]), url_id=post[10]) }}"
             class="link link-hover text-xl font-bold line-clamp-2 leading-tight"
             >{{ post[1] }}</a
         >
