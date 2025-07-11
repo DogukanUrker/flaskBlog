@@ -15,7 +15,9 @@ from utils.log import Log
 change_profile_picture_blueprint = Blueprint("change_profile_picture", __name__)
 
 
-@change_profile_picture_blueprint.route("/change_profile_picture", methods=["GET", "POST"])
+@change_profile_picture_blueprint.route(
+    "/change_profile_picture", methods=["GET", "POST"]
+)
 def change_profile_picture():
     """
     This function is the route for the change profile picture page.

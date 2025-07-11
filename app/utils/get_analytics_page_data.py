@@ -6,7 +6,11 @@ from utils.log import Log
 
 
 def get_analytics_page_traffic_graph_data(
-    post_id: int, since_posted=False, weeks: float = 0, days: float = 0, hours: float = 0
+    post_id: int,
+    since_posted=False,
+    weeks: float = 0,
+    days: float = 0,
+    hours: float = 0,
 ) -> list[list[int]]:
     """
     Returns the post's visitors traffic data list inside list.
@@ -33,7 +37,9 @@ def get_analytics_page_traffic_graph_data(
     else:
         time_delta_args = {"weeks": weeks or 0, "days": days or 0, "hours": hours}
 
-        user_query_limit = int((datetime.now() - timedelta(**time_delta_args)).timestamp())
+        user_query_limit = int(
+            (datetime.now() - timedelta(**time_delta_args)).timestamp()
+        )
 
         sql_query = """select strftime('%Y-%m-%d %H:%M', time_stamp, 'unixepoch') as visit_time_stamp, count(*) as visit_count from posts_analytics where post_id = ? and time_stamp > ? GROUP BY visit_time_stamp ORDER BY visit_time_stamp ASC"""
         parameter = (post_id, user_query_limit)

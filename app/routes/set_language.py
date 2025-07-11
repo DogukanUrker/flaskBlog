@@ -1,4 +1,5 @@
-from flask import Blueprint, redirect, request, session
+from flask import Blueprint, redirect, session
+from settings import Settings
 from utils.flash_message import flash_message
 from utils.log import Log
 

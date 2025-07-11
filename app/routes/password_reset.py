@@ -16,7 +16,6 @@ from settings import Settings
 from utils.flash_message import flash_message
 from utils.forms.PasswordResetForm import PasswordResetForm
 from utils.log import Log
-from utils.time import current_time_stamp
 
 password_reset_blueprint = Blueprint("password_reset", __name__)
 
