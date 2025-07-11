@@ -31,7 +31,7 @@
     {% from "components/categoryContainer.html" import categoryContainer %} {{
     categoryContainer(translations, category="All") }} {% from
     "components/sortMenu.html" import sortMenu %} {{
-    sortMenu(sortName,source,translations) }}
+    sortMenu(sort_name,source,translations) }}
 </div>
 
 <div
@@ -39,7 +39,7 @@
 >
     {% for post in posts %}
         {% from "components/postCardMacro.html" import postCard with context %}
-        {{ postCard(post=post, authorProfilePicture=getProfilePicture(post[5])) }}
+        {{ postCard(post=post, author_profile_picture=get_profile_picture(post[5])) }}
     {% endfor %}
 </div>
 

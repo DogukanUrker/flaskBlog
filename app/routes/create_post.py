@@ -18,7 +18,7 @@ from utils.time import current_time_stamp
 create_post_blueprint = Blueprint("create_post", __name__)
 
 
-@create_post_blueprint.route("/createpost", methods=["GET", "POST"])
+@create_post_blueprint.route("/create_post", methods=["GET", "POST"])
 def create_post():
     """
     This function creates a new post for the user.
@@ -117,4 +117,4 @@ def create_post():
             category="error",
             language=session["language"],
         )
-        return redirect("/login/redirect=&createpost")
+        return redirect("/login/redirect=&create_post")

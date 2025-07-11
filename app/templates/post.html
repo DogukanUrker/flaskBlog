@@ -7,7 +7,7 @@
     property="og:image"
     content="{{
     blogPostUrl
-  }}{{ url_for('returnPostBanner.return_post_banner', post_id= id) }}"
+  }}{{ url_for('return_post_banner.return_post_banner', post_id= id) }}"
 />
 <meta name="keywords" content="{{ tags }}" />
 <meta name="author" content="{{ author }}" />
@@ -20,7 +20,7 @@
     name="twitter:image"
     content="{{
     blogPostUrl
-  }}{{ url_for('returnPostBanner.return_post_banner', post_id= id) }}"
+  }}{{ url_for('return_post_banner.return_post_banner', post_id= id) }}"
 />
 <meta property="og:site_name" content="{{ appName }}" />
 
@@ -33,7 +33,7 @@
     class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 mx-auto mt-6 md:mt-10 break-words"
 >
     <img
-        src="{{ url_for('returnPostBanner.return_post_banner', post_id= id) }}"
+        src="{{ url_for('return_post_banner.return_post_banner', post_id= id) }}"
         class="mx-auto rounded-md shadow-md select-none"
     />
 
@@ -100,7 +100,7 @@
                 <h5 class="m-1 flex">
                     <img
                         class="w-7 mr-2 select-none"
-                        src="{{ getProfilePicture(author) }}"
+                        src="{{ get_profile_picture(author) }}"
                         alt="{{ author }}"
                     />
                     {{ author }}
@@ -116,14 +116,14 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <button
                 type="submit"
-                name="postDeleteButton"
+                name="post_delete_button"
                 class="text-rose-500 hover:text-rose-500/75 duration-150"
             >
                 <i class="ti ti-trash-x mr-1 text-2xl"></i>
             </button>
         </form>
         <a
-                                    href="/editpost/{{ url_id }}"
+                                    href="/edit_post/{{ url_id }}"
             class="text-rose-500 hover:text-rose-500/75 duration-150"
         >
             <i class="ti ti-edit mr-1 text-2xl"></i>
@@ -142,7 +142,7 @@
                     >
                         <img
                             class="w-7 mr-2"
-                            src="{{ getProfilePicture(comment[3]) }}"
+                            src="{{ get_profile_picture(comment[3]) }}"
                             alt=""
                         />
                         <div>{{ comment[3] }}</div>

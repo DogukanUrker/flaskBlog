@@ -3,7 +3,7 @@
 <title>{{translations.dashboard.titleAdmin}}</title>
 {% else %}
 <title>{{translations.dashboard.title}}</title>
-{% endif %} {% endblock head %} {% block body %} {% if showPosts %}
+{% endif %} {% endblock head %} {% block body %} {% if show_posts %}
 <h1 class="my-4 text-4xl font-medium select-none text-center">
     {{translations.dashboard.posts}}
 </h1>
@@ -13,7 +13,7 @@
     class="w-11/12 md:w-10/12 lg:w-8/12 xl:w-5/12 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md border-gray-500/25"
 >
     <img
-        src="{{ url_for('returnPostBanner.return_post_banner', post_id= post[0]) }}"
+        src="{{ url_for('return_post_banner.return_post_banner', post_id= post[0]) }}"
         class="w-96 rounded mx-auto"
     />
 
@@ -28,18 +28,18 @@
     </div>
 
     <section class="flex items-center justify-between my-2">
-        <a
-            href="/editpost/{{ post[10] }}"
-            class="hover:text-rose-500 duration-150 font-medium"
-        >
-            <i class="ti ti-edit mr-1 text-2xl"></i>
-        </a>
+            <a
+        href="/edit_post/{{ post[10] }}"
+        class="hover:text-rose-500 duration-150 font-medium"
+    >
+        <i class="ti ti-edit mr-1 text-2xl"></i>
+    </a>
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-            <input type="hidden" name="postID" value="{{ post[0] }}" />
+            <input type="hidden" name="post_id" value="{{ post[0] }}" />
             <button
                 type="submit"
-                name="postDeleteButton"
+                name="post_delete_button"
                 class="hover:text-rose-500 duration-150 font-medium"
             >
                 <i class="ti ti-trash-x mr-1 text-2xl"></i>
@@ -122,16 +122,16 @@
 {% endfor %}
 {% from "components/pagination.html" import pagination %}
 {{ pagination(page, total_pages, request.path) }}
-{% elif not showPosts %} {% if request.path == "/admin/posts" %}
+{% elif not show_posts %} {% if request.path == "/admin/posts" %}
 <h1>{{translations.dashboard.noPosts}}</h1>
 {% else %}
 <p class="text-center mt-32 select-none">
     {{translations.dashboard.noPost}}
-    <a href="/createpost" class="hover:text-rose-500 duration-150 font-medium"
+    <a href="/create_post" class="hover:text-rose-500 duration-150 font-medium"
         >{{translations.dashboard.create}}</a
     >?
 </p>
-{% endif %} {% endif %} {% if showComments and not request.path ==
+{% endif %} {% endif %} {% if show_comments and not request.path ==
 "/admin/posts" %}
 <h1 class="my-4 text-4xl font-medium select-none text-center">
     {{translations.dashboard.comments}}

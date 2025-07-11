@@ -13,10 +13,10 @@ from utils.forms.CreatePostForm import CreatePostForm
 from utils.log import Log
 from utils.time import current_time_stamp
 
-edit_post_blueprint = Blueprint("editPost", __name__)
+edit_post_blueprint = Blueprint("edit_post", __name__)
 
 
-@edit_post_blueprint.route("/editpost/<url_id>", methods=["GET", "POST"])
+@edit_post_blueprint.route("/edit_post/<url_id>", methods=["GET", "POST"])
 def edit_post(url_id):
     """
     This function handles the edit post route.
@@ -155,4 +155,4 @@ def edit_post(url_id):
             category="error",
             language=session["language"],
         )
-        return redirect(f"/login/redirect=&editpost&{url_id}")
+        return redirect(f"/login/redirect=&edit_post&{url_id}")

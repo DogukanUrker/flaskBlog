@@ -23,7 +23,7 @@
 
     <div class="flex items-center justify-center gap-4 font-medium select-none">
         <div class="block md:hidden">
-            <a href="/searchbar"><i class="ti ti-search text-2xl"></i></a>
+            <a href="/search_bar"><i class="ti ti-search text-2xl"></i></a>
         </div>
 
         {% if session["user_name"] %}
@@ -31,12 +31,12 @@
             <div>
                 <img
                     class="block w-7 h-7"
-                                            src="{{ getProfilePicture(session['user_name']) }}"
+                                            src="{{ get_profile_picture(session['user_name']) }}"
                 />
             </div>
         </a>
 
-        <a href="/createpost" class="text-center">
+        <a href="/create_post" class="text-center">
             <button class="hover:text-rose-500 duration-150">
                 <i class="ti ti-pencil-plus text-2xl"></i>
             </button>

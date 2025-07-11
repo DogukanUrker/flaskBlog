@@ -18,14 +18,14 @@ from utils.forms.PasswordResetForm import PasswordResetForm
 from utils.log import Log
 from utils.time import current_time_stamp
 
-password_reset_blueprint = Blueprint("passwordReset", __name__)
+password_reset_blueprint = Blueprint("password_reset", __name__)
 
 
 password_reset_codes_storage = {}
 
 
 @password_reset_blueprint.route(
-    "/passwordreset/codesent=<code_sent>", methods=["GET", "POST"]
+    "/password_reset/codesent=<code_sent>", methods=["GET", "POST"]
 )
 def password_reset(code_sent):
     """
@@ -166,7 +166,7 @@ def password_reset(code_sent):
                     category="success",
                     language=session["language"],
                 )
-                return redirect("/passwordreset/codesent=true")
+                return redirect("/password_reset/codesent=true")
             else:
                 Log.error(f'User: "{user_name}" with email: "{email}" not found')
                 flash_message(

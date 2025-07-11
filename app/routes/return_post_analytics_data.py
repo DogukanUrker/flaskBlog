@@ -34,7 +34,7 @@ def return_post_traffic_graph_data() -> dict:
         - `410 Gone`: If analytics is disabled by the admin.
     """
 
-    post_id = request.args.get("postID", type=int)
+    post_id = request.args.get("post_id", type=int)
 
     since_posted = str(request.args.get("sincePosted", default=False)).lower() == "true"
 
@@ -62,8 +62,8 @@ def return_post_traffic_graph_data() -> dict:
             else:
                 return make_response(
                     {
-                        "message": "Missing postID; unable to retrieve data.",
-                        "error": "postID (type: int) is required.",
+                        "message": "Missing post_id; unable to retrieve data.",
+                        "error": "post_id (type: int) is required.",
                     },
                     404,
                 )
@@ -98,7 +98,7 @@ def return_post_country_graph_data() -> dict:
         `410 Gone`: If analytics is disabled by the admin.
     """
 
-    post_id = request.args.get("postID", type=int)
+    post_id = request.args.get("post_id", type=int)
 
     view_all = str(request.args.get("viewAll", default=False)).lower() == "true"
 
@@ -116,8 +116,8 @@ def return_post_country_graph_data() -> dict:
             else:
                 return make_response(
                     {
-                        "message": "Missing postID; unable to retrieve data.",
-                        "error": "postID (type: int) is required.",
+                        "message": "Missing post_id; unable to retrieve data.",
+                        "error": "post_id (type: int) is required.",
                     },
                     404,
                 )
