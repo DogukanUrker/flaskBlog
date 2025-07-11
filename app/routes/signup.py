@@ -12,10 +12,10 @@ from flask import (
     session,
 )
 from passlib.hash import sha512_crypt as encryption
-from requests import post as requestsPost
+from requests import post as requests_post
 from settings import Settings
-from utils.addPoints import add_points
-from utils.flashMessage import flash_message
+from utils.add_points import add_points
+from utils.flash_message import flash_message
 from utils.forms.SignUpForm import SignUpForm
 from utils.log import Log
 from utils.time import current_time_stamp
@@ -68,7 +68,7 @@ def signup():
 
                             if Settings.RECAPTCHA:
                                 secret_response = request.form["g-recaptcha-response"]
-                                verify_response = requestsPost(
+                                verify_response = requests_post(
                                     url=f"{Settings.RECAPTCHA_VERIFY_URL}?secret={Settings.RECAPTCHA_SECRET_KEY}&response={secret_response}"
                                 ).json()
                                 if not (
@@ -162,7 +162,7 @@ def signup():
                             server.send_message(mail)
                             server.quit()
 
-                            return redirect("/verifyUser/codesent=false")
+                            return redirect("/verify_user/codesent=false")
                         else:
                             Log.error(
                                 f'Username: "{user_name}" do not fits to ascii characters',
@@ -200,6 +200,7 @@ def signup():
                         category="error",
                         language=session["language"],
                     )
+
                 if user_name in users and email not in mails:
                     Log.error(f'This username "{user_name}" is unavailable')
 
@@ -213,8 +214,8 @@ def signup():
             return render_template(
                 "signup.html",
                 form=form,
-                hideSignUp=True,
-                siteKey=Settings.RECAPTCHA_SITE_KEY,
+                hide_sign_up=True,
+                site_key=Settings.RECAPTCHA_SITE_KEY,
                 recaptcha=Settings.RECAPTCHA,
             )
     else:

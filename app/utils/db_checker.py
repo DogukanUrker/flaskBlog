@@ -19,7 +19,7 @@ from utils.log import Log
 from utils.time import current_time_stamp
 
 
-def dbFolder():
+def db_folder():
     """
     Checks if the database folder exists, and create it if it does not.
 
@@ -37,7 +37,7 @@ def dbFolder():
         Log.success(f'Database folder: "/{Settings.DB_FOLDER_ROOT}" created')
 
 
-def usersTable():
+def users_table():
     """
     Checks if the users' table exists in the database, and create it if it does not.
     Checks if default admin is true create an admin user with custom admin account settings if it is.
@@ -60,7 +60,7 @@ def usersTable():
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     try:
-        cursor.execute("""select userID from users; """).fetchall()
+        cursor.execute("""select user_id from users; """).fetchall()
 
         Log.info(f'Table: "users" found in "{Settings.DB_USERS_ROOT}"')
 
@@ -68,28 +68,28 @@ def usersTable():
     except Exception:
         Log.error(f'Table: "users" not found in "{Settings.DB_USERS_ROOT}"')
 
-        usersTable = """
+        users_table_schema = """
         create table if not exists Users(
-            "userID"    integer not null unique,
-            "userName"  text unique,
+            "user_id"    integer not null unique,
+            "user_name"  text unique,
             "email" text unique,
             "password"  text,
-            "profilePicture" text,
+            "profile_picture" text,
             "role"  text,
             "points"    integer,
-            "timeStamp" integer,
-            "isVerified"    text,
-            primary key("userID" autoincrement)
+            "time_stamp" integer,
+            "is_verified"    text,
+            primary key("user_id" autoincrement)
         );"""
 
-        cursor.execute(usersTable)
+        cursor.execute(users_table_schema)
 
         if Settings.DEFAULT_ADMIN:
             password = encryption.hash(Settings.DEFAULT_ADMIN_PASSWORD)
 
             cursor.execute(
                 """
-                insert into Users(userName,email,password,profilePicture,role,points,timeStamp,isVerified) \
+                insert into Users(user_name,email,password,profile_picture,role,points,time_stamp,is_verified) \
                 values(?,?,?,?,?,?,?,?)
                 """,
                 (
@@ -117,7 +117,7 @@ def usersTable():
         Log.success(f'Table: "users" created in "{Settings.DB_USERS_ROOT}"')
 
 
-def postsTable():
+def posts_table():
     """
     Checks if the posts table exists in the database, and creates it if it does not.
 
@@ -147,24 +147,24 @@ def postsTable():
     except Exception:
         Log.error(f'Table: "posts" not found in "{Settings.DB_POSTS_ROOT}"')
 
-        postsTable = """
+        posts_table_schema = """
         CREATE TABLE "posts" (
             "id"    integer not null unique,
             "title" text not null,
             "tags"  text not null,
             "content"   text not null,
             "banner"    BLOB not null,
-            "author"    text not null,
+            "user_name"    text not null,
             "views" integer,
-            "timeStamp" integer,
-            "lastEditTimeStamp" integer,
+            "time_stamp" integer,
+            "last_edit_time_stamp" integer,
             "category"  text not null,
-            "urlID" TEXT NOT NULL,
+            "url_id" TEXT NOT NULL,
             "abstract" text not null default "",
             primary key("id" autoincrement)
         );"""
 
-        cursor.execute(postsTable)
+        cursor.execute(posts_table_schema)
 
         connection.commit()
 
@@ -173,7 +173,7 @@ def postsTable():
         Log.success(f'Table: "posts" created in "{Settings.DB_POSTS_ROOT}"')
 
 
-def commentsTable():
+def comments_table():
     """
     Checks if the comments table exists in the database, and creates it if it does not.
 
@@ -203,17 +203,17 @@ def commentsTable():
     except Exception:
         Log.error(f'Table: "comments" not found in "{Settings.DB_COMMENTS_ROOT}"')
 
-        commentsTable = """
+        comments_table_schema = """
         create table if not exists comments(
             "id"    integer not null,
-            "post"  integer,
+            "post_id"  integer,
             "comment"   text,
-            "user"  text,
-            "timeStamp" integer,
+            "user_name"  text,
+            "time_stamp" integer,
             primary key("id" autoincrement)
         );"""
 
-        cursor.execute(commentsTable)
+        cursor.execute(comments_table_schema)
 
         connection.commit()
 
@@ -222,7 +222,7 @@ def commentsTable():
         Log.success(f'Table: "comments" created in "{Settings.DB_COMMENTS_ROOT}"')
 
 
-def analyticsTable():
+def analytics_table():
     """
     Checks if the analytics table exists in the database, and creates it if it does not.
 
@@ -244,35 +244,35 @@ def analyticsTable():
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     try:
-        cursor.execute("""select id from postsAnalytics; """).fetchall()
+        cursor.execute("""select id from posts_analytics; """).fetchall()
 
-        Log.info(f'Table: "postsAnalytics" found in "{Settings.DB_ANALYTICS_ROOT}"')
+        Log.info(f'Table: "posts_analytics" found in "{Settings.DB_ANALYTICS_ROOT}"')
 
         connection.close()
     except Exception:
         Log.error(
-            f'Table: "postsAnalytics" not found in "{Settings.DB_ANALYTICS_ROOT}"'
+            f'Table: "posts_analytics" not found in "{Settings.DB_ANALYTICS_ROOT}"'
         )
 
-        analyticsTable = """
-        create table if not exists postsAnalytics(
+        analytics_table_schema = """
+        create table if not exists posts_analytics(
             "id"    integer not null,
-            "postID"  integer,
-            "visitorUserName"  text,
+            "post_id"  integer,
+            "visitor_user_name"  text,
             "country" text,
             "os" text,
             "continent" text,
-            "timeSpendDuration" int default 0,
-            "timeStamp" integer,
+            "time_spend_duration" int default 0,
+            "time_stamp" integer,
             primary key("id" autoincrement)
         );"""
 
-        cursor.execute(analyticsTable)
+        cursor.execute(analytics_table_schema)
 
         connection.commit()
 
         connection.close()
 
         Log.success(
-            f'Table: "postsAnalytics" created in "{Settings.DB_ANALYTICS_ROOT}"'
+            f'Table: "posts_analytics" created in "{Settings.DB_ANALYTICS_ROOT}"'
         )

@@ -15,7 +15,7 @@ class ChangePasswordForm(Form):
     """
 
     old_password = PasswordField(
-        "oldPassword",
+        "old_password",
         [
             validators.Length(min=8),
             validators.InputRequired(),
@@ -31,7 +31,7 @@ class ChangePasswordForm(Form):
     )
 
     password_confirm = PasswordField(
-        "passwordConfirm",
+        "password_confirm",
         [
             validators.Length(min=8),
             validators.InputRequired(),

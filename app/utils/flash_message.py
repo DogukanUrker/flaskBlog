@@ -4,13 +4,13 @@ from os.path import exists
 from flask import flash
 
 
-def flash_message(page="error", message="wrongCall", category="error", language="en"):
+def flash_message(page="error", message="wrong_call", category="error", language="en"):
     """
     Displays a flash message on the page.
 
     Args:
         page (str, optional): The page where the flash message will be displayed. Defaults to "error".
-        message (str, optional): The specific message to be displayed. Defaults to "wrongCall".
+        message (str, optional): The specific message to be displayed. Defaults to "wrong_call".
         category (str, optional): The category of the flash message. Defaults to "error".
         language (str, optional): The language used for translation. Defaults to "en".
 

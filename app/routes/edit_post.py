@@ -8,7 +8,7 @@ from flask import (
     session,
 )
 from settings import Settings
-from utils.flashMessage import flash_message
+from utils.flash_message import flash_message
 from utils.forms.CreatePostForm import CreatePostForm
 from utils.log import Log
 from utils.time import current_time_stamp
