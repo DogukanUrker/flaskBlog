@@ -9,11 +9,11 @@
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-        {{ form.postTitle(class_="input input-bordered w-full my-2",
+        {{ form.post_title(class_="input input-bordered w-full my-2",
         autocomplete="off",placeholder=translations.editPost.titlePlaceholder)
-        }} {{ form.postTags(class_="input input-bordered w-full my-2",
+        }} {{ form.post_tags(class_="input input-bordered w-full my-2",
         autocomplete="off",placeholder=translations.editPost.tags) }} {{
-        form.postAbstract(class_="textarea textarea-bordered w-full my-2",
+        form.post_abstract(class_="textarea textarea-bordered w-full my-2",
         autocomplete="off",placeholder=translations.editPost.abstractPlaceholder)
         }}
         <p class="text-xs text-center w-fit mx-auto mb-2">
@@ -23,11 +23,11 @@
         <div class="w-fit mx-auto text-center my-4">
             <p class="mb-2">{{translations.editPost.current}}</p>
             <img
-                src="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+                src="{{ url_for('return_post_banner.return_post_banner', post_id= id) }}"
                 class="h-48 w-64 group-hover:scale-110 transition duration-150 object-cover rounded-md mx-auto select-none"
             />
             <p class="mt-2">{{translations.editPost.new}}</p>
-            {{ form.postBanner(class_="file-input file-input-bordered w-full",
+            {{ form.post_banner(class_="file-input file-input-bordered w-full",
             placeholder=translations.editPost.bannerPlaceholder) }}
         </div>
 
@@ -37,8 +37,8 @@
             >
             <select
                 class="select select-bordered w-72"
-                id="postCategory"
-                name="postCategory"
+                id="post_category"
+                name="post_category"
                 required=""
             >
                 <option value="Apps">{{translations.categories.apps}}</option>
@@ -100,7 +100,7 @@
         </div>
 
         <div>
-            {{ form.postContent(class_="textarea textarea-bordered w-full h-96",
+            {{ form.post_content(class_="textarea textarea-bordered w-full h-96",
             id_="markdown-editor", autocomplete="off") }}
         </div>
 

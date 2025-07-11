@@ -4,7 +4,7 @@
 <div class="text-center mt-32">
     <form method="post" class="mx-auto w-fit mt-8">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        {{ form.newUserName(class_="input input-bordered w-full my-2", placeholder=translations.changeUserName.placeholder)
+        {{ form.new_user_name(class_="input input-bordered w-full my-2", placeholder=translations.changeUserName.placeholder)
         }}
         <button
             type="submit"

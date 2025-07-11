@@ -13,7 +13,7 @@
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {{
-            form.newProfilePictureSeed(class_="input input-bordered w-full my-2", placeholder=translations.changeProfilePicture.placeholder)
+            form.new_profile_picture_seed(class_="input input-bordered w-full my-2", placeholder=translations.changeProfilePicture.placeholder)
             }}
             <button
                 type="submit"

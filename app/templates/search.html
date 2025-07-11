@@ -33,7 +33,7 @@
         >
             {% for post in posts %}
                 {% for post_data in post %}
-                    {{ postCard(post=post_data, authorProfilePicture=getProfilePicture(post_data[5])) }}
+                    {{ postCard(post=post_data, author_profile_picture=get_profile_picture(post_data[5])) }}
                 {% endfor %}
             {% endfor %}
         </div>

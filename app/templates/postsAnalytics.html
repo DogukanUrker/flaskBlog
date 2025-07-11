@@ -22,7 +22,7 @@
                     <h5 class="m-1 flex">
                         <img
                             class="w-7 mr-2 select-none"
-                            src="{{ getProfilePicture( post[5]) }}"
+                            src="{{ get_profile_picture(post[5]) }}"
                             alt="{{ post[5] }}"
                         />
                         {{ post[5] }}
@@ -240,7 +240,7 @@
     <div id="pieChart" class="flex justify-center"></div>
 
     <script>
-        let postID = "{{ post[0] }}";
+        let post_id= "{{ post[0] }}";
         let visitorCounts = "{{ translations.analytics.visitorCounts }}";
         let traffic = "{{ translations.analytics.traffic }}";
         let visitor = "{{ translations.analytics.visitor }}";
@@ -284,6 +284,6 @@
     </div>
 </div>
 
-<script src="{{ url_for('static', filename='js/postsAnalytics.js') }}"></script>
+<script src="{{ url_for('static', filename='js/posts_analytics.js') }}"></script>
 
 {% endblock body %}
