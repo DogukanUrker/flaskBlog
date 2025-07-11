@@ -8,7 +8,7 @@ A modern blog application built with Flask, featuring a clean UI and powerful ad
 ## ✨ Features
 
 - **User System** - Registration, login, profiles with custom avatars
-- **Rich Editor** - Summer Note editor for creating beautiful posts
+- **Rich Editor** - [Milkdown](https://milkdown.dev/) editor for creating beautiful posts
 - **Admin Panel** - Full control over users, posts, and comments
 - **Dark/Light Themes** - Automatic theme switching
 - **Categories** - Organize posts by topics
