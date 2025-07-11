@@ -5,20 +5,19 @@
     href="{{ url_for('static', filename='css/flash.css') }}"
 />
 
-<div
-    id="flashContainer"
-    class="fixed w-fit text-center md:text-xl select-none z-50 shadow-md"
->
+<div id="flashContainer" class="fixed text-center select-none z-50">
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    "success" %}
-    <p id="flash" class="text-green-500 bg-green-200 rounded p-2 font-medium">
-        {{ message }}
-    </p>
-    {% else %}
-    <p id="flash" class="text-red-500 bg-red-200 rounded p-2 font-medium">
-        {{ message }}
-    </p>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    messages %} {% for category, message in messages %}
+    <div
+        role="alert"
+        class="alert shadow-md {% if category == 'success' %}alert-success{% else %}alert-error{% endif %} alert-soft"
+    >
+        {% if category == 'success' %}<i
+            class="ti ti-circle-check-filled text-xl"
+        ></i
+        >{% else %} <i class="ti ti-circle-x-filled text-xl"></i>{% endif %}
+        <span>{{ message }}</span>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
 </div>
 {% endmacro %}

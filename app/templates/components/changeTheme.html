@@ -1,46 +1,262 @@
 <div class="absolute right-2 top-2">
     <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-            <svg class="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12.5,8L16,12L12.5,16L11,14.5L12.5,13H9V11H12.5L11,9.5L12.5,8Z"/>
-            </svg>
-        </div>
-        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow max-h-96 overflow-y-auto">
-            <li><a href="{{ url_for('setTheme.setTheme', theme='light') }}">☀️ Light</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='dark') }}">🌙 Dark</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='cupcake') }}">🧁 Cupcake</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='bumblebee') }}">🐝 Bumblebee</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='emerald') }}">💚 Emerald</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='corporate') }}">🏢 Corporate</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='synthwave') }}">🌊 Synthwave</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='retro') }}">📺 Retro</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='cyberpunk') }}">🤖 Cyberpunk</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='valentine') }}">💝 Valentine</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='halloween') }}">🎃 Halloween</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='garden') }}">🌻 Garden</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='forest') }}">🌲 Forest</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='aqua') }}">💧 Aqua</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='lofi') }}">🎵 Lo-fi</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='pastel') }}">🎨 Pastel</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='fantasy') }}">🦄 Fantasy</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='wireframe') }}">📐 Wireframe</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='black') }}">⚫ Black</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='luxury') }}">💎 Luxury</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='dracula') }}">🧛 Dracula</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='cmyk') }}">🖨️ CMYK</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='autumn') }}">🍂 Autumn</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='business') }}">💼 Business</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='acid') }}">🟢 Acid</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='lemonade') }}">🍋 Lemonade</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='night') }}">🌃 Night</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='coffee') }}">☕ Coffee</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='winter') }}">❄️ Winter</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='dim') }}">🔅 Dim</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='nord') }}">🗻 Nord</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='sunset') }}">🌅 Sunset</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='caramellatte') }}">🍯 Caramel Latte</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='abyss') }}">🖤 Abyss</a></li>
-            <li><a href="{{ url_for('setTheme.setTheme', theme='silk') }}">🎀 Silk</a></li>
+        <button
+            tabindex="0"
+            class="btn btn-ghost btn-circle"
+            aria-label="Change theme"
+        >
+            <i class="ti ti-palette"></i>
+        </button>
+        <ul
+            tabindex="0"
+            class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow max-h-96 overflow-y-auto"
+            role="menu"
+        >
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='light') }}"
+                    role="menuitem"
+                    >☀️ Light</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='dark') }}"
+                    role="menuitem"
+                    >🌙 Dark</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='cupcake') }}"
+                    role="menuitem"
+                    >🧁 Cupcake</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='bumblebee') }}"
+                    role="menuitem"
+                    >🐝 Bumblebee</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='emerald') }}"
+                    role="menuitem"
+                    >💚 Emerald</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='corporate') }}"
+                    role="menuitem"
+                    >🏢 Corporate</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='synthwave') }}"
+                    role="menuitem"
+                    >🌊 Synthwave</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='retro') }}"
+                    role="menuitem"
+                    >📺 Retro</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='cyberpunk') }}"
+                    role="menuitem"
+                    >🤖 Cyberpunk</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='valentine') }}"
+                    role="menuitem"
+                    >💝 Valentine</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='halloween') }}"
+                    role="menuitem"
+                    >🎃 Halloween</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='garden') }}"
+                    role="menuitem"
+                    >🌻 Garden</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='forest') }}"
+                    role="menuitem"
+                    >🌲 Forest</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='aqua') }}"
+                    role="menuitem"
+                    >💧 Aqua</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='lofi') }}"
+                    role="menuitem"
+                    >🎵 Lo-fi</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='pastel') }}"
+                    role="menuitem"
+                    >🎨 Pastel</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='fantasy') }}"
+                    role="menuitem"
+                    >🦄 Fantasy</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='wireframe') }}"
+                    role="menuitem"
+                    >📐 Wireframe</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='black') }}"
+                    role="menuitem"
+                    >⚫ Black</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='luxury') }}"
+                    role="menuitem"
+                    >💎 Luxury</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='dracula') }}"
+                    role="menuitem"
+                    >🧛 Dracula</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='cmyk') }}"
+                    role="menuitem"
+                    >🖨️ CMYK</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='autumn') }}"
+                    role="menuitem"
+                    >🍂 Autumn</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='business') }}"
+                    role="menuitem"
+                    >💼 Business</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='acid') }}"
+                    role="menuitem"
+                    >🟢 Acid</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='lemonade') }}"
+                    role="menuitem"
+                    >🍋 Lemonade</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='night') }}"
+                    role="menuitem"
+                    >🌃 Night</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='coffee') }}"
+                    role="menuitem"
+                    >☕ Coffee</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='winter') }}"
+                    role="menuitem"
+                    >❄️ Winter</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='dim') }}"
+                    role="menuitem"
+                    >🔅 Dim</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='nord') }}"
+                    role="menuitem"
+                    >🗻 Nord</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='sunset') }}"
+                    role="menuitem"
+                    >🌅 Sunset</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='caramellatte') }}"
+                    role="menuitem"
+                    >🍯 Caramel Latte</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='abyss') }}"
+                    role="menuitem"
+                    >🖤 Abyss</a
+                >
+            </li>
+            <li>
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='silk') }}"
+                    role="menuitem"
+                    >🎀 Silk</a
+                >
+            </li>
         </ul>
     </div>
 </div>
