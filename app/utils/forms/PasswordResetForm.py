@@ -40,7 +40,7 @@ class PasswordResetForm(Form):
     )
 
     password_confirm = PasswordField(
-        "passwordConfirm",
+        "password_confirm",
         [
             validators.Length(min=8),
             validators.InputRequired(),

@@ -6,9 +6,9 @@ import sqlite3
 
 from flask import Blueprint, render_template, request, session
 from settings import Settings
-from utils.getAnalyticsPageData import (
-    getAnalyticsPageOSGraphData,
-    getAnalyticsPageTrafficGraphData,
+from utils.get_analytics_page_data import (
+    get_analytics_page_os_graph_data,
+    get_analytics_page_traffic_graph_data,
 )
 from utils.log import Log
 
@@ -49,14 +49,14 @@ def analytics_post(url_id):
                 )
                 post = cursor.fetchone()
 
-                todays_visitor_data = getAnalyticsPageTrafficGraphData(
-                    postID=post[0], hours=24
+                todays_visitor_data = get_analytics_page_traffic_graph_data(
+                    post_id=post[0], hours=24
                 )
                 todays_visitor = 0
                 for views in todays_visitor_data:
                     todays_visitor += int(views[1])
 
-                os_graph_data = getAnalyticsPageOSGraphData(post[0])
+                os_graph_data = get_analytics_page_os_graph_data(post[0])
 
                 return render_template(
                     "postsAnalytics.html",

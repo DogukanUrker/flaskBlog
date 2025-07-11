@@ -2,13 +2,13 @@ import sqlite3
 
 from flask import Blueprint, make_response, request, session
 from settings import Settings
-from utils.getAnalyticsPageData import (
-    getAnalyticsPageCountryGraphData,
-    getAnalyticsPageTrafficGraphData,
+from utils.get_analytics_page_data import (
+    get_analytics_page_country_graph_data,
+    get_analytics_page_traffic_graph_data,
 )
 from utils.log import Log
 
-return_post_analytics_data_blueprint = Blueprint("returnPostTrafficGraphData", __name__)
+return_post_analytics_data_blueprint = Blueprint("return_post_traffic_graph_data", __name__)
 
 
 @return_post_analytics_data_blueprint.route("/api/v1/postTrafficGraphData")
@@ -49,9 +49,9 @@ def return_post_traffic_graph_data() -> dict:
             if post_id:
                 return make_response(
                     {
-                        "payload": getAnalyticsPageTrafficGraphData(
-                            postID=post_id,
-                            sincePosted=since_posted,
+                        "payload": get_analytics_page_traffic_graph_data(
+                            post_id=post_id,
+                            since_posted=since_posted,
                             weeks=weeks,
                             days=days,
                             hours=hours,
@@ -107,8 +107,8 @@ def return_post_country_graph_data() -> dict:
             if post_id:
                 return make_response(
                     {
-                        "payload": getAnalyticsPageCountryGraphData(
-                            postID=post_id, viewAll=view_all
+                        "payload": get_analytics_page_country_graph_data(
+                            post_id=post_id, view_all=view_all
                         )
                     },
                     200,
@@ -138,7 +138,7 @@ def store_time_spends_duration() -> dict:
     """
     This function stores the time spent by a visitor on a post.
 
-    This API updates the `timeSpendDuration` field in the `postsAnalytics` table
+    This API updates the `time_spend_duration` field in the `posts_analytics` table
     for a given visitor.
 
     Request Data (JSON):
@@ -163,7 +163,7 @@ def store_time_spends_duration() -> dict:
                 cursor = connection.cursor()
 
                 cursor.execute(
-                    """update postsAnalytics set timeSpendDuration = ? where id = ? """,
+                    """update posts_analytics set time_spend_duration = ? where id = ? """,
                     (spend_time, visitor_id),
                 )
                 connection.commit()

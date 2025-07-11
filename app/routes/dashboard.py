@@ -10,8 +10,8 @@ from flask import (
     url_for,
 )
 from settings import Settings
-from utils.delete import Delete
-from utils.flashMessage import flash_message
+from utils.delete import delete_post
+from utils.flash_message import flash_message
 from utils.log import Log
 from utils.paginate import paginate_query
 
@@ -24,7 +24,7 @@ def dashboard(user_name):
         if session["user_name"].lower() == user_name.lower():
             if request.method == "POST":
                 if "postDeleteButton" in request.form:
-                    Delete.post(request.form["postID"])
+                    delete_post(request.form["postID"])
 
                     return (
                         redirect(url_for("dashboard.dashboard", user_name=user_name)),

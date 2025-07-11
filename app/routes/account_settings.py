@@ -2,7 +2,7 @@ import sqlite3
 
 from flask import Blueprint, redirect, render_template, request, session
 from settings import Settings
-from utils.delete import Delete
+from utils.delete import delete_user
 from utils.log import Log
 
 account_settings_blueprint = Blueprint("account_settings", __name__)
@@ -23,7 +23,7 @@ def account_settings():
         user = cursor.fetchall()
 
         if request.method == "POST":
-            Delete.user(user[0][0])
+            delete_user(user[0][0])
             return redirect("/")
 
         return render_template(

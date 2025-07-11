@@ -9,11 +9,11 @@ from flask import (
 )
 from passlib.hash import sha512_crypt as encryption
 from settings import Settings
-from utils.flashMessage import flash_message
+from utils.flash_message import flash_message
 from utils.forms.ChangePasswordForm import ChangePasswordForm
 from utils.log import Log
 
-change_password_blueprint = Blueprint("changePassword", __name__)
+change_password_blueprint = Blueprint("change_password", __name__)
 
 
 @change_password_blueprint.route("/changepassword", methods=["GET", "POST"])
@@ -50,7 +50,7 @@ def change_password():
             if encryption.verify(old_password, cursor.fetchone()[0]):
                 if old_password == password:
                     flash_message(
-                        page="changePassword",
+                        page="change_password",
                         message="same",
                         category="error",
                         language=session["language"],
@@ -58,7 +58,7 @@ def change_password():
 
                 if password != password_confirm:
                     flash_message(
-                        page="changePassword",
+                        page="change_password",
                         message="match",
                         category="error",
                         language=session["language"],
@@ -84,7 +84,7 @@ def change_password():
 
                     session.clear()
                     flash_message(
-                        page="changePassword",
+                        page="change_password",
                         message="success",
                         category="success",
                         language=session["language"],
@@ -93,7 +93,7 @@ def change_password():
                     return redirect("/login/redirect=&")
             else:
                 flash_message(
-                    page="changePassword",
+                    page="change_password",
                     message="old",
                     category="error",
                     language=session["language"],
@@ -108,7 +108,7 @@ def change_password():
             f"{request.remote_addr} tried to change his password without logging in"
         )
         flash_message(
-            page="changePassword",
+            page="change_password",
             message="login",
             category="error",
             language=session["language"],

@@ -12,43 +12,43 @@ from flask_wtf.csrf import (
 from routes.about import (
     about_blueprint,
 )
-from routes.accountSettings import (
+from routes.account_settings import (
     account_settings_blueprint,
 )
-from routes.adminPanel import (
+from routes.admin_panel import (
     admin_panel_blueprint,
 )
-from routes.adminPanelComments import (
+from routes.admin_panel_comments import (
     admin_panel_comments_blueprint,
 )
-from routes.adminPanelPosts import (
+from routes.admin_panel_posts import (
     admin_panel_posts_blueprint,
 )
-from routes.adminPanelUsers import (
+from routes.admin_panel_users import (
     admin_panel_users_blueprint,
 )
 from routes.category import (
     category_blueprint,
 )
-from routes.changeLanguage import (
+from routes.change_language import (
     change_language_blueprint,
 )
-from routes.changePassword import (
+from routes.change_password import (
     change_password_blueprint,
 )
-from routes.changeProfilePicture import (
+from routes.change_profile_picture import (
     change_profile_picture_blueprint,
 )
-from routes.changeUserName import (
+from routes.change_user_name import (
     change_user_name_blueprint,
 )
-from routes.createPost import (
+from routes.create_post import (
     create_post_blueprint,
 )
 from routes.dashboard import (
     dashboard_blueprint,
 )
-from routes.editPost import (
+from routes.edit_post import (
     edit_post_blueprint,
 )
 from routes.index import (
@@ -60,70 +60,70 @@ from routes.login import (
 from routes.logout import (
     logout_blueprint,
 )
-from routes.passwordReset import (
+from routes.password_reset import (
     password_reset_blueprint,
 )
 from routes.post import post_blueprint
-from routes.postsAnalytics import (
+from routes.posts_analytics import (
     analytics_blueprint,
 )
-from routes.privacyPolicy import (
+from routes.privacy_policy import (
     privacy_policy_blueprint,
 )
-from routes.returnPostAnalyticsData import (
+from routes.return_post_analytics_data import (
     return_post_analytics_data_blueprint,
 )
-from routes.returnPostBanner import (
+from routes.return_post_banner import (
     return_post_banner_blueprint,
 )
 from routes.search import (
     search_blueprint,
 )
-from routes.searchBar import (
+from routes.search_bar import (
     search_bar_blueprint,
 )
-from routes.setLanguage import (
+from routes.set_language import (
     set_language_blueprint,
 )
-from routes.setTheme import (
+from routes.set_theme import (
     set_theme_blueprint,
 )
 from routes.signup import (
     sign_up_blueprint,
 )
 from routes.user import user_blueprint
-from routes.verifyUser import (
+from routes.verify_user import (
     verify_user_blueprint,
 )
 from settings import Settings
-from utils.afterRequest import after_request_logger
-from utils.beforeRequest.browserLanguage import browser_language
-from utils.contextProcessor.isLogin import is_login
-from utils.contextProcessor.isRegistration import is_registration
-from utils.contextProcessor.markdown import markdown_processor
-from utils.contextProcessor.returnPostUrlID import returnPostUrlID
-from utils.contextProcessor.returnPostUrlSlug import returnPostUrlSlug
-from utils.contextProcessor.returnUserProfilePicture import returnUserProfilePicture
-from utils.contextProcessor.translations import inject_translations
-from utils.dbChecker import (
-    analyticsTable,
-    commentsTable,
-    dbFolder,
-    postsTable,
-    usersTable,
+from utils.after_request import after_request_logger
+from utils.before_request.browser_language import browser_language
+from utils.context_processor.is_login import is_login
+from utils.context_processor.is_registration import is_registration
+from utils.context_processor.markdown import markdown_processor
+from utils.context_processor.return_post_url_id import return_post_url_id
+from utils.context_processor.return_post_url_slug import return_post_url_slug
+from utils.context_processor.return_user_profile_picture import return_user_profile_picture
+from utils.context_processor.translations import inject_translations
+from utils.db_checker import (
+    analytics_table,
+    comments_table,
+    db_folder,
+    posts_table,
+    users_table,
 )
-from utils.errorHandlers.csrfErrorHandler import (
-    csrfErrorHandler,
+from utils.error_handlers.csrf_error_handler import (
+    csrf_error_handler,
 )
-from utils.errorHandlers.notFoundErrorHandler import (
-    notFoundErrorHandler,
+from utils.error_handlers.not_found_error_handler import (
+    not_found_error_handler,
 )
-from utils.errorHandlers.unauthorizedErrorHandler import (
-    unauthorizedErrorHandler,
+from utils.error_handlers.unauthorized_error_handler import (
+    unauthorized_error_handler,
 )
-from utils.generateUrlIdFromPost import get_slug_from_post_title
+from utils.generate_url_id_from_post import get_slug_from_post_title
 from utils.log import Log
-from utils.terminalASCII import terminal_ascii
+from utils.terminal_ascii import terminal_ascii
 from utils.time import current_time_stamp
 
 start_time = current_time_stamp()
@@ -154,9 +154,9 @@ csrf = CSRFProtect(app)
 app.context_processor(is_login)
 
 app.context_processor(is_registration)
-app.context_processor(returnUserProfilePicture)
-app.context_processor(returnPostUrlID)
-app.context_processor(returnPostUrlSlug)
+app.context_processor(return_user_profile_picture)
+app.context_processor(return_post_url_id)
+app.context_processor(return_post_url_slug)
 app.context_processor(inject_translations)
 app.context_processor(markdown_processor)
 app.before_request(browser_language)
@@ -222,26 +222,26 @@ else:
     Log.info("Default admin is off")
 
 
-dbFolder()
-usersTable()
-postsTable()
-commentsTable()
-analyticsTable()
+db_folder()
+users_table()
+posts_table()
+comments_table()
+analytics_table()
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return notFoundErrorHandler(e)
+    return not_found_error_handler(e)
 
 
 @app.errorhandler(401)
 def unauthorized(e):
-    return unauthorizedErrorHandler(e)
+    return unauthorized_error_handler(e)
 
 
 @app.errorhandler(CSRFError)
 def csrf_error(e):
-    return csrfErrorHandler(e)
+    return csrf_error_handler(e)
 
 
 @app.after_request

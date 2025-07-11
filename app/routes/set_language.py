@@ -1,6 +1,5 @@
-from flask import Blueprint, redirect, session
-from settings import Settings
-from utils.flashMessage import flash_message
+from flask import Blueprint, redirect, request, session
+from utils.flash_message import flash_message
 from utils.log import Log
 
 set_language_blueprint = Blueprint("setLanguage", __name__)

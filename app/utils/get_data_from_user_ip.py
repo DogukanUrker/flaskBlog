@@ -61,17 +61,17 @@ In the case of a web application, you must include a link back to DB-IP.com on p
 """
 
 
-def getDataFromUserIP(userAgentString: str) -> dict:
+def get_data_from_user_ip(user_agent_string: str) -> dict:
     """
     This function returns visitors computer os, country and continent
     Args:
-        userAgentString (str): user agent string
+        user_agent_string (str): user agent string
     Returns:
         returns dict response containing country name, os, continent or failure message
         Note: If GeoIP database is not available, country and continent will be "Unknown"
     """
     try:
-        user_agent = parse(userAgentString)
+        user_agent = parse(user_agent_string)
         os_name = user_agent.os.family
 
         reader = _get_geoip_reader()
@@ -86,9 +86,9 @@ def getDataFromUserIP(userAgentString: str) -> dict:
                 },
             }
 
-        userIPAddr = requests.get("https://api.ipify.org", timeout=5)
+        user_ip_addr = requests.get("https://api.ipify.org", timeout=5)
 
-        response = reader.country(userIPAddr.text.strip())
+        response = reader.country(user_ip_addr.text.strip())
 
         return {
             "status": 0,
@@ -101,7 +101,7 @@ def getDataFromUserIP(userAgentString: str) -> dict:
 
     except requests.exceptions.RequestException:
         try:
-            user_agent = parse(userAgentString)
+            user_agent = parse(user_agent_string)
             return {
                 "status": 0,
                 "payload": {
@@ -115,7 +115,7 @@ def getDataFromUserIP(userAgentString: str) -> dict:
 
     except geoip2.errors.AddressNotFoundError:
         try:
-            user_agent = parse(userAgentString)
+            user_agent = parse(user_agent_string)
             return {
                 "status": 0,
                 "payload": {
@@ -129,7 +129,7 @@ def getDataFromUserIP(userAgentString: str) -> dict:
 
     except Exception as e:
         try:
-            user_agent = parse(userAgentString)
+            user_agent = parse(user_agent_string)
             return {
                 "status": 0,
                 "payload": {

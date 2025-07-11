@@ -9,13 +9,13 @@ from flask import (
     url_for,
 )
 from settings import Settings
-from utils.addPoints import add_points
-from utils.calculateReadTime import calculate_read_time
-from utils.delete import Delete
-from utils.flashMessage import flash_message
+from utils.add_points import add_points
+from utils.calculate_read_time import calculate_read_time
+from utils.delete import delete_post, delete_comment
+from utils.flash_message import flash_message
 from utils.forms.CommentForm import CommentForm
-from utils.generateUrlIdFromPost import get_slug_from_post_title
-from utils.getDataFromUserIP import getDataFromUserIP
+from utils.generate_url_id_from_post import get_slug_from_post_title
+from utils.get_data_from_user_ip import get_data_from_user_ip
 from utils.log import Log
 from utils.time import current_time_stamp
 
@@ -63,13 +63,13 @@ def post(url_id=None, slug=None):
         connection.commit()
 
         if request.method == "POST":
-            if "postDeleteButton" in request.form:
-                Delete.post(post[0])
+            if "post_delete_button" in request.form:
+                delete_post(post[0])
 
                 return redirect("/")
 
-            if "commentDeleteButton" in request.form:
-                Delete.comment(request.form["commentID"])
+            if "comment_delete_button" in request.form:
+                delete_comment(request.form["comment_id"])
 
                 return redirect(url_for("post.post", url_id=url_id)), 301
 
@@ -84,7 +84,7 @@ def post(url_id=None, slug=None):
             cursor = connection.cursor()
 
             cursor.execute(
-                "insert into comments(post,comment,user,time_stamp) \
+                "insert into comments(post_id,comment,user_name,time_stamp) \
                 values(?, ?, ?, ?)",
                 (
                     post[0],
@@ -117,18 +117,18 @@ def post(url_id=None, slug=None):
         cursor = connection.cursor()
 
         cursor.execute(
-            """select * from comments where post = ? order by time_stamp desc""",
+            """select * from comments where post_id = ? order by time_stamp desc""",
             [(post[0])],
         )
         comments = cursor.fetchall()
 
         if Settings.ANALYTICS:
-            user_ip_data = getDataFromUserIP(str(request.headers.get("User-Agent")))
+            user_ip_data = get_data_from_user_ip(str(request.headers.get("User-Agent")))
             id_for_random_visitor = None
             if "user_name" in session:
                 session_user = session["user_name"]
             else:
-                session_user = "unsignedUser"
+                session_user = "unsigned_user"
             if user_ip_data["status"] == 0:
                 Log.database(f"Connecting to '{Settings.DB_ANALYTICS_ROOT}' database")
 
@@ -137,7 +137,7 @@ def post(url_id=None, slug=None):
                 cursor = connection.cursor()
 
                 cursor.execute(
-                    """insert into postsAnalytics (postID, visitorUserName, country, os, continent, time_stamp) values (?,?,?,?,?,?) RETURNING id""",
+                    """insert into posts_analytics (post_id, visitor_user_name, country, os, continent, time_stamp) values (?,?,?,?,?,?) RETURNING id""",
                     (
                         post[0],
                         session_user,
@@ -151,7 +151,7 @@ def post(url_id=None, slug=None):
                 connection.commit()
                 connection.close()
             else:
-                Log.error(f"Aborting postsAnalytics, {user_ip_data['message']}")
+                Log.error(f"Aborting posts_analytics, {user_ip_data['message']}")
         else:
             id_for_random_visitor = None
 
@@ -162,16 +162,16 @@ def post(url_id=None, slug=None):
             tags=post[2],
             abstract=post[11],
             content=post[3],
-            author=post[5],
+            user_name=post[5],
             views=post[6],
             time_stamp=post[7],
             last_edit_time_stamp=post[8],
             url_id=post[10],
             form=form,
             comments=comments,
-            appName=Settings.APP_NAME,
-            blogPostUrl=request.root_url,
-            readingTime=calculate_read_time(post[3]),
+            app_name=Settings.APP_NAME,
+            blog_post_url=request.root_url,
+            reading_time=calculate_read_time(post[3]),
             id_for_random_visitor=id_for_random_visitor,
         )
 

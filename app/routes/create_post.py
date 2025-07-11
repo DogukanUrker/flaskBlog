@@ -8,14 +8,14 @@ from flask import (
     session,
 )
 from settings import Settings
-from utils.addPoints import add_points
-from utils.flashMessage import flash_message
+from utils.add_points import add_points
+from utils.flash_message import flash_message
 from utils.forms.CreatePostForm import CreatePostForm
-from utils.generateUrlIdFromPost import generate_url_id
+from utils.generate_url_id_from_post import generate_url_id
 from utils.log import Log
 from utils.time import current_time_stamp
 
-create_post_blueprint = Blueprint("createPost", __name__)
+create_post_blueprint = Blueprint("create_post", __name__)
 
 
 @create_post_blueprint.route("/createpost", methods=["GET", "POST"])
@@ -46,7 +46,7 @@ def create_post():
 
             if post_content == "" or post_abstract == "":
                 flash_message(
-                    page="createPost",
+                    page="create_post",
                     message="empty",
                     category="error",
                     language=session["language"],
@@ -66,7 +66,7 @@ def create_post():
                         tags,
                         content,
                         banner,
-                        author,
+                        user_name,
                         views,
                         time_stamp,
                         last_edit_time_stamp,
@@ -98,7 +98,7 @@ def create_post():
 
                 add_points(20, session["user_name"])
                 flash_message(
-                    page="createPost",
+                    page="create_post",
                     message="success",
                     category="success",
                     language=session["language"],
@@ -112,7 +112,7 @@ def create_post():
     else:
         Log.error(f"{request.remote_addr} tried to create a new post without login")
         flash_message(
-            page="createPost",
+            page="create_post",
             message="login",
             category="error",
             language=session["language"],

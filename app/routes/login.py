@@ -9,10 +9,10 @@ from flask import (
     session,
 )
 from passlib.hash import sha512_crypt as encryption
-from requests import post as requestsPost
+from requests import post as requests_post
 from settings import Settings
-from utils.addPoints import add_points
-from utils.flashMessage import flash_message
+from utils.add_points import add_points
+from utils.flash_message import flash_message
 from utils.forms.LoginForm import LoginForm
 from utils.log import Log
 
@@ -60,28 +60,28 @@ def login(direct):
                     Log.error(f'User: "{user_name}" not found')
                     flash_message(
                         page="login",
-                        message="notFound",
+                        message="not_found",
                         category="error",
                         language=session["language"],
                     )
                 else:
                     if encryption.verify(password, user[3]):
                         if Settings.RECAPTCHA:
-                            secretResponse = request.form["g-recaptcha-response"]
-                            verifyResponse = requestsPost(
-                                url=f"{Settings.RECAPTCHA_VERIFY_URL}?secret={Settings.RECAPTCHA_SECRET_KEY}&response={secretResponse}"
+                            secret_response = request.form["g-recaptcha-response"]
+                            verify_response = requests_post(
+                                url=f"{Settings.RECAPTCHA_VERIFY_URL}?secret={Settings.RECAPTCHA_SECRET_KEY}&response={secret_response}"
                             ).json()
                             if not (
-                                verifyResponse["success"] is True
-                                or verifyResponse.get("score", 0) > 0.5
+                                verify_response["success"] is True
+                                or verify_response.get("score", 0) > 0.5
                             ):
                                 Log.error(
-                                    f"Login reCAPTCHA | verification: {verifyResponse.get('success')} | score: {verifyResponse.get('score')}",
+                                    f"Login reCAPTCHA | verification: {verify_response.get('success')} | score: {verify_response.get('score')}",
                                 )
                                 abort(401)
 
                             Log.success(
-                                f"Login reCAPTCHA | verification: {verifyResponse['success']} | score: {verifyResponse.get('score')}",
+                                f"Login reCAPTCHA | verification: {verify_response['success']} | score: {verify_response.get('score')}",
                             )
 
                         session["user_name"] = user[1]
@@ -112,8 +112,8 @@ def login(direct):
             return render_template(
                 "login.html",
                 form=form,
-                hideLogin=True,
-                siteKey=Settings.RECAPTCHA_SITE_KEY,
+                hide_login=True,
+                site_key=Settings.RECAPTCHA_SITE_KEY,
                 recaptcha=Settings.RECAPTCHA,
             )
     else:

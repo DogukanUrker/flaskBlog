@@ -8,12 +8,12 @@ from flask import (
     session,
 )
 from settings import Settings
-from utils.changeUserRole import change_user_role
-from utils.delete import Delete
+from utils.change_user_role import change_user_role
+from utils.delete import delete_user
 from utils.log import Log
 from utils.paginate import paginate_query
 
-admin_panel_users_blueprint = Blueprint("adminPanelUsers", __name__)
+admin_panel_users_blueprint = Blueprint("admin_panel_users", __name__)
 
 
 @admin_panel_users_blueprint.route("/admin/users", methods=["GET", "POST"])
@@ -33,19 +33,19 @@ def admin_panel_users():
         role = cursor.fetchone()[0]
 
         if request.method == "POST":
-            if "userDeleteButton" in request.form:
+            if "user_delete_button" in request.form:
                 Log.info(
-                    f"Admin: {session['user_name']} deleted user: {request.form['userName']}"
+                    f"Admin: {session['user_name']} deleted user: {request.form['user_name']}"
                 )
 
-                Delete.user(request.form["userName"])
+                delete_user(request.form["user_name"])
 
-            if "userRoleChangeButton" in request.form:
+            if "user_role_change_button" in request.form:
                 Log.info(
-                    f"Admin: {session['user_name']} changed {request.form['userName']}'s role"
+                    f"Admin: {session['user_name']} changed {request.form['user_name']}'s role"
                 )
 
-                change_user_role(request.form["userName"])
+                change_user_role(request.form["user_name"])
 
         if role == "admin":
             users, page, total_pages = paginate_query(

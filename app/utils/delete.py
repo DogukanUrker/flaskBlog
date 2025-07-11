@@ -6,11 +6,11 @@ and interacting with the posts, users, and comments tables.
 
 The functions in this module are:
 
-- deletePost(postID): This function deletes a post and all associated comments
+- delete_post(post_id): This function deletes a post and all associated comments
 from the database.
-- deleteUser(userName): This function deletes a user and all associated data
+- delete_user(user_name): This function deletes a user and all associated data
 from the database.
-- deleteComment(commentID): This function deletes a comment from the database.
+- delete_comment(comment_id): This function deletes a comment from the database.
 
 The functions in this module use the following helper functions:
 
@@ -27,144 +27,145 @@ import sqlite3
 
 from flask import redirect, session
 from settings import Settings
-from utils.flashMessage import flash_message
+from utils.flash_message import flash_message
 from utils.log import Log
 
 
-class Delete:
-    def post(post_id):
-        """
-        This function deletes a post and all associated comments from the database.
+def delete_post(post_id):
+    """
+    This function deletes a post and all associated comments from the database.
 
-        Parameters:
-        post_id (str): The ID of the post to be deleted.
+    Parameters:
+    post_id (str): The ID of the post to be deleted.
 
-        Returns:
-        None
-        """
-        Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-        connection.set_trace_callback(Log.database)
-        cursor = connection.cursor()
-        cursor.execute(
-            """select author from posts where id = ? """,
-            [(post_id)],
-        )
-        cursor.execute(
-            """delete from posts where id = ? """,
-            [(post_id)],
-        )
-        cursor.execute("update sqlite_sequence set seq = seq-1")
-        connection.commit()
-        connection.close()
-        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
-        connection.set_trace_callback(Log.database)
-        cursor = connection.cursor()
-        cursor.execute(
-            """select count(*) from comments where post = ? """,
-            [(post_id)],
-        )
-        comment_count = list(cursor)[0][0]
-        cursor.execute(
-            """delete from comments where post = ? """,
-            [(post_id)],
-        )
-        cursor.execute(
-            """update sqlite_sequence set seq = seq - ? """,
-            [(comment_count)],
-        )
-        connection.commit()
+    Returns:
+    None
+    """
+    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
+    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
+    connection.set_trace_callback(Log.database)
+    cursor = connection.cursor()
+    cursor.execute(
+        """select user_name from posts where id = ? """,
+        [(post_id)],
+    )
+    cursor.execute(
+        """delete from posts where id = ? """,
+        [(post_id)],
+    )
+    cursor.execute("update sqlite_sequence set seq = seq-1")
+    connection.commit()
+    connection.close()
+    connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
+    connection.set_trace_callback(Log.database)
+    cursor = connection.cursor()
+    cursor.execute(
+        """select count(*) from comments where post_id = ? """,
+        [(post_id)],
+    )
+    comment_count = list(cursor)[0][0]
+    cursor.execute(
+        """delete from comments where post_id = ? """,
+        [(post_id)],
+    )
+    cursor.execute(
+        """update sqlite_sequence set seq = seq - ? """,
+        [(comment_count)],
+    )
+    connection.commit()
 
-        connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
-        connection.set_trace_callback(Log.database)
-        cursor = connection.cursor()
-        cursor.execute(
-            """select postID from postsAnalytics where postID = ? """,
-            [(post_id)],
-        )
-        cursor.execute(
-            """delete from postsAnalytics where postID = ? """,
-            [(post_id)],
-        )
-        connection.commit()
+    connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
+    connection.set_trace_callback(Log.database)
+    cursor = connection.cursor()
+    cursor.execute(
+        """select post_id from posts_analytics where post_id = ? """,
+        [(post_id)],
+    )
+    cursor.execute(
+        """delete from posts_analytics where post_id = ? """,
+        [(post_id)],
+    )
+    connection.commit()
 
-        flash_message(
-            page="delete",
-            message="post",
-            category="error",
-            language=session["language"],
-        )
-        Log.success(f'Post: "{post_id}" deleted')
+    flash_message(
+        page="delete",
+        message="post",
+        category="error",
+        language=session["language"],
+    )
+    Log.success(f'Post: "{post_id}" deleted')
 
-    def user(user_name):
-        """
-        This function deletes a user and all associated data from the database.
 
-        Parameters:
-        user_name (str): The username of the user to be deleted.
+def delete_user(user_name):
+    """
+    This function deletes a user and all associated data from the database.
 
-        Returns:
-        None
-        """
-        Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
-        connection = sqlite3.connect(Settings.DB_USERS_ROOT)
-        connection.set_trace_callback(Log.database)
-        cursor = connection.cursor()
-        cursor.execute(
-            """select * from users where lower(user_name) = ? """,
-            [(user_name.lower())],
-        )
-        cursor.execute(
-            """select role from users where user_name = ? """,
-            [(session["user_name"])],
-        )
-        perpetrator = cursor.fetchone()
-        cursor.execute(
-            """delete from users where lower(user_name) = ? """,
-            [(user_name.lower())],
-        )
-        cursor.execute("update sqlite_sequence set seq = seq-1")
-        connection.commit()
-        flash_message(
-            page="delete",
-            message="user",
-            category="error",
-            language=session["language"],
-        )
-        Log.success(f'User: "{user_name}" deleted')
-        if perpetrator[0] == "admin":
-            return redirect("/admin/users")
-        else:
-            session.clear()
-            return redirect("/")
+    Parameters:
+    user_name (str): The username of the user to be deleted.
 
-    def comment(comment_id):
-        """
-        This function deletes a comment from the database.
+    Returns:
+    None
+    """
+    Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
+    connection = sqlite3.connect(Settings.DB_USERS_ROOT)
+    connection.set_trace_callback(Log.database)
+    cursor = connection.cursor()
+    cursor.execute(
+        """select * from users where lower(user_name) = ? """,
+        [(user_name.lower())],
+    )
+    cursor.execute(
+        """select role from users where user_name = ? """,
+        [(session["user_name"])],
+    )
+    perpetrator = cursor.fetchone()
+    cursor.execute(
+        """delete from users where lower(user_name) = ? """,
+        [(user_name.lower())],
+    )
+    cursor.execute("update sqlite_sequence set seq = seq-1")
+    connection.commit()
+    flash_message(
+        page="delete",
+        message="user",
+        category="error",
+        language=session["language"],
+    )
+    Log.success(f'User: "{user_name}" deleted')
+    if perpetrator[0] == "admin":
+        return redirect("/admin/users")
+    else:
+        session.clear()
+        return redirect("/")
 
-        Parameters:
-        comment_id (str): The ID of the comment to be deleted.
 
-        Returns:
-        None
-        """
-        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
-        connection.set_trace_callback(Log.database)
-        cursor = connection.cursor()
-        cursor.execute(
-            """select user from comments where id = ? """,
-            [(comment_id)],
-        )
-        cursor.execute(
-            """delete from comments where id = ? """,
-            [(comment_id)],
-        )
-        cursor.execute("update sqlite_sequence set seq = seq-1")
-        connection.commit()
-        flash_message(
-            page="delete",
-            message="comment",
-            category="error",
-            language=session["language"],
-        )
-        Log.success(f'Comment: "{comment_id}" deleted')
+def delete_comment(comment_id):
+    """
+    This function deletes a comment from the database.
+
+    Parameters:
+    comment_id (str): The ID of the comment to be deleted.
+
+    Returns:
+    None
+    """
+    connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
+    connection.set_trace_callback(Log.database)
+    cursor = connection.cursor()
+    cursor.execute(
+        """select user_name from comments where id = ? """,
+        [(comment_id)],
+    )
+    cursor.execute(
+        """delete from comments where id = ? """,
+        [(comment_id)],
+    )
+    cursor.execute("update sqlite_sequence set seq = seq-1")
+    connection.commit()
+    flash_message(
+        page="delete",
+        message="comment",
+        category="error",
+        language=session["language"],
+    )
+    Log.success(f'Comment: "{comment_id}" deleted')

@@ -13,9 +13,10 @@ from flask import (
 )
 from passlib.hash import sha512_crypt as encryption
 from settings import Settings
-from utils.flashMessage import flash_message
+from utils.flash_message import flash_message
 from utils.forms.PasswordResetForm import PasswordResetForm
 from utils.log import Log
+from utils.time import current_time_stamp
 
 password_reset_blueprint = Blueprint("passwordReset", __name__)
 
