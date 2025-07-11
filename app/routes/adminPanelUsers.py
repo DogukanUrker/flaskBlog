@@ -1,4 +1,5 @@
 import sqlite3
+from math import ceil
 
 from flask import (
     Blueprint,
@@ -47,12 +48,19 @@ def adminPanelUsers():
                 changeUserRole(request.form["userName"])
 
         if role == "admin":
+            page = request.args.get("page", 1, type=int)
+            per_page = 9
+
             Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
             connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
-            cursor.execute("select * from users")
+            cursor.execute("select count(*) from users")
+            total_users = cursor.fetchone()[0]
+            total_pages = max(ceil(total_users / per_page), 1)
+            offset = (page - 1) * per_page
+            cursor.execute("select * from users limit ? offset ?", (per_page, offset))
             users = cursor.fetchall()
 
             Log.info(f"Rendering adminPanelUsers.html: params: users={users}")
@@ -60,6 +68,8 @@ def adminPanelUsers():
             return render_template(
                 "adminPanelUsers.html",
                 users=users,
+                page=page,
+                total_pages=total_pages,
             )
         else:
             Log.error(

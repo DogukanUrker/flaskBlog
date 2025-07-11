@@ -1,0 +1,11 @@
+{% macro pagination(page, total_pages, base_url) %}
+<div class="join flex justify-center mt-8">
+    {% if page > 1 %}
+    <a href="{{ base_url }}?page={{ page-1 }}" class="join-item btn btn-sm">Prev</a>
+    {% endif %}
+    <span class="join-item btn btn-sm pointer-events-none">{{ page }} / {{ total_pages }}</span>
+    {% if page < total_pages %}
+    <a href="{{ base_url }}?page={{ page+1 }}" class="join-item btn btn-sm">Next</a>
+    {% endif %}
+</div>
+{% endmacro %}

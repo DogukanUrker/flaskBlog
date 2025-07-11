@@ -1,6 +1,7 @@
 import sqlite3
+from math import ceil
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from settings import Settings
 from utils.log import Log
 
@@ -12,6 +13,9 @@ def search(query):
     query = query.replace("%20", " ")
     queryNoWhiteSpace = query.replace("+", "")
     query = query.replace("+", " ")
+
+    page = request.args.get("page", 1, type=int)
+    per_page = 9
 
     Log.info(f"Searching for query: {query}")
 
@@ -120,6 +124,11 @@ def search(query):
 
         posts.append(cursor.fetchall())
 
+    total_posts = len(posts)
+    total_pages = max(ceil(total_posts / per_page), 1)
+    offset = (page - 1) * per_page
+    posts = posts[offset : offset + per_page]
+
     Log.info(
         f"Rendering search.html: params: query={query} | users={users} | posts={len(posts)} | empty={empty}"
     )
@@ -130,4 +139,6 @@ def search(query):
         users=users,
         query=query,
         empty=empty,
+        page=page,
+        total_pages=total_pages,
     )

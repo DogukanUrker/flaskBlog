@@ -9,8 +9,9 @@ purposes without permission is strictly prohibited.
 
 import sqlite3
 from json import load
+from math import ceil
 
-from flask import Blueprint, abort, redirect, render_template, session
+from flask import Blueprint, abort, redirect, render_template, request, session
 from settings import Settings
 from utils.log import Log
 
@@ -56,6 +57,9 @@ def category(category, by="timeStamp", sort="desc"):
     byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp"]
     sortOptions = ["asc", "desc"]
 
+    page = request.args.get("page", 1, type=int)
+    per_page = 9
+
     if by not in byOptions or sort not in sortOptions:
         Log.warning(
             f"The provided sorting options are not valid: By: {by} Sort: {sort}"
@@ -72,8 +76,16 @@ def category(category, by="timeStamp", sort="desc"):
     cursor = connection.cursor()
 
     cursor.execute(
-        f"""select * from posts where lower(category) = ? order by {by} {sort}""",
-        [(category.lower())],
+        "select count(*) from posts where lower(category) = ?",
+        [category.lower()],
+    )
+    total_posts = cursor.fetchone()[0]
+    total_pages = max(ceil(total_posts / per_page), 1)
+
+    offset = (page - 1) * per_page
+    cursor.execute(
+        f"select * from posts where lower(category) = ? order by {by} {sort} limit ? offset ?",
+        (category.lower(), per_page, offset),
     )
     posts = cursor.fetchall()
 
@@ -97,4 +109,6 @@ def category(category, by="timeStamp", sort="desc"):
         category=translations["categories"][category.lower()],
         sortName=sortName,
         source=f"/category/{category}",
+        page=page,
+        total_pages=total_pages,
     )

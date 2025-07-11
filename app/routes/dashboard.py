@@ -1,5 +1,6 @@
 import sqlite3
 from json import load
+from math import ceil
 
 from flask import (
     Blueprint,
@@ -31,13 +32,24 @@ def dashboard(userName):
                     )
             Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
+            page = request.args.get("page", 1, type=int)
+            per_page = 9
+
             connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
 
             cursor.execute(
-                """select * from posts where author = ? order by timeStamp desc""",
+                "select count(*) from posts where author = ?",
                 [(session["userName"])],
+            )
+            total_posts = cursor.fetchone()[0]
+            total_pages = max(ceil(total_posts / per_page), 1)
+
+            offset = (page - 1) * per_page
+            cursor.execute(
+                """select * from posts where author = ? order by timeStamp desc limit ? offset ?""",
+                (session["userName"], per_page, offset),
             )
             posts = cursor.fetchall()
             Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
@@ -82,6 +94,8 @@ def dashboard(userName):
                 comments=comments,
                 showPosts=showPosts,
                 showComments=showComments,
+                page=page,
+                total_pages=total_pages,
             )
         else:
             Log.error(

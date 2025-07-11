@@ -18,8 +18,9 @@ purposes without permission is strictly prohibited.
 
 import sqlite3
 from json import load
+from math import ceil
 
-from flask import Blueprint, redirect, render_template, session
+from flask import Blueprint, redirect, render_template, request, session
 from settings import Settings
 from utils.log import Log
 
@@ -49,6 +50,9 @@ def index(by="hot", sort="desc"):
     byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp", "hot"]
     sortOptions = ["asc", "desc"]
 
+    page = request.args.get("page", 1, type=int)
+    per_page = 9
+
     if by not in byOptions or sort not in sortOptions:
         Log.warning(
             f"The provided sorting options are not valid: By: {by} Sort: {sort}"
@@ -62,13 +66,22 @@ def index(by="hot", sort="desc"):
 
     cursor = connection.cursor()
 
+    cursor.execute("select count(*) from posts")
+    total_posts = cursor.fetchone()[0]
+    total_pages = max(ceil(total_posts / per_page), 1)
+
+    offset = (page - 1) * per_page
+
     if by == "hot":
         cursor.execute(
-            f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort}"
+            f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort} LIMIT ? OFFSET ?",
+            (per_page, offset),
         )
-        pass
     else:
-        cursor.execute(f"select * from posts order by {by} {sort}")
+        cursor.execute(
+            f"select * from posts order by {by} {sort} limit ? offset ?",
+            (per_page, offset),
+        )
 
     posts = cursor.fetchall()
 
@@ -88,4 +101,11 @@ def index(by="hot", sort="desc"):
 
     Log.info(f"Sorting posts on index page by: {sortName}")
 
-    return render_template("index.html", posts=posts, sortName=sortName, source="")
+    return render_template(
+        "index.html",
+        posts=posts,
+        sortName=sortName,
+        source="",
+        page=page,
+        total_pages=total_pages,
+    )
