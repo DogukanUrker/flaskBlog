@@ -90,7 +90,7 @@ def category(category, by="time_stamp", sort="desc"):
         "category.html",
         posts=posts,
         category=translations["categories"][category.lower()],
-        sortName=sort_name,
+        sort_name=sort_name,
         source=f"/category/{category}",
         page=page,
         total_pages=total_pages,

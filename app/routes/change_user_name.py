@@ -15,7 +15,7 @@ from utils.log import Log
 change_user_name_blueprint = Blueprint("change_user_name", __name__)
 
 
-@change_user_name_blueprint.route("/changeusername", methods=["GET", "POST"])
+@change_user_name_blueprint.route("/change_user_name", methods=["GET", "POST"])
 def change_user_name():
     """
     This function is the route for the change username page.
@@ -119,4 +119,4 @@ def change_user_name():
             language=session["language"],
         )
 
-        return redirect("/login/redirect=changeusername")
+        return redirect("/login/redirect=change_user_name")

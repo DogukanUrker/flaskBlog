@@ -5,7 +5,7 @@ from flask import Blueprint, request, send_file
 from settings import Settings
 from utils.log import Log
 
-return_post_banner_blueprint = Blueprint("returnPostBanner", __name__)
+return_post_banner_blueprint = Blueprint("return_post_banner", __name__)
 
 
 @return_post_banner_blueprint.route("/postImage/<int:post_id>")

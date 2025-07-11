@@ -21,12 +21,13 @@ def logout():
     """
 
     if "user_name" in session:
+        language = session.get("language", "en")  # Get language before clearing session
         session.clear()
         flash_message(
             page="logout",
             message="success",
             category="success",
-            language=session["language"],
+            language=language,
         )
 
     return redirect("/")

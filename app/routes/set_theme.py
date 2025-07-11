@@ -2,10 +2,10 @@ from flask import Blueprint, redirect, request, session, url_for
 from settings import Settings
 from utils.log import Log
 
-set_theme_blueprint = Blueprint("setTheme", __name__)
+set_theme_blueprint = Blueprint("set_theme", __name__)
 
 
-@set_theme_blueprint.route("/setTheme/<theme>")
+@set_theme_blueprint.route("/set_theme/<theme>")
 def set_theme(theme):
     """
     Set the theme for the application.

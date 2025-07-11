@@ -16,7 +16,7 @@ from utils.log import Log
 change_password_blueprint = Blueprint("change_password", __name__)
 
 
-@change_password_blueprint.route("/changepassword", methods=["GET", "POST"])
+@change_password_blueprint.route("/change_password", methods=["GET", "POST"])
 def change_password():
     """
     This function is the route for the change password page.
@@ -114,4 +114,4 @@ def change_password():
             language=session["language"],
         )
 
-        return redirect("/login/redirect=changepassword")
+        return redirect("/login/redirect=change_password")

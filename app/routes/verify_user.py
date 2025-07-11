@@ -17,10 +17,10 @@ from utils.forms.VerifyUserForm import VerifyUserForm
 from utils.log import Log
 from utils.time import current_time_stamp
 
-verify_user_blueprint = Blueprint("verifyUser", __name__)
+verify_user_blueprint = Blueprint("verify_user", __name__)
 
 
-@verify_user_blueprint.route("/verifyUser/codesent=<code_sent>", methods=["GET", "POST"])
+@verify_user_blueprint.route("/verify_user/codesent=<code_sent>", methods=["GET", "POST"])
 def verify_user(code_sent):
     """
     This function handles the verification of the user's account.
@@ -156,7 +156,7 @@ def verify_user(code_sent):
                             f'Verification code sent to "{email[0]}" for user: "{user_name}"'
                         )
 
-                        return redirect("/verifyUser/codesent=true")
+                        return redirect("/verify_user/codesent=true")
 
                 return render_template(
                     "verifyUser.html",

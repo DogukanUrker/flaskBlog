@@ -23,8 +23,8 @@ def dashboard(user_name):
     if "user_name" in session:
         if session["user_name"].lower() == user_name.lower():
             if request.method == "POST":
-                if "postDeleteButton" in request.form:
-                    delete_post(request.form["postID"])
+                if "post_delete_button" in request.form:
+                    delete_post(request.form["post_id"])
 
                     return (
                         redirect(url_for("dashboard.dashboard", user_name=user_name)),

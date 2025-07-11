@@ -88,7 +88,7 @@ def index(by="hot", sort="desc"):
     return render_template(
         "index.html",
         posts=posts,
-        sortName=sort_name,
+        sort_name=sort_name,
         source="",
         page=page,
         total_pages=total_pages,
