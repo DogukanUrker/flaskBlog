@@ -1,6 +1,5 @@
 import sqlite3
 from json import load
-from math import ceil
 
 from flask import (
     Blueprint,
@@ -14,6 +13,7 @@ from settings import Settings
 from utils.delete import Delete
 from utils.flashMessage import flashMessage
 from utils.log import Log
+from utils.paginate import paginate_query
 
 dashboardBlueprint = Blueprint("dashboard", __name__)
 
@@ -30,28 +30,12 @@ def dashboard(userName):
                         redirect(url_for("dashboard.dashboard", userName=userName)),
                         301,
                     )
-            Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-            page = request.args.get("page", 1, type=int)
-            per_page = 9
-
-            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-            connection.set_trace_callback(Log.database)
-            cursor = connection.cursor()
-
-            cursor.execute(
+            posts, page, total_pages = paginate_query(
+                Settings.DB_POSTS_ROOT,
                 "select count(*) from posts where author = ?",
-                [(session["userName"])],
+                "select * from posts where author = ? order by timeStamp desc",
+                [session["userName"]],
             )
-            total_posts = cursor.fetchone()[0]
-            total_pages = max(ceil(total_posts / per_page), 1)
-
-            offset = (page - 1) * per_page
-            cursor.execute(
-                """select * from posts where author = ? order by timeStamp desc limit ? offset ?""",
-                (session["userName"], per_page, offset),
-            )
-            posts = cursor.fetchall()
             Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
             connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)

@@ -7,13 +7,12 @@ subject to change without notice. Use of this code for commercial or non-commerc
 purposes without permission is strictly prohibited.
 """
 
-import sqlite3
 from json import load
-from math import ceil
 
-from flask import Blueprint, abort, redirect, render_template, request, session
+from flask import Blueprint, abort, redirect, render_template, session
 from settings import Settings
 from utils.log import Log
+from utils.paginate import paginate_query
 
 categoryBlueprint = Blueprint("category", __name__)
 
@@ -57,9 +56,6 @@ def category(category, by="timeStamp", sort="desc"):
     byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp"]
     sortOptions = ["asc", "desc"]
 
-    page = request.args.get("page", 1, type=int)
-    per_page = 9
-
     if by not in byOptions or sort not in sortOptions:
         Log.warning(
             f"The provided sorting options are not valid: By: {by} Sort: {sort}"
@@ -69,25 +65,12 @@ def category(category, by="timeStamp", sort="desc"):
     if category.lower() not in categories:
         abort(404)
 
-    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.database)
-    cursor = connection.cursor()
-
-    cursor.execute(
+    posts, page, total_pages = paginate_query(
+        Settings.DB_POSTS_ROOT,
         "select count(*) from posts where lower(category) = ?",
+        f"select * from posts where lower(category) = ? order by {by} {sort}",
         [category.lower()],
     )
-    total_posts = cursor.fetchone()[0]
-    total_pages = max(ceil(total_posts / per_page), 1)
-
-    offset = (page - 1) * per_page
-    cursor.execute(
-        f"select * from posts where lower(category) = ? order by {by} {sort} limit ? offset ?",
-        (category.lower(), per_page, offset),
-    )
-    posts = cursor.fetchall()
 
     if by == "timeStamp":
         by = "create"

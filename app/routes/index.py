@@ -16,13 +16,12 @@ subject to change without notice. Use of this code for commercial or non-commerc
 purposes without permission is strictly prohibited.
 """
 
-import sqlite3
 from json import load
-from math import ceil
 
-from flask import Blueprint, redirect, render_template, request, session
+from flask import Blueprint, redirect, render_template, session
 from settings import Settings
 from utils.log import Log
+from utils.paginate import paginate_query
 
 indexBlueprint = Blueprint("index", __name__)
 
@@ -50,40 +49,25 @@ def index(by="hot", sort="desc"):
     byOptions = ["timeStamp", "title", "views", "category", "lastEditTimeStamp", "hot"]
     sortOptions = ["asc", "desc"]
 
-    page = request.args.get("page", 1, type=int)
-    per_page = 9
-
     if by not in byOptions or sort not in sortOptions:
         Log.warning(
             f"The provided sorting options are not valid: By: {by} Sort: {sort}"
         )
         return redirect("/")
 
-    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.database)
-
-    cursor = connection.cursor()
-
-    cursor.execute("select count(*) from posts")
-    total_posts = cursor.fetchone()[0]
-    total_pages = max(ceil(total_posts / per_page), 1)
-
-    offset = (page - 1) * per_page
-
     if by == "hot":
-        cursor.execute(
-            f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort} LIMIT ? OFFSET ?",
-            (per_page, offset),
+        select_query = (
+            "SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) "
+            f"AS hotScore FROM posts ORDER BY hotScore {sort}"
         )
     else:
-        cursor.execute(
-            f"select * from posts order by {by} {sort} limit ? offset ?",
-            (per_page, offset),
-        )
+        select_query = f"select * from posts order by {by} {sort}"
 
-    posts = cursor.fetchall()
+    posts, page, total_pages = paginate_query(
+        Settings.DB_POSTS_ROOT,
+        "select count(*) from posts",
+        select_query,
+    )
 
     if by == "timeStamp":
         by = "create"

@@ -1,6 +1,3 @@
-import sqlite3
-from math import ceil
-
 from flask import (
     Blueprint,
     redirect,
@@ -10,6 +7,7 @@ from flask import (
 )
 from settings import Settings
 from utils.log import Log
+from utils.paginate import paginate_query
 
 adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
 
@@ -21,21 +19,11 @@ def adminPanelComments():
         Log.info(f"Admin: {session['userName']} reached to comments admin panel")
         Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
-        page = request.args.get("page", 1, type=int)
-        per_page = 9
-
-        connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
-        connection.set_trace_callback(Log.database)
-        cursor = connection.cursor()
-        cursor.execute("select count(*) from comments")
-        total_comments = cursor.fetchone()[0]
-        total_pages = max(ceil(total_comments / per_page), 1)
-        offset = (page - 1) * per_page
-        cursor.execute(
-            "select * from comments order by timeStamp desc limit ? offset ?",
-            (per_page, offset),
+        comments, page, total_pages = paginate_query(
+            Settings.DB_COMMENTS_ROOT,
+            "select count(*) from comments",
+            "select * from comments order by timeStamp desc",
         )
-        comments = cursor.fetchall()
 
         Log.info(f"Rendering adminPanelComments.html: params: comments={comments}")
 
