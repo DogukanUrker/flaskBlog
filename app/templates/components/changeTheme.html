@@ -1,185 +1,259 @@
 <div class="absolute right-2 top-2">
     <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+        <button
+            tabindex="0"
+            class="btn btn-ghost btn-circle"
+            aria-label="Change theme"
+        >
             <i class="ti ti-palette"></i>
-        </div>
+        </button>
         <ul
             tabindex="0"
             class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow max-h-96 overflow-y-auto"
+            role="menu"
         >
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='light') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='light') }}"
+                    role="menuitem"
                     >☀️ Light</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='dark') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='dark') }}"
+                    role="menuitem"
                     >🌙 Dark</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='cupcake') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='cupcake') }}"
+                    role="menuitem"
                     >🧁 Cupcake</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='bumblebee') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='bumblebee') }}"
+                    role="menuitem"
                     >🐝 Bumblebee</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='emerald') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='emerald') }}"
+                    role="menuitem"
                     >💚 Emerald</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='corporate') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='corporate') }}"
+                    role="menuitem"
                     >🏢 Corporate</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='synthwave') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='synthwave') }}"
+                    role="menuitem"
                     >🌊 Synthwave</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='retro') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='retro') }}"
+                    role="menuitem"
                     >📺 Retro</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='cyberpunk') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='cyberpunk') }}"
+                    role="menuitem"
                     >🤖 Cyberpunk</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='valentine') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='valentine') }}"
+                    role="menuitem"
                     >💝 Valentine</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='halloween') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='halloween') }}"
+                    role="menuitem"
                     >🎃 Halloween</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='garden') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='garden') }}"
+                    role="menuitem"
                     >🌻 Garden</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='forest') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='forest') }}"
+                    role="menuitem"
                     >🌲 Forest</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='aqua') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='aqua') }}"
+                    role="menuitem"
                     >💧 Aqua</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='lofi') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='lofi') }}"
+                    role="menuitem"
                     >🎵 Lo-fi</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='pastel') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='pastel') }}"
+                    role="menuitem"
                     >🎨 Pastel</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='fantasy') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='fantasy') }}"
+                    role="menuitem"
                     >🦄 Fantasy</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='wireframe') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='wireframe') }}"
+                    role="menuitem"
                     >📐 Wireframe</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='black') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='black') }}"
+                    role="menuitem"
                     >⚫ Black</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='luxury') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='luxury') }}"
+                    role="menuitem"
                     >💎 Luxury</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='dracula') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='dracula') }}"
+                    role="menuitem"
                     >🧛 Dracula</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='cmyk') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='cmyk') }}"
+                    role="menuitem"
                     >🖨️ CMYK</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='autumn') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='autumn') }}"
+                    role="menuitem"
                     >🍂 Autumn</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='business') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='business') }}"
+                    role="menuitem"
                     >💼 Business</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='acid') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='acid') }}"
+                    role="menuitem"
                     >🟢 Acid</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='lemonade') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='lemonade') }}"
+                    role="menuitem"
                     >🍋 Lemonade</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='night') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='night') }}"
+                    role="menuitem"
                     >🌃 Night</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='coffee') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='coffee') }}"
+                    role="menuitem"
                     >☕ Coffee</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='winter') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='winter') }}"
+                    role="menuitem"
                     >❄️ Winter</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='dim') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='dim') }}"
+                    role="menuitem"
                     >🔅 Dim</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='nord') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='nord') }}"
+                    role="menuitem"
                     >🗻 Nord</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='sunset') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='sunset') }}"
+                    role="menuitem"
                     >🌅 Sunset</a
                 >
             </li>
             <li>
                 <a
                     href="{{ url_for('setTheme.setTheme', theme='caramellatte') }}"
+                    role="menuitem"
                     >🍯 Caramel Latte</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='abyss') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='abyss') }}"
+                    role="menuitem"
                     >🖤 Abyss</a
                 >
             </li>
             <li>
-                <a href="{{ url_for('setTheme.setTheme', theme='silk') }}"
+                <a
+                    href="{{ url_for('setTheme.setTheme', theme='silk') }}"
+                    role="menuitem"
                     >🎀 Silk</a
                 >
             </li>
