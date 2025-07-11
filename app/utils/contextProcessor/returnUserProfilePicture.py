@@ -1,12 +1,12 @@
-from utils.getProfilePicture import getProfilePicture
+from utils.getProfilePicture import get_profile_picture
 
 
 def returnUserProfilePicture():
     """
-    Returns a dictionary with the user's profile picture URL.
+    Returns a dictionary with the user's profile picture.
 
     Returns:
-        dict: A dictionary containing the user's profile picture URL.
+        dict: A dictionary containing the user's profile picture.
     """
 
-    return dict(getProfilePicture=getProfilePicture)
+    return dict(getProfilePicture=get_profile_picture)

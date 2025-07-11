@@ -4,7 +4,7 @@ from settings import Settings
 from utils.log import Log
 
 
-def addPoints(points, user):
+def add_points(points, user):
     """
     Adds the specified number of points to the user with the specified username.
     """
@@ -13,7 +13,7 @@ def addPoints(points, user):
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute(
-        """update users set points = points+? where userName = ? """,
+        """update users set points = points+? where user_name = ? """,
         [(points), (user)],
     )
     connection.commit()

@@ -8,15 +8,15 @@ from flask import (
     session,
 )
 from settings import Settings
-from utils.flashMessage import flashMessage
+from utils.flashMessage import flash_message
 from utils.forms.ChangeUserNameForm import ChangeUserNameForm
 from utils.log import Log
 
-changeUserNameBlueprint = Blueprint("changeUserName", __name__)
+change_user_name_blueprint = Blueprint("changeUserName", __name__)
 
 
-@changeUserNameBlueprint.route("/changeusername", methods=["GET", "POST"])
-def changeUserName():
+@change_user_name_blueprint.route("/changeusername", methods=["GET", "POST"])
+def change_user_name():
     """
     Checks if the user is logged in:
     If the user is not logged in, they are redirected to the homepage.
@@ -35,36 +35,36 @@ def changeUserName():
     The change username template with the form.
     """
 
-    if "userName" in session:
+    if "user_name" in session:
         form = ChangeUserNameForm(request.form)
 
         if request.method == "POST":
-            newUserName = request.form["newUserName"]
-            newUserName = newUserName.replace(" ", "")
+            new_user_name = request.form["new_user_name"]
+            new_user_name = new_user_name.replace(" ", "")
             Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
             connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
-                """select userName from users where userName = ? """,
-                [(newUserName)],
+                """select user_name from users where user_name = ? """,
+                [(new_user_name)],
             )
-            userNameCheck = cursor.fetchone()
+            user_name_check = cursor.fetchone()
 
-            if newUserName.isascii():
-                if newUserName == session["userName"]:
-                    flashMessage(
+            if new_user_name.isascii():
+                if new_user_name == session["user_name"]:
+                    flash_message(
                         page="changeUserName",
                         message="same",
                         category="error",
                         language=session["language"],
                     )
                 else:
-                    if userNameCheck is None:
+                    if user_name_check is None:
                         cursor.execute(
-                            """update users set userName = ? where userName = ? """,
-                            [(newUserName), (session["userName"])],
+                            """update users set user_name = ? where user_name = ? """,
+                            [(new_user_name), (session["user_name"])],
                         )
                         connection.commit()
 
@@ -73,7 +73,7 @@ def changeUserName():
                         cursor = connection.cursor()
                         cursor.execute(
                             """update posts set Author = ? where author = ? """,
-                            [(newUserName), (session["userName"])],
+                            [(new_user_name), (session["user_name"])],
                         )
                         connection.commit()
 
@@ -82,29 +82,29 @@ def changeUserName():
                         cursor = connection.cursor()
                         cursor.execute(
                             """update comments set user = ? where user = ? """,
-                            [(newUserName), (session["userName"])],
+                            [(new_user_name), (session["user_name"])],
                         )
                         connection.commit()
                         Log.success(
-                            f'User: "{session["userName"]}" changed his username to "{newUserName}"'
+                            f'User: "{session["user_name"]}" changed his username to "{new_user_name}"'
                         )
-                        session["userName"] = newUserName
-                        flashMessage(
+                        session["user_name"] = new_user_name
+                        flash_message(
                             page="changeUserName",
                             message="success",
                             category="success",
                             language=session["language"],
                         )
-                        return redirect(f"/user/{newUserName.lower()}")
+                        return redirect(f"/user/{new_user_name.lower()}")
                     else:
-                        flashMessage(
+                        flash_message(
                             page="changeUserName",
                             message="taken",
                             category="error",
                             language=session["language"],
                         )
             else:
-                flashMessage(
+                flash_message(
                     page="changeUserName",
                     message="ascii",
                     category="error",

@@ -47,7 +47,7 @@
             </div>
         </section>
 
-        {% if session["userName"] == user[1] %}
+        {% if session["user_name"] == user[1] %}
         <section class="flex w-full items-center justify-between my-4">
             <div
                 class="flex items-center w-fit hover:text-rose-500 duration-150"
@@ -69,7 +69,7 @@
                     >{{translations.user.dashboard}}</a
                 >
             </div>
-            {% endif %} {% if user[5] == "admin" and session["userName"] ==
+            {% endif %} {% if user[5] == "admin" and session["user_name"] ==
             user[1] %}
             <div
                 class="flex items-center w-fit hover:text-rose-500 duration-150"
@@ -78,13 +78,13 @@
                 <a href="/admin" class="">{{translations.user.admin}}</a>
             </div>
         </section>
-        {% endif %} {% if "userName" in session and session['userName'] ==
+        {% endif %} {% if "user_name" in session and session['user_name'] ==
         "{{user[1]}}"%}
         <div class="flex items-center w-fit hover:text-rose-500 duration-150">
-            <a href="/dashboard/{{session['userName']}}"
+            <a href="/dashboard/{{session['user_name']}}"
                 ><i class="ti ti-clipboard-text mr-1 text-xl"></i
             ></a>
-            <a href="/dashboard/{{session['userName']}}" class=""
+            <a href="/dashboard/{{session['user_name']}}" class=""
                 >{{translations.user.dashboard}}</a
             >
         </div>

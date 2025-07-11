@@ -5,20 +5,20 @@ from settings import Settings
 from utils.delete import Delete
 from utils.log import Log
 
-accountSettingsBlueprint = Blueprint("accountSettings", __name__)
+account_settings_blueprint = Blueprint("account_settings", __name__)
 
 
-@accountSettingsBlueprint.route("/accountsettings", methods=["GET", "POST"])
-def accountSettings():
-    if "userName" in session:
+@account_settings_blueprint.route("/account_settings", methods=["GET", "POST"])
+def account_settings():
+    if "user_name" in session:
         Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
         connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
-            """select userName from users where userName = ? """,
-            [(session["userName"])],
+            """select user_name from users where user_name = ? """,
+            [(session["user_name"])],
         )
         user = cursor.fetchall()
 
@@ -35,4 +35,4 @@ def accountSettings():
             f"{request.remote_addr} tried to reach account settings without being logged in"
         )
 
-        return redirect("/login/redirect=&accountsettings")
+        return redirect("/login/redirect=&account_settings")

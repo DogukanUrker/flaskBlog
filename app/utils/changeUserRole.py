@@ -5,32 +5,32 @@ from settings import Settings
 from utils.log import Log
 
 
-def changeUserRole(userName):
+def change_user_role(user_name):
     """
     Changes the role of the user with the specified username.
     """
-    userName = userName.lower()
+    user_name = user_name.lower()
     Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
     connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute(
-        """select role from users where lower(userName) = ? """,
-        [(userName)],
+        """select role from users where lower(user_name) = ? """,
+        [(user_name)],
     )
     role = cursor.fetchone()[0]
     if role == "admin":
-        newRole = "user"
+        new_role = "user"
     elif role == "user":
-        newRole = "admin"
+        new_role = "admin"
     cursor.execute(
-        """update users set role = ? where lower(userName) = ? """,
-        [(newRole), (userName)],
+        """update users set role = ? where lower(user_name) = ? """,
+        [(new_role), (user_name)],
     )
     Log.success(
-        f'Admin: "{session["userName"]}" changed user: "{userName}"s role to "{newRole}" ',
+        f'Admin: "{session["user_name"]}" changed user: "{user_name}"s role to "{new_role}" ',
     )
     connection.commit()
-    if session["userName"].lower() == userName:
-        Log.success(f'Admin: "{session["userName"]}" changed his role to "user"')
+    if session["user_name"].lower() == user_name:
+        Log.success(f'Admin: "{session["user_name"]}" changed his role to "user"')
         return redirect("/")

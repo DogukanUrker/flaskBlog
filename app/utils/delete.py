@@ -27,17 +27,17 @@ import sqlite3
 
 from flask import redirect, session
 from settings import Settings
-from utils.flashMessage import flashMessage
+from utils.flashMessage import flash_message
 from utils.log import Log
 
 
 class Delete:
-    def post(postID):
+    def post(post_id):
         """
         This function deletes a post and all associated comments from the database.
 
         Parameters:
-        postID (str): The ID of the post to be deleted.
+        post_id (str): The ID of the post to be deleted.
 
         Returns:
         None
@@ -48,11 +48,11 @@ class Delete:
         cursor = connection.cursor()
         cursor.execute(
             """select author from posts where id = ? """,
-            [(postID)],
+            [(post_id)],
         )
         cursor.execute(
             """delete from posts where id = ? """,
-            [(postID)],
+            [(post_id)],
         )
         cursor.execute("update sqlite_sequence set seq = seq-1")
         connection.commit()
@@ -62,16 +62,16 @@ class Delete:
         cursor = connection.cursor()
         cursor.execute(
             """select count(*) from comments where post = ? """,
-            [(postID)],
+            [(post_id)],
         )
-        commentCount = list(cursor)[0][0]
+        comment_count = list(cursor)[0][0]
         cursor.execute(
             """delete from comments where post = ? """,
-            [(postID)],
+            [(post_id)],
         )
         cursor.execute(
             """update sqlite_sequence set seq = seq - ? """,
-            [(commentCount)],
+            [(comment_count)],
         )
         connection.commit()
 
@@ -80,28 +80,28 @@ class Delete:
         cursor = connection.cursor()
         cursor.execute(
             """select postID from postsAnalytics where postID = ? """,
-            [(postID)],
+            [(post_id)],
         )
         cursor.execute(
             """delete from postsAnalytics where postID = ? """,
-            [(postID)],
+            [(post_id)],
         )
         connection.commit()
 
-        flashMessage(
+        flash_message(
             page="delete",
             message="post",
             category="error",
             language=session["language"],
         )
-        Log.success(f'Post: "{postID}" deleted')
+        Log.success(f'Post: "{post_id}" deleted')
 
-    def user(userName):
+    def user(user_name):
         """
         This function deletes a user and all associated data from the database.
 
         Parameters:
-        userName (str): The username of the user to be deleted.
+        user_name (str): The username of the user to be deleted.
 
         Returns:
         None
@@ -111,39 +111,39 @@ class Delete:
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
-            """select * from users where lower(userName) = ? """,
-            [(userName.lower())],
+            """select * from users where lower(user_name) = ? """,
+            [(user_name.lower())],
         )
         cursor.execute(
-            """select role from users where userName = ? """,
-            [(session["userName"])],
+            """select role from users where user_name = ? """,
+            [(session["user_name"])],
         )
         perpetrator = cursor.fetchone()
         cursor.execute(
-            """delete from users where lower(userName) = ? """,
-            [(userName.lower())],
+            """delete from users where lower(user_name) = ? """,
+            [(user_name.lower())],
         )
         cursor.execute("update sqlite_sequence set seq = seq-1")
         connection.commit()
-        flashMessage(
+        flash_message(
             page="delete",
             message="user",
             category="error",
             language=session["language"],
         )
-        Log.success(f'User: "{userName}" deleted')
+        Log.success(f'User: "{user_name}" deleted')
         if perpetrator[0] == "admin":
             return redirect("/admin/users")
         else:
             session.clear()
             return redirect("/")
 
-    def comment(commentID):
+    def comment(comment_id):
         """
         This function deletes a comment from the database.
 
         Parameters:
-        commentID (str): The ID of the comment to be deleted.
+        comment_id (str): The ID of the comment to be deleted.
 
         Returns:
         None
@@ -153,18 +153,18 @@ class Delete:
         cursor = connection.cursor()
         cursor.execute(
             """select user from comments where id = ? """,
-            [(commentID)],
+            [(comment_id)],
         )
         cursor.execute(
             """delete from comments where id = ? """,
-            [(commentID)],
+            [(comment_id)],
         )
         cursor.execute("update sqlite_sequence set seq = seq-1")
         connection.commit()
-        flashMessage(
+        flash_message(
             page="delete",
             message="comment",
             category="error",
             language=session["language"],
         )
-        Log.success(f'Comment: "{commentID}" deleted')
+        Log.success(f'Comment: "{comment_id}" deleted')

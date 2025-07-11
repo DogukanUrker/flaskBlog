@@ -12,30 +12,30 @@ from utils.getAnalyticsPageData import (
 )
 from utils.log import Log
 
-analyticsBlueprint = Blueprint("analytics", __name__)
+analytics_blueprint = Blueprint("analytics", __name__)
 
 
-@analyticsBlueprint.route("/analytics/posts/<urlID>")
-def analyticsPost(urlID):
+@analytics_blueprint.route("/analytics/posts/<url_id>")
+def analytics_post(url_id):
     """
     This function is used to render the post analytics page.
 
-    :param urlID: The urlID of the post.
-    :type urlID: str
+    :param url_id: The url_id of the post.
+    :type url_id: str
     :return: The rendered analytics post page.
     :rtype: flask.Response
     """
     if Settings.ANALYTICS:
-        if "userName" in session:
+        if "user_name" in session:
             connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
 
-            cursor.execute("select urlID from posts")
+            cursor.execute("select url_id from posts")
             posts = str(cursor.fetchall())
 
-            if urlID in posts:
-                Log.success(f'post: "{urlID}" loaded')
+            if url_id in posts:
+                Log.success(f'post: "{url_id}" loaded')
 
                 Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
@@ -44,25 +44,25 @@ def analyticsPost(urlID):
                 cursor = connection.cursor()
 
                 cursor.execute(
-                    """select * from posts where urlID = ? """,
-                    [(urlID)],
+                    """select * from posts where url_id = ? """,
+                    [(url_id)],
                 )
                 post = cursor.fetchone()
 
-                todaysVisitorData = getAnalyticsPageTrafficGraphData(
+                todays_visitor_data = getAnalyticsPageTrafficGraphData(
                     postID=post[0], hours=24
                 )
-                todaysVisitor = 0
-                for views in todaysVisitorData:
-                    todaysVisitor += int(views[1])
+                todays_visitor = 0
+                for views in todays_visitor_data:
+                    todays_visitor += int(views[1])
 
-                osGraphData = getAnalyticsPageOSGraphData(post[0])
+                os_graph_data = getAnalyticsPageOSGraphData(post[0])
 
                 return render_template(
                     "postsAnalytics.html",
                     post=post,
-                    todaysVisitor=todaysVisitor,
-                    osGraphData=osGraphData,
+                    todays_visitor=todays_visitor,
+                    os_graph_data=os_graph_data,
                 )
 
             else:

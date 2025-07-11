@@ -28,14 +28,14 @@ def getAnalyticsPageTrafficGraphData(
             hours = 48
 
     if sincePosted:
-        sqlQuery = """select strftime('%Y-%m-%d %H:%M', timeStamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
+        sqlQuery = """select strftime('%Y-%m-%d %H:%M', time_stamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
         parameter = (postID,)
     else:
         timeDeltaArgs = {"weeks": weeks or 0, "days": days or 0, "hours": hours}
 
         userQueryLimit = int((datetime.now() - timedelta(**timeDeltaArgs)).timestamp())
 
-        sqlQuery = """select strftime('%Y-%m-%d %H:%M', timeStamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? and timeStamp > ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
+        sqlQuery = """select strftime('%Y-%m-%d %H:%M', time_stamp, 'unixepoch') as visitTimeStamp, count(*) as visitCount from postsAnalytics where postID = ? and time_stamp > ? GROUP BY visitTimeStamp ORDER BY visitTimeStamp ASC"""
         parameter = (postID, userQueryLimit)
 
     try:

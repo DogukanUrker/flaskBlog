@@ -17,29 +17,29 @@ class CreatePostForm(Form):
     This class creates a form for creating a post.
     """
 
-    postTitle = StringField(
+    post_title = StringField(
         "Post Title",
         [validators.Length(min=4, max=75), validators.InputRequired()],
     )
 
-    postTags = StringField(
+    post_tags = StringField(
         "Post Tags",
         [validators.InputRequired()],
     )
 
-    postAbstract = TextAreaField(
+    post_abstract = TextAreaField(
         "Post Abstract",
         [validators.Length(min=150, max=200), validators.InputRequired()],
     )
 
-    postContent = TextAreaField(
+    post_content = TextAreaField(
         "Post Content",
         [validators.Length(min=50)],
     )
 
-    postBanner = FileField("Post Banner")
+    post_banner = FileField("Post Banner")
 
-    postCategory = SelectField(
+    post_category = SelectField(
         "Post Category",
         [validators.InputRequired()],
         choices=[

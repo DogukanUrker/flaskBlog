@@ -9,15 +9,15 @@ from flask import (
 )
 from passlib.hash import sha512_crypt as encryption
 from settings import Settings
-from utils.flashMessage import flashMessage
+from utils.flashMessage import flash_message
 from utils.forms.ChangePasswordForm import ChangePasswordForm
 from utils.log import Log
 
-changePasswordBlueprint = Blueprint("changePassword", __name__)
+change_password_blueprint = Blueprint("changePassword", __name__)
 
 
-@changePasswordBlueprint.route("/changepassword", methods=["GET", "POST"])
-def changePassword():
+@change_password_blueprint.route("/changepassword", methods=["GET", "POST"])
+def change_password():
     """
     This function is the route for the change password page.
     It is used to change the user's password.
@@ -29,13 +29,13 @@ def changePassword():
         render_template: a rendered template with the form
     """
 
-    if "userName" in session:
+    if "user_name" in session:
         form = ChangePasswordForm(request.form)
 
         if request.method == "POST":
-            oldPassword = request.form["oldPassword"]
+            old_password = request.form["old_password"]
             password = request.form["password"]
-            passwordConfirm = request.form["passwordConfirm"]
+            password_confirm = request.form["password_confirm"]
             Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
             connection = sqlite3.connect(Settings.DB_USERS_ROOT)
@@ -43,47 +43,47 @@ def changePassword():
             cursor = connection.cursor()
 
             cursor.execute(
-                """select password from users where userName = ? """,
-                [(session["userName"])],
+                """select password from users where user_name = ? """,
+                [(session["user_name"])],
             )
 
-            if encryption.verify(oldPassword, cursor.fetchone()[0]):
-                if oldPassword == password:
-                    flashMessage(
+            if encryption.verify(old_password, cursor.fetchone()[0]):
+                if old_password == password:
+                    flash_message(
                         page="changePassword",
                         message="same",
                         category="error",
                         language=session["language"],
                     )
 
-                if password != passwordConfirm:
-                    flashMessage(
+                if password != password_confirm:
+                    flash_message(
                         page="changePassword",
                         message="match",
                         category="error",
                         language=session["language"],
                     )
 
-                if oldPassword != password and password == passwordConfirm:
-                    newPassword = encryption.hash(password)
+                if old_password != password and password == password_confirm:
+                    new_password = encryption.hash(password)
                     Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
                     connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                     connection.set_trace_callback(Log.database)
                     cursor = connection.cursor()
                     cursor.execute(
-                        """update users set password = ? where userName = ? """,
-                        [(newPassword), (session["userName"])],
+                        """update users set password = ? where user_name = ? """,
+                        [(new_password), (session["user_name"])],
                     )
 
                     connection.commit()
 
                     Log.success(
-                        f'User: "{session["userName"]}" changed his password',
+                        f'User: "{session["user_name"]}" changed his password',
                     )
 
                     session.clear()
-                    flashMessage(
+                    flash_message(
                         page="changePassword",
                         message="success",
                         category="success",
@@ -92,7 +92,7 @@ def changePassword():
 
                     return redirect("/login/redirect=&")
             else:
-                flashMessage(
+                flash_message(
                     page="changePassword",
                     message="old",
                     category="error",
@@ -107,7 +107,7 @@ def changePassword():
         Log.error(
             f"{request.remote_addr} tried to change his password without logging in"
         )
-        flashMessage(
+        flash_message(
             page="changePassword",
             message="login",
             category="error",

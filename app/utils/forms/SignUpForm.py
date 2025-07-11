@@ -16,7 +16,7 @@ class SignUpForm(Form):
     This class creates a form for signing up.
     """
 
-    userName = StringField(
+    user_name = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
     )
@@ -34,7 +34,7 @@ class SignUpForm(Form):
         ],
     )
 
-    passwordConfirm = PasswordField(
+    password_confirm = PasswordField(
         "passwordConfirm",
         [
             validators.Length(min=8),

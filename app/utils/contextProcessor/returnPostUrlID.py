@@ -1,4 +1,4 @@
-from utils.getPostUrlIdFromPost import getPostUrlIdFromPost
+from utils.getPostUrlIdFromPost import get_post_url_id_from_post
 
 
 def returnPostUrlID():
@@ -9,4 +9,4 @@ def returnPostUrlID():
         dict: A dictionary containing the post's URL id.
     """
 
-    return dict(getPostUrlIdFromPost=getPostUrlIdFromPost)
+    return dict(getPostUrlIdFromPost=get_post_url_id_from_post)

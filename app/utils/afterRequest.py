@@ -2,7 +2,7 @@ from flask import request
 from utils.log import Log
 
 
-def afterRequestLogger(response):
+def after_request_logger(response):
     """
     This function is used to log the response of an HTTP request.
 

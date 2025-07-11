@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template
 from utils.log import Log
 
-searchBarBlueprint = Blueprint("searchBar", __name__)
+search_bar_blueprint = Blueprint("searchBar", __name__)
 
 
-@searchBarBlueprint.route("/searchbar")
-def searchBar():
+@search_bar_blueprint.route("/searchbar")
+def search_bar():
     """
     This function returns the search bar HTML page.
 

@@ -4,7 +4,7 @@ from os.path import exists
 from flask import flash
 
 
-def flashMessage(page="error", message="wrongCall", category="error", language="en"):
+def flash_message(page="error", message="wrongCall", category="error", language="en"):
     """
     Displays a flash message on the page.
 
@@ -18,9 +18,9 @@ def flashMessage(page="error", message="wrongCall", category="error", language="
         None
     """
     text = None
-    translationFile = f"./translations/{language}.json"
-    if exists(translationFile):
-        with open(translationFile, "r", encoding="utf-8") as file:
+    translation_file = f"./translations/{language}.json"
+    if exists(translation_file):
+        with open(translation_file, "r", encoding="utf-8") as file:
             translations = load(file)
             text = translations["flash"]
     flash(text[page][message], category)

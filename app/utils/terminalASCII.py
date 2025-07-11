@@ -1,4 +1,4 @@
-def terminalASCII():
+def terminal_ascii():
     """
     This function returns a string containing the terminal ASCII art.
     """

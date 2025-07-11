@@ -5,12 +5,12 @@ This module contains the function to calculate the estimated reading time in min
 from re import sub
 
 
-def calculateReadTime(content):
+def calculate_read_time(content):
     """Calculate the estimated reading time in minutes for a given post content."""
 
-    cleanText = sub(r"<[^>]+>", "", content)
+    clean_text = sub(r"<[^>]+>", "", content)
 
-    wordCount = len(cleanText.split())
-    readingTime = max(1, round(wordCount / 200))
+    word_count = len(clean_text.split())
+    reading_time = max(1, round(word_count / 200))
 
-    return readingTime
+    return reading_time

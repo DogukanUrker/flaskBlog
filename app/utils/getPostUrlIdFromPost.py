@@ -4,14 +4,14 @@ from settings import Settings
 from utils.log import Log
 
 
-def getPostUrlIdFromPost(postID: int):
+def get_post_url_id_from_post(post_id: int):
     """
-    Returns the post's urlID from post's id.
+    Returns the post's url_id from post's id.
     Args:
-        postID (int): The post's primary key/id whose urlID to be retrieved.
+        post_id (int): The post's primary key/id whose url_id to be retrieved.
 
     Returns:
-        str or None: The post's urlID of the post, or None if not found.
+        str or None: The post's url_id of the post, or None if not found.
     """
     Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
@@ -20,15 +20,15 @@ def getPostUrlIdFromPost(postID: int):
 
     cursor = connection.cursor()
 
-    cursor.execute("""select urlID from posts where id = ?""", (postID,))
+    cursor.execute("""select url_id from posts where id = ?""", (post_id,))
     try:
-        urlID = cursor.fetchone()[0]
-        Log.info(f"Returning post's id {postID} and post's urlID: {urlID}")
+        url_id = cursor.fetchone()[0]
+        Log.info(f"Returning post's id {post_id} and post's url_id: {url_id}")
     except Exception:
-        urlID = None
-        Log.error(f"Failed to retrieve post's urlID for post id : {postID}")
+        url_id = None
+        Log.error(f"Failed to retrieve post's url_id for post id : {post_id}")
 
     cursor.close()
     connection.close()
 
-    return urlID
+    return url_id

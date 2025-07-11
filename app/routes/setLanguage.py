@@ -1,13 +1,13 @@
 from flask import Blueprint, redirect, session
 from settings import Settings
-from utils.flashMessage import flashMessage
+from utils.flashMessage import flash_message
 from utils.log import Log
 
-setLanguageBlueprint = Blueprint("setLanguage", __name__)
+set_language_blueprint = Blueprint("setLanguage", __name__)
 
 
-@setLanguageBlueprint.route("/setLanguage/<language>")
-def setLanguage(language):
+@set_language_blueprint.route("/setLanguage/<language>")
+def set_language(language):
     """
     Set the language for the application.
 
@@ -19,7 +19,7 @@ def setLanguage(language):
     if language in Settings.LANGUAGES:
         session["language"] = language
         Log.info(f"Language set to: {language}")
-        flashMessage(
+        flash_message(
             page="setLanguage",
             message="success",
             category="success",

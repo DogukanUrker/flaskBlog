@@ -13,7 +13,7 @@
     class="w-11/12 md:w-10/12 lg:w-8/12 xl:w-5/12 h-fit mx-auto py-4 px-2 my-8 border-2 rounded-md shadow-md border-gray-500/25"
 >
     <img
-        src="{{ url_for('returnPostBanner.returnPostBanner', postID = post[0]) }}"
+        src="{{ url_for('returnPostBanner.return_post_banner', post_id= post[0]) }}"
         class="w-96 rounded mx-auto"
     />
 
@@ -174,7 +174,7 @@
 </a>
 {% else %}
 <a
-    href='/user/{{ session["userName"] }}'
+    href='/user/{{ session["user_name"] }}'
     class="hidden md:block fixed bottom-0 left-1"
 >
     <i

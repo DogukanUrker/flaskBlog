@@ -8,11 +8,11 @@ from utils.getAnalyticsPageData import (
 )
 from utils.log import Log
 
-returnPostAnalyticsDataBlueprint = Blueprint("returnPostTrafficGraphData", __name__)
+return_post_analytics_data_blueprint = Blueprint("returnPostTrafficGraphData", __name__)
 
 
-@returnPostAnalyticsDataBlueprint.route("/api/v1/postTrafficGraphData")
-def returnPostTrafficGraphData() -> dict:
+@return_post_analytics_data_blueprint.route("/api/v1/postTrafficGraphData")
+def return_post_traffic_graph_data() -> dict:
     """
     Retrieves traffic graph data for a given post.
 
@@ -21,8 +21,8 @@ def returnPostTrafficGraphData() -> dict:
 
     Args (Query Parameters):
         if None of below kwargs are given then default will be last 48 hours data
-        - `postID` (int, required): The ID of the post for which traffic data is requested.
-        - `sincePosted` (bool, optional): If `True`, fetches data since the post was published and other kwargs will be ignored.
+        - `post_id` (int, required): The ID of the post for which traffic data is requested.
+        - `since_posted` (bool, optional): If `True`, fetches data since the post was published and other kwargs will be ignored.
         - `weeks` (float, optional): Number of weeks to filter the traffic data.
         - `days` (float, optional): Number of days to filter the traffic data.
         - `hours` (float, optional): Number of hours to filter the traffic data.
@@ -30,13 +30,13 @@ def returnPostTrafficGraphData() -> dict:
     Returns:
         - `200 OK`: Successfully retrieves graph data.
         - `403 Forbidden`: If the client is not authenticated.
-        - `404 Not Found`: If `postID` is missing.
+        - `404 Not Found`: If `post_id` is missing.
         - `410 Gone`: If analytics is disabled by the admin.
     """
 
-    postID = request.args.get("postID", type=int)
+    post_id = request.args.get("postID", type=int)
 
-    sincePosted = str(request.args.get("sincePosted", default=False)).lower() == "true"
+    since_posted = str(request.args.get("sincePosted", default=False)).lower() == "true"
 
     weeks = request.args.get("weeks", type=float, default=0)
 
@@ -45,13 +45,13 @@ def returnPostTrafficGraphData() -> dict:
     hours = request.args.get("hours", type=float, default=0)
 
     if Settings.ANALYTICS:
-        if "userName" in session:
-            if postID:
+        if "user_name" in session:
+            if post_id:
                 return make_response(
                     {
                         "payload": getAnalyticsPageTrafficGraphData(
-                            postID=postID,
-                            sincePosted=sincePosted,
+                            postID=post_id,
+                            sincePosted=since_posted,
                             weeks=weeks,
                             days=days,
                             hours=hours,
@@ -79,8 +79,8 @@ def returnPostTrafficGraphData() -> dict:
         return ({"message": "analytics is disabled by admin"}, 410)
 
 
-@returnPostAnalyticsDataBlueprint.route("/api/v1/postCountryGraphData")
-def returnPostCountryGraphData() -> dict:
+@return_post_analytics_data_blueprint.route("/api/v1/postCountryGraphData")
+def return_post_country_graph_data() -> dict:
     """
     Retrieves country-based graph data for a given post.
 
@@ -88,27 +88,27 @@ def returnPostCountryGraphData() -> dict:
     providing insights into the geographical distribution of viewers.
 
     Args (Query Parameters):
-        `postID` (int, required): The ID of the post for which analytics data is requested.
-        `viewAll` (bool, optional): If `True`, returns data for all time; otherwise, return top 25 countries.
+        `post_id` (int, required): The ID of the post for which analytics data is requested.
+        `view_all` (bool, optional): If `True`, returns data for all time; otherwise, return top 25 countries.
 
     Returns:
         `200 OK`: Successfully retrieves graph data.
         `403 Forbidden`: If the client is not authenticated.
-        `404 Not Found`: If `postID` is missing.
+        `404 Not Found`: If `post_id` is missing.
         `410 Gone`: If analytics is disabled by the admin.
     """
 
-    postID = request.args.get("postID", type=int)
+    post_id = request.args.get("postID", type=int)
 
-    viewAll = str(request.args.get("viewAll", default=False)).lower() == "true"
+    view_all = str(request.args.get("viewAll", default=False)).lower() == "true"
 
     if Settings.ANALYTICS:
-        if "userName" in session:
-            if postID:
+        if "user_name" in session:
+            if post_id:
                 return make_response(
                     {
                         "payload": getAnalyticsPageCountryGraphData(
-                            postID=postID, viewAll=viewAll
+                            postID=post_id, viewAll=view_all
                         )
                     },
                     200,
@@ -133,8 +133,8 @@ def returnPostCountryGraphData() -> dict:
         return make_response({"message": "analytics is disabled by admin"}, 410)
 
 
-@returnPostAnalyticsDataBlueprint.route("/api/v1/timeSpendsDuration", methods={"POST"})
-def storeTimeSpendsDuraton() -> dict:
+@return_post_analytics_data_blueprint.route("/api/v1/timeSpendsDuration", methods={"POST"})
+def store_time_spends_duration() -> dict:
     """
     This function stores the time spent by a visitor on a post.
 
@@ -142,8 +142,8 @@ def storeTimeSpendsDuraton() -> dict:
     for a given visitor.
 
     Request Data (JSON):
-        `visitorID (int)`: Unique identifier of the visitor.
-        `spendTime (int)`: Time spent (in seconds).
+        `visitor_id (int)`: Unique identifier of the visitor.
+        `spend_time (int)`: Time spent (in seconds).
 
     Returns:
         `200 OK`: If the update is successful.
@@ -153,9 +153,9 @@ def storeTimeSpendsDuraton() -> dict:
 
     if Settings.ANALYTICS:
         if request.method == "POST":
-            visitorData = request.json
-            visitorID = visitorData.get("visitorID")
-            spendTime = visitorData.get("spendTime")
+            visitor_data = request.json
+            visitor_id = visitor_data.get("visitorID")
+            spend_time = visitor_data.get("spendTime")
 
             try:
                 connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
@@ -164,7 +164,7 @@ def storeTimeSpendsDuraton() -> dict:
 
                 cursor.execute(
                     """update postsAnalytics set timeSpendDuration = ? where id = ? """,
-                    (spendTime, visitorID),
+                    (spend_time, visitor_id),
                 )
                 connection.commit()
                 return make_response({"message": "Successfully upadated"}, 200)

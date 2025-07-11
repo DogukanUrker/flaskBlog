@@ -11,15 +11,15 @@ from flask import (
 from passlib.hash import sha512_crypt as encryption
 from requests import post as requestsPost
 from settings import Settings
-from utils.addPoints import addPoints
-from utils.flashMessage import flashMessage
+from utils.addPoints import add_points
+from utils.flashMessage import flash_message
 from utils.forms.LoginForm import LoginForm
 from utils.log import Log
 
-loginBlueprint = Blueprint("login", __name__)
+login_blueprint = Blueprint("login", __name__)
 
 
-@loginBlueprint.route("/login/redirect=<direct>", methods=["GET", "POST"])
+@login_blueprint.route("/login/redirect=<direct>", methods=["GET", "POST"])
 def login(direct):
     """
     This function handles the login process for the website.
@@ -35,8 +35,8 @@ def login(direct):
     """
     direct = direct.replace("&", "/")
     if Settings.LOG_IN:
-        if "userName" in session:
-            Log.error(f'User: "{session["userName"]}" already logged in')
+        if "user_name" in session:
+            Log.error(f'User: "{session["user_name"]}" already logged in')
             return (
                 redirect(direct),
                 301,
@@ -44,21 +44,21 @@ def login(direct):
         else:
             form = LoginForm(request.form)
             if request.method == "POST":
-                userName = request.form["userName"]
+                user_name = request.form["user_name"]
                 password = request.form["password"]
-                userName = userName.replace(" ", "")
+                user_name = user_name.replace(" ", "")
                 Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
                 connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
-                    """select * from users where lower(userName) = ? """,
-                    [(userName.lower())],
+                    """select * from users where lower(user_name) = ? """,
+                    [(user_name.lower())],
                 )
                 user = cursor.fetchone()
                 if not user:
-                    Log.error(f'User: "{userName}" not found')
-                    flashMessage(
+                    Log.error(f'User: "{user_name}" not found')
+                    flash_message(
                         page="login",
                         message="notFound",
                         category="error",
@@ -84,11 +84,11 @@ def login(direct):
                                 f"Login reCAPTCHA | verification: {verifyResponse['success']} | score: {verifyResponse.get('score')}",
                             )
 
-                        session["userName"] = user[1]
-                        session["userRole"] = user[5]
-                        addPoints(1, session["userName"])
+                        session["user_name"] = user[1]
+                        session["user_role"] = user[5]
+                        add_points(1, session["user_name"])
                         Log.success(f'User: "{user[1]}" logged in')
-                        flashMessage(
+                        flash_message(
                             page="login",
                             message="success",
                             category="success",
@@ -102,7 +102,7 @@ def login(direct):
 
                     else:
                         Log.error("Wrong password")
-                        flashMessage(
+                        flash_message(
                             page="login",
                             message="password",
                             category="error",

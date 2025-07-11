@@ -8,18 +8,18 @@ from flask import (
     session,
 )
 from settings import Settings
-from utils.addPoints import addPoints
-from utils.flashMessage import flashMessage
+from utils.addPoints import add_points
+from utils.flashMessage import flash_message
 from utils.forms.CreatePostForm import CreatePostForm
-from utils.generateUrlIdFromPost import generateurlID
+from utils.generateUrlIdFromPost import generate_url_id
 from utils.log import Log
-from utils.time import currentTimeStamp
+from utils.time import current_time_stamp
 
-createPostBlueprint = Blueprint("createPost", __name__)
+create_post_blueprint = Blueprint("createPost", __name__)
 
 
-@createPostBlueprint.route("/createpost", methods=["GET", "POST"])
-def createPost():
+@create_post_blueprint.route("/createpost", methods=["GET", "POST"])
+def create_post():
     """
     This function creates a new post for the user.
 
@@ -33,26 +33,26 @@ def createPost():
         401: If the user is not authenticated.
     """
 
-    if "userName" in session:
+    if "user_name" in session:
         form = CreatePostForm(request.form)
 
         if request.method == "POST":
-            postTitle = request.form["postTitle"]
-            postTags = request.form["postTags"]
-            postAbstract = request.form["postAbstract"]
-            postContent = request.form["postContent"]
-            postBanner = request.files["postBanner"].read()
-            postCategory = request.form["postCategory"]
+            post_title = request.form["post_title"]
+            post_tags = request.form["post_tags"]
+            post_abstract = request.form["post_abstract"]
+            post_content = request.form["post_content"]
+            post_banner = request.files["post_banner"].read()
+            post_category = request.form["post_category"]
 
-            if postContent == "" or postAbstract == "":
-                flashMessage(
+            if post_content == "" or post_abstract == "":
+                flash_message(
                     page="createPost",
                     message="empty",
                     category="error",
                     language=session["language"],
                 )
                 Log.error(
-                    f'User: "{session["userName"]}" tried to create a post with empty content',
+                    f'User: "{session["user_name"]}" tried to create a post with empty content',
                 )
             else:
                 Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
@@ -68,36 +68,36 @@ def createPost():
                         banner,
                         author,
                         views,
-                        timeStamp,
-                        lastEditTimeStamp,
+                        time_stamp,
+                        last_edit_time_stamp,
                         category,
-                        urlID,
+                        url_id,
                         abstract
                     ) VALUES (
                         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                     )
                     """,
                     (
-                        postTitle,
-                        postTags,
-                        postContent,
-                        postBanner,
-                        session["userName"],
+                        post_title,
+                        post_tags,
+                        post_content,
+                        post_banner,
+                        session["user_name"],
                         0,
-                        currentTimeStamp(),
-                        currentTimeStamp(),
-                        postCategory,
-                        generateurlID(),
-                        postAbstract,
+                        current_time_stamp(),
+                        current_time_stamp(),
+                        post_category,
+                        generate_url_id(),
+                        post_abstract,
                     ),
                 )
                 connection.commit()
                 Log.success(
-                    f'Post: "{postTitle}" posted by "{session["userName"]}"',
+                    f'Post: "{post_title}" posted by "{session["user_name"]}"',
                 )
 
-                addPoints(20, session["userName"])
-                flashMessage(
+                add_points(20, session["user_name"])
+                flash_message(
                     page="createPost",
                     message="success",
                     category="success",
@@ -111,7 +111,7 @@ def createPost():
         )
     else:
         Log.error(f"{request.remote_addr} tried to create a new post without login")
-        flashMessage(
+        flash_message(
             page="createPost",
             message="login",
             category="error",
