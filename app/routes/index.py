@@ -16,12 +16,12 @@ subject to change without notice. Use of this code for commercial or non-commerc
 purposes without permission is strictly prohibited.
 """
 
-import sqlite3
 from json import load
 
 from flask import Blueprint, redirect, render_template, session
 from settings import Settings
 from utils.log import Log
+from utils.paginate import paginate_query
 
 indexBlueprint = Blueprint("index", __name__)
 
@@ -55,22 +55,19 @@ def index(by="hot", sort="desc"):
         )
         return redirect("/")
 
-    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.database)
-
-    cursor = connection.cursor()
-
     if by == "hot":
-        cursor.execute(
-            f"SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) AS hotScore FROM posts ORDER BY hotScore {sort}"
+        select_query = (
+            "SELECT *, (views * 1 / log(1 + (strftime('%s', 'now') - timeStamp) / 3600 + 2)) "
+            f"AS hotScore FROM posts ORDER BY hotScore {sort}"
         )
-        pass
     else:
-        cursor.execute(f"select * from posts order by {by} {sort}")
+        select_query = f"select * from posts order by {by} {sort}"
 
-    posts = cursor.fetchall()
+    posts, page, total_pages = paginate_query(
+        Settings.DB_POSTS_ROOT,
+        "select count(*) from posts",
+        select_query,
+    )
 
     if by == "timeStamp":
         by = "create"
@@ -88,4 +85,11 @@ def index(by="hot", sort="desc"):
 
     Log.info(f"Sorting posts on index page by: {sortName}")
 
-    return render_template("index.html", posts=posts, sortName=sortName, source="")
+    return render_template(
+        "index.html",
+        posts=posts,
+        sortName=sortName,
+        source="",
+        page=page,
+        total_pages=total_pages,
+    )

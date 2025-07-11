@@ -79,6 +79,8 @@
     {% endif %}
 </div>
 {% endfor %} {% if request.path == "/admin/comments" %}
+{% from "components/pagination.html" import pagination %}
+{{ pagination(page, total_pages, request.path) }}
 <a href="/admin" class="hidden md:block fixed bottom-0 left-1">
     <i
         class="ti ti-arrow-back mr-1 text-xl hover:text-rose-500 duration-150"

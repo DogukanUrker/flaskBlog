@@ -119,7 +119,10 @@
         </div>
     </div>
 </div>
-{% endfor %} {% elif not showPosts %} {% if request.path == "/admin/posts" %}
+{% endfor %}
+{% from "components/pagination.html" import pagination %}
+{{ pagination(page, total_pages, request.path) }}
+{% elif not showPosts %} {% if request.path == "/admin/posts" %}
 <h1>{{translations.dashboard.noPosts}}</h1>
 {% else %}
 <p class="text-center mt-32 select-none">

@@ -1,5 +1,3 @@
-import sqlite3
-
 from flask import (
     Blueprint,
     redirect,
@@ -9,6 +7,7 @@ from flask import (
 )
 from settings import Settings
 from utils.log import Log
+from utils.paginate import paginate_query
 
 adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
 
@@ -20,17 +19,23 @@ def adminPanelPosts():
         Log.info(f"Admin: {session['userName']} reached to posts admin panel")
         Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
-        connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-        connection.set_trace_callback(Log.database)
-        cursor = connection.cursor()
-        cursor.execute("select * from posts order by timeStamp desc")
-        posts = cursor.fetchall()
+        posts, page, total_pages = paginate_query(
+            Settings.DB_POSTS_ROOT,
+            "select count(*) from posts",
+            "select * from posts order by timeStamp desc",
+        )
 
         Log.info(
             f"Rendering dashboard.html: params: posts={len(posts)} and showPosts=True"
         )
 
-        return render_template("dashboard.html", posts=posts, showPosts=True)
+        return render_template(
+            "dashboard.html",
+            posts=posts,
+            showPosts=True,
+            page=page,
+            total_pages=total_pages,
+        )
     else:
         Log.error(
             f"{request.remote_addr} tried to reach post admin panel being logged in"

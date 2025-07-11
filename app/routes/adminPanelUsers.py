@@ -11,6 +11,7 @@ from settings import Settings
 from utils.changeUserRole import changeUserRole
 from utils.delete import Delete
 from utils.log import Log
+from utils.paginate import paginate_query
 
 adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)
 
@@ -47,19 +48,19 @@ def adminPanelUsers():
                 changeUserRole(request.form["userName"])
 
         if role == "admin":
-            Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
-
-            connection = sqlite3.connect(Settings.DB_USERS_ROOT)
-            connection.set_trace_callback(Log.database)
-            cursor = connection.cursor()
-            cursor.execute("select * from users")
-            users = cursor.fetchall()
+            users, page, total_pages = paginate_query(
+                Settings.DB_USERS_ROOT,
+                "select count(*) from users",
+                "select * from users",
+            )
 
             Log.info(f"Rendering adminPanelUsers.html: params: users={users}")
 
             return render_template(
                 "adminPanelUsers.html",
                 users=users,
+                page=page,
+                total_pages=total_pages,
             )
         else:
             Log.error(

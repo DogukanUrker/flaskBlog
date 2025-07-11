@@ -7,12 +7,12 @@ subject to change without notice. Use of this code for commercial or non-commerc
 purposes without permission is strictly prohibited.
 """
 
-import sqlite3
 from json import load
 
 from flask import Blueprint, abort, redirect, render_template, session
 from settings import Settings
 from utils.log import Log
+from utils.paginate import paginate_query
 
 categoryBlueprint = Blueprint("category", __name__)
 
@@ -65,17 +65,12 @@ def category(category, by="timeStamp", sort="desc"):
     if category.lower() not in categories:
         abort(404)
 
-    Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-    connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-    connection.set_trace_callback(Log.database)
-    cursor = connection.cursor()
-
-    cursor.execute(
-        f"""select * from posts where lower(category) = ? order by {by} {sort}""",
-        [(category.lower())],
+    posts, page, total_pages = paginate_query(
+        Settings.DB_POSTS_ROOT,
+        "select count(*) from posts where lower(category) = ?",
+        f"select * from posts where lower(category) = ? order by {by} {sort}",
+        [category.lower()],
     )
-    posts = cursor.fetchall()
 
     if by == "timeStamp":
         by = "create"
@@ -97,4 +92,6 @@ def category(category, by="timeStamp", sort="desc"):
         category=translations["categories"][category.lower()],
         sortName=sortName,
         source=f"/category/{category}",
+        page=page,
+        total_pages=total_pages,
     )

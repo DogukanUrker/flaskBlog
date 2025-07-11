@@ -13,6 +13,7 @@ from settings import Settings
 from utils.delete import Delete
 from utils.flashMessage import flashMessage
 from utils.log import Log
+from utils.paginate import paginate_query
 
 dashboardBlueprint = Blueprint("dashboard", __name__)
 
@@ -29,17 +30,12 @@ def dashboard(userName):
                         redirect(url_for("dashboard.dashboard", userName=userName)),
                         301,
                     )
-            Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
-
-            connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
-            connection.set_trace_callback(Log.database)
-            cursor = connection.cursor()
-
-            cursor.execute(
-                """select * from posts where author = ? order by timeStamp desc""",
-                [(session["userName"])],
+            posts, page, total_pages = paginate_query(
+                Settings.DB_POSTS_ROOT,
+                "select count(*) from posts where author = ?",
+                "select * from posts where author = ? order by timeStamp desc",
+                [session["userName"]],
             )
-            posts = cursor.fetchall()
             Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
             connection = sqlite3.connect(Settings.DB_COMMENTS_ROOT)
@@ -82,6 +78,8 @@ def dashboard(userName):
                 comments=comments,
                 showPosts=showPosts,
                 showComments=showComments,
+                page=page,
+                total_pages=total_pages,
             )
         else:
             Log.error(
