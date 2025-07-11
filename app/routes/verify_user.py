@@ -15,12 +15,13 @@ from settings import Settings
 from utils.flash_message import flash_message
 from utils.forms.VerifyUserForm import VerifyUserForm
 from utils.log import Log
-from utils.time import current_time_stamp
 
 verify_user_blueprint = Blueprint("verify_user", __name__)
 
 
-@verify_user_blueprint.route("/verify_user/codesent=<code_sent>", methods=["GET", "POST"])
+@verify_user_blueprint.route(
+    "/verify_user/codesent=<code_sent>", methods=["GET", "POST"]
+)
 def verify_user(code_sent):
     """
     This function handles the verification of the user's account.
@@ -43,7 +44,7 @@ def verify_user(code_sent):
         cursor = connection.cursor()
 
         cursor.execute(
-                            """select is_verified from users where lower(user_name) = ? """,
+            """select is_verified from users where lower(user_name) = ? """,
             [(user_name.lower())],
         )
         is_verified = cursor.fetchone()[0]

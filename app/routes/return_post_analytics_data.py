@@ -8,7 +8,9 @@ from utils.get_analytics_page_data import (
 )
 from utils.log import Log
 
-return_post_analytics_data_blueprint = Blueprint("return_post_traffic_graph_data", __name__)
+return_post_analytics_data_blueprint = Blueprint(
+    "return_post_traffic_graph_data", __name__
+)
 
 
 @return_post_analytics_data_blueprint.route("/api/v1/postTrafficGraphData")
@@ -133,7 +135,9 @@ def return_post_country_graph_data() -> dict:
         return make_response({"message": "analytics is disabled by admin"}, 410)
 
 
-@return_post_analytics_data_blueprint.route("/api/v1/timeSpendsDuration", methods={"POST"})
+@return_post_analytics_data_blueprint.route(
+    "/api/v1/timeSpendsDuration", methods={"POST"}
+)
 def store_time_spends_duration() -> dict:
     """
     This function stores the time spent by a visitor on a post.

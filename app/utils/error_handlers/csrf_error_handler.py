@@ -1,5 +1,4 @@
 from flask import render_template
-from utils.log import Log
 
 
 def csrf_error_handler(e):

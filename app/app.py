@@ -103,7 +103,9 @@ from utils.context_processor.is_registration import is_registration
 from utils.context_processor.markdown import markdown_processor
 from utils.context_processor.return_post_url_id import return_post_url_id
 from utils.context_processor.return_post_url_slug import return_post_url_slug
-from utils.context_processor.return_user_profile_picture import return_user_profile_picture
+from utils.context_processor.return_user_profile_picture import (
+    return_user_profile_picture,
+)
 from utils.context_processor.translations import inject_translations
 from utils.db_checker import (
     analytics_table,

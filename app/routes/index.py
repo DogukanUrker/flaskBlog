@@ -46,7 +46,14 @@ def index(by="hot", sort="desc"):
     The rendered template of the home page with sorted posts according to the provided sorting options.
     """
 
-    by_options = ["time_stamp", "title", "views", "category", "last_edit_time_stamp", "hot"]
+    by_options = [
+        "time_stamp",
+        "title",
+        "views",
+        "category",
+        "last_edit_time_stamp",
+        "hot",
+    ]
     sort_options = ["asc", "desc"]
 
     if by not in by_options or sort not in sort_options:
