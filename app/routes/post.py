@@ -11,7 +11,7 @@ from flask import (
 from settings import Settings
 from utils.add_points import add_points
 from utils.calculate_read_time import calculate_read_time
-from utils.delete import delete_post, delete_comment
+from utils.delete import delete_comment, delete_post
 from utils.flash_message import flash_message
 from utils.forms.CommentForm import CommentForm
 from utils.generate_url_id_from_post import get_slug_from_post_title
@@ -84,7 +84,7 @@ def post(url_id=None, slug=None):
             cursor = connection.cursor()
 
             cursor.execute(
-                "insert into comments(post_id,comment,user_name,time_stamp) \
+                "insert into comments(id,comment,user_name,time_stamp) \
                 values(?, ?, ?, ?)",
                 (
                     post[0],
@@ -117,7 +117,7 @@ def post(url_id=None, slug=None):
         cursor = connection.cursor()
 
         cursor.execute(
-            """select * from comments where post_id = ? order by time_stamp desc""",
+            """select * from comments where id = ? order by time_stamp desc""",
             [(post[0])],
         )
         comments = cursor.fetchall()
@@ -137,7 +137,7 @@ def post(url_id=None, slug=None):
                 cursor = connection.cursor()
 
                 cursor.execute(
-                    """insert into posts_analytics (post_id, visitor_user_name, country, os, continent, time_stamp) values (?,?,?,?,?,?) RETURNING id""",
+                    """insert into posts_analytics (id, visitor_user_name, country, os, continent, time_stamp) values (?,?,?,?,?,?) RETURNING id""",
                     (
                         post[0],
                         session_user,
