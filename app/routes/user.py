@@ -26,7 +26,7 @@ def user(user_name):
     connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
-    cursor.execute("select userName from users")
+    cursor.execute("select user_name from users")
     users = cursor.fetchall()
     """
     This if statement checks if the given username exists in the database.
