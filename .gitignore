@@ -165,6 +165,7 @@ log/
 
 # PyCharm files
 /.idea
+
 #vsocde files
 /.vscode
 
