@@ -8,7 +8,7 @@ from utils.log import Log
 return_post_banner_blueprint = Blueprint("return_post_banner", __name__)
 
 
-@return_post_banner_blueprint.route("/postImage/<int:post_id>")
+@return_post_banner_blueprint.route("/post_image/<int:post_id>")
 def return_post_banner(post_id):
     """
     This function returns the banner image for a given post ID.
