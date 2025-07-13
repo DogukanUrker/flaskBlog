@@ -14,4 +14,4 @@ def search_bar():
     """
 
     Log.info("Rendering searchBar.html")
-    return render_template("search_bar.html")
+    return render_template("searchBar.html")

@@ -17,7 +17,7 @@ admin_panel_users_blueprint = Blueprint("admin_panel_users", __name__)
 
 
 @admin_panel_users_blueprint.route("/admin/users", methods=["GET", "POST"])
-@admin_panel_users_blueprint.route("/adminpanel/users", methods=["GET", "POST"])
+@admin_panel_users_blueprint.route("/admin_panel/users", methods=["GET", "POST"])
 def admin_panel_users():
     if "user_name" in session:
         Log.info(f"Admin: {session['user_name']} reached to users admin panel")

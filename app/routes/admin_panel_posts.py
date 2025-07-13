@@ -9,11 +9,11 @@ from settings import Settings
 from utils.log import Log
 from utils.paginate import paginate_query
 
-admin_panel_posts_blueprint = Blueprint("adminPanelPosts", __name__)
+admin_panel_posts_blueprint = Blueprint("admin_panel_posts", __name__)
 
 
 @admin_panel_posts_blueprint.route("/admin/posts", methods=["GET", "POST"])
-@admin_panel_posts_blueprint.route("/adminpanel/posts", methods=["GET", "POST"])
+@admin_panel_posts_blueprint.route("/admin_panel/posts", methods=["GET", "POST"])
 def admin_panel_posts():
     if "user_name" in session:
         Log.info(f"Admin: {session['user_name']} reached to posts admin panel")
