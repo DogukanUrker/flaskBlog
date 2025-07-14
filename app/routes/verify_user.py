@@ -34,8 +34,8 @@ def verify_user(code_sent):
 
     """
 
-    if "user_name" in session:
-        user_name = session["user_name"]
+    if "username" in session:
+        username = session["username"]
         Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
         Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
@@ -44,8 +44,8 @@ def verify_user(code_sent):
         cursor = connection.cursor()
 
         cursor.execute(
-            """select is_verified from users where lower(user_name) = ? """,
-            [(user_name.lower())],
+            """select is_verified from users where lower(username) = ? """,
+            [(username.lower())],
         )
         is_verified = cursor.fetchone()[0]
 
@@ -62,11 +62,11 @@ def verify_user(code_sent):
 
                     if code == verification_code:
                         cursor.execute(
-                            """update users set is_verified = "True" where lower(user_name) = ? """,
-                            [(user_name.lower())],
+                            """update users set is_verified = "True" where lower(username) = ? """,
+                            [(username.lower())],
                         )
                         connection.commit()
-                        Log.success(f'User: "{user_name}" has been verified')
+                        Log.success(f'User: "{username}" has been verified')
                         flash_message(
                             page="verifyUser",
                             message="success",
@@ -90,18 +90,18 @@ def verify_user(code_sent):
             elif code_sent == "false":
                 if request.method == "POST":
                     cursor.execute(
-                        """select * from users where lower(user_name) = ? """,
-                        [(user_name.lower())],
+                        """select * from users where lower(username) = ? """,
+                        [(username.lower())],
                     )
-                    user_name_db = cursor.fetchone()
+                    username_db = cursor.fetchone()
 
                     cursor.execute(
-                        """select email from users where lower(user_name) = ? """,
-                        [(user_name.lower())],
+                        """select email from users where lower(username) = ? """,
+                        [(username.lower())],
                     )
                     email = cursor.fetchone()
 
-                    if user_name_db:
+                    if username_db:
                         context = ssl.create_default_context()
                         server = smtplib.SMTP(Settings.SMTP_SERVER, Settings.SMTP_PORT)
                         server.ehlo()
@@ -113,7 +113,7 @@ def verify_user(code_sent):
 
                         message = EmailMessage()
                         message.set_content(
-                            f"Hi {user_name}👋,\nHere is your account verification code🔢:\n{verification_code}"
+                            f"Hi {username}👋,\nHere is your account verification code🔢:\n{verification_code}"
                         )
                         message.add_alternative(
                             f"""\
@@ -125,7 +125,7 @@ def verify_user(code_sent):
                                     <div style="text-align: center;">
                                         <h1 style="color: #F43F5E;">Thank you for creating an account!</h1>
                                         <p style="font-size: 16px;">
-                                        Hello, {user_name}.
+                                        Hello, {username}.
                                         </p>
                                         <p style="font-size: 16px;">
                                         Please enter the verification code below to verify your account.
@@ -154,7 +154,7 @@ def verify_user(code_sent):
                         server.send_message(message)
                         server.quit()
                         Log.success(
-                            f'Verification code sent to "{email[0]}" for user: "{user_name}"'
+                            f'Verification code sent to "{email[0]}" for user: "{username}"'
                         )
 
                         return redirect("/verify_user/codesent=true")

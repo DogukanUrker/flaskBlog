@@ -12,11 +12,11 @@ from utils.flash_message import flash_message
 from utils.forms.ChangeUserNameForm import ChangeUserNameForm
 from utils.log import Log
 
-change_user_name_blueprint = Blueprint("change_user_name", __name__)
+change_username_blueprint = Blueprint("change_username", __name__)
 
 
-@change_user_name_blueprint.route("/change_user_name", methods=["GET", "POST"])
-def change_user_name():
+@change_username_blueprint.route("/change_username", methods=["GET", "POST"])
+def change_username():
     """
     This function is the route for the change username page.
     It is used to change the user's username.
@@ -28,20 +28,20 @@ def change_user_name():
         render_template: a rendered template with the form
     """
 
-    if "user_name" in session:
+    if "username" in session:
         form = ChangeUserNameForm(request.form)
 
         if request.method == "POST":
-            new_user_name = request.form["new_user_name"]
-            new_user_name = new_user_name.replace(" ", "")
+            new_username = request.form["new_username"]
+            new_username = new_username.replace(" ", "")
             Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
             connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
-                """select * from users where lower(user_name) = ? """,
-                [(new_user_name.lower())],
+                """select * from users where lower(username) = ? """,
+                [(new_username.lower())],
             )
             user = cursor.fetchone()
 
@@ -52,8 +52,8 @@ def change_user_name():
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
-                    """update users set user_name = ? where user_name = ? """,
-                    [(new_user_name), (session["user_name"])],
+                    """update users set username = ? where username = ? """,
+                    [(new_username), (session["username"])],
                 )
 
                 connection.commit()
@@ -64,8 +64,8 @@ def change_user_name():
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
-                    """update posts set user_name = ? where user_name = ? """,
-                    [(new_user_name), (session["user_name"])],
+                    """update posts set username = ? where username = ? """,
+                    [(new_username), (session["username"])],
                 )
 
                 connection.commit()
@@ -76,19 +76,19 @@ def change_user_name():
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
-                    """update comments set user_name = ? where user_name = ? """,
-                    [(new_user_name), (session["user_name"])],
+                    """update comments set username = ? where username = ? """,
+                    [(new_username), (session["username"])],
                 )
 
                 connection.commit()
 
                 Log.success(
-                    f"User: {session['user_name']} changed his username to {new_user_name}",
+                    f"User: {session['username']} changed his username to {new_username}",
                 )
 
-                session["user_name"] = new_user_name
+                session["username"] = new_username
                 flash_message(
-                    page="change_user_name",
+                    page="change_username",
                     message="success",
                     category="success",
                     language=session["language"],
@@ -96,9 +96,9 @@ def change_user_name():
 
                 return redirect("/account_settings")
             else:
-                Log.error(f'User: "{new_user_name}" already exists')
+                Log.error(f'User: "{new_username}" already exists')
                 flash_message(
-                    page="change_user_name",
+                    page="change_username",
                     message="exists",
                     category="error",
                     language=session["language"],
@@ -113,10 +113,10 @@ def change_user_name():
             f"{request.remote_addr} tried to change his username without logging in"
         )
         flash_message(
-            page="change_user_name",
+            page="change_username",
             message="login",
             category="error",
             language=session["language"],
         )
 
-        return redirect("/login/redirect=change_user_name")
+        return redirect("/login/redirect=change_username")

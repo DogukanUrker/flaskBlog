@@ -13,7 +13,7 @@ def add_points(points, user):
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute(
-        """update users set points = points+? where user_name = ? """,
+        """update users set points = points+? where username = ? """,
         [(points), (user)],
     )
     connection.commit()

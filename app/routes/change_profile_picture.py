@@ -30,7 +30,7 @@ def change_profile_picture():
         render_template: a rendered template with the form
     """
 
-    if "user_name" in session:
+    if "username" in session:
         form = ChangeProfilePictureForm(request.form)
 
         if request.method == "POST":
@@ -42,14 +42,14 @@ def change_profile_picture():
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
-                """update users set profile_picture = ? where user_name = ? """,
-                [(new_profile_picture), (session["user_name"])],
+                """update users set profile_picture = ? where username = ? """,
+                [(new_profile_picture), (session["username"])],
             )
 
             connection.commit()
 
             Log.success(
-                f"User: {session['user_name']} changed his profile picture",
+                f"User: {session['username']} changed his profile picture",
             )
 
             flash_message(

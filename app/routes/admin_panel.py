@@ -9,20 +9,20 @@ admin_panel_blueprint = Blueprint("admin_panel", __name__)
 
 @admin_panel_blueprint.route("/admin")
 def admin_panel():
-    if "user_name" in session:
+    if "username" in session:
         Log.success(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
         connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
-            """select role from users where user_name = ? """,
-            [(session["user_name"])],
+            """select role from users where username = ? """,
+            [(session["username"])],
         )
         role = cursor.fetchone()[0]
 
         if role == "admin":
-            Log.info(f"Admin: {session['user_name']} reached to the admin panel")
+            Log.info(f"Admin: {session['username']} reached to the admin panel")
 
             Log.info("Rendering adminPanel.html: params: None")
 

@@ -26,7 +26,7 @@ def analytics_post(url_id):
     :rtype: flask.Response
     """
     if Settings.ANALYTICS:
-        if "user_name" in session:
+        if "username" in session:
             connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()

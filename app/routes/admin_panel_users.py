@@ -19,33 +19,33 @@ admin_panel_users_blueprint = Blueprint("admin_panel_users", __name__)
 @admin_panel_users_blueprint.route("/admin/users", methods=["GET", "POST"])
 @admin_panel_users_blueprint.route("/admin_panel/users", methods=["GET", "POST"])
 def admin_panel_users():
-    if "user_name" in session:
-        Log.info(f"Admin: {session['user_name']} reached to users admin panel")
+    if "username" in session:
+        Log.info(f"Admin: {session['username']} reached to users admin panel")
         Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
         connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
-            """select role from users where user_name = ? """,
-            [(session["user_name"])],
+            """select role from users where username = ? """,
+            [(session["username"])],
         )
         role = cursor.fetchone()[0]
 
         if request.method == "POST":
             if "user_delete_button" in request.form:
                 Log.info(
-                    f"Admin: {session['user_name']} deleted user: {request.form['user_name']}"
+                    f"Admin: {session['username']} deleted user: {request.form['username']}"
                 )
 
-                delete_user(request.form["user_name"])
+                delete_user(request.form["username"])
 
             if "user_role_change_button" in request.form:
                 Log.info(
-                    f"Admin: {session['user_name']} changed {request.form['user_name']}'s role"
+                    f"Admin: {session['username']} changed {request.form['username']}'s role"
                 )
 
-                change_user_role(request.form["user_name"])
+                change_user_role(request.form["username"])
 
         if role == "admin":
             users, page, total_pages = paginate_query(

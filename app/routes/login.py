@@ -35,8 +35,8 @@ def login(direct):
     """
     direct = direct.replace("&", "/")
     if Settings.LOG_IN:
-        if "user_name" in session:
-            Log.error(f'User: "{session["user_name"]}" already logged in')
+        if "username" in session:
+            Log.error(f'User: "{session["username"]}" already logged in')
             return (
                 redirect(direct),
                 301,
@@ -44,20 +44,20 @@ def login(direct):
         else:
             form = LoginForm(request.form)
             if request.method == "POST":
-                user_name = request.form["user_name"]
+                username = request.form["username"]
                 password = request.form["password"]
-                user_name = user_name.replace(" ", "")
+                username = username.replace(" ", "")
                 Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
                 connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
                 cursor.execute(
-                    """select * from users where lower(user_name) = ? """,
-                    [(user_name.lower())],
+                    """select * from users where lower(username) = ? """,
+                    [(username.lower())],
                 )
                 user = cursor.fetchone()
                 if not user:
-                    Log.error(f'User: "{user_name}" not found')
+                    Log.error(f'User: "{username}" not found')
                     flash_message(
                         page="login",
                         message="not_found",
@@ -84,9 +84,9 @@ def login(direct):
                                 f"Login reCAPTCHA | verification: {verify_response['success']} | score: {verify_response.get('score')}",
                             )
 
-                        session["user_name"] = user[1]
+                        session["username"] = user[1]
                         session["user_role"] = user[5]
-                        add_points(1, session["user_name"])
+                        add_points(1, session["username"])
                         Log.success(f'User: "{user[1]}" logged in')
                         flash_message(
                             page="login",

@@ -18,23 +18,23 @@ from utils.paginate import paginate_query
 dashboard_blueprint = Blueprint("dashboard", __name__)
 
 
-@dashboard_blueprint.route("/dashboard/<user_name>", methods=["GET", "POST"])
-def dashboard(user_name):
-    if "user_name" in session:
-        if session["user_name"].lower() == user_name.lower():
+@dashboard_blueprint.route("/dashboard/<username>", methods=["GET", "POST"])
+def dashboard(username):
+    if "username" in session:
+        if session["username"].lower() == username.lower():
             if request.method == "POST":
                 if "post_delete_button" in request.form:
                     delete_post(request.form["post_id"])
 
                     return (
-                        redirect(url_for("dashboard.dashboard", user_name=user_name)),
+                        redirect(url_for("dashboard.dashboard", username=username)),
                         301,
                     )
             posts, page, total_pages = paginate_query(
                 Settings.DB_POSTS_ROOT,
                 "select count(*) from posts where author = ?",
                 "select * from posts where author = ? order by time_stamp desc",
-                [session["user_name"]],
+                [session["username"]],
             )
             Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
@@ -44,7 +44,7 @@ def dashboard(user_name):
 
             cursor.execute(
                 """select * from comments where lower(user) = ? order by time_stamp desc""",
-                [(user_name.lower())],
+                [(username.lower())],
             )
             comments = cursor.fetchall()
 
@@ -83,10 +83,10 @@ def dashboard(user_name):
             )
         else:
             Log.error(
-                f'User: "{session["user_name"]}" tried to login to another users dashboard',
+                f'User: "{session["username"]}" tried to login to another users dashboard',
             )
 
-            return redirect(f"/dashboard/{session['user_name'].lower()}")
+            return redirect(f"/dashboard/{session['username'].lower()}")
     else:
         Log.error(f"{request.remote_addr} tried to access the dashboard without login")
         flash_message(

@@ -32,7 +32,7 @@ def edit_post(url_id):
         abort(401): if the user is not authorized to edit the post
     """
 
-    if "user_name" in session:
+    if "username" in session:
         Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
         connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
@@ -55,7 +55,7 @@ def edit_post(url_id):
 
             Log.success(f'POST: "{url_id}" FOUND')
 
-            if post[5] == session["user_name"] or session["user_role"] == "admin":
+            if post[5] == session["username"] or session["user_role"] == "admin":
                 form = CreatePostForm(request.form)
                 form.post_title.data = post[1]
                 form.post_tags.data = post[2]
@@ -79,7 +79,7 @@ def edit_post(url_id):
                             language=session["language"],
                         )
                         Log.error(
-                            f'User: "{session["user_name"]}" tried to edit a post with empty content',
+                            f'User: "{session["username"]}" tried to edit a post with empty content',
                         )
                     else:
                         connection = sqlite3.connect(Settings.DB_POSTS_ROOT)
@@ -141,7 +141,7 @@ def edit_post(url_id):
                     language=session["language"],
                 )
                 Log.error(
-                    f'User: "{session["user_name"]}" tried to edit another authors post',
+                    f'User: "{session["username"]}" tried to edit another authors post',
                 )
                 return redirect("/")
         else:

@@ -33,7 +33,7 @@ def create_post():
         401: If the user is not authenticated.
     """
 
-    if "user_name" in session:
+    if "username" in session:
         form = CreatePostForm(request.form)
 
         if request.method == "POST":
@@ -52,7 +52,7 @@ def create_post():
                     language=session["language"],
                 )
                 Log.error(
-                    f'User: "{session["user_name"]}" tried to create a post with empty content',
+                    f'User: "{session["username"]}" tried to create a post with empty content',
                 )
             else:
                 Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
@@ -66,7 +66,7 @@ def create_post():
                         tags,
                         content,
                         banner,
-                        user_name,
+                        username,
                         views,
                         time_stamp,
                         last_edit_time_stamp,
@@ -82,7 +82,7 @@ def create_post():
                         post_tags,
                         post_content,
                         post_banner,
-                        session["user_name"],
+                        session["username"],
                         0,
                         current_time_stamp(),
                         current_time_stamp(),
@@ -93,10 +93,10 @@ def create_post():
                 )
                 connection.commit()
                 Log.success(
-                    f'Post: "{post_title}" posted by "{session["user_name"]}"',
+                    f'Post: "{post_title}" posted by "{session["username"]}"',
                 )
 
-                add_points(20, session["user_name"])
+                add_points(20, session["username"])
                 flash_message(
                     page="create_post",
                     message="success",

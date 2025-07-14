@@ -14,7 +14,7 @@ class ChangeUserNameForm(Form):
     This class creates a form for changing the username.
     """
 
-    new_user_name = StringField(
+    new_username = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
     )

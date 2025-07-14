@@ -15,7 +15,7 @@ class LoginForm(Form):
     This class creates a form for logging in.
     """
 
-    user_name = StringField(
+    username = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
     )

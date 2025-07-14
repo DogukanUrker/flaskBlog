@@ -71,7 +71,7 @@ def users_table():
         users_table_schema = """
         create table if not exists Users(
             "user_id"    integer not null unique,
-            "user_name"  text unique,
+            "username"  text unique,
             "email" text unique,
             "password"  text,
             "profile_picture" text,
@@ -89,7 +89,7 @@ def users_table():
 
             cursor.execute(
                 """
-                insert into Users(user_name,email,password,profile_picture,role,points,time_stamp,is_verified) \
+                insert into Users(username,email,password,profile_picture,role,points,time_stamp,is_verified) \
                 values(?,?,?,?,?,?,?,?)
                 """,
                 (
@@ -154,7 +154,7 @@ def posts_table():
             "tags"  text not null,
             "content"   text not null,
             "banner"    BLOB not null,
-            "user_name"    text not null,
+            "username"    text not null,
             "views" integer,
             "time_stamp" integer,
             "last_edit_time_stamp" integer,
@@ -208,7 +208,7 @@ def comments_table():
             "id"    integer not null,
             "post_id"  integer,
             "comment"   text,
-            "user_name"  text,
+            "username"  text,
             "time_stamp" integer,
             primary key("id" autoincrement)
         );"""
@@ -258,7 +258,7 @@ def analytics_table():
         create table if not exists posts_analytics(
             "id"    integer not null,
             "post_id"  integer,
-            "visitor_user_name"  text,
+            "visitor_username"  text,
             "country" text,
             "os" text,
             "continent" text,
