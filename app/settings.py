@@ -23,8 +23,10 @@ class Settings:
         TAMGA_LOGGER (bool): Toggle custom logging feature.
         WERKZEUG_LOGGER (bool): Toggle werkzeug logging feature.
         LOG_TO_FILE (bool): Toggle logging to file feature.
+        LOG_TO_JSON (bool): Toggle logging to JSON feature.
         LOG_FOLDER_ROOT (str): Root path of the log folder.
         LOG_FILE_ROOT (str): Root path of the log file.
+        LOG_JSON_ROOT (str): Root path of the log JSON file.
         BREAKER_TEXT (str): Separator text used in log files.
         APP_SECRET_KEY (str): Secret key for Flask sessions.
         SESSION_PERMANENT (bool): Toggle permanent sessions for the Flask application.
@@ -50,7 +52,7 @@ class Settings:
     """
 
     # Application Configuration
-    APP_NAME = "flaskBlog"
+    APP_NAME = "FlaskBlog"
     APP_VERSION = "3.0.0dev"
     APP_ROOT_PATH = "."
     APP_HOST = "localhost"
@@ -108,8 +110,10 @@ class Settings:
     TAMGA_LOGGER = True
     WERKZEUG_LOGGER = False
     LOG_TO_FILE = True
+    LOG_TO_JSON = True
     LOG_FOLDER_ROOT = "log/"
     LOG_FILE_ROOT = LOG_FOLDER_ROOT + "log.log"
+    LOG_JSON_ROOT = LOG_FOLDER_ROOT + "log.json"
     BREAKER_TEXT = "\n"
 
     # Session Configuration

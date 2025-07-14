@@ -16,7 +16,7 @@ class PasswordResetForm(Form):
     This class creates a form for resetting the password.
     """
 
-    userName = StringField(
+    username = StringField(
         "Username",
         [validators.Length(min=4, max=25), validators.InputRequired()],
     )
@@ -39,8 +39,8 @@ class PasswordResetForm(Form):
         ],
     )
 
-    passwordConfirm = PasswordField(
-        "passwordConfirm",
+    password_confirm = PasswordField(
+        "password_confirm",
         [
             validators.Length(min=8),
             validators.InputRequired(),

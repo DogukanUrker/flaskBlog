@@ -7,7 +7,7 @@
     property="og:image"
     content="{{
     blogPostUrl
-  }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+  }}{{ url_for('return_post_banner.return_post_banner', post_id= id) }}"
 />
 <meta name="keywords" content="{{ tags }}" />
 <meta name="author" content="{{ author }}" />
@@ -20,7 +20,7 @@
     name="twitter:image"
     content="{{
     blogPostUrl
-  }}{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+  }}{{ url_for('return_post_banner.return_post_banner', post_id= id) }}"
 />
 <meta property="og:site_name" content="{{ appName }}" />
 
@@ -33,7 +33,7 @@
     class="w-11/12 md:w-5/6 lg:w-7/12 xl:w-5/12 mx-auto mt-6 md:mt-10 break-words"
 >
     <img
-        src="{{ url_for('returnPostBanner.returnPostBanner', postID = id) }}"
+        src="{{ url_for('return_post_banner.return_post_banner', post_id= id) }}"
         class="mx-auto rounded-md shadow-md select-none"
     />
 
@@ -49,9 +49,9 @@
         <p class="text-sm font-medium">
             {{ readingTime|string + " " + translations.post.minRead }}
         </p>
-        {% if author == session["userName"] or "admin" == session["userName"] %}
+        {% if author == session["username"] or "admin" == session["username"] %}
         <a
-            href="/analytics/posts/{{ urlID }}"
+            href="/analytics/posts/{{ url_id }}"
             class="shadow-lg hover:text-rose-500 duration-150"
             >{{ translations.post.viewPerformance }}</a
         >
@@ -89,7 +89,7 @@
                     {{ views }}
                 </div>
             </h5>
-            <h5 class="time">{{ timeStamp }}</h5>
+            <h5 class="time">{{ time_stamp }}</h5>
         </div>
 
         <div class="flex w-full justify-between my-1">
@@ -100,30 +100,30 @@
                 <h5 class="m-1 flex">
                     <img
                         class="w-7 mr-2 select-none"
-                        src="{{ getProfilePicture(author) }}"
+                        src="{{ get_profile_picture(author) }}"
                         alt="{{ author }}"
                     />
                     {{ author }}
                 </h5>
             </a>
-            <h5 class="date">{{ timeStamp }}</h5>
+            <h5 class="date">{{ time_stamp }}</h5>
         </div>
     </div>
 
-    {% if author == session["userName"] %}
+    {% if author == session["username"] %}
     <div class="flex justify-between px-2">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <button
                 type="submit"
-                name="postDeleteButton"
+                name="post_delete_button"
                 class="text-rose-500 hover:text-rose-500/75 duration-150"
             >
                 <i class="ti ti-trash-x mr-1 text-2xl"></i>
             </button>
         </form>
         <a
-            href="/editpost/{{ urlID }}"
+            href="/edit_post/{{ url_id }}"
             class="text-rose-500 hover:text-rose-500/75 duration-150"
         >
             <i class="ti ti-edit mr-1 text-2xl"></i>
@@ -142,13 +142,13 @@
                     >
                         <img
                             class="w-7 mr-2"
-                            src="{{ getProfilePicture(comment[3]) }}"
+                            src="{{ get_profile_picture(comment[3]) }}"
                             alt=""
                         />
                         <div>{{ comment[3] }}</div>
                     </a>
                 </div>
-                {% if session["userName"] == comment[3] %}
+                {% if session["username"] == comment[3] %}
                 <form method="post" class="mx-2 my-1">
                     <input
                         type="hidden"
@@ -183,13 +183,11 @@
 <div class="mx-auto text-center my-8 w-10/12 md:w-5/12 lg:w-4/12 xl:w-3/12">
     <form method="post" class="md:w-max">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        {% if session["userName"] %}
+        {% if session["username"] %}
         <div class="border rounded border-rose-500/25">
-            {{ form.comment(class_="textarea textarea-bordered w-full h-24 my-2",placeholder=translations.post.placeholder) }}
-            <button
-                type="submit"
-                class="btn btn-neutral mt-2"
-            >
+            {{ form.comment(class_="textarea textarea-bordered w-full h-24
+            my-2",placeholder=translations.post.placeholder) }}
+            <button type="submit" class="btn btn-neutral mt-2">
                 <i class="ti ti-arrow-narrow-up mr-1 text-xl"></i>
             </button>
         </div>
