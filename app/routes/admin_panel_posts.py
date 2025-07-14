@@ -15,8 +15,8 @@ admin_panel_posts_blueprint = Blueprint("admin_panel_posts", __name__)
 @admin_panel_posts_blueprint.route("/admin/posts", methods=["GET", "POST"])
 @admin_panel_posts_blueprint.route("/admin_panel/posts", methods=["GET", "POST"])
 def admin_panel_posts():
-    if "user_name" in session:
-        Log.info(f"Admin: {session['user_name']} reached to posts admin panel")
+    if "username" in session:
+        Log.info(f"Admin: {session['username']} reached to posts admin panel")
         Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
         posts, page, total_pages = paginate_query(

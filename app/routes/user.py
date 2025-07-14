@@ -11,33 +11,33 @@ from utils.log import Log
 user_blueprint = Blueprint("user", __name__)
 
 
-@user_blueprint.route("/user/<user_name>")
-def user(user_name):
+@user_blueprint.route("/user/<username>")
+def user(username):
     """
     This function is used to render the user page.
 
-    :param user_name: The username of the user.
-    :type user_name: str
+    :param username: The username of the user.
+    :type username: str
     :return: The rendered user page.
     :rtype: flask.Response
     """
-    user_name = user_name.lower()
+    username = username.lower()
     Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
     connection = sqlite3.connect(Settings.DB_USERS_ROOT)
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
-    cursor.execute("select user_name from users")
+    cursor.execute("select username from users")
     users = cursor.fetchall()
     """
     This if statement checks if the given username exists in the database.
     If the username exists, the function fetches the user details and the number of views their posts have received.
     It also fetches all the posts made by the user and all the comments made by the user.
     """
-    if user_name in str(users).lower():
-        Log.success(f'User: "{user_name}" found')
+    if username in str(users).lower():
+        Log.success(f'User: "{username}" found')
         cursor.execute(
-            """select * from users where lower(user_name) = ? """,
-            [(user_name)],
+            """select * from users where lower(username) = ? """,
+            [(username)],
         )
         user = cursor.fetchone()
         Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
@@ -62,7 +62,7 @@ def user(user_name):
         cursor = connection.cursor()
         cursor.execute(
             """select * from comments where lower(user) = ? """,
-            [(user_name.lower())],
+            [(username.lower())],
         )
         comments = cursor.fetchall()
         """
@@ -78,7 +78,7 @@ def user(user_name):
             show_comments = False
         else:
             show_comments = True
-        Log.success(f'User: "{user_name}"s data loaded')
+        Log.success(f'User: "{username}"s data loaded')
         return render_template(
             "user.html",
             user=user,
@@ -89,5 +89,5 @@ def user(user_name):
             show_comments=show_comments,
         )
     else:
-        Log.error(f'User: "{user_name}" not found')
+        Log.error(f'User: "{username}" not found')
         return render_template("notFound.html")

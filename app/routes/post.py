@@ -84,22 +84,22 @@ def post(url_id=None, slug=None):
             cursor = connection.cursor()
 
             cursor.execute(
-                "insert into comments(id,comment,user_name,time_stamp) \
+                "insert into comments(id,comment,username,time_stamp) \
                 values(?, ?, ?, ?)",
                 (
                     post[0],
                     comment,
-                    session["user_name"],
+                    session["username"],
                     current_time_stamp(),
                 ),
             )
             connection.commit()
 
             Log.success(
-                f'User: "{session["user_name"]}" commented to post: "{url_id}"',
+                f'User: "{session["username"]}" commented to post: "{url_id}"',
             )
 
-            add_points(5, session["user_name"])
+            add_points(5, session["username"])
 
             flash_message(
                 page="post",
@@ -125,8 +125,8 @@ def post(url_id=None, slug=None):
         if Settings.ANALYTICS:
             user_ip_data = get_data_from_user_ip(str(request.headers.get("User-Agent")))
             id_for_random_visitor = None
-            if "user_name" in session:
-                session_user = session["user_name"]
+            if "username" in session:
+                session_user = session["username"]
             else:
                 session_user = "unsigned_user"
             if user_ip_data["status"] == 0:
@@ -137,7 +137,7 @@ def post(url_id=None, slug=None):
                 cursor = connection.cursor()
 
                 cursor.execute(
-                    """insert into posts_analytics (id, visitor_user_name, country, os, continent, time_stamp) values (?,?,?,?,?,?) RETURNING id""",
+                    """insert into posts_analytics (id, visitor_username, country, os, continent, time_stamp) values (?,?,?,?,?,?) RETURNING id""",
                     (
                         post[0],
                         session_user,
@@ -162,7 +162,7 @@ def post(url_id=None, slug=None):
             tags=post[2],
             abstract=post[11],
             content=post[3],
-            user_name=post[5],
+            username=post[5],
             views=post[6],
             time_stamp=post[7],
             last_edit_time_stamp=post[8],

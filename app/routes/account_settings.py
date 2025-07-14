@@ -10,15 +10,15 @@ account_settings_blueprint = Blueprint("account_settings", __name__)
 
 @account_settings_blueprint.route("/account_settings", methods=["GET", "POST"])
 def account_settings():
-    if "user_name" in session:
+    if "username" in session:
         Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
         connection = sqlite3.connect(Settings.DB_USERS_ROOT)
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         cursor.execute(
-            """select user_name from users where user_name = ? """,
-            [(session["user_name"])],
+            """select username from users where username = ? """,
+            [(session["username"])],
         )
         user = cursor.fetchall()
 

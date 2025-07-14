@@ -20,7 +20,7 @@ def logout():
         redirect: a redirect to the homepage
     """
 
-    if "user_name" in session:
+    if "username" in session:
         language = session.get("language", "en")  # Get language before clearing session
         session.clear()
         flash_message(

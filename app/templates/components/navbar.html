@@ -26,12 +26,12 @@
             <a href="/search_bar"><i class="ti ti-search text-2xl"></i></a>
         </div>
 
-        {% if session["user_name"] %}
-        <a href="/user/{{ session['user_name'].lower() }}">
+        {% if session["username"] %}
+        <a href="/user/{{ session['username'].lower() }}">
             <div>
                 <img
                     class="block w-7 h-7"
-                                            src="{{ get_profile_picture(session['user_name']) }}"
+                    src="{{ get_profile_picture(session['username']) }}"
                 />
             </div>
         </a>

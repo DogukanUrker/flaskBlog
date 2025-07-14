@@ -26,14 +26,14 @@ def search(query):
     cursor = connection.cursor()
 
     query_users = cursor.execute(
-        """select * from users where user_name like ? """,
+        """select * from users where username like ? """,
         [
             ("%" + query + "%"),
         ],
     ).fetchall()
 
     query_users = cursor.execute(
-        """select * from users where user_name like ? """,
+        """select * from users where username like ? """,
         [
             ("%" + query_no_white_space + "%"),
         ],

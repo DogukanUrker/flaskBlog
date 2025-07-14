@@ -39,8 +39,8 @@ from routes.change_password import (
 from routes.change_profile_picture import (
     change_profile_picture_blueprint,
 )
-from routes.change_user_name import (
-    change_user_name_blueprint,
+from routes.change_username import (
+    change_username_blueprint,
 )
 from routes.create_post import (
     create_post_blueprint,
@@ -278,7 +278,7 @@ app.register_blueprint(set_language_blueprint)
 app.register_blueprint(set_theme_blueprint)
 app.register_blueprint(privacy_policy_blueprint)
 app.register_blueprint(password_reset_blueprint)
-app.register_blueprint(change_user_name_blueprint)
+app.register_blueprint(change_username_blueprint)
 app.register_blueprint(change_password_blueprint)
 app.register_blueprint(change_language_blueprint)
 app.register_blueprint(admin_panel_users_blueprint)

@@ -23,17 +23,20 @@
         >{{ post[1] }}</a
     >
 
-    <div tag="content" class="h-60 overflow-y-hidden mt-6 mb-3 break-words markdown-content compact">
+    <div
+        tag="content"
+        class="h-60 overflow-y-hidden mt-6 mb-3 break-words markdown-content compact"
+    >
         {{ render_markdown(post[3]) }}
     </div>
 
     <section class="flex items-center justify-between my-2">
-            <a
-        href="/edit_post/{{ post[10] }}"
-        class="hover:text-rose-500 duration-150 font-medium"
-    >
-        <i class="ti ti-edit mr-1 text-2xl"></i>
-    </a>
+        <a
+            href="/edit_post/{{ post[10] }}"
+            class="hover:text-rose-500 duration-150 font-medium"
+        >
+            <i class="ti ti-edit mr-1 text-2xl"></i>
+        </a>
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <input type="hidden" name="post_id" value="{{ post[0] }}" />
@@ -119,10 +122,9 @@
         </div>
     </div>
 </div>
-{% endfor %}
-{% from "components/pagination.html" import pagination %}
-{{ pagination(page, total_pages, request.path) }}
-{% elif not show_posts %} {% if request.path == "/admin/posts" %}
+{% endfor %} {% from "components/pagination.html" import pagination %} {{
+pagination(page, total_pages, request.path) }} {% elif not show_posts %} {% if
+request.path == "/admin/posts" %}
 <h1>{{translations.dashboard.noPosts}}</h1>
 {% else %}
 <p class="text-center mt-32 select-none">
@@ -174,7 +176,7 @@
 </a>
 {% else %}
 <a
-    href='/user/{{ session["user_name"] }}'
+    href='/user/{{ session["username"] }}'
     class="hidden md:block fixed bottom-0 left-1"
 >
     <i

@@ -47,7 +47,7 @@
             </div>
         </section>
 
-        {% if session["user_name"] == user[1] %}
+        {% if session["username"] == user[1] %}
         <section class="flex w-full items-center justify-between my-4">
             <div
                 class="flex items-center w-fit hover:text-rose-500 duration-150"
@@ -69,7 +69,7 @@
                     >{{translations.user.dashboard}}</a
                 >
             </div>
-            {% endif %} {% if user[5] == "admin" and session["user_name"] ==
+            {% endif %} {% if user[5] == "admin" and session["username"] ==
             user[1] %}
             <div
                 class="flex items-center w-fit hover:text-rose-500 duration-150"
@@ -78,13 +78,13 @@
                 <a href="/admin" class="">{{translations.user.admin}}</a>
             </div>
         </section>
-        {% endif %} {% if "user_name" in session and session['user_name'] ==
+        {% endif %} {% if "username" in session and session['username'] ==
         "{{user[1]}}"%}
         <div class="flex items-center w-fit hover:text-rose-500 duration-150">
-            <a href="/dashboard/{{session['user_name']}}"
+            <a href="/dashboard/{{session['username']}}"
                 ><i class="ti ti-clipboard-text mr-1 text-xl"></i
             ></a>
-            <a href="/dashboard/{{session['user_name']}}" class=""
+            <a href="/dashboard/{{session['username']}}" class=""
                 >{{translations.user.dashboard}}</a
             >
         </div>
@@ -99,8 +99,8 @@
     >
         {% for post in posts %} {% from "components/postCardMacro.html" import
         postCard%} {{
-        postCard(post=post,author_profile_picture=get_profile_picture(post[5])) }}
-        {% endfor %}
+        postCard(post=post,author_profile_picture=get_profile_picture(post[5]))
+        }} {% endfor %}
     </div>
     {% endif %} {% if show_comments %}
     <h1 class="mb-4 text-center text-2xl text-rose-500 select-none">

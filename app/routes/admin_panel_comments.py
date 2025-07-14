@@ -15,8 +15,8 @@ admin_panel_comments_blueprint = Blueprint("adminPanelComments", __name__)
 @admin_panel_comments_blueprint.route("/admin/comments", methods=["GET", "POST"])
 @admin_panel_comments_blueprint.route("/adminpanel/comments", methods=["GET", "POST"])
 def admin_panel_comments():
-    if "user_name" in session:
-        Log.info(f"Admin: {session['user_name']} reached to comments admin panel")
+    if "username" in session:
+        Log.info(f"Admin: {session['username']} reached to comments admin panel")
         Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
         comments, page, total_pages = paginate_query(

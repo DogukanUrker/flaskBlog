@@ -37,33 +37,33 @@ def signup():
     """
 
     if Settings.REGISTRATION:
-        if "user_name" in session:
-            Log.error(f'USER: "{session["user_name"]}" ALREADY LOGGED IN')
+        if "username" in session:
+            Log.error(f'USER: "{session["username"]}" ALREADY LOGGED IN')
             return redirect("/")
         else:
             form = SignUpForm(request.form)
 
             if request.method == "POST":
-                user_name = request.form["user_name"]
+                username = request.form["username"]
                 email = request.form["email"]
                 password = request.form["password"]
                 password_confirm = request.form["password_confirm"]
 
-                user_name = user_name.replace(" ", "")
+                username = username.replace(" ", "")
                 Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
 
                 connection = sqlite3.connect(Settings.DB_USERS_ROOT)
                 connection.set_trace_callback(Log.database)
                 cursor = connection.cursor()
 
-                cursor.execute("select user_name from users")
+                cursor.execute("select username from users")
                 users = str(cursor.fetchall())
                 cursor.execute("select email from users")
                 mails = str(cursor.fetchall())
 
-                if user_name not in users and email not in mails:
+                if username not in users and email not in mails:
                     if password_confirm == password:
-                        if user_name.isascii():
+                        if username.isascii():
                             password = encryption.hash(password)
 
                             if Settings.RECAPTCHA:
@@ -90,14 +90,14 @@ def signup():
                             cursor = connection.cursor()
                             cursor.execute(
                                 """
-                                insert into users(user_name,email,password,profile_picture,role,points,time_stamp,is_verified) \
+                                insert into users(username,email,password,profile_picture,role,points,time_stamp,is_verified) \
                                 values(?, ?, ?, ?, ?, ?, ?, ?)
                                 """,
                                 (
-                                    user_name,
+                                    username,
                                     email,
                                     password,
-                                    f"https://api.dicebear.com/7.x/identicon/svg?seed={user_name}&radius=10",
+                                    f"https://api.dicebear.com/7.x/identicon/svg?seed={username}&radius=10",
                                     "user",
                                     0,
                                     current_time_stamp(),
@@ -106,11 +106,11 @@ def signup():
                             )
                             connection.commit()
 
-                            Log.success(f'User: "{user_name}" added to database')
+                            Log.success(f'User: "{username}" added to database')
 
-                            session["user_name"] = user_name
-                            add_points(1, session["user_name"])
-                            Log.success(f'User: "{user_name}" logged in')
+                            session["username"] = username
+                            add_points(1, session["username"])
+                            Log.success(f'User: "{username}" logged in')
 
                             flash_message(
                                 page="signup",
@@ -131,7 +131,7 @@ def signup():
 
                             mail = EmailMessage()
                             mail.set_content(
-                                f"Hi {user_name}👋,\n Welcome to {Settings.APP_NAME}"
+                                f"Hi {username}👋,\n Welcome to {Settings.APP_NAME}"
                             )
                             mail.add_alternative(
                                 f"""\
@@ -142,7 +142,7 @@ def signup():
                                 >
                                 <div style="text-align: center;">
                                     <h1 style="color: #F43F5E;">
-                                    Hi {user_name}, <br />
+                                    Hi {username}, <br />
                                     Welcome to {Settings.APP_NAME}!
                                     </h1>
                                     <p style="font-size: 16px;">
@@ -165,7 +165,7 @@ def signup():
                             return redirect("/verify_user/codesent=false")
                         else:
                             Log.error(
-                                f'Username: "{user_name}" do not fits to ascii characters',
+                                f'Username: "{username}" do not fits to ascii characters',
                             )
                             flash_message(
                                 page="signup",
@@ -183,15 +183,15 @@ def signup():
                             language=session["language"],
                         )
 
-                if user_name in users and email in mails:
-                    Log.error(f'"{user_name}" & "{email}" is unavailable ')
+                if username in users and email in mails:
+                    Log.error(f'"{username}" & "{email}" is unavailable ')
                     flash_message(
                         page="signup",
                         message="taken",
                         category="error",
                         language=session["language"],
                     )
-                if user_name not in users and email in mails:
+                if username not in users and email in mails:
                     Log.error(f'This email "{email}" is unavailable')
 
                     flash_message(
@@ -201,8 +201,8 @@ def signup():
                         language=session["language"],
                     )
 
-                if user_name in users and email not in mails:
-                    Log.error(f'This username "{user_name}" is unavailable')
+                if username in users and email not in mails:
+                    Log.error(f'This username "{username}" is unavailable')
 
                     flash_message(
                         page="signup",

@@ -8,7 +8,7 @@ The functions in this module are:
 
 - delete_post(post_id): This function deletes a post and all associated comments
 from the database.
-- delete_user(user_name): This function deletes a user and all associated data
+- delete_user(username): This function deletes a user and all associated data
 from the database.
 - delete_comment(comment_id): This function deletes a comment from the database.
 
@@ -46,7 +46,7 @@ def delete_post(post_id):
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute(
-        """select user_name from posts where id = ? """,
+        """select username from posts where id = ? """,
         [(post_id)],
     )
     cursor.execute(
@@ -96,12 +96,12 @@ def delete_post(post_id):
     Log.success(f'Post: "{post_id}" deleted')
 
 
-def delete_user(user_name):
+def delete_user(username):
     """
     This function deletes a user and all associated data from the database.
 
     Parameters:
-    user_name (str): The username of the user to be deleted.
+    username (str): The username of the user to be deleted.
 
     Returns:
     None
@@ -111,17 +111,17 @@ def delete_user(user_name):
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute(
-        """select * from users where lower(user_name) = ? """,
-        [(user_name.lower())],
+        """select * from users where lower(username) = ? """,
+        [(username.lower())],
     )
     cursor.execute(
-        """select role from users where user_name = ? """,
-        [(session["user_name"])],
+        """select role from users where username = ? """,
+        [(session["username"])],
     )
     perpetrator = cursor.fetchone()
     cursor.execute(
-        """delete from users where lower(user_name) = ? """,
-        [(user_name.lower())],
+        """delete from users where lower(username) = ? """,
+        [(username.lower())],
     )
     cursor.execute("update sqlite_sequence set seq = seq-1")
     connection.commit()
@@ -131,7 +131,7 @@ def delete_user(user_name):
         category="error",
         language=session["language"],
     )
-    Log.success(f'User: "{user_name}" deleted')
+    Log.success(f'User: "{username}" deleted')
     if perpetrator[0] == "admin":
         return redirect("/admin/users")
     else:
@@ -153,7 +153,7 @@ def delete_comment(comment_id):
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
     cursor.execute(
-        """select user_name from comments where id = ? """,
+        """select username from comments where id = ? """,
         [(comment_id)],
     )
     cursor.execute(

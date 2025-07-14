@@ -48,15 +48,15 @@ def password_reset(code_sent):
         connection.set_trace_callback(Log.database)
         cursor = connection.cursor()
         if request.method == "POST":
-            user_name = request.form["user_name"]
-            user_name = user_name.replace(" ", "")
+            username = request.form["username"]
+            username = username.replace(" ", "")
             code = request.form["code"]
             password = request.form["password"]
             password_confirm = request.form["password_confirm"]
-            if code == password_reset_codes_storage.get(user_name, ""):
+            if code == password_reset_codes_storage.get(username, ""):
                 cursor.execute(
-                    """select password from users where lower(user_name) = ? """,
-                    [(user_name.lower())],
+                    """select password from users where lower(username) = ? """,
+                    [(username.lower())],
                 )
                 old_password = cursor.fetchone()[0]
                 if password == password_confirm:
@@ -68,15 +68,15 @@ def password_reset(code_sent):
                             language=session["language"],
                         )
                     else:
-                        password_reset_codes_storage.pop(user_name)
+                        password_reset_codes_storage.pop(username)
 
                         password = encryption.hash(password)
                         cursor.execute(
-                            """update users set password = ? where lower(user_name) = ? """,
-                            [(password), (user_name.lower())],
+                            """update users set password = ? where lower(username) = ? """,
+                            [(password), (username.lower())],
                         )
                         connection.commit()
-                        Log.success(f'User: "{user_name}" changed his password')
+                        Log.success(f'User: "{username}" changed his password')
                         flash_message(
                             page="passwordReset",
                             message="success",
@@ -106,16 +106,16 @@ def password_reset(code_sent):
         )
     elif code_sent == "false":
         if request.method == "POST":
-            user_name = request.form["user_name"]
+            username = request.form["username"]
             email = request.form["email"]
-            user_name = user_name.replace(" ", "")
+            username = username.replace(" ", "")
             Log.database(f"Connecting to '{Settings.DB_USERS_ROOT}' database")
             connection = sqlite3.connect(Settings.DB_USERS_ROOT)
             connection.set_trace_callback(Log.database)
             cursor = connection.cursor()
             cursor.execute(
-                """select * from users where lower(user_name) = ? and lower(email) = ? """,
-                [user_name.lower(), email.lower()],
+                """select * from users where lower(username) = ? and lower(email) = ? """,
+                [username.lower(), email.lower()],
             )
             user_db = cursor.fetchone()
             if user_db:
@@ -126,10 +126,10 @@ def password_reset(code_sent):
                 server.ehlo()
                 server.login(Settings.SMTP_MAIL, Settings.SMTP_PASSWORD)
                 password_reset_code = str(randint(1000, 9999))
-                password_reset_codes_storage[user_name] = password_reset_code
+                password_reset_codes_storage[username] = password_reset_code
                 message = EmailMessage()
                 message.set_content(
-                    f"Hi {user_name}👋,\nForgot your password😶‍🌫️? No problem👌.\nHere is your password reset code🔢:\n{password_reset_code}"
+                    f"Hi {username}👋,\nForgot your password😶‍🌫️? No problem👌.\nHere is your password reset code🔢:\n{password_reset_code}"
                 )
                 message.add_alternative(
                     f"""\
@@ -138,7 +138,7 @@ def password_reset(code_sent):
                     <div style="max-width: 600px;margin: 0 auto;background-color: #ffffff;padding: 20px; border-radius:0.5rem;">
                         <div style="text-align: center;">
                         <h1 style="color: #F43F5E;">Password Reset</h1>
-                        <p>Hello, {user_name}.</p>
+                        <p>Hello, {username}.</p>
                         <p>We received a request to reset your password for your account. If you did not request this, please ignore this email.</p>
                         <p>To reset your password, enter the following code in the app:</p>
                         <span style="display: inline-block; background-color: #e0e0e0; color: #000000;padding: 10px 20px;font-size: 24px;font-weight: bold; border-radius: 0.5rem;">{password_reset_code}</span>
@@ -157,7 +157,7 @@ def password_reset(code_sent):
                 server.send_message(message)
                 server.quit()
                 Log.success(
-                    f'Password reset code: "{password_reset_code}" sent to "{email}" for user: "{user_name}"'
+                    f'Password reset code: "{password_reset_code}" sent to "{email}" for user: "{username}"'
                 )
                 flash_message(
                     page="passwordReset",
@@ -167,7 +167,7 @@ def password_reset(code_sent):
                 )
                 return redirect("/password_reset/codesent=true")
             else:
-                Log.error(f'User: "{user_name}" with email: "{email}" not found')
+                Log.error(f'User: "{username}" with email: "{email}" not found')
                 flash_message(
                     page="passwordReset",
                     message="notFound",
