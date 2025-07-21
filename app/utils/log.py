@@ -12,7 +12,7 @@ if not exists(Settings.LOG_FOLDER_ROOT):
     mkdir(Settings.LOG_FOLDER_ROOT)
 
 Log = Tamga(
-    logToFile=Settings.LOG_TO_FILE,
-    logToConsole=Settings.TAMGA_LOGGER,
-    logFile=Settings.LOG_FILE_ROOT,
+    console_output=Settings.TAMGA_LOGGER,
+    file_output=Settings.LOG_TO_FILE,
+    file_path=Settings.LOG_FILE_ROOT,
 )
