@@ -1,11 +1,11 @@
-{% macro sortMenu(sortName,source,translations) %}
+{% macro sortMenu(sort_name,source,translations) %}
 <div class="dropdown">
     <div
         tabindex="0"
         role="button"
         class="btn w-full md:w-fit text-base-content"
     >
-        {{sortName}}
+        {{sort_name}}
     </div>
     <ul
         tabindex="0"
@@ -13,7 +13,7 @@
     >
         <li class="menu-title">{{ translations.sortMenu.desc }}</li>
         <li>
-            <a onclick="location = '{{source}}/by=timeStamp/sort=desc'">
+                            <a onclick="location = '{{source}}/by=time_stamp/sort=desc'">
                 {{ translations.sortMenu.create }}
             </a>
         </li>
@@ -33,7 +33,7 @@
             </a>
         </li>
         <li>
-            <a onclick="location = '{{source}}/by=lastEditTimeStamp/sort=desc'">
+                            <a onclick="location = '{{source}}/by=last_edit_time_stamp/sort=desc'">
                 {{ translations.sortMenu.edit }}
             </a>
         </li>
@@ -45,7 +45,7 @@
 
         <li class="menu-title">{{ translations.sortMenu.asc }}</li>
         <li>
-            <a onclick="location = '{{source}}/by=timeStamp/sort=asc'">
+                            <a onclick="location = '{{source}}/by=time_stamp/sort=asc'">
                 {{ translations.sortMenu.create }}
             </a>
         </li>
@@ -65,7 +65,7 @@
             </a>
         </li>
         <li>
-            <a onclick="location = '{{source}}/by=lastEditTimeStamp/sort=asc'">
+                            <a onclick="location = '{{source}}/by=last_edit_time_stamp/sort=asc'">
                 {{ translations.sortMenu.edit }}
             </a>
         </li>
