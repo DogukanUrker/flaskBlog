@@ -4,12 +4,9 @@
 <div class="text-center mt-32">
     <form method="post" class="mx-auto w-fit mt-8">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        {{ form.newUserName(class_="input input-bordered w-full my-2", placeholder=translations.changeUserName.placeholder)
-        }}
-        <button
-            type="submit"
-            class="btn btn-neutral mt-4"
-        >
+        {{ form.new_username(class_="input input-bordered w-full my-2",
+        placeholder=translations.changeUserName.placeholder) }}
+        <button type="submit" class="btn btn-neutral mt-4">
             {{translations.changeUserName.change}}
         </button>
     </form>

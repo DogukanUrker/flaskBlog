@@ -14,8 +14,8 @@ class ChangePasswordForm(Form):
     This class creates a form for changing the password.
     """
 
-    oldPassword = PasswordField(
-        "oldPassword",
+    old_password = PasswordField(
+        "old_password",
         [
             validators.Length(min=8),
             validators.InputRequired(),
@@ -30,8 +30,8 @@ class ChangePasswordForm(Form):
         ],
     )
 
-    passwordConfirm = PasswordField(
-        "passwordConfirm",
+    password_confirm = PasswordField(
+        "password_confirm",
         [
             validators.Length(min=8),
             validators.InputRequired(),

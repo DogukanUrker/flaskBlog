@@ -9,22 +9,22 @@ from flask import (
     url_for,
 )
 from settings import Settings
-from utils.addPoints import addPoints
-from utils.calculateReadTime import calculateReadTime
-from utils.delete import Delete
-from utils.flashMessage import flashMessage
+from utils.add_points import add_points
+from utils.calculate_read_time import calculate_read_time
+from utils.delete import delete_comment, delete_post
+from utils.flash_message import flash_message
 from utils.forms.CommentForm import CommentForm
-from utils.generateUrlIdFromPost import getSlugFromPostTitle
-from utils.getDataFromUserIP import getDataFromUserIP
+from utils.generate_url_id_from_post import get_slug_from_post_title
+from utils.get_data_from_user_ip import get_data_from_user_ip
 from utils.log import Log
-from utils.time import currentTimeStamp
+from utils.time import current_time_stamp
 
-postBlueprint = Blueprint("post", __name__)
+post_blueprint = Blueprint("post", __name__)
 
 
-@postBlueprint.route("/post/<urlID>", methods=["GET", "POST"])
-@postBlueprint.route("/post/<slug>-<urlID>", methods=["GET", "POST"])
-def post(urlID=None, slug=None):
+@post_blueprint.route("/post/<url_id>", methods=["GET", "POST"])
+@post_blueprint.route("/post/<slug>-<url_id>", methods=["GET", "POST"])
+def post(url_id=None, slug=None):
     form = CommentForm(request.form)
 
     Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
@@ -33,16 +33,16 @@ def post(urlID=None, slug=None):
     connection.set_trace_callback(Log.database)
     cursor = connection.cursor()
 
-    cursor.execute("select urlID, title from posts where urlID = ?", (urlID,))
+    cursor.execute("select url_id, title from posts where url_id = ?", (url_id,))
     posts = cursor.fetchone()
 
-    if str(urlID) in posts:
-        postSlug = getSlugFromPostTitle(posts[1])
+    if str(url_id) in posts:
+        post_slug = get_slug_from_post_title(posts[1])
 
-        if slug != postSlug:
-            return redirect(url_for("post.post", urlID=urlID, slug=postSlug))
+        if slug != post_slug:
+            return redirect(url_for("post.post", url_id=url_id, slug=post_slug))
 
-        Log.success(f'post: "{urlID}" loaded')
+        Log.success(f'post: "{url_id}" loaded')
 
         Log.database(f"Connecting to '{Settings.DB_POSTS_ROOT}' database")
 
@@ -51,8 +51,8 @@ def post(urlID=None, slug=None):
         cursor = connection.cursor()
 
         cursor.execute(
-            """select * from posts where urlID = ? """,
-            [(urlID)],
+            """select * from posts where url_id = ? """,
+            [(url_id)],
         )
         post = cursor.fetchone()
 
@@ -63,15 +63,15 @@ def post(urlID=None, slug=None):
         connection.commit()
 
         if request.method == "POST":
-            if "postDeleteButton" in request.form:
-                Delete.post(post[0])
+            if "post_delete_button" in request.form:
+                delete_post(post[0])
 
                 return redirect("/")
 
-            if "commentDeleteButton" in request.form:
-                Delete.comment(request.form["commentID"])
+            if "comment_delete_button" in request.form:
+                delete_comment(request.form["comment_id"])
 
-                return redirect(url_for("post.post", urlID=urlID)), 301
+                return redirect(url_for("post.post", url_id=url_id)), 301
 
             from markupsafe import escape
 
@@ -84,31 +84,31 @@ def post(urlID=None, slug=None):
             cursor = connection.cursor()
 
             cursor.execute(
-                "insert into comments(post,comment,user,timeStamp) \
+                "insert into comments(id,comment,username,time_stamp) \
                 values(?, ?, ?, ?)",
                 (
                     post[0],
                     comment,
-                    session["userName"],
-                    currentTimeStamp(),
+                    session["username"],
+                    current_time_stamp(),
                 ),
             )
             connection.commit()
 
             Log.success(
-                f'User: "{session["userName"]}" commented to post: "{urlID}"',
+                f'User: "{session["username"]}" commented to post: "{url_id}"',
             )
 
-            addPoints(5, session["userName"])
+            add_points(5, session["username"])
 
-            flashMessage(
+            flash_message(
                 page="post",
                 message="success",
                 category="success",
                 language=session["language"],
             )
 
-            return redirect(url_for("post.post", urlID=urlID)), 301
+            return redirect(url_for("post.post", url_id=url_id)), 301
 
         Log.database(f"Connecting to '{Settings.DB_COMMENTS_ROOT}' database")
 
@@ -117,19 +117,19 @@ def post(urlID=None, slug=None):
         cursor = connection.cursor()
 
         cursor.execute(
-            """select * from comments where post = ? order by timeStamp desc""",
+            """select * from comments where id = ? order by time_stamp desc""",
             [(post[0])],
         )
         comments = cursor.fetchall()
 
         if Settings.ANALYTICS:
-            userIPData = getDataFromUserIP(str(request.headers.get("User-Agent")))
-            idForRandomVisitor = None
-            if "userName" in session:
-                sessionUser = session["userName"]
+            user_ip_data = get_data_from_user_ip(str(request.headers.get("User-Agent")))
+            id_for_random_visitor = None
+            if "username" in session:
+                session_user = session["username"]
             else:
-                sessionUser = "unsignedUser"
-            if userIPData["status"] == 0:
+                session_user = "unsigned_user"
+            if user_ip_data["status"] == 0:
                 Log.database(f"Connecting to '{Settings.DB_ANALYTICS_ROOT}' database")
 
                 connection = sqlite3.connect(Settings.DB_ANALYTICS_ROOT)
@@ -137,23 +137,23 @@ def post(urlID=None, slug=None):
                 cursor = connection.cursor()
 
                 cursor.execute(
-                    """insert into postsAnalytics (postID, visitorUserName, country, os, continent, timeStamp) values (?,?,?,?,?,?) RETURNING id""",
+                    """insert into posts_analytics (id, visitor_username, country, os, continent, time_stamp) values (?,?,?,?,?,?) RETURNING id""",
                     (
                         post[0],
-                        sessionUser,
-                        userIPData["payload"]["country"],
-                        userIPData["payload"]["os"],
-                        userIPData["payload"]["continent"],
-                        currentTimeStamp(),
+                        session_user,
+                        user_ip_data["payload"]["country"],
+                        user_ip_data["payload"]["os"],
+                        user_ip_data["payload"]["continent"],
+                        current_time_stamp(),
                     ),
                 )
-                idForRandomVisitor = cursor.fetchone()[0]
+                id_for_random_visitor = cursor.fetchone()[0]
                 connection.commit()
                 connection.close()
             else:
-                Log.error(f"Aborting postsAnalytics, {userIPData['message']}")
+                Log.error(f"Aborting posts_analytics, {user_ip_data['message']}")
         else:
-            idForRandomVisitor = None
+            id_for_random_visitor = None
 
         return render_template(
             "post.html",
@@ -162,17 +162,17 @@ def post(urlID=None, slug=None):
             tags=post[2],
             abstract=post[11],
             content=post[3],
-            author=post[5],
+            username=post[5],
             views=post[6],
-            timeStamp=post[7],
-            lastEditTimeStamp=post[8],
-            urlID=post[10],
+            time_stamp=post[7],
+            last_edit_time_stamp=post[8],
+            url_id=post[10],
             form=form,
             comments=comments,
-            appName=Settings.APP_NAME,
-            blogPostUrl=request.root_url,
-            readingTime=calculateReadTime(post[3]),
-            idForRandomVisitor=idForRandomVisitor,
+            app_name=Settings.APP_NAME,
+            blog_post_url=request.root_url,
+            reading_time=calculate_read_time(post[3]),
+            id_for_random_visitor=id_for_random_visitor,
         )
 
     else:

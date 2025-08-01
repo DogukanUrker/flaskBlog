@@ -14,7 +14,7 @@ class ChangeProfilePictureForm(Form):
     This class creates a form for changing the profile picture.
     """
 
-    newProfilePictureSeed = StringField(
+    new_profile_picture_seed = StringField(
         "ProfilePictureSeed",
         [validators.InputRequired()],
     )
